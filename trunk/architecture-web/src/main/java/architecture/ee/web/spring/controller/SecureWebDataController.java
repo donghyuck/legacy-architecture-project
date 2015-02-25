@@ -48,6 +48,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,6 +69,8 @@ import architecture.common.lifecycle.SystemInformationService;
 import architecture.common.model.json.CustomJsonDateDeserializer;
 import architecture.common.model.json.CustomJsonDateSerializer;
 import architecture.common.user.CompanyManager;
+import architecture.common.user.SecurityHelper;
+import architecture.common.user.User;
 import architecture.common.util.StringUtils;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.exception.NotFoundException;
@@ -76,9 +79,12 @@ import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.attachment.AttachmentManager;
 import architecture.ee.web.attachment.ImageManager;
 import architecture.ee.web.logo.LogoManager;
+import architecture.ee.web.navigator.DefaultMenu;
+import architecture.ee.web.navigator.Menu;
 import architecture.ee.web.navigator.MenuRepository;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteManager;
+import architecture.ee.web.spring.controller.WebDataController.ItemList;
 import architecture.ee.web.util.WebApplicatioinConstants;
 import architecture.ee.web.util.WebSiteUtils;
 import architecture.ee.web.ws.Property;
@@ -136,15 +142,6 @@ public class SecureWebDataController {
 		IProducerRegistry ipr = ProducerRegistryFactory.getProducerRegistryInstance();		
 		for (ProducerReference ref : ipr.getProducerReferences() ){
 			IStatsProducer producer  = ref.get();		
-			
-			
-			log.debug( "======================================");
-			log.debug( 
-					"category:" +producer.getCategory()+ 			
-					", subsystem:" +producer.getSubsystem() + 	
-					", producerId::" + producer.getProducerId()
-			);			
-
 		}
 		
 		
@@ -162,6 +159,15 @@ public class SecureWebDataController {
 	public List<DiskUsage>  getDiskUsages(NativeWebRequest request) throws NotFoundException {				
 		return systemInformationService.getDiskUsages();
 	}	
+
+	@RequestMapping(value="/mgmt/database/list_connection.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public List<DatabaseInfo>  getDatabaseConnections(NativeWebRequest request) throws NotFoundException {
+		
+		
+		
+		return systemInformationService.getDatabaseInfos();
+	}
 	
 	@RequestMapping(value="/stage/jdbc/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
@@ -175,6 +181,7 @@ public class SecureWebDataController {
 	@RequestMapping(value="/stage/jdbc/schema/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public SchemaInfo  getDatabaseSchema(NativeWebRequest request) throws NotFoundException {		
+		
 		if(schemaBrowserTask.getStatusCode() == 0 ){
 			schemaBrowserTask.catalogFilter = ApplicationHelper.getApplicationProperty("performance-monitoring.database.catalog", null);
 			schemaBrowserTask.schemaFilter = ApplicationHelper.getApplicationProperty("performance-monitoring.database.schema", null);		
@@ -186,7 +193,8 @@ public class SecureWebDataController {
 		if( schemaInfo.status == 2 ){
 			schemaInfo.catalog = schemaBrowserTask.database.getCatalog();
 			schemaInfo.schema = schemaBrowserTask.database.getSchema();
-			schemaInfo.tables = schemaBrowserTask.database.getTableNames();
+			for( String tableName : schemaBrowserTask.database.getTableNames() )
+				schemaInfo.addTable(tableName);
 		}		
 		return schemaInfo;
 	}	
@@ -350,6 +358,32 @@ public class SecureWebDataController {
 		return new CacheStats(cache);
 	}
 	
+	/**
+	 * navigator
+	 * @param request
+	 * @return
+	 * @throws NotFoundException
+	 */
+	@RequestMapping(value="/mgmt/navigator/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public ItemList  getMenuList(NativeWebRequest request) throws NotFoundException {				
+		int totalCount = menuRepository.getTotalMenuCount();
+		return new ItemList(menuRepository.getMenus(), totalCount);		
+	}
+	
+	@RequestMapping(value="/mgmt/navigator/update.json",method={RequestMethod.POST} )
+	@ResponseBody
+	public Menu  updateMenu(@RequestBody DefaultMenu menu, NativeWebRequest request) throws NotFoundException {			
+		User user = SecurityHelper.getUser();		
+		Menu menuToUse = menuRepository.getMenu(menu.getMenuId());
+		menuToUse.setMenuData(menu.getMenuData());
+		menuToUse.setName(menu.getName());
+		menuToUse.setEnabled(menu.isEnabled());
+		menuToUse.setTitle(menu.getTitle());
+		menuToUse.setLoaction(menu.getLocation());		
+		menuRepository.updateMenu(menuToUse);		
+		return menuToUse;
+	}
 	
 	@RequestMapping(value="/mgmt/sql/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
@@ -407,7 +441,7 @@ public class SecureWebDataController {
 	public static class SchemaInfo{
 		private String schema;
 		private String catalog;
-		private String[] tables;
+		private List<Property> tables;
 		private int status;		
 		
 		
@@ -418,7 +452,7 @@ public class SecureWebDataController {
 			status = 0 ;
 			catalog = null;
 			schema = null;
-			tables = new String[]{};		
+			tables = new ArrayList<Property>();
 		}
 		/**
 		 * @return schema
@@ -447,14 +481,18 @@ public class SecureWebDataController {
 		/**
 		 * @return tables
 		 */
-		public String[] getTables() {
+		public List<Property> getTables() {
 			return tables;
 		}
 		/**
 		 * @param tables 설정할 tables
 		 */
-		public void setTables(String[] tables) {
+		public void setTables(List<Property> tables) {
 			this.tables = tables;
+		}
+		
+		public void addTable(String name){
+			this.tables.add(new Property("name", name));
 		}
 		/**
 		 * @return status
