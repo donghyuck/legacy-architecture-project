@@ -94,7 +94,11 @@ public class SecureMoSKitoController {
 			NativeWebRequest request) throws Exception 	
 	{	
 		ArrayList<LibraryObject> aBeans = new ArrayList<LibraryObject>();
-		List<URL> classpath = getClassPathUrls(request.getContextPath());
+		String context = request.getContextPath();
+		if( StringUtils.isEmpty(context) )
+			context = "/";
+		
+		List<URL> classpath = getClassPathUrls(context);
 		for (URL url : classpath){
 			String fileName = url.getFile();
 			if (!fileName.endsWith(".jar"))
@@ -104,7 +108,7 @@ public class SecureMoSKitoController {
 			int lastSlash = fileName.lastIndexOf('/');
 			try{
 				bean.setName(fileName.substring(lastSlash + 1));
-				bean.setMavenVersion(MavenVersionReader.readVersionFromJar(f));
+				bean.setMavenVersion(MavenVersionReader.readVersionFromJar(f));				
 				if (bean.getMavenVersion()==null){
 					bean.setLastModified(new Date(f.lastModified()));
 				}
@@ -118,6 +122,7 @@ public class SecureMoSKitoController {
 	}
 	
 	private List<URL> getClassPathUrls(final String context){
+		log.debug("context: " + context);
 		List<URL> forTomcat7 = getClassPathUrlsForTomcat(context, "context");
 		if (forTomcat7!=null && forTomcat7.size()>0)
 			return forTomcat7;
@@ -139,12 +144,12 @@ public class SecureMoSKitoController {
 						BadAttributeValueExpException,
 						InvalidApplicationException {
 					String type = name.getKeyProperty("type");
+					log.debug( name.getDomain()  + " : " + name.getKeyPropertyList() );
 					if (!type.equals("WebappClassLoader"))
 						return false;
 					if (!name.getDomain().equals("Catalina"))
 						return false;
-					if (!name.getKeyProperty(contextPropertyName).equals(
-							context))
+					if (!name.getKeyProperty(contextPropertyName).equals(context))
 						return false;
 					return true;
 				}
