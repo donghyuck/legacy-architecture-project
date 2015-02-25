@@ -46,8 +46,8 @@ import architecture.ee.web.navigator.Menu;
 import architecture.ee.web.navigator.MenuRepository;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteManager;
+import architecture.ee.web.spring.controller.WebDataController.ItemList;
 import architecture.ee.web.util.WebSiteUtils;
-import architecture.user.spring.controller.SecureUserDataController.ItemList;
 
 @Controller ("secure-community-data-controller")
 @RequestMapping("/secure/data")
@@ -97,22 +97,6 @@ public class SecureCommunityDataController {
 	public SecureCommunityDataController() {
 	}
 
-
-	@RequestMapping(value="/mgmt/menu/update.json",method={RequestMethod.POST} )
-	@ResponseBody
-	public Menu  updateMenu(
-			@RequestBody DefaultMenu menu, 
-			NativeWebRequest request) throws NotFoundException {			
-		User user = SecurityHelper.getUser();		
-		Menu menuToUse = menuRepository.getMenu(menu.getMenuId());
-		menuToUse.setMenuData(menu.getMenuData());
-		menuToUse.setName(menu.getName());
-		menuToUse.setEnabled(menu.isEnabled());
-		menuToUse.setTitle(menu.getTitle());
-		menuToUse.setLoaction(menu.getLocation());		
-		menuRepository.updateMenu(menuToUse);		
-		return menuToUse;
-	}
 
 	@RequestMapping(value="/mgmt/website/list.json",method={RequestMethod.POST} )
 	@ResponseBody
