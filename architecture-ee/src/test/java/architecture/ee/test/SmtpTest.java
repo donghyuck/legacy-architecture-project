@@ -43,8 +43,8 @@ public class SmtpTest {
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(sender.createMimeMessage(), true);
 			
-			helper.setFrom("andang311@inkium.com");
-			helper.setTo("andang72@naver.com");
+			helper.setTo("andang311");
+			helper.setFrom("andang72@naver.com");
 			
 			helper.setSubject("테스트");
 			helper.setText("내용없음", "<strong>내용없음</strong>"); //("<strong>내용없음</strong>", true);
@@ -74,7 +74,7 @@ public class SmtpTest {
 	
 	public static JavaMailSender newMailSender(){		
 		JavaMailSenderImpl sender = new JavaMailSenderImpl();
-		sender.setHost("222.122.52.4");
+		sender.setHost("222.122.47.196");
 		Properties javaMailProperties = new Properties();
 		javaMailProperties.put("mail.debug", "true");
 		javaMailProperties.put("mail.smtp.auth", "false");
