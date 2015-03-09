@@ -50,19 +50,17 @@ public interface PhotoStreamsManager {
 	
 	public List<Photo> getPhotos(int startIndex, int maxResults );	
 	
-	/*
-	public int getTotalSharedImageCount(int objectyType ,  long objectId);
-		
-	public List<Photo> getSharedImages( int objectyType ,  long objectId, int startIndex, int maxResults );
+	public List<Photo> getPhotosByRandom(int objectType, long objectId); 
 	
-	public int getTotalSharedImageCount(User creator);
+	public List<Photo> getPhotosByRandom(int objectType, long objectId, int startIndex, int maxResults );
 	
-	public List<Photo> getSharedImages( User creator, int startIndex, int maxResults );
+	public List<Photo> getPhotosByRandom(int objectType);
 	
-	public Photo createSharedImage(  int objectyType ,  long objectId, User creator, Image image );
+	public List<Photo> getPhotosByRandom(int objectType, int startIndex, int maxResults );
 	
-	public void updateSharedImage(  Photo image );
+	public List<Photo> getPhotosByRandom();
 	
-	public void deleteSharedImage(  Photo image );
-		*/
+	public List<Photo> getPhotosByRandom(int startIndex, int maxResults );	
+	
+	
 }
