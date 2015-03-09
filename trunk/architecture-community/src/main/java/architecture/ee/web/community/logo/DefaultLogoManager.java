@@ -20,7 +20,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.locks.Lock;
@@ -88,6 +90,7 @@ public class DefaultLogoManager implements LogoManager{
 		this.logoImageDao = logoImageDao;
 	}
 
+	
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void addLogoImage(LogoImage logoImage, File file) {
 		if( logoImage.getLogoId() < 1) {
@@ -100,6 +103,34 @@ public class DefaultLogoManager implements LogoManager{
 			logoImageDao.addLogoImage(logoImage, file);			
 		}
 	}
+	
+
+	@Override
+	public LogoImage createLogoImage() {
+		return new DefaultLogoImage();
+	}
+
+	@Override
+	public void addLogoImage(LogoImage logoImage, InputStream is) {
+		logoImageDao.addLogoImage(logoImage, is);		
+	}	
+	
+	public void updateLogoImage( LogoImage logoImage, File file ) throws LogoImageNotFoundException {
+		// clear cache  			
+		List<Long> list = getLogoImageIdList(logoImage.getObjectType(), logoImage.getObjectId());
+		for( Long logoImageId : list){
+			this.logoImageCache.remove(logoImageId);
+		}		
+		this.logoImageIdsCache.remove(getLogoImageIdListCacheKey(logoImage.getObjectType(), logoImage.getObjectId()));		
+		if( file != null)
+			deleteImageFileCache(logoImage);		
+		
+		Date now = Calendar.getInstance().getTime();
+		logoImage.setModifiedDate(now);
+		logoImageDao.updateLogoImage(logoImage, file);		
+	}
+	
+	
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void removeLogoImage(LogoImage logoImage) throws LogoImageNotFoundException {
@@ -357,6 +388,7 @@ public class DefaultLogoManager implements LogoManager{
 			FileUtils.copyInputStreamToFile(inputStream, file);
 		}		
 		return file;
-	}	
+	}
+
 	
 }

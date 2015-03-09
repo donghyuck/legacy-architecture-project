@@ -27,6 +27,12 @@ public interface LogoImageDao {
 
 	public void addLogoImage(LogoImage logoImage, File file);
 	
+	public void addLogoImage(LogoImage logoImage, InputStream is);
+
+	public void updateLogoImage(LogoImage logoImage, File file);
+	
+	public void updateLogoImage(LogoImage logoImage, InputStream is);
+	
 	public void removeLogoImage(LogoImage logoImage);
 	
 	public InputStream getInputStream(LogoImage logoImage) throws IOException;
