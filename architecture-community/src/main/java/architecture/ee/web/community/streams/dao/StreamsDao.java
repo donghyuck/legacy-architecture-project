@@ -37,6 +37,19 @@ public interface StreamsDao {
 	
 	public List<String> getPhotoIds (int objectType, long objectId, int startIndex, int maxResults ) ;
 	
+	public List<String> getPhotoIdsByRandom () ;
+
+	public List<String> getPhotoIdsByRandom (int objectType) ;
+	
+	public List<String> getPhotoIdsByRandom (int objectType, long objectId) ;
+
+	public List<String> getPhotoIdsByRandom (int startIndex, int maxResults ) ;
+
+	public List<String> getPhotoIdsByRandom (int objectType, int startIndex, int maxResults ) ;
+	
+	public List<String> getPhotoIdsByRandom (int objectType, long objectId, int startIndex, int maxResults ) ;
+	
+	
 	public Photo getPhotoStream(String photoId ) throws NotFoundException ;
 	
 	public void addPhoto(Photo photo) ;

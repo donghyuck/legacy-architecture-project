@@ -199,4 +199,40 @@ public class DefaultPhotoStreamsManager implements PhotoStreamsManager {
 			photoStreamCache.remove(p.getExternalId());
 	}
 
+	@Override
+	public List<Photo> getPhotosByRandom(int objectType, long objectId) {
+		List<String> ids = getStreamsDao().getPhotoIdsByRandom(objectType, objectId);				
+		return toPhotoList(ids);
+	}
+
+	@Override
+	public List<Photo> getPhotosByRandom(int objectType, long objectId, int startIndex, int maxResults) {
+		List<String> ids = getStreamsDao().getPhotoIdsByRandom(objectType, objectId, startIndex, maxResults);				
+		return toPhotoList(ids);
+	}
+
+	@Override
+	public List<Photo> getPhotosByRandom(int objectType) {
+		List<String> ids = getStreamsDao().getPhotoIdsByRandom(objectType);				
+		return toPhotoList(ids);
+	}
+
+	@Override
+	public List<Photo> getPhotosByRandom(int objectType, int startIndex, 	int maxResults) {
+		List<String> ids = getStreamsDao().getPhotoIdsByRandom(objectType, startIndex, maxResults);				
+		return toPhotoList(ids);
+	}
+
+	@Override
+	public List<Photo> getPhotosByRandom() {
+		List<String> ids = getStreamsDao().getPhotoIdsByRandom();				
+		return toPhotoList(ids);
+	}
+
+	@Override
+	public List<Photo> getPhotosByRandom(int startIndex, int maxResults) {
+		List<String> ids = getStreamsDao().getPhotoIdsByRandom(startIndex, maxResults);				
+		return toPhotoList(ids);
+	}
+
 }

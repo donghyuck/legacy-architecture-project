@@ -49,19 +49,6 @@ public class JdbcStreamsDao extends ExtendedJdbcDaoSupport implements StreamsDao
 		}		
 	};
 	
-	public List<String> getPhotoIds() {
-		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ALL_STREAM_PHOTO_IDS").getSql(), String.class);	
-	}
-
-	public List<String> getPhotoIds(int objectType) {
-		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE").getSql(), 				
-				String.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectType ));	
-	}
-
-	public List<String> getPhotoIds(int objectType, long objectId) {
-		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 				
-				String.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectId ));	
-	}
 
 	public Photo getPhotoStream(String photoId) throws NotFoundException {
 		try {
@@ -106,16 +93,28 @@ public class JdbcStreamsDao extends ExtendedJdbcDaoSupport implements StreamsDao
 				new SqlParameterValue(Types.NUMERIC, objectId ));
 	}
 
-	public List<String> getPhotoIds(int startIndex, int maxResults) {
-		
+	public List<String> getPhotoIds() {
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ALL_STREAM_PHOTO_IDS").getSql(), String.class);	
+	}
+
+	public List<String> getPhotoIds(int objectType) {
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE").getSql(), 				
+				String.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectType ));	
+	}
+
+	public List<String> getPhotoIds(int objectType, long objectId) {
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 				
+				String.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectId ));	
+	}
+	
+	public List<String> getPhotoIds(int startIndex, int maxResults) {		
 		return getExtendedJdbcTemplate().queryScrollable(
 				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ALL_STREAM_PHOTO_IDS").getSql(), 
 				startIndex, 
 				maxResults, 
 				new Object[0], 
 				new int[0], 
-				String.class);
-		
+				String.class);		
 	}
 
 	public List<String> getPhotoIds(int objectType, int startIndex, int maxResults) {
@@ -138,6 +137,51 @@ public class JdbcStreamsDao extends ExtendedJdbcDaoSupport implements StreamsDao
 				String.class);
 	}
 
+
+	public List<String> getPhotoIdsByRandom() {
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ALL_STREAM_PHOTO_IDS_RANDOMLY").getSql(), String.class);	
+	}
+
+	public List<String> getPhotoIdsByRandom(int objectType) {
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE_RANDOMLY").getSql(), 				
+				String.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectType ));	
+	}
+
+	public List<String> getPhotoIdsByRandom(int objectType, long objectId) {
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID_RANDOMLY").getSql(), 				
+				String.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectId ));	
+	}
+	
+	public List<String> getPhotoIdsByRandom(int startIndex, int maxResults) {		
+		return getExtendedJdbcTemplate().queryScrollable(
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ALL_STREAM_PHOTO_IDS_RANDOMLY").getSql(), 
+				startIndex, 
+				maxResults, 
+				new Object[0], 
+				new int[0], 
+				String.class);		
+	}
+
+	public List<String> getPhotoIdsByRandom(int objectType, int startIndex, int maxResults) {
+		return getExtendedJdbcTemplate().queryScrollable(
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE_RANDOMLY").getSql(), 
+				startIndex, 
+				maxResults, 
+				new Object[ ] {objectType }, 
+				new int[] {Types.NUMERIC}, 
+				String.class);
+	}
+
+	public List<String> getPhotoIdsByRandom(int objectType, long objectId, int startIndex, int maxResults) {
+		return getExtendedJdbcTemplate().queryScrollable(
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID_RANDOMLY").getSql(), 
+				startIndex, 
+				maxResults, 
+				new Object[ ] {objectType, objectId }, 
+				new int[] {Types.NUMERIC, Types.NUMERIC}, 
+				String.class);
+	}
+	
 	public List<String> getPhotoIdsByImage(long imageId) {
 		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_IDS_BY_IMAGE_ID").getSql(), 				
 				String.class, new SqlParameterValue (Types.NUMERIC, imageId ));	
