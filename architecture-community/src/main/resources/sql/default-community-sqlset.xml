@@ -187,6 +187,18 @@
 			?, ?, ?, ?, ?, ?, ?, ?, ?
 		)
 	]]></sql-query>	
+	<sql-query name="UPDATE_LOGO_IMAGE" description="UPDATE_LOGO_IMAGE"><![CDATA[
+		UPDATE V2_LOGO SET
+			OBJECT_TYPE = ?,
+			OBJECT_ID = ?,
+			PRIMARY_IMAGE = ?,
+			FILE_NAME = ?,
+			FILE_SIZE = ?,
+			CONTENT_TYPE = ?,
+			MODIFIED_DATE = ?
+		WHERE
+			LOGO_ID = ?	
+	]]></sql-query>		
 	<sql-query name="DELETE_LOGO_IMAGE_DATA_BY_ID" description="DELETE_LOGO_IMAGE_DATA_BY_ID"><![CDATA[    	
 	DELETE FROM V2_LOGO_DATA
 	WHERE
@@ -679,12 +691,14 @@
 	SELECT ANNOUNCE_ID FROM V2_ANNOUNCE 
 	order by MODIFIED_DATE desc
 	]]></sql-query>			
+    
     <!--  STREMAS PHOTO -->
 	<sql-query name="SELECT_STREAM_PHOTO_IDS_BY_IMAGE_ID" description="SELECT_STREAM_PHOTO_IDS_BY_IMAGE_ID"><![CDATA[
 	SELECT 
 		EXTERNAL_ID
 	FROM V2_IMAGE_STREAMS WHERE IMAGE_ID = ?
 	]]></sql-query>
+	
 	<sql-query name="SELECT_ALL_STREAM_PHOTO_IDS" description="SELECT_ALL_STREAM_PHOTO_IDS"><![CDATA[
 	SELECT 
 		EXTERNAL_ID
@@ -707,6 +721,34 @@
     AND T2.OBJECT_TYPE = ?
     AND T2.OBJECT_ID = ?
 	]]></sql-query>
+	
+	<sql-query name="SELECT_ALL_STREAM_PHOTO_IDS_RANDOMLY" description="SELECT_ALL_STREAM_PHOTO_IDS"><![CDATA[
+	SELECT 
+		EXTERNAL_ID
+	FROM V2_IMAGE_STREAMS	
+	ORDER BY dbms_random.value
+	]]></sql-query>
+	<sql-query name="SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE_RANDOMLY" description="SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE"><![CDATA[
+	SELECT 
+		T1.EXTERNAL_ID
+	FROM V2_IMAGE_STREAMS T1 , V2_IMAGE T2		
+	WHERE 
+    T1.IMAGE_ID = T2.IMAGE_ID 
+    AND T2.OBJECT_TYPE = ?
+    ORDER BY dbms_random.value
+	]]></sql-query>
+	<sql-query name="SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID_RANDOMLY" description="SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
+	SELECT 
+		T1.EXTERNAL_ID
+	FROM V2_IMAGE_STREAMS T1 , V2_IMAGE T2		
+	WHERE 
+    T1.IMAGE_ID = T2.IMAGE_ID 
+    AND T2.OBJECT_TYPE = ?
+    AND T2.OBJECT_ID = ?
+    ORDER BY dbms_random.value
+	]]></sql-query>
+		
+	
 	<sql-query name="SELECT_STREAM_PHOTO_BY_ID" description="SELECT_STREAM_PHOTO_BY_ID"><![CDATA[
 	SELECT 
 		EXTERNAL_ID,
@@ -719,6 +761,7 @@
 	WHERE 
 		EXTERNAL_ID = ? 
 	]]></sql-query>
+	
 	<sql-query name="CREATE_STREAM_PHOTO" description="CREATE_STREAM_PHOTO"><![CDATA[
 	INSERT INTO V2_IMAGE_STREAMS (
 		EXTERNAL_ID,
