@@ -37,7 +37,7 @@ public class DefaultLogoImage implements LogoImage {
 
 	private Long userId;
 
-	private Boolean primary;
+	private boolean primary;
 
 	private String imageContentType;
 
@@ -116,17 +116,12 @@ public class DefaultLogoImage implements LogoImage {
 		this.userId = userId;
 	}
 
-	/**
-	 * @return primary
-	 */
-	public Boolean getPrimary() {
-		return primary;
-	}
+
 
 	/**
 	 * @param primary 설정할 primary
 	 */
-	public void setPrimary(Boolean primary) {
+	public void setPrimary(boolean primary) {
 		this.primary = primary;
 	}
 
@@ -269,8 +264,9 @@ public class DefaultLogoImage implements LogoImage {
 			builder.append("objectId=").append(objectId).append(", ");
 		if (userId != null)
 			builder.append("userId=").append(userId).append(", ");
-		if (primary != null)
-			builder.append("primary=").append(primary).append(", ");
+
+		builder.append("primary=").append(primary).append(", ");
+		
 		if (filename != null)
 			builder.append("filename=").append(filename).append(", ");
 		if (imageContentType != null)
