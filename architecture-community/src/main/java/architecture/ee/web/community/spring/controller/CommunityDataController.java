@@ -65,6 +65,7 @@ import architecture.ee.web.community.streams.PhotoStreamsManager;
 import architecture.ee.web.site.WebSiteNotFoundException;
 import architecture.ee.web.util.WebSiteUtils;
 import architecture.ee.web.ws.Property;
+import architecture.ee.web.ws.Result;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -354,14 +355,14 @@ public class CommunityDataController {
 	
 	@RequestMapping(value="/streams/photos/insert.json",method={RequestMethod.POST} )
 	@ResponseBody
-	public void insertPhotoStream(@RequestParam(value="imageId", defaultValue="0", required=true ) Long imageId, NativeWebRequest request) throws NotFoundException {
+	public Result insertPhotoStream(@RequestParam(value="imageId", defaultValue="0", required=true ) Long imageId, NativeWebRequest request) throws NotFoundException {
 		User user = SecurityHelper.getUser();		
 		if(user.isAnonymous())
 			throw new UnAuthorizedException();		
 		
 		Image image = imageManager.getImage(imageId);
 		photoStreamsManager.addImage(image, user);
-		
+		return Result.newResult();
 		
 	}
 	
@@ -377,6 +378,17 @@ public class CommunityDataController {
 	}
 	
 	
+	@PreAuthorize("permitAll")
+	@RequestMapping(value="/streams/photos/list_with_random.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public PhotoList  getStreamPhotoListByRandom(
+			@RequestParam(value="objectType", defaultValue="2", required=false ) Integer objectType,
+			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
+			@RequestParam(value="pageSize", defaultValue="15", required=false ) Integer pageSize,
+			NativeWebRequest request ) throws NotFoundException {		
+		User user = SecurityHelper.getUser();		
+		return getStreamPhotoList(objectType, startIndex, pageSize, true, request.getNativeRequest(HttpServletRequest.class));
+	}
 	
 	@PreAuthorize("permitAll")
 	@RequestMapping(value="/streams/photos/list.json",method={RequestMethod.POST, RequestMethod.GET} )
@@ -387,10 +399,10 @@ public class CommunityDataController {
 			@RequestParam(value="pageSize", defaultValue="15", required=false ) Integer pageSize,
 			NativeWebRequest request ) throws NotFoundException {		
 		User user = SecurityHelper.getUser();		
-		return getStreamPhotoList(objectType, startIndex, pageSize, request.getNativeRequest(HttpServletRequest.class));
+		return getStreamPhotoList(objectType, startIndex, pageSize, false, request.getNativeRequest(HttpServletRequest.class));
 	}
 	
-	private PhotoList getStreamPhotoList(int objectType, int startIndex, int pageSize, HttpServletRequest request) throws NotFoundException{			
+	private PhotoList getStreamPhotoList(int objectType, int startIndex, int pageSize, boolean random, HttpServletRequest request) throws NotFoundException{			
 		User user = SecurityHelper.getUser();
 		long objectId = user.getUserId();		
 		if( objectType == 1 ){
@@ -407,13 +419,22 @@ public class CommunityDataController {
 		else
 			list.setTotalCount(photoStreamsManager.getTotalPhotoCount());
 
-		if(objectType > 0 && objectId == 0)
-			list.setPhotos(photoStreamsManager.getPhotos(objectType, startIndex, pageSize));
-		else if (objectType > 0 && objectId > 0)
-			list.setPhotos(photoStreamsManager.getPhotos(objectType, objectId, startIndex, pageSize));
-		else
-			list.setPhotos(photoStreamsManager.getPhotos(startIndex, pageSize));
-		
+		if(objectType > 0 && objectId == 0){
+			if( random )
+				list.setPhotos(photoStreamsManager.getPhotosByRandom(objectType, startIndex, pageSize));
+			else
+				list.setPhotos(photoStreamsManager.getPhotos(objectType, startIndex, pageSize));
+		}else if (objectType > 0 && objectId > 0){
+			if( random )
+				list.setPhotos(photoStreamsManager.getPhotosByRandom(objectType, objectId, startIndex, pageSize));
+			else
+				list.setPhotos(photoStreamsManager.getPhotos(objectType, objectId, startIndex, pageSize));
+		}else{
+			if( random )
+				list.setPhotos(photoStreamsManager.getPhotosByRandom(startIndex, pageSize));
+			else
+				list.setPhotos(photoStreamsManager.getPhotos(startIndex, pageSize));
+		}
 		return list;
 	}
 	

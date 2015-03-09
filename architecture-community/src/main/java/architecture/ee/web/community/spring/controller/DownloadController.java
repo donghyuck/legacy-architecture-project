@@ -178,8 +178,6 @@ public class DownloadController {
 				image = logoManager.getPrimaryLogoImage(site);			
 			}			
 			if( image != null ){
-				
-				
 				InputStream input ;
 				String contentType ;
 				int contentLength ;
