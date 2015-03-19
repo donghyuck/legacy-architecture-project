@@ -17,6 +17,7 @@ package architecture.ee.component.core.lifecycle;
 
 import javax.servlet.ServletContext;
 
+import net.anotheria.moskito.core.accumulation.Accumulators;
 import net.anotheria.moskito.core.threshold.ThresholdStatus;
 import net.anotheria.moskito.core.threshold.Thresholds;
 import net.anotheria.moskito.core.threshold.guard.GuardedDirection;
@@ -143,46 +144,22 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 		LicenseManager licenseManager = getBootstrapComponent(LicenseManager.class);
 		License license = licenseManager.getLicense();
 		log.info(license.toString());
-        
-       // MethodInvoker invoker = new MethodInvoker();        
-        // 플러그인 기능은 평가판 라이선스에서는 제공하지 않는다.
-        if( AdminHelper.isSetupComplete() && license.getType() != License.Type.EVALUATION  ){
-        	try {
+
+		// MethodInvoker invoker = new MethodInvoker();        
+		// 플러그인 기능은 평가판 라이선스에서는 제공하지 않는다.
+		if( AdminHelper.isSetupComplete() && license.getType() != License.Type.EVALUATION  ){
+			try {
 				PluginService pluginService = getBootstrapComponent(PluginService.class);
 				pluginService.prepare();
 			} catch (Exception e) {
 				
 			}
 		}
-
+        
+        setupMoskitoThresholds();
+        
 		// 컨텐스트를 로드합니다
-		if (isSetServletContext() && isSetContextLoader()) {
-			
-			if( configService.getApplicationBooleanProperty("performance-monitoring.moskito.thresholds-setup", false)){
-				log.debug("setup moskito threshold ...");
-				Thresholds.addMemoryThreshold(
-					"PermGenFree", "MemoryPool-PS Perm Gen-NonHeap", "Free", 
-					new LongBarrierPassGuard(ThresholdStatus.GREEN, 1000 * 1000 * 5, GuardedDirection.UP), /* */
-					new LongBarrierPassGuard(ThresholdStatus.YELLOW, 1000 * 1000 * 5, GuardedDirection.DOWN), /* */
-					new LongBarrierPassGuard(ThresholdStatus.ORANGE, 1000 * 1000 * 2, GuardedDirection.DOWN), /* */
-					new LongBarrierPassGuard(ThresholdStatus.RED, 1000 * 1000 * 1, GuardedDirection.DOWN), /* */
-					new LongBarrierPassGuard(ThresholdStatus.PURPLE, 1000 * 1, GuardedDirection.DOWN) /* */	
-				);		
-				Thresholds.addMemoryThreshold(
-					"OldGenFree", "MemoryPool-PS Old Gen-Heap", "Free", /* */
-					new LongBarrierPassGuard(ThresholdStatus.GREEN, 1000 * 1000 * 100, GuardedDirection.UP), /* */
-					new LongBarrierPassGuard(ThresholdStatus.YELLOW, 1000 * 1000 * 50, GuardedDirection.DOWN), /* */
-					new LongBarrierPassGuard(ThresholdStatus.ORANGE, 1000 * 1000 * 10, GuardedDirection.DOWN), /* */
-					new LongBarrierPassGuard(ThresholdStatus.RED, 1000 * 1000 * 2, GuardedDirection.DOWN), /* */
-					new LongBarrierPassGuard(ThresholdStatus.PURPLE, 1000 * 1000 * 1, GuardedDirection.DOWN) /* */						
-				);				
-				Thresholds.addThreshold("ThreadCount", "ThreadCount", "ThreadCount", "Current", "default", new LongBarrierPassGuard(ThresholdStatus.GREEN, 200, GuardedDirection.DOWN),
-					new LongBarrierPassGuard(ThresholdStatus.YELLOW, 200, GuardedDirection.UP), new LongBarrierPassGuard(ThresholdStatus.ORANGE, 300, GuardedDirection.UP),
-					new LongBarrierPassGuard(ThresholdStatus.RED, 500, GuardedDirection.UP), new LongBarrierPassGuard(ThresholdStatus.PURPLE, 1000, GuardedDirection.UP)
-				);
-				
-			}
-			
+		if (isSetServletContext() && isSetContextLoader()) {			
 			try {
 				this.applicationContext = (ConfigurableApplicationContext) getContextLoader().initWebApplicationContext(getServletContext());
 				this.applicationContext.start();
@@ -193,6 +170,109 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 			
 			
 		}
+	}
+	
+	private void setupMoskitoThresholds(){				
+		boolean isEnabled = this.getRepository().getSetupApplicationProperties().getBooleanProperty("performance-monitoring.moskito.thresholds-setup", false);		
+		if( isEnabled || configService.getApplicationBooleanProperty("performance-monitoring.moskito.thresholds-setup", false)){
+			log.debug("setup moskito threshold ...");
+			Thresholds.addMemoryThreshold(
+				"PermGenFree", "MemoryPool-PS Perm Gen-NonHeap", "Free", 
+				new LongBarrierPassGuard(ThresholdStatus.GREEN, 1000 * 1000 * 5, GuardedDirection.UP), /* */
+				new LongBarrierPassGuard(ThresholdStatus.YELLOW, 1000 * 1000 * 5, GuardedDirection.DOWN), /* */
+				new LongBarrierPassGuard(ThresholdStatus.ORANGE, 1000 * 1000 * 2, GuardedDirection.DOWN), /* */
+				new LongBarrierPassGuard(ThresholdStatus.RED, 1000 * 1000 * 1, GuardedDirection.DOWN), /* */
+				new LongBarrierPassGuard(ThresholdStatus.PURPLE, 1000 * 1, GuardedDirection.DOWN) /* */	
+			);		
+			Thresholds.addMemoryThreshold(
+				"OldGenFree", "MemoryPool-PS Old Gen-Heap", "Free", /* */
+				new LongBarrierPassGuard(ThresholdStatus.GREEN, 1000 * 1000 * 100, GuardedDirection.UP), /* */
+				new LongBarrierPassGuard(ThresholdStatus.YELLOW, 1000 * 1000 * 50, GuardedDirection.DOWN), /* */
+				new LongBarrierPassGuard(ThresholdStatus.ORANGE, 1000 * 1000 * 10, GuardedDirection.DOWN), /* */
+				new LongBarrierPassGuard(ThresholdStatus.RED, 1000 * 1000 * 2, GuardedDirection.DOWN), /* */
+				new LongBarrierPassGuard(ThresholdStatus.PURPLE, 1000 * 1000 * 1, GuardedDirection.DOWN) /* */						
+			);				
+			Thresholds.addThreshold("ThreadCount", "ThreadCount", "ThreadCount", "Current", "default", new LongBarrierPassGuard(ThresholdStatus.GREEN, 200, GuardedDirection.DOWN),
+				new LongBarrierPassGuard(ThresholdStatus.YELLOW, 200, GuardedDirection.UP), new LongBarrierPassGuard(ThresholdStatus.ORANGE, 300, GuardedDirection.UP),
+				new LongBarrierPassGuard(ThresholdStatus.RED, 500, GuardedDirection.UP), new LongBarrierPassGuard(ThresholdStatus.PURPLE, 1000, GuardedDirection.UP)
+			);			
+		}		
+		
+		log.info("Configuring memory accumulators.");
+		setupMemoryAccumulators();
+		log.info("Configuring thread accumulators.");
+		setupThreadAccumulators();
+		log.info("Configuring session accumulators.");
+		setupSessionCountAccumulators();
+		log.info("Configuring url accumulators.");
+		setupUrlAccumulators();
+		setupCPUAccumulators();
+		
+	}
+	private static void setupThreadAccumulators(){
+		Accumulators.createAccumulator("ThreadCount", "ThreadCount", "ThreadCount", "current", "default");
+		Accumulators.createAccumulator("ThreadStateRunnable-1m", "ThreadStates", "RUNNABLE", "current", "1m");
+		Accumulators.createAccumulator("ThreadStateWaiting-1m", "ThreadStates", "WAITING", "current", "1m");
+		Accumulators.createAccumulator("ThreadStateBlocked-1m", "ThreadStates", "BLOCKED", "current", "1m");
+		Accumulators.createAccumulator("ThreadStateTimedWaiting-1m", "ThreadStates", "TIMED_WAITING", "current", "1m");
+
+		Accumulators.createAccumulator("ThreadStateRunnable-5m", "ThreadStates", "RUNNABLE", "current", "5m");
+		Accumulators.createAccumulator("ThreadStateWaiting-5m", "ThreadStates", "WAITING", "current", "5m");
+		Accumulators.createAccumulator("ThreadStateBlocked-5m", "ThreadStates", "BLOCKED", "current", "5m");
+		Accumulators.createAccumulator("ThreadStateTimedWaiting-5m", "ThreadStates", "TIMED_WAITING", "current", "5m");		
+	}
+	
+	private static void setupSessionCountAccumulators(){
+		Accumulators.createAccumulator("SessionCount Cur Absolute", "SessionCount", "Sessions", "cur", "default");
+		Accumulators.createAccumulator("SessionCount Cur 1h", "SessionCount", "Sessions", "cur", "1h");
+		Accumulators.createAccumulator("SessionCount New 1h", "SessionCount", "Sessions", "new", "1h");
+		Accumulators.createAccumulator("SessionCount Del 1h", "SessionCount", "Sessions", "del", "1h");
+	}
+	
+	public static void setupMemoryAccumulators(){
+		Accumulators.createMemoryAccumulator1m("PermGenFree 1m", "MemoryPool-PS Perm Gen-NonHeap", "Free"); 
+		Accumulators.createMemoryAccumulator1m("PermGenFree MB 1m", "MemoryPool-PS Perm Gen-NonHeap", "Free MB"); 
+		Accumulators.createMemoryAccumulator1m("OldGenFree 1m", "MemoryPool-PS Old Gen-Heap", "Free");
+		Accumulators.createMemoryAccumulator1m("OldGenFree MB 1m", "MemoryPool-PS Old Gen-Heap", "Free MB");
+		Accumulators.createMemoryAccumulator1m("OldGenUsed 1m", "MemoryPool-PS Old Gen-Heap", "Used");
+		Accumulators.createMemoryAccumulator1m("OldGenUsed MB 1m", "MemoryPool-PS Old Gen-Heap", "Used MB");
+
+		Accumulators.createMemoryAccumulator5m("PermGenFree 5m", "MemoryPool-PS Perm Gen-NonHeap", "Free"); 
+		Accumulators.createMemoryAccumulator5m("PermGenFree MB 5m", "MemoryPool-PS Perm Gen-NonHeap", "Free MB"); 
+		Accumulators.createMemoryAccumulator5m("OldGenFree 5m", "MemoryPool-PS Old Gen-Heap", "Free");
+		Accumulators.createMemoryAccumulator5m("OldGenFree MB 5m", "MemoryPool-PS Old Gen-Heap", "Free MB");
+		Accumulators.createMemoryAccumulator5m("OldGenUsed 5m", "MemoryPool-PS Old Gen-Heap", "Used");
+		Accumulators.createMemoryAccumulator5m("OldGenUsed MB 5m", "MemoryPool-PS Old Gen-Heap", "Used MB");
+	
+		Accumulators.createMemoryAccumulator("PermGenFree 1h", "MemoryPool-PS Perm Gen-NonHeap", "Free", "1h"); 
+		Accumulators.createMemoryAccumulator("PermGenFree MB 1h", "MemoryPool-PS Perm Gen-NonHeap", "Free MB", "1h"); 
+		Accumulators.createMemoryAccumulator("OldGenFree 1h", "MemoryPool-PS Old Gen-Heap", "Free", "1h");
+		Accumulators.createMemoryAccumulator("OldGenFree MB 1h", "MemoryPool-PS Old Gen-Heap", "Free MB", "1h");
+		Accumulators.createMemoryAccumulator("OldGenUsed 1h", "MemoryPool-PS Old Gen-Heap", "Used", "1h");
+		Accumulators.createMemoryAccumulator("OldGenUsed MB 1h", "MemoryPool-PS Old Gen-Heap", "Used MB", "1h");
+	
+	}
+
+	public static void setupUrlAccumulators(){
+		Accumulators.createUrlREQAccumulator("URL REQ 1m", "cumulated", "1m");
+		Accumulators.createUrlREQAccumulator("URL REQ 5m", "cumulated", "5m");
+		Accumulators.createUrlREQAccumulator("URL REQ 1h", "cumulated", "1h");
+
+		Accumulators.createUrlAVGAccumulator("URL AVG 1m", "cumulated", "1m");
+		Accumulators.createUrlAVGAccumulator("URL AVG 5m", "cumulated", "5m");
+		Accumulators.createUrlAVGAccumulator("URL AVG 1h", "cumulated", "1h");
+
+		Accumulators.createUrlTotalTimeAccumulator("URL Time 1m", "cumulated", "1m");
+		Accumulators.createUrlTotalTimeAccumulator("URL Time 5m", "cumulated", "5m");
+		Accumulators.createUrlTotalTimeAccumulator("URL Time 1h", "cumulated", "1h");
+
+	}
+
+	public static void setupCPUAccumulators(){
+		Accumulators.createAccumulator("CPU Time 1m", "OS", "OS", "CPU Time", "1m" ); //, net.anotheria.moskito.core.stats.TimeUnit.SECONDS);
+		Accumulators.createAccumulator("CPU Time 5m", "OS", "OS", "CPU Time", "5m" ); //, net.anotheria.moskito.core.stats.TimeUnit.SECONDS);
+		Accumulators.createAccumulator("CPU Time 1h", "OS", "OS", "CPU Time", "1h" ) ; //, net.anotheria.moskito.core.stats.TimeUnit.SECONDS);
+		//OS.OS.CPU Time/default/NANOSECONDS
 	}
 	
 	@Override
