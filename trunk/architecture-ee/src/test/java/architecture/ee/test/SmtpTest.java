@@ -43,7 +43,7 @@ public class SmtpTest {
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(sender.createMimeMessage(), true);
 			
-			helper.setTo("andang311");
+			helper.setTo("developer");
 			helper.setFrom("andang72@naver.com");
 			
 			helper.setSubject("테스트");
