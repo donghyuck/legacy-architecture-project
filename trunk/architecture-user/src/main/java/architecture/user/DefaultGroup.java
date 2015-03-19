@@ -7,6 +7,7 @@ import java.util.Set;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
+import architecture.common.model.json.CompanyDeserializer;
 import architecture.common.model.json.CustomJsonDateDeserializer;
 import architecture.common.model.json.CustomJsonDateSerializer;
 import architecture.common.model.support.BaseModelObjectSupport;
@@ -30,7 +31,6 @@ public class DefaultGroup extends BaseModelObjectSupport implements Group {
 	private long companyId ;
 
 	private long groupId;
-
 
 	/**
 	 */
@@ -60,6 +60,7 @@ public class DefaultGroup extends BaseModelObjectSupport implements Group {
 	private Set<Long> addedMembers;
 
 	private Set<Long> removedMembers;		
+
 	
 	public DefaultGroup () {
 		groupId = -1L;
@@ -70,6 +71,7 @@ public class DefaultGroup extends BaseModelObjectSupport implements Group {
 		return company;
 	}
 
+	@JsonDeserialize(using = CompanyDeserializer.class)
 	public void setCompany(Company company) {
 		this.company = company;
 	}
@@ -225,15 +227,17 @@ public class DefaultGroup extends BaseModelObjectSupport implements Group {
 		return administrators.contains(user.getUserId());
 	}
 
-	
+	@JsonIgnore
 	public Serializable getPrimaryKeyObject() {
 		return getGroupId();
 	}
 
+	
 	public void setPrimaryKeyObject(Serializable primaryKeyObj) {
 		setGroupId(((Long)primaryKeyObj).longValue());
 	}
 
+	@JsonIgnore
 	public int getModelObjectType() {
 		return ModelTypeFactory.getTypeIdFromCode("GROUP");
 	}
@@ -267,11 +271,24 @@ public class DefaultGroup extends BaseModelObjectSupport implements Group {
 
 	public int getMemberCount() {
 		if( members == null)
-			return 0 ;
-		
+			return 0 ;		
 		return members.size();
 	}
-
+	
+	@JsonIgnore
+	public void setMemberCount(int memberCount){
+		
+	}
+	@JsonIgnore
+	public void setAdminCount(int administratorCount){
+		
+	}
+	
+	@JsonIgnore
+	public void setAdministratorCount(int administratorCount){
+		
+	}
+	
 	public int getAdministratorCount() {
 		if(administrators == null)
 			return 0;
