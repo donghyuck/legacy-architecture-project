@@ -38,14 +38,20 @@ import architecture.common.user.CompanyAlreadyExistsException;
 import architecture.common.user.CompanyManager;
 import architecture.common.user.CompanyNotFoundException;
 import architecture.common.user.CompanyTemplate;
+import architecture.common.user.Group;
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
+import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.spring.controller.WebDataController.ItemList;
 import architecture.ee.web.ws.Property;
 import architecture.ee.web.ws.Result;
+import architecture.ee.web.ws.StringProperty;
+import architecture.user.DefaultGroup;
+import architecture.user.GroupAlreadyExistsException;
 import architecture.user.GroupManager;
+import architecture.user.GroupNotFoundException;
 import architecture.user.RoleManager;
 
 
@@ -73,133 +79,110 @@ public class SecureUserDataController {
 	
 	
 	public SecureUserDataController() {
-		// TODO 자동 생성된 생성자 스텁
-	}
 
-	@RequestMapping(value="/mgmt/role/list.json",method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public ItemList getRoleList(
-			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
-			@RequestParam(value="pageSize", defaultValue="0", required=false ) Integer pageSize,
-			NativeWebRequest request) throws NotFoundException {		
-		
-		User user = SecurityHelper.getUser();	
-		int totalCount = roleManager.getTotalRoleCount();		
-		return new ItemList( roleManager.getRoles(), totalCount );
-	
 	}
 	
-	
-	@RequestMapping(value="/mgmt/company/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@RequestMapping(value="/me/company/get.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
-	public ItemList getCompanyList(
-			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
-			@RequestParam(value="pageSize", defaultValue="0", required=false ) Integer pageSize,
-			NativeWebRequest request) throws NotFoundException {			
+	public Company getCompany(	NativeWebRequest request) throws NotFoundException, CompanyNotFoundException {			
 		
-		User user = SecurityHelper.getUser();	
-		int totalCount = companyManager.getTotalCompanyCount();
-		if( pageSize > 0 ){			
-			return new ItemList( companyManager.getCompanies(startIndex, pageSize), totalCount );
-		}else{
-			return new ItemList( companyManager.getCompanies(), totalCount );
-		}
+		User user = SecurityHelper.getUser();
+		long companyId = user.getCompanyId();
+		return companyManager.getCompany(companyId);
 	}
-
 	
-	@RequestMapping(value="/mgmt/company/create.json",method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public Result createCompany(
-			@RequestBody CompanyTemplate newCompany,
-			NativeWebRequest request) throws CompanyAlreadyExistsException {			
-		
-		User user = SecurityHelper.getUser();		
-		companyManager.createCompany(newCompany.getName(), newCompany.getDisplayName(), newCompany.getDomainName(), newCompany.getDescription());		
-		return Result.newResult();
-	}	
-	
-	@RequestMapping(value="/mgmt/company/update.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@RequestMapping(value="/me/company/update.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public Result updateCompany(
 			@RequestBody CompanyTemplate newCompany,
 			NativeWebRequest request) throws CompanyNotFoundException, CompanyAlreadyExistsException {					
-		User user = SecurityHelper.getUser();			
-		Company oldCompany = companyManager.getCompany(newCompany.getCompanyId());
-		if( !StringUtils.equals(newCompany.getName(), oldCompany.getName())){
-			oldCompany.setName(newCompany.getName());
+				
+		User user = SecurityHelper.getUser();
+		long myCompanyId = user.getCompanyId();
+		if( newCompany.getCompanyId() != myCompanyId )
+			return Result.newResult(new UnAuthorizedException());		
+		
+		Company orgCompany = companyManager.getCompany(newCompany.getCompanyId());
+		if( !StringUtils.equals(newCompany.getName(), orgCompany.getName())){
+			orgCompany.setName(newCompany.getName());
 		}
-		if( !StringUtils.equals(newCompany.getDisplayName(), oldCompany.getDisplayName())){
-			oldCompany.setDisplayName(newCompany.getDisplayName());
+		if( !StringUtils.equals(newCompany.getDisplayName(), orgCompany.getDisplayName())){
+			orgCompany.setDisplayName(newCompany.getDisplayName());
 		}		
-		if( !StringUtils.equals(newCompany.getDomainName(), oldCompany.getDomainName())){
-			oldCompany.setDomainName(newCompany.getDomainName());
+		if( !StringUtils.equals(newCompany.getDomainName(), orgCompany.getDomainName())){
+			orgCompany.setDomainName(newCompany.getDomainName());
 		}	
-		if( !StringUtils.equals(newCompany.getDescription(), oldCompany.getDescription())){
-			oldCompany.setDescription(newCompany.getDescription());
+		if( !StringUtils.equals(newCompany.getDescription(), orgCompany.getDescription())){
+			orgCompany.setDescription(newCompany.getDescription());
 		}	
-		companyManager.updateCompany(oldCompany);		
+		companyManager.updateCompany(orgCompany);	
+		
 		return Result.newResult();
 	}	
 
-	@RequestMapping(value="/mgmt/company/properties/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@RequestMapping(value="/me/company/properties/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public List<Property> getCompanyPropertyList(
-			@RequestParam(value="companyId", defaultValue="0", required=true ) Long companyId,
 			NativeWebRequest request) throws CompanyNotFoundException {			
 		
-		User user = SecurityHelper.getUser();	
-		Company company = companyManager.getCompany(companyId);		
+		User user = SecurityHelper.getUser();
+		long myCompanyId = user.getCompanyId();
+		
+		Company company = companyManager.getCompany(myCompanyId);		
 		return toPropertyList(company.getProperties());
 	}	
 
-	@RequestMapping(value="/mgmt/company/properties/update.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@RequestMapping(value="/me/company/properties/update.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public Result updateCompanyPropertyList(
-			@RequestBody List<Property> newProperties,
-			@RequestParam(value="companyId", defaultValue="0", required=true ) Long companyId,
+			@RequestBody StringProperty[] newProperties,
 			NativeWebRequest request) throws CompanyNotFoundException, CompanyAlreadyExistsException {			
 		
-		User user = SecurityHelper.getUser();	
-		Company company = companyManager.getCompany(companyId);		
+		User user = SecurityHelper.getUser();
+		long myCompanyId = user.getCompanyId();
+		Company company = companyManager.getCompany(myCompanyId);		
 		Map<String, String> properties = company.getProperties();	
-		for (Property property : newProperties) {
-			properties.put(property.getName(), property.getValue().toString());
+		for (StringProperty property : newProperties) {
+			properties.put(property.getName(), property.getValue());
 		}	
-		if( newProperties.size() > 0){
+		if( newProperties.length > 0){
 			companyManager.updateCompany(company);
 		}
 		return Result.newResult();
 	}
 	
-	@RequestMapping(value="/mgmt/company/properties/delete.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@RequestMapping(value="/me/company/properties/delete.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public Result deleteCompanyPropertyList(
-			@RequestBody List<Property> newProperties,
-			@RequestParam(value="companyId", defaultValue="0", required=true ) Long companyId,
+			@RequestBody StringProperty[] newProperties,
 			NativeWebRequest request) throws CompanyNotFoundException, CompanyAlreadyExistsException {			
 		
-		User user = SecurityHelper.getUser();	
-		Company company = companyManager.getCompany(companyId);		
+		User user = SecurityHelper.getUser();
+		long myCompanyId = user.getCompanyId();
+		Company company = companyManager.getCompany(myCompanyId);		
+		
 		Map<String, String> properties = company.getProperties();	
-		for (Property property : newProperties) {
+		for (StringProperty property : newProperties) {
 			properties.remove(property.getName());
 		}
-		if( newProperties.size() > 0){
+		if( newProperties.length > 0){
+			company.setProperties(properties);
 			companyManager.updateCompany(company);
 		}
 		return Result.newResult();
 	}
 		
-	@RequestMapping(value="/mgmt/company/groups/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@RequestMapping(value="/me/company/groups/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public ItemList getCompanyGroups(
-			@RequestParam(value="companyId", defaultValue="0", required=true ) Long companyId,
 			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
 			@RequestParam(value="pageSize", defaultValue="0", required=false ) Integer pageSize,
 			NativeWebRequest request) throws CompanyNotFoundException, CompanyAlreadyExistsException {			
 		
-		User user = SecurityHelper.getUser();	
-		Company company = companyManager.getCompany(companyId);		
+		User user = SecurityHelper.getUser();
+		long myCompanyId = user.getCompanyId();
+		Company company = companyManager.getCompany(myCompanyId);		
+		
 		int totalCount = companyManager.getTotalCompanyGroupCount(company);
 		companyManager.getCompanyGroups(company);
 		if( pageSize > 0 ){			
@@ -208,25 +191,66 @@ public class SecureUserDataController {
 			return new ItemList( companyManager.getCompanyGroups(company), totalCount );
 		}
 	}	
+
+	@RequestMapping(value="/me/company/groups/create.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public Result createCompanyGroup(
+			@RequestBody DefaultGroup newGroup,
+			NativeWebRequest request) throws GroupAlreadyExistsException, CompanyNotFoundException {		
+		
+		User user = SecurityHelper.getUser();
+		long myCompanyId = user.getCompanyId();
+		Company company = companyManager.getCompany(myCompanyId);	
+		Group group = groupManager.createGroup(newGroup.getName(), newGroup.getDisplayName(), newGroup.getDescription(), company);				
+		return Result.newResult();
+	}	
 	
-	@RequestMapping(value="/mgmt/company/users/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@RequestMapping(value="/me/company/groups/update.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public Result updateCompanyGroup(
+			@RequestBody DefaultGroup newGroup,
+			NativeWebRequest request) throws GroupNotFoundException, GroupAlreadyExistsException, CompanyNotFoundException {		
+		
+		User user = SecurityHelper.getUser();
+		long myCompanyId = user.getCompanyId();
+		Company company = companyManager.getCompany(myCompanyId);	
+		
+		Group group = groupManager.getGroup(newGroup.getGroupId());		
+		if(group.getCompanyId() != company.getCompanyId()){
+			return Result.newResult(new UnAuthorizedException());					
+		}		
+		
+		if( !StringUtils.equals(newGroup.getName(), group.getName())){
+			group.setName(newGroup.getName());
+		}	
+		if( !StringUtils.equals(newGroup.getDisplayName(), group.getDisplayName())){
+			group.setDisplayName(newGroup.getDisplayName());
+		}			
+		if( !StringUtils.equals(newGroup.getDescription(), group.getDescription())){
+			group.setDescription(newGroup.getDescription());
+		}		
+		groupManager.updateGroup(group);
+		return Result.newResult();
+	}	
+	
+	@RequestMapping(value="/me/company/users/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public ItemList getCompanyUsers(
-			@RequestParam(value="companyId", defaultValue="0", required=true ) Long companyId,
 			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
 			@RequestParam(value="pageSize", defaultValue="0", required=false ) Integer pageSize,
 			NativeWebRequest request) throws CompanyNotFoundException, CompanyAlreadyExistsException {			
 		
-		User user = SecurityHelper.getUser();	
+		User user = SecurityHelper.getUser();
+		long myCompanyId = user.getCompanyId();
+		Company company = companyManager.getCompany(myCompanyId);	
 		
-		Company company = companyManager.getCompany(companyId);		
 		int totalCount = companyManager.getTotalCompanyUserCount(company);
 		if( pageSize > 0 ){			
 			return new ItemList( companyManager.getCompanyUsers(company, startIndex, pageSize), totalCount );
 		}else{
 			return new ItemList( companyManager.getCompanyUsers(company), totalCount );
 		}
-	}		
+	}	
 	
 	protected List<Property> toPropertyList (Map<String, String> properties){
 		List<Property> list = new ArrayList<Property>();
