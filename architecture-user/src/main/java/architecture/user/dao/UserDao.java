@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import architecture.common.user.Company;
+import architecture.common.user.Group;
 import architecture.common.user.User;
 
 public interface UserDao {
@@ -38,7 +39,7 @@ public interface UserDao {
 
     public abstract int getAuthenticatedUserCount();
 
-    public abstract List<Integer> getUserIdsWithStatuses(int status[]);
+    public abstract List<Long> getUserIdsWithStatuses(int status[]);
     
     public abstract int getRecentUserCount(Date date);
 
@@ -79,5 +80,12 @@ public interface UserDao {
 	public abstract int getFoundUserCount(Company company, String nameOrEmail);
 	
 	public void switchCompanies(long  companyId,  Set<Long> users );
-	    
+
+	
+	public abstract List<Long> findUserIds(Company company, Group group, String nameOrEmail);
+	
+	public abstract List<Long> findUserIds(Company company, Group group, String nameOrEmail, int startIndex, int numResults);
+	
+	public abstract int getFoundUserCount(Company company, Group group, String nameOrEmail);
+	
 }
