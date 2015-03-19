@@ -23,6 +23,7 @@ import java.net.URLEncoder;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,6 +58,7 @@ public class DownloadController {
 	@Inject
 	@Qualifier("attachmentManager")
 	private AttachmentManager attachmentManager;
+
 	
 	
 	/**
@@ -86,6 +88,23 @@ public class DownloadController {
 	public void setImageManager(ImageManager imageManager) {
 		this.imageManager = imageManager;
 	}
+	
+	
+	@RequestMapping(value = "/export", method = RequestMethod.POST)
+	public void exportProxy(
+		@RequestParam(value="fileName",  required=true ) String fileName, 
+		@RequestParam(value="contentType",  required=true ) String contentType,
+		@RequestParam(value="base64",  required=true ) String base64,
+		HttpServletResponse response )throws IOException {		
+		
+		byte[] content = Base64.decodeBase64(base64);
+		response.setContentType(contentType);
+		response.setContentLength(content.length);		
+		response.setHeader("ContentDisposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+		response.getOutputStream().write(content);
+		response.flushBuffer();			
+	}
+	
 	
 	@RequestMapping(value = "/file/{attachmentId}/{filename:.+}", method = RequestMethod.GET)
 	@ResponseBody

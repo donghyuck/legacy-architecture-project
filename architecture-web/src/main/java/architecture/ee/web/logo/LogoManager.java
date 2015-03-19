@@ -25,9 +25,15 @@ import architecture.ee.web.site.WebSite;
 
 public interface LogoManager {
 		
+	public LogoImage createLogoImage();
+	
 	public void addLogoImage(LogoImage logoImage, File file);
 	
+	public void addLogoImage(LogoImage logoImage, InputStream is);
+	
 	public void removeLogoImage(LogoImage logoImage) throws LogoImageNotFoundException ;
+	
+	public void updateLogoImage( LogoImage logoImage, File file ) throws LogoImageNotFoundException ;
 	
 	public LogoImage getLogoImageById(Long logoId)  throws LogoImageNotFoundException ;
 	
