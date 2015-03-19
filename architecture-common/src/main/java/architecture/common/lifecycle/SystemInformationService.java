@@ -21,7 +21,8 @@ import architecture.common.license.License;
 
 public interface SystemInformationService extends Component {
 
-		public abstract SystemInfo getSystemInfo();
+		
+	public abstract SystemInfo getSystemInfo();
 		
 		public abstract MemoryInfo getMemoryInfo();
 		
@@ -30,5 +31,6 @@ public interface SystemInformationService extends Component {
 		public abstract List<DatabaseInfo> getDatabaseInfos();
 		
 		public abstract List<DiskUsage> getDiskUsages();
+		
 	
 }

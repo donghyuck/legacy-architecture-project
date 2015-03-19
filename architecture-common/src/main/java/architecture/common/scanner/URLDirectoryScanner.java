@@ -16,6 +16,8 @@ import java.util.Map;
 import architecture.common.exception.NullArgumentException;
 import architecture.common.util.L10NUtils;
 
+
+
 public class URLDirectoryScanner extends AbstractDirectoryScanner {
 	
 	protected boolean doRecursiveSearch = true;
