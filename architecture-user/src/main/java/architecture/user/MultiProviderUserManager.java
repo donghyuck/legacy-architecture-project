@@ -27,6 +27,7 @@ import net.anotheria.moskito.aop.annotation.Monitor;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
@@ -41,6 +42,7 @@ import architecture.common.exception.CodeableException;
 import architecture.common.exception.CodeableRuntimeException;
 import architecture.common.user.Company;
 import architecture.common.user.EmailAlreadyExistsException;
+import architecture.common.user.Group;
 import architecture.common.user.User;
 import architecture.common.user.UserAlreadyExistsException;
 import architecture.common.user.UserManager;
@@ -332,8 +334,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 					} catch (Exception ex) {
 						log.error(L10NUtils.getMessage("005111"), ex);
 					}
-				}
-				
+				}				
 			}			
 			if(null == user){				
 				if(caseInsensitive){
@@ -359,17 +360,15 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 			
 		}
 
-		 if(null == user && null != template.getEmail()){
-			 try
-	            {
-	                user = userDao.getUserByEmail(template.getEmail());
-	            }
-	            // Misplaced declaration of an exception variable
-	            catch(Exception ex)
-	            {
-	                log.debug(L10NUtils.getMessage("005114"), ex);
-	            }
-		 } 
+		if (null == user && null != template.getEmail()) {
+			try {
+				user = userDao.getUserByEmail(template.getEmail());
+			}
+			// Misplaced declaration of an exception variable
+			catch (Exception ex) {
+				log.debug(L10NUtils.getMessage("005114"), ex);
+			}
+		}
 		 
 		if (null == user) {
 			user = sourceUserFromProvider(template);
@@ -391,69 +390,61 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 	}
 
 	public User getUser(String userName) throws UserNotFoundException {
-		if(null == userName)
-        {
-            return null;
-        }		
+		if (null == userName) {
+			return null;
+		}
 		User user = getUser(((User) (new UserTemplate(userName))));
 		if (null == user) {
-			UserNotFoundException e = CodeableException.newException(UserNotFoundException.class, 5116, userName);
+			UserNotFoundException e = CodeableException.newException(
+					UserNotFoundException.class, 5116, userName);
 			log.info(e.getMessage());
 			throw e;
 		}
-		return user;        
+		return user;
 	}
 
 	public User getUser(long userId) throws UserNotFoundException {
-		
 		User user = getUser(((User) (new UserTemplate(userId))));
-        if(null == user)
-        {
-        	UserNotFoundException e = CodeableException.newException(UserNotFoundException.class, 5117, userId);
+		if (null == user) {
+			UserNotFoundException e = CodeableException.newException( UserNotFoundException.class, 5117, userId);
 			log.info(e.getMessage());
 			throw e;
-        }		
+		}
 		return user;
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public void deleteUser(User user) throws UnsupportedOperationException, UserNotFoundException {
-		log.info( L10NUtils.format("005118", user ) );
-        User loadedUser = getUser(user);
-        if(null == loadedUser)
-        {
-            log.info( L10NUtils.format("005119", user.toString()) );
-        } else
-        {
-        	try
-            {
-                UserProvider up = getUserProvider(loadedUser);
-                if(null != up)
-                {
-                    log.debug( L10NUtils.getMessage("005120") );
-                    up.deleteUser(loadedUser);
-                    userProviderCache.remove(Long.valueOf(user.getUserId()));
-                }
-            }
-            catch(Exception ex)
-            {
-                log.warn(  L10NUtils.getMessage("005121") , ex);
-            }
-            try
-            {
-                userDao.delete(loadedUser);
-                userCache.remove(Long.valueOf(loadedUser.getUserId()));
-                userIdCache.remove(loadedUser.getUsername());
-                resetUserCounts();
-            }
-            catch(DataAccessException ex)
-            {
-                String message = (new StringBuilder()).append("Failed to remove application user for ").append(user).append(".").toString();
-                log.error(message, ex);
-                throw ex;
-            }        	
-        }
-		
+	public void deleteUser(User user) throws UnsupportedOperationException,
+			UserNotFoundException {
+		log.info(L10NUtils.format("005118", user));
+		User loadedUser = getUser(user);
+		if (null == loadedUser) {
+			log.info(L10NUtils.format("005119", user.toString()));
+		} else {
+			try {
+				UserProvider up = getUserProvider(loadedUser);
+				if (null != up) {
+					log.debug(L10NUtils.getMessage("005120"));
+					up.deleteUser(loadedUser);
+					userProviderCache.remove(Long.valueOf(user.getUserId()));
+				}
+			} catch (Exception ex) {
+				log.warn(L10NUtils.getMessage("005121"), ex);
+			}
+			try {
+				userDao.delete(loadedUser);
+				userCache.remove(Long.valueOf(loadedUser.getUserId()));
+				userIdCache.remove(loadedUser.getUsername());
+				resetUserCounts();
+			} catch (DataAccessException ex) {
+				String message = (new StringBuilder())
+						.append("Failed to remove application user for ")
+						.append(user).append(".").toString();
+				log.error(message, ex);
+				throw ex;
+			}
+		}
+
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
@@ -512,14 +503,11 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public User updateUser(User user) throws UserNotFoundException, UserAlreadyExistsException {
-
 		log.debug( L10NUtils.format("005124", user ) );
-        UserTemplate userModel = new UserTemplate(getUser(user));
-        
+        UserTemplate userModel = new UserTemplate(getUser(user));        
         if( null == userModel){
         	throw CodeableException.newException(UserNotFoundException.class, 5116, user);
-        }
-		        
+        }		        
         String previousUsername = null;
         if(!userModel.getUsername().equals(user.getUsername()))
         {
@@ -653,11 +641,9 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 		
 		User sourcedUser;
 		for(UserProvider up :providers ){			
-			sourcedUser = up.getUser(user);
-			
+			sourcedUser = up.getUser(user);			
 			if(sourcedUser == null)
-				continue;
-			
+				continue;			
 			validateProviderUser(sourcedUser);
 			if (null == sourcedUser.getPasswordHash()) {
 				UserTemplate sourcedUserWithPass = new UserTemplate(sourcedUser);
@@ -666,7 +652,6 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 				sourcedUserWithPass.setPasswordHash(new String(buffer));
 				sourcedUser = sourcedUserWithPass;
 			}
-
 			User appUser = userDao.getUserByUsername(sourcedUser.getUsername());
 			if (null == appUser) {
 				log.debug( L10NUtils.getMessage( "005131" ) ) ; 
@@ -674,8 +659,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 			}
 			userProviderCache.put(new Element(appUser.getUserId(), up.getName()));			
 			return appUser;
-		}
-		
+		}		
 		return null;
 	}
 
@@ -765,92 +749,86 @@ public class MultiProviderUserManager implements UserManager, EventSource {
     	// fire event ;;
         //eventPublisher.publish(event);
     }
-    
-    protected UserProvider getUserProvider(User user){
-    	 if(providers.size() == 0)
-             return null;
-    	 
-    	 String providerName = (String) userProviderCache.get( user.getUserId() ).getValue();         
-    	 for(UserProvider up : providers){
-        	 if( up.getName().equals(providerName) )
-        		 return up;
-         }
-         
-    	 for(UserProvider up : providers){
-    		 User sourcedUser = up.getUser(user);
-    		 if(null != sourcedUser){
-    			 userProviderCache.put( new Element( user.getUserId(), up.getName() ));
-                 updateCaches(sourcedUser);
-                 return up;
-    		 }
-    	 }         
-         return null;
-    }    
-    
-	private void updateCaches(User user)
-    {
-        long uid = user.getUserId();
-        if(uid < 0L)
-        {
-            throw new IllegalArgumentException( L10NUtils.format("005134", uid) );
-        } else
-        {
-            this.userCache.put(new Element(uid, user));
-            this.userIdCache.put(new Element(user.getUsername(), uid ));
-            return;
-        }
-    }	
-	
-	private String getPasswordHash(User user)
-    {
-        String passwd;
-        passwd = user.getPassword();
-        if(null == passwd)
-            return null;
-        if(passwd.equals(""))
-            return null;
-        try
-        {
-        	log.debug( user.getPassword() + "=" + passwordEncoder.encodePassword(passwd, saltSource.getSalt(new ExtendedUserDetailsAdaptor(user)))  );
-            return passwordEncoder.encodePassword(passwd, saltSource.getSalt(new ExtendedUserDetailsAdaptor(user)));
-        }
-        catch(Exception ex)
-        {
-            log.warn( L10NUtils.getMessage("005135"), ex);
-        }
-        return null;
-    }
-	
-    private void wireTemplateDates(UserTemplate ut)
-    {
-        if(null == ut)
-            return;
-        if( null == ut.getCreationDate() )
-            ut.setCreationDate(new Date());
-        if(null == ut.getModifiedDate())
-            ut.setModifiedDate(new Date());
-    }    
 
-    private String caseEmailAddress(User user)
-    {
-        return emailAddressCaseSensitive || user.getEmail() == null ? user.getEmail() : user.getEmail().toLowerCase();
-    }
-    
-    protected UserTemplate translateFederated(UserTemplate usert)
-    {
-        if(null == usert)
-            return null;
-        if(usert.isFederated())
-        {
-            usert.setGetPasswordHashSupported(false);
-            usert.setSetEmailSuppoted(false);
-            usert.setSetNameSupported(false);
-            usert.setSetPasswordHashSupported(false);
-            usert.setSetPasswordSupported(false);
-            usert.setSetUsernameSupported(false);
-        }
-        return usert;
-    }
+	protected UserProvider getUserProvider(User user) {
+		if (providers.size() == 0)
+			return null;
+
+		String providerName = (String) userProviderCache.get(user.getUserId()).getValue();
+		for (UserProvider up : providers) {
+			if (up.getName().equals(providerName))
+				return up;
+		}
+
+		for (UserProvider up : providers) {
+			User sourcedUser = up.getUser(user);
+			if (null != sourcedUser) {
+				userProviderCache.put(new Element(user.getUserId(), up.getName()));
+				updateCaches(sourcedUser);
+				return up;
+			}
+		}
+		return null;
+	}
+
+	private void updateCaches(User user) {
+		long uid = user.getUserId();
+		if (uid < 0L) {
+			throw new IllegalArgumentException(L10NUtils.format("005134", uid));
+		} else {
+			this.userCache.put(new Element(uid, user));
+			this.userIdCache.put(new Element(user.getUsername(), uid));
+			return;
+		}
+	}
+	
+	private String getPasswordHash(User user) {
+		String passwd;
+		passwd = user.getPassword();
+		if (null == passwd)
+			return null;
+		if (passwd.equals(""))
+			return null;
+		try {
+			log.debug(user.getPassword()
+					+ "=" 
+					+ passwordEncoder.encodePassword(passwd, saltSource
+							.getSalt(new ExtendedUserDetailsAdaptor(user))));
+			return passwordEncoder.encodePassword(passwd,
+					saltSource.getSalt(new ExtendedUserDetailsAdaptor(user)));
+		} catch (Exception ex) {
+			log.warn(L10NUtils.getMessage("005135"), ex);
+		}
+		return null;
+	}
+	
+	private void wireTemplateDates(UserTemplate ut) {
+		if (null == ut)
+			return;
+		if (null == ut.getCreationDate())
+			ut.setCreationDate(new Date());
+		if (null == ut.getModifiedDate())
+			ut.setModifiedDate(new Date());
+	}
+
+	private String caseEmailAddress(User user) {
+		return emailAddressCaseSensitive || user.getEmail() == null ? user
+				.getEmail() : user.getEmail().toLowerCase();
+	}
+
+	protected UserTemplate translateFederated(UserTemplate usert) {
+		if (null == usert)
+			return null;
+		if (usert.isFederated()) {
+			usert.setGetPasswordHashSupported(false);
+			usert.setSetEmailSuppoted(false);
+			usert.setSetNameSupported(false);
+			usert.setSetPasswordHashSupported(false);
+			usert.setSetPasswordSupported(false);
+			usert.setSetUsernameSupported(false);
+		}
+		return usert;
+	}
 
 	public List<User> findUsers(String nameOrEmail) {
 		return userDao.findUsers(nameOrEmail);
@@ -888,5 +866,39 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 		return userDao.getFoundUserCount(company, nameOrEmail);
 	}
 
+	public List<User> findUsersWithGroupFilter(Company company, Group group, String nameOrEmail) {
+		 List<Long> IDs = userDao.findUserIds(company, group, nameOrEmail);
+		 List<User> list = new ArrayList<User>(IDs.size());
+		 for( Long userId : IDs)
+		 {
+			User user;
+			try {
+				user = getUser(userId);
+				list.add(user);
+			} catch (UserNotFoundException e) {
+				log.warn(e);
+			}			
+		 }	 
+		 return list;		
+	}
 	
+	public List<User> findUsersWithGroupFilter(Company company, Group group, String nameOrEmail, int startIndex, int numResults) {
+		 List<Long> IDs = userDao.findUserIds(company, group, nameOrEmail, startIndex, numResults);
+		 List<User> list = new ArrayList<User>(IDs.size());
+		 for( Long userId : IDs)
+		 {
+			User user;
+			try {
+				user = getUser(userId);
+				list.add(user);
+			} catch (UserNotFoundException e) {
+				log.warn(e);
+			}			
+		 }	 
+		 return list;			
+	}
+	
+	public int getFoundUserCountWithGroupFilter(Company company, Group group, String nameOrEmail) {
+		return userDao.getFoundUserCount(company, group, nameOrEmail);
+	}	
 }
