@@ -65,12 +65,14 @@ public class SecurityTest {
 	*/
 	@Test
 	public void testPasswordEncoder (){
-		MessageDigestPasswordEncoder encoder = new MessageDigestPasswordEncoder("SHA-256");
+		MessageDigestPasswordEncoder encoder = new MessageDigestPasswordEncoder("SHA-1");
 		
 		System.out.println(
-				encoder.encodePassword("1234", null)
+				encoder.encodePassword("inkium01", null)
 		);
-		
+		System.out.println(
+				encoder.encodePassword("weham1", null)
+		);		
 	}
 	
 	@Test

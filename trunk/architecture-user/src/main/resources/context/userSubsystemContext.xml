@@ -40,7 +40,7 @@
 		
 	
 	<bean id="companyDao" class="architecture.user.dao.impl.JdbcCompanyDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
-	<bean id="companyManager" class="architecture.user.DefaultCompanyManager" depends-on="companyDao eventPublisher groupManager"  p:companyDao-ref="companyDao" p:eventPublisher-ref="eventPublisher"  p:groupManager-ref="groupManager" p:companyCache-ref="companyCache" p:companyIdCache-ref="companyIdCache"  p:companyDomainCache-ref="companyDomainCache" />		
+	<bean id="companyManager" class="architecture.user.DefaultCompanyManager" depends-on="companyDao eventPublisher groupManager userManager"  p:companyDao-ref="companyDao" p:eventPublisher-ref="eventPublisher"  p:userManager-ref="userManager" p:groupManager-ref="groupManager" p:companyCache-ref="companyCache" p:companyIdCache-ref="companyIdCache"  p:companyDomainCache-ref="companyDomainCache" />		
 						
 	<bean id="userDao" class="architecture.user.dao.impl.JdbcUserDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
 	<bean id="userManager" class="architecture.user.MultiProviderUserManager" depends-on="userDao, eventPublisher"  p:userDao-ref="userDao" p:eventPublisher-ref="eventPublisher"  p:passwordEncoder-ref="passwordEncoder" p:saltSource-ref="passwordSaltSource" p:userCache-ref="userCache" p:userIdCache-ref="userIDCache"  p:userProviderCache-ref="userProviderCache" />		

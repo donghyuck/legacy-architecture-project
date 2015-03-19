@@ -437,6 +437,35 @@
 		WHERE COMPANY_ID= ? AND VISIBLE = 1 AND ( EMAIL LIKE ? OR NAME LIKE ? )	
 	 ]]></sql-query>	
 
+	<sql-query name="SELECT_COMPANY_USER_IDS_BY_EMAIL_OR_NAME_WITH_GROUP_FILTER" description="회사 소속 사용자 " ><![CDATA[
+	SELECT 
+		T1.USER_ID
+	FROM V2_USER T1 
+	WHERE T1.COMPANY_ID= ?
+	AND T1.VISIBLE = 1 
+	AND ( T1.EMAIL LIKE ? OR T1.NAME LIKE ? )
+		AND NOT EXISTS (
+		SELECT T2.USER_ID 
+		FROM V2_GROUP_MEMBERS T2       
+		WHERE T2.GROUP_ID = ?
+		AND T1.USER_ID = T2.USER_ID
+	)	
+	 ]]></sql-query>
+	 <sql-query name="COUNT_COMPANY_USERS_BY_EMAIL_OR_NAME_WITH_GROUP_FILTER" description="회사 소속 사용자 " ><![CDATA[
+	SELECT 
+		COUNT(T1.USER_ID)
+	FROM V2_USER T1 
+	WHERE T1.COMPANY_ID= ?
+	AND T1.VISIBLE = 1 
+	AND ( T1.EMAIL LIKE ? OR T1.NAME LIKE ? )
+		AND NOT EXISTS (
+		SELECT T2.USER_ID 
+		FROM V2_GROUP_MEMBERS T2       
+		WHERE T2.GROUP_ID = ?
+		AND T1.USER_ID = T2.USER_ID
+	)
+	 ]]></sql-query>
+	
 	<!-- GROUP -->
 	<sql-query name="CREATE_GROUP" description="그룹 생성"><![CDATA[    
     	INSERT INTO V2_GROUP (
