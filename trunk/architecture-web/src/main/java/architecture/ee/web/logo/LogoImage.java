@@ -43,7 +43,7 @@ public interface LogoImage extends Cacheable {
 
 	public void setFilename(String filename) ;
 	
-	public void setPrimary(Boolean primary) ;
+	public void setPrimary(boolean primary) ;
 	
 	public String getImageContentType();
 	
