@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.SqlParameterValue;
 
 import architecture.common.user.Company;
 import architecture.common.user.CompanyNotFoundException;
+import architecture.common.user.Group;
 import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
@@ -42,8 +43,8 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 			ut.setLastName( rs.getString("LAST_NAME") );
 			ut.setEmail( rs.getString("EMAIL") );
 			ut.setEmailVisible( rs.getInt("EMAIL_VISIBLE") == 1 ); 
-			ut.setLastLoggedIn( rs.getDate("LAST_LOGINED_IN") ); 
-			ut.setLastProfileUpdate( rs.getDate("LAST_PROFILE_UPDATE") );  
+			ut.setLastLoggedIn( rs.getTimestamp("LAST_LOGINED_IN") ); 
+			ut.setLastProfileUpdate( rs.getTimestamp("LAST_PROFILE_UPDATE") );  
 			ut.setEnabled( rs.getInt("USER_ENABLED") == 1 ); 			
 			ut.setExternal( rs.getInt("IS_EXTERNAL") == 1 );  
 			ut.setFederated( rs.getInt("FEDERATED") == 1 );
@@ -59,7 +60,6 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {			
 			UserTemplate ut = new UserTemplate();			
-
 			ut.setCompanyId( Long.parseLong(rs.getString("COMPANY_ID")) );
 			ut.setUserId(rs.getLong("USER_ID")); 
 			ut.setUsername(rs.getString("USERNAME")); 
@@ -70,8 +70,8 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 			ut.setLastName( rs.getString("LAST_NAME") );
 			ut.setEmail( rs.getString("EMAIL") );
 			ut.setEmailVisible( rs.getInt("EMAIL_VISIBLE") == 1 ); 
-			ut.setLastLoggedIn( rs.getDate("LAST_LOGINED_IN") ); 
-			ut.setLastProfileUpdate( rs.getDate("LAST_PROFILE_UPDATE") );  
+			ut.setLastLoggedIn( rs.getTimestamp("LAST_LOGINED_IN") ); 
+			ut.setLastProfileUpdate( rs.getTimestamp("LAST_PROFILE_UPDATE") );  
 			ut.setEnabled( rs.getInt("USER_ENABLED") == 1 ); 
 			// rs.getInt("VISIBLE");
 			ut.setExternal( rs.getInt("IS_EXTERNAL") == 1 );  
@@ -212,9 +212,9 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 				Types.VARCHAR,
 				Types.VARCHAR,
 				Types.NUMERIC,			
-				Types.DATE,
+				Types.TIMESTAMP,
 				
-				Types.DATE,
+				Types.TIMESTAMP,
 				Types.NUMERIC,
 				Types.NUMERIC,
 				Types.NUMERIC,
@@ -447,8 +447,8 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 		return users;
 	}
 
-	public List<Integer> getUserIdsWithStatuses(int[] status) {
-		return getExtendedJdbcTemplate().queryForList(getBoundSqlWithAdditionalParameter("ARCHITECTURE_SECURITY.SELECT_USER_ID_BY_STATUS", status).getSql(), Integer.class);
+	public List<Long> getUserIdsWithStatuses(int[] status) {
+		return getExtendedJdbcTemplate().queryForList(getBoundSqlWithAdditionalParameter("ARCHITECTURE_SECURITY.SELECT_USER_ID_BY_STATUS", status).getSql(), Long.class);
 	}
 
 	public List<User> findUsers(String nameOrEmail) {
@@ -546,6 +546,39 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 
 	public void switchCompanies(long companyId, Set<Long> users) {
 		
+	}
+
+	@Override
+	public List<Long> findUserIds(Company company, Group group, String nameOrEmail) {
+		return getExtendedJdbcTemplate().queryForList(
+				getBoundSql("ARCHITECTURE_SECURITY.SELECT_COMPANY_USER_IDS_BY_EMAIL_OR_NAME_WITH_GROUP_FILTER").getSql(), 
+				Long.class, 
+				new SqlParameterValue(Types.INTEGER, company.getCompanyId() ),
+				new SqlParameterValue(Types.VARCHAR, nameOrEmail ), 
+				new SqlParameterValue(Types.VARCHAR, nameOrEmail ), 
+				new SqlParameterValue(Types.INTEGER, group.getGroupId() ));
+	}
+
+	@Override
+	public List<Long> findUserIds(Company company, Group group, String nameOrEmail, int startIndex, int numResults) {
+		return getExtendedJdbcTemplate().queryScrollable(
+				getBoundSql("ARCHITECTURE_SECURITY.SELECT_COMPANY_USER_IDS_BY_EMAIL_OR_NAME_WITH_GROUP_FILTER").getSql(), 
+				startIndex, 
+				numResults, 
+				new Object[]{ company.getCompanyId(), nameOrEmail, nameOrEmail, group.getGroupId()}, 
+				new int[] {Types.NUMERIC, Types.VARCHAR, Types.VARCHAR , Types.NUMERIC}, 
+				Long.class);
+	}
+
+	@Override
+	public int getFoundUserCount(Company company, Group group, String nameOrEmail) {
+		return getExtendedJdbcTemplate().queryForObject(
+			getBoundSql("ARCHITECTURE_SECURITY.COUNT_COMPANY_USERS_BY_EMAIL_OR_NAME_WITH_GROUP_FILTER").getSql(), 
+			Integer.class, 
+			new SqlParameterValue(Types.INTEGER, company.getCompanyId() ),
+			new SqlParameterValue(Types.VARCHAR, nameOrEmail ), 
+			new SqlParameterValue(Types.VARCHAR, nameOrEmail ), 
+			new SqlParameterValue(Types.INTEGER, group.getGroupId() ));
 	}
     
 }

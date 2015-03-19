@@ -35,6 +35,7 @@ import org.springframework.jdbc.core.SqlParameterValue;
 
 import architecture.common.user.Company;
 import architecture.common.user.CompanyNotFoundException;
+import architecture.common.user.Group;
 import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
@@ -465,8 +466,8 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 		return users;
 	}
 
-	public List<Integer> getUserIdsWithStatuses(int[] status) {
-		return getExtendedJdbcTemplate().queryForList(getSql("SELECT_USER_ID_BY_STATUS", status), Integer.class);
+	public List<Long> getUserIdsWithStatuses(int[] status) {
+		return getExtendedJdbcTemplate().queryForList(getSql("SELECT_USER_ID_BY_STATUS", status), Long.class);
 	}
 
 	public List<User> findUsers(String nameOrEmail) {
@@ -590,5 +591,29 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 				return userIdsToUse.size();
 			}}		
 		); 		
+	}
+
+
+	@Override
+	public List<Long> findUserIds(Company company, Group group,
+			String nameOrEmail) {
+		// TODO 자동 생성된 메소드 스텁
+		return null;
+	}
+
+
+	@Override
+	public List<Long> findUserIds(Company company, Group group,
+			String nameOrEmail, int startIndex, int numResults) {
+		// TODO 자동 생성된 메소드 스텁
+		return null;
+	}
+
+
+	@Override
+	public int getFoundUserCount(Company company, Group group,
+			String nameOrEmail) {
+		// TODO 자동 생성된 메소드 스텁
+		return 0;
 	}
 }
