@@ -30,7 +30,7 @@ public class CompanyTemplate  extends BaseModelObjectSupport implements Company 
 	private Long companyId;
 	private String displayName;
 	private String domainName;
-	
+	private int memberCount;
 	
 	public CompanyTemplate() {
 		this.companyId = -1L;
@@ -38,6 +38,7 @@ public class CompanyTemplate  extends BaseModelObjectSupport implements Company 
 		Date now = Calendar.getInstance().getTime();
 		this.setCreationDate(now);
 		this.setModifiedDate(now);
+		this.memberCount = 0;
 	}
 	
 	/**
@@ -90,6 +91,20 @@ public class CompanyTemplate  extends BaseModelObjectSupport implements Company 
 		this.companyId = companyId;
 	}
 	
+	/**
+	 * @return memberCount
+	 */
+	public int getMemberCount() {
+		return memberCount;
+	}
+
+	/**
+	 * @param memberCount 설정할 memberCount
+	 */
+	public void setMemberCount(int memberCount) {
+		this.memberCount = memberCount;
+	}
+
 	@JsonIgnore
 	public int getCachedSize() {
 		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName())  +  CacheSizes.sizeOfString(getDisplayName()) + CacheSizes.sizeOfString( getDescription() ) + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate() ;

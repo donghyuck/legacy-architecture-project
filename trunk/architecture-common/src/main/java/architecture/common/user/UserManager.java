@@ -102,4 +102,10 @@ public interface UserManager {
 	
 	public abstract int getFoundUserCount(Company company, String nameOrEmail);
 	
+	public abstract List<User> findUsersWithGroupFilter(Company company, Group group, String nameOrEmail);
+	
+	public abstract List<User> findUsersWithGroupFilter(Company company, Group group, String nameOrEmail, int startIndex, int numResults);
+	
+	public abstract int getFoundUserCountWithGroupFilter(Company company, Group group, String nameOrEmail);
+	
 }
