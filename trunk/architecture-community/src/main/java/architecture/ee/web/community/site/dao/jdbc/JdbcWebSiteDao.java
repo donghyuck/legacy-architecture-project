@@ -29,12 +29,14 @@ import architecture.common.user.CompanyTemplate;
 import architecture.common.user.UserTemplate;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.ee.web.community.site.DefaultWebSite;
 import architecture.ee.web.navigator.DefaultMenu;
+import architecture.ee.web.site.DefaultWebSite;
+import architecture.ee.web.site.WebPageNotFoundException;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteDomainMapper;
 import architecture.ee.web.site.WebSiteNotFoundException;
 import architecture.ee.web.site.dao.WebSiteDao;
+import architecture.ee.web.site.page.WebPage;
 
 public class JdbcWebSiteDao extends ExtendedJdbcDaoSupport implements WebSiteDao  {
 
@@ -42,8 +44,41 @@ public class JdbcWebSiteDao extends ExtendedJdbcDaoSupport implements WebSiteDao
 	private String sequencerName = "WEBSITE";
 	private String webSitePropertyTableName = "V2_WEBSITE_PROPERTY";
 	private String webSitePropertyPrimaryColumnName = "WEBSITE_ID";
-		
 	
+	private String webPageSequencerName = "WEBPAGE";
+	private String webPagePropertyTableName = "V2_WEBPAGE_PROPERTY";
+	private String webPagePropertyPrimaryColumnName = "WEBPAGE_ID";	
+
+	/**
+	 * 
+		WEBPAGE_ID				INTEGER NOT NULL,
+		WEBSITE_ID					INTEGER NOT NULL,		
+		NAME						VARCHAR2(255)	NOT NULL, 
+		DESCRIPTION				VARCHAR2(1000), 
+		DISPLAY_NAME			VARCHAR2(255)	NOT NULL, 
+		CONTENT_TYPE			VARCHAR2(255)	NOT NULL, 
+		TEMPLATE					VARCHAR2(255)	NOT NULL, 
+		ENABLED					NUMBER(1, 0)  DEFAULT 1,
+		CREATION_DATE			DATE DEFAULT  SYSDATE NOT NULL,
+		MODIFIED_DATE			DATE DEFAULT  SYSDATE NOT NULL,
+	 * 
+	 */
+	private final RowMapper<WebPage> pageMapper = new RowMapper<WebPage>(){
+		public WebPage mapRow(ResultSet rs, int rowNum) throws SQLException {
+			WebPage page = new WebPage(rs.getLong("WEBPAGE_ID"));			
+			page.setName(rs.getString("NAME"));
+			page.setDescription(rs.getString("DESCRIPTION"));
+			page.setDisplayName(rs.getString("DISPLAY_NAME"));			
+			page.setEnabled(rs.getInt("ENABLED") == 1 ? true : false );
+			page.setContentType(rs.getString("CONTENT_TYPE"));			
+			page.setTemplate(rs.getString("TEMPLATE"));			
+			page.setCreationDate(rs.getTimestamp("CREATION_DATE"));
+			page.setModifiedDate(rs.getTimestamp("MODIFIED_DATE"));					
+			return page;
+		}		
+	};
+	
+
 	private final RowMapper<WebSite> siteMapper = new RowMapper<WebSite>(){
 		public WebSite mapRow(ResultSet rs, int rowNum) throws SQLException {
 			DefaultWebSite site = new DefaultWebSite(rs.getLong("WEBSITE_ID"));			
@@ -133,6 +168,52 @@ public class JdbcWebSiteDao extends ExtendedJdbcDaoSupport implements WebSiteDao
 		this.webSitePropertyPrimaryColumnName = webSitePropertyPrimaryColumnName;
 	}
 
+	
+	
+	/**
+	 * @return webPageSequencerName
+	 */
+	public String getWebPageSequencerName() {
+		return webPageSequencerName;
+	}
+
+	/**
+	 * @param webPageSequencerName 설정할 webPageSequencerName
+	 */
+	public void setWebPageSequencerName(String webPageSequencerName) {
+		this.webPageSequencerName = webPageSequencerName;
+	}
+
+	/**
+	 * @return webPagePropertyTableName
+	 */
+	public String getWebPagePropertyTableName() {
+		return webPagePropertyTableName;
+	}
+
+	/**
+	 * @param webPagePropertyTableName 설정할 webPagePropertyTableName
+	 */
+	public void setWebPagePropertyTableName(String webPagePropertyTableName) {
+		this.webPagePropertyTableName = webPagePropertyTableName;
+	}
+
+
+	/**
+	 * @return webPagePropertyPrimaryColumnName
+	 */
+	public String getWebPagePropertyPrimaryColumnName() {
+		return webPagePropertyPrimaryColumnName;
+	}
+
+	/**
+	 * @param webPagePropertyPrimaryColumnName 설정할 webPagePropertyPrimaryColumnName
+	 */
+	public void setWebPagePropertyPrimaryColumnName(
+			String webPagePropertyPrimaryColumnName) {
+		this.webPagePropertyPrimaryColumnName = webPagePropertyPrimaryColumnName;
+	}
+
 	public Map<String, String> getWebSiteProperties(long webSiteId) {
 		return extendedPropertyDao.getProperties(webSitePropertyTableName, webSitePropertyPrimaryColumnName, webSiteId);
 	}
@@ -144,7 +225,7 @@ public class JdbcWebSiteDao extends ExtendedJdbcDaoSupport implements WebSiteDao
 	public void setWebSiteProperties(long webSiteId, Map<String, String> props) {
 		extendedPropertyDao.updateProperties(webSitePropertyTableName, webSitePropertyPrimaryColumnName, webSiteId, props);
 	}
-
+	
 	public void createWebSite(WebSite webSite) {
 		long webSiteIdToUse = webSite.getWebSiteId();
 		if( webSiteIdToUse < 0 )
@@ -249,6 +330,51 @@ public class JdbcWebSiteDao extends ExtendedJdbcDaoSupport implements WebSiteDao
 					return new WebSiteDomainMapper(rs.getLong("WEBSITE_ID"), rs.getString("URL")) ;
 				}}
 		);
+	}
+
+	
+
+	public Map<String, String> getWebPageProperties(long webPageId) {
+		return extendedPropertyDao.getProperties(webPagePropertyTableName, webPagePropertyPrimaryColumnName, webPageId);
+	}
+
+	public void deleteWebPageProperties(long webPageId) {
+		extendedPropertyDao.deleteProperties(webPagePropertyTableName, webPagePropertyPrimaryColumnName, webPageId);
+	}
+	
+	public void setWebPageProperties(long webPageId, Map<String, String> props) {
+		extendedPropertyDao.updateProperties(webPagePropertyTableName, webPagePropertyPrimaryColumnName, webPageId, props);
+	}
+		
+	
+	@Override
+	public WebPage getWebPageByName(long webSiteId, String name)
+			throws WebPageNotFoundException {
+		try{
+			WebPage page =  getExtendedJdbcTemplate().queryForObject(
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_WEBPAGE_BY_NAME").getSql(), 
+				pageMapper, 
+				new SqlParameterValue (Types.NUMERIC, webSiteId ), new SqlParameterValue (Types.VARCHAR, name ));			
+			page.setProperties(getWebPageProperties(page.getWebPageId()));
+			return page;		
+		} catch (DataAccessException e) {
+			throw new WebPageNotFoundException(e);
+		}				
+	}
+
+	@Override
+	public WebPage getWebPageById(long webPageId)
+			throws WebPageNotFoundException {
+		try{
+			WebPage page = getExtendedJdbcTemplate().queryForObject(
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_WEBPAGE_BY_ID").getSql(), 
+				pageMapper, 
+				new SqlParameterValue (Types.NUMERIC, webPageId ));			
+			page.setProperties(getWebPageProperties(webPageId));
+			return page;
+		} catch (DataAccessException e) {
+			throw new WebPageNotFoundException(e);
+		}	
 	}	
 	
 }
