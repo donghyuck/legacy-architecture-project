@@ -19,10 +19,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +42,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,7 +58,9 @@ import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.SystemInformationService;
 import architecture.common.model.json.CustomJsonDateDeserializer;
 import architecture.common.model.json.CustomJsonDateSerializer;
+import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
+import architecture.common.user.CompanyNotFoundException;
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
 import architecture.common.util.StringUtils;
@@ -69,15 +75,23 @@ import architecture.ee.web.logo.LogoImageNotFoundException;
 import architecture.ee.web.logo.LogoManager;
 import architecture.ee.web.navigator.DefaultMenu;
 import architecture.ee.web.navigator.Menu;
+import architecture.ee.web.navigator.MenuComponent;
+import architecture.ee.web.navigator.MenuNotFoundException;
 import architecture.ee.web.navigator.MenuRepository;
+import architecture.ee.web.site.DefaultWebSite;
+import architecture.ee.web.site.WebPageNotFoundException;
 import architecture.ee.web.site.WebSite;
+import architecture.ee.web.site.WebSiteAlreadyExistsExcaption;
 import architecture.ee.web.site.WebSiteManager;
+import architecture.ee.web.site.WebSiteNotFoundException;
+import architecture.ee.web.site.page.WebPage;
 import architecture.ee.web.spring.controller.SecureWebStageDataController.CacheStats;
 import architecture.ee.web.spring.controller.WebDataController.ItemList;
 import architecture.ee.web.util.WebApplicatioinConstants;
 import architecture.ee.web.util.WebSiteUtils;
 import architecture.ee.web.ws.Property;
 import architecture.ee.web.ws.Result;
+import architecture.ee.web.ws.StringProperty;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -126,6 +140,483 @@ public class SecureWebMgmtDataController {
 	public SecureWebMgmtDataController() {
 	}
 
+	/** 
+	 * Website
+	 */
+
+	@RequestMapping(value="/mgmt/website/list.json",method={RequestMethod.POST} )
+	@ResponseBody
+	public ItemList getCompanyWebSiteList(
+			@RequestParam(value="company", defaultValue="0", required=false ) Long company,
+			NativeWebRequest request) throws CompanyNotFoundException {			
+		
+		User user = SecurityHelper.getUser();			
+		Company companyToUse ;
+		if( company > 0 ){
+			companyToUse = companyManager.getCompany(company);
+		}else{
+			companyToUse = user.getCompany();
+		}		
+		int totalCount = webSiteManager.getWebCount(companyToUse);
+		return new ItemList(webSiteManager.getWebSites(companyToUse), totalCount);
+	}		
+
+	@RequestMapping(value="/mgmt/website/update.json",method={RequestMethod.POST} )
+	@ResponseBody
+	public Result updateWebSite(
+			@RequestBody DefaultWebSite webSite,
+			NativeWebRequest request) throws WebSiteAlreadyExistsExcaption, WebSiteNotFoundException {			
+		
+		User user = SecurityHelper.getUser();			
+		WebSite webSiteToUse ;
+		Date now = Calendar.getInstance().getTime();
+		if( webSite.getWebSiteId() > 0 ){
+			webSiteToUse =  webSiteManager.getWebSiteById(webSite.getWebSiteId());
+			if( StringUtils.isNotEmpty(webSite.getName()) &&  !StringUtils.equals( webSiteToUse.getName(), webSite.getName())){
+				webSiteToUse.setName(webSite.getName());
+			}
+			if( StringUtils.isNotEmpty(webSite.getDisplayName()) && !StringUtils.equals( webSiteToUse.getDisplayName(), webSite.getDisplayName())){
+				webSiteToUse.setDisplayName(webSite.getDisplayName());
+			}	
+			if( StringUtils.isNotEmpty(webSite.getDescription()) && !StringUtils.equals( webSiteToUse.getDescription(), webSite.getDescription())){
+				webSiteToUse.setDescription(webSite.getDescription());
+			}	
+			if( StringUtils.isNotEmpty(webSite.getUrl()) && !StringUtils.equals( webSiteToUse.getUrl(), webSite.getUrl())){
+				webSiteToUse.setUrl(webSite.getUrl());
+			}	
+			if( webSiteToUse.isEnabled() != webSite.isEnabled()){
+				webSiteToUse.setEnabled(webSite.isEnabled());
+			}
+			if( webSiteToUse.getMenu().getMenuId()!= webSite.getMenu().getMenuId()){
+				webSiteToUse.setMenu(webSite.getMenu());
+			}
+			webSiteToUse.setModifiedDate(now);
+		}else{
+			webSiteManager.createWebSite(webSite.getName(), webSite.getDescription(), webSite.getDisplayName(), webSite.getUrl(), false, webSite.getCompany(), user);
+		}
+		return Result.newResult();
+	}	
+	
+	
+	@RequestMapping(value="/mgmt/website/get_and_refersh.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public WebSite  getWebSite(
+			@RequestParam(value="siteId", defaultValue="0", required=false ) Long siteId,
+			@RequestParam(value="refresh", defaultValue="false", required=false ) boolean refersh,
+			NativeWebRequest request) throws NotFoundException {				
+		WebSite webSite;		
+		if( siteId > 0 )
+			webSite = webSiteManager.getWebSiteById(siteId);
+		else 
+			webSite = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class));
+		
+		if(refersh){
+			long webSiteId = webSite.getWebSiteId();
+			webSiteManager.refreshWebSite(webSite);
+			webSite = webSiteManager.getWebSiteById(webSiteId);
+		}
+		return webSite;
+	}	
+
+	@RequestMapping(value="/mgmt/website/navigator/update.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public Result  updateWebSiteMenu(
+			@RequestBody DefaultWebSite webSite,
+			@RequestParam(value="refresh", defaultValue="true", required=false ) boolean refersh,
+			NativeWebRequest request) throws NotFoundException {				
+
+		Date now = Calendar.getInstance().getTime();
+		WebSite webSiteToUse  =  webSiteManager.getWebSiteById(webSite.getWebSiteId());
+		Menu menu = webSite.getMenu();
+		if( menu.getMenuId() >0 ){
+			Menu menuToUse = menuRepository.getMenu(webSite.getMenu().getMenuId());
+			
+			if(!StringUtils.equals(menuToUse.getMenuData(), menu.getMenuData()))
+				menuToUse.setMenuData(menu.getMenuData());
+			
+			menuToUse.setModifiedDate(now);
+			menuRepository.updateMenu(menuToUse);
+			
+			if(refersh)
+				webSiteManager.refreshWebSite(webSiteToUse);
+		}
+		
+		return Result.newResult();
+	}	
+
+	@RequestMapping(value="/mgmt/website/properties/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public List<Property> getCompanyPropertyList(
+			@RequestParam(value="siteId", defaultValue="0", required=false ) Long siteId,
+			NativeWebRequest request) throws WebSiteNotFoundException {			
+		
+		User user = SecurityHelper.getUser();	
+		WebSite site = webSiteManager.getWebSiteById(siteId);
+		return toPropertyList(site.getProperties());
+	}	
+
+	@RequestMapping(value="/mgmt/website/properties/update.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public Result updateCompanyPropertyList(
+			@RequestBody StringProperty[] newProperties,
+			@RequestParam(value="siteId", defaultValue="0", required=false ) Long siteId,
+			NativeWebRequest request) throws WebSiteNotFoundException, WebSiteAlreadyExistsExcaption {			
+		
+		User user = SecurityHelper.getUser();	
+		WebSite site = webSiteManager.getWebSiteById(siteId);
+		Map<String, String> properties = site.getProperties();	
+		for (StringProperty property : newProperties) {
+			properties.put(property.getName(), property.getValue());
+		}	
+		if( newProperties.length > 0){
+			webSiteManager.updateWebSite(site);
+		}
+		return Result.newResult();
+	}
+	
+	@RequestMapping(value="/mgmt/website/properties/delete.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public Result deleteCompanyPropertyList(
+			@RequestBody StringProperty[] newProperties,
+			@RequestParam(value="siteId", defaultValue="0", required=false ) Long siteId,
+			NativeWebRequest request) throws WebSiteNotFoundException, WebSiteAlreadyExistsExcaption {			
+		
+		User user = SecurityHelper.getUser();	
+		WebSite site = webSiteManager.getWebSiteById(siteId);
+		Map<String, String> properties = site.getProperties();	
+		for (StringProperty property : newProperties) {
+			properties.remove(property.getName());
+		}
+		if( newProperties.length > 0){
+			site.setProperties(properties);
+			webSiteManager.updateWebSite(site);
+		}
+		return Result.newResult();
+	}	
+
+	
+	
+	@RequestMapping(value="/mgmt/website/pages/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public ItemList getWebsitePageList(
+			@RequestParam(value="siteId", defaultValue="0", required=false ) Long siteId,
+			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
+			@RequestParam(value="pageSize", defaultValue="0", required=false ) Integer pageSize,			
+			NativeWebRequest request) throws WebSiteNotFoundException, WebSiteAlreadyExistsExcaption {			
+		
+		User user = SecurityHelper.getUser();	
+		WebSite site = webSiteManager.getWebSiteById(siteId);
+		int totalCount = webSiteManager.getWebPageCount(site);
+		if( pageSize > 0 ){			
+			return new ItemList( webSiteManager.getWebPages(site, startIndex, pageSize), totalCount );
+		}else{
+			return new ItemList( webSiteManager.getWebPages(site), totalCount );
+		}
+	}	
+
+
+	@RequestMapping(value="/mgmt/website/page/properties/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public List<Property> getWebsitePagePropertyList(
+			@RequestParam(value="pageId", defaultValue="0", required=false ) Long pageId,
+			NativeWebRequest request) throws WebPageNotFoundException {			
+		
+		User user = SecurityHelper.getUser();	
+		WebPage page = webSiteManager.getWebPageById(pageId);
+		return toPropertyList(page.getProperties());
+	}	
+
+	@RequestMapping(value="/mgmt/website/page/properties/update.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public Result updateWebsitePagePropertyList(
+			@RequestBody StringProperty[] newProperties,
+			@RequestParam(value="pageId", defaultValue="0", required=false ) Long pageId,
+			NativeWebRequest request) throws WebPageNotFoundException {			
+		
+		User user = SecurityHelper.getUser();	
+		WebPage page = webSiteManager.getWebPageById(pageId);
+		Map<String, String> properties = page.getProperties();	
+		for (StringProperty property : newProperties) {
+			properties.put(property.getName(), property.getValue());
+		}	
+		if( newProperties.length > 0){
+			webSiteManager.updateWebPage(page);
+		}
+		return Result.newResult();
+	}
+	
+	@RequestMapping(value="/mgmt/website/page/properties/delete.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public Result deleteWebsitePagePropertyList(
+			@RequestBody StringProperty[] newProperties,
+			@RequestParam(value="pageId", defaultValue="0", required=false ) Long pageId,
+			NativeWebRequest request) throws WebPageNotFoundException {			
+		
+		User user = SecurityHelper.getUser();	
+		WebPage page = webSiteManager.getWebPageById(pageId);
+		Map<String, String> properties = page.getProperties();	
+		for (StringProperty property : newProperties) {
+			properties.remove(property.getName());
+		}
+		if( newProperties.length > 0){
+			page.setProperties(properties);
+			webSiteManager.updateWebPage(page);
+		}
+		return Result.newResult();
+	}	
+	
+	/**
+	 * Navigator 
+	 */
+	
+	/**
+	 * navigator
+	 * @param request
+	 * @return
+	 * @throws NotFoundException
+	 */
+	@RequestMapping(value="/mgmt/navigator/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public ItemList  getMenuList(NativeWebRequest request) throws NotFoundException {				
+		int totalCount = menuRepository.getTotalMenuCount();
+		return new ItemList(menuRepository.getMenus(), totalCount);		
+	}
+	
+	@RequestMapping(value="/mgmt/navigator/update.json",method={RequestMethod.POST} )
+	@ResponseBody
+	public Menu  updateMenu(@RequestBody DefaultMenu menu, NativeWebRequest request) throws NotFoundException {			
+		User user = SecurityHelper.getUser();		
+		Menu menuToUse = menuRepository.getMenu(menu.getMenuId());
+		menuToUse.setMenuData(menu.getMenuData());
+		menuToUse.setName(menu.getName());
+		menuToUse.setEnabled(menu.isEnabled());
+		menuToUse.setTitle(menu.getTitle());
+		menuToUse.setLoaction(menu.getLocation());		
+		menuRepository.updateMenu(menuToUse);		
+		return menuToUse;
+	}
+
+
+	@RequestMapping(value="/mgmt/navigator/properties/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public List<Property> getMenuPropertyList(
+			@RequestParam(value="menuId", defaultValue="0", required=false ) Long menuId,
+			NativeWebRequest request) throws MenuNotFoundException {			
+		
+		User user = SecurityHelper.getUser();	
+		Menu menuToUse = menuRepository.getMenu(menuId);
+		return toPropertyList(menuToUse.getProperties());
+	}	
+
+	@RequestMapping(value="/mgmt/navigator/properties/update.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public Result updateMenuPropertyList(
+			@RequestBody StringProperty[] newProperties,
+			@RequestParam(value="menuId", defaultValue="0", required=false ) Long menuId,
+			NativeWebRequest request) throws MenuNotFoundException, WebSiteAlreadyExistsExcaption {			
+		
+		User user = SecurityHelper.getUser();	
+		Menu menuToUse = menuRepository.getMenu(menuId);
+		Map<String, String> properties = menuToUse.getProperties();	
+		for (StringProperty property : newProperties) {
+			properties.put(property.getName(), property.getValue());
+		}	
+		if( newProperties.length > 0){
+			menuRepository.updateMenu(menuToUse);	
+		}
+		return Result.newResult();
+	}
+	
+	@RequestMapping(value="/mgmt/navigator/properties/delete.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public Result deleteMenuPropertyList(
+			@RequestBody StringProperty[] newProperties,
+			@RequestParam(value="menuId", defaultValue="0", required=false ) Long menuId,
+			NativeWebRequest request) throws MenuNotFoundException, WebSiteAlreadyExistsExcaption {			
+		
+		User user = SecurityHelper.getUser();	
+		Menu menuToUse = menuRepository.getMenu(menuId);
+		Map<String, String> properties = menuToUse.getProperties();	
+		for (StringProperty property : newProperties) {
+			properties.remove(property.getName());
+		}
+		if( newProperties.length > 0){
+			menuToUse.setProperties(properties);
+			menuRepository.updateMenu(menuToUse);	
+		}
+		return Result.newResult();
+	}
+	
+	@RequestMapping(value="/mgmt/navigator/items/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	public List<MenuItem> getMenuItemList(
+		@RequestParam(value="menuId", defaultValue="0", required=false ) Long menuId,	
+		@RequestParam(value="siteId", defaultValue="0", required=false ) Long siteId		
+	) throws MenuNotFoundException, WebSiteNotFoundException{
+		User user = SecurityHelper.getUser();		
+		Menu menuToUse = null ;
+		if( menuToUse == null && menuId > 0 )
+			menuToUse = menuRepository.getMenu(menuId);
+		if( menuToUse == null && siteId > 0 )
+			webSiteManager.getWebSiteById(siteId).getMenu();
+		
+		
+		Set<String> set = menuRepository.getMenuNames(menuToUse);
+		List<MenuItem> menus = new ArrayList<MenuItem>(set.size()); 
+		for(String name : set){
+			MenuComponent mc = menuRepository.getMenuComponent(menuToUse, name);
+			menus.add(new MenuItem(mc, name));
+		}		
+		return menus;
+	}
+	
+	public static class MenuItem {
+		private String menu;
+		private String name;
+		private String title;
+		private String page;
+		private String description;
+		private String icon;
+		private String roles; 
+		private boolean last = false;;
+		int depth = 0;
+		/**
+		 * 
+		 */
+		public MenuItem() {
+			this.name = null;
+			this.title = null;
+			this.page = null;
+			this.description = null;
+			this.icon = null;
+			this.roles = null;
+			this.menu = null;
+		}
+		public MenuItem(MenuComponent mc, String menu) {
+			this();
+			this.depth = mc.getMenuDepth();
+			this.page = mc.getPage();
+			this.roles = mc.getRoles();
+			this.name = mc.getName();
+			this.title =mc.getTitle();
+			this.description = mc.getDescription();
+			this.last = mc.isLast();
+			this.menu = menu;
+		}
+		
+
+		/**
+		 * @return menu
+		 */
+		public String isMenu() {
+			return menu;
+		}
+		/**
+		 * @param menu 설정할 menu
+		 */
+		public void setMenu(String menu) {
+			this.menu = menu;
+		}
+		/**
+		 * @return name
+		 */
+		public String getName() {
+			return name;
+		}
+		/**
+		 * @param name 설정할 name
+		 */
+		public void setName(String name) {
+			this.name = name;
+		}
+		/**
+		 * @return title
+		 */
+		public String getTitle() {
+			return title;
+		}
+		/**
+		 * @param title 설정할 title
+		 */
+		public void setTitle(String title) {
+			this.title = title;
+		}
+		/**
+		 * @return page
+		 */
+		public String getPage() {
+			return page;
+		}
+		/**
+		 * @param page 설정할 page
+		 */
+		public void setPage(String page) {
+			this.page = page;
+		}
+		/**
+		 * @return description
+		 */
+		public String getDescription() {
+			return description;
+		}
+		/**
+		 * @param description 설정할 description
+		 */
+		public void setDescription(String description) {
+			this.description = description;
+		}
+		/**
+		 * @return icon
+		 */
+		public String getIcon() {
+			return icon;
+		}
+		/**
+		 * @param icon 설정할 icon
+		 */
+		public void setIcon(String icon) {
+			this.icon = icon;
+		}
+		/**
+		 * @return roles
+		 */
+		public String getRoles() {
+			return roles;
+		}
+		/**
+		 * @param roles 설정할 roles
+		 */
+		public void setRoles(String roles) {
+			this.roles = roles;
+		}
+		/**
+		 * @return last
+		 */
+		public boolean isLast() {
+			return last;
+		}
+		/**
+		 * @param last 설정할 last
+		 */
+		public void setLast(boolean last) {
+			this.last = last;
+		}
+		/**
+		 * @return depth
+		 */
+		public int getDepth() {
+			return depth;
+		}
+		/**
+		 * @param depth 설정할 depth
+		 */
+		public void setDepth(int depth) {
+			this.depth = depth;
+		}
+		
+		
+	}
+	
+	
 	/**
 	 * Logo
 	 */
@@ -248,7 +739,6 @@ public class SecureWebMgmtDataController {
 		FileInfo fileInfo = new FileInfo( file );
 		fileInfo.setCustomized(customizedToUse);
 		fileInfo.setFileContent( file.isDirectory() ? "": FileUtils.readFileToString(file));
-		
 		return fileInfo;
 	}	
 
@@ -350,36 +840,6 @@ public class SecureWebMgmtDataController {
 	}
 	
 	
-	/**
-	 * Navigator 
-	 */
-	
-	/**
-	 * navigator
-	 * @param request
-	 * @return
-	 * @throws NotFoundException
-	 */
-	@RequestMapping(value="/mgmt/navigator/list.json",method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public ItemList  getMenuList(NativeWebRequest request) throws NotFoundException {				
-		int totalCount = menuRepository.getTotalMenuCount();
-		return new ItemList(menuRepository.getMenus(), totalCount);		
-	}
-	
-	@RequestMapping(value="/mgmt/navigator/update.json",method={RequestMethod.POST} )
-	@ResponseBody
-	public Menu  updateMenu(@RequestBody DefaultMenu menu, NativeWebRequest request) throws NotFoundException {			
-		User user = SecurityHelper.getUser();		
-		Menu menuToUse = menuRepository.getMenu(menu.getMenuId());
-		menuToUse.setMenuData(menu.getMenuData());
-		menuToUse.setName(menu.getName());
-		menuToUse.setEnabled(menu.isEnabled());
-		menuToUse.setTitle(menu.getTitle());
-		menuToUse.setLoaction(menu.getLocation());		
-		menuRepository.updateMenu(menuToUse);		
-		return menuToUse;
-	}
 	
 	/**
 	 * Sql 
@@ -601,7 +1061,7 @@ public class SecureWebMgmtDataController {
 
 		/**
 		 * @param lastModifiedDate
-		 *            설정할 lastModifiedDate
+		 *	설정할 lastModifiedDate
 		 */
 		@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 		public void setLastModifiedDate(Date lastModifiedDate) {
@@ -609,4 +1069,13 @@ public class SecureWebMgmtDataController {
 		}
 
 	}	
+
+	protected List<Property> toPropertyList (Map<String, String> properties){
+		List<Property> list = new ArrayList<Property>();
+		for (String key : properties.keySet()) {
+			String value = properties.get(key);
+			list.add(new Property(key, value));
+		}
+		return list;
+	}
 }
