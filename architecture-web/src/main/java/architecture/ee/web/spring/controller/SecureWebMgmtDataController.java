@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -89,6 +90,7 @@ import architecture.ee.web.spring.controller.SecureWebStageDataController.CacheS
 import architecture.ee.web.spring.controller.WebDataController.ItemList;
 import architecture.ee.web.util.WebApplicatioinConstants;
 import architecture.ee.web.util.WebSiteUtils;
+import architecture.ee.web.ws.MenuItem;
 import architecture.ee.web.ws.Property;
 import architecture.ee.web.ws.Result;
 import architecture.ee.web.ws.StringProperty;
@@ -243,6 +245,82 @@ public class SecureWebMgmtDataController {
 		
 		return Result.newResult();
 	}	
+	
+
+	@RequestMapping(value="/mgmt/website/navigator/items/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public List<MenuItem> getMenuItemList(
+		@RequestParam(value="siteId", defaultValue="0", required=false ) Long siteId	,
+		@RequestParam(value="menu", required=false ) String menu	,
+		@RequestParam(value="item", required=false ) String item,
+		@RequestParam(value="progenitor", defaultValue="false", required=false ) boolean progenitor	
+	) throws MenuNotFoundException, WebSiteNotFoundException{
+		
+		User user = SecurityHelper.getUser();		
+		if( siteId  ==  0 )
+			return Collections.EMPTY_LIST;
+		
+		Menu menuToUse = webSiteManager.getWebSiteById(siteId).getMenu();
+		
+		if( StringUtils.isEmpty(menu)){
+			Set<String> set = menuRepository.getMenuNames(menuToUse);
+			List<MenuItem> menus = new ArrayList<MenuItem>(set.size()); 
+			for(String name : set){
+				MenuComponent mc = menuRepository.getMenuComponent(menuToUse, name);
+				menus.add(new MenuItem(mc, name, true));
+			}
+			return menus;
+		}else{
+			MenuComponent mc1 = menuRepository.getMenuComponent(menuToUse, menu);			
+			MenuComponent parent = null;
+			if(progenitor)
+			{
+				parent = mc1;
+			}else{				
+				if(StringUtils.isNotEmpty(item)){
+					for( MenuComponent mc2 : mc1.getComponents() ){
+						if( StringUtils.equals( mc2.getName() , item) ){
+							parent = mc2;
+							break;
+						}
+					}
+					if(parent ==null ){
+						for( MenuComponent mc2 : mc1.getComponents() ){
+							for( MenuComponent mc3 : mc2.getComponents() ){
+								if( StringUtils.equals( mc3.getName() , item) ){
+									parent = mc3;
+									break;
+								}
+							}
+						}
+					}
+					if(parent ==null ){
+						for( MenuComponent mc2 : mc1.getComponents() ){
+							for( MenuComponent mc3 : mc2.getComponents() ){
+								for( MenuComponent mc4 : mc3.getComponents() ){
+									if( StringUtils.equals( mc4.getName() , item) ){
+										parent = mc4;
+										break;
+									}								
+								}
+							}
+						}
+					}
+				}				
+			}
+
+			if (parent != null) {
+				List<MenuItem> menus = new ArrayList<MenuItem>(parent.getComponents().size());
+				for (MenuComponent child : parent.getComponents()) {
+					menus.add(new MenuItem(child, menu, false));
+				}
+				return menus;
+			}
+		
+		}
+		return Collections.EMPTY_LIST;
+	}
+	
 
 	@RequestMapping(value="/mgmt/website/properties/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
@@ -446,177 +524,7 @@ public class SecureWebMgmtDataController {
 		}
 		return Result.newResult();
 	}
-	
-	@RequestMapping(value="/mgmt/navigator/items/list.json",method={RequestMethod.POST, RequestMethod.GET} )
-	public List<MenuItem> getMenuItemList(
-		@RequestParam(value="menuId", defaultValue="0", required=false ) Long menuId,	
-		@RequestParam(value="siteId", defaultValue="0", required=false ) Long siteId		
-	) throws MenuNotFoundException, WebSiteNotFoundException{
-		User user = SecurityHelper.getUser();		
-		Menu menuToUse = null ;
-		if( menuToUse == null && menuId > 0 )
-			menuToUse = menuRepository.getMenu(menuId);
-		if( menuToUse == null && siteId > 0 )
-			webSiteManager.getWebSiteById(siteId).getMenu();
 		
-		
-		Set<String> set = menuRepository.getMenuNames(menuToUse);
-		List<MenuItem> menus = new ArrayList<MenuItem>(set.size()); 
-		for(String name : set){
-			MenuComponent mc = menuRepository.getMenuComponent(menuToUse, name);
-			menus.add(new MenuItem(mc, name));
-		}		
-		return menus;
-	}
-	
-	public static class MenuItem {
-		private String menu;
-		private String name;
-		private String title;
-		private String page;
-		private String description;
-		private String icon;
-		private String roles; 
-		private boolean last = false;;
-		int depth = 0;
-		/**
-		 * 
-		 */
-		public MenuItem() {
-			this.name = null;
-			this.title = null;
-			this.page = null;
-			this.description = null;
-			this.icon = null;
-			this.roles = null;
-			this.menu = null;
-		}
-		public MenuItem(MenuComponent mc, String menu) {
-			this();
-			this.depth = mc.getMenuDepth();
-			this.page = mc.getPage();
-			this.roles = mc.getRoles();
-			this.name = mc.getName();
-			this.title =mc.getTitle();
-			this.description = mc.getDescription();
-			this.last = mc.isLast();
-			this.menu = menu;
-		}
-		
-
-		/**
-		 * @return menu
-		 */
-		public String isMenu() {
-			return menu;
-		}
-		/**
-		 * @param menu 설정할 menu
-		 */
-		public void setMenu(String menu) {
-			this.menu = menu;
-		}
-		/**
-		 * @return name
-		 */
-		public String getName() {
-			return name;
-		}
-		/**
-		 * @param name 설정할 name
-		 */
-		public void setName(String name) {
-			this.name = name;
-		}
-		/**
-		 * @return title
-		 */
-		public String getTitle() {
-			return title;
-		}
-		/**
-		 * @param title 설정할 title
-		 */
-		public void setTitle(String title) {
-			this.title = title;
-		}
-		/**
-		 * @return page
-		 */
-		public String getPage() {
-			return page;
-		}
-		/**
-		 * @param page 설정할 page
-		 */
-		public void setPage(String page) {
-			this.page = page;
-		}
-		/**
-		 * @return description
-		 */
-		public String getDescription() {
-			return description;
-		}
-		/**
-		 * @param description 설정할 description
-		 */
-		public void setDescription(String description) {
-			this.description = description;
-		}
-		/**
-		 * @return icon
-		 */
-		public String getIcon() {
-			return icon;
-		}
-		/**
-		 * @param icon 설정할 icon
-		 */
-		public void setIcon(String icon) {
-			this.icon = icon;
-		}
-		/**
-		 * @return roles
-		 */
-		public String getRoles() {
-			return roles;
-		}
-		/**
-		 * @param roles 설정할 roles
-		 */
-		public void setRoles(String roles) {
-			this.roles = roles;
-		}
-		/**
-		 * @return last
-		 */
-		public boolean isLast() {
-			return last;
-		}
-		/**
-		 * @param last 설정할 last
-		 */
-		public void setLast(boolean last) {
-			this.last = last;
-		}
-		/**
-		 * @return depth
-		 */
-		public int getDepth() {
-			return depth;
-		}
-		/**
-		 * @param depth 설정할 depth
-		 */
-		public void setDepth(int depth) {
-			this.depth = depth;
-		}
-		
-		
-	}
-	
-	
 	/**
 	 * Logo
 	 */
