@@ -66,6 +66,7 @@ public class JdbcWebSiteDao extends ExtendedJdbcDaoSupport implements WebSiteDao
 	private final RowMapper<WebPage> pageMapper = new RowMapper<WebPage>(){
 		public WebPage mapRow(ResultSet rs, int rowNum) throws SQLException {
 			WebPage page = new WebPage(rs.getLong("WEBPAGE_ID"));			
+			page.setWebSiteId(rs.getLong("WEBSITE_ID"));
 			page.setName(rs.getString("NAME"));
 			page.setDescription(rs.getString("DESCRIPTION"));
 			page.setDisplayName(rs.getString("DISPLAY_NAME"));			
@@ -375,6 +376,77 @@ public class JdbcWebSiteDao extends ExtendedJdbcDaoSupport implements WebSiteDao
 		} catch (DataAccessException e) {
 			throw new WebPageNotFoundException(e);
 		}	
+	}
+
+	@Override
+	public int getWebPageCount(long websiteId) {
+		return getExtendedJdbcTemplate().queryForInt(
+				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_WEBPAGE_BY_WEBSITE").getSql(), 		
+				new SqlParameterValue(Types.NUMERIC, websiteId )
+		);
+	}
+
+	@Override
+	public List<Long> getWebPageIds(long websiteId) {
+		return getExtendedJdbcTemplate().queryForList(				
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_WEBPAGE_IDS_BY_WEBSITE").getSql(), 		
+				Long.class,
+				new SqlParameterValue(Types.NUMERIC, websiteId )
+				);
+	}
+
+	@Override
+	public List<Long> getWebPageIds(long websiteId, int startIndex,
+			int maxResults) {
+		return getExtendedJdbcTemplate().queryScrollable(
+			getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_WEBPAGE_IDS_BY_WEBSITE").getSql(),
+			startIndex, 
+			maxResults, 
+			new Object[ ] {websiteId}, 
+			new int[] {Types.NUMERIC}, 
+			Long.class);
+	}
+
+	@Override
+	public void createWebPage(WebPage page) {
+		long webPageIdToUse = page.getWebPageId();
+		if( webPageIdToUse <= 0L ){
+			webPageIdToUse = getNextId(webPageSequencerName);
+			page.setWebPageId(webPageIdToUse);		
+		}		
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.CREATE_WEBPAGE").getSql(), 	
+				new SqlParameterValue (Types.NUMERIC, page.getWebPageId()),
+				new SqlParameterValue (Types.NUMERIC, page.getWebSiteId()),
+				new SqlParameterValue (Types.VARCHAR, page.getName()), 
+				new SqlParameterValue (Types.VARCHAR, page.getDescription()), 
+				new SqlParameterValue(Types.VARCHAR, page.getDisplayName()),
+				new SqlParameterValue(Types.VARCHAR, page.getContentType()),
+				new SqlParameterValue(Types.VARCHAR, page.getTemplate()),
+				new SqlParameterValue(Types.NUMERIC, page.isEnabled() ? 1 : 0),
+				new SqlParameterValue(Types.DATE, page.getModifiedDate()),
+				new SqlParameterValue(Types.DATE, page.getCreationDate())
+		);		
+		setWebPageProperties(page.getWebPageId(), page.getProperties());	
+	}
+
+	@Override
+	public void updateWebPage(WebPage page) {
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_WEBPAGE").getSql(), 	
+				new SqlParameterValue (Types.VARCHAR, page.getName()), 
+				new SqlParameterValue (Types.VARCHAR, page.getDescription()), 
+				new SqlParameterValue(Types.VARCHAR, page.getDisplayName()),
+				new SqlParameterValue(Types.VARCHAR, page.getContentType()),
+				new SqlParameterValue(Types.VARCHAR, page.getTemplate()),
+				new SqlParameterValue(Types.NUMERIC, page.isEnabled() ? 1 : 0),
+				new SqlParameterValue(Types.DATE, page.getModifiedDate()),
+				new SqlParameterValue (Types.NUMERIC, page.getWebPageId() ) );			
+		setWebPageProperties(page.getWebPageId(), page.getProperties());	
+	}
+
+	@Override
+	public void deleteWebPage(WebPage page) {
+		// TODO 자동 생성된 메소드 스텁
+		
 	}	
 	
 }

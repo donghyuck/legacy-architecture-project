@@ -98,41 +98,4 @@ public class SecureCommunityDataController {
 	}
 
 
-	@RequestMapping(value="/mgmt/website/list.json",method={RequestMethod.POST} )
-	@ResponseBody
-	public ItemList getWebSiteList(
-			@RequestParam(value="company", defaultValue="0", required=false ) Long company,
-			NativeWebRequest request) throws CompanyNotFoundException {			
-		
-		User user = SecurityHelper.getUser();			
-		Company companyToUse ;
-		if( company > 0 ){
-			companyToUse = companyManager.getCompany(company);
-		}else{
-			companyToUse = user.getCompany();
-		}		
-		int totalCount = webSiteManager.getWebCount(companyToUse);
-		return new ItemList(webSiteManager.getWebSites(companyToUse), totalCount);
-	}		
-	
-	@RequestMapping(value="mgmt/website/get_and_refersh.json",method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public WebSite  getWebSite(
-			@RequestParam(value="siteId", defaultValue="0", required=false ) Long siteId,
-			@RequestParam(value="refresh", defaultValue="false", required=false ) boolean refersh,
-			NativeWebRequest request) throws NotFoundException {				
-		WebSite webSite;
-		
-		if( siteId > 0 )
-			webSite = webSiteManager.getWebSiteById(siteId);
-		else 
-			webSite = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class));
-		
-		if(refersh){
-			long webSiteId = webSite.getWebSiteId();
-			webSiteManager.refreshWebSite(webSite);
-			webSite = webSiteManager.getWebSiteById(webSiteId);
-		}
-		return webSite;
-	}
 }

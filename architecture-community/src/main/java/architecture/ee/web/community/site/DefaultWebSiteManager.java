@@ -16,6 +16,8 @@
 package architecture.ee.web.community.site;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import net.sf.ehcache.Cache;
@@ -23,6 +25,8 @@ import net.sf.ehcache.Element;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.fasterxml.jackson.core.sym.Name;
 
 import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
@@ -32,12 +36,15 @@ import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.util.StringUtils;
 import architecture.ee.web.navigator.MenuNotFoundException;
+import architecture.ee.web.site.DefaultWebSite;
+import architecture.ee.web.site.WebPageNotFoundException;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteAlreadyExistsExcaption;
 import architecture.ee.web.site.WebSiteDomainMapper;
 import architecture.ee.web.site.WebSiteManager;
 import architecture.ee.web.site.WebSiteNotFoundException;
 import architecture.ee.web.site.dao.WebSiteDao;
+import architecture.ee.web.site.page.WebPage;
 import architecture.ee.web.util.WebSiteUtils;
 
 public class DefaultWebSiteManager implements WebSiteManager {
@@ -67,6 +74,10 @@ public class DefaultWebSiteManager implements WebSiteManager {
 	private Cache webSiteIdCache;
 	
 	private Cache webSiteUrlCache;
+	
+	private Cache webPageIdCache;
+	
+	private Cache webPageCache;
 	
 	public DefaultWebSiteManager() {
 		
@@ -98,6 +109,36 @@ public class DefaultWebSiteManager implements WebSiteManager {
 	 */
 	public void setCompanyManager(CompanyManager companyManager) {
 		this.companyManager = companyManager;
+	}
+
+
+
+	/**
+	 * @return webPageIdCache
+	 */
+	public Cache getWebPageIdCache() {
+		return webPageIdCache;
+	}
+
+	/**
+	 * @param webPageIdCache 설정할 webPageIdCache
+	 */
+	public void setWebPageIdCache(Cache webPageIdCache) {
+		this.webPageIdCache = webPageIdCache;
+	}
+
+	/**
+	 * @return webPageCache
+	 */
+	public Cache getWebPageCache() {
+		return webPageCache;
+	}
+
+	/**
+	 * @param webPageCache 설정할 webPageCache
+	 */
+	public void setWebPageCache(Cache webPageCache) {
+		this.webPageCache = webPageCache;
 	}
 
 	/**
@@ -305,5 +346,97 @@ public class DefaultWebSiteManager implements WebSiteManager {
 			webSiteCache.remove(webSite.getWebSiteId());
 		}		
 	}
+ 
+	
+	@Override
+	public WebPage getWebPageByName(WebSite website, String name) throws WebPageNotFoundException {		
+		String pageKey = getWebPageKey(website.getName(), name);
+		Long pageId = -1L;
+		if(webPageIdCache.get(pageKey) != null){
+			pageId = (Long)webPageIdCache.get(pageKey).getValue();
+		}
+		if( pageId < 0 ){			
+			WebPage page = webSiteDao.getWebPageByName(website.getWebSiteId(), name);
+			webPageIdCache.put(new Element(pageKey, page.getWebPageId()));		
+			pageId = page.getWebPageId();
+			this.webPageCache.remove(pageId);
+			this.webPageCache.put(new Element(pageId, page));
+			
+		}
+		return getWebPageById(pageId);
+	}
+	
+	protected String getWebPageKey(String site, String file){
+		return site.toLowerCase() + "_" + file.toLowerCase() ;		
+	}
+	
+	public WebPage getWebPageById(Long webPageId) throws WebPageNotFoundException {
+		WebPage webPage;
+		if(webPageCache.get(webPageId) != null ) {
+			webPage = 	(WebPage)webPageCache.get(webPageId).getValue();
+		}else{
+			webPage = webSiteDao.getWebPageById(webPageId);		
+			webPageCache.put(new Element( webPageId, webPage ));			
+		}		
+		return webPage;		
+	}
+	
+
+	@Override
+	public void updateWebPage(WebPage page) {
+		boolean isNewPage = page.getWebPageId() <= 0L;
+		Date now = Calendar.getInstance().getTime();
+		if( isNewPage ){
+			page.setCreationDate(now);
+			page.setModifiedDate(now);
+			webSiteDao.createWebPage(page);
+		}else{
+			page.setModifiedDate(now);
+			webSiteDao.updateWebPage(page);
+		}
+		if( webPageCache != null){
+			webPageCache.remove(page.getWebPageId());
+		}		
+	}
+
+	@Override
+	public void removeWebPage(WebPage page) {
+		webSiteDao.deleteWebPage(page);
+		if( webPageCache != null){
+			webPageCache.remove(page.getWebPageId());
+		}		
+	}
+
+	@Override
+	public List<WebPage> getWebPages(WebSite website) {
+		List<Long> IDs = webSiteDao.getWebPageIds(website.getWebSiteId());
+		List<WebPage> list = new ArrayList<WebPage>();
+		for(Long webPageId : IDs){
+			try {
+				list.add(getWebPageById(webPageId));
+			} catch (WebPageNotFoundException e) {
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<WebPage> getWebPages(WebSite website, int startIndex, int maxResults) {
+		List<Long> IDs = webSiteDao.getWebPageIds(website.getWebSiteId(), startIndex, maxResults);
+		List<WebPage> list = new ArrayList<WebPage>();
+		for(Long webPageId : IDs){
+			try {
+				list.add(getWebPageById(webPageId));
+			} catch (WebPageNotFoundException e) {
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public int getWebPageCount(WebSite website) {
+		return webSiteDao.getWebPageCount(website.getWebSiteId());
+	}
+
 
 }
