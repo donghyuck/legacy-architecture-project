@@ -106,6 +106,95 @@ public class DownloadController {
 	}
 	
 	
+	
+	
+	
+	@RequestMapping(value = "/files/{fileId:[\\p{Digit}]+}/{filename:.+}", method = { RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public void downloadFile( 
+			@PathVariable("fileId") Long fileId, 
+			@PathVariable("filename") String filename , 
+			@RequestParam(value="thumbnail", defaultValue="false", required=false ) boolean thumbnail, 
+			@RequestParam(value="width", defaultValue="150", required=false ) Integer width, 
+			@RequestParam(value="height", defaultValue="150", required=false ) Integer height, 
+			HttpServletResponse response )throws IOException {
+
+		try {
+			if( fileId > 0 && StringUtils.isNotEmpty(filename)){
+				Attachment attachment = attachmentManager.getAttachment(fileId);			
+				if( StringUtils.equals(filename, attachment.getName() ) ){					
+					if( thumbnail ){						
+						if( StringUtils.startsWithIgnoreCase(attachment.getContentType(), "image") || StringUtils.endsWithIgnoreCase(attachment.getContentType(), "pdf") ){							
+							InputStream input = attachmentManager.getAttachmentImageThumbnailInputStream(attachment, width, height);
+							response.setContentType(attachment.getThumbnailContentType());
+							response.setContentLength(attachment.getThumbnailSize());			
+							IOUtils.copy(input, response.getOutputStream());							
+							response.flushBuffer();			
+						}
+					} else{
+						InputStream input = attachmentManager.getAttachmentInputStream(attachment);			 						
+						response.setContentType(attachment.getContentType());
+						response.setContentLength(attachment.getSize());			
+						IOUtils.copy(input, response.getOutputStream());		
+						response.setHeader("contentDisposition", "attachment;filename=" + getEncodedFileName(attachment) );
+						response.flushBuffer();
+					}			
+				}else{
+					throw new NotFoundException();
+				}
+			}else{
+				throw new NotFoundException();
+			}
+		} catch (NotFoundException e) {
+			response.sendError(404);
+		}	
+		
+	}
+
+	@RequestMapping(value = "/images/{imageId:[\\p{Digit}]+}/{filename:.+}", method = RequestMethod.GET)
+	@ResponseBody
+	public void donwloadImage(
+			@PathVariable("imageId") Long imageId, 
+			@PathVariable("filename") String filename , 
+			@RequestParam(value="width", 	defaultValue="0", required=false ) Integer width, 
+			@RequestParam(value="height", defaultValue="0", required=false ) Integer height, 
+			HttpServletResponse response )throws IOException {
+		try {
+			if( imageId > 0 && StringUtils.isNotEmpty(filename)){
+				Image image =imageManager.getImage(imageId);
+				User user = SecurityHelper.getUser();
+				if(hasPermissions(image, user) && StringUtils.equals(filename, image.getName() ) ){
+					InputStream input ;
+					String contentType ;
+					int contentLength ;			
+					if( width > 0 && width > 0 )			{
+						input = imageManager.getImageThumbnailInputStream(image, width, height);
+						contentType = image.getThumbnailContentType();
+						contentLength = image.getThumbnailSize();
+					}else{
+						input = imageManager.getImageInputStream(image);
+						contentType = image.getContentType();
+						contentLength = image.getSize();				
+					}								
+					response.setContentType(contentType);
+					response.setContentLength(contentLength);			
+					IOUtils.copy(input, response.getOutputStream());
+					response.flushBuffer();							
+				}else{
+					throw new NotFoundException();
+				}				
+			}else{
+				throw new NotFoundException();
+			}		
+		} catch (NotFoundException e) {
+			response.sendError(404);
+		}		
+	}
+		
+	
+	
+	
+	
 	@RequestMapping(value = "/file/{attachmentId}/{filename:.+}", method = RequestMethod.GET)
 	@ResponseBody
 	public void handleFile( 

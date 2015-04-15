@@ -19,6 +19,7 @@ import java.util.List;
 
 import architecture.common.user.Company;
 import architecture.common.user.User;
+import architecture.ee.web.site.page.WebPage;
 
 public interface WebSiteManager {
 	
@@ -44,4 +45,20 @@ public interface WebSiteManager {
 	
 	public void refreshWebSite(WebSite webSite);
 	
+	
+	public WebPage getWebPageByName(WebSite website, String name) throws WebPageNotFoundException;
+	
+	public WebPage getWebPageById(Long webPageId) throws WebPageNotFoundException;
+	
+		
+	public void updateWebPage(WebPage webpage);
+	
+	public void removeWebPage(WebPage webpage);
+	
+	public List<WebPage> getWebPages(WebSite website);
+	
+	public List<WebPage> getWebPages(WebSite website, int startIndex, int maxResults );
+	
+	public int getWebPageCount(WebSite website);
+		
 }

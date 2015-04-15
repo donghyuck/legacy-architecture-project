@@ -15,6 +15,8 @@
  */
 package architecture.ee.web.util;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
@@ -105,6 +107,7 @@ public class WebSiteUtils {
 	public static MenuComponent getMenuComponent(MenuComponent menu, String name) throws MenuNotFoundException { 
 		for( MenuComponent childMenu : menu.getComponents() )
 		{
+			
 			if( name.equals( childMenu.getName() ) ){
 				return childMenu;
 			}
@@ -198,6 +201,11 @@ public class WebSiteUtils {
 	
 	public static boolean hasLogo(WebSite website){
 		return getLogoManager().getLogoImages(website).size() > 0 ? true : false;
+	}
+
+	public static Set<String> getMenuNames(WebSite website)throws MenuNotFoundException{
+		Menu menu = website.getMenu();
+		return getMenuRepository().getMenuNames(menu);
 	}
 	
 	public static boolean isAllowedSignIn(WebSite website){
