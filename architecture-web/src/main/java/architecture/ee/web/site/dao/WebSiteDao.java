@@ -17,9 +17,11 @@ package architecture.ee.web.site.dao;
 
 import java.util.List;
 
+import architecture.ee.web.site.WebPageNotFoundException;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteDomainMapper;
 import architecture.ee.web.site.WebSiteNotFoundException;
+import architecture.ee.web.site.page.WebPage;
 
 public interface WebSiteDao {
 	
@@ -42,5 +44,22 @@ public interface WebSiteDao {
 	public List<Long> getWebSiteIds(long companyId);	
 	
 	public List<WebSiteDomainMapper> getWebSiteDomainMappers();
+	
+	public WebPage getWebPageByName(long webSiteId, String name) throws WebPageNotFoundException;
+	
+	public WebPage getWebPageById(long webPageId) throws WebPageNotFoundException;
+	
+	public int getWebPageCount(long websiteId);
+	
+	public List<Long> getWebPageIds(long websiteId);
+	
+	public List<Long> getWebPageIds(long websiteId, int startIndex, int maxResults );
+	
+
+	public void createWebPage(WebPage page);
+	
+	public void updateWebPage(WebPage page);
+	
+	public void deleteWebPage(WebPage page);
 	
 }

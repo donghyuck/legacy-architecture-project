@@ -16,9 +16,12 @@
 package architecture.ee.web.navigator;
 
 import java.util.List;
+import java.util.Set;
 
 public interface MenuRepository {
 
+	public Set<String> getMenuNames(Menu menu)throws MenuNotFoundException;
+	
 	public MenuComponent getMenuComponent(String name, String menu) throws MenuNotFoundException;
 		
 	public MenuComponent getMenuComponent(Menu menu, String name) throws MenuNotFoundException;

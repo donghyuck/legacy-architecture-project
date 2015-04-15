@@ -308,7 +308,6 @@ public class SecureWebMgmtDataController {
 					}
 				}				
 			}
-
 			if (parent != null) {
 				List<MenuItem> menus = new ArrayList<MenuItem>(parent.getComponents().size());
 				for (MenuComponent child : parent.getComponents()) {
@@ -380,8 +379,7 @@ public class SecureWebMgmtDataController {
 			@RequestParam(value="siteId", defaultValue="0", required=false ) Long siteId,
 			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
 			@RequestParam(value="pageSize", defaultValue="0", required=false ) Integer pageSize,			
-			NativeWebRequest request) throws WebSiteNotFoundException, WebSiteAlreadyExistsExcaption {			
-		
+			NativeWebRequest request) throws WebSiteNotFoundException, WebSiteAlreadyExistsExcaption {	
 		User user = SecurityHelper.getUser();	
 		WebSite site = webSiteManager.getWebSiteById(siteId);
 		int totalCount = webSiteManager.getWebPageCount(site);
@@ -391,8 +389,43 @@ public class SecureWebMgmtDataController {
 			return new ItemList( webSiteManager.getWebPages(site), totalCount );
 		}
 	}	
-
-
+	
+	@RequestMapping(value="/mgmt/website/page/update.json",method={RequestMethod.POST} )
+	@ResponseBody
+	public Result  updateWebsitePage(@RequestBody WebPage page, NativeWebRequest request) throws NotFoundException {			
+		User user = SecurityHelper.getUser();		
+		boolean isNewPage = page.getWebPageId() <= 0 ;
+		if( isNewPage ){
+			webSiteManager.updateWebPage(page);
+		}else{
+			WebPage orgPage = webSiteManager.getWebPageById(page.getWebPageId());
+			if( StringUtils.isNotEmpty(page.getContentType()) && !StringUtils.equals(orgPage.getContentType(), page.getContentType())){
+				orgPage.setContentType(page.getContentType());
+			}
+			if( StringUtils.isNotEmpty(page.getDisplayName()) && !StringUtils.equals(orgPage.getDisplayName(), page.getDisplayName())){
+				orgPage.setDisplayName(page.getDisplayName());				
+			}
+			if( StringUtils.isNotEmpty(page.getName()) && !StringUtils.equals(orgPage.getName(), page.getName())){
+				orgPage.setName(page.getName());				
+			}
+			if( StringUtils.isNotEmpty(page.getLocale()) && !StringUtils.equals(orgPage.getLocale(), page.getLocale())){
+				orgPage.setLocale(page.getLocale());				
+			}			
+			if( StringUtils.isNotEmpty(page.getTemplate()) && !StringUtils.equals(orgPage.getTemplate(), page.getTemplate())){
+				orgPage.setTemplate(page.getTemplate());				
+			}
+			if(!StringUtils.equals(orgPage.getDescription(), page.getDescription())){
+				orgPage.setDescription(page.getContentType());
+			}
+			if( page.getProperties().size() > 0 ){
+				orgPage.setProperties(page.getProperties());
+			}
+			webSiteManager.updateWebPage(orgPage);
+		}		
+		log.debug(page);
+		return Result.newResult();
+	}
+	
 	@RequestMapping(value="/mgmt/website/page/properties/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public List<Property> getWebsitePagePropertyList(
@@ -409,8 +442,7 @@ public class SecureWebMgmtDataController {
 	public Result updateWebsitePagePropertyList(
 			@RequestBody StringProperty[] newProperties,
 			@RequestParam(value="pageId", defaultValue="0", required=false ) Long pageId,
-			NativeWebRequest request) throws WebPageNotFoundException {			
-		
+			NativeWebRequest request) throws WebPageNotFoundException {		
 		User user = SecurityHelper.getUser();	
 		WebPage page = webSiteManager.getWebPageById(pageId);
 		Map<String, String> properties = page.getProperties();	
@@ -428,8 +460,7 @@ public class SecureWebMgmtDataController {
 	public Result deleteWebsitePagePropertyList(
 			@RequestBody StringProperty[] newProperties,
 			@RequestParam(value="pageId", defaultValue="0", required=false ) Long pageId,
-			NativeWebRequest request) throws WebPageNotFoundException {			
-		
+			NativeWebRequest request) throws WebPageNotFoundException {					
 		User user = SecurityHelper.getUser();	
 		WebPage page = webSiteManager.getWebPageById(pageId);
 		Map<String, String> properties = page.getProperties();	

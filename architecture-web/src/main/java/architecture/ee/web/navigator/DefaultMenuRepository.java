@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,6 +51,11 @@ public class DefaultMenuRepository extends AbstractMenuRepository {
 			holders.put(menu.getName(), holder);
 		}
 		return holder;
+	}
+	
+	public Set<String> getMenuNames(Menu menu)throws MenuNotFoundException {
+		MenuHolder holder = getMenuHolder(menu);
+		return holder.getMenuNames();
 	}
 	
 	public MenuComponent getMenuComponent(Menu menu, String menuName) throws MenuNotFoundException {
