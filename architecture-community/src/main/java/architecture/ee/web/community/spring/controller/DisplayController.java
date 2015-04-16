@@ -42,6 +42,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.Company;
+import architecture.common.user.CompanyNotFoundException;
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
@@ -49,7 +50,8 @@ import architecture.ee.web.community.page.BodyType;
 import architecture.ee.web.community.page.Page;
 import architecture.ee.web.community.page.PageMaker;
 import architecture.ee.web.community.page.PageManager;
-import architecture.ee.web.community.page.WebPageWrapper;
+import architecture.ee.web.community.page.PageNotFoundException;
+import architecture.ee.web.community.page.PageAdaptor;
 import architecture.ee.web.navigator.MenuComponent;
 import architecture.ee.web.navigator.MenuNotFoundException;
 import architecture.ee.web.site.WebPageNotFoundException;
@@ -66,7 +68,7 @@ public class DisplayController {
 		
 	private static final Log log = LogFactory.getLog(DisplayController.class);
 	
-	private static final String DEFAULT_PAGE_TEMPLATE = "/html/community/page";		
+	private static final String DEFAULT_PAGE_TEMPLATE = "/html/community/page.ftl";		
 	
 	private static final String DEFAULT_CONTENT_TYPE = "text/html;charset=UTF-8";
 	
@@ -86,11 +88,55 @@ public class DisplayController {
 	
 	public DisplayController() {
 	}
-
+	
+	
 	/**
+	 *  display/{objectType}/{objectId}/{filename}
+	 *  
 	 * 
-	 * @param siteId 디폴트 0 값은 현재 접근 도에인에 따른 사이트를 의미
-	 * @param name 웹 페이지  
+	 * @param objectType
+	 * @param objectId
+	 * @param filename
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws IOException 
+	 * @throws PageNotFoundException
+	 * @throws WebSiteNotFoundException
+	 */
+	@RequestMapping(value="/{objectType}/{objectId}/{filename:.+}", method=RequestMethod.GET)
+	public String page (
+			@PathVariable Integer objectType, 
+			@PathVariable Long objectId, 
+			@PathVariable String filename, 
+			@RequestParam(value="siteId", defaultValue="0", required=false ) int siteId,
+			@RequestParam(value="version", defaultValue="0", required=false ) int version,
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			Model model ) throws IOException{		
+		User user = SecurityHelper.getUser();				
+		String restOfTheUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		log.debug(filename  + ":" + restOfTheUrl);		
+		Page page = null;
+		WebSite website = null;
+		try {			
+			page = getPage( filename, version );
+			website = getWebSite(siteId, request);		
+			setPageActionAdaptor(page, website, user, model, request, response);			
+		} catch (NotFoundException e) {
+			response.sendError(404);
+		}
+		setContentType(response);	
+		String template = page.getProperty("template", DEFAULT_PAGE_TEMPLATE );		
+		return getFreemarkerView(template);
+	}
+	
+	/**
+	 *   
+	 *   /display/aa.html
+	 *    
+	 * @param filename
 	 * @param request
 	 * @param response
 	 * @param model
@@ -98,61 +144,153 @@ public class DisplayController {
 	 * @throws NotFoundException
 	 * @throws IOException
 	 */
-	@RequestMapping(value="/{siteId:[\\p{Digit}]+}/{name:.+}", method=RequestMethod.GET)
-	public String displayWebpage(
-		@PathVariable Long siteId, 
-		@PathVariable String name, 
-		HttpServletRequest request, 
-		HttpServletResponse response, Model model) throws IOException {				
-	
+	@RequestMapping(value="/{filename:.+}", method=RequestMethod.GET)
+	public String page(
+			@PathVariable String filename, 
+			@RequestParam(value="siteId", defaultValue="0", required=false ) int siteId,
+			@RequestParam(value="version", defaultValue="0", required=false ) int version,
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			Model model) throws IOException {		
+		boolean notFound = false;
+		User user = SecurityHelper.getUser();		
+		Page page = null;
+		WebSite website = null;		
+		String template = null;
 		String restOfTheUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		log.debug(filename  + ":" + restOfTheUrl);	
+		
+		try {
+			website = getWebSite(siteId, request);		
+			page = getPage( filename, version );			
+			if( page != null ){
+				setPageActionAdaptor(page, website, user, model, request, response);
+				setContentType(response);		
+				template = page.getProperty("template", DEFAULT_PAGE_TEMPLATE );			
+			}
+		} catch (NotFoundException e) {
+			notFound = true;
+		}	
+		
+		if( page == null && website != null ){
+			try{
+				WebPage webpage = webSiteManager.getWebPageByName(website, filename);			
+				setPageActionAdaptor(new PageAdaptor(webpage), website, user, model, request, response);
+				setContentType(webpage.getContentType(), response);		
+				template = webpage.getTemplate();
+			} catch (NotFoundException e) {
+				notFound = true;				
+			}				
+		}
+		if( notFound )
+			response.sendError(404);
+		else
+			return getFreemarkerView(template);
+	}
+	
+	protected void setPageActionAdaptor(
+			Page page,			
+			WebSite site,
+			User user,
+			Model model,
+			HttpServletRequest request, 
+			HttpServletResponse response			
+			){
+		PageMaker.Builder builder = PageMaker.newBuilder().configuration(freeMarkerConfig.getConfiguration()).servletContext(servletContext).page(page).model(model).request(request);			
+		model.addAttribute("action", PageActionAdaptor.newBuilder().webSite(site).builder(builder).user(user).build());	
+	}
+	
+	protected Page getPage(String filename, int version) throws PageNotFoundException{
+		Page page;
+		if(version != 0){
+			page = pageManager.getPage(filename, version);	
+		}else{
+			page = pageManager.getPage(filename);	
+		} 	
+		return page;
+	}
+	
+	protected WebSite getWebSite(long webSiteId, HttpServletRequest request) throws WebSiteNotFoundException{
+		WebSite website; 
+		if( webSiteId == 0 )
+			website = WebSiteUtils.getWebSite(request);
+		else
+			website = webSiteManager.getWebSiteById(webSiteId);		
+		return website;
+	}	
+	
+	/**
+	 * display/{siteId}/{filename}
+	 * 
+	 * @param siteId 디폴트 0 값은 현재 접근 도에인에 따른 사이트를 의미
+	 * @param filename
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/{siteId:[\\p{Digit}]+}/{filename:.+}", method=RequestMethod.GET)
+	public String webpage (
+		@PathVariable Long siteId, 
+		@PathVariable String filename, 
+		HttpServletRequest request, 
+		HttpServletResponse response, Model model) throws IOException {			
+		
 		User user = SecurityHelper.getUser();			
-		WebSite website = null ;
+		String restOfTheUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		log.debug(filename  + ":" + restOfTheUrl);				
+		WebSite website = null;
+		WebPage page = null;
 		try{
-			if( siteId == 0 )
-				website = WebSiteUtils.getWebSite(request);
-			else
-				website = webSiteManager.getWebSiteById(siteId);
+			website = getWebSite(siteId, request) ;
+			page = webSiteManager.getWebPageByName(website, filename);			
+			setPageActionAdaptor(new PageAdaptor(page), website, user, model, request, response);
 		} catch (NotFoundException e) {
 			response.sendError(404);
 		}			
-		WebPage page = null;
+		setContentType(page.getContentType(), response);
+		return getFreemarkerView(page.getTemplate(), DEFAULT_PAGE_TEMPLATE );
+	}
+
+	@RequestMapping(value = "/", method=RequestMethod.GET, params={"source"})
+	public String page(
+			@RequestParam(value="source") String source, 
+			@RequestParam(value="siteId", defaultValue="0", required=false ) int siteId,
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			Model model) throws IOException {		
+		
+		User user = SecurityHelper.getUser();	
+		WebSite website = null;			
 		try {
-			page = webSiteManager.getWebPageByName(website, name);
-		} catch (WebPageNotFoundException e) {
+			website = getWebSite(siteId, request) ;
+			setPageActionAdaptor(null, website, user, model, request, response);
+		} catch (NotFoundException e) {
 			response.sendError(404);
-		}					
-		PageMaker.Builder builder = PageMaker.newBuilder().configuration(freeMarkerConfig.getConfiguration()).servletContext(servletContext).page(new WebPageWrapper(page)).model(model).request(request);			
-		model.addAttribute("action", PageActionAdaptor.newBuilder().webSite(website).builder(builder).user(user).build());			
-		response.setContentType(StringUtils.defaultString(page.getContentType(), DEFAULT_CONTENT_TYPE ));			
-		return StringUtils.defaultString(page.getTemplate(), DEFAULT_PAGE_TEMPLATE );
+		}
+		setContentType(response);
+		return getFreemarkerView(source);
+	}	
+	
+	
+		
+	protected String getFreemarkerView(String view){	
+		return getFreemarkerView(view, DEFAULT_PAGE_TEMPLATE);
+	}
+	
+	protected String getFreemarkerView(String view, String defaultView ){		
+		String viewToUse =StringUtils.defaultString(view, defaultView );
+		if( StringUtils.endsWithAny(viewToUse, "ftl") ){
+			viewToUse = StringUtils.removeEndIgnoreCase(viewToUse, ".ftl");			
+		}		
+		return viewToUse;
 	}
 	
 
-	@RequestMapping(value="/{filename}", method=RequestMethod.GET)
-	public String page(@PathVariable String filename, HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException, IOException {		
-		User user = SecurityHelper.getUser();		
-		Page page = pageManager.getPage(filename);	
-		page.getObjectId();
-		page.getObjectType();		
-		WebSite website = getCurrentWebSite(request);
-		PageMaker.Builder builder = PageMaker.newBuilder().configuration(freeMarkerConfig.getConfiguration()).servletContext(servletContext).page(page).model(model).request(request);			
-		model.addAttribute("action", PageActionAdaptor.newBuilder().webSite(website).builder(builder).user(user).build());
-		response.setContentType("text/html;charset=UTF-8");
-		return DEFAULT_PAGE_TEMPLATE;
-	}
-	
-	@RequestMapping(value = "/{filename}", method=RequestMethod.GET, params={"source"})
-	public String template(@PathVariable String filename, @RequestParam(value="source") String view, HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException, IOException {		
-		
-		User user = SecurityHelper.getUser();		
-		WebSite website = getCurrentWebSite(request);
-		model.addAttribute("action", PageActionAdaptor.newBuilder().webSite(website).user(user).build());		
-		//String restOfTheUrl = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-		setContentType(response);
-		log.debug("name:" + filename);
-		log.debug("path:" + view 	);		
-		return view;
+	private void setContentType(String contentType, HttpServletResponse response){
+		String contentTypeToUse = StringUtils.defaultString(contentType, DEFAULT_CONTENT_TYPE );		
+		response.setContentType(contentTypeToUse);
 	}
 	
 	private void setContentType(HttpServletResponse response){
@@ -170,9 +308,7 @@ public class DisplayController {
 		return true;
 	}
 	
-	private WebSite getCurrentWebSite(HttpServletRequest request) throws WebSiteNotFoundException{
-		return WebSiteUtils.getWebSite(request);
-	}	
+
 	
 	public static class PageActionAdaptor {
 		
