@@ -21,14 +21,14 @@ import java.util.Map;
 import architecture.common.user.User;
 import architecture.ee.web.site.page.WebPage;
 
-public class WebPageWrapper implements Page {
+public class PageAdaptor implements Page {
 	
 	private WebPage page ;
 
 	/**
 	 * @param page
 	 */
-	public WebPageWrapper(WebPage page) {
+	public PageAdaptor(WebPage page) {
 		this.page = page;
 	}
 	
@@ -207,7 +207,7 @@ public class WebPageWrapper implements Page {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("WebPageWrapper [");
+		builder.append("PageAdaptor [");
 		if (page != null)
 			builder.append("page=").append(page).append(", ");
 		if (super.toString() != null)
