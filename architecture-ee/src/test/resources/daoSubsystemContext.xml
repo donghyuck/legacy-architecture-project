@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<description><![CDATA[
+        Dao Subsystem Context
+	]]></description>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" p:driverClassName="oracle.jdbc.driver.OracleDriver"
+		p:url="jdbc:oracle:thin:@//222.122.63.138:1521/INKIUMDB"
+		p:username="fw_v1" p:password="inkium" p:initialSize="1" />
+
+
+	<bean id="automaticJdbcExtractor" class="architecture.ee.spring.jdbc.support.AutomaticJdbcExtractor" lazy-init="true">
+		<property name="defaultJdbcExtractor">
+			<bean class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor" />
+		</property>	
+		<property name="extractors">
+			<map>
+				<entry key="org.apache.commons.dbcp">
+					<bean class="architecture.ee.spring.jdbc.support.LazyNativeJdbcExtractor">
+						<property name="extractorClass">
+							<value type="java.lang.Class">org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor</value>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry key="weblogic">
+					<bean class="architecture.ee.spring.jdbc.support.LazyNativeJdbcExtractor">
+						<property name="extractorClass">
+							<value type="java.lang.Class">org.springframework.jdbc.support.nativejdbc.WebLogicNativeJdbcExtractor</value>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry key="c3p0">
+					<bean class="architecture.ee.spring.jdbc.support.LazyNativeJdbcExtractor">
+						<property name="extractorClass">
+							<value type="java.lang.Class">org.springframework.jdbc.support.nativejdbc.C3P0NativeJdbcExtractor</value>
+						</property>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>	
+
+
+	<bean id="sqlConfiguration" 
+	    class="architecture.ee.jdbc.sqlquery.factory.ConfigurationFactory"
+		factory-method="getConfiguration" />
+		
+	<bean id="sqlQueryFactoryBuilder" 
+	    class="architecture.ee.jdbc.sqlquery.factory.impl.SqlQueryFactoryBuilderImpl"
+		init-method="initialize">
+		<constructor-arg index="0" ref="sqlConfiguration" />
+		<property name="resourceLocations">
+			<list>
+				<value>res:common-sqlset.xml</value>
+			</list>
+		</property>
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="sequencerFactory" 
+	    class="architecture.ee.jdbc.sequencer.SequencerFactory" scope="singleton">
+		<constructor-arg index="0" ref="sqlConfiguration"/>
+		<constructor-arg index="1" ref="dataSource"/>
+	</bean>		
+
+	<bean id="sequenceDao" 
+	    class="architecture.ee.jdbc.sequencer.incrementer.JdbcMaxValueIncrementer" 
+	    init-method="initialize">
+		<constructor-arg ref="sequencerFactory"/>
+	</bean>	
+	
+
+	<bean id="jdbcDaoSupport" abstract="true" 
+	    p:configuration-ref="sqlConfiguration" 
+	    p:dataSource-ref="dataSource" 
+	    p:jdbcHelper-ref="jdbcHelper"
+	    p:sequenceDao-ref="sequenceDao"
+	    depends-on="sqlConfiguration, dataSource, jdbcHelper, sequenceDao" />
+	    		
+	<bean id="sqlQueryClient"
+		class="architecture.ee.component.SqlQueryClientImpl" parent="jdbcDaoSupport" />
+</beans>
