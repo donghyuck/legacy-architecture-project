@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factories>
+	<rank>1000</rank>
+	<factory interface="architecture.common.i18n.LocalizerFactory$Implementation" impl="architecture.common.i18n.impl.LocalizerFactoryImpl" />
+	<factory interface="architecture.common.profile.ProfilerFactory$Implementation" impl="architecture.common.profile.ProfilerFactoryImpl" />
+    <factory interface="architecture.common.util.RuntimeHelperFactory$Implementation" impl="architecture.common.util.internal.RuntimeHelperFactoryImpl" />
+</factories>
+
