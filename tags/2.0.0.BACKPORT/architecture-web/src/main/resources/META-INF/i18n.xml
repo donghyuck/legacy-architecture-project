@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localizers>
+
+     <!--  WEB  -->
+	<localizer bundleName="architecture.ee.web.i18n.WebLogLocalizer" codes="005501-006000" />
+	
+</localizers>
