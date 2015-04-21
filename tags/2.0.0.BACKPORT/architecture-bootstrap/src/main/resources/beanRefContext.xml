@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+    xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
+	default-autowire="no" 
+	default-lazy-init="false" 
+	default-init-method="initialize"
+	default-destroy-method="destroy">
+
+    <bean id="default-services-context" class="org.springframework.context.support.ClassPathXmlApplicationContext" lazy-init="true">
+        <constructor-arg>
+            <list>
+                <value>classpath*:META-INF/services/default-bootstrap-context.xml</value>
+                <value>classpath*:META-INF/services/default-database-context.xml</value>
+                <value>classpath*:META-INF/services/default-transaction-context.xml</value>
+                <value>classpath*:META-INF/services/default-dao-context.xml</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+</beans>	

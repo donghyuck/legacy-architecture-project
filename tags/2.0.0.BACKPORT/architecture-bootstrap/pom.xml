@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>architecture.bootstrap</groupId>
+  <artifactId>architecture-bootstrap</artifactId>
+  <version>1.0.3.RELEASE</version>
+
+<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>ARCHITECTURE Maven Repository</name>
+			<url>http://222.122.63.146/artifactory/repo</url>
+		</repository>
+	</repositories>
+
+	<properties file="local.properties">
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<javac.src.version>1.5</javac.src.version>
+		<javac.target.version>1.5</javac.target.version>
+		<project.javadoc.docEncoding>UTF-8</project.javadoc.docEncoding>
+		<project.build.version>1.0.0.RELEASE</project.build.version>
+	</properties>
+
+<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${javac.src.version}</source>
+					<target>${javac.target.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>			
+		</plugins>
+	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>hadoop-master</id>
+			<name>hadoop-master-releases</name>
+			<url>http://222.122.63.146/artifactory/ext-release-local</url>
+		</repository>
+	</distributionManagement>
+	  
+</project>

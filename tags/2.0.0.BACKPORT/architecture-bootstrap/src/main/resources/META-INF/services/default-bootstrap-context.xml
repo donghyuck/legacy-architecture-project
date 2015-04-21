@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	default-autowire="no" default-lazy-init="false" default-init-method="init"
+	default-destroy-method="destroy">
+	<description>
+	<![CDATA[
+        Define Bootstrap Context
+	]]>
+	</description>
+	<!-- ================================================ -->
+	<!-- 1. Task Engine                                                                      -->
+	<!-- ================================================ -->
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" p:corePoolSize="5" p:maxPoolSize="10" p:queueCapacity="25" />
+
+	<bean id="taskEngine" class="architecture.common.task.TaskEngine" />
+
+	<!-- ================================================ -->
+	<!-- 2. Event                                                                              -->
+	<!-- ================================================ -->
+	<bean id="eventDispatcher" class="architecture.common.event.internal.AsynchronousAbleEventDispatcher" depends-on="taskExecutor">
+		<constructor-arg index="0" ref="taskExecutor" />
+	</bean>
+	
+	<bean id="listenerHandlerConfiguration" class="architecture.common.event.internal.ListenerHandlerConfigurationImpl" />
+
+	<bean id="eventPublisher" class="architecture.common.event.internal.EventPublisherImpl" depends-on="eventDispatcher, listenerHandlerConfiguration" >
+		<constructor-arg index="0" ref="eventDispatcher" />
+		<constructor-arg index="1" ref="listenerHandlerConfiguration" />
+	</bean>
+
+	<!-- ================================================ -->
+	<!-- 3. Cache                                                                                     -->
+	<!-- ================================================ -->
+	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:shared="false" />
+
+	<!-- ================================================ -->
+	<!-- 4. Core Components                                                              -->
+	<!-- ================================================ -->	
+	<bean id="contextLoader" class="architecture.ee.spring.context.WebApplicationContextLoader" />
+
+	<bean id="configService" class="architecture.ee.component.core.lifecycle.ConfigServiceImpl" init-method="initialize" depends-on="eventPublisher, sqlConfiguration, dataSource" p:eventPublisher-ref="eventPublisher" p:sqlConfiguration-ref="sqlConfiguration" p:dataSource-ref="dataSource" />
+
+	<bean id="adminService" class="architecture.ee.component.core.lifecycle.AdminServiceImpl" init-method="initialize" depends-on="eventPublisher, contextLoader, configService" p:eventPublisher-ref="eventPublisher" p:contextLoader-ref="contextLoader" p:configService-ref="configService"  />
+
+	<!-- =================================================== -->
+	<!-- 5. License Manager                                                                             -->
+	<!-- =================================================== -->		
+	<bean id="licenseManager" class="architecture.common.license.LicenseManagerFactory"  factory-method="getLicenseManager" />
+
+	<!-- =================================================== -->
+	<!-- 6. GroovyClassLoader                                                                          -->
+	<!-- =================================================== -->	
+    <bean id="groovyClassLoaderFactory" class="architecture.ee.spring.scripting.groovy.GroovyClassLoaderFactory" />
+    
+    <!-- =================================================== -->
+	<!-- 6. System Information Service                                                               -->
+	<!-- =================================================== -->	
+	<bean id="systemInformationService" class="architecture.ee.component.core.lifecycle.DefaultSystemInformationService" depends-on="licenseManager"  p:licenseManager-ref="licenseManager" />
+	
+	
+</beans>
