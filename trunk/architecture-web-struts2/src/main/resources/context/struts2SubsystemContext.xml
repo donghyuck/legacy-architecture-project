@@ -18,7 +18,7 @@
 
 	<bean id="freemarkerManager"
 		class="architecture.ee.web.struts2.view.freemarker.ExtendedFreemarkerManager"
-		p:freeMarkerConfig-ref="freemarkerConfig" depends-on="freemarkerConfig" />
+		p:freeMarkerConfig-ref="freemarkerConfig" depends-on="freemarkerConfig" p:exposeSpringMacroHelpers="true"/>
 
 		
 </beans>

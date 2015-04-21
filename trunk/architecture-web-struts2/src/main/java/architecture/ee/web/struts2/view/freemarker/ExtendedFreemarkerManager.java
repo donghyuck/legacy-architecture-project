@@ -30,11 +30,14 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.views.freemarker.FreemarkerManager;
 import org.apache.struts2.views.freemarker.ScopesHashModel;
+import org.springframework.web.servlet.support.RequestContext;
+import org.springframework.web.servlet.view.AbstractTemplateView;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 
 import architecture.common.exception.ComponentNotFoundException;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.util.WebApplicatioinConstants;
+import architecture.ee.web.view.freemarker.FreeMarkerHelper;
 
 import com.opensymphony.xwork2.util.ValueStack;
 
@@ -45,8 +48,6 @@ import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
-import freemarker.template.TemplateHashModel;
-import freemarker.template.TemplateModelException;
 
 /**
  * 스트럿츠 2 지원을 위한 Freemarker 클래스
@@ -56,6 +57,7 @@ import freemarker.template.TemplateModelException;
  */
 public class ExtendedFreemarkerManager extends FreemarkerManager {
 
+	private boolean exposeSpringMacroHelpers = false;
     private List tagModels;
     
 	private static final Log log = LogFactory.getLog(ExtendedFreemarkerManager.class);
@@ -86,7 +88,6 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 			throws TemplateException {		
 		if(ApplicationHelper.isReady())
 		try {
-			//FreeMarkerConfig freeMarkerConfig = ApplicationHelper.getComponent(FreeMarkerConfig.class);
 			Configuration configuration = freeMarkerConfig.getConfiguration();			
 			configureDefaultConfiguration(configuration, servletContext );
 			return configuration;
@@ -95,18 +96,18 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 		return super.createConfiguration(servletContext);
 	}
 	
-    protected void configureDefaultConfiguration(Configuration configuration, ServletContext servletContext)
-    {     
-    	configuration.setCacheStorage(new StrongCacheStorage());        
-    	configuration.setTemplateExceptionHandler(getTemplateExceptionHandler());    	
-        // configuration.addAutoImport("framework", "/template/common/include/framework-macros.ftl");        
-        // configuration.setLocalizedLookup(false);
-    	if( configuration.getObjectWrapper() == null ){
-    	    configuration.setObjectWrapper(createObjectWrapper(servletContext));
-    	}
-    }
-    
-    @Override
+	protected void configureDefaultConfiguration(Configuration configuration, 	ServletContext servletContext) {
+		configuration.setCacheStorage(new StrongCacheStorage());
+		configuration.setTemplateExceptionHandler(getTemplateExceptionHandler());
+		// configuration.addAutoImport("framework",
+		// "/template/common/include/framework-macros.ftl");
+		// configuration.setLocalizedLookup(false);
+		if (configuration.getObjectWrapper() == null) {
+			configuration.setObjectWrapper(createObjectWrapper(servletContext));
+		}
+	}
+
+	@Override
 	protected void loadSettings(ServletContext servletContext) {
 		super.loadSettings(servletContext);
 		HttpServletRequest request = ServletActionContext.getRequest();
@@ -127,51 +128,45 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
         this.tagModels = tagModels;
     }
     
+	    
+
+	/**
+	 * @return exposeSpringMacroHelpers
+	 */
+	public boolean isExposeSpringMacroHelpers() {
+		return exposeSpringMacroHelpers;
+	}
+
+	/**
+	 * @param exposeSpringMacroHelpers 설정할 exposeSpringMacroHelpers
+	 */
+	public void setExposeSpringMacroHelpers(boolean exposeSpringMacroHelpers) {
+		this.exposeSpringMacroHelpers = exposeSpringMacroHelpers;
+	}
 
 	@Override
 	protected void populateContext(ScopesHashModel model, ValueStack stack,
 			Object action, HttpServletRequest request,
 			HttpServletResponse response) {
-
 		super.populateContext(model, stack, action, request, response);		
 		HashMap<String, Object> map = new HashMap<String, Object>();		
 		populateStatics(map);		
-		model.putAll(map);
+		
+		if(exposeSpringMacroHelpers)
+			exposeSpringMacroHelpers(map, request, response);
+		
+		model.putAll(map);		
 	}
 
-	public void populateStatics(Map<String, Object> model){
-		
+	protected void exposeSpringMacroHelpers(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response){
+		model.put(AbstractTemplateView.SPRING_MACRO_REQUEST_CONTEXT_ATTRIBUTE, 	new RequestContext(request, response, request.getSession().getServletContext(), model));
+	}
+
+	
+	
+	public void populateStatics(Map<String, Object> model){		
 		BeansWrapper b = (BeansWrapper) wrapper;
-		
-		try {
-			TemplateHashModel enumModels = b.getEnumModels();
-			try {
-
-			} catch (Exception e) {
-				log.error(e);
-			}
-			model.put("enums", b.getEnumModels());
-		} catch (UnsupportedOperationException e) {
-		}
-
-		TemplateHashModel staticModels = b.getStaticModels();
-		try {
-			model.put("TextUtils",              staticModels.get("architecture.common.util.TextUtils"));
-			model.put("StringUtils",              staticModels.get("architecture.common.util.StringUtils"));
-			model.put("L10NUtils",              staticModels.get("architecture.common.util.L10NUtils"));
-			model.put("LocaleUtils",             staticModels.get("architecture.ee.web.util.LocaleUtils"));
-			model.put("HtmlUtils",               staticModels.get("architecture.ee.web.util.HtmlUtils"));
-			model.put("ServletUtils",             staticModels.get("architecture.ee.web.util.ServletUtils"));
-			model.put("ParamUtils",              staticModels.get("architecture.ee.web.util.ParamUtils"));
-			model.put("WebSiteUtils",              staticModels.get("architecture.ee.web.util.WebSiteUtils"));
-			model.put("CompanyUtils",         staticModels.get("architecture.user.util.CompanyUtils"));
-			model.put("SecurityHelper",         staticModels.get("architecture.common.user.SecurityHelper"));
-			model.put("ApplicationHelper",     staticModels.get("architecture.ee.util.ApplicationHelper"));							
-			model.put("WebApplicationHelper",     staticModels.get("architecture.ee.web.util.WebApplicationHelper"));
-		} catch (TemplateModelException e) {
-			log.error(e);
-		}		
-		model.put("statics", BeansWrapper.getDefaultInstance().getStaticModels());
+		FreeMarkerHelper.populateStatics(b, model);		
 	}
 
 	@Override
@@ -180,16 +175,14 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 	    //log.debug("templatePath:" + templatePath );
 	    //log.debug("loader:" + loader.getClass().getName() );
 	    
-	    return loader;	    
-        //return super.createTemplateLoader(servletContext, templatePath);	    
+	    return loader;	        
     }
 
     private TemplateExceptionHandler getTemplateExceptionHandler()
     {
     	boolean logErrorDefault = false;
         boolean logError = ApplicationHelper.getApplicationBooleanProperty(WebApplicatioinConstants.VIEW_FREEMARKER_DEBUG, logErrorDefault);
-        TemplateExceptionHandler handler;
-        
+        TemplateExceptionHandler handler;        
         if(logError)
             handler = LOG_DEBUG_HANDLER;
         else

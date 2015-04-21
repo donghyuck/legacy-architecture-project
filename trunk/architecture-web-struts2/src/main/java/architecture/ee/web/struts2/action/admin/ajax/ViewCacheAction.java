@@ -342,10 +342,7 @@ public class ViewCacheAction extends WebSiteActionSupport {
 		 */
 		public long getAverageSearchTime() {
 			return averageSearchTime;
-		}		
-		
-		
-        
+		}	
 	}
 	
 }
