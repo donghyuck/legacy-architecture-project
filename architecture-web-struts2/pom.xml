@@ -7,9 +7,20 @@
 		<version>1.0.0.RELEASE</version>
 	</parent>
 	<artifactId>architecture-web-struts2</artifactId>
-	<version>1.1.0.RELEASE</version>
+	<version>2.0.0.RELEASE</version>
 	<name>APPLICATION WEB STRUTS2 SUPPORT</name>
 	<description>웹 어플리케이션 개발을 위한 스트럿츠 2 지원 패키지</description>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<javac.src.version>1.6</javac.src.version>
+		<javac.target.version>1.6</javac.target.version>
+		<project.javadoc.docEncoding>UTF-8</project.javadoc.docEncoding>
+		<project.build.version>2.0.0.RELEASE</project.build.version>
+		<project.dependency.spring.version>4.1.0.RELEASE</project.dependency.spring.version>
+		<project.dependency.spring-security.version>3.2.5.RELEASE</project.dependency.spring-security.version>				
+	</properties>
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -129,12 +140,12 @@
 		<dependency>
 			<groupId>architecture.web</groupId>
 			<artifactId>architecture-web</artifactId>
-			<version>1.1.0.RELEASE</version>
+			<version>${project.build.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>architecture.user</groupId>
 			<artifactId>architecture-user</artifactId>
-			<version>1.0.5.RELEASE</version>
+			<version>${project.build.version}</version>
 		</dependency>
 
 		<dependency>
