@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factories>
+	<rank>1000</rank>	
+	<factory interface="architecture.common.lifecycle.ApplicationHelperFactory$Implementation" impl="architecture.ee.spring.context.impl.ApplicationHelperFactoryImpl" />
+	<factory interface="architecture.common.lifecycle.bootstrap.Bootstrap$Implementation" impl="architecture.ee.component.core.lifecycle.BootstrapImpl" />		
+	<factory interface="architecture.common.jdbc.datasource.DataSourceFactory$Implementation" impl="architecture.ee.jdbc.datasource.impl.DataSourceFactoryImpl" />		
+	<factory interface="architecture.common.license.LicenseManagerFactory$Implementation" impl="architecture.ee.license.FrameworkLicenseManagerFactory" />
+	<factory interface="architecture.ee.jdbc.util.JdbcHelperFactory$Implementation" impl="architecture.ee.jdbc.util.impl.JdbcHelperFactoryImpl" />
+	
+</factories>
+
