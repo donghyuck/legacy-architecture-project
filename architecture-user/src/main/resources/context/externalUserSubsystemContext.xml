@@ -1,0 +1,54 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<description>
+	<![CDATA[
+        Define User System 
+	]]>
+	</description>	
+
+	<bean id="companyCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="companyCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	<bean id="companyIdCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="companyIdCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	<bean id="companyDomainCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="companyDomainCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	
+	<bean id="userProviderCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="userProviderCache"  p:maxElementsInMemory="5000" p:diskPersistent="false"  p:overflowToDisk="false"  p:timeToIdle="30" p:timeToLive="60"  p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	<bean id="userIDCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="userIDCache"  p:maxElementsInMemory="5000" p:diskPersistent="false"  p:overflowToDisk="false" p:timeToIdle="30" p:timeToLive="60"  p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	<bean id="userCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="userCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	
+	<bean id="groupCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="groupCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	<bean id="groupIdCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="groupIdCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	
+	<bean id="roleCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="roleCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	<bean id="roleIdCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="roleIdCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	
+						
+	<bean id="companyDao" class="architecture.user.dao.impl.JdbcCompanyDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
+	<bean id="companyManager" class="architecture.user.DefaultCompanyManager" depends-on="companyDao eventPublisher groupManager"  p:companyDao-ref="companyDao" p:eventPublisher-ref="eventPublisher"  p:groupManager-ref="groupManager" p:companyCache-ref="companyCache" p:companyIdCache-ref="companyIdCache" p:companyDomainCache-ref="companyDomainCache"  />		
+							
+	<bean id="userManager" class="architecture.user.MultiProviderUserManager" depends-on="userDao, eventPublisher"  p:userDao-ref="userDao" p:eventPublisher-ref="eventPublisher"  p:passwordEncoder-ref="passwordEncoder" p:saltSource-ref="passwordSaltSource" p:userCache-ref="userCache" p:userIdCache-ref="userIDCache"  p:userProviderCache-ref="userProviderCache" />		
+
+	<bean id="groupDao" class="architecture.user.dao.impl.JdbcGroupDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
+	<bean id="groupManager" class="architecture.user.DefaultGroupManager" depends-on="groupDao, userManager, eventPublisher"  p:groupDao-ref="groupDao" p:userManager-ref="userManager" p:eventPublisher-ref="eventPublisher"  p:groupCache-ref="groupCache" p:groupIdCache-ref="groupIdCache"  />	
+		 
+	<bean id="roleDao" class="architecture.user.dao.impl.JdbcRoleDao" parent="jdbcDaoSupport" />			 				
+	<bean id="roleManager" class="architecture.user.DefaultRoleManager"  depends-on="roleDao, groupManager, eventPublisher"  p:roleDao-ref="roleDao"  p:groupManager-ref="groupManager" p:eventPublisher-ref="eventPublisher" 	p:roleCache-ref="roleCache" p:roleIdCache-ref="roleIdCache"  />	
+<!-- 
+	<bean id="imageDao" class="architecture.ee.web.attachment.dao.impl.JdbcImageDao" parent="jdbcDaoSupport" />
+	<bean id="imageManager" class="architecture.ee.web.attachment.DefaultImageManager"  init-method="initialize" destroy-method="destroy"  depends-on="imageDao eventPublisher" 	p:imageDao-ref="imageDao" p:eventPublisher-ref="eventPublisher"  p:imageCache-ref="imageCache" />
+
+	<bean id="attachmentDao" class="architecture.ee.web.attachment.dao.impl.JdbcAttachmentDao" parent="jdbcDaoSupport" depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
+	<bean id="attachmentManager" class="architecture.ee.web.attachment.DefaultAttachmentManager"  init-method="initialize" destroy-method="destroy"  depends-on="attachmentDao, eventPublisher" 	p:attachmentDao-ref="attachmentDao" p:eventPublisher-ref="eventPublisher"  p:attachmentCache-ref="attachmentCache" />
+ -->		 			
+    <bean id="passwordEncoder" class="architecture.user.security.spring.authentication.encoding.PasswordEncoderFactory" />    
+    <bean id="passwordSaltSource" class="architecture.user.security.spring.authentication.encoding.SaltSourceFactory" />
+
+</beans>
