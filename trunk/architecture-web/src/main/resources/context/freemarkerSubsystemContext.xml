@@ -27,7 +27,7 @@
 		</property>				
 		<property name="freemarkerSettings">
 			<props>
-	            <prop key="auto_import">/org/springframework/web/servlet/view/freemarker/spring.ftl as spring</prop>
+	            <prop key="auto_import">/org/springframework/web/servlet/view/freemarker/spring.ftl as spring, /architecture/ee/web/view/freemarker/kendo.ftl as kendo</prop>
 	        </props>
 		</property>
 		<property name="freemarkerVariables">
