@@ -244,7 +244,13 @@
     	OBJECT_TYPE = ?	AND OBJECT_ID = ?
     ]]></sql-query>            
     
-        
+    <sql-query name="USAGE_ATTACHMENT_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 해당 이미지 크기 조회"><![CDATA[    
+	SELECT SUM(FILE_SIZE)
+	FROM V2_ATTACHMENT
+	WHERE 
+		OBJECT_TYPE = ?	AND OBJECT_ID = ?
+	]]></sql-query>    
+	
     <!--  IMAGE -->	 
 	<sql-query name="SELECT_IMAGE_LINK_BY_LINK_ID" description="SELECT_IMAGE_LINK_BY_LINK_ID"><![CDATA[    
 	SELECT 
@@ -375,6 +381,12 @@
     	OBJECT_TYPE = ?	AND OBJECT_ID = ?
     ]]></sql-query>    
     
+    <sql-query name="USAGE_IMAGE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 해당 이미지 크기 조회"><![CDATA[    
+	SELECT SUM(FILE_SIZE)
+	FROM V2_IMAGE
+	WHERE 
+		OBJECT_TYPE = ?	AND OBJECT_ID = ?
+	]]></sql-query>    
 
 <!--  TEMPLATE -->
     <sql-query name="SELECT_TEMPLATE_BY_ID" description="ID로 TEMPLATE 조회"><![CDATA[    
