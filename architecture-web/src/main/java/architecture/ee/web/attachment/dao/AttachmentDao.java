@@ -62,4 +62,6 @@ public interface AttachmentDao {
 
     public abstract List<Attachment> getByObjectTypeAndObjectId(int objectType, long objectId);
     
+    public long getAttachmentUsage(int objectType, long objectId) ;
+    
 }

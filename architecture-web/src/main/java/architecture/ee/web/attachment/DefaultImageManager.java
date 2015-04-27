@@ -679,6 +679,11 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 			imageLinkDao.removeImageLink(link);	
 		} catch (NotFoundException e) {
 		}				
+	}
+
+	@Override
+	public long getUsage(int objectType, long objectId) {
+		return imageDao.getImageUsage(objectType, objectId);
 	}	
 
 }

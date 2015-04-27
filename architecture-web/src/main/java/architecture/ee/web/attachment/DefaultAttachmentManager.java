@@ -319,4 +319,9 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 	public int getTotalAttachmentCount(int objectType, long objectId) {
 		return attachmentDao.getAttachmentCount(objectType, objectId);
 	}
+
+	@Override
+	public long getAttachmentUsage(int objectType, long objectId) {
+		return attachmentDao.getAttachmentUsage(objectType, objectId);
+	}
 }
