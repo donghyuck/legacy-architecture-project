@@ -123,6 +123,7 @@ public class DisplayController {
 		try {			
 			page = getPage( filename, version );
 			website = getWebSite(siteId, request);		
+			
 			setPageActionAdaptor(page, website, user, model, request, response);			
 		} catch (NotFoundException e) {
 			response.sendError(404);
@@ -135,6 +136,9 @@ public class DisplayController {
 	/**
 	 *   
 	 *   /display/aa.html
+	 *   
+	 *   
+	 * @todo 존재하지 않는 페이지를 반복하여 처리하는 것을 방지하는  기능이 요구됨
 	 *    
 	 * @param filename
 	 * @param request
@@ -156,21 +160,16 @@ public class DisplayController {
 		User user = SecurityHelper.getUser();		
 		Page page = null;
 		WebSite website = null;		
-		String template = null;
-		String restOfTheUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-		log.debug(filename  + ":" + restOfTheUrl);	
-		
+		String template = null;		
 		try {
 			website = getWebSite(siteId, request);		
 			page = getPage( filename, version );			
-			if( page != null ){
-				setPageActionAdaptor(page, website, user, model, request, response);
-				setContentType(response);		
-				template = page.getProperty("template", DEFAULT_PAGE_TEMPLATE );			
-			}
+			setPageActionAdaptor(page, website, user, model, request, response);
+			template = page.getProperty("template", DEFAULT_PAGE_TEMPLATE );	
+			setContentType(response);		
 		} catch (NotFoundException e) {
-			notFound = true;
-		}	
+
+		}
 		
 		if( page == null && website != null ){
 			try{
@@ -179,13 +178,10 @@ public class DisplayController {
 				setContentType(webpage.getContentType(), response);		
 				template = webpage.getTemplate();
 			} catch (NotFoundException e) {
-				notFound = true;				
+				response.sendError(404);
 			}				
 		}
-		if( notFound )
-			response.sendError(404);
-		else
-			return getFreemarkerView(template);
+		return getFreemarkerView(template);
 	}
 	
 	protected void setPageActionAdaptor(
