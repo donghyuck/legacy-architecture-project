@@ -39,4 +39,6 @@ public interface ImageDao {
 	public List<Long> getImageIds(int objectType, long objectId);
 	
 	public int getImageCount( int objectType, long objectId );
+	
+	public long getImageUsage( int objectType, long objectId );
 }

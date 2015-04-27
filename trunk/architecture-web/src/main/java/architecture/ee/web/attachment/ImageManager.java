@@ -90,9 +90,11 @@ public interface ImageManager {
 	
 	public abstract InputStream getImageThumbnailInputStream(Image image, int width, int height ) ;
 	
-	public List<Image> getImages(int objectyType ,  long objectId );
+	public long getUsage(int objectType ,  long objectId);
 	
-	public List<Image> getImages(int objectyType ,  long objectId, int startIndex, int maxResults );
+	public List<Image> getImages(int objectType ,  long objectId );
+	
+	public List<Image> getImages(int objectType ,  long objectId, int startIndex, int maxResults );
 	
 	public int getTotalImageCount(int objectType, long objectId );
 		
