@@ -43,6 +43,6 @@ public interface AttachmentManager {
 		
 	public abstract int getTotalAttachmentCount(int objectType, long objectId);
 	
-	public long getAttachmentUsage( int objectType, long objectId );
+	public long getUsage( int objectType, long objectId );
 	
 }
