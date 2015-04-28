@@ -999,6 +999,73 @@
 	FROM V2_WEBSITE	
 	]]></sql-query>	
 	
+	<sql-query name="SELECT_WEBPAGE_BY_NAME" description=""><![CDATA[
+	SELECT
+		WEBPAGE_ID,
+		WEBSITE_ID,
+		NAME,
+		DESCRIPTION,
+		DISPLAY_NAME,
+		CONTENT_TYPE,
+		TEMPLATE,
+		ENABLED,
+		CREATION_DATE,
+		MODIFIED_DATE	
+	FROM V2_WEBPAGE
+	WHERE 	WEBSITE_ID = ? AND NAME = ?
+	]]></sql-query>	
+
+	<sql-query name="SELECT_WEBPAGE_BY_ID" description=""><![CDATA[
+	SELECT
+		WEBPAGE_ID,
+		WEBSITE_ID,
+		NAME,
+		DESCRIPTION,
+		DISPLAY_NAME,
+		CONTENT_TYPE,
+		TEMPLATE,
+		ENABLED,
+		CREATION_DATE,
+		MODIFIED_DATE	
+	FROM V2_WEBPAGE
+	WHERE 	WEBPAGE_ID = ?
+	]]></sql-query>			
+
+	<sql-query name="CREATE_WEBPAGE" description=""><![CDATA[
+	INSERT INTO V2_WEBPAGE (
+		WEBPAGE_ID,
+		WEBSITE_ID,
+		NAME,
+		DESCRIPTION,
+		DISPLAY_NAME,
+		CONTENT_TYPE,
+		TEMPLATE,
+		ENABLED,
+		CREATION_DATE,
+		MODIFIED_DATE	
+	) VALUES ( ?,?,?,?,?,?,?,?,?,? )		
+	]]></sql-query>		
+	<sql-query name="UPDATE_WEBPAGE" description=""><![CDATA[
+	UPDATE V2_WEBPAGE SET
+		NAME = ?,
+		DESCRIPTION = ?,
+		DISPLAY_NAME = ?,
+		CONTENT_TYPE = ?,
+		TEMPLATE = ?,
+		ENABLED = ?,
+		MODIFIED_DATE = ?	
+	WHERE WEBPAGE_ID = ?			
+	]]></sql-query>	
+		
+	<sql-query name="COUNT_WEBPAGE_BY_WEBSITE" description=""><![CDATA[
+		SELECT COUNT(WEBSITE_ID) FROM V2_WEBPAGE
+		WHERE WEBSITE_ID = ?	
+	]]></sql-query>
+	<sql-query name="SELECT_WEBPAGE_IDS_BY_WEBSITE" description=""><![CDATA[
+		SELECT WEBPAGE_ID FROM V2_WEBPAGE
+		WHERE WEBSITE_ID = ?	
+	]]></sql-query>
+	
 	<!-- ANNOUNCE -->			
 	<sql-query name="COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
 	SELECT COUNT(ANNOUNCE_ID) FROM V2_ANNOUNCE WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
