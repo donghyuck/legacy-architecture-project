@@ -46,7 +46,7 @@ import architecture.ee.web.navigator.Menu;
 import architecture.ee.web.navigator.MenuRepository;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteManager;
-import architecture.ee.web.spring.controller.WebDataController.ItemList;
+import architecture.ee.web.spring.controller.MyCloudDataController.ItemList;
 import architecture.ee.web.util.WebSiteUtils;
 
 @Controller ("secure-community-data-controller")

@@ -10,6 +10,7 @@
 	<model id="30" code="WEBSITE" />
 	<model id="31" code="PAGE" />
 	<model id="32" code="PAGE_BODY" />
-	<model id="33" code="LOGO_IMAGE" />
-	<model id="37" code="SOCIAL_CONNECT" />	
+	<model id="33" code="WEBPAGE" />		
+	<model id="37" code="SOCIAL_CONNECT" />
+	<model id="34" code="LOGO" />	
 </models>
