@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -55,15 +56,16 @@ import architecture.ee.web.attachment.impl.AttachmentImpl;
 import architecture.ee.web.attachment.impl.ImageImpl;
 import architecture.ee.web.util.WebSiteUtils;
 import architecture.ee.web.ws.Property;
+import architecture.ee.web.ws.Usage;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
 import com.drew.metadata.exif.ExifSubIFDDirectory;
 
-@Controller ("web-data-controller")
+@Controller ("my-cloud-data-controller")
 @RequestMapping("/data")
-public class WebDataController {
+public class MyCloudDataController {
 
 	private Log log = LogFactory.getLog(getClass());
 	
@@ -104,6 +106,26 @@ public class WebDataController {
 		this.attachmentManager = attachmentManager;
 	}
 
+	@Secured({"ROLE_USER"})
+	@RequestMapping(value="/cloud/usage.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public Map<String, Usage> usage (NativeWebRequest request)
+	{
+		User user = SecurityHelper.getUser();		
+		int objectType = user.getModelObjectType();
+		long objectId = user.getUserId();			
+		long maxSize = 1073741824 * 5;
+		
+		long imageUsage = imageManager.getUsage(objectType, objectId);
+		long fileUsage = attachmentManager.getUsage(objectType, objectId);
+		float percentage = (imageUsage + fileUsage ) * 100 / maxSize;
+		
+		Map<String, Usage> list = new HashMap<String, Usage>();
+		list.put("photo", new Usage("photo", imageUsage));
+		list.put("file", new Usage("file", fileUsage));
+		list.put("limit", new Usage("limit", maxSize));
+		return list;
+	}
 	
 	@Secured({"ROLE_USER"})
 	@RequestMapping(value="/images/list.json",method={RequestMethod.POST, RequestMethod.GET} )

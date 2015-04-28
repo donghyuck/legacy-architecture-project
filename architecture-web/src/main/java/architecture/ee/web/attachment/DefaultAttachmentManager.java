@@ -321,7 +321,7 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 	}
 
 	@Override
-	public long getAttachmentUsage(int objectType, long objectId) {
+	public long getUsage(int objectType, long objectId) {
 		return attachmentDao.getAttachmentUsage(objectType, objectId);
 	}
 }
