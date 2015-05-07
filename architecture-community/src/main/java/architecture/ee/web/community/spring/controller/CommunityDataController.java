@@ -212,6 +212,8 @@ public class CommunityDataController {
 				page.setObjectId(WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId());			
 			}else if (page.getObjectType() == 1 && page.getObjectId() == 0L ){
 				page.setObjectId(user.getCompanyId());		
+			}else if (page.getObjectType() == 2 && page.getObjectId() == 0L ){
+				page.setObjectId(user.getUserId());		
 			}
 			target =  new DefaultPage(page.getObjectType(), page.getObjectId());
 			target.setUser(page.getUser());			
