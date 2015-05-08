@@ -328,16 +328,17 @@ public class MyCloudDataController {
 	@ResponseBody
 	public List<Image>  uploadImageWithMedia(
 			@RequestParam(value="objectType", defaultValue="2", required=false ) Integer objectType,
+			@RequestParam(value="objectId", defaultValue="0", required=false ) Long objectId,
 			@RequestParam(value="imageId", defaultValue="0", required=false ) Long imageId, 
 			MultipartHttpServletRequest request) throws NotFoundException, IOException {				
 		User user = SecurityHelper.getUser();
-		long objectId = user.getUserId();		
 		if( objectType == 1 ){
 			objectId = user.getCompanyId();			
+		}else	if( objectType == 2 ){
+			objectId = user.getUserId();		
 		}else if ( objectType == 30){
 			objectId = WebSiteUtils.getWebSite(request).getWebSiteId();
 		}	
-		
 		
 		Iterator<String> names = request.getFileNames(); 
 		List<Image> list = new ArrayList<Image>();		
