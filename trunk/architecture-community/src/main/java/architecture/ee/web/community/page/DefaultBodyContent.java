@@ -15,6 +15,10 @@
  */
 package architecture.ee.web.community.page;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
 public class DefaultBodyContent implements BodyContent {
 
 	private long bodyId;
@@ -24,6 +28,10 @@ public class DefaultBodyContent implements BodyContent {
 	private BodyType bodyType;
 	
 	private String bodyText;
+	
+	private String firstImageSrc = null ;
+	
+	private int imageCount = 0;
 	
 	public DefaultBodyContent() {
 		this.bodyId = -1L;
@@ -35,7 +43,7 @@ public class DefaultBodyContent implements BodyContent {
 		this.bodyId = -1L;
 		this.pageId = pageId;
 		this.bodyType = BodyType.FREEMARKER;
-		this.bodyText = bodyText;
+		setBodyText(bodyText);
 	}	
 
 	/**
@@ -48,7 +56,7 @@ public class DefaultBodyContent implements BodyContent {
 		this.bodyId = bodyId;
 		this.pageId = pageId;
 		this.bodyType = bodyType;
-		this.bodyText = bodyText;
+		setBodyText(bodyText);
 	}
 
 
@@ -65,8 +73,18 @@ public class DefaultBodyContent implements BodyContent {
 	/**
 	 * @param bodyText 설정할 bodyText
 	 */
-	public void setBodyText(String bodyText) {
+	public void setBodyText(String bodyText) {		
 		this.bodyText = bodyText;
+		try {
+			Document doc = Jsoup.parse(this.bodyText);		
+			Elements  links = doc.select("img");
+			this.imageCount = links.size();
+			if( imageCount > 0 )
+				firstImageSrc = links.first().attr("src");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		
 	}
 
 
@@ -111,6 +129,20 @@ public class DefaultBodyContent implements BodyContent {
 	 */
 	public void setBodyType(BodyType bodyType) {
 		this.bodyType = bodyType;
+	}
+
+	/**
+	 * @return firstImageSrc
+	 */
+	public String getFirstImageSrc() {
+		return firstImageSrc;
+	}
+
+	/**
+	 * @return imageCount
+	 */
+	public int getImageCount() {
+		return imageCount;
 	}
 
 	
