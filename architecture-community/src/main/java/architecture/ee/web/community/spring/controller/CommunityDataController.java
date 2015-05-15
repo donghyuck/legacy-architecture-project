@@ -174,7 +174,7 @@ public class CommunityDataController {
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value="/pages/update_state.json", method=RequestMethod.POST)
 	@ResponseBody
-	public String updatePageState(
+	public Page updatePageState(
 			@RequestBody DefaultPage page, 
 			NativeWebRequest request) throws NotFoundException{		
 		User user = SecurityHelper.getUser();
@@ -185,9 +185,11 @@ public class CommunityDataController {
 			throw new UnAuthorizedException();
 				
 		Page target = pageManager.getPage(page.getPageId());
-	
+		target.setPageState(page.getPageState());
+		pageManager.updatePage(target);
 		
-		return target.getPageState().name();
+		
+		return target;
 	}
 	
 	
