@@ -132,31 +132,38 @@ public class MyCloudDataController {
 	@ResponseBody
 	public ImageList  getImageList(
 			@RequestParam(value="objectType", defaultValue="2", required=false ) Integer objectType,
+			@RequestParam(value="objectId", defaultValue="0", required=false ) Long objectId,
 			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
 			@RequestParam(value="pageSize", defaultValue="0", required=false ) Integer pageSize,
 			NativeWebRequest request ) throws NotFoundException {		
 		User user = SecurityHelper.getUser();
 		
-		return getImageList(objectType, startIndex, pageSize, request.getNativeRequest(HttpServletRequest.class));
+		return getImageList(objectType, objectId, startIndex, pageSize, request.getNativeRequest(HttpServletRequest.class));
+		
 	}
 	
 	
-	private ImageList getImageList(int objectType, int startIndex, int pageSize, HttpServletRequest request) throws NotFoundException{			
-		User user = SecurityHelper.getUser();
-		long objectId = user.getUserId();		
+	private ImageList getImageList(int objectType, long objectId, int startIndex, int pageSize, HttpServletRequest request) throws NotFoundException{			
+		User user = SecurityHelper.getUser();		
 		if( objectType == 1 ){
 			objectId = user.getCompanyId();			
+		}else	if( objectType == 2 ){
+			objectId = user.getUserId();		
 		}else if ( objectType == 30){
 			objectId = WebSiteUtils.getWebSite(request).getWebSiteId();
-		}				
+		}
+		
 		ImageList list = new ImageList();
-		list.setTotalCount(imageManager.getTotalImageCount(objectType, objectId));		
+		
+		
+		list.setTotalCount(imageManager.getTotalImageCount(objectType, objectId));	
 		if( pageSize > 0 ){
 			list.setImages(imageManager.getImages(objectType, objectId, startIndex, pageSize));
 		}else{
 			list.setImages(imageManager.getImages(objectType, objectId));
 		}
 		return list;
+		
 	}
 	
 	public static class ImageList {
