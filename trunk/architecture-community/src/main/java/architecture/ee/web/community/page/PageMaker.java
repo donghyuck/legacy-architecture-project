@@ -149,6 +149,7 @@ public class PageMaker {
 	}
 	
 	protected Template getPageTemplate(Page page) throws IOException{
+
 		Template  template = new Template ("page-body-"+ page.getBodyContent().getBodyId(), new StringReader(page.getBodyText()), getConfiguration());		
 		return template;
 	}

@@ -375,5 +375,39 @@ public class DefaultPageManager implements PageManager  {
 	}
 
 
+	@Override
+	public List<Page> getPages(int objectType, PageState state) {
+		List<Long> ids = pageDao.getPageIds(objectType, state);
+		ArrayList<Page> list = new ArrayList<Page>(ids.size());
+		for( Long pageId : ids ){
+			try {
+				list.add(getPage(pageId));
+			} catch (PageNotFoundException e) {
+			}		
+		}
+		return list;
+	}
+
+
+	@Override
+	public List<Page> getPages(int objectType, PageState state, int startIndex, int maxResults) {
+		List<Long> ids = pageDao.getPageIds(objectType, state, startIndex, maxResults);
+		ArrayList<Page> list = new ArrayList<Page>(ids.size());
+		for( Long pageId : ids ){
+			try {
+				list.add(getPage(pageId));
+			} catch (PageNotFoundException e) {
+			}		
+		}
+		return list;
+	}
+
+
+	@Override
+	public int getPageCount(int objectType, PageState state) {
+		return pageDao.getPageCount(objectType, state);
+	}
+
+
 	
 }

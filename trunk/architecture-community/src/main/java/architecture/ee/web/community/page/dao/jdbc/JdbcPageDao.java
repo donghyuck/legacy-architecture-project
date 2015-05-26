@@ -688,6 +688,37 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 				new int[] {Types.NUMERIC, Types.NUMERIC}, 
 				Long.class);
 	}
+
+	@Override
+	public List<Long> getPageIds(int objectType, PageState state) {
+		return getExtendedJdbcTemplate().queryForList(				
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_IDS_BY_OBJECT_TYPE_AND_STATE").getSql(), 		
+				Long.class,
+				new SqlParameterValue(Types.NUMERIC, objectType ),
+				new SqlParameterValue(Types.VARCHAR,  state.name().toLowerCase() )
+				);
+	}
+
+	@Override
+	public List<Long> getPageIds(int objectType, PageState state,
+			int startIndex, int maxResults) {
+		return getExtendedJdbcTemplate().queryScrollable(
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_IDS_BY_OBJECT_TYPE_AND_STATE").getSql(), 
+				startIndex, 
+				maxResults, 
+				new Object[ ] {objectType, state.name().toLowerCase() }, 
+				new int[] {Types.NUMERIC, Types.VARCHAR}, 
+				Long.class);
+	}
+
+	@Override
+	public int getPageCount(int objectType, PageState state) {
+		return getExtendedJdbcTemplate().queryForInt(
+				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_PAGE_BY_OBJECT_TYPE_AND_STATE").getSql(), 		
+				new SqlParameterValue(Types.NUMERIC, objectType ),
+				new SqlParameterValue(Types.VARCHAR, state.name().toLowerCase()  )
+		);
+	}
 	
 	
 
