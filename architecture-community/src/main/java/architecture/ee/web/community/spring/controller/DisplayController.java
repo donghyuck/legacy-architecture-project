@@ -156,6 +156,7 @@ public class DisplayController {
 			HttpServletRequest request, 
 			HttpServletResponse response, 
 			Model model) throws IOException {		
+		
 		boolean notFound = false;
 		User user = SecurityHelper.getUser();		
 		Page page = null;
@@ -168,7 +169,7 @@ public class DisplayController {
 			template = page.getProperty("template", DEFAULT_PAGE_TEMPLATE );	
 			setContentType(response);		
 		} catch (NotFoundException e) {
-
+			notFound = true;
 		}
 		
 		if( page == null && website != null ){

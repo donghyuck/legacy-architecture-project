@@ -46,5 +46,12 @@ public interface PageManager {
 		public abstract int getPageCount(int objectType, long objectId);		
 		
 		public abstract List<PageVersion> getPageVersions(long pageId);
+		
+		
+		public abstract List<Page> getPages(int objectType, PageState state);
+				
+		public abstract List<Page> getPages(int objectType, PageState state, int startIndex, int maxResults);
+		
+		public abstract int getPageCount(int objectType, PageState state);			
 				
 }
