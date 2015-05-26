@@ -105,10 +105,6 @@ public class DownloadController {
 		response.flushBuffer();			
 	}
 	
-	
-	
-	
-	
 	@RequestMapping(value = "/files/{fileId:[\\p{Digit}]+}/{filename:.+}", method = { RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public void downloadFile( 
@@ -191,9 +187,6 @@ public class DownloadController {
 		}		
 	}
 		
-	
-	
-	
 	
 	@RequestMapping(value = "/file/{attachmentId}/{filename:.+}", method = RequestMethod.GET)
 	@ResponseBody
