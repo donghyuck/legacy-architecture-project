@@ -262,7 +262,6 @@
  	WHERE 
  		OBJECT_TYPE = ? 
  		AND OBJECT_ID = ?
- 	ORDER BY 	MODIFIED_DATE 		
     ]]></sql-query>	
 	
  	<sql-query name="SELECT_PAGE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="SELECT_PAGE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[    	
@@ -270,8 +269,26 @@
  	WHERE 
  		OBJECT_TYPE = ? 
  		AND OBJECT_ID = ?
- 	ORDER BY 	MODIFIED_DATE 		
+ 	ORDER BY 	MODIFIED_DATE 	DESC	
     ]]></sql-query>		
+ 	<sql-query name="COUNT_PAGE_BY_OBJECT_TYPE_AND_STATE" description="COUNT_PAGE_BY_OBJECT_TYPE_AND_STATE"><![CDATA[    	
+ 	SELECT count( T1.PAGE_ID ) FROM V2_PAGE T1, v2_page_version t2
+ 	WHERE 
+	    t1.object_type = ?
+	    and t2.state = ?
+	    and t1.page_id = t2.page_id 
+	    and t1.version_id = t2.version_id	  	
+    ]]></sql-query>	
+	
+ 	<sql-query name="SELECT_PAGE_IDS_BY_OBJECT_TYPE_AND_STATE" description="SELECT_PAGE_IDS_BY_OBJECT_TYPE_AND_STATE"><![CDATA[    	
+  	SELECT T1.PAGE_ID FROM V2_PAGE T1, v2_page_version t2
+ 	WHERE 	    
+	    t1.object_type = ?
+	    and t2.state = ?
+	    and t1.page_id = t2.page_id 
+	    and t1.version_id = t2.version_id	    
+ 	ORDER BY 	T1.MODIFIED_DATE DESC 		
+    ]]></sql-query>		    
  	<sql-query name="CREATE_PAGE" description="CREATE_PAGE"><![CDATA[    	
 		INSERT INTO V2_PAGE (
 			PAGE_ID,
@@ -1084,4 +1101,23 @@
 	AND START_DATE >=  ?
 	AND END_DATE >=  ?
 	]]></sql-query>			
+	
+	<!--  VIEW  COUNT -->
+	<sql-query name="VIEW_COUNT_BY_OBJECT_TYPE_AND_OBJECT_ID" description="VIEW_COUNT_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
+	SELECT 
+		VIEWCOUNT FROM V2_VIEWCOUNT 
+	WHERE OBJECT_TYPE = ? AND OBJECT_ID = ? 
+	]]></sql-query>		
+	<sql-query name="DELETE_VIEW_COUNT" description="DELETE_VIEW_COUNT"><![CDATA[
+	DELETE FROM V2_VIEWCOUNT 
+	WHERE OBJECT_TYPE = ? AND OBJECT_ID = ? 
+	]]></sql-query>	
+	<sql-query name="UPDATE_VIEW_COUNT" description="UPDATE_VIEW_COUNT"><![CDATA[
+	UPDATE  
+		V2_VIEWCOUNT SET VIEWCOUNT = ?
+	WHERE OBJECT_TYPE = ? AND OBJECT_ID = ? 
+	]]></sql-query>	
+	<sql-query name="CREATE_VIEW_COUNT"  description="CREATE_VIEW_COUNT"><![CDATA[
+	INSERT INTO V2_VIEWCOUNT ( OBJECT_TYPE, OBJECT_ID, VIEWCOUNT )  VALUES (?, ?, ?)
+	]]></sql-query>				
 </sqlset>

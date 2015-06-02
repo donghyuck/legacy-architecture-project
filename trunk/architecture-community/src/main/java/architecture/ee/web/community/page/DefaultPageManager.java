@@ -26,16 +26,20 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import architecture.common.event.api.EventPublisher;
+import architecture.common.event.api.EventSource;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.ee.web.community.page.dao.PageDao;
 import architecture.ee.web.community.page.dao.PageVersionDao;
+import architecture.ee.web.community.page.event.PageEvent;
 
-public class DefaultPageManager implements PageManager  {
+public class DefaultPageManager implements PageManager, EventSource  {
 
 	private Log log = LogFactory.getLog(getClass());
 	private UserManager userManager;
+	private EventPublisher eventPublisher;
 	
 	private PageDao pageDao ;
 	
@@ -125,8 +129,15 @@ public class DefaultPageManager implements PageManager  {
 		boolean isNewVersionRequired = isNewVersionRequired( forceNewVersion, isNewPage );
 		if(isNewPage){
 			pageDao.create(page);			
+			eventPublisher.publish(new PageEvent(page, PageEvent.Type.CREATED));
 		}else{
 			pageDao.update(page, isNewVersionRequired);
+			if( page.getPageState() == PageState.DELETED ){
+				eventPublisher.publish(new PageEvent(page, PageEvent.Type.DELETED));
+			}else{
+				eventPublisher.publish(new PageEvent(page, PageEvent.Type.UPDATED));
+			}
+			
 		}		
 		
 		if( pageCache.get(page.getPageId()) != null ){
@@ -406,6 +417,12 @@ public class DefaultPageManager implements PageManager  {
 	@Override
 	public int getPageCount(int objectType, PageState state) {
 		return pageDao.getPageCount(objectType, state);
+	}
+
+
+	@Override
+	public void setEventPublisher(EventPublisher eventPublisher) {
+		this.eventPublisher = eventPublisher;		
 	}
 
 

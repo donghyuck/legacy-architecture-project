@@ -49,7 +49,12 @@
 	<bean id="logoImageCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="logoImageCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0"  p:statisticsEnabled="true" />
 	<bean id="logoImageIdsCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="logoImageIdsCache"  p:maxElementsInMemory="100"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="60"  p:timeToLive="600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0"  p:statisticsEnabled="true" />
 	
+	
+	<bean id="pageCountCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="pageCountCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" p:statisticsEnabled="true" />
+	
+	
 	<bean id="timelineCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="timelineCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0"  p:statisticsEnabled="true" />
+	
 	
 	
 	
@@ -72,6 +77,7 @@
 		
 	<bean id="socialConnectDao" class="architecture.ee.web.community.social.provider.connect.dao.JdbcSocialConnectDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
 	
+	<bean id="viewCountDao" class="architecture.ee.web.community.stats.dao.jdbc.JdbcViewCountDao" parent="jdbcDaoSupport" />
 		
 	<bean id="pageManager" class="architecture.ee.web.community.page.DefaultPageManager" 
 		depends-on="pageDao, pageVersionDao"  
@@ -81,7 +87,8 @@
 		p:pageIdCache-ref="pageIdCache" 
 		p:pageVersionCache-ref="pageVersionCache" 
 		p:pageVersionsCache-ref="pageVersionsCache" 
-		p:userManager-ref="userManager" />		
+		p:userManager-ref="userManager" 
+		p:eventPublisher-ref="eventPublisher" />
 				
 	<bean id="webSiteManager" class="architecture.ee.web.community.site.DefaultWebSiteManager" depends-on="webSiteDao"  p:webSiteDao-ref="webSiteDao" p:webSiteCache-ref="webSiteCache" p:webSiteIdCache-ref="webSiteIdCache"  p:webSiteUrlCache-ref="webSiteUrlCache"  p:webPageCache-ref="webPageCache"  p:webPageIdCache-ref="webPageIdCache"  p:userManager-ref="userManager"  p:companyManager-ref="companyManager" />		
 	<bean id="templateManager" class="architecture.ee.web.template.DefaultTemplateManager" depends-on="templateDao"  p:templateDao-ref="templateDao" p:objectCache-ref="templateCache" p:userManager-ref="userManager" />		
@@ -95,5 +102,14 @@
 	
 	<bean id="socialConnectManager" class="architecture.ee.web.community.social.provider.connect.DefaultSocialConnectManager" depends-on="socialConnectDao"  p:socialConnectDao-ref="socialConnectDao" p:socialConnectCache-ref="socialConnectCache"/>		
 	
-	
+	<bean id="viewCountManager"
+		class="architecture.ee.web.community.stats.ViewCountManager"
+		depends-on="viewCountDao" p:viewCountDao-ref="viewCountDao"
+		p:pageCountCache-ref="pageCountCache"
+		p:eventPublisher-ref="eventPublisher" 
+		init-method="initialize"
+		destroy-method="destroy" >
+		<constructor-arg index="0" ref="taskEngine" />
+	</bean>
+
 </beans>

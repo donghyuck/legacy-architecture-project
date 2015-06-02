@@ -16,38 +16,22 @@
 package architecture.ee.web.community.spring.controller;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.NativeWebRequest;
 
-import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
-import architecture.common.user.CompanyNotFoundException;
-import architecture.common.user.SecurityHelper;
-import architecture.common.user.User;
-import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.AttachmentManager;
 import architecture.ee.web.attachment.ImageManager;
 import architecture.ee.web.community.announce.AnnounceManager;
 import architecture.ee.web.community.page.PageManager;
 import architecture.ee.web.community.streams.PhotoStreamsManager;
 import architecture.ee.web.logo.LogoManager;
-import architecture.ee.web.navigator.DefaultMenu;
-import architecture.ee.web.navigator.Menu;
 import architecture.ee.web.navigator.MenuRepository;
-import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteManager;
-import architecture.ee.web.spring.controller.MyCloudDataController.ItemList;
-import architecture.ee.web.util.WebSiteUtils;
 
 @Controller ("secure-community-data-controller")
 @RequestMapping("/secure/data")

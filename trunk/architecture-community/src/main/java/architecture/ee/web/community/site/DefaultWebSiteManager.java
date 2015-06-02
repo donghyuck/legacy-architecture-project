@@ -26,8 +26,6 @@ import net.sf.ehcache.Element;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.core.sym.Name;
-
 import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
 import architecture.common.user.CompanyNotFoundException;

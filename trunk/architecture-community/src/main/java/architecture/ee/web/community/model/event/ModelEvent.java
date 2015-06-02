@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.page;
+package architecture.ee.web.community.model.event;
 
-public enum PageState {
+public class ModelEvent {
 
-	INCOMPLETE, APPROVAL, PUBLISHED, REJECTED, ARCHIVED, DELETED, NONE ;
+	public ModelEvent() {
+		
+	}
 
 }

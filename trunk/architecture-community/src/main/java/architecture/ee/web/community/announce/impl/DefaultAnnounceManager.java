@@ -39,6 +39,7 @@ import architecture.ee.web.community.announce.AnnounceNotFoundException;
 import architecture.ee.web.community.announce.dao.AnnounceDao;
 
 public class DefaultAnnounceManager implements AnnounceManager, EventSource {
+	
 	protected Log log = LogFactory.getLog(getClass());	
 	private EventPublisher eventPublisher;
 	

@@ -19,12 +19,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.common.user.User;
 import architecture.ee.web.community.Comment;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class CommentImpl extends EntityModelObjectSupport implements Comment  {
 

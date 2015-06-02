@@ -58,8 +58,11 @@ import architecture.ee.web.community.announce.AnnounceNotFoundException;
 import architecture.ee.web.community.announce.impl.DefaultAnnounce;
 import architecture.ee.web.community.page.DefaultBodyContent;
 import architecture.ee.web.community.page.DefaultPage;
+import architecture.ee.web.community.page.ImmutablePage;
 import architecture.ee.web.community.page.Page;
 import architecture.ee.web.community.page.PageManager;
+import architecture.ee.web.community.page.PageState;
+import architecture.ee.web.community.stats.ViewCountManager;
 import architecture.ee.web.community.streams.Photo;
 import architecture.ee.web.community.streams.PhotoStreamsManager;
 import architecture.ee.web.site.WebSiteNotFoundException;
@@ -93,6 +96,10 @@ public class CommunityDataController {
 	@Inject
 	@Qualifier("pageManager")
 	private PageManager pageManager;
+	
+	@Inject
+	@Qualifier("viewCountManager")
+	private ViewCountManager viewCountManager;	
 	
 	
 	/**
@@ -152,14 +159,44 @@ public class CommunityDataController {
 	}
 	
 
+	
+	
+	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SITE_ADMIN' , 'ROLE_USER')")
+	@RequestMapping(value="/pages/published/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public PageList  getPublishedPageList(
+			@RequestParam(value="objectType", defaultValue="2", required=false ) Integer objectType,
+			@RequestParam(value="state", defaultValue="NONE", required=false ) String state,
+			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
+			@RequestParam(value="pageSize", defaultValue="15", required=false ) Integer pageSize,
+			NativeWebRequest request ) throws NotFoundException {		
+		User user = SecurityHelper.getUser();					
+		return getPublishedPageList(objectType, startIndex, pageSize);
+	}
+
+	private PageList getPublishedPageList( int objectType, int startIndex, int pageSize){		
+		PageList list = new PageList();
+		list.setTotalCount(pageManager.getPageCount(objectType, PageState.PUBLISHED));
+		List<Page> pages = new ArrayList(list.getTotalCount());
+		for( Page page :  pageManager.getPages(objectType, PageState.PUBLISHED, startIndex, pageSize) )
+		{
+			pages.add(new ImmutablePage(page));
+		}
+		list.setPages(pages);
+		return list;
+	}
+	
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SITE_ADMIN' , 'ROLE_USER')")
 	@RequestMapping(value="/pages/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public PageList  getPageList(
 			@RequestParam(value="objectType", defaultValue="2", required=false ) Integer objectType,
+			@RequestParam(value="state", defaultValue="NONE", required=false ) String state,
 			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
 			@RequestParam(value="pageSize", defaultValue="15", required=false ) Integer pageSize,
 			NativeWebRequest request ) throws NotFoundException {		
+		
 		User user = SecurityHelper.getUser();						
 		long objectId = user.getUserId();		
 		if( objectType == 1 ){
@@ -168,9 +205,38 @@ public class CommunityDataController {
 			objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();
 		}	
 		
-		return getPageList(objectType, objectId, startIndex, pageSize);
+		PageState pageState = PageState.valueOf(state.toUpperCase());		
+		return getPageList(objectType, objectId, pageState, startIndex, pageSize);
 	}
 	
+	
+	@PreAuthorize("hasRole('ROLE_USER')")
+	@RequestMapping(value="/pages/get.json", method=RequestMethod.POST)
+	@ResponseBody
+	public Page getPage(
+			@RequestParam(value="pageId", defaultValue="2", required=true ) Long pageId,
+			@RequestParam(value="version", defaultValue="0", required=false ) Integer version,
+			@RequestParam(value="count", defaultValue="0", required=false ) Integer count,
+			NativeWebRequest request) throws NotFoundException{		
+		
+		User user = SecurityHelper.getUser();
+		Page page = pageManager.getPage(pageId);
+		
+		
+		if( page.getPageState() == PageState.PUBLISHED ){
+			if( count > 0 )
+				viewCountManager.addPageCount(page);
+			return page;
+		}
+		
+		if(page.getUser().getUserId() == user.getUserId()){
+			return page;
+		}
+		
+		throw new UnAuthorizedException();
+	}	
+	
+			
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value="/pages/update_state.json", method=RequestMethod.POST)
 	@ResponseBody
@@ -220,6 +286,8 @@ public class CommunityDataController {
 			target =  new DefaultPage(page.getObjectType(), page.getObjectId());
 			target.setUser(page.getUser());			
 			target.setBodyContent(new DefaultBodyContent());
+			
+			log.debug( target.getProperties());
 		}
 		
 		target.setName(page.getName());
@@ -288,10 +356,15 @@ public class CommunityDataController {
 		return list;
 	}
 	
-	private PageList getPageList( int objectType, long objectId,  int startIndex, int pageSize){		
+	private PageList getPageList( int objectType, long objectId, PageState pageState, int startIndex, int pageSize){		
 		PageList list = new PageList();		
+		
+		
+		
 		list.setPages( pageManager.getPages(objectType, objectId, startIndex, pageSize) );
+		
 		list.setTotalCount(pageManager.getPageCount(objectType, objectId));
+		
 		return list;
 	}
 	
@@ -299,6 +372,13 @@ public class CommunityDataController {
 		
 		private List<Page> pages ;
 		private int totalCount ;
+		
+		
+		/**
+		 * 
+		 */
+		public PageList() {
+		}
 		/**
 		 * @return pages
 		 */

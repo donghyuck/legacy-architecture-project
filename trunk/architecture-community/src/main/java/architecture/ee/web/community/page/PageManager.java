@@ -53,5 +53,8 @@ public interface PageManager {
 		public abstract List<Page> getPages(int objectType, PageState state, int startIndex, int maxResults);
 		
 		public abstract int getPageCount(int objectType, PageState state);			
+		
+		
+		
 				
 }
