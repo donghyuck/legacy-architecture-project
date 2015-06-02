@@ -13,10 +13,51 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.page;
+package architecture.ee.web.community.page.event;
 
-public enum PageState {
+import java.util.Date;
 
-	INCOMPLETE, APPROVAL, PUBLISHED, REJECTED, ARCHIVED, DELETED, NONE ;
+import architecture.common.lifecycle.event.Event;
+import architecture.ee.web.community.page.Page;
+
+public class PageEvent extends Event {
+
+	public enum Type {
+
+		CREATED,
+
+		UPDATED,
+
+		DELETED,
+
+		MOVED,
+
+		EXPIRED,
+
+		VIEWED
+	};
+
+	private Type type;
+	private Date date;
+
+	public PageEvent(Page source, Type type) {
+		super(source);
+		this.type = type;
+		date = new Date();
+	}
+
+	/**
+	 * @return date
+	 */
+	public Date getDate() {
+		return date;
+	}
+
+	/**
+	 * @return type
+	 */
+	public Type getType() {
+		return type;
+	}
 
 }

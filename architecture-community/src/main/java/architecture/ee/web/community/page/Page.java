@@ -49,7 +49,7 @@ public interface Page extends Cacheable {
 	public String getTitle();
 	
 	public void setTitle(String title);
-			
+				
 	public String getSummary();
 	
 	public void setSummary(String summary);
@@ -87,5 +87,7 @@ public interface Page extends Cacheable {
 	public abstract User getUser();
 	
 	public abstract void setUser(User user);
+	
+	public abstract Integer getViewCount();
 			
 }

@@ -13,10 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.page;
+package architecture.ee.web.community.stats.dao;
 
-public enum PageState {
+import java.util.List;
 
-	INCOMPLETE, APPROVAL, PUBLISHED, REJECTED, ARCHIVED, DELETED, NONE ;
+import architecture.ee.web.community.stats.ViewCountManager.ViewCountInfo;
 
+public interface ViewCountDao {
+
+	public int getViewCount(int objectType,  long  objectId, long parentObjectId);
+	
+	public void updateViewCounts(final List<ViewCountInfo> views);
+	
+	public void deleteViewCount(int objectType, long objectId);
+	
+	public void insertInitialViewCount( int objectType, long objectId, long parentObjectId, int count);
+	
 }

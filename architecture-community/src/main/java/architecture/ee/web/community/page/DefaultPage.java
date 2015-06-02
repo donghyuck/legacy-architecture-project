@@ -26,8 +26,10 @@ import architecture.common.model.json.UserDeserializer;
 import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.common.util.StringUtils;
+import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.community.page.json.BodyContentDeserializer;
 import architecture.ee.web.community.page.json.PageStateDeserializer;
+import architecture.ee.web.community.stats.ViewCountManager;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -50,6 +52,7 @@ public class DefaultPage implements Page {
 	private User user ;
 	
 	public DefaultPage() {
+
 		this.name = null;
 		this.pageId = -1L;
 		this.objectType = -1;
@@ -195,6 +198,8 @@ public class DefaultPage implements Page {
 	public BodyContent getBodyContent() {
 		return bodyContent;
 	}
+	
+	
 
 	/**
 	 * @param bodyContent 설정할 bodyContent
@@ -202,8 +207,19 @@ public class DefaultPage implements Page {
 	@JsonDeserialize(using = BodyContentDeserializer.class)
 	public void setBodyContent(BodyContent bodyContent) {
 		this.bodyContent = bodyContent;
-	}
+	}	
+	
 
+	public Integer getViewCount() {
+		if( ApplicationHelper.getComponent(ViewCountManager.class).isViewCountsEnabled())
+			return ApplicationHelper.getComponent(ViewCountManager.class).getPageCount(this);
+		else
+			return -1;	
+	}
+	
+	@JsonIgnore
+	public void setViewCount(int viewCount){}
+	
 	/**
 	 * @return creationDate
 	 */
@@ -349,6 +365,5 @@ public class DefaultPage implements Page {
 		builder.append("]");
 		return builder.toString();
 	}
-
 	
 }

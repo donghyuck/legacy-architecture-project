@@ -13,10 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.page;
+package architecture.ee;
 
-public enum PageState {
+import org.junit.Test;
 
-	INCOMPLETE, APPROVAL, PUBLISHED, REJECTED, ARCHIVED, DELETED, NONE ;
+public class ViewCountTest {
 
+	public ViewCountTest() {
+		// TODO 자동 생성된 생성자 스텁
+	}
+
+	
+		@Test
+		public void testNumber(){
+			
+			long i = 0x2bf20L;
+			System.out.println(i);	
+		}
 }

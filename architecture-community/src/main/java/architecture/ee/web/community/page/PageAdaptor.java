@@ -215,6 +215,11 @@ public class PageAdaptor implements Page {
 		builder.append("]");
 		return builder.toString();
 	}
+
+	@Override
+	public int getViewCount() {
+		return -1;
+	}
 	
 	
 }

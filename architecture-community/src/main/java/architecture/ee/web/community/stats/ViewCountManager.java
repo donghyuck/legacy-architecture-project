@@ -31,6 +31,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import architecture.common.event.api.EventListener;
+import architecture.common.event.api.EventPublisher;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.task.TaskEngine;
 import architecture.common.user.authentication.UnAuthorizedException;
@@ -40,24 +41,66 @@ import architecture.ee.web.community.page.event.PageEvent;
 import architecture.ee.web.community.stats.dao.ViewCountDao;
 
 public class ViewCountManager {
+	
+	public static final Long DEFAULT_PERIOD_TIME = 180000L;
+	
 	private static final Log log = LogFactory.getLog(ViewCountManager.class);
-	Lock lock = new ReentrantLock();
+	
+	private Lock lock = new ReentrantLock();
 	private boolean viewCountsEnabled = false;
     private static Map<String, ViewCountInfo> queue;
     private static PersistenceTask task;
     private Cache pageCountCache;
     private ViewCountDao viewCountDao;
+    private EventPublisher eventPublisher;
     
 	public ViewCountManager(TaskEngine taskEngine){
 		this.viewCountsEnabled = ApplicationHelper.getApplicationBooleanProperty("components.viewCounts.enabled", true);
-		log.debug("view count enabled : " +viewCountsEnabled );
+		log.debug("view count enabled : " +viewCountsEnabled );		
 		if( viewCountsEnabled ){
-			initQueue();
+			queue = initQueue();
 			task = new PersistenceTask();
-			taskEngine.schedule(task, 0x2bf20L, 0x2bf20L);
+			taskEngine.schedule(task, DEFAULT_PERIOD_TIME, DEFAULT_PERIOD_TIME);
 		}
 	}
 	
+	public void initialize(){
+		this.eventPublisher.register(this);		
+	}
+	
+	
+	/**
+	 * @return pageCountCache
+	 */
+	public Cache getPageCountCache() {
+		return pageCountCache;
+	}
+
+
+	/**
+	 * @param pageCountCache 설정할 pageCountCache
+	 */
+	public void setPageCountCache(Cache pageCountCache) {
+		this.pageCountCache = pageCountCache;
+	}
+
+
+	/**
+	 * @return eventPublisher
+	 */
+	public EventPublisher getEventPublisher() {
+		return eventPublisher;
+	}
+
+
+	/**
+	 * @param eventPublisher 설정할 eventPublisher
+	 */
+	public void setEventPublisher(EventPublisher eventPublisher) {
+		this.eventPublisher = eventPublisher;
+	}
+
+
 	public void addPageCount(Page page){
 		if(viewCountsEnabled){			
 			addCount(ModelTypeFactory.getTypeIdFromCode("PAGE"), page.getPageId(), -1, pageCountCache, 1);
@@ -104,13 +147,15 @@ public class ViewCountManager {
 	
 	
 	private void addCount( int objectType, long objectId, long parentObjectId, Cache cache, int amount ){
-		String cacheKey = getCacheKey(objectType, objectId);
+		
 		int count = -1;	
+		String cacheKey = getCacheKey(objectType, objectId);
+		
 		if( cache.get( cacheKey )!= null)
 			count = (Integer)cache.get(cacheKey).getValue();
 		else
-			count = viewCountDao.getViewCount( objectType, objectId , parentObjectId );
-		count += amount;
+			count = viewCountDao.getViewCount( objectType, objectId , parentObjectId );		
+		count += amount;		
 		cache.put(new Element(cacheKey, Integer.valueOf(count)));
 		Map<String, ViewCountInfo> queueRef = queue;
 		synchronized(queueRef){
@@ -161,10 +206,16 @@ public class ViewCountManager {
 				queue.remove(key);
 				viewCountDao.deleteViewCount(objectType, page.getPageId());
 				pageCountCache.remove(key);
+			}else{
+				
 			}
 		}
 	}	
 	
+	public void destroy() throws Exception
+	{
+		eventPublisher.unregister(this);
+	}
 	
 	/**
 	 * @return viewCountsEnabled
@@ -185,10 +236,11 @@ public class ViewCountManager {
 	
 	 static class PersistenceTask extends TimerTask
      {
-		public void run() {			
-			log.debug((new StringBuilder()).append("Starting a save of view counts to the database. Thread: ").append(Thread.currentThread().getName()).toString());
-			Map<String, ViewCountInfo> localQueue = ViewCountManager.queue;
-			ViewCountManager.queue = ViewCountManager.initQueue();
+		public void run() {						
+			log.debug((new StringBuilder()).append("Starting a save of view counts to the database. Thread: ").append(Thread.currentThread().getName()).toString());			
+			Map<String, ViewCountInfo> localQueue = ViewCountManager.queue;			
+			log.debug("queue: " + localQueue.size() );			
+			ViewCountManager.queue = ViewCountManager.initQueue();			
 			if( localQueue.size() > 0 ){
 			    // batch update. ..
 				// update V2_VIEW_COUNT set view_count = ? where objectType = ? and objectId = ?
