@@ -112,4 +112,16 @@
 		<constructor-arg index="0" ref="taskEngine" />
 	</bean>
 
+	<!--  =============================  -->
+	<!--  CommentManager                                   -->
+	<!--  =============================  -->
+	<bean id="commnetDao" class="architecture.ee.web.community.comment.dao.jdbc.JdbcCommnetDao" parent="jdbcDaoSupport" />
+	<bean id="webSiteManager" class="architecture.ee.web.community.site.DefaultWebSiteManager" depends-on="commnetDao"  init-method="initialize"
+		p:eventPublisher-ref="eventPublisher" 
+		p:commentCache-ref="commentCache" 
+		p:treeWalkerCache-ref="treeWalkerCache"  
+		p:commnetDao-ref="commnetDao" 		
+		p:pageManager-ref="pageManager"  
+		p:userManager-ref="userManager"  />		
+	
 </beans>
