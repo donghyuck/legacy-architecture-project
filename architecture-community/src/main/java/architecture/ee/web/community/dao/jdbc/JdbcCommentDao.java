@@ -22,7 +22,7 @@ import java.util.Map;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.community.Comment;
-import architecture.ee.web.community.CommentNotFoundException;
+import architecture.ee.web.community.comment.CommentNotFoundException;
 import architecture.ee.web.community.dao.CommentDao;
 
 public class JdbcCommentDao extends ExtendedJdbcDaoSupport implements CommentDao {

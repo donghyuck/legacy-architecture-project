@@ -89,5 +89,7 @@ public interface Page extends Cacheable {
 	public abstract void setUser(User user);
 	
 	public abstract Integer getViewCount();
+	
+	public abstract Integer getCommentCount();
 			
 }

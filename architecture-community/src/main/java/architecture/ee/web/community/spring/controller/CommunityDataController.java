@@ -45,6 +45,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
@@ -56,6 +57,10 @@ import architecture.ee.web.community.announce.Announce;
 import architecture.ee.web.community.announce.AnnounceManager;
 import architecture.ee.web.community.announce.AnnounceNotFoundException;
 import architecture.ee.web.community.announce.impl.DefaultAnnounce;
+import architecture.ee.web.community.comment.Comment;
+import architecture.ee.web.community.comment.CommentManager;
+import architecture.ee.web.community.comment.CommentTreeWalker;
+import architecture.ee.web.community.comment.DefaultComment;
 import architecture.ee.web.community.page.DefaultBodyContent;
 import architecture.ee.web.community.page.DefaultPage;
 import architecture.ee.web.community.page.ImmutablePage;
@@ -101,6 +106,9 @@ public class CommunityDataController {
 	@Qualifier("viewCountManager")
 	private ViewCountManager viewCountManager;	
 	
+	@Inject
+	@Qualifier("commentManager")
+	private CommentManager commentManager ;
 	
 	/**
 	 * @return announceManager
@@ -158,8 +166,44 @@ public class CommunityDataController {
 		this.attachmentManager = attachmentManager;
 	}
 	
-
+	@RequestMapping(value={"/pages/comment.json"},method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public Result  addComment (
+			@RequestParam(value="objectType", defaultValue="0", required=true ) Integer objectType,
+			@RequestParam(value="objectId", defaultValue="0", required=true ) Long objectId,
+			@RequestParam(value="text", defaultValue="", required=true ) String text,
+			NativeWebRequest request ) throws NotFoundException {		
+		
+		User user = SecurityHelper.getUser();			
+		String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();		
+		
+		Comment comment = commentManager.createComment(objectType, objectId, user, text);
+		comment.setIPAddress(address);
+		comment.setName(user.getName());
+		comment.setEmail(user.getEmail());
+		
+		commentManager.addComment(comment);
+		
+		return Result.newResult();
+	}
 	
+	@RequestMapping(value={"/pages/comments/list.json"},method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public CommentList getPageComments (
+			@RequestParam(value="pageId", defaultValue="0", required=true ) Long pageId,
+			NativeWebRequest request 
+			){
+		
+		int objectType = ModelTypeFactory.getTypeIdFromCode("PAGE") ;
+		CommentTreeWalker walker = commentManager.getCommentTreeWalker(objectType, pageId);
+		
+		Comment PARENT = new DefaultComment();
+		
+		CommentList list = new CommentList();
+		list.setTotalCount(walker.getRecursiveChildCount(PARENT));
+		list.setComments( walker.recursiveChildren(PARENT) );		
+		return list;
+	}	
 	
 	
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SITE_ADMIN' , 'ROLE_USER')")
@@ -286,17 +330,14 @@ public class CommunityDataController {
 			target =  new DefaultPage(page.getObjectType(), page.getObjectId());
 			target.setUser(page.getUser());			
 			target.setBodyContent(new DefaultBodyContent());
-			
-			log.debug( target.getProperties());
+			target.setProperties(page.getProperties());
 		}
 		
 		target.setName(page.getName());
 		target.setTitle(page.getTitle());
 		target.setSummary(page.getSummary());
 		target.setBodyText(page.getBodyContent().getBodyText());
-		
-		pageManager.updatePage(target);	
-		
+		pageManager.updatePage(target);			
 		return target;
 	}
 	
@@ -315,7 +356,10 @@ public class CommunityDataController {
 		
 	@RequestMapping(value="/pages/properties/update.json", method=RequestMethod.POST)
 	@ResponseBody
-	public List<Property>  updateImageProperty(@RequestParam(value="pageId", defaultValue="0", required=true ) Long pageId, @RequestParam(value="versionId", defaultValue="1" ) Integer versionId, @RequestBody List<Property> newProperties, NativeWebRequest request ) throws NotFoundException {		
+	public List<Property>  updateImageProperty(
+			@RequestParam(value="pageId", defaultValue="0", required=true ) Long pageId, 
+			@RequestParam(value="versionId", defaultValue="1" ) Integer versionId, 
+			@RequestBody List<Property> newProperties, NativeWebRequest request ) throws NotFoundException {		
 		User user = SecurityHelper.getUser();		
 		Page page = pageManager.getPage(pageId, versionId);
 		Map<String, String> properties = page.getProperties();		
@@ -368,15 +412,10 @@ public class CommunityDataController {
 		return list;
 	}
 	
-	public static class PageList {
-		
+	public static class PageList {		
 		private List<Page> pages ;
 		private int totalCount ;
 		
-		
-		/**
-		 * 
-		 */
 		public PageList() {
 		}
 		/**
@@ -403,8 +442,40 @@ public class CommunityDataController {
 		public void setTotalCount(int totalCount) {
 			this.totalCount = totalCount;
 		}
+	}
+
+	public static class CommentList {
 		
-		
+		private List<Comment> comments ;
+		private int totalCount ;		/**
+		 * 
+		 */
+		public CommentList() {
+		}
+		/**
+		 * @return pages
+		 */
+		public List<Comment> getComments() {
+			return comments;
+		}
+		/**
+		 * @param pages 설정할 pages
+		 */
+		public void setComments(List<Comment> comments) {
+			this.comments = comments;
+		}
+		/**
+		 * @return totalCount
+		 */
+		public int getTotalCount() {
+			return totalCount;
+		}
+		/**
+		 * @param totalCount 설정할 totalCount
+		 */
+		public void setTotalCount(int totalCount) {
+			this.totalCount = totalCount;
+		}
 	}
 	
 	/**

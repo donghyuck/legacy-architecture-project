@@ -19,11 +19,13 @@ import java.util.Date;
 import java.util.Map;
 
 import architecture.common.model.json.CustomJsonDateDeserializer;
+import architecture.common.model.json.CustomJsonDateSerializer;
 import architecture.common.model.json.UserDeserializer;
 import architecture.common.user.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
 public class ImmutablePage implements Page {
@@ -134,7 +136,7 @@ public class ImmutablePage implements Page {
 		throw new UnsupportedOperationException();
 	}
 
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getCreationDate() {
 		return this.page.getCreationDate();
 	}
@@ -144,7 +146,7 @@ public class ImmutablePage implements Page {
 		throw new UnsupportedOperationException();
 	}
 
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getModifiedDate() {
 		return this.page.getModifiedDate();
 	}

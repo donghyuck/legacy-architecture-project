@@ -118,8 +118,8 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 			new SqlParameterValue(Types.VARCHAR, page.getName() ),
 			new SqlParameterValue(Types.NUMERIC, page.getVersionId()),
 			new SqlParameterValue(Types.NUMERIC, page.getUser().getUserId()),
-			new SqlParameterValue(Types.DATE, page.getCreationDate()),
-			new SqlParameterValue(Types.DATE, page.getModifiedDate())
+			new SqlParameterValue(Types.TIMESTAMP, page.getCreationDate()),
+			new SqlParameterValue(Types.TIMESTAMP, page.getModifiedDate())
 		);		
 		
 		insertPageVersion(page);
@@ -143,9 +143,9 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 					public void setValues(PreparedStatement ps, int index) throws SQLException {		
 						Map.Entry<String, String> e = entryList.get(index);
 						ps.setLong(1,  pageId);
-						ps.setLong(1,  pageVersionId);
-						ps.setString(2, e.getKey());
-						ps.setString(3, e.getValue());
+						ps.setLong(2,  pageVersionId);
+						ps.setString(3, e.getKey());
+						ps.setString(4, e.getValue());
 					}
 				}
 			);
@@ -423,7 +423,7 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 			new SqlParameterValue(Types.VARCHAR, page.getName() ),
 			new SqlParameterValue(Types.NUMERIC, page.getVersionId()),
 			new SqlParameterValue(Types.NUMERIC, page.getUser().getUserId()),
-			new SqlParameterValue(Types.DATE, page.getModifiedDate()),
+			new SqlParameterValue(Types.TIMESTAMP, page.getModifiedDate()),
 			new SqlParameterValue(Types.NUMERIC, page.getPageId() )
 		);	
 		
@@ -561,8 +561,8 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 							page.setUser(new UserTemplate(-1L));
 						page.setTitle(rs.getString("TITLE"));
 						page.setSummary(rs.getString("SUMMARY"));
-						page.setCreationDate(rs.getDate("CREATION_DATE"));
-						page.setModifiedDate(rs.getDate("MODIFIED_DATE"));						
+						page.setCreationDate(rs.getTimestamp("CREATION_DATE"));
+						page.setModifiedDate(rs.getTimestamp("MODIFIED_DATE"));						
 						return page;
 					}					
 				},

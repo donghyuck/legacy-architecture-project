@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 import architecture.ee.web.community.Comment;
-import architecture.ee.web.community.CommentNotFoundException;
+import architecture.ee.web.community.comment.CommentNotFoundException;
 
 public interface CommentDao {
 
