@@ -32,6 +32,7 @@ import architecture.ee.web.community.page.json.PageStateDeserializer;
 import architecture.ee.web.community.stats.ViewCountManager;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -209,7 +210,7 @@ public class DefaultPage implements Page {
 		this.bodyContent = bodyContent;
 	}	
 	
-
+	@JsonProperty
 	public Integer getViewCount() {
 		if( ApplicationHelper.getComponent(ViewCountManager.class).isViewCountsEnabled())
 			return ApplicationHelper.getComponent(ViewCountManager.class).getPageCount(this);

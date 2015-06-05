@@ -217,9 +217,9 @@ public class PageAdaptor implements Page {
 	}
 
 	@Override
-	public int getViewCount() {
-		return -1;
+	public Integer getViewCount() {
+		return -1;				
 	}
-	
+
 	
 }
