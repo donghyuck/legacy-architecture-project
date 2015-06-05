@@ -51,6 +51,7 @@ public class DefaultCommentManager implements CommentManager  {
 	private Cache treeWalkerCache;
 	private PageManager pageManager;
 	private UserManager userManager;
+	private Comment rootParent = new DefaultComment();
 	
 	public DefaultCommentManager() {
 	}
@@ -288,4 +289,9 @@ public class DefaultCommentManager implements CommentManager  {
 	 private static String getTreeWalkerCacheKey( int objectType, long objectId) {
 		 return LockUtils.intern((new StringBuilder("commentTreeWalker-")).append(objectType).append("-").append(objectId).toString());
 	 }
+
+	@Override
+	public Comment getRootParent() {
+		return rootParent;
+	}
 }
