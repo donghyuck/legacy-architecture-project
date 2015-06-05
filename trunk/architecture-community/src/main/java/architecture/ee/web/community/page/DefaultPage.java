@@ -20,6 +20,8 @@ import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import architecture.common.exception.ComponentNotFoundException;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.json.CustomJsonDateDeserializer;
 import architecture.common.model.json.CustomJsonDateSerializer;
 import architecture.common.model.json.UserDeserializer;
@@ -27,6 +29,7 @@ import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.common.util.StringUtils;
 import architecture.ee.util.ApplicationHelper;
+import architecture.ee.web.community.comment.CommentManager;
 import architecture.ee.web.community.page.json.BodyContentDeserializer;
 import architecture.ee.web.community.page.json.PageStateDeserializer;
 import architecture.ee.web.community.stats.ViewCountManager;
@@ -219,7 +222,9 @@ public class DefaultPage implements Page {
 	}
 	
 	@JsonIgnore
-	public void setViewCount(int viewCount){}
+	public void setViewCount(int viewCount){
+		
+	}
 	
 	/**
 	 * @return creationDate
@@ -365,6 +370,18 @@ public class DefaultPage implements Page {
 			builder.append("user=").append(user);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	
+	@JsonProperty
+	@Override
+	public Integer getCommentCount() {
+		try {
+			CommentManager cmg = ApplicationHelper.getComponent(CommentManager.class);
+			return cmg.getCommentTreeWalker(ModelTypeFactory.getTypeIdFromCode("PAGE"), getPageId()).getRecursiveChildCount(cmg.getRootParent());
+		} catch (ComponentNotFoundException e) {
+			return 0;
+		}
 	}
 	
 }
