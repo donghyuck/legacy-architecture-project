@@ -115,12 +115,14 @@
 	<!--  =============================  -->
 	<!--  CommentManager                                   -->
 	<!--  =============================  -->
-	<bean id="commnetDao" class="architecture.ee.web.community.comment.dao.jdbc.JdbcCommnetDao" parent="jdbcDaoSupport" />
-	<bean id="webSiteManager" class="architecture.ee.web.community.site.DefaultWebSiteManager" depends-on="commnetDao"  init-method="initialize"
+	<bean id="commentDao" class="architecture.ee.web.community.comment.dao.jdbc.JdbcCommentDao" parent="jdbcDaoSupport" depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao"  />
+	<bean id="commentCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="commentCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" p:statisticsEnabled="true" />
+	<bean id="treeWalkerCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="treeWalkerCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" p:statisticsEnabled="true" />
+	<bean id="commentManager" class="architecture.ee.web.community.comment.DefaultCommentManager" depends-on="commentDao"  init-method="initialize"
 		p:eventPublisher-ref="eventPublisher" 
 		p:commentCache-ref="commentCache" 
 		p:treeWalkerCache-ref="treeWalkerCache"  
-		p:commnetDao-ref="commnetDao" 		
+		p:commentDao-ref="commentDao" 		
 		p:pageManager-ref="pageManager"  
 		p:userManager-ref="userManager"  />		
 	
