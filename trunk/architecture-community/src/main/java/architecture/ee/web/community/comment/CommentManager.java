@@ -26,6 +26,8 @@ public interface CommentManager {
     public static final int COMMENTS_MODERATED = 4;
     public static final int COMMENTS_DEFAULT = 2;
     
+    public abstract Comment getRootParent();
+    
 	public abstract Comment getComment(long commentId) throws CommentNotFoundException;
 
 	public abstract void update(Comment comment) throws UnAuthorizedException;
