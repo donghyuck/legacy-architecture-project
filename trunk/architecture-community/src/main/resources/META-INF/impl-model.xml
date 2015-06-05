@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <models>
 	<rank>1000</rank>
-
+	<!--  from web -->
+	<!-- 
+	<model id="16" code="IMAGE" />
+	<model id="17" code="ATTACHMENT" />
+	<model id="18" code="MENU" />		
+	-->
 	<model id="19" code="SOCIAL_NETWORK" />
 	<model id="20" code="CONTENT" />
 	<model id="21" code="TEMPLATE" />
 	<model id="22" code="ANNOUNCE" />
 	<model id="23" code="PROFILE_IMAGE" />
+	<model id="26" code="COMMENT" />
 	<model id="30" code="WEBSITE" />
 	<model id="31" code="PAGE" />
 	<model id="32" code="PAGE_BODY" />
 	<model id="33" code="WEBPAGE" />		
-	<model id="37" code="SOCIAL_CONNECT" />
 	<model id="34" code="LOGO" />	
+	<model id="37" code="SOCIAL_CONNECT" />
 </models>
