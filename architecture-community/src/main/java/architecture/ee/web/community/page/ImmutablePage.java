@@ -253,6 +253,11 @@ public class ImmutablePage implements Page {
 	@Override
 	public Integer getViewCount() {
 		return page.getViewCount();
+	}
+
+	@Override
+	public Integer getCommentCount() {
+		return page.getCommentCount();
 	} 
 
 }

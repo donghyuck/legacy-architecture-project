@@ -201,9 +201,6 @@ public class PageAdaptor implements Page {
 		throw new UnsupportedOperationException();						
 	}
 
-	/* (비Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -218,8 +215,11 @@ public class PageAdaptor implements Page {
 
 	@Override
 	public Integer getViewCount() {
-		return -1;				
+		return 0;				
 	}
 
-	
+	@Override
+	public Integer getCommentCount() {
+		return 0;
+	}
 }
