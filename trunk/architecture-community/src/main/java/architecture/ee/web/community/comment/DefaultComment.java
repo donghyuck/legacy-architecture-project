@@ -59,6 +59,9 @@ public class DefaultComment implements Comment  {
 		this.parentObjectType = -1;
 		this.parentObjectId = -1L;	
 		this.user = new UserTemplate(-1L);
+		this.name = null;
+		this.email = null;
+		this.url = null;
 		this.creationDate = Calendar.getInstance().getTime();
 		this.modifiedDate = this.creationDate;
 		this.properties = new HashMap<String, String>();
@@ -197,6 +200,9 @@ public class DefaultComment implements Comment  {
 	 * @return name
 	 */
 	public String getName() {
+		if(!user.isAnonymous() && user.isNameVisible())
+			return user.getName();
+		
 		return name;
 	}
 
@@ -211,6 +217,9 @@ public class DefaultComment implements Comment  {
 	 * @return email
 	 */
 	public String getEmail() {
+		if(!user.isAnonymous() && user.isEmailVisible())
+			return user.getEmail();
+		
 		return email;
 	}
 

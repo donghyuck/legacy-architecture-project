@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.tika.Tika;
@@ -172,6 +173,8 @@ public class CommunityDataController {
 			@RequestParam(value="objectType", defaultValue="0", required=true ) Integer objectType,
 			@RequestParam(value="objectId", defaultValue="0", required=true ) Long objectId,
 			@RequestParam(value="text", defaultValue="", required=true ) String text,
+			@RequestParam(value="name", defaultValue="", required=false ) String name,
+			@RequestParam(value="email", defaultValue="", required=false ) String email,
 			NativeWebRequest request ) throws NotFoundException {		
 		
 		User user = SecurityHelper.getUser();			
@@ -179,12 +182,18 @@ public class CommunityDataController {
 		
 		Comment comment = commentManager.createComment(objectType, objectId, user, text);
 		comment.setIPAddress(address);
-		comment.setName(user.getName());
-		comment.setEmail(user.getEmail());
+		
+		if(StringUtils.isNotEmpty(name))
+			comment.setName(name);
+		
+		if(StringUtils.isNotEmpty(email))
+			comment.setEmail(email);
 		
 		commentManager.addComment(comment);
 		
-		return Result.newResult();
+		CommentTreeWalker walker = commentManager.getCommentTreeWalker(objectType, objectId);				
+		
+		return Result.newResult(walker.getRecursiveChildCount(commentManager.getRootParent()));
 	}
 	
 	@RequestMapping(value={"/pages/comments/list.json"},method={RequestMethod.POST, RequestMethod.GET} )
@@ -197,11 +206,10 @@ public class CommunityDataController {
 		int objectType = ModelTypeFactory.getTypeIdFromCode("PAGE") ;
 		CommentTreeWalker walker = commentManager.getCommentTreeWalker(objectType, pageId);
 		
-		Comment PARENT = new DefaultComment();
-		
+		Comment PARENT = new DefaultComment();		
 		CommentList list = new CommentList();
-		list.setTotalCount(walker.getRecursiveChildCount(PARENT));
-		list.setComments( walker.recursiveChildren(PARENT) );		
+		list.setTotalCount(walker.getRecursiveChildCount(commentManager.getRootParent()));
+		list.setComments( walker.recursiveChildren(commentManager.getRootParent()) );	
 		return list;
 	}	
 	

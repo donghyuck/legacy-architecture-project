@@ -50,6 +50,7 @@ public class DefaultPhotoStreamsManager implements PhotoStreamsManager {
 	}
 
 	public Photo getPhotoById(String externalId) throws NotFoundException {
+		
 		Photo photoToUse = getPhotoFromCache(externalId);
 		if( photoToUse == null ){
 			photoToUse = getStreamsDao().getPhotoStream(externalId);
@@ -62,6 +63,7 @@ public class DefaultPhotoStreamsManager implements PhotoStreamsManager {
 			}			
 			updatePhotoInCache(photoToUse);
 		}
+		
 		return photoToUse;
 	}
 

@@ -21,6 +21,7 @@ import java.sql.Types;
 import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
@@ -257,24 +258,26 @@ public class JdbcCommentDao extends ExtendedJdbcDaoSupport  implements CommentDa
 	}
 	
 	public CommentTreeWalker getCommentTreeWalker(int objectType, long objectId){
-		
-		int numComments = getExtendedJdbcTemplate().queryForInt(
-			getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_COMMENT_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
-			new SqlParameterValue(Types.NUMERIC, objectType ),
-			new SqlParameterValue(Types.NUMERIC, objectId ));		
-		
+		int numComments = getExtendedJdbcTemplate().queryForObject(
+				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_COMMENT_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
+				Integer.class,
+				new SqlParameterValue(Types.NUMERIC, objectType ),
+				new SqlParameterValue(Types.NUMERIC, objectId ));
 		numComments++;	
-		final LongTree tree = new LongTree(-1L, numComments);			
+		
+		final LongTree tree = new LongTree(-1L, numComments);	
 		
 		getExtendedJdbcTemplate().query(
 				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ROOT_COMMENT").getSql(), 
 				new RowCallbackHandler(){
-					public void processRow(ResultSet rs) throws SQLException {						
-						while( rs.next() ){
-							long commentId = rs.getLong(1);
+					public void processRow(ResultSet rs) throws SQLException {					
+
+//						while( rs.next() ){
+							long commentId = rs.getLong(1);							
 							tree.addChild(-1L, commentId);
-						}						
-					}},
+							log.debug("tree add : " + commentId );
+//						}						
+				}},
 				new SqlParameterValue(Types.NUMERIC, objectType ),
 				new SqlParameterValue(Types.NUMERIC, objectId ));
 		
@@ -282,14 +285,22 @@ public class JdbcCommentDao extends ExtendedJdbcDaoSupport  implements CommentDa
 				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_CHILD_COMMENT").getSql(), 
 				new RowCallbackHandler(){
 					public void processRow(ResultSet rs) throws SQLException {						
-						while( rs.next() ){
+//						while( rs.next() ){
 							long commentId = rs.getLong(1);
 							long parentCommentId = rs.getLong(2);
 							tree.addChild(parentCommentId, commentId);
-						}						
+							log.debug("tree add : " + parentCommentId + "," +  commentId );
+//						}						
 					}},
 				new SqlParameterValue(Types.NUMERIC, objectType ),
 				new SqlParameterValue(Types.NUMERIC, objectId ));
+		
+		log.debug("total:" + tree.getChildCount(-1L));
+		StringBuilder sb = new StringBuilder();
+		for( long id : tree.getRecursiveChildren(-1L) ){
+			sb.append(id).append(", ");
+		}
+		log.debug( sb.toString());
 		
 		return new DefaultCommentTreeWalker(objectType, objectId, tree);		
 	} 
