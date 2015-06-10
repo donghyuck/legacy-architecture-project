@@ -226,6 +226,10 @@ public class DefaultPage implements Page {
 		
 	}
 	
+	@JsonIgnore
+	public void setCommentCount(int commentCount){
+		
+	}
 	/**
 	 * @return creationDate
 	 */

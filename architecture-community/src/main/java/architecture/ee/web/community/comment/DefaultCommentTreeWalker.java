@@ -160,6 +160,7 @@ public class DefaultCommentTreeWalker implements CommentTreeWalker  {
 			try {
 				list.add(mgr.getComment(childId));
 			} catch (CommentNotFoundException e) {
+				e.printStackTrace();
 			}
 		return list;
 	}
@@ -173,6 +174,7 @@ public class DefaultCommentTreeWalker implements CommentTreeWalker  {
 				try {
 					list.add(mgr.getComment(commentId));
 				} catch (CommentNotFoundException e) {
+					e.printStackTrace();
 				}
 			return list;
 	}
