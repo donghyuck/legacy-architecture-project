@@ -125,5 +125,23 @@
 		p:commentDao-ref="commentDao" 		
 		p:pageManager-ref="pageManager"  
 		p:userManager-ref="userManager"  />		
-	
+	<!--  =============================  -->
+	<!--  TagManager       			                            -->
+	<!--  =============================  -->	
+	<bean id="tagDao" class="architecture.ee.web.community.tag.dao.jdbc.JdbcTagDao" parent="jdbcDaoSupport" />
+	<bean id="tagCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="tagCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" p:statisticsEnabled="true" />
+	<bean id="tagIdCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="tagIdCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" p:statisticsEnabled="true" />
+	<bean id="tagContentCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="tagContentCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" p:statisticsEnabled="true" />
+	<bean id="tagManager"
+		class="architecture.ee.web.community.tag.DefaultTagManager"
+		depends-on="tagDao" 
+		init-method="initialize"
+		destroy-method="destory" 
+		p:eventPublisher-ref="eventPublisher" 
+		p:tagDao-ref="tagDao" 
+		p:tagCache-ref="tagCache" 
+		p:tagIdCache-ref="tagIdCache" 
+		p:tagContentCache-ref="tagContentCache" 
+		p:pageManager-ref="pageManager" 
+		/>
 </beans>
