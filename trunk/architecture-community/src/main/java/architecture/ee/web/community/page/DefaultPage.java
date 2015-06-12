@@ -33,6 +33,9 @@ import architecture.ee.web.community.comment.CommentManager;
 import architecture.ee.web.community.page.json.BodyContentDeserializer;
 import architecture.ee.web.community.page.json.PageStateDeserializer;
 import architecture.ee.web.community.stats.ViewCountManager;
+import architecture.ee.web.community.tag.DefaultTagDelegator;
+import architecture.ee.web.community.tag.TagDelegator;
+import architecture.ee.web.community.tag.TagManager;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -387,5 +390,24 @@ public class DefaultPage implements Page {
 			return 0;
 		}
 	}
+
+	@JsonIgnore
+	public TagDelegator getTagDelegator() {
+		if( this.getPageId() == -1L )
+			throw new IllegalStateException("Cannot retrieve tag manager prior to document being saved.");
+		else{
+			TagManager tmg = ApplicationHelper.getComponent(TagManager.class);
+			return new DefaultTagDelegator(ModelTypeFactory.getTypeIdFromCode("PAGE"), this.getPageId(), tmg);
+		}
+	}
+
+	@JsonIgnore
+	public void setTagsString(String tagsString){}
 	
+	@JsonProperty
+	public String getTagsString() {		
+		if( this.getPageId() > 0 )
+			return getTagDelegator().getTagsAsString();		
+		return null;
+	}
 }

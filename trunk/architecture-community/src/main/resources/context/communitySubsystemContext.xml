@@ -136,7 +136,7 @@
 		class="architecture.ee.web.community.tag.DefaultTagManager"
 		depends-on="tagDao" 
 		init-method="initialize"
-		destroy-method="destory" 
+		destroy-method="destroy" 
 		p:eventPublisher-ref="eventPublisher" 
 		p:tagDao-ref="tagDao" 
 		p:tagCache-ref="tagCache" 

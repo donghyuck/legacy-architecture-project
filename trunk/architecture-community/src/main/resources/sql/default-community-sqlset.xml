@@ -1247,5 +1247,62 @@
 		CREATION_DATE, 
 		COMMENT_ID ASC	
 	]]></sql-query>			
-					
+	
+	<!--  ====================================  -->
+	<!--  TAG																	 -->
+	<!--  ====================================  -->
+	<sql-query name="INSERT_TAG" description="INSERT_TAG"><![CDATA[
+	INSERT INTO V2_OBJECT_TAG (
+		TAG_ID,
+		OBJECT_TYPE,
+		OBJECT_ID,
+		CREATION_DATE
+	) VALUES (?,?,?,?)
+	]]></sql-query>	
+	<sql-query name="DELETE_TAG" description="DELETE_TAG"><![CDATA[
+	DELETE FROM V2_OBJECT_TAG 
+	WHERE OBJECT_TYPE = ?		
+	AND  OBJECT_ID = ?		
+	AND  TAG_ID = ?		
+	]]></sql-query>		
+	<sql-query name="COUNT_TAG" description="COUNT_TAG"><![CDATA[
+	SELECT COUNT(*) 
+	FROM V2_OBJECT_TAG
+	WHERE TAG_ID = ?		 
+	]]></sql-query>	
+	<sql-query name="SELECT_TAG_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="SELECT_TAG_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
+	SELECT 
+		TAG_ID
+	FROM V2_OBJECT_TAG
+	WHERE OBJECT_TYPE = ?
+	AND  OBJECT_ID = ?
+	]]></sql-query>			
+	<sql-query name="SELECT_CONTENT_TAG_BY_ID" description="SELECT_CONTENT_TAG_BY_ID"><![CDATA[
+	SELECT 
+		TAG_ID,
+		TAG_NAME,
+		CREATION_DATE
+	FROM V2_TAG
+	WHERE TAG_ID = ?
+	]]></sql-query>			
+	<sql-query name="SELECT_CONTENT_TAG_BY_NAME" description="SELECT_CONTENT_TAG_BY_NAME"><![CDATA[
+	SELECT 
+		TAG_ID,
+		TAG_NAME,
+		CREATION_DATE
+	FROM V2_TAG
+	WHERE TAG_NAME = ?
+	]]></sql-query>		
+	<sql-query name="CREATE_CONTENT_TAG" description="CREATE_CONTENT_TAG"><![CDATA[
+	INSERT INTO V2_TAG
+	(
+		TAG_ID,
+		TAG_NAME,
+		CREATION_DATE
+	) VALUES (?,?,?) 
+	]]></sql-query>	
+	<sql-query name="DELETE_CONTENT_TAG" description="DELETE_CONTENT_TAG"><![CDATA[
+	DELETE FROM V2_TAG
+	WHERE TAG_ID = ?
+	]]></sql-query>								
 </sqlset>

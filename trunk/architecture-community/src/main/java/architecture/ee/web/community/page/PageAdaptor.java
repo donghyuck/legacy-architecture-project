@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.Map;
 
 import architecture.common.user.User;
+import architecture.ee.web.community.tag.TagDelegator;
 import architecture.ee.web.site.page.WebPage;
 
 public class PageAdaptor implements Page {
@@ -221,5 +222,15 @@ public class PageAdaptor implements Page {
 	@Override
 	public Integer getCommentCount() {
 		return 0;
+	}
+
+	@Override
+	public TagDelegator getTagDelegator() {
+		return null;
+	}
+
+	@Override
+	public String getTagsString() {
+		return null;
 	}
 }

@@ -305,8 +305,6 @@ public class CommunityDataController {
 		Page target = pageManager.getPage(page.getPageId());
 		target.setPageState(page.getPageState());
 		pageManager.updatePage(target);
-		
-		
 		return target;
 	}
 	
@@ -323,10 +321,18 @@ public class CommunityDataController {
 		
 		if( user.isAnonymous() || user.getUserId() != page.getUser().getUserId() )
 			throw new UnAuthorizedException();
-				
+		
+		boolean doUpdate = false;		
 		Page target ;
+		String tagsString = null;
 		if( page.getPageId() > 0){
 			target = pageManager.getPage(page.getPageId());
+			if( !StringUtils.equals(page.getName(), target.getName()) || 
+					!StringUtils.equals(page.getTitle(), target.getTitle()) ||
+					!StringUtils.equals(page.getSummary(), target.getSummary()) || 
+					!StringUtils.equals(page.getBodyContent().getBodyText(), target.getBodyContent().getBodyText())){
+				doUpdate = true;		
+			}
 		}else{
 			if( page.getObjectType() == 30 && page.getObjectId() == 0L ){
 				page.setObjectId(WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId());			
@@ -339,13 +345,23 @@ public class CommunityDataController {
 			target.setUser(page.getUser());			
 			target.setBodyContent(new DefaultBodyContent());
 			target.setProperties(page.getProperties());
+			doUpdate = true;		
 		}
 		
-		target.setName(page.getName());
-		target.setTitle(page.getTitle());
-		target.setSummary(page.getSummary());
-		target.setBodyText(page.getBodyContent().getBodyText());
-		pageManager.updatePage(target);			
+		tagsString = page.getProperty("tagsString", null);
+		if( tagsString != null )
+			target.getProperties().remove("tagsString");
+		
+		if( doUpdate ){
+			target.setName(page.getName());
+			target.setTitle(page.getTitle());
+			target.setSummary(page.getSummary());
+			target.setBodyText(page.getBodyContent().getBodyText());		
+			pageManager.updatePage(target);			
+		}
+		if( tagsString != null )
+			target.getTagDelegator().setTags(tagsString);		
+		
 		return target;
 	}
 	
@@ -409,14 +425,9 @@ public class CommunityDataController {
 	}
 	
 	private PageList getPageList( int objectType, long objectId, PageState pageState, int startIndex, int pageSize){		
-		PageList list = new PageList();		
-		
-		
-		
-		list.setPages( pageManager.getPages(objectType, objectId, startIndex, pageSize) );
-		
-		list.setTotalCount(pageManager.getPageCount(objectType, objectId));
-		
+		PageList list = new PageList();	
+		list.setPages( pageManager.getPages(objectType, objectId, startIndex, pageSize) );		
+		list.setTotalCount(pageManager.getPageCount(objectType, objectId));		
 		return list;
 	}
 	

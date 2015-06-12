@@ -18,21 +18,21 @@ package architecture.ee.web.community.page;
 import java.util.Date;
 import java.util.Map;
 
-import architecture.common.model.json.CustomJsonDateDeserializer;
 import architecture.common.model.json.CustomJsonDateSerializer;
 import architecture.common.model.json.UserDeserializer;
 import architecture.common.user.User;
+import architecture.ee.web.community.tag.TagDelegator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-
 public class ImmutablePage implements Page {
 
-	private Page page ;
+	private Page page;
 	boolean allowShowContentBody = false;
-		
+
 	public ImmutablePage(Page page) {
 		this.page = page;
 		this.allowShowContentBody = false;
@@ -42,7 +42,6 @@ public class ImmutablePage implements Page {
 	public int getCachedSize() {
 		return 0;
 	}
-
 
 	public Integer getObjectType() {
 		return page.getObjectType();
@@ -58,7 +57,7 @@ public class ImmutablePage implements Page {
 
 	@Override
 	public void setObjectId(Long objectId) {
-		throw new UnsupportedOperationException();		
+		throw new UnsupportedOperationException();
 	}
 
 	public Long getPageId() {
@@ -109,9 +108,9 @@ public class ImmutablePage implements Page {
 	}
 
 	public String getBodyText() {
-		if(allowShowContentBody)
+		if (allowShowContentBody)
 			return this.page.getBodyText();
-		else	
+		else
 			return null;
 	}
 
@@ -121,10 +120,11 @@ public class ImmutablePage implements Page {
 	}
 
 	public BodyContent getBodyContent() {
-		if(allowShowContentBody)
+		if (allowShowContentBody)
 			return this.page.getBodyContent();
-		else 
-			return new BodyContentAdaptor((DefaultBodyContent)this.page.getBodyContent());
+		else
+			return new BodyContentAdaptor(
+					(DefaultBodyContent) this.page.getBodyContent());
 	}
 
 	public void setBodyContent(BodyContent bodyContent) {
@@ -157,7 +157,7 @@ public class ImmutablePage implements Page {
 	}
 
 	public Map<String, String> getProperties() {
-		
+
 		return this.page.getProperties();
 	}
 
@@ -187,13 +187,13 @@ public class ImmutablePage implements Page {
 	}
 
 	public void setUser(User user) {
-		throw new UnsupportedOperationException();		
+		throw new UnsupportedOperationException();
 	}
-	
+
 	public static class BodyContentAdaptor implements BodyContent {
 
-		private DefaultBodyContent body ;
-		
+		private DefaultBodyContent body;
+
 		public BodyContentAdaptor(DefaultBodyContent body) {
 			super();
 			this.body = body;
@@ -206,7 +206,7 @@ public class ImmutablePage implements Page {
 
 		@Override
 		public void setBodyId(long bodyId) {
-			throw new UnsupportedOperationException();		
+			throw new UnsupportedOperationException();
 		}
 
 		@Override
@@ -216,16 +216,16 @@ public class ImmutablePage implements Page {
 
 		@Override
 		public void setPageId(long pageId) {
-			throw new UnsupportedOperationException();					
+			throw new UnsupportedOperationException();
 		}
 
 		@Override
-		public BodyType getBodyType() {			
+		public BodyType getBodyType() {
 			return body.getBodyType();
 		}
 
 		public void setBodyType(BodyType bodyType) {
-			throw new UnsupportedOperationException();				
+			throw new UnsupportedOperationException();
 		}
 
 		@JsonIgnore
@@ -235,9 +235,9 @@ public class ImmutablePage implements Page {
 
 		@Override
 		public void setBodyText(String bodyText) {
-			throw new UnsupportedOperationException();		
+			throw new UnsupportedOperationException();
 		}
-		
+
 		public String getFirstImageSrc() {
 			return body.getFirstImageSrc();
 		}
@@ -258,6 +258,16 @@ public class ImmutablePage implements Page {
 	@Override
 	public Integer getCommentCount() {
 		return page.getCommentCount();
-	} 
-
+	}
+	
+	@JsonIgnore
+	public TagDelegator getTagDelegator() {
+		return page.getTagDelegator();
+	}
+	
+	@JsonProperty
+	public String getTagsString(){
+		return page.getTagsString();
+	}
+	
 }

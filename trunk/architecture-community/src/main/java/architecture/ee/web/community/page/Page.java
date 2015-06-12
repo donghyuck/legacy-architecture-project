@@ -20,6 +20,7 @@ import java.util.Map;
 
 import architecture.common.cache.Cacheable;
 import architecture.common.user.User;
+import architecture.ee.web.community.tag.TagDelegator;
 
 
 public interface Page extends Cacheable {
@@ -91,5 +92,9 @@ public interface Page extends Cacheable {
 	public abstract Integer getViewCount();
 	
 	public abstract Integer getCommentCount();
+	
+	public abstract TagDelegator getTagDelegator();
+	
+	public abstract String getTagsString();
 			
 }
