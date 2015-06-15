@@ -15,123 +15,107 @@
  */
 package architecture.ee.web.community.poll;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import architecture.common.event.api.EventPublisher;
+import architecture.common.event.api.EventSource;
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.exception.NotFoundException;
+import architecture.ee.web.community.poll.dao.PollDao;
 
-public class DefaultPollManager implements PollManager {
+public class DefaultPollManager implements PollManager, EventSource {
 
+	private Log log = LogFactory.getLog(getClass());
+	
 	private final LinkedList insertQueue = new LinkedList();
 	
+	private Cache pollCache;
+	
+	private EventPublisher eventPublisher;
+		
+	private PollDao pollDao;
+	
+	
 	public DefaultPollManager() {
-		// TODO 자동 생성된 생성자 스텁
+	}
+
+	public void setEventPublisher(EventPublisher eventPublisher) {
+		this.eventPublisher = eventPublisher;
+	}
+	
+	/**
+	 * @param pollCache 설정할 pollCache
+	 */
+	public void setPollCache(Cache pollCache) {
+		this.pollCache = pollCache;
+	}
+
+	/**
+	 * @param pollDao 설정할 pollDao
+	 */
+	public void setPollDao(PollDao pollDao) {
+		this.pollDao = pollDao;
 	}
 
 	public Poll createPoll(int objectType, long objectId, User user, String name) {
+		
 		DefaultPoll poll = new DefaultPoll(objectType, objectId, user, name);
+		poll.setMode(0L);
+		pollDao.createPoll(poll);
+				
 		// insert into db
-		// pollCache.put(Long.valueOf(poll.getID()), poll);
+		 pollCache.put(new Element(Long.valueOf(poll.getPollId()), poll));
+		 
 		// PollEvent event = new PollEvent(30, poll, poll.getJiveContainer(),
 		// Collections.emptyMap());
 		// PollEventDispatcher.getInstance().dispatchEvent(event);
 		return poll;
 	}
+	
+	
+
+	public List<Poll> getPolls() {
+		List<Long> ids = pollDao.getPollIds();
+		List<Poll> polls = new ArrayList<Poll>();
+		for( Long id : ids){
+			try {
+				polls.add(getPoll(id));
+			} catch (Exception e) {
+				log.warn(e);
+			}
+		}		
+ 		return polls;
+	}
+
+	public int getPollCount() {		
+		return pollDao.getPollCount();
+	}
+
+	public Poll getPoll(long pollId) throws UnAuthorizedException,
+			NotFoundException {
+		Poll poll = getPollCacheById(pollId);
+		if(poll == null){
+			poll = pollDao.getPollById(pollId);
+			pollCache.put(new Element(poll.getPollId(), poll));
+		}
+		return poll;
+	}
+	
+	private Poll getPollCacheById( long pollId){
+		if(pollCache.get(pollId) != null){
+			return (Poll)pollCache.get(pollId).getValue();
+		}
+		return null;
+	}
     
-
-	@Override
-	public void deletePoll(Poll poll) throws UnAuthorizedException,
-			PollException {
-		if (poll == null)
-			throw new IllegalArgumentException("Cannot delete null poll");
-		
-	}
-
-	@Override
-	public void deleteUserPolls(User user) throws UnAuthorizedException,
-			PollException {
-		// TODO 자동 생성된 메소드 스텁
-		
-	}
-
-	@Override
-	public int getPollCount() {
-		// TODO 자동 생성된 메소드 스텁
-		return 0;
-	}
-
-	@Override
-	public List getPolls() {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
-	}
-
-	@Override
-	public int getPollCount(int objectType, long objectId) throws UnAuthorizedException {
-		// TODO 자동 생성된 메소드 스텁
-		return 0;
-	}
-
-	@Override
-	public List getPolls(int objectType, long objectId) throws UnAuthorizedException {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
-	}
-
-	@Override
-	public List getActivePolls() {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
-	}
-
-	@Override
-	public int getActivePollCount() {
-		// TODO 자동 생성된 메소드 스텁
-		return 0;
-	}
-
-	@Override
-	public List getActivePolls(int objectType, long objectId) throws UnAuthorizedException {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
-	}
-
-	@Override
-	public int getActivePollCount(int objectType, long objectId) {
-		// TODO 자동 생성된 메소드 스텁
-		return 0;
-	}
-
-	@Override
-	public List getLivePolls() {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
-	}
-
-	@Override
-	public int getLivePollCount() {
-		// TODO 자동 생성된 메소드 스텁
-		return 0;
-	}
-
-	@Override
-	public List getLivePolls(int objectType, long objectId) throws UnAuthorizedException {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
-	}
-
-	@Override
-	public int getLivePollCount(int objectType, long objectId) throws UnAuthorizedException {
-		// TODO 자동 생성된 메소드 스텁
-		return 0;
-	}
-
-	@Override
-	public Poll getPoll(long pollId) throws UnAuthorizedException, NotFoundException {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
-	}
 
 }

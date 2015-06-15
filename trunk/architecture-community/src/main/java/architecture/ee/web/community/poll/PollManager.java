@@ -23,44 +23,43 @@ import architecture.ee.exception.NotFoundException;
 
 public interface PollManager {
 
-	public Poll createPoll(int objectType, long objectId, User user, String name)
-			throws UnAuthorizedException;
+	public abstract List<Poll> getPolls();
+	
+	public abstract int getPollCount();
+	
+	public Poll createPoll(int objectType, long objectId, User user, String name) throws UnAuthorizedException;
+	
+	public abstract Poll getPoll(long pollId) throws UnAuthorizedException, NotFoundException;
+	
+	
+	/*
+	public abstract void deletePoll(Poll poll) throws UnAuthorizedException, PollException;
 
-    public abstract void deletePoll(Poll poll)
-        throws UnAuthorizedException, PollException;
+	public abstract void deleteUserPolls(User user) throws UnAuthorizedException, PollException;
 
-    public abstract void deleteUserPolls(User user)
-        throws UnAuthorizedException, PollException;
 
-    public abstract int getPollCount();
 
-    public abstract List getPolls();
 
-    public abstract int getPollCount(int i, long l)
-        throws UnAuthorizedException;
+	public abstract int getPollCount(int objectType, long objectId)throws UnAuthorizedException;
 
-    public abstract List getPolls(int i, long l)
-        throws UnAuthorizedException;
+	public abstract List<Poll> getPolls(int objectType, long objectId) throws UnAuthorizedException;
 
-    public abstract List getActivePolls();
+	public abstract List<Poll> getActivePolls();
 
-    public abstract int getActivePollCount();
+	public abstract int getActivePollCount();
 
-    public abstract List getActivePolls(int i, long l)
-        throws UnAuthorizedException;
+	public abstract List<Poll> getActivePolls(int objectType, long objectId) throws UnAuthorizedException;
 
-    public abstract int getActivePollCount(int i, long l);
+	public abstract int getActivePollCount(int objectType, long objectId);
 
-    public abstract List getLivePolls();
+	public abstract List<Poll> getLivePolls();
 
-    public abstract int getLivePollCount();
+	public abstract int getLivePollCount();
 
-    public abstract List getLivePolls(int i, long l)
-        throws UnAuthorizedException;
+	public abstract List<Poll> getLivePolls(int objectType, long objectId) throws UnAuthorizedException;
 
-    public abstract int getLivePollCount(int i, long l)
-        throws UnAuthorizedException;
+	public abstract int getLivePollCount(int objectType, long objectId) throws UnAuthorizedException;
 
-    public abstract Poll getPoll(long l)
-        throws UnAuthorizedException, NotFoundException;
+	
+*/
 }

@@ -20,7 +20,7 @@ import java.util.List;
 
 import architecture.common.model.ModelObject;
 import architecture.common.user.User;
-import architecture.common.user.authentication.UnAuthorizedException;
+import architecture.ee.web.community.model.ContentObject.Status;
 
 public interface Poll extends ModelObject {
 
@@ -28,5 +28,35 @@ public interface Poll extends ModelObject {
 	public static final long ALLOW_ANONYMOUS_VOTE_MODIFICATION = 32L;
 	public static final long MULTIPLE_SELECTIONS_ALLOWED = 256L;
 
+	public abstract long getPollId();
 
+	public abstract int getCommentStatus();
+
+	public abstract Date getCreationDate();
+
+	public abstract String getDescription();
+
+	public abstract Date getEndDate();
+
+	public abstract Date getExpireDate();
+
+	public abstract Date getModifiedDate();
+
+	public abstract String getName();
+
+	public abstract long getObjectId();
+
+	public abstract int getObjectType();
+
+	public abstract List<PollOption> getOptions();
+
+	public abstract Date getStartDate();
+
+	public abstract Status getStatus();
+
+	public abstract User getUser();
+
+	public abstract boolean isModeEnabled(long mode);
+	
+	public abstract long getMode();
 }

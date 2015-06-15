@@ -54,7 +54,5 @@ public interface PageManager {
 		
 		public abstract int getPageCount(int objectType, PageState state);			
 		
-		
-		
 				
 }

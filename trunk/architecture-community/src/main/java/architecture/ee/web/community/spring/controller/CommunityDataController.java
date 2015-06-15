@@ -68,10 +68,12 @@ import architecture.ee.web.community.page.ImmutablePage;
 import architecture.ee.web.community.page.Page;
 import architecture.ee.web.community.page.PageManager;
 import architecture.ee.web.community.page.PageState;
+import architecture.ee.web.community.poll.PollManager;
 import architecture.ee.web.community.stats.ViewCountManager;
 import architecture.ee.web.community.streams.Photo;
 import architecture.ee.web.community.streams.PhotoStreamsManager;
 import architecture.ee.web.site.WebSiteNotFoundException;
+import architecture.ee.web.spring.controller.MyCloudDataController.ItemList;
 import architecture.ee.web.util.WebSiteUtils;
 import architecture.ee.web.ws.Property;
 import architecture.ee.web.ws.Result;
@@ -110,6 +112,13 @@ public class CommunityDataController {
 	@Inject
 	@Qualifier("commentManager")
 	private CommentManager commentManager ;
+
+	
+	@Inject
+	@Qualifier("pollManager")
+	private PollManager pollManager;
+	
+	
 	
 	/**
 	 * @return announceManager
@@ -871,5 +880,17 @@ public class CommunityDataController {
 			this.totalCount = totalCount;
 		}
 	} 
+
+	/** ======================================== **/
+	/**  POLL					                                                    * */
+	/** ======================================== **/
+	@RequestMapping(value={"/polls/list.json"},method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public ItemList getPolls (NativeWebRequest request 
+			){		
+		ItemList list = new ItemList(pollManager.getPolls(), pollManager.getPollCount() );		
+		return list;
+		
+	}	
 
 }
