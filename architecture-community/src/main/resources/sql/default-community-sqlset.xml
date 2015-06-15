@@ -1259,17 +1259,20 @@
 		CREATION_DATE
 	) VALUES (?,?,?,?)
 	]]></sql-query>	
+	
 	<sql-query name="DELETE_TAG" description="DELETE_TAG"><![CDATA[
 	DELETE FROM V2_OBJECT_TAG 
 	WHERE OBJECT_TYPE = ?		
 	AND  OBJECT_ID = ?		
 	AND  TAG_ID = ?		
 	]]></sql-query>		
+	
 	<sql-query name="COUNT_TAG" description="COUNT_TAG"><![CDATA[
 	SELECT COUNT(*) 
 	FROM V2_OBJECT_TAG
 	WHERE TAG_ID = ?		 
 	]]></sql-query>	
+	
 	<sql-query name="SELECT_TAG_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="SELECT_TAG_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
 	SELECT 
 		TAG_ID
@@ -1277,6 +1280,7 @@
 	WHERE OBJECT_TYPE = ?
 	AND  OBJECT_ID = ?
 	]]></sql-query>			
+	
 	<sql-query name="SELECT_CONTENT_TAG_BY_ID" description="SELECT_CONTENT_TAG_BY_ID"><![CDATA[
 	SELECT 
 		TAG_ID,
@@ -1285,6 +1289,7 @@
 	FROM V2_TAG
 	WHERE TAG_ID = ?
 	]]></sql-query>			
+	
 	<sql-query name="SELECT_CONTENT_TAG_BY_NAME" description="SELECT_CONTENT_TAG_BY_NAME"><![CDATA[
 	SELECT 
 		TAG_ID,
@@ -1293,6 +1298,7 @@
 	FROM V2_TAG
 	WHERE TAG_NAME = ?
 	]]></sql-query>		
+	
 	<sql-query name="CREATE_CONTENT_TAG" description="CREATE_CONTENT_TAG"><![CDATA[
 	INSERT INTO V2_TAG
 	(
@@ -1301,8 +1307,89 @@
 		CREATION_DATE
 	) VALUES (?,?,?) 
 	]]></sql-query>	
+	
 	<sql-query name="DELETE_CONTENT_TAG" description="DELETE_CONTENT_TAG"><![CDATA[
 	DELETE FROM V2_TAG
 	WHERE TAG_ID = ?
-	]]></sql-query>								
+	]]></sql-query>							
+	<!--  ====================================  -->
+	<!--  POLL																	 -->
+	<!--  ====================================  -->
+	<sql-query name="COUNT_ALL_POLL" description="COUNT_ALL_POLL"><![CDATA[
+	SELECT 
+		COUNT(POLL_ID)	
+	FROM V2_POLL
+	]]></sql-query>	
+	
+	<sql-query name="SELECT_ALL_POLL_IDS" description="SELECT_ALL_POLL"><![CDATA[
+	SELECT 
+		POLL_ID,
+		CREATION_DATE	
+	FROM V2_POLL	
+	ORDER BY CREATION_DATE DESC, POLL_ID DESC		
+	]]></sql-query>			
+	
+	<sql-query name="SELECT_POLL_BY_ID" description="SELECT_POLL_BY_ID"><![CDATA[
+	SELECT 
+		POLL_ID,
+		OBJECT_TYPE,
+		OBJECT_ID,
+		USER_ID,
+		NAME,
+		DESCRIPTION,
+		POLL_MODE,
+		CREATION_DATE,
+		MODIFIED_DATE,
+		START_DATE,
+		END_DATE,
+		EXPIRE_DATE,
+		STATUS
+	FROM V2_POLL	
+	WHERE  POLL_ID = ?
+	]]></sql-query>		
+		
+		
+	<sql-query name="SELECT_POLL_OPTIONS" description="SELECT_POLL_OPTIONS"><![CDATA[
+	SELECT 
+		OPTION_ID,
+		POLL_ID,
+		OPTIONI_INDEX,
+		OPTION_TEXT
+	FROM V2_POLL_OPTION
+	WHERE 	POLL_ID = ?
+	ORDER BY OPTIONI_INDEX ASC
+	]]></sql-query>			
+	
+	<sql-query name="INSERT_POLL" description="INSERT_POLL"><![CDATA[
+	INSERT INTO V2_POLL ( 
+		POLL_ID,
+		OBJECT_TYPE,
+		OBJECT_ID,
+		USER_ID,
+		NAME,
+		DESCRIPTION,
+		POLL_MODE,
+		CREATION_DATE,
+		MODIFIED_DATE,
+		START_DATE,
+		END_DATE,
+		EXPIRE_DATE,
+		STATUS
+	) VALUES (?,?,?,?,?, ?,?,?,?,?, ?,?,?)
+	]]></sql-query>		
+	
+	<sql-query name="UPDATE_POLL" description="UPDATE_POLL"><![CDATA[
+	UPDATE V2_POLL
+	SET			
+		NAME = ?,
+		DESCRIPTION = ?,
+		POLL_MODE =? ,
+		MODIFIED_DATE = ?,
+		START_DATE = ?,
+		END_DATE = ?,
+		EXPIRE_DATE = ?,
+		STATUS = ?
+	WHERE 
+		POLL_ID = ?
+	]]></sql-query>									
 </sqlset>

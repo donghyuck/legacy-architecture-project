@@ -24,6 +24,8 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import architecture.common.cache.CacheSizes;
 import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
@@ -31,6 +33,8 @@ import architecture.ee.web.community.model.ContentObject.Status;
 
 public class DefaultPoll implements Poll {
 
+	private static final Log log = LogFactory.getLog(DefaultPoll.class);
+	
 	private long pollId;
 
 	private int objectType;
@@ -57,23 +61,22 @@ public class DefaultPoll implements Poll {
 
 	private int commentStatus;
 
-	private List options;
+	private List<PollOption> options;
 
 	private Status status;
 
-	private static final Log log = LogFactory.getLog(DefaultPoll.class);
 	
 	public DefaultPoll() {
-		pollId = -1L;
-		objectType = -1;
-		objectId = -1L;
-		user = new UserTemplate(-1L);
-		name = null;
-		description = null;
-		mode = 0L;
-		commentStatus = 2;
-		status = Status.PUBLISHED;
-		options = new ArrayList();
+		this.pollId = -1L;
+		this.objectType = -1;
+		this.objectId = -1L;
+		this.user = new UserTemplate(-1L);
+		this.name = null;
+		this.description = null;
+		this.mode = 0L;
+		this.commentStatus = 2;
+		this.status = Status.PUBLISHED;
+		this.options = new ArrayList<PollOption>();
 	}
 
 	/**
@@ -97,30 +100,39 @@ public class DefaultPoll implements Poll {
 		this.objectId = objectId;
 		this.user = user;
 		this.name = name;
+		this.mode = 0L;
+		this.commentStatus = 2;
+		this.status = Status.PUBLISHED;
+		this.options =  new ArrayList<PollOption>();
+		
 		if(name == null)
-            throw new IllegalArgumentException("Name cannot be null");		
+			throw new IllegalArgumentException("Name cannot be null");
+		
 		Calendar cal = Calendar.getInstance();
 		Date now = cal.getTime();
-		cal.add(Calendar.YEAR, 1);
+		
 		this.creationDate = now;
 		this.modifiedDate = now;
+		this.startDate = now;
+		
+		cal.add(Calendar.YEAR, 1);
 		this.endDate =  cal.getTime();
 		this.expireDate = endDate;		
 	}
 
 	
 	
-	@Override
+	@JsonIgnore
 	public Serializable getPrimaryKeyObject() {
 		return pollId;
 	}
 
-	@Override
+	@JsonIgnore
 	public int getModelObjectType() {
-		return 29;
+		return 40;
 	}
 
-	@Override
+	@JsonIgnore
 	public int getCachedSize() {
         int size = CacheSizes.sizeOfObject();
         size += CacheSizes.sizeOfLong();
@@ -340,15 +352,19 @@ public class DefaultPoll implements Poll {
 	/**
 	 * @return options
 	 */
-	public List getOptions() {
+	public List<PollOption> getOptions() {
 		return options;
 	}
 
 	/**
 	 * @param options 설정할 options
 	 */
-	public void setOptions(List options) {
+	public void setOptions(List<PollOption> options) {
 		this.options = options;
+	}
+	
+	public void addOption(PollOption option){
+		this.options.add(option);
 	}
 
 	/**
