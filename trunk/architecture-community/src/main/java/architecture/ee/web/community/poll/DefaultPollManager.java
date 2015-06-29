@@ -100,8 +100,7 @@ public class DefaultPollManager implements PollManager, EventSource {
 		return pollDao.getPollCount();
 	}
 
-	public Poll getPoll(long pollId) throws UnAuthorizedException,
-			NotFoundException {
+	public Poll getPoll(long pollId) throws UnAuthorizedException, NotFoundException {
 		Poll poll = getPollCacheById(pollId);
 		if(poll == null){
 			poll = pollDao.getPollById(pollId);
@@ -115,6 +114,44 @@ public class DefaultPollManager implements PollManager, EventSource {
 			return (Poll)pollCache.get(pollId).getValue();
 		}
 		return null;
+	}
+
+	@Override
+	public int getPollCount(int objectType, long objectId) {
+		return pollDao.getPollCount(objectType, objectId);
+	}
+
+	@Override
+	public int getPollCount(User user) {
+		return pollDao.getPollCount(user);
+	}
+
+	@Override
+	public List<Poll> getPolls(int objectType, long objectId) {
+		List<Long> ids = pollDao.getPollIds(objectType, objectId);
+		List<Poll> polls = new ArrayList<Poll>();
+		for( Long id : ids){
+			try {
+				polls.add(getPoll(id));
+			} catch (Exception e) {
+				log.warn(e);
+			}
+		}		
+ 		return polls;
+	}
+
+	@Override
+	public List<Poll> getPolls(User user) {
+		List<Long> ids = pollDao.getPollIds(user);
+		List<Poll> polls = new ArrayList<Poll>();
+		for( Long id : ids){
+			try {
+				polls.add(getPoll(id));
+			} catch (Exception e) {
+				log.warn(e);
+			}
+		}		
+ 		return polls;
 	}
     
 

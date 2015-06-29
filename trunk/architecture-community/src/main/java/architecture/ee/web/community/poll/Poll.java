@@ -59,4 +59,6 @@ public interface Poll extends ModelObject {
 	public abstract boolean isModeEnabled(long mode);
 	
 	public abstract long getMode();
+	
+	public abstract void setOptions(List<PollOption> options) ;
 }

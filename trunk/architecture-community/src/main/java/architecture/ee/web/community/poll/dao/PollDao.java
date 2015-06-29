@@ -17,6 +17,7 @@ package architecture.ee.web.community.poll.dao;
 
 import java.util.List;
 
+import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.community.poll.Poll;
 
@@ -32,6 +33,13 @@ public interface PollDao {
 		
 	public abstract  int getPollCount();
 	
-	public abstract List<Long> getPollIds();
+	public abstract  int getPollCount(int objectType, long objectId);
 	
+	public abstract  int getPollCount(User user);
+	
+	public abstract List<Long> getPollIds();
+		
+	public abstract List<Long> getPollIds(int objectType, long objectId);	
+	
+	public abstract List<Long> getPollIds(User user);	
 }
