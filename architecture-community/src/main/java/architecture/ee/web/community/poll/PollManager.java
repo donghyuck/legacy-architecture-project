@@ -22,14 +22,22 @@ import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.exception.NotFoundException;
 
 public interface PollManager {
-
-	public abstract List<Poll> getPolls();
-	
-	public abstract int getPollCount();
-	
+		
 	public Poll createPoll(int objectType, long objectId, User user, String name) throws UnAuthorizedException;
 	
 	public abstract Poll getPoll(long pollId) throws UnAuthorizedException, NotFoundException;
+	
+	public abstract int getPollCount();
+	
+	public abstract int getPollCount(int objectType, long objectId);
+	
+	public abstract int getPollCount(User user);
+	
+	public abstract List<Poll> getPolls();
+	
+	public abstract List<Poll> getPolls(int objectType, long objectId);
+	
+	public abstract List<Poll> getPolls(User user);
 	
 	
 	/*

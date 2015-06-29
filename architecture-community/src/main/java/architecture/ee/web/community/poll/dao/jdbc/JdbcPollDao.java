@@ -18,13 +18,15 @@ package architecture.ee.web.community.poll.dao.jdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 
+import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
@@ -106,37 +108,43 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 	@Override
 	public int getPollCount() {
 		return getExtendedJdbcTemplate().queryForObject(
-				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_ALL_POLL").getSql(), Integer.class 
+				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_ALL_POLLS").getSql(), Integer.class 
 		);
 	}
 
 	@Override
-	public List<Long> getPollIds() {
-		return getExtendedJdbcTemplate().queryForList(				
-				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ALL_POLL_IDS").getSql(), 		
-				Long.class
-				);
+	public List<Long> getPollIds() {		
+		final List<Long> list = new ArrayList<Long>(); 
+		getExtendedJdbcTemplate().query(
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ALL_POLL_IDS").getSql(), 
+				new RowCallbackHandler(){
+					public void processRow(ResultSet rs) throws SQLException {					
+						long pollId = rs.getLong(1);							
+						list.add(pollId);
+				}});
+		return list;
 	}
 
 	@Override
 	public Poll getPollById(long pollId) throws NotFoundException {		
 		
-		final DefaultPoll poll = new DefaultPoll();
+		Poll poll = new DefaultPoll();
 		try {
-			getExtendedJdbcTemplate().queryForObject(
+			poll = getExtendedJdbcTemplate().queryForObject(
 					getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_POLL_BY_ID").getSql(), 
 					pollMapper,
 					new SqlParameterValue(Types.NUMERIC, pollId));
 		} catch (DataAccessException e) {
 			throw new NotFoundException((new StringBuilder()).append("No poll found with id: ").append(pollId).toString());
 		}
-		
+		/*
 		List<PollOption> options = getExtendedJdbcTemplate().query(
 				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_POLL_OPTIONS").getSql(),	
 				pollOptionMapper,
 				new SqlParameterValue(Types.NUMERIC, pollId)
 		);
 		poll.setOptions(options);
+		*/
 		
 		return poll;
 	}
@@ -213,6 +221,52 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 	@Override
 	public Poll deletePoll(Poll poll) {
 		return null;
+	}
+
+	@Override
+	public int getPollCount(int objectType, long objectId) {
+		return getExtendedJdbcTemplate().queryForObject(
+				getBoundSql("ARCHITECTURE_COMMUNITY.OBECT_POLL_COUNT").getSql(), Integer.class,
+				new SqlParameterValue (Types.NUMERIC, objectType ),
+				new SqlParameterValue (Types.NUMERIC, objectId )
+		);
+	}
+
+	@Override
+	public int getPollCount(User user) {
+		return getExtendedJdbcTemplate().queryForObject(
+				getBoundSql("ARCHITECTURE_COMMUNITY.USER_POLL_COUNT").getSql(), Integer.class ,
+				new SqlParameterValue (Types.NUMERIC, user.getUserId() )
+		);
+	}
+
+	@Override
+	public List<Long> getPollIds(int objectType, long objectId) {
+		final List<Long> list = new ArrayList<Long>(); 
+		getExtendedJdbcTemplate().query(
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_OBJECT_POLL_IDS").getSql(), 
+				new RowCallbackHandler(){
+					public void processRow(ResultSet rs) throws SQLException {					
+						long pollId = rs.getLong(1);							
+						list.add(pollId);
+				}},
+				new SqlParameterValue (Types.NUMERIC, objectType ),
+				new SqlParameterValue (Types.NUMERIC, objectId ));
+		return list;
+	}
+
+	@Override
+	public List<Long> getPollIds(User user) {
+		final List<Long> list = new ArrayList<Long>(); 
+		getExtendedJdbcTemplate().query(
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_USER_POLL_IDS").getSql(), 
+				new RowCallbackHandler(){
+					public void processRow(ResultSet rs) throws SQLException {					
+						long pollId = rs.getLong(1);							
+						list.add(pollId);
+				}}, 
+				new SqlParameterValue (Types.NUMERIC, user.getUserId() ));
+		return list;
 	}
 
 }

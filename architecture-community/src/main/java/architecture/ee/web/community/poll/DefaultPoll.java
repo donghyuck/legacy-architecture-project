@@ -25,8 +25,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import architecture.common.cache.CacheSizes;
+import architecture.common.model.json.CustomJsonDateDeserializer;
+import architecture.common.model.json.CustomJsonDateSerializer;
+import architecture.common.model.json.UserDeserializer;
 import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.ee.web.community.model.ContentObject.Status;
@@ -148,6 +153,7 @@ public class DefaultPoll implements Poll {
         return size;
 	}
 	
+	@JsonIgnore
     public String toString()
     {
     	StringBuffer buf = new StringBuffer();
@@ -207,6 +213,7 @@ public class DefaultPoll implements Poll {
 	/**
 	 * @param user 설정할 user
 	 */
+	@JsonDeserialize(using = UserDeserializer.class)
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -242,6 +249,7 @@ public class DefaultPoll implements Poll {
 	/**
 	 * @return creationDate
 	 */
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -249,6 +257,8 @@ public class DefaultPoll implements Poll {
 	/**
 	 * @param creationDate 설정할 creationDate
 	 */
+	
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
@@ -256,6 +266,7 @@ public class DefaultPoll implements Poll {
 	/**
 	 * @return modifiedDate
 	 */
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getModifiedDate() {
 		return modifiedDate;
 	}
@@ -263,6 +274,7 @@ public class DefaultPoll implements Poll {
 	/**
 	 * @param modifiedDate 설정할 modifiedDate
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
@@ -270,6 +282,7 @@ public class DefaultPoll implements Poll {
 	/**
 	 * @return startDate
 	 */
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -277,6 +290,7 @@ public class DefaultPoll implements Poll {
 	/**
 	 * @param startDate 설정할 startDate
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
@@ -284,6 +298,7 @@ public class DefaultPoll implements Poll {
 	/**
 	 * @return endDate
 	 */
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getEndDate() {
 		return endDate;
 	}
@@ -291,6 +306,7 @@ public class DefaultPoll implements Poll {
 	/**
 	 * @param endDate 설정할 endDate
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
@@ -298,6 +314,7 @@ public class DefaultPoll implements Poll {
 	/**
 	 * @return expireDate
 	 */
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getExpireDate() {
 		return expireDate;
 	}
@@ -305,6 +322,7 @@ public class DefaultPoll implements Poll {
 	/**
 	 * @param expireDate 설정할 expireDate
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setExpireDate(Date expireDate) {
 		this.expireDate = expireDate;
 	}
@@ -338,6 +356,7 @@ public class DefaultPoll implements Poll {
 	/**
 	 * @return commentStatus
 	 */
+	@JsonIgnore
 	public int getCommentStatus() {
 		return commentStatus;
 	}
@@ -345,6 +364,7 @@ public class DefaultPoll implements Poll {
 	/**
 	 * @param commentStatus 설정할 commentStatus
 	 */
+	@JsonIgnore
 	public void setCommentStatus(int commentStatus) {
 		this.commentStatus = commentStatus;
 	}
@@ -359,6 +379,7 @@ public class DefaultPoll implements Poll {
 	/**
 	 * @param options 설정할 options
 	 */
+	
 	public void setOptions(List<PollOption> options) {
 		this.options = options;
 	}
