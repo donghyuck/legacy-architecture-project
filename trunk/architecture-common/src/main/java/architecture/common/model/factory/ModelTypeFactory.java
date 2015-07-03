@@ -274,12 +274,9 @@ public class ModelTypeFactory {
 
 		try {
 			_map = new FastMap<String, ModelType>(); 
-			List<ModelList> list =  new FastList<ModelList>(); 
-			
-			ModelTypeFactory.parseLegacyXmlFile(list);
-			
-			Collections.sort(list, new RankComparator());	
-			
+			List<ModelList> list =  new FastList<ModelList>(); 			
+			ModelTypeFactory.parseLegacyXmlFile(list);			
+			Collections.sort(list, new RankComparator());				
 			for(ModelList factorylist : list){
 			    for( ModelType factory : factorylist.modelTypes ){
 			    	if (!_map.containsKey(factory.code)) {
@@ -319,19 +316,9 @@ public class ModelTypeFactory {
 	}
 	
 	public static Integer getTypeIdFromCode(String code) {		
-		log.debug("code[" + code + "]"  );		
 		return _map.get(code).id;
 	}
-	
-/*	public static ModelType getModelTypeFromObject(Object model) {
 		
-		for( ModelType type : _map.values() ){
-			if( model.getClass().getName().equals( type.implName ) )
-				return type;
-		}
-		return _map.get("UNKNOWN");
-	}*/
-	
 	private static List<ModelList> parseLegacyXmlFile(List<ModelList> list) throws Exception {	
 		ClassLoader cl = Thread.currentThread().getContextClassLoader();
 		Enumeration<URL> enumeration = cl.getResources(IF_PLUGIN_PATH);				
@@ -343,8 +330,7 @@ public class ModelTypeFactory {
 		xmlreader.setDTDHandler(handler);
 		xmlreader.setEntityResolver(handler);		
 		xmlreader.setErrorHandler(handler);		
-		System.out.println("Model Enum:");	
-		
+		System.out.println("Model Enum:");			
 		do {
 			if (!enumeration.hasMoreElements())
 				break;
@@ -362,4 +348,3 @@ public class ModelTypeFactory {
 		return list;
 	}
 }
-
