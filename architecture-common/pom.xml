@@ -188,13 +188,6 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>javax.crypto</groupId>
-			<artifactId>javax.crypto</artifactId>
-			<version>1.6</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
 			<version>2.0.1</version>
