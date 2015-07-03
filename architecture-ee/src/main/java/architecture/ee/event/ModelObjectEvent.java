@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Donghyuck, Son
+ * Copyright 2012, 2013 Donghyuck, Son
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,34 +17,36 @@ package architecture.ee.event;
 
 import architecture.common.lifecycle.event.Event;
 
-/**
- * @author  donghyuck
- */
-public class PluginStateChangeEvent extends Event {
-
-	private static final long serialVersionUID = -6725688776619308652L;
+public class ModelObjectEvent extends Event  {
 
 	public enum State {
 
-		INSTALLED, 
+		CREATED, 
 
-		UNINSTALLED, 
+		UPDATED, 
 
-		UNLOADED, 
+		DELETED, 
 
-		RESTART
+		MOVED,
+		
+		EXPIRED,
+		
+		VIEWED	
 	};
 	
-
 	private State state;
 	
-	public PluginStateChangeEvent(Object source, State state) {
+	public ModelObjectEvent(Object source, State state) {
 		super(source);
 		this.state = state;
 	}
 
+	/**
+	 * @return state
+	 */
 	public State getState() {
 		return state;
 	}
+
 	
 }

@@ -12,7 +12,7 @@
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 			
 	<!-- =================================================== -->
-	<!-- 1. URLDirectoryScanner                                                                 -->
+	<!-- 1. URLDirectoryScanner																		-->
 	<!-- =================================================== -->
 	<bean id="directoryScanner" class="architecture.ee.spring.resources.scanner.impl.DirectoryScannerImpl" destroy-method="destroy" p:fastDeploy="true">
 		<property name="directoryListenerList">		
@@ -26,5 +26,4 @@
 			</list>
 		</property>
     </bean>
-    	
 </beans>

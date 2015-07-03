@@ -27,10 +27,6 @@ import java.util.TimeZone;
 
 import javax.sql.DataSource;
 
-import architecture.common.util.StringUtils;
-
-import net.anotheria.moskito.aop.annotation.Monitor;
-
 import org.apache.commons.lang3.time.FastDateFormat;
 import org.apache.commons.vfs2.FileObject;
 import org.springframework.transaction.annotation.Propagation;
@@ -42,6 +38,7 @@ import architecture.common.lifecycle.ComponentImpl;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.internal.EmptyApplicationProperties;
 import architecture.common.util.LocaleUtils;
+import architecture.common.util.StringUtils;
 import architecture.common.util.vfs.VFSUtils;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.util.ApplicationConstants;

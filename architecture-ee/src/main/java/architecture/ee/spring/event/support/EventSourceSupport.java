@@ -15,9 +15,7 @@ public class EventSourceSupport implements EventSource {
 	 */
 	private EventDispatcher dispatcher;
 	
-	public void setEventPublisher(EventPublisher eventPublisher) {
-		// TODO Auto-generated method stub
-		
+	public void setEventPublisher(EventPublisher eventPublisher) {		
 	}
 
 }
