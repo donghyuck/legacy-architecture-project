@@ -60,8 +60,6 @@ public class GroovyScriptEngineFactory implements FactoryBean<GroovyScriptEngine
 			boolean recompileGroovySource = setupProperties.getBooleanProperty(ApplicationConstants.SCRIPTING_GROOVY_SOURCE_RECOMPILE_PROP_NAME, false);
 			
 			
-			
-			
 			if( StringUtils.isEmpty(path) ){
 				path = AdminHelper.getRepository().getURI("groovy");
 			}			
