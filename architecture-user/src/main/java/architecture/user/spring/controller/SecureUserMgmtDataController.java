@@ -46,7 +46,7 @@ import architecture.common.user.UserAlreadyExistsException;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.ee.exception.NotFoundException;
-import architecture.ee.web.spring.controller.WebDataController.ItemList;
+import architecture.ee.web.spring.controller.MyCloudDataController.ItemList;
 import architecture.ee.web.ws.Property;
 import architecture.ee.web.ws.Result;
 import architecture.ee.web.ws.StringProperty;
