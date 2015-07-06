@@ -68,6 +68,8 @@ import architecture.ee.web.community.page.ImmutablePage;
 import architecture.ee.web.community.page.Page;
 import architecture.ee.web.community.page.PageManager;
 import architecture.ee.web.community.page.PageState;
+import architecture.ee.web.community.poll.DefaultPoll;
+import architecture.ee.web.community.poll.Poll;
 import architecture.ee.web.community.poll.PollManager;
 import architecture.ee.web.community.stats.ViewCountManager;
 import architecture.ee.web.community.streams.Photo;
@@ -886,11 +888,38 @@ public class CommunityDataController {
 	/** ======================================== **/
 	@RequestMapping(value={"/polls/list.json"},method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
-	public ItemList getPolls (NativeWebRequest request 
+	public ItemList getPolls (			
+			@RequestParam(value="objectType", defaultValue="0", required=false ) Integer objectType,
+			@RequestParam(value="objectId", defaultValue="0", required=false ) Long objectId,
+			@RequestParam(value="active", defaultValue="false", required=false ) Boolean active,
+			@RequestParam(value="live", defaultValue="false", required=false ) Boolean live,
+			NativeWebRequest request 
 			){		
-		ItemList list = new ItemList(pollManager.getPolls(), pollManager.getPollCount() );		
-		return list;
-		
+		User user = SecurityHelper.getUser();
+		ItemList list ;
+		if( objectType > 0 && objectId > 0 ){			
+			 list = new ItemList(pollManager.getPolls(objectType, objectId), pollManager.getPollCount(objectType, objectId) );		
+		}else{
+			 list = new ItemList(pollManager.getPolls(user), pollManager.getPollCount(user) );
+		}
+		return list;		
 	}	
 
+	@PreAuthorize("hasRole('ROLE_USER')")
+	@RequestMapping(value="/polls/update.json", method=RequestMethod.POST)
+	@ResponseBody
+	public Poll updatePoll(
+			@RequestBody DefaultPoll poll, 
+			NativeWebRequest request) throws NotFoundException{		
+		User user = SecurityHelper.getUser();
+		if(poll.getUser() == null && poll.getPollId() < 0)
+			poll.setUser(user);
+		if( user.isAnonymous() || user.getUserId() != poll.getUser().getUserId() )
+			throw new UnAuthorizedException();
+		boolean doUpdate = false;			
+		
+		Poll target = pollManager.createPoll(poll.getObjectType(), poll.getObjectId(), user, poll.getName());
+
+		return target;
+	}
 }

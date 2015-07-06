@@ -125,6 +125,7 @@
 		p:commentDao-ref="commentDao" 		
 		p:pageManager-ref="pageManager"  
 		p:userManager-ref="userManager"  />		
+		
 	<!--  =============================  -->
 	<!--  TagManager       			                            -->
 	<!--  =============================  -->	
@@ -144,4 +145,17 @@
 		p:tagContentCache-ref="tagContentCache" 
 		p:pageManager-ref="pageManager" 
 		/>
+	<!--  =============================  -->
+	<!--  PollManager      			                            -->
+	<!--  =============================  -->			
+	<bean id="pollDao" class="architecture.ee.web.community.poll.dao.jdbc.JdbcPollDao" parent="jdbcDaoSupport" />	
+	<bean id="pollCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="pollCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" p:statisticsEnabled="true" />
+	<bean id="pollManager"
+		class="architecture.ee.web.community.poll.DefaultPollManager"
+		depends-on="pollDao" 
+		p:eventPublisher-ref="eventPublisher" 
+		p:pollDao-ref="pollDao" 
+		p:pollCache-ref="pollCache" 
+		/>	
+		
 </beans>

@@ -1315,12 +1315,29 @@
 	<!--  ====================================  -->
 	<!--  POLL																	 -->
 	<!--  ====================================  -->
-	<sql-query name="COUNT_ALL_POLL" description="COUNT_ALL_POLL"><![CDATA[
+	<sql-query name="COUNT_ALL_POLLS" description="COUNT_ALL_POLL"><![CDATA[
 	SELECT 
 		COUNT(POLL_ID)	
 	FROM V2_POLL
 	]]></sql-query>	
-	
+
+	<sql-query name="OBECT_POLL_COUNT" description="OBECT_POLL_COUNT"><![CDATA[
+	SELECT 
+		COUNT(POLL_ID)	
+	FROM V2_POLL
+	WHERE 
+		OBJECT_TYPE = ? AND
+		OBJECT_ID = ?
+	]]></sql-query>		
+
+	<sql-query name="USER_POLL_COUNT" description="USER_POLL_COUNT"><![CDATA[
+	SELECT 
+		COUNT(POLL_ID)	
+	FROM V2_POLL
+	WHERE 
+		USER_ID = ? 
+	]]></sql-query>		
+		
 	<sql-query name="SELECT_ALL_POLL_IDS" description="SELECT_ALL_POLL"><![CDATA[
 	SELECT 
 		POLL_ID,
@@ -1328,7 +1345,28 @@
 	FROM V2_POLL	
 	ORDER BY CREATION_DATE DESC, POLL_ID DESC		
 	]]></sql-query>			
+
+	<sql-query name="SELECT_OBJECT_POLL_IDS" description="SELECT_OBJECT_POLL_IDS"><![CDATA[
+	SELECT 
+		POLL_ID,
+		CREATION_DATE	
+	FROM V2_POLL	
+	WHERE 
+		OBJECT_TYPE = ? AND
+		OBJECT_ID = ?
+	ORDER BY CREATION_DATE DESC, POLL_ID DESC		
+	]]></sql-query>	
 	
+	<sql-query name="SELECT_USER_POLL_IDS" description="SELECT_USER_POLL_IDS"><![CDATA[
+	SELECT 
+		POLL_ID,
+		CREATION_DATE	
+	FROM V2_POLL	
+	WHERE 
+		USER_ID = ? 
+	ORDER BY CREATION_DATE DESC, POLL_ID DESC		
+	]]></sql-query>	
+			
 	<sql-query name="SELECT_POLL_BY_ID" description="SELECT_POLL_BY_ID"><![CDATA[
 	SELECT 
 		POLL_ID,
