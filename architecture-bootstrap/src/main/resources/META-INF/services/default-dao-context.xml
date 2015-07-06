@@ -9,20 +9,17 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
-       
 	<description>
 	<![CDATA[
         Define Data Access Object
 	]]>
 	</description>
 	<!-- ================================================ -->
-	<!-- 1. SQL Service                                                                       -->
-	<!-- ================================================ -->	
-	
+	<!-- 1. SQL Service                                                                       		-->
+	<!-- ================================================ -->		
 	<bean id="sqlConfiguration" factory-bean="sqlQueryFactory" factory-method="getConfiguration" />
-	
-    <bean id="sqlQueryFactory" class="architecture.ee.jdbc.sqlquery.factory.SqlQueryFactoryBuilder" factory-method="getSqlQueryFactory" init-method="initialize" depends-on="dataSource" p:incrementerSupported="false" >
-    	<property name="resourceLocations">
+	<bean id="sqlQueryFactory" class="architecture.ee.jdbc.sqlquery.factory.SqlQueryFactoryBuilder" factory-method="getSqlQueryFactory" init-method="initialize" depends-on="dataSource" p:incrementerSupported="false" >
+		<property name="resourceLocations">
 			<list>
 				<value>res:sql/default-framework-sqlset.xml</value>
 				<value>res:sql/default-community-sqlset.xml</value>
@@ -31,26 +28,19 @@
 			</list>
     	</property>
     	<property name="dataSource" ref="dataSource" />
-    	
     </bean>	
-    
 	<!-- =================================================== -->
 	<!-- 2. Dao Support																					 -->
-	<!-- =================================================== -->
-	
+	<!-- =================================================== -->	
 	<bean id="maxValueIncrementer" factory-bean="sqlQueryFactory" factory-method="getMaxValueIncrementer" />	
 		<bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler" lazy-init="true">
 		<property name="nativeJdbcExtractor">
 			<ref bean="automaticJdbcExtractor"/>
 		</property>
     </bean>
-	
 	<bean id="jdbcDaoSupport" abstract="true" p:configuration-ref="sqlConfiguration" p:dataSource-ref="dataSource" p:maxValueIncrementer-ref="maxValueIncrementer"  depends-on="dataSource, sqlConfiguration, maxValueIncrementer" />
-	    
  	<bean id="extendedPropertyDao" class="architecture.ee.jdbc.property.dao.impl.JdbcExtendedPropertyDao" parent="jdbcDaoSupport" />
- 	    	     	    
 	<bean id="sqlQuerySupport" abstract="true" p:sqlQueryFactory-ref="sqlQueryFactory"  depends-on="sqlQueryFactory"  />	
-	
 	<bean id="sqlQueryClient"  parent="sqlQuerySupport" class="architecture.ee.component.impl.SqlQueryClientImpl" p:dataSource-ref="dataSource" />
 			
 </beans>
