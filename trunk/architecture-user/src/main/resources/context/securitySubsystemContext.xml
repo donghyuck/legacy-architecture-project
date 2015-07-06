@@ -62,7 +62,7 @@
 		<security:intercept-url pattern="/**"						access="hasRole('ROLE_USER')" />
 
 		<security:request-cache ref="authenticationRequestCache" />        
-		<security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/main.do" />
+		<security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/" />
 		<security:form-login 
 			login-page="/accounts/login?ver=1" 
 			login-processing-url="/login_auth" 
@@ -101,7 +101,7 @@
 		<property name="defaultEntryPoint" ref="ajaxAuthenticationEntryPoint" />
 	</bean>
 	
-	<bean id="authenticationSuccessHandler" class="architecture.ee.web.security.spring.authentication.ExtendedAuthenticationSuccessHandler" p:defaultTargetUrl="/main.do" />	
+	<bean id="authenticationSuccessHandler" class="architecture.ee.web.security.spring.authentication.ExtendedAuthenticationSuccessHandler" p:defaultTargetUrl="/" />	
 	<bean id="authenticationFailureHandler"  class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" p:defaultFailureUrl="/includes/jsp/error.jsp" p:useForward="true" />	
 	<bean id="daoAuthenticationProvider" class="architecture.user.security.spring.authentication.ExtendedAuthenticationProvider"  p:saltSource-ref="passwordSaltSource"  p:passwordEncoder-ref="passwordEncoder" p:userDetailsService-ref="userDetailsService" p:userManager-ref="userManager"/>
 	<bean id="userDetailsService" class="architecture.user.security.spring.userdetails.ExtendedUserDetailsService" p:userManager-ref="userManager" p:roleManager-ref="roleManager" />

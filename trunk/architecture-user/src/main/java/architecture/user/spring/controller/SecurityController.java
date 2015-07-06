@@ -75,8 +75,8 @@ public static class ActionAdaptor {
 		private String remoteAddr;		
 		private User user;
 		
-		private WebSite webSite;
-				
+		private WebSite webSite;				
+
 		public MenuComponent getWebSiteMenu(String name) throws MenuNotFoundException { 
 			if( webSite != null ){
 				return WebSiteUtils.getMenuComponent( webSite.getMenu(), name);
@@ -84,6 +84,18 @@ public static class ActionAdaptor {
 				throw new MenuNotFoundException();
 			}
 		}
+		
+		public boolean hasWebSiteMenu(String name ){
+			if( webSite != null ){
+				try {
+					WebSiteUtils.getMenuComponent( webSite.getMenu(), name);
+					return true;
+				} catch (MenuNotFoundException e) {
+					return false;
+				}				
+			}
+			return false;
+		}		
 		
 		public boolean isSetNavigator (){
 			return false;
