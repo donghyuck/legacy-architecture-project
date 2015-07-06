@@ -60,6 +60,5 @@
 	<!-- 6. System Information Service                                                               -->
 	<!-- =================================================== -->	
 	<bean id="systemInformationService" class="architecture.ee.component.core.lifecycle.DefaultSystemInformationService" depends-on="licenseManager"  p:licenseManager-ref="licenseManager" />
-	
-	
+		
 </beans>
