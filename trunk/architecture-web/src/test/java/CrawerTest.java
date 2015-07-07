@@ -1,10 +1,3 @@
-import org.junit.Test;
-
-import edu.uci.ics.crawler4j.crawler.CrawlConfig;
-import edu.uci.ics.crawler4j.crawler.CrawlController;
-import edu.uci.ics.crawler4j.fetcher.PageFetcher;
-import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
-import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 /*
  * Copyright 2012, 2013 Donghyuck, Son
@@ -31,7 +24,7 @@ public class CrawerTest {
 	
 //	/@Test
 	public void testCrawer() throws Exception{
-		
+		/*
 		CrawlConfig config = new CrawlConfig();
 		config.setCrawlStorageFolder("C:\\Users\\donghyuck\\Documents\\oCam");
 		
@@ -40,7 +33,7 @@ public class CrawerTest {
 	    RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
 	    CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
 	    controller.addSeed("http://www.clien.net/cs2/bbs/board.php?bo_table=jirum");
-	    
+	    */
 	    
 	}
 }
