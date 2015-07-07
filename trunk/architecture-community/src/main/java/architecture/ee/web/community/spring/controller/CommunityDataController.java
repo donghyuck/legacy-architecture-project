@@ -630,18 +630,24 @@ public class CommunityDataController {
 		
 		User user = SecurityHelper.getUser();
 		int objectType = uploader.getObjectType();
-		long objectId = user.getUserId();		
-		if( objectType == 1 ){
+		long objectId = uploader.getObjectId();
+		if( objectType == 2){
+			objectId = user.getUserId();	
+		}
+		else if( objectType == 1 ){
 			objectId = user.getCompanyId();			
 		}else if ( objectType == 30){
 			objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();
 		}	
-		
-		
 		Image imageToUse = imageManager.createImage(objectType, objectId,  uploader.getFileName(),  uploader.getContentType(),  uploader.readFileFromUrl());
+		
+		if( uploader.getSourceUrl() == null){
+			uploader.setSourceUrl(uploader.getImageUrl());
+		}
 		imageToUse.getProperties().put("source", uploader.getSourceUrl().toString());
-		imageToUse.getProperties().put("url", uploader.getSourceUrl().toString());		
+		imageToUse.getProperties().put("url", uploader.getImageUrl().toString());		
 		log.debug(imageToUse);
+		
 		return  imageManager.saveImage(imageToUse);
 	}
 	
@@ -653,8 +659,19 @@ public class CommunityDataController {
 		 
 		 private URL imageUrl ;
 		 
+		 private long objectId = 0 ;
+		 
 		 @JsonIgnore
 		 private String contentType;
+		 
+		 public void setObjectId(long objectId){
+			 this.objectId = objectId;
+		 }
+		 
+		 public long getObjectId(){
+			return this.objectId;
+		 }
+		 
 		/**
 		 * @return sourceUrl
 		 */
