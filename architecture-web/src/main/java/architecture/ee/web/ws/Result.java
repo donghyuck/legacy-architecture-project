@@ -19,11 +19,24 @@ public class Result {
 	
 	private boolean success;
 	private Error error;
+	private Integer count;
 	
 	public Result() {
 		error = null;
 		success = true;
 	}
+	
+	
+	/**
+	 * @param count
+	 */
+	private Result(Integer count) {
+		error = null;
+		success = true;
+		this.count = count;
+	}
+
+
 	/**
 	 * @param success
 	 */
@@ -38,6 +51,22 @@ public class Result {
 	public boolean isSuccess() {
 		return success;
 	}
+
+	/**
+	 * @return count
+	 */
+	public Integer getCount() {
+		return count;
+	}
+
+
+	/**
+	 * @param count 설정할 count
+	 */
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
 
 	/**
 	 * @param success 설정할 success
@@ -60,6 +89,10 @@ public class Result {
 
 	public static Result newResult(){
 		return new Result();
+	}
+	
+	public static Result newResult(int count){
+		return new Result(count);
 	}
 	
 	public static Result newResult(Throwable e){
