@@ -388,7 +388,7 @@ public class CommunityDataController {
 		log.debug("input:" + page.getProperties());		
 		log.debug("target:"+ target.getProperties());		
 		
-		return target;
+		return pageManager.getPage(target.getPageId());
 	}
 	
 	@RequestMapping(value="/pages/properties/list.json", method={RequestMethod.POST, RequestMethod.GET} )
