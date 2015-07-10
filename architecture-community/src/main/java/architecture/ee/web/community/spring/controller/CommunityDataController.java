@@ -346,11 +346,13 @@ public class CommunityDataController {
 			if( !StringUtils.equals(page.getName(), target.getName()) || 
 					!StringUtils.equals(page.getTitle(), target.getTitle()) ||
 					!StringUtils.equals(page.getSummary(), target.getSummary()) ||
+				
 					!StringUtils.equals(page.getBodyContent().getBodyText(), target.getBodyContent().getBodyText())){
 				//target.setProperties(page.getProperties());
-				doUpdate = true;		
-				log.debug( "do update ..." );
+
 			}
+			doUpdate = true;		
+			log.debug( "do update ..." );
 		}else{
 			if( page.getObjectType() == 30 && page.getObjectId() == 0L ){
 				page.setObjectId(WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId());			
@@ -367,15 +369,16 @@ public class CommunityDataController {
 			doUpdate = true;		
 		}		
 		
-		tagsString = page.getProperty("tagsString", null);		
+		tagsString = page.getProperty("tagsString", null);	
+		if( tagsString != null )
+			page.getProperties().remove("tagsString");
+		
 		if( doUpdate ){
 			target.setName(page.getName());
 			target.setTitle(page.getTitle());
 			target.setSummary(page.getSummary());
 			target.setBodyText(page.getBodyContent().getBodyText());
-			target.setProperties(page.getProperties());
-			if( tagsString != null )
-				target.getProperties().remove("tagsString");
+			target.setProperties(page.getProperties());			
 			pageManager.updatePage(target);			
 		}		
 		
