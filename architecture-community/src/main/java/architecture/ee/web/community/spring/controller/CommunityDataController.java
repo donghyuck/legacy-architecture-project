@@ -336,6 +336,11 @@ public class CommunityDataController {
 		boolean doUpdate = false;		
 		Page target ;
 		String tagsString = null;
+		
+		
+		log.debug("page:" + page.getProperties());		
+		
+		
 		if( page.getPageId() > 0){
 			target = pageManager.getPage(page.getPageId());
 			if( !StringUtils.equals(page.getName(), target.getName()) || 
@@ -344,6 +349,7 @@ public class CommunityDataController {
 					!StringUtils.equals(page.getBodyContent().getBodyText(), target.getBodyContent().getBodyText())){
 				//target.setProperties(page.getProperties());
 				doUpdate = true;		
+				log.debug( "do update ..." );
 			}
 		}else{
 			if( page.getObjectType() == 30 && page.getObjectId() == 0L ){
@@ -359,26 +365,25 @@ public class CommunityDataController {
 			target.setBodyContent(new DefaultBodyContent());
 			//target.setProperties(page.getProperties());
 			doUpdate = true;		
-		}
+		}		
 		
-		tagsString = page.getProperty("tagsString", null);
-		if( tagsString != null )
-			target.getProperties().remove("tagsString");
-		
-		
+		tagsString = page.getProperty("tagsString", null);		
 		if( doUpdate ){
 			target.setName(page.getName());
 			target.setTitle(page.getTitle());
 			target.setSummary(page.getSummary());
 			target.setBodyText(page.getBodyContent().getBodyText());
 			target.setProperties(page.getProperties());
+			if( tagsString != null )
+				target.getProperties().remove("tagsString");
 			pageManager.updatePage(target);			
-		}
+		}		
 		
-		if( tagsString != null )
-			target.getTagDelegator().setTags(tagsString);		
+		if( tagsString != null && !StringUtils.equals(target.getTagDelegator().getTagsAsString(), tagsString) )
+			target.getTagDelegator().setTags(tagsString);
 		
-		log.debug(target.getProperties());
+		log.debug("input:" + page.getProperties());		
+		log.debug("target:"+ target.getProperties());		
 		
 		return target;
 	}
