@@ -340,8 +340,9 @@ public class CommunityDataController {
 			target = pageManager.getPage(page.getPageId());
 			if( !StringUtils.equals(page.getName(), target.getName()) || 
 					!StringUtils.equals(page.getTitle(), target.getTitle()) ||
-					!StringUtils.equals(page.getSummary(), target.getSummary()) || 
+					!StringUtils.equals(page.getSummary(), target.getSummary()) ||
 					!StringUtils.equals(page.getBodyContent().getBodyText(), target.getBodyContent().getBodyText())){
+				//target.setProperties(page.getProperties());
 				doUpdate = true;		
 			}
 		}else{
@@ -350,12 +351,13 @@ public class CommunityDataController {
 			}else if (page.getObjectType() == 1 && page.getObjectId() == 0L ){
 				page.setObjectId(user.getCompanyId());		
 			}else if (page.getObjectType() == 2 && page.getObjectId() == 0L ){
-				page.setObjectId(user.getUserId());		
+				page.setObjectId(user.getUserId());	
+				
 			}
 			target =  new DefaultPage(page.getObjectType(), page.getObjectId());
 			target.setUser(page.getUser());			
 			target.setBodyContent(new DefaultBodyContent());
-			target.setProperties(page.getProperties());
+			//target.setProperties(page.getProperties());
 			doUpdate = true;		
 		}
 		
@@ -363,15 +365,20 @@ public class CommunityDataController {
 		if( tagsString != null )
 			target.getProperties().remove("tagsString");
 		
+		
 		if( doUpdate ){
 			target.setName(page.getName());
 			target.setTitle(page.getTitle());
 			target.setSummary(page.getSummary());
-			target.setBodyText(page.getBodyContent().getBodyText());		
+			target.setBodyText(page.getBodyContent().getBodyText());
+			target.setProperties(page.getProperties());
 			pageManager.updatePage(target);			
 		}
+		
 		if( tagsString != null )
 			target.getTagDelegator().setTags(tagsString);		
+		
+		log.debug(target.getProperties());
 		
 		return target;
 	}
