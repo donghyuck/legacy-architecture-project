@@ -447,12 +447,12 @@
 
  	<sql-query name="UPDATE_PAGE_PROPERTY_BY_NAME" description="UPDATE_PAGE_PROPERTY_BY_NAME"><![CDATA[    	
  		UPDATE V2_PAGE_PROPERTY 
- 		SET 
- 			PROPERTY_NAME = ?,
+ 		SET  			
  			PROPERTY_VALUE = ?
  		WHERE 
- 			PAGE_ID = ? 
- 			AND 	VERSION_ID = ?
+ 			PAGE_ID = ? AND
+ 			VERSION_ID = ? AND
+ 			PROPERTY_NAME = ?
     ]]></sql-query>        
 
  	<sql-query name="SELECT_PAGE_ID_BY_NAME" description="SELECT_PAGE_BY_NAME"><![CDATA[    	
