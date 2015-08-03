@@ -50,4 +50,10 @@ public interface PageDao {
 	public abstract List<Long> getPageIds(int objectType, PageState state, int startIndex, int maxResults ) ;
 	
 	public abstract int getPageCount(int objectType, PageState state);
+	
+	public abstract List<Long> getPageIds(int objectType, long objectId, PageState state);
+	
+	public abstract List<Long> getPageIds(int objectType, long objectId, PageState state, int startIndex, int maxResults ) ;	
+	
+	public abstract int getPageCount(int objectType, long objectId, PageState state);
 }

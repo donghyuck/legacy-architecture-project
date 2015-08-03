@@ -35,19 +35,26 @@ import com.fasterxml.jackson.databind.JsonNode;
 public class BodyContentDeserializer extends JsonDeserializer<BodyContent> {
 
 	private final Log log = LogFactory.getLog(BodyContentDeserializer.class);
+	
 	@Override
 	public BodyContent deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
 			throws IOException, JsonProcessingException {
 		ObjectCodec oc = jsonParser.getCodec();
 		
 		JsonNode node = oc.readTree(jsonParser);
-		
-		log.debug("body content ... " + node.asText() );
-		long bodyId = node.get("bodyId").asLong();
-		long pageId = node.get("pageId").asLong();
-		String bodyText = node.get("bodyText").textValue();
-		BodyType bodyType = BodyType.valueOf( node.get("bodyType").textValue().toUpperCase() );
-		return new DefaultBodyContent(bodyId, pageId, bodyType, bodyText);
+		if( node == null){
+			return new DefaultBodyContent();
+		}else{
+			long bodyId = node.get("bodyId").asLong();
+			long pageId = node.get("pageId").asLong();
+			
+			String bodyText = "";
+			if( node.has("bodyText")){
+				bodyText = node.get("bodyText").textValue();
+			}
+			BodyType bodyType = BodyType.valueOf( node.get("bodyType").textValue().toUpperCase() );
+			return new DefaultBodyContent(bodyId, pageId, bodyType, bodyText);
+		}
 	}
 
 

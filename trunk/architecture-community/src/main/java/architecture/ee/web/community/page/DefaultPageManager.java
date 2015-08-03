@@ -421,10 +421,43 @@ public class DefaultPageManager implements PageManager, EventSource  {
 
 
 	@Override
+	public int getPageCount(int objectType, long objectId, PageState state) {
+		return pageDao.getPageCount(objectType, objectId, state);
+	}
+
+
+	@Override
+	public List<Page> getPages(int objectType, long objectId, PageState state) {
+		List<Long> ids = pageDao.getPageIds(objectType, objectId, state);
+		ArrayList<Page> list = new ArrayList<Page>(ids.size());
+		for( Long pageId : ids ){
+			try {
+				list.add(getPage(pageId));
+			} catch (PageNotFoundException e) {
+			}		
+		}
+		return list;
+	}
+
+
+	@Override
+	public List<Page> getPages(int objectType, long objectId, PageState state, int startIndex, int maxResults) {
+		List<Long> ids = pageDao.getPageIds(objectType, objectId, state, startIndex, maxResults);
+		ArrayList<Page> list = new ArrayList<Page>(ids.size());
+		for( Long pageId : ids ){
+			try {
+				list.add(getPage(pageId));
+			} catch (PageNotFoundException e) {
+			}		
+		}
+		return list;
+	}
+
+	
+	@Override
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;		
 	}
-
 
 	
 }
