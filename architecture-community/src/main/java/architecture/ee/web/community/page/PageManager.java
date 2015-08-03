@@ -35,6 +35,7 @@ public interface PageManager {
 		
 		public abstract Page getPage(String name, int versionId)throws PageNotFoundException;
 		
+		
 		public abstract List<Page> getPages(int objectType);
 		
 		public abstract List<Page> getPages(int objectType, long objectId);
@@ -42,7 +43,6 @@ public interface PageManager {
 		public abstract List<Page> getPages(int objectType, long objectId, int startIndex, int maxResults);
 		
 		public abstract int getPageCount(int objectType);
-		
 		public abstract int getPageCount(int objectType, long objectId);		
 		
 		public abstract List<PageVersion> getPageVersions(long pageId);
@@ -54,5 +54,11 @@ public interface PageManager {
 		
 		public abstract int getPageCount(int objectType, PageState state);			
 		
+		
+		public abstract int getPageCount(int objectType, long objectId, PageState state);
+		
+		public abstract List<Page> getPages(int objectType, long objectId, PageState state);
+		
+		public abstract List<Page> getPages(int objectType, long objectId, PageState state, int startIndex, int maxResults);		
 				
 }

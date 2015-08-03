@@ -241,13 +241,26 @@ public class CommunityDataController {
 	private PageList getPublishedPageList( int objectType, int startIndex, int pageSize){		
 		PageList list = new PageList();
 		list.setTotalCount(pageManager.getPageCount(objectType, PageState.PUBLISHED));
+		
 		List<Page> pages = new ArrayList(list.getTotalCount());
 		for( Page page :  pageManager.getPages(objectType, PageState.PUBLISHED, startIndex, pageSize) )
 		{
 			pages.add(new ImmutablePage(page));
 		}
+		
 		list.setPages(pages);
+		
 		return list;
+	}
+	
+	
+	private List<Page> toImmutablePageList(List<Page> list){
+		List<Page> pages = new ArrayList(list.size());
+		for( Page page :  list )
+		{
+			pages.add(new ImmutablePage(page));
+		}
+		return pages;
 	}
 	
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SITE_ADMIN' , 'ROLE_USER')")
@@ -258,6 +271,7 @@ public class CommunityDataController {
 			@RequestParam(value="state", defaultValue="NONE", required=false ) String state,
 			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
 			@RequestParam(value="pageSize", defaultValue="15", required=false ) Integer pageSize,
+			@RequestParam(value="full", defaultValue="true", required=false ) Boolean isFull,
 			NativeWebRequest request ) throws NotFoundException {		
 		
 		User user = SecurityHelper.getUser();						
@@ -268,8 +282,8 @@ public class CommunityDataController {
 			objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();
 		}	
 		
-		PageState pageState = PageState.valueOf(state.toUpperCase());		
-		return getPageList(objectType, objectId, pageState, startIndex, pageSize);
+		PageState pageState = PageState.valueOf(state.toUpperCase());	
+		return getPageList(objectType, objectId, pageState, startIndex, pageSize, isFull);
 	}
 	
 	
@@ -305,7 +319,8 @@ public class CommunityDataController {
 	@ResponseBody
 	public Page updatePageState(
 			@RequestBody DefaultPage page, 
-			NativeWebRequest request) throws NotFoundException{		
+			NativeWebRequest request) throws NotFoundException{	
+		
 		User user = SecurityHelper.getUser();
 		if(page.getUser() == null && page.getPageId() == 0)
 			page.setUser(user);
@@ -425,7 +440,9 @@ public class CommunityDataController {
 
 	@RequestMapping(value="/pages/properties/delete.json", method={RequestMethod.POST, RequestMethod.DELETE})
 	@ResponseBody
-	public List<Property>  deleteImageProperty(@RequestParam(value="imageId", defaultValue="0", required=true ) Long pageId, @RequestParam(value="versionId", defaultValue="1" ) Integer versionId, @RequestBody List<Property> newProperties,  NativeWebRequest request ) throws NotFoundException {		
+	public List<Property>  deleteImageProperty(@RequestParam(value="pageId", defaultValue="0", required=true ) Long pageId, 
+			@RequestParam(value="versionId", defaultValue="1" ) Integer versionId, @RequestBody List<Property> newProperties,  
+			NativeWebRequest request ) throws NotFoundException {		
 		User user = SecurityHelper.getUser();		
 		Page page = pageManager.getPage(pageId, versionId);
 		Map<String, String> properties = page.getProperties();	
@@ -450,10 +467,36 @@ public class CommunityDataController {
 		return list;
 	}
 	
-	private PageList getPageList( int objectType, long objectId, PageState pageState, int startIndex, int pageSize){		
+	private boolean isPageStateFilterEnabled(PageState pageState){
+		if( pageState != PageState.NONE){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	private PageList getPageList( int objectType, long objectId, PageState pageState, int startIndex, int pageSize, Boolean isFull){		
+		
 		PageList list = new PageList();	
-		list.setPages( pageManager.getPages(objectType, objectId, startIndex, pageSize) );		
-		list.setTotalCount(pageManager.getPageCount(objectType, objectId));		
+		boolean byState = isPageStateFilterEnabled(pageState);
+		
+		List<Page> data ;
+		int totalCount = 0 ;
+		if(byState){
+			data = pageManager.getPages(objectType, objectId, pageState, startIndex, pageSize);
+			totalCount = pageManager.getPageCount(objectType, objectId, pageState);
+		}else{
+			data = pageManager.getPages(objectType, objectId, startIndex, pageSize);
+			totalCount = pageManager.getPageCount(objectType, objectId);
+		}
+		
+		if(isFull){
+			list.setPages( data );	
+		}else{
+			
+			list.setPages( toImmutablePageList( data ));		
+		}
+		list.setTotalCount(totalCount);		
+		
 		return list;
 	}
 	
@@ -948,6 +991,7 @@ public class CommunityDataController {
 			poll.setUser(user);
 		if( user.isAnonymous() || user.getUserId() != poll.getUser().getUserId() )
 			throw new UnAuthorizedException();
+		
 		boolean doUpdate = false;			
 		
 		Poll target = pollManager.createPoll(poll.getObjectType(), poll.getObjectId(), user, poll.getName());

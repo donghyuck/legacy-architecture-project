@@ -35,7 +35,6 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.support.SqlLobValue;
 
 import architecture.common.user.SecurityHelper;
@@ -152,26 +151,20 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 		}		
 	}
 	
-	private void updateProperties(final Page page){
-		
-		Map<String, String> oldProps = loadProperties(page);
-		
+	private void updateProperties(final Page page){		
+		Map<String, String> oldProps = loadProperties(page);		
 		log.debug("old:" + oldProps );
-		log.debug("new:" + page.getProperties() );
+		log.debug("new:" + page.getProperties() );	
 		
 		final List<String> deleteKeys = getDeletedPropertyKeys(oldProps, page.getProperties());
 		final List<String> modifiedKeys = getModifiedPropertyKeys(oldProps, page.getProperties());
 		final List<String> addedKeys = getAddedPropertyKeys(oldProps, page.getProperties());
-		
-
-		log.debug("deleteKeys:" + deleteKeys.size());
-		
+		log.debug("deleteKeys:" + deleteKeys.size());	
 		if( !deleteKeys.isEmpty() ){
 			getExtendedJdbcTemplate().batchUpdate(
 				getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_PAGE_PROPERTY_BY_NAME").getSql(), 
 				new BatchPreparedStatementSetter(){
-					public void setValues(PreparedStatement ps, int i)
-							throws SQLException {
+					public void setValues(PreparedStatement ps, int i) throws SQLException {
 						ps.setLong(1, page.getPageId());
 						ps.setLong(2,  page.getVersionId());
 						ps.setString(3, deleteKeys.get(i));
@@ -182,22 +175,19 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 				}
 			);	
 		}
-		log.debug("modifiedKeys:" + deleteKeys.size());
-		
+		log.debug("modifiedKeys:" + modifiedKeys.size());		
 		if( !modifiedKeys.isEmpty() ){
 			getExtendedJdbcTemplate().batchUpdate(
 				getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_PAGE_PROPERTY_BY_NAME").getSql(), 
 				new BatchPreparedStatementSetter(){
-					public void setValues(PreparedStatement ps, int i)
-							throws SQLException {
-						
+					public void setValues(PreparedStatement ps, int i) throws SQLException {						
 						String key = modifiedKeys.get(i);
-						String value = page.getProperty(key, null);						
+						String value = page.getProperties().get(key);					
 						log.debug("batch[" + key + "=" + value +  "]");
-						ps.setString(1, key);
-						ps.setString(2, value);
-						ps.setLong(3, page.getPageId());
-						ps.setLong(4,  page.getVersionId());
+						ps.setString(1, value);
+						ps.setLong(2, page.getPageId());
+						ps.setLong(3,  page.getVersionId());
+						ps.setString(4, key);
 					}
 					public int getBatchSize() {
 						return modifiedKeys.size();
@@ -214,13 +204,10 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 						ps.setLong(1, page.getPageId());
 						ps.setLong(2,  page.getVersionId());
 						String key = addedKeys.get(i);
-						String value = page.getProperty(key, null);
-						
-						log.debug("batch[" + key + "=" + value +  "]");
-						
+						String value = page.getProperty(key, null);						
+						log.debug("batch[" + key + "=" + value +  "]");						
 						ps.setString(3, key);
-						ps.setString(4, value );
-												
+						ps.setString(4, value );												
 					}
 					public int getBatchSize() {
 						return addedKeys.size();
@@ -236,8 +223,6 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 		Set<String> newKeys = newProps.keySet();
 		for( String key : newKeys)
 			oldKeys.remove(key);
-		
-		//oldKeys.removeAll(newKeys);		
 		return Arrays.asList( 
 			oldKeys.toArray( new String[oldKeys.size()] )
 		);
@@ -248,31 +233,36 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 		HashMap<String, String> temp = new HashMap<String, String>(oldProps);
 		Set<String> oldKeys = temp.keySet();
 		Set<String> newKeys = newProps.keySet();
-		oldKeys.retainAll(newKeys);
-		
+		oldKeys.retainAll(newKeys);		
 		List<String> modified = new ArrayList<String>();
 		for( String key : oldKeys){			
+			log.debug(key +" equals:[" +newProps.get(key)+"]=["+ oldProps.get(key) + "]" + StringUtils.equals(newProps.get(key), oldProps.get(key)) );
 			if( !StringUtils.equals(newProps.get(key), oldProps.get(key)))
 				modified.add(key);
 		}
 		return modified;
 	}
 	
+	/**
+	 * return key values  
+	 * @param oldProps
+	 * @param newProps
+	 * @return
+	 */
 	private List<String> getAddedPropertyKeys(Map<String, String> oldProps, Map<String, String> newProps){
 		HashMap<String, String> temp = new HashMap<String, String>(oldProps);
 		Set<String> oldKeys = temp.keySet();
 		Set<String> newKeys = newProps.keySet();
-		
-		for( String key : oldKeys)
-			newKeys.remove(key);
-				
-		return Arrays.asList( 
-			newKeys.toArray( new String[newKeys.size()] )
-		); 
+		List<String> added = new ArrayList<String>();
+		for( String key : newKeys){
+			if(!oldKeys.contains(key)){
+				added.add(key);
+			}	
+		}		
+		return added;
 	}	
 	
-	private Map<String, String> loadProperties(Page page){
-		
+	private Map<String, String> loadProperties(Page page){		
 		return getExtendedJdbcTemplate().query(
 			getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_PROPERTIES").getSql(), 
 			new Object[] { page.getPageId(), page.getVersionId() }, new ResultSetExtractor<Map<String, String>>(){
@@ -284,8 +274,7 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 					rows.put(key, value);
 				}
 				return rows;
-		}});
-		
+		}});		
 	}
 	
 	private void insertPageVersion(Page page){
@@ -549,7 +538,7 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 		page.setVersionId(versionNumber);
 		getExtendedJdbcTemplate().query(
 				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_BY_ID_AND_VERSION").getSql(), 
-				new ParameterizedRowMapper<Page>(){
+				new RowMapper<Page>(){
 					public Page mapRow(ResultSet rs, int rowNum)
 							throws SQLException {						
 						page.setName(rs.getString("NAME"));
@@ -647,7 +636,7 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 	public Page getPageByTitle(int objectType, long objectId, String title) {
 		Long resutls[] = getExtendedJdbcTemplate().queryForObject(
 				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_TITLE").getSql(), 	
-				new ParameterizedRowMapper<Long[]>(){
+				new RowMapper<Long[]>(){
 					public Long[] mapRow(ResultSet rs, int rowNum) throws SQLException {
 						return new Long[]{ rs.getLong("PAGE_ID"), rs.getLong("VERSION_ID") };
 					}					
@@ -713,13 +702,45 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 
 	@Override
 	public int getPageCount(int objectType, PageState state) {
-		return getExtendedJdbcTemplate().queryForInt(
-				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_PAGE_BY_OBJECT_TYPE_AND_STATE").getSql(), 		
+		return getExtendedJdbcTemplate().queryForObject(
+				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_PAGE_BY_OBJECT_TYPE_AND_STATE").getSql(), 	
+				Integer.class,
 				new SqlParameterValue(Types.NUMERIC, objectType ),
 				new SqlParameterValue(Types.VARCHAR, state.name().toLowerCase()  )
 		);
 	}
-	
-	
+
+	@Override
+	public List<Long> getPageIds(int objectType, long objectId, PageState state) {
+		return getExtendedJdbcTemplate().queryForList(				
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_STATE").getSql(), 		
+				Long.class,
+				new SqlParameterValue(Types.NUMERIC, objectType ),
+				new SqlParameterValue(Types.NUMERIC, objectId ),
+				new SqlParameterValue(Types.VARCHAR,  state.name().toLowerCase() )
+				);
+	}
+
+	@Override
+	public List<Long> getPageIds(int objectType, long objectId, PageState state, int startIndex, int maxResults) {
+		return getExtendedJdbcTemplate().queryScrollable(
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_STATE").getSql(), 
+				startIndex, 
+				maxResults, 
+				new Object[ ] {objectType, objectId, state.name().toLowerCase() }, 
+				new int[] {Types.NUMERIC, Types.NUMERIC, Types.VARCHAR}, 
+				Long.class);
+	}
+
+	@Override
+	public int getPageCount(int objectType, long objectId, PageState state) {
+		return getExtendedJdbcTemplate().queryForObject(
+				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_PAGE_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_STATE").getSql(), 	
+				Integer.class,
+				new SqlParameterValue(Types.NUMERIC, objectType ),
+				new SqlParameterValue(Types.NUMERIC, objectId ),
+				new SqlParameterValue(Types.VARCHAR, state.name().toLowerCase()  )
+		);
+	}
 
 }

@@ -255,7 +255,9 @@
 		COUNT(LOGO_ID)
 	FROM V2_LOGO 
 	WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
-	]]></sql-query>						
+	]]></sql-query>		
+	
+					
 	<!--  PAGE  -->
  	<sql-query name="COUNT_PAGE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="COUNT_PAGE_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[    	
  	SELECT count( PAGE_ID ) FROM V2_PAGE 
@@ -289,6 +291,39 @@
 	    and t1.version_id = t2.version_id	    
  	ORDER BY 	T1.MODIFIED_DATE DESC 		
     ]]></sql-query>		    
+ 
+  	<sql-query name="COUNT_PAGE_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_STATE" description="COUNT_PAGE_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_STATE"><![CDATA[    	
+ 	SELECT count( T1.PAGE_ID ) FROM V2_PAGE T1, v2_page_version t2
+ 	WHERE 
+	    t1.object_type = ?
+	    and t1.object_id = ?
+	    and t2.state = ?
+	    and t1.page_id = t2.page_id 
+	    and t1.version_id = t2.version_id	  	
+    ]]></sql-query>	
+ 
+  	<sql-query name="SELECT_PAGE_IDS_BY_OBJECT_TYPE_AND_STATE" description="SELECT_PAGE_IDS_BY_OBJECT_TYPE_AND_STATE"><![CDATA[    	
+  	SELECT T1.PAGE_ID FROM V2_PAGE T1, v2_page_version t2
+ 	WHERE 	    
+	    t1.object_type = ?
+	    and t2.state = ?
+	    and t1.page_id = t2.page_id 
+	    and t1.version_id = t2.version_id	    
+ 	ORDER BY 	T1.MODIFIED_DATE DESC 		
+    ]]></sql-query>		
+    
+  	<sql-query name="SELECT_PAGE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_STATE" description="SELECT_PAGE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_STATE"><![CDATA[    	
+  	SELECT T1.PAGE_ID FROM V2_PAGE T1, v2_page_version t2
+ 	WHERE 	    
+	    t1.object_type = ?
+	    and t1.object_id = ?
+	    and t2.state = ?
+	    and t1.page_id = t2.page_id 
+	    and t1.version_id = t2.version_id	    
+ 	ORDER BY 	T1.MODIFIED_DATE DESC 		
+    ]]></sql-query>	
+    
+              
  	<sql-query name="CREATE_PAGE" description="CREATE_PAGE"><![CDATA[    	
 		INSERT INTO V2_PAGE (
 			PAGE_ID,
