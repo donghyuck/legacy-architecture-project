@@ -71,6 +71,7 @@ import architecture.ee.web.community.page.PageState;
 import architecture.ee.web.community.poll.DefaultPoll;
 import architecture.ee.web.community.poll.Poll;
 import architecture.ee.web.community.poll.PollManager;
+import architecture.ee.web.community.poll.PollOption;
 import architecture.ee.web.community.stats.ViewCountManager;
 import architecture.ee.web.community.streams.Photo;
 import architecture.ee.web.community.streams.PhotoStreamsManager;
@@ -983,19 +984,50 @@ public class CommunityDataController {
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value="/polls/update.json", method=RequestMethod.POST)
 	@ResponseBody
-	public Poll updatePoll(
-			@RequestBody DefaultPoll poll, 
-			NativeWebRequest request) throws NotFoundException{		
+	public Poll updatePoll(@RequestBody DefaultPoll poll, NativeWebRequest request) throws NotFoundException{		
 		User user = SecurityHelper.getUser();
 		if(poll.getUser() == null && poll.getPollId() < 0)
 			poll.setUser(user);
 		if( user.isAnonymous() || user.getUserId() != poll.getUser().getUserId() )
 			throw new UnAuthorizedException();
 		
-		boolean doUpdate = false;			
+		boolean doUpdate = false;
 		
-		Poll target = pollManager.createPoll(poll.getObjectType(), poll.getObjectId(), user, poll.getName());
-
-		return target;
+		if( poll.getPollId() > 0){
+			DefaultPoll orgPoll = (DefaultPoll) pollManager.getPoll(poll.getPollId());
+			orgPoll.setName(poll.getName());
+			orgPoll.setDescription(poll.getDescription());
+			orgPoll.setStartDate(poll.getStartDate());
+			orgPoll.setEndDate(poll.getEndDate());
+			orgPoll.setExpireDate(poll.getExpireDate());
+			orgPoll.setMode(poll.getMode());
+			orgPoll.setStatus(poll.getStatus());
+			pollManager.updatePoll(orgPoll);
+			return orgPoll;
+		}else{
+			return pollManager.createPoll(poll.getObjectType(), poll.getObjectId(), user, poll.getName());
+		}
 	}
+	
+	@RequestMapping(value={"/polls/options/list.json"},method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public List<PollOption> getPollOptions(
+			@RequestParam(value="pollId", defaultValue="0", required=true ) Long pollId, 
+			NativeWebRequest request) throws UnAuthorizedException, NotFoundException{		
+		Poll poll = pollManager.getPoll(pollId);
+		return pollManager.getPollOptions(poll);		
+	}	
+	
+	@RequestMapping(value="/polls/options/update.json", method=RequestMethod.POST)
+	public void updatePollOptions(
+			@RequestParam(value="pollId", defaultValue="0", required=true ) Long pollId, 
+			@RequestBody List<PollOption> options) throws UnAuthorizedException, NotFoundException{
+		
+		Poll poll = pollManager.getPoll(pollId);
+		for( PollOption po : options){
+			log.debug(po);
+		}
+		
+	}
+	
 }

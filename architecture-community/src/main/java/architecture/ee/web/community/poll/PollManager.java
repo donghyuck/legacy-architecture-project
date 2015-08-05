@@ -41,8 +41,9 @@ public interface PollManager {
 	
 	public abstract List<Poll> getPolls(User user);
 	
-	
 	public abstract List<PollOption> getPollOptions(Poll poll) throws NotFoundException;
+	
+	public abstract void setPollOptions(Poll poll);
 	
 	
 	/*

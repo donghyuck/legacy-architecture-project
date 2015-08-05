@@ -25,6 +25,12 @@ public class PollOption implements Serializable {
 	private long pollId;
 	
 	
+	public PollOption() {
+		optionId = -1L;
+		optionIndex = 1;
+		pollId = -1L;
+	}
+
 	/**
 	 * @param pollId
 	 * @param optionId
@@ -93,5 +99,13 @@ public class PollOption implements Serializable {
 	public void setPollId(long pollId) {
 		this.pollId = pollId;
 	}
+
+	@Override
+	public String toString() {
+		return "PollOption [optionId=" + optionId + ", optionText=" + optionText + ", optionIndex=" + optionIndex
+				+ ", pollId=" + pollId + "]";
+	}
+	
+	
 	
 }
