@@ -25,6 +25,8 @@ public interface PollManager {
 		
 	public Poll createPoll(int objectType, long objectId, User user, String name) throws UnAuthorizedException;
 	
+	public abstract void updatePoll(Poll poll) throws NotFoundException;
+	
 	public abstract Poll getPoll(long pollId) throws UnAuthorizedException, NotFoundException;
 	
 	public abstract int getPollCount();
@@ -38,6 +40,9 @@ public interface PollManager {
 	public abstract List<Poll> getPolls(int objectType, long objectId);
 	
 	public abstract List<Poll> getPolls(User user);
+	
+	
+	public abstract List<PollOption> getPollOptions(Poll poll) throws NotFoundException;
 	
 	
 	/*
