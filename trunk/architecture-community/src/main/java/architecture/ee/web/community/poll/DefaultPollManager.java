@@ -81,7 +81,13 @@ public class DefaultPollManager implements PollManager, EventSource {
 		return poll;
 	}
 	
-	
+
+	@Override
+	public void updatePoll(Poll poll) throws NotFoundException {
+		pollDao.updatePoll(poll);
+		pollCache.remove(poll.getPollId());
+	}
+    	
 
 	public List<Poll> getPolls() {
 		List<Long> ids = pollDao.getPollIds();
@@ -153,6 +159,18 @@ public class DefaultPollManager implements PollManager, EventSource {
 		}		
  		return polls;
 	}
-    
+
+	@Override
+	public List<PollOption> getPollOptions(Poll poll) throws NotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPollOptions(Poll poll) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

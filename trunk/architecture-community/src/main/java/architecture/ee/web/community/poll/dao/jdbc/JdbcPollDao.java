@@ -19,6 +19,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
@@ -38,24 +40,7 @@ import architecture.ee.web.community.poll.dao.PollDao;
 
 public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 
-	/*
-	 * 
-	 * 
-		POLL_ID,
-		OBJECT_TYPE,
-		OBJECT_ID,
-		USER_ID,
-		NAME,
-		DESCRIPTION,
-		POLL_MODE,
-		CREATION_DATE,
-		MODIFIED_DATE,
-		START_DATE,
-		END_DATE,
-		EXPIRE_DATE,
-		STATUS
-		
-	 */
+
 	private final RowMapper<Poll> pollMapper = new RowMapper<Poll>(){
 		public Poll mapRow(ResultSet rs, int rowNum) throws SQLException {
 			
@@ -79,13 +64,7 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 		}		
 	};	
 	
-	/**
-	 * 		
-	 * OPTION_ID,
-		POLL_ID,
-		OPTIONI_INDEX,
-		OPTION_TEXT
-	 */
+
 	private final RowMapper<PollOption> pollOptionMapper = new RowMapper<PollOption>(){
 		public PollOption mapRow(ResultSet rs, int rowNum) throws SQLException {			
 			PollOption option = new PollOption(rs.getLong("OPTION_ID"), rs.getLong("POLL_ID"), rs.getString("OPTION_TEXT"), rs.getInt("OPTIONI_INDEX"));
@@ -145,26 +124,9 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 		);
 		poll.setOptions(options);
 		*/
-		
 		return poll;
 	}
 
-	
-	/*
-	 * 		POLL_ID,
-		OBJECT_TYPE,
-		OBJECT_ID,
-		USER_ID,
-		NAME,
-		DESCRIPTION,
-		POLL_MODE,
-		CREATION_DATE,
-		MODIFIED_DATE,
-		START_DATE,
-		END_DATE,
-		EXPIRE_DATE,
-		STATUS
-		**/
 	@Override
 	public Poll createPoll(Poll poll) {		
 		DefaultPoll dp = (DefaultPoll)poll;
@@ -189,23 +151,13 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 		return dp;
 	}
 
-	/*
-	 * 
-	 * 
-	 * 		NAME = ?,
-		DESCRIPTION = ?,
-		POLL_MODE =? ,
-		MODIFIED_DATE = ?,
-		START_DATE = ?,
-		END_DATE = ?,
-		EXPIRE_DATE = ?,
-		STATUS = ?
-	WHERE 
-		POLL_ID = ?
-		
-	 */
 	@Override
 	public Poll updatePoll(Poll poll) {
+		
+		Date now = Calendar.getInstance().getTime();
+		poll.setModifiedDate(now);
+		
+		
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_POLL").getSql(), 	
 				new SqlParameterValue (Types.VARCHAR, poll.getName() ), 		
 				new SqlParameterValue (Types.VARCHAR, poll.getDescription() ), 
@@ -217,6 +169,8 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 		);			
 		return poll;
 	}
+	
+	
 
 	@Override
 	public Poll deletePoll(Poll poll) {

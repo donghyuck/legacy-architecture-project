@@ -41,6 +41,8 @@ public interface Poll extends ModelObject {
 	public abstract Date getExpireDate();
 
 	public abstract Date getModifiedDate();
+	
+	public abstract void setModifiedDate(Date modifiedDate);
 
 	public abstract String getName();
 
@@ -61,4 +63,5 @@ public interface Poll extends ModelObject {
 	public abstract long getMode();
 	
 	public abstract void setOptions(List<PollOption> options) ;
+	
 }
