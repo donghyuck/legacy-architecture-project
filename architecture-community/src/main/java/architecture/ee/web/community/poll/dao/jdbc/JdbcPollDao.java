@@ -146,26 +146,25 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 				new SqlParameterValue(Types.TIMESTAMP, dp.getStartDate()),
 				new SqlParameterValue(Types.TIMESTAMP, dp.getEndDate()),		
 				new SqlParameterValue(Types.TIMESTAMP, dp.getExpireDate()),		
-				new SqlParameterValue(Types.TIMESTAMP, dp.getStatus().getIntValue())		
+				new SqlParameterValue(Types.NUMERIC, dp.getStatus().getIntValue())		
 		);
 		return dp;
 	}
 
 	@Override
 	public Poll updatePoll(Poll poll) {
-		
 		Date now = Calendar.getInstance().getTime();
 		poll.setModifiedDate(now);
-		
-		
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_POLL").getSql(), 	
-				new SqlParameterValue (Types.VARCHAR, poll.getName() ), 		
-				new SqlParameterValue (Types.VARCHAR, poll.getDescription() ), 
-				new SqlParameterValue (Types.NUMERIC, poll.getMode() ), 			
+				new SqlParameterValue(Types.VARCHAR, poll.getName() ), 		
+				new SqlParameterValue(Types.VARCHAR, poll.getDescription() ), 
+				new SqlParameterValue(Types.NUMERIC, poll.getMode() ), 		
+				new SqlParameterValue(Types.TIMESTAMP, poll.getModifiedDate()),
 				new SqlParameterValue(Types.TIMESTAMP, poll.getStartDate()),
 				new SqlParameterValue(Types.TIMESTAMP, poll.getEndDate()),		
 				new SqlParameterValue(Types.TIMESTAMP, poll.getExpireDate()),		
-				new SqlParameterValue(Types.TIMESTAMP, poll.getStatus().getIntValue())					
+				new SqlParameterValue(Types.NUMERIC, poll.getStatus().getIntValue()),	
+				new SqlParameterValue(Types.NUMERIC, poll.getPollId()) 
 		);			
 		return poll;
 	}
@@ -221,6 +220,52 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 				}}, 
 				new SqlParameterValue (Types.NUMERIC, user.getUserId() ));
 		return list;
+	}
+
+	@Override
+	public List<PollOption> getPollOptions(Poll poll) {
+		List<PollOption> options = getExtendedJdbcTemplate().query(
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_POLL_OPTIONS").getSql(),	
+				pollOptionMapper,
+				new SqlParameterValue(Types.NUMERIC, poll.getPollId())
+		);
+		return options;
+	}
+
+	@Override
+	public void updatePollOptions(Poll poll, List<PollOption> options) {
+		for( PollOption option : options){
+			if( option.getOptionId() > 0 ){
+				getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_POLL_OPTION").getSql(), 	
+						new SqlParameterValue(Types.VARCHAR, option.getOptionText() ), 
+						new SqlParameterValue(Types.NUMERIC, option.getOptionIndex() ), 			
+						new SqlParameterValue(Types.NUMERIC, option.getOptionId())					
+				);	
+			}else{
+				option.setOptionId(getNextPollOptionId());
+				option.setPollId(poll.getPollId());
+				getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.INSERT_POLL_OPTION").getSql(), 	
+						new SqlParameterValue(Types.NUMERIC, option.getOptionId()),	
+						new SqlParameterValue(Types.NUMERIC, option.getPollId()), 
+						new SqlParameterValue(Types.NUMERIC, option.getOptionIndex()), 			
+						new SqlParameterValue(Types.VARCHAR, option.getOptionText())				
+				);					
+			}
+		}
+		
+	}
+
+	@Override
+	public void deletePollOptions(Poll poll, List<PollOption> options) {
+		for( PollOption option : options){
+			if( option.getOptionId() > 0 && option.getPollId() == poll.getPollId()){				
+				getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_POLL_OPTION").getSql(),
+						new SqlParameterValue(Types.NUMERIC, option.getOptionId())
+				);
+			}
+		}
+		
+		
 	}
 
 }
