@@ -28,8 +28,11 @@ import org.apache.commons.logging.LogFactory;
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
 import architecture.common.user.User;
+import architecture.common.user.UserManager;
+import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.exception.NotFoundException;
+import architecture.ee.web.community.page.Page;
 import architecture.ee.web.community.poll.dao.PollDao;
 
 public class DefaultPollManager implements PollManager, EventSource {
@@ -44,9 +47,18 @@ public class DefaultPollManager implements PollManager, EventSource {
 		
 	private PollDao pollDao;
 	
+	private UserManager userManager;
 	
 	public DefaultPollManager() {
 	}
+
+	
+	
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
+	}
+
+
 
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;
@@ -110,6 +122,7 @@ public class DefaultPollManager implements PollManager, EventSource {
 		Poll poll = getPollCacheById(pollId);
 		if(poll == null){
 			poll = pollDao.getPollById(pollId);
+			setUserInPoll(poll);
 			pollCache.put(new Element(poll.getPollId(), poll));
 		}
 		return poll;
@@ -162,8 +175,8 @@ public class DefaultPollManager implements PollManager, EventSource {
 
 	@Override
 	public List<PollOption> getPollOptions(Poll poll) throws NotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+
+		return pollDao.getPollOptions(poll);
 	}
 
 	@Override
@@ -172,5 +185,12 @@ public class DefaultPollManager implements PollManager, EventSource {
 		
 	}
 
-
+	protected void setUserInPoll(Poll poll){
+		long userId = poll.getUser().getUserId();
+		try {
+			((DefaultPoll)poll).setUser(userManager.getUser(userId));
+		} catch (UserNotFoundException e) {
+		}		
+	}
+	
 }
