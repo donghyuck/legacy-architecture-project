@@ -1426,13 +1426,39 @@
 	SELECT 
 		OPTION_ID,
 		POLL_ID,
-		OPTIONI_INDEX,
+		OPTION_INDEX,
 		OPTION_TEXT
 	FROM V2_POLL_OPTION
 	WHERE 	POLL_ID = ?
-	ORDER BY OPTIONI_INDEX ASC
+	ORDER BY OPTION_INDEX ASC
 	]]></sql-query>			
 	
+	<sql-query name="INSERT_POLL_OPTION" description="UPDATE_POLL"><![CDATA[
+	INSERT INTO V2_POLL_OPTION (
+		OPTION_ID,
+		POLL_ID,
+		OPTION_INDEX,
+		OPTION_TEXT
+	) VALUES (
+		?,?,?,?
+	)
+	]]></sql-query>			
+	
+	<sql-query name="UPDATE_POLL_OPTION" description="UPDATE_POLL"><![CDATA[
+	UPDATE V2_POLL_OPTION
+	SET		
+		OPTION_TEXT = ?,	
+		OPTION_INDEX = ?
+	WHERE 
+		OPTION_ID = ?
+	]]></sql-query>				
+		
+	<sql-query name="DELETE_POLL_OPTION" description="UPDATE_POLL"><![CDATA[
+	DELETE V2_POLL_OPTION
+	WHERE 
+		OPTION_ID = ?
+	]]></sql-query>		
+		
 	<sql-query name="INSERT_POLL" description="INSERT_POLL"><![CDATA[
 	INSERT INTO V2_POLL ( 
 		POLL_ID,
