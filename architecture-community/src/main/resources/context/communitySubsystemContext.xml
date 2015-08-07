@@ -153,6 +153,7 @@
 	<bean id="pollManager"
 		class="architecture.ee.web.community.poll.DefaultPollManager"
 		depends-on="pollDao" 
+		p:userManager-ref="userManager"
 		p:eventPublisher-ref="eventPublisher" 
 		p:pollDao-ref="pollDao" 
 		p:pollCache-ref="pollCache" 
