@@ -20,6 +20,7 @@ import java.util.List;
 import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.community.poll.Poll;
+import architecture.ee.web.community.poll.PollOption;
 
 public interface PollDao {
 
@@ -42,4 +43,11 @@ public interface PollDao {
 	public abstract List<Long> getPollIds(int objectType, long objectId);	
 	
 	public abstract List<Long> getPollIds(User user);	
+	
+	public abstract List<PollOption> getPollOptions(Poll poll);
+	
+	public abstract void updatePollOptions(Poll poll, List<PollOption> options);
+	
+	public abstract void deletePollOptions(Poll poll, List<PollOption> options);
+	
 }

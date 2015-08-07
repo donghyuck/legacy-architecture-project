@@ -1002,6 +1002,10 @@ public class CommunityDataController {
 			orgPoll.setExpireDate(poll.getExpireDate());
 			orgPoll.setMode(poll.getMode());
 			orgPoll.setStatus(poll.getStatus());
+			
+			
+			
+			
 			pollManager.updatePoll(orgPoll);
 			return orgPoll;
 		}else{
@@ -1009,24 +1013,37 @@ public class CommunityDataController {
 		}
 	}
 	
+	
 	@RequestMapping(value={"/polls/options/list.json"},method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public List<PollOption> getPollOptions(
 			@RequestParam(value="pollId", defaultValue="0", required=true ) Long pollId, 
-			NativeWebRequest request) throws UnAuthorizedException, NotFoundException{		
+			NativeWebRequest request) throws UnAuthorizedException, NotFoundException{	
 		Poll poll = pollManager.getPoll(pollId);
 		return pollManager.getPollOptions(poll);		
 	}	
 	
 	@RequestMapping(value="/polls/options/update.json", method=RequestMethod.POST)
-	public void updatePollOptions(
+	@ResponseBody
+	public Result updatePollOptions(
 			@RequestParam(value="pollId", defaultValue="0", required=true ) Long pollId, 
 			@RequestBody List<PollOption> options) throws UnAuthorizedException, NotFoundException{
 		
 		Poll poll = pollManager.getPoll(pollId);
-		for( PollOption po : options){
-			log.debug(po);
-		}
+		pollManager.setPollOptions(poll, options);
+		return Result.newResult();
+		
+	}
+	
+	@RequestMapping(value="/polls/options/delete.json", method=RequestMethod.POST)
+	@ResponseBody
+	public Result deletePollOptions(
+			@RequestParam(value="pollId", defaultValue="0", required=true ) Long pollId, 
+			@RequestBody List<PollOption> options) throws UnAuthorizedException, NotFoundException{
+		
+		Poll poll = pollManager.getPoll(pollId);
+		pollManager.deletePollOptions(poll, options);
+		return Result.newResult();
 		
 	}
 	

@@ -229,6 +229,8 @@ public class DefaultPoll implements Poll {
 	 * @param name 설정할 name
 	 */
 	public void setName(String name) {
+		if( name == null)
+			throw new IllegalArgumentException("name can not be null.");
 		this.name = name;
 	}
 
@@ -292,6 +294,8 @@ public class DefaultPoll implements Poll {
 	 */
 	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setStartDate(Date startDate) {
+		if( startDate == null || this.endDate != null && startDate.compareTo(this.endDate) > 0)
+			throw new IllegalArgumentException("Start date can not be null or greater than endDate.");
 		this.startDate = startDate;
 	}
 
@@ -308,6 +312,9 @@ public class DefaultPoll implements Poll {
 	 */
 	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setEndDate(Date endDate) {
+		if( endDate == null || this.startDate != null && this.startDate.compareTo(endDate) > 0)
+			throw new IllegalArgumentException("End date can not be null or less than startDate.");
+		
 		this.endDate = endDate;
 	}
 
@@ -324,6 +331,8 @@ public class DefaultPoll implements Poll {
 	 */
 	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setExpireDate(Date expireDate) {
+		if( expireDate == null || endDate != null && endDate.compareTo(expireDate)>0)
+			throw new IllegalArgumentException("Expire date can not be null or less than end Date.");
 		this.expireDate = expireDate;
 	}
 
@@ -369,6 +378,10 @@ public class DefaultPoll implements Poll {
 		this.commentStatus = commentStatus;
 	}
 
+	
+	public int getOptionCount(){
+		return options.size();
+	}
 	/**
 	 * @return options
 	 */
@@ -387,6 +400,7 @@ public class DefaultPoll implements Poll {
 	public void addOption(PollOption option){
 		this.options.add(option);
 	}
+	
 
 	/**
 	 * @return status

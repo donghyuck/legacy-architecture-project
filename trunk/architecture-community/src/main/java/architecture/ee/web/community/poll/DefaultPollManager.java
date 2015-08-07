@@ -24,6 +24,8 @@ import net.sf.ehcache.Element;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
@@ -78,6 +80,7 @@ public class DefaultPollManager implements PollManager, EventSource {
 		this.pollDao = pollDao;
 	}
 
+	 @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public Poll createPoll(int objectType, long objectId, User user, String name) {
 		
 		DefaultPoll poll = new DefaultPoll(objectType, objectId, user, name);
@@ -94,7 +97,7 @@ public class DefaultPollManager implements PollManager, EventSource {
 	}
 	
 
-	@Override
+	 @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void updatePoll(Poll poll) throws NotFoundException {
 		pollDao.updatePoll(poll);
 		pollCache.remove(poll.getPollId());
@@ -179,11 +182,6 @@ public class DefaultPollManager implements PollManager, EventSource {
 		return pollDao.getPollOptions(poll);
 	}
 
-	@Override
-	public void setPollOptions(Poll poll) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	protected void setUserInPoll(Poll poll){
 		long userId = poll.getUser().getUserId();
@@ -191,6 +189,31 @@ public class DefaultPollManager implements PollManager, EventSource {
 			((DefaultPoll)poll).setUser(userManager.getUser(userId));
 		} catch (UserNotFoundException e) {
 		}		
+	}
+
+
+
+	 @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
+	public void setPollOptions(Poll poll, List<PollOption> options) {
+		try {
+			pollDao.updatePollOptions(poll, options);
+			updatePoll(poll);
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+
+
+	 @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
+	public void deletePollOptions(Poll poll, List<PollOption> options) {
+		try {
+			pollDao.deletePollOptions(poll, options);
+			updatePoll(poll);
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

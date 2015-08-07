@@ -25,7 +25,9 @@ import architecture.ee.web.community.model.ContentObject.Status;
 public interface Poll extends ModelObject {
 
 	public static final long ALLOW_USER_VOTE_MODIFICATION = 16L;
+	
 	public static final long ALLOW_ANONYMOUS_VOTE_MODIFICATION = 32L;
+	
 	public static final long MULTIPLE_SELECTIONS_ALLOWED = 256L;
 
 	public abstract long getPollId();
