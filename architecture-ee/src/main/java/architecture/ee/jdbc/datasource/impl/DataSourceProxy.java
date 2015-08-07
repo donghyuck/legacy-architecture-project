@@ -18,6 +18,8 @@ package architecture.ee.jdbc.datasource.impl;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
+import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
@@ -63,6 +65,12 @@ public class DataSourceProxy implements DataSource {
 	@Override
 	public boolean isWrapperFor(Class<?> iface) throws SQLException {
 		return dataSource.isWrapperFor(iface);
+	}
+
+	@Override
+	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+
+		return null;
 	}	
 	
 }
