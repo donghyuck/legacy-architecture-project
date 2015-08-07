@@ -36,6 +36,7 @@ import architecture.ee.web.community.model.ContentObject.Status;
 import architecture.ee.web.community.poll.DefaultPoll;
 import architecture.ee.web.community.poll.Poll;
 import architecture.ee.web.community.poll.PollOption;
+import architecture.ee.web.community.poll.Vote;
 import architecture.ee.web.community.poll.dao.PollDao;
 
 public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
@@ -63,8 +64,15 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 			return poll;
 		}		
 	};	
-	
 
+	private final RowMapper<Vote> voteMapper = new RowMapper<Vote>(){
+		public Vote mapRow(ResultSet rs, int rowNum) throws SQLException {			
+			Vote option = new Vote(rs.getLong("OPTION_ID"), rs.getLong("USER_ID"), rs.getString("GUEST_ID"), rs.getString("IP"), rs.getTimestamp("VOTE_DATE"));
+			return option;
+		}		
+	};	
+		
+		
 	private final RowMapper<PollOption> pollOptionMapper = new RowMapper<PollOption>(){
 		public PollOption mapRow(ResultSet rs, int rowNum) throws SQLException {			
 			PollOption option = new PollOption(rs.getLong("OPTION_ID"), rs.getLong("POLL_ID"), rs.getString("OPTION_TEXT"), rs.getInt("OPTION_INDEX"));
@@ -231,7 +239,7 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 		);
 		return options;
 	}
-
+	
 	@Override
 	public void updatePollOptions(Poll poll, List<PollOption> options) {
 		for( PollOption option : options){
@@ -263,9 +271,34 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 						new SqlParameterValue(Types.NUMERIC, option.getOptionId())
 				);
 			}
-		}
-		
-		
+		}		
 	}
+
+	public void deleteVote(Vote vote){
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_VOTE").getSql(),
+			new SqlParameterValue(Types.NUMERIC, vote.getOptionId()),	
+			new SqlParameterValue(Types.NUMERIC, vote.getUserId()),
+			new SqlParameterValue(Types.VARCHAR, vote.getUniqueId())
+		);		
+	}
+	
+	public void insertVote(Vote vote){
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.INSERT_VOTE").getSql(),
+			new SqlParameterValue(Types.NUMERIC, vote.getOptionId()),	
+			new SqlParameterValue(Types.NUMERIC, vote.getUserId()),
+			new SqlParameterValue(Types.VARCHAR, vote.getUniqueId()),
+			new SqlParameterValue(Types.TIMESTAMP, vote.getVoteDate()),
+			new SqlParameterValue(Types.VARCHAR, vote.getIPAddress())
+		);
+	}
+	
+	public List<Vote> getVotes(Poll poll) {
+		List<Vote> options = getExtendedJdbcTemplate().query(
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_VOTES_BY_POLL").getSql(),	
+				voteMapper,
+				new SqlParameterValue(Types.NUMERIC, poll.getPollId())
+		);
+		return options;
+	}	
 
 }

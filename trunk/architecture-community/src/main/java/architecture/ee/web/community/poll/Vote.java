@@ -22,10 +22,9 @@ import architecture.common.cache.Cacheable;
 
 public class Vote implements Cacheable {
 
-	private long pollId;
 	private long userId;
 	private String uniqueId;
-	private int optionIndex;
+	private long optionId;
 	private Date voteDate;
 	private String ip;
 	
@@ -38,12 +37,10 @@ public class Vote implements Cacheable {
 	 * @param optionIndex
 	 * @param ip
 	 */
-	protected Vote(long pollId, long userId, String uniqueId, int optionIndex,
-			String ip) {
-		this.pollId = pollId;
+	protected Vote(long optionId, long userId, String uniqueId,  String ip) {
 		this.userId = userId;
 		this.uniqueId = uniqueId;
-		this.optionIndex = optionIndex;
+		this.optionId = optionId;
 		this.ip = ip;
 		this.voteDate = new Date();
 	}
@@ -56,12 +53,10 @@ public class Vote implements Cacheable {
 	 * @param ip
 	 * @param voteDate
 	 */
-	protected Vote(long pollId, long userId, String uniqueId, int optionIndex,
-			String ip, Date voteDate) {
-		this.pollId = pollId;
+	public Vote(long optionId, long userId, String uniqueId, String ip, Date voteDate) {
 		this.userId = userId;
 		this.uniqueId = uniqueId;
-		this.optionIndex = optionIndex;
+		this.optionId = optionId;
 		this.ip = ip;
 		this.voteDate = voteDate;
 	}
@@ -77,26 +72,6 @@ public class Vote implements Cacheable {
 	public void setIPAddress(String ip) {
 		this.ip = ip;
 	}
-	
-	/**
-	 * @return pollId
-	 */
-	public long getPollId() {
-		return pollId;
-	}
-
-
-
-
-	/**
-	 * @param pollId 설정할 pollId
-	 */
-	public void setPollId(long pollId) {
-		this.pollId = pollId;
-	}
-
-
-
 
 	/**
 	 * @return userId
@@ -138,25 +113,16 @@ public class Vote implements Cacheable {
 
 
 
-	/**
-	 * @return optionIndex
-	 */
-	public int getOptionIndex() {
-		return optionIndex;
+
+
+
+	public long getOptionId() {
+		return optionId;
 	}
 
-
-
-
-	/**
-	 * @param optionIndex 설정할 optionIndex
-	 */
-	public void setOptionIndex(int optionIndex) {
-		this.optionIndex = optionIndex;
+	public void setOptionId(long optionId) {
+		this.optionId = optionId;
 	}
-
-
-
 
 	/**
 	 * @return voteDate

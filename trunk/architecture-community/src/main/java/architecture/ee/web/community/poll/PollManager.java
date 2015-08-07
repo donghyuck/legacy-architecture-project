@@ -15,6 +15,7 @@
  */
 package architecture.ee.web.community.poll;
 
+import java.util.Date;
 import java.util.List;
 
 import architecture.common.user.User;
@@ -46,6 +47,47 @@ public interface PollManager {
 	public abstract void setPollOptions(Poll poll, List<PollOption> options);
 	
 	public abstract void deletePollOptions(Poll poll, List<PollOption> options);
+	
+	public abstract int getVoteCount(Poll poll);
+	
+	public abstract int getVoteCount(Poll poll, long optionId);
+
+	public abstract int getUserVoteCount(Poll poll);
+	
+	public abstract int getUserVoteCount(Poll poll, long optionId);
+
+	public abstract int getAnomymousVoteCount(Poll poll);
+	
+	public abstract int getAnomymousVoteCount(Poll poll, long optionId);
+	
+	public abstract List<Vote> getUserVotes(Poll poll);
+	
+	public abstract List<Vote> getAnomymousVotes(Poll poll);
+	
+	public abstract List<Vote> getUserVotes(Poll poll, long optionId);
+	
+	public abstract List<Vote> getAnomymousVotes(Poll poll, long optionId);	
+	
+	
+	public abstract void addUserVote(Poll poll, long optionId, User user); 	
+	
+	public abstract void addUserVote(Poll poll, long optionId, User user, Date voteDate); 
+	
+	
+	public abstract boolean hasUserVoted(Poll poll, User user);
+	
+	public abstract boolean hasAnomyouseVoted(Poll poll, String username);
+	
+
+	public abstract void addAnomymousVote(Poll poll, long optionId, String username); 	
+	
+	public abstract void addAnomymousVote(Poll poll, long optionId, String username, Date voteDate); 
+	
+	
+	public abstract List<PollOption> getUserVotes(Poll poll, User user);
+	
+	public abstract List<PollOption> getAnomymousVotes(Poll poll, String username);
+	
 	
 	
 	/*
