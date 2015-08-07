@@ -16,6 +16,7 @@
 package architecture.ee.web.community.poll;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -126,6 +127,7 @@ public class DefaultPollManager implements PollManager, EventSource {
 		if(poll == null){
 			poll = pollDao.getPollById(pollId);
 			setUserInPoll(poll);
+			poll.setOptions( pollDao.getPollOptions(poll));
 			pollCache.put(new Element(poll.getPollId(), poll));
 		}
 		return poll;
@@ -178,8 +180,8 @@ public class DefaultPollManager implements PollManager, EventSource {
 
 	@Override
 	public List<PollOption> getPollOptions(Poll poll) throws NotFoundException {
-
-		return pollDao.getPollOptions(poll);
+		Poll target = getPoll(poll.getPollId());
+		return target.getOptions();
 	}
 
 
@@ -190,8 +192,6 @@ public class DefaultPollManager implements PollManager, EventSource {
 		} catch (UserNotFoundException e) {
 		}		
 	}
-
-
 
 	 @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void setPollOptions(Poll poll, List<PollOption> options) {
@@ -204,8 +204,6 @@ public class DefaultPollManager implements PollManager, EventSource {
 		
 	}
 
-
-
 	 @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void deletePollOptions(Poll poll, List<PollOption> options) {
 		try {
@@ -214,6 +212,150 @@ public class DefaultPollManager implements PollManager, EventSource {
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+
+
+
+	@Override
+	public int getVoteCount(Poll poll) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	@Override
+	public int getVoteCount(Poll poll, long optionId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	@Override
+	public int getUserVoteCount(Poll poll) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	@Override
+	public int getUserVoteCount(Poll poll, long optionId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	@Override
+	public int getAnomymousVoteCount(Poll poll) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	@Override
+	public int getAnomymousVoteCount(Poll poll, long optionId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	@Override
+	public List<Vote> getUserVotes(Poll poll) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List<Vote> getAnomymousVotes(Poll poll) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List<Vote> getUserVotes(Poll poll, long optionId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List<Vote> getAnomymousVotes(Poll poll, long optionId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public void addUserVote(Poll poll, long optionId, User user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void addUserVote(Poll poll, long optionId, User user, Date voteDate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public boolean hasUserVoted(Poll poll, User user) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	@Override
+	public boolean hasAnomyouseVoted(Poll poll, String username) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	@Override
+	public void addAnomymousVote(Poll poll, long optionId, String username) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void addAnomymousVote(Poll poll, long optionId, String username, Date voteDate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public List<PollOption> getUserVotes(Poll poll, User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List<PollOption> getAnomymousVotes(Poll poll, String username) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
