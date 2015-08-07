@@ -58,7 +58,7 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 			poll.setExpireDate(rs.getTimestamp("EXPIRE_DATE"));
 			poll.setMode(rs.getLong("POLL_MODE"));
 			poll.setStatus( 
-					Status.valueOf(rs.getInt("STATUS"))
+				Status.valueOf(rs.getInt("STATUS"))
 			);
 			return poll;
 		}		
@@ -67,7 +67,7 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 
 	private final RowMapper<PollOption> pollOptionMapper = new RowMapper<PollOption>(){
 		public PollOption mapRow(ResultSet rs, int rowNum) throws SQLException {			
-			PollOption option = new PollOption(rs.getLong("OPTION_ID"), rs.getLong("POLL_ID"), rs.getString("OPTION_TEXT"), rs.getInt("OPTIONI_INDEX"));
+			PollOption option = new PollOption(rs.getLong("OPTION_ID"), rs.getLong("POLL_ID"), rs.getString("OPTION_TEXT"), rs.getInt("OPTION_INDEX"));
 			return option;
 		}		
 	};	
