@@ -31,6 +31,8 @@ public interface PollDao {
 	public abstract Poll deletePoll( Poll poll);
 	
 	public abstract	Poll getPollById(long pollId) throws NotFoundException;
+	
+	
 		
 	public abstract  int getPollCount();
 	
@@ -38,11 +40,17 @@ public interface PollDao {
 	
 	public abstract  int getPollCount(User user);
 	
+	
+	
+	
 	public abstract List<Long> getPollIds();
 		
 	public abstract List<Long> getPollIds(int objectType, long objectId);	
 	
 	public abstract List<Long> getPollIds(User user);	
+	
+	
+	
 	
 	public abstract List<PollOption> getPollOptions(Poll poll);
 	
