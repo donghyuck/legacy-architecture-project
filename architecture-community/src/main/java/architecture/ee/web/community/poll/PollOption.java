@@ -24,7 +24,6 @@ public class PollOption implements Serializable {
 	private int optionIndex;
 	private long pollId;
 	
-	
 	public PollOption() {
 		optionId = -1L;
 		optionIndex = 1;

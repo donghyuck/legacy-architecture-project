@@ -1348,7 +1348,7 @@
 	WHERE TAG_ID = ?
 	]]></sql-query>							
 	<!--  ====================================  -->
-	<!--  POLL																	 -->
+	<!--  POLL									-->
 	<!--  ====================================  -->
 	<sql-query name="COUNT_ALL_POLLS" description="COUNT_ALL_POLL"><![CDATA[
 	SELECT 
@@ -1490,5 +1490,44 @@
 		STATUS = ?
 	WHERE 
 		POLL_ID = ?
-	]]></sql-query>									
+	]]></sql-query>		
+	
+	<sql-query name="SELECT_VOTES_BY_POLL" description="SELECT_VOTES_BY_POLL"><![CDATA[
+	select 
+		t2.OPTION_ID, 
+		t2.USER_ID, 
+		t2.GUEST_ID, 
+		t2.IP, 
+		t2.VOTE_DATE 
+	from v2_poll_option t1, v2_poll_vote t2 
+	where 
+		t1.poll_id = ?
+		t1.option_id = t2.option_id;
+	]]></sql-query>	
+	
+	<sql-query name="DELETE_VOTE" description="DELETE_VOTE"><![CDATA[
+	delete from V2_POLL_VOTE 
+	where
+		OPTION_ID = ? AND
+		USER_ID = ? AND
+		GUEST_ID = ?
+	]]></sql-query>		
+
+	<sql-query name="DELETE_USER_VOTES" description="DELETE_VOTE"><![CDATA[
+	delete from V2_POLL_VOTE 
+	where
+		USER_ID = ? 
+	]]></sql-query>		
+		
+	<sql-query name="INSERT_VOTE" description="INSERT_VOTE"><![CDATA[
+	insert into V2_POLL_VOTE (
+		OPTION_ID,
+		USER_ID,
+		GUEST_ID,
+		VOTE_DATE,
+		IP
+	) values ( ?, ?, ?, ?, ?)		
+	]]></sql-query>		
+	
+									
 </sqlset>

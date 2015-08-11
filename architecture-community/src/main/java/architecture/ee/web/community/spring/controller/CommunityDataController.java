@@ -72,6 +72,7 @@ import architecture.ee.web.community.poll.DefaultPoll;
 import architecture.ee.web.community.poll.Poll;
 import architecture.ee.web.community.poll.PollManager;
 import architecture.ee.web.community.poll.PollOption;
+import architecture.ee.web.community.poll.PollStats;
 import architecture.ee.web.community.stats.ViewCountManager;
 import architecture.ee.web.community.streams.Photo;
 import architecture.ee.web.community.streams.PhotoStreamsManager;
@@ -980,14 +981,58 @@ public class CommunityDataController {
 		}
 		return list;		
 	}	
+	
+	@RequestMapping(value={"/polls/stats/list.json"},method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public ItemList getStatsPolls (			
+			@RequestParam(value="objectType", defaultValue="0", required=false ) Integer objectType,
+			@RequestParam(value="objectId", defaultValue="0", required=false ) Long objectId,
+			@RequestParam(value="active", defaultValue="false", required=false ) Boolean active,
+			@RequestParam(value="live", defaultValue="false", required=false ) Boolean live,
+			NativeWebRequest request 
+			){		
+
+		User user = SecurityHelper.getUser();
+		
+		List<PollStats> items = new ArrayList<PollStats>();
+		int pollCount = 0;
+
+		if( objectType > 0 && objectId > 0 ){		
+			pollCount = pollManager.getPollCount(objectType, objectId);
+			for( Poll p : pollManager.getPolls(objectType, objectId)){
+				items.add(pollManager.getPollStats(p, user));
+			}
+		}else{
+			pollCount = pollManager.getPollCount(user);
+			for( Poll p : pollManager.getPolls(user)){
+				items.add(pollManager.getPollStats(p, user));
+			}		
+		}
+				
+		return new ItemList(items, pollCount);		
+	}	
+	
+	@RequestMapping(value={"/polls/stats/get.json"},method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public PollStats getStatsPoll (			
+			@RequestParam(value="pollId", defaultValue="0", required=true ) Long pollId,
+			NativeWebRequest request 
+			) throws UnAuthorizedException, NotFoundException{		
+		User user = SecurityHelper.getUser();
+		Poll poll = pollManager.getPoll(pollId);
+		return pollManager.getPollStats(poll, user);
+	}
+	 
 
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value="/polls/update.json", method=RequestMethod.POST)
 	@ResponseBody
 	public Poll updatePoll(@RequestBody DefaultPoll poll, NativeWebRequest request) throws NotFoundException{		
+		
 		User user = SecurityHelper.getUser();
-		if(poll.getUser() == null && poll.getPollId() < 0)
+		if(poll.getUser() == null && poll.getPollId() < 1)
 			poll.setUser(user);
+		
 		if( user.isAnonymous() || user.getUserId() != poll.getUser().getUserId() )
 			throw new UnAuthorizedException();
 		
@@ -1002,9 +1047,6 @@ public class CommunityDataController {
 			orgPoll.setExpireDate(poll.getExpireDate());
 			orgPoll.setMode(poll.getMode());
 			orgPoll.setStatus(poll.getStatus());
-			
-			
-			
 			
 			pollManager.updatePoll(orgPoll);
 			return orgPoll;
