@@ -25,6 +25,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -336,6 +337,49 @@ public class DefaultPoll implements Poll {
 		this.expireDate = expireDate;
 	}
 
+	@JsonProperty
+	public boolean isMultipleSelectAllowed(){
+		return isModeEnabled(Poll.MULTIPLE_SELECTIONS_ALLOWED);
+	}
+	
+	public void setMultipleSelectAllowed( boolean allowed){
+		if( isModeEnabled(Poll.MULTIPLE_SELECTIONS_ALLOWED) ){
+			if( !allowed )
+				setMode(Poll.MULTIPLE_SELECTIONS_ALLOWED, allowed);
+		}else{
+			if( allowed )
+				setMode(Poll.MULTIPLE_SELECTIONS_ALLOWED, allowed);			
+		}
+	}
+	
+	public boolean isAnonymousVoteAllowed(){
+		return isModeEnabled(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION);
+	}
+
+	public void setAnonymousVoteAllowed( boolean allowed){
+		if( isModeEnabled(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION) ){
+			if( !allowed )
+				setMode(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION, allowed);
+		}else{
+			if( allowed )
+				setMode(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION, allowed);			
+		}
+	}
+
+	public boolean isUserVoteAllowed(){
+		return isModeEnabled(Poll.ALLOW_USER_VOTE_MODIFICATION);
+	}
+	
+	public void setUserVoteAllowed( boolean allowed){
+		if( isModeEnabled(Poll.ALLOW_USER_VOTE_MODIFICATION) ){
+			if( !allowed )
+				setMode(Poll.ALLOW_USER_VOTE_MODIFICATION, allowed);
+		}else{
+			if( allowed )
+				setMode(Poll.ALLOW_USER_VOTE_MODIFICATION, allowed);			
+		}
+	}
+	
 	/**
 	 * @return mode
 	 */

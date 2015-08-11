@@ -20,9 +20,9 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-
+import org.apache.commons.collections.primitives.ArrayLongList;
+import org.apache.commons.collections.primitives.LongList;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.annotation.Propagation;
@@ -35,16 +35,20 @@ import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.exception.NotFoundException;
-import architecture.ee.web.community.page.Page;
 import architecture.ee.web.community.poll.dao.PollDao;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 public class DefaultPollManager implements PollManager, EventSource {
 
-	private Log log = LogFactory.getLog(getClass());
 	
-	private final LinkedList insertQueue = new LinkedList();
+	private static final Log log = LogFactory.getLog(DefaultPollManager.class);
+	
+	private final LinkedList<Vote> insertQueue = new LinkedList<Vote>();
 	
 	private Cache pollCache;
+	
+	private Cache voteCache;
 	
 	private EventPublisher eventPublisher;
 		
@@ -55,16 +59,30 @@ public class DefaultPollManager implements PollManager, EventSource {
 	public DefaultPollManager() {
 	}
 
-	
-	
+	public LinkedList<Vote> getVoteQueue(){
+		return insertQueue;
+	}	
+
 	public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;
 	}
 
 
 
+	public Cache getVoteCache() {
+		return voteCache;
+	}
+
+	public void setVoteCache(Cache voteCache) {
+		this.voteCache = voteCache;
+	}
+
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;
+	}
+	
+	public Cache getPollCache() {
+		return pollCache;
 	}
 	
 	/**
@@ -214,148 +232,337 @@ public class DefaultPollManager implements PollManager, EventSource {
 		}
 	}
 
-
-
-	@Override
 	public int getVoteCount(Poll poll) {
-		// TODO Auto-generated method stub
-		return 0;
+		List<Vote> votes = getVotes(poll);
+		return votes.size();
 	}
 
-
-
-	@Override
 	public int getVoteCount(Poll poll, long optionId) {
-		// TODO Auto-generated method stub
-		return 0;
+		List<Vote> votes = getVotes(poll);
+		int count = 0;
+		for(Vote vote : votes){
+			if(vote.getOptionId() == optionId)
+				count ++ ;
+		}
+		return count;
 	}
 
-
-
-	@Override
 	public int getUserVoteCount(Poll poll) {
-		// TODO Auto-generated method stub
-		return 0;
+		List<Vote> votes = getVotes(poll);
+		int count = 0;
+		for(Vote vote : votes){
+			if(vote.getUserId() > 0)
+				count ++ ;
+		}
+		return count;
 	}
 
-
-
-	@Override
 	public int getUserVoteCount(Poll poll, long optionId) {
-		// TODO Auto-generated method stub
-		return 0;
+		List<Vote> votes = getVotes(poll);
+		int count = 0;
+		for(Vote vote : votes){
+			if(vote.getOptionId() == optionId && vote.getUserId() > 0)
+				count ++ ;
+		}
+		return count;
 	}
 
-
-
-	@Override
 	public int getAnomymousVoteCount(Poll poll) {
-		// TODO Auto-generated method stub
-		return 0;
+		List<Vote> votes = getVotes(poll);
+		int count = 0;
+		for(Vote vote : votes){
+			if(vote.getUserId() == -1L)
+				count ++ ;
+		}
+		return count;
 	}
 
-
-
-	@Override
 	public int getAnomymousVoteCount(Poll poll, long optionId) {
-		// TODO Auto-generated method stub
-		return 0;
+		List<Vote> votes = getVotes(poll);
+		int count = 0;
+		for(Vote vote : votes){
+			if(vote.getOptionId() == optionId &&  vote.getUserId() == -1L)
+				count ++ ;
+		}
+		return count;
 	}
 
+	
+	private List<Vote> getVotesFromCache(Poll poll){
+		if( voteCache.get(poll.getPollId()) != null){
+			return (List<Vote>)voteCache.get(poll.getPollId()).getValue();
+		}else{
+			return null;
+		} 
+	}
+	
+	private List<Vote> loadVotes(Poll poll){
+		List<Vote> votes = pollDao.getVotes(poll);
+		voteCache.put(new Element(poll.getPollId(), votes));
+		return votes;
+	}
+	
+	public List<Vote> getVotes(Poll poll){
+		List<Vote> votes =getVotesFromCache(poll);
+		if(votes == null)
+			votes = loadVotes(poll);
+		return votes;
+	}
+	
+	public List<User> getUserVotes(Poll poll) {
+		List<Vote> votes = getVotes(poll);
+		LongList list = new ArrayLongList();
+		for(Vote vote : votes){
+			if( vote.getUserId() != -1L )
+				list.add(vote.getUserId());
+		}
+		return toUserList(list);
+	}
+	
+	private List<User> toUserList(LongList userIds ){
+		List<User> users = new ArrayList<User>();
+		for(long userId : userIds.toArray()){
+			try {
+				users.add(userManager.getUser(userId));
+			} catch (UserNotFoundException e) {
+			}
+		}
+		return users;
+	}
+	
 
-
-	@Override
-	public List<Vote> getUserVotes(Poll poll) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<String> getAnomymousVotes(Poll poll) {
+		List<Vote> votes = getVotes(poll);
+		List<String> list = new ArrayList<String>();
+		for(Vote vote : votes){
+			if( vote.getUserId() == -1L )
+				list.add(vote.getUniqueId());
+		}
+		return list;
 	}
 
-
-
-	@Override
-	public List<Vote> getAnomymousVotes(Poll poll) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> getUserVotes(Poll poll, long optionId) {
+		List<Vote> votes = getVotes(poll);
+		LongList list = new ArrayLongList();
+		for(Vote vote : votes){
+			if( optionId == vote.getOptionId() && vote.getUserId() != -1L )
+				list.add(vote.getUserId());
+		}
+		return toUserList(list);
 	}
 
-
-
-	@Override
-	public List<Vote> getUserVotes(Poll poll, long optionId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<String> getAnomymousVotes(Poll poll, long optionId) {
+		List<Vote> votes = getVotes(poll);
+		List<String> list = new ArrayList<String>();
+		for(Vote vote : votes){
+			if( optionId == vote.getOptionId() && vote.getUserId() == -1L )
+				list.add(vote.getUniqueId());
+		}
+		return list;
 	}
 
-
-
-	@Override
-	public List<Vote> getAnomymousVotes(Poll poll, long optionId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public void addUserVote(Poll poll, long optionId, User user) {
-		// TODO Auto-generated method stub
+	public void addUserVote(Poll poll, long optionId, User user) throws PollException {
+		boolean optionExist = false;
+		for( PollOption option : poll.getOptions()) {
+			if( option.getOptionId() == optionId )
+				optionExist = true;
+				break;
+		}
+		if(!optionExist)
+			throw new IllegalArgumentException("option is not valid.");
+		if(user == null)
+			throw new IllegalArgumentException("user cannot be null.");
 		
-	}
-
-
-
-	@Override
-	public void addUserVote(Poll poll, long optionId, User user, Date voteDate) {
-		// TODO Auto-generated method stub
+		Date now = new Date();
+		if(poll.getStartDate().compareTo(now)>0 || poll.getEndDate().compareTo(now) < 0 ){
+			throw new PollException("Cannot add vote : Poll is not active");
+		}
 		
+		Vote vote = new Vote(optionId, user.getUserId(), null, null, new Date() );
+		List<Vote> votes = getVotes(poll);
+		if( (poll.getMode() & Poll.MULTIPLE_SELECTIONS_ALLOWED) == 0L) {
+			for(Vote v : votes){
+				if( v.getUserId() == user.getUserId() ){
+					throw new PollException("Cannot not add vote : MULTIPLE_SELECTIONS_ALLOWED is not enabled");
+				}
+			}
+		}
+
+		for(Vote v : votes){
+			if( v.getUserId() == user.getUserId() && now.getTime() - v.getVoteDate().getTime() <= 2000L  ){
+				throw new PollException("Cannot not add vote : Existing votes are older then 2 seconds");
+			}
+		}		
+		votes.add(vote);
+		voteCache.put(new Element(poll.getPollId(), votes));
+		getVoteQueue().add(vote);		
 	}
 
+	public void addUserVote(Poll poll, long optionId, User user, Date voteDate) throws PollException {
+		boolean optionExist = false;
+		for( PollOption option : poll.getOptions()) {
+			if( option.getOptionId() == optionId )
+				optionExist = true;
+				break;
+		}
+		if(!optionExist)
+			throw new IllegalArgumentException("option is not valid.");
+		if(user == null)
+			throw new IllegalArgumentException("user cannot be null.");
+		
+		Date now = new Date();
+		if(poll.getStartDate().compareTo(now)>0 || poll.getEndDate().compareTo(now) < 0 ){
+			throw new PollException("Cannot add vote : Poll is not active");
+		}
+		
+		Vote vote = new Vote(optionId, user.getUserId(), null, null, voteDate );
+		List<Vote> votes = getVotes(poll);
+		if( (poll.getMode() & Poll.MULTIPLE_SELECTIONS_ALLOWED) == 0L) {
+			for(Vote v : votes){
+				if( v.getUserId() == user.getUserId() ){
+					throw new PollException("Cannot not add vote : MULTIPLE_SELECTIONS_ALLOWED is not enabled");
+				}
+			}
+		}
 
+		for(Vote v : votes){
+			if( v.getUserId() == user.getUserId() && now.getTime() - v.getVoteDate().getTime() <= 2000L  ){
+				throw new PollException("Cannot not add vote : Existing votes are older then 2 seconds");
+			}
+		}
+		
+		votes.add(vote);
+		voteCache.put(new Element(poll.getPollId(), votes));
+		getVoteQueue().add(vote);		
+	}
 
-	@Override
 	public boolean hasUserVoted(Poll poll, User user) {
-		// TODO Auto-generated method stub
+		if( user == null)
+			throw new IllegalArgumentException("user cannot be null.");
+		List<Vote> votes = getVotes(poll);
+		for(Vote vote : votes)
+		{
+			if( vote.getUserId() == user.getUserId())
+				return true;
+		}
+		
 		return false;
 	}
 
-
-
-	@Override
 	public boolean hasAnomyouseVoted(Poll poll, String username) {
-		// TODO Auto-generated method stub
+		if( username == null)
+			throw new IllegalArgumentException("user unique name be null.");
+		List<Vote> votes = getVotes(poll);
+		for(Vote vote : votes)
+		{
+			if( username.equals(vote.getUniqueId()))
+				return true;
+		}		
 		return false;
 	}
 
-
-
-	@Override
-	public void addAnomymousVote(Poll poll, long optionId, String username) {
-		// TODO Auto-generated method stub
-		
+	public void addAnomymousVote(Poll poll, long optionId, String username) throws PollException {
+		boolean optionExist = false;
+		for( PollOption option : poll.getOptions()) {
+			if( option.getOptionId() == optionId )
+				optionExist = true;
+				break;
+		}
+		if(!optionExist)
+			throw new IllegalArgumentException("option is not valid.");
+		if(StringUtils.isEmpty(username))
+			throw new IllegalArgumentException("unique Id cannot be null.");		
+		Date now = new Date();
+		if(poll.getStartDate().compareTo(now)>0 || poll.getEndDate().compareTo(now) < 0 ){
+			throw new PollException("Cannot add vote : Poll is not active");
+		}		
+		Vote vote = new Vote(optionId, -1L, username, null, new Date());
+		List<Vote> votes = getVotes(poll);
+		if( (poll.getMode() & Poll.MULTIPLE_SELECTIONS_ALLOWED) == 0L) {
+			for(Vote v : votes){
+				if( username.equals(v.getUniqueId()) ){
+					throw new PollException("Cannot not add vote : MULTIPLE_SELECTIONS_ALLOWED is not enabled");
+				}
+			}
+		}	
+		votes.add(vote);
+		voteCache.put(new Element(poll.getPollId(), votes));
+		getVoteQueue().add(vote);		
 	}
 
 
-
-	@Override
-	public void addAnomymousVote(Poll poll, long optionId, String username, Date voteDate) {
-		// TODO Auto-generated method stub
+	public void addAnomymousVote(Poll poll, long optionId, String username, Date voteDate) throws PollException {
+		boolean optionExist = false;
+		for( PollOption option : poll.getOptions()) {
+			if( option.getOptionId() == optionId )
+				optionExist = true;
+				break;
+		}
+		if(!optionExist)
+			throw new IllegalArgumentException("option is not valid.");
+		if(StringUtils.isEmpty(username))
+			throw new IllegalArgumentException("unique Id cannot be null.");
 		
+		Date now = new Date();
+		if(poll.getStartDate().compareTo(now)>0 || poll.getEndDate().compareTo(now) < 0 ){
+			throw new PollException("Cannot add vote : Poll is not active");
+		}
+		
+		Vote vote = new Vote(optionId, -1L, username, null, voteDate);
+		List<Vote> votes = getVotes(poll);
+		if( (poll.getMode() & Poll.MULTIPLE_SELECTIONS_ALLOWED) == 0L) {
+			for(Vote v : votes){
+				if( username.equals(v.getUniqueId()) ){
+					throw new PollException("Cannot not add vote : MULTIPLE_SELECTIONS_ALLOWED is not enabled");
+				}
+			}
+		}	
+		votes.add(vote);
+		voteCache.put(new Element(poll.getPollId(), votes));
+		getVoteQueue().add(vote);			
 	}
 
 
-
-	@Override
 	public List<PollOption> getUserVotes(Poll poll, User user) {
-		// TODO Auto-generated method stub
-		return null;
+		if(user == null)
+			throw new IllegalArgumentException("user cannot be null.");
+		List<Vote> votes = getVotes(poll);
+		LongList list = new ArrayLongList();
+		List<PollOption> options = new ArrayList<PollOption>();
+		
+		for(Vote vote : votes){
+			if(vote.getUserId() == user.getUserId() && !list.contains(vote.getOptionId()) )
+			{
+				list.add(vote.getOptionId());
+			}
+		}
+		for(PollOption option : poll.getOptions())
+		{
+			if(list.contains(option.getOptionId()))
+				options.add(option);
+		}
+		return options;
 	}
 
 
-
-	@Override
 	public List<PollOption> getAnomymousVotes(Poll poll, String username) {
-		// TODO Auto-generated method stub
-		return null;
+		if(username == null)
+			throw new IllegalArgumentException("user unique id cannot be null.");
+		List<Vote> votes = getVotes(poll);
+		LongList list = new ArrayLongList();
+		List<PollOption> options = new ArrayList<PollOption>();
+		for(Vote vote : votes){
+			if(username.equals(vote.getUniqueId()) && !list.contains(vote.getOptionId()) )
+			{
+				list.add(vote.getOptionId());
+			}
+		}
+		for(PollOption option : poll.getOptions())
+		{
+			if(list.contains(option.getOptionId()))
+				options.add(option);
+		}
+		return options;
 	}
 	
 }

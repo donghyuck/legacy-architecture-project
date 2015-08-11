@@ -21,6 +21,7 @@ import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.community.poll.Poll;
 import architecture.ee.web.community.poll.PollOption;
+import architecture.ee.web.community.poll.Vote;
 
 public interface PollDao {
 
@@ -57,5 +58,9 @@ public interface PollDao {
 	public abstract void updatePollOptions(Poll poll, List<PollOption> options);
 	
 	public abstract void deletePollOptions(Poll poll, List<PollOption> options);
+	
+	public abstract List<Vote> getVotes(Poll poll);
+	
+	public abstract void batchPollVotes(final List<Vote> votes);
 	
 }
