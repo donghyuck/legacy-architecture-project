@@ -15,6 +15,7 @@
  */
 package architecture.ee.web.community.poll.dao.jdbc;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -23,7 +24,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.configureme.util.StringUtils;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
@@ -299,6 +302,34 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 				new SqlParameterValue(Types.NUMERIC, poll.getPollId())
 		);
 		return options;
-	}	
+	}
+
+	@Override
+	public void batchPollVotes(final List<Vote> votes) {
+		getExtendedJdbcTemplate().batchUpdate(				
+				getBoundSql("ARCHITECTURE_COMMUNITY.INSERT_VOTE").getSql(), 
+				new BatchPreparedStatementSetter() {
+					@Override
+					public void setValues(PreparedStatement ps, int i)
+							throws SQLException {
+						Vote vote = votes.get(i);
+						ps.setLong(1,  vote.getOptionId());
+						if( vote.getUserId() > 0 )
+							ps.setLong(2, vote.getUserId());
+						else 
+							ps.setNull(2, Types.NUMERIC);
+						if( StringUtils.isEmpty(vote.getUniqueId()))
+							ps.setNull(3, Types.VARCHAR);
+						else
+							ps.setString(3, vote.getUniqueId());
+						ps.setObject(4, vote.getVoteDate(), Types.TIMESTAMP);
+						ps.setString(5, vote.getIPAddress());
+					}
+					@Override
+					public int getBatchSize() {
+						return votes.size();
+					}}
+			);
+	}
 
 }

@@ -16,6 +16,7 @@
 package architecture.ee.web.community.poll;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import architecture.common.user.User;
@@ -23,8 +24,10 @@ import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.exception.NotFoundException;
 
 public interface PollManager {
+	
+	public abstract LinkedList<Vote> getVoteQueue();
 		
-	public Poll createPoll(int objectType, long objectId, User user, String name) throws UnAuthorizedException;
+	public abstract Poll createPoll(int objectType, long objectId, User user, String name) throws UnAuthorizedException;
 	
 	public abstract void updatePoll(Poll poll) throws NotFoundException;
 	
@@ -48,47 +51,43 @@ public interface PollManager {
 	
 	public abstract void deletePollOptions(Poll poll, List<PollOption> options);
 	
-	public abstract int getVoteCount(Poll poll);
-	
-	public abstract int getVoteCount(Poll poll, long optionId);
+	public int getVoteCount(Poll poll) ;
 
-	public abstract int getUserVoteCount(Poll poll);
-	
-	public abstract int getUserVoteCount(Poll poll, long optionId);
+	public int getVoteCount(Poll poll, long optionId) ;
 
-	public abstract int getAnomymousVoteCount(Poll poll);
-	
-	public abstract int getAnomymousVoteCount(Poll poll, long optionId);
-	
-	public abstract List<Vote> getUserVotes(Poll poll);
-	
-	public abstract List<Vote> getAnomymousVotes(Poll poll);
-	
-	public abstract List<Vote> getUserVotes(Poll poll, long optionId);
-	
-	public abstract List<Vote> getAnomymousVotes(Poll poll, long optionId);	
-	
-	
-	public abstract void addUserVote(Poll poll, long optionId, User user); 	
-	
-	public abstract void addUserVote(Poll poll, long optionId, User user, Date voteDate); 
-	
-	
-	public abstract boolean hasUserVoted(Poll poll, User user);
-	
-	public abstract boolean hasAnomyouseVoted(Poll poll, String username);
-	
+	public int getUserVoteCount(Poll poll) ;
 
-	public abstract void addAnomymousVote(Poll poll, long optionId, String username); 	
+	public int getUserVoteCount(Poll poll, long optionId) ;
+
+	public int getAnomymousVoteCount(Poll poll);
+
+	public int getAnomymousVoteCount(Poll poll, long optionId);
 	
-	public abstract void addAnomymousVote(Poll poll, long optionId, String username, Date voteDate); 
+	public List<Vote> getVotes(Poll poll);
 	
+	public List<User> getUserVotes(Poll poll) ;
+
+	public List<String> getAnomymousVotes(Poll poll) ;
+
+	public List<User> getUserVotes(Poll poll, long optionId) ;
+
+	public List<String> getAnomymousVotes(Poll poll, long optionId);
+
+	public void addUserVote(Poll poll, long optionId, User user) throws PollException ;
 	
-	public abstract List<PollOption> getUserVotes(Poll poll, User user);
-	
-	public abstract List<PollOption> getAnomymousVotes(Poll poll, String username);
-	
-	
+	public void addUserVote(Poll poll, long optionId, User user, Date voteDate) throws PollException ;
+
+	public boolean hasUserVoted(Poll poll, User user);
+
+	public boolean hasAnomyouseVoted(Poll poll, String username) ;
+
+	public void addAnomymousVote(Poll poll, long optionId, String username) throws PollException ;
+
+	public void addAnomymousVote(Poll poll, long optionId, String username, Date voteDate) throws PollException ;
+
+	public List<PollOption> getUserVotes(Poll poll, User user) ;
+
+	public List<PollOption> getAnomymousVotes(Poll poll, String username) ;
 	
 	/*
 	public abstract void deletePoll(Poll poll) throws UnAuthorizedException, PollException;
@@ -120,4 +119,5 @@ public interface PollManager {
 
 	
 */
+	
 }
