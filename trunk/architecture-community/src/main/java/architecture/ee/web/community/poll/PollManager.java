@@ -89,6 +89,9 @@ public interface PollManager {
 
 	public List<PollOption> getAnomymousVotes(Poll poll, String username) ;
 	
+	public PollStats getPollStats(Poll poll, User user);
+	
+	
 	/*
 	public abstract void deletePoll(Poll poll) throws UnAuthorizedException, PollException;
 

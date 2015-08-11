@@ -16,6 +16,7 @@
 package architecture.ee.web.community.poll;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -563,6 +564,31 @@ public class DefaultPollManager implements PollManager, EventSource {
 				options.add(option);
 		}
 		return options;
+	}
+
+	@Override
+	public PollStats getPollStats(Poll poll, User user) {
+		
+		PollStats ps = new PollStats(poll);
+		ps.setVoteCount(this.getVoteCount(poll));
+		
+		if( !user.isAnonymous()){
+			ps.setUserVotes(this.getUserVotes(poll, user));
+		}else{
+			ps.setUserVotes(Collections.EMPTY_LIST);
+		}
+		
+		List<PollOptionStats> list = new ArrayList<PollOptionStats>(ps.getPoll().getOptions().size());
+		
+		for(PollOption po : ps.getPoll().getOptions())
+		{
+			PollOptionStats pos = new PollOptionStats(po);
+			pos.setVoteCount(this.getVoteCount(poll, po.getOptionId()));
+			pos.setVoteUsers(this.getUserVotes(poll, po.getOptionId()));
+			list.add(pos);
+		}
+		ps.setPollOptionStats(list);
+		return ps;
 	}
 	
 }

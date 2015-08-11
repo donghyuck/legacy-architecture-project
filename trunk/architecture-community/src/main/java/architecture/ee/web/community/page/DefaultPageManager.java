@@ -458,6 +458,4 @@ public class DefaultPageManager implements PageManager, EventSource  {
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;		
 	}
-
-	
 }

@@ -101,10 +101,14 @@
 	<bean id="timelineManager" class="architecture.ee.web.community.timeline.DefaultTimelineManager" depends-on="timelineDao"  p:timelineDao-ref="timelineDao"  p:timelineCache-ref="timelineCache"/>			
 	
 	<bean id="socialConnectManager" class="architecture.ee.web.community.social.provider.connect.DefaultSocialConnectManager" depends-on="socialConnectDao"  p:socialConnectDao-ref="socialConnectDao" p:socialConnectCache-ref="socialConnectCache"/>		
-	
-	<bean id="viewCountManager"
-		class="architecture.ee.web.community.stats.ViewCountManager"
-		depends-on="viewCountDao" p:viewCountDao-ref="viewCountDao"
+
+
+	<!--  =============================  -->
+	<!--  ViewCountManager               -->
+	<!--  =============================  -->
+		
+	<bean id="viewCountManager" class="architecture.ee.web.community.stats.ViewCountManager" depends-on="viewCountDao" 
+		p:viewCountDao-ref="viewCountDao"
 		p:pageCountCache-ref="pageCountCache"
 		p:eventPublisher-ref="eventPublisher" 
 		init-method="initialize"
@@ -113,7 +117,7 @@
 	</bean>
 
 	<!--  =============================  -->
-	<!--  CommentManager                                   -->
+	<!--  CommentManager                 -->
 	<!--  =============================  -->
 	<bean id="commentDao" class="architecture.ee.web.community.comment.dao.jdbc.JdbcCommentDao" parent="jdbcDaoSupport" depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao"  />
 	<bean id="commentCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="commentCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" p:statisticsEnabled="true" />
@@ -127,7 +131,7 @@
 		p:userManager-ref="userManager"  />		
 		
 	<!--  =============================  -->
-	<!--  TagManager       			                            -->
+	<!--  TagManager       			     -->
 	<!--  =============================  -->	
 	<bean id="tagDao" class="architecture.ee.web.community.tag.dao.jdbc.JdbcTagDao" parent="jdbcDaoSupport" />
 	<bean id="tagCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="tagCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" p:statisticsEnabled="true" />
@@ -146,10 +150,12 @@
 		p:pageManager-ref="pageManager" 
 		/>
 	<!--  =============================  -->
-	<!--  PollManager      			                            -->
+	<!--  PollManager      			  	 -->
 	<!--  =============================  -->			
 	<bean id="pollDao" class="architecture.ee.web.community.poll.dao.jdbc.JdbcPollDao" parent="jdbcDaoSupport" />	
 	<bean id="pollCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="pollCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" p:statisticsEnabled="true" />
+	<bean id="voteCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="voteCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" p:statisticsEnabled="true" />
+	
 	<bean id="pollManager"
 		class="architecture.ee.web.community.poll.DefaultPollManager"
 		depends-on="pollDao" 
@@ -157,6 +163,9 @@
 		p:eventPublisher-ref="eventPublisher" 
 		p:pollDao-ref="pollDao" 
 		p:pollCache-ref="pollCache" 
+		p:voteCache-ref="voteCache" 
 		/>	
-		
+	<bean id="batchPollInsertTask" class="architecture.ee.web.community.poll.BatchPollInsertTask" p:pollDao-ref="pollDao" >
+		<property name="voteQueue"><util:property-path path="pollManager.voteQueue"/></property>
+	</bean>
 </beans>

@@ -30,12 +30,19 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import architecture.common.cache.CacheSizes;
+import architecture.common.exception.ComponentNotFoundException;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.json.CustomJsonDateDeserializer;
 import architecture.common.model.json.CustomJsonDateSerializer;
 import architecture.common.model.json.UserDeserializer;
 import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
+import architecture.ee.util.ApplicationHelper;
+import architecture.ee.web.community.comment.CommentManager;
 import architecture.ee.web.community.model.ContentObject.Status;
+import architecture.ee.web.community.tag.DefaultTagDelegator;
+import architecture.ee.web.community.tag.TagDelegator;
+import architecture.ee.web.community.tag.TagManager;
 
 public class DefaultPoll implements Poll {
 
@@ -460,4 +467,51 @@ public class DefaultPoll implements Poll {
 		this.status = status;
 	}
     
+	
+	@JsonProperty
+	@Override
+	public Integer getCommentCount() {
+		try {
+			CommentManager cmg = ApplicationHelper.getComponent(CommentManager.class);
+			return cmg.getCommentTreeWalker(ModelTypeFactory.getTypeIdFromCode("POLL"), getPollId()).getRecursiveChildCount(cmg.getRootParent());
+		} catch (ComponentNotFoundException e) {
+			return 0;
+		}
+	}
+
+	@JsonIgnore
+	public TagDelegator getTagDelegator() {
+		if( this.getPollId() < 1)
+			throw new IllegalStateException("Cannot retrieve tag manager prior to document being saved.");
+		else{
+			TagManager tmg = ApplicationHelper.getComponent(TagManager.class);
+			return new DefaultTagDelegator(ModelTypeFactory.getTypeIdFromCode("POLL"), this.getPollId(), tmg);
+		}
+	}
+
+	@JsonIgnore
+	public void setTagsString(String tagsString){}
+	
+	@JsonProperty
+	public String getTagsString() {		
+		if( this.getPollId() > 0 )
+			return getTagDelegator().getTagsAsString();		
+		return null;
+	}
+
+	@Override
+	public int getVoteCount() {
+		if( getPollId() < 1 )
+			return 0;
+		
+		try {
+			PollManager pm = ApplicationHelper.getComponent(PollManager.class);
+			return pm.getVoteCount(this);
+		} catch (ComponentNotFoundException e) {
+			return 0;
+		}
+	}
+	
+	@JsonIgnore
+	public void setVoteCount(int voteCount){}
 }

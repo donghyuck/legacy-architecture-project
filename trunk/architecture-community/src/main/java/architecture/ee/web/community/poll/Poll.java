@@ -21,6 +21,7 @@ import java.util.List;
 import architecture.common.model.ModelObject;
 import architecture.common.user.User;
 import architecture.ee.web.community.model.ContentObject.Status;
+import architecture.ee.web.community.tag.TagDelegator;
 
 public interface Poll extends ModelObject {
 
@@ -65,5 +66,13 @@ public interface Poll extends ModelObject {
 	public abstract long getMode();
 	
 	public abstract void setOptions(List<PollOption> options) ;
+	
+	public abstract Integer getCommentCount();
+	
+	public abstract TagDelegator getTagDelegator();
+	
+	public abstract String getTagsString();
+	
+	public abstract int getVoteCount();
 	
 }
