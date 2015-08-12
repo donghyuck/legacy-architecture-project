@@ -70,9 +70,12 @@ import architecture.ee.web.community.page.PageManager;
 import architecture.ee.web.community.page.PageState;
 import architecture.ee.web.community.poll.DefaultPoll;
 import architecture.ee.web.community.poll.Poll;
+import architecture.ee.web.community.poll.PollException;
 import architecture.ee.web.community.poll.PollManager;
 import architecture.ee.web.community.poll.PollOption;
+import architecture.ee.web.community.poll.PollOptionStats;
 import architecture.ee.web.community.poll.PollStats;
+import architecture.ee.web.community.poll.Vote;
 import architecture.ee.web.community.stats.ViewCountManager;
 import architecture.ee.web.community.streams.Photo;
 import architecture.ee.web.community.streams.PhotoStreamsManager;
@@ -1087,6 +1090,82 @@ public class CommunityDataController {
 		pollManager.deletePollOptions(poll, options);
 		return Result.newResult();
 		
+	}
+	
+	@RequestMapping(value="/polls/vote_allowed.json", method=RequestMethod.POST)
+	@ResponseBody
+	public Result voteAllowed (
+			@RequestBody Vote vote,
+			NativeWebRequest request
+			) throws UnAuthorizedException, NotFoundException, PollException {
+		
+		User user = SecurityHelper.getUser();
+		String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();	
+		Poll poll = pollManager.getPoll(vote.getPollId());
+		vote.setUserId(user.getUserId());
+		vote.setIPAddress(address);
+				
+		boolean voteAllow = false;
+		boolean hasVoted = false;
+		
+		if(user.isAnonymous()){
+			if(poll.isModeEnabled(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION))
+				voteAllow = true;
+			else
+				voteAllow = false;
+			hasVoted = pollManager.hasAnomyouseVoted(poll, vote.getUniqueId());
+			if( poll.isModeEnabled(Poll.MULTIPLE_SELECTIONS_ALLOWED))
+				voteAllow = true;
+			else
+				voteAllow = !hasVoted;			
+		}else{
+			if(poll.isModeEnabled(Poll.ALLOW_USER_VOTE_MODIFICATION))
+				voteAllow = true;
+			else
+				voteAllow = false;			
+			hasVoted = pollManager.hasUserVoted(poll, user);
+			if( poll.isModeEnabled(Poll.MULTIPLE_SELECTIONS_ALLOWED))
+				voteAllow = true;
+			else
+				voteAllow = !hasVoted;
+		}
+		
+		Result result = Result.newResult(hasVoted?1:0);
+		result.setSuccess(voteAllow);
+		return result;
+	}
+	
+	@RequestMapping(value="/polls/vote.json", method=RequestMethod.POST)
+	@ResponseBody
+	public Result addVote(
+			@RequestBody Vote vote,
+			NativeWebRequest request
+			) throws UnAuthorizedException, NotFoundException, PollException {
+		
+		User user = SecurityHelper.getUser();
+		String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();	
+		Poll poll = pollManager.getPoll(vote.getPollId());
+		vote.setUserId(user.getUserId());
+		vote.setIPAddress(address);
+		
+		log.debug(vote);
+		if(user.isAnonymous()){
+			if(StringUtils.isEmpty(vote.getUniqueId()))
+			{
+				throw new PollException("you need uinque id value (email address).");
+			}
+			if(!poll.isModeEnabled(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION)){
+				throw new UnAuthorizedException("anonymous vote not allowd.");
+			}
+			pollManager.addAnomymousVote(poll, vote.getOptionId(), vote.getUniqueId(), vote.getIPAddress());
+		}else{
+			if(!poll.isModeEnabled(Poll.ALLOW_USER_VOTE_MODIFICATION)){
+				throw new UnAuthorizedException("user vote not allowd.");
+			}
+			pollManager.addUserVote(poll, vote.getOptionId(), user, vote.getIPAddress());
+		}
+		
+		return Result.newResult();
 	}
 	
 }
