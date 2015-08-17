@@ -964,21 +964,41 @@ public class CommunityDataController {
 	} 
 
 	/** ======================================== **/
-	/**  POLL					                                                    * */
+	/**  POLL					      			 **/
 	/** ======================================== **/
+	
+	private long getObjectId(int objectType, User user, NativeWebRequest request){
+		long objectId = 0;		
+		if( objectType == 1 ){
+			objectId = user.getCompanyId();			
+		}else if ( objectType == 2){
+			objectId = user.getUserId();	
+		}else if ( objectType == 30){
+			try {
+				objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();
+			} catch (WebSiteNotFoundException e) {
+			}
+		}
+		return objectId;
+	}
+
+	
+	
 	@RequestMapping(value={"/polls/list.json"},method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public ItemList getPolls (			
 			@RequestParam(value="objectType", defaultValue="0", required=false ) Integer objectType,
 			@RequestParam(value="objectId", defaultValue="0", required=false ) Long objectId,
+			@RequestParam(value="status", defaultValue= "ALL", required=false) String statusString,
 			@RequestParam(value="active", defaultValue="false", required=false ) Boolean active,
 			@RequestParam(value="live", defaultValue="false", required=false ) Boolean live,
 			NativeWebRequest request 
 			){		
+		
 		User user = SecurityHelper.getUser();
 		ItemList list ;
-		if( objectType > 0 && objectId > 0 ){			
-			 list = new ItemList(pollManager.getPolls(objectType, objectId), pollManager.getPollCount(objectType, objectId) );		
+		if( objectType > 0 ){			
+			 list = new ItemList(pollManager.getPolls(objectType, getObjectId(objectType, user, request)), pollManager.getPollCount(objectType, getObjectId(objectType, user, request)) );		
 		}else{
 			 list = new ItemList(pollManager.getPolls(user), pollManager.getPollCount(user) );
 		}
@@ -1000,9 +1020,9 @@ public class CommunityDataController {
 		List<PollStats> items = new ArrayList<PollStats>();
 		int pollCount = 0;
 
-		if( objectType > 0 && objectId > 0 ){		
-			pollCount = pollManager.getPollCount(objectType, objectId);
-			for( Poll p : pollManager.getPolls(objectType, objectId)){
+		if( objectType > 0){		
+			pollCount = pollManager.getPollCount(objectType, getObjectId(objectType, user, request));
+			for( Poll p : pollManager.getPolls(objectType, getObjectId(objectType, user, request))){
 				items.add(pollManager.getPollStats(p, user));
 			}
 		}else{
@@ -1014,6 +1034,23 @@ public class CommunityDataController {
 				
 		return new ItemList(items, pollCount);		
 	}	
+
+	
+	@RequestMapping(value={"/polls/get.json"},method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public Poll getPoll (			
+			@RequestParam(value="pollId", defaultValue="0", required=true ) Long pollId,
+			NativeWebRequest request 
+			) throws UnAuthorizedException, NotFoundException{		
+		User user = SecurityHelper.getUser();
+		Poll poll = pollManager.getPoll(pollId);
+		/*
+		for( PollOption po : poll.getOptions() )
+		{
+			po.setVoteCount(pollManager.getVoteCount(poll, po.getOptionId()));
+		}*/
+		return poll;
+	}
 	
 	@RequestMapping(value={"/polls/stats/get.json"},method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
@@ -1038,9 +1075,6 @@ public class CommunityDataController {
 		
 		if( user.isAnonymous() || user.getUserId() != poll.getUser().getUserId() )
 			throw new UnAuthorizedException();
-		
-		boolean doUpdate = false;
-		
 		if( poll.getPollId() > 0){
 			DefaultPoll orgPoll = (DefaultPoll) pollManager.getPoll(poll.getPollId());
 			orgPoll.setName(poll.getName());
@@ -1054,6 +1088,8 @@ public class CommunityDataController {
 			pollManager.updatePoll(orgPoll);
 			return orgPoll;
 		}else{
+			if( poll.getObjectType() > 0 && poll.getObjectId() == 0)
+				poll.setObjectId(getObjectId(poll.getObjectType(), user, request));
 			return pollManager.createPoll(poll.getObjectType(), poll.getObjectId(), user, poll.getName());
 		}
 	}
