@@ -17,18 +17,31 @@ package architecture.ee.web.community.poll;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import architecture.common.cache.CacheSizes;
 import architecture.common.cache.Cacheable;
 
 public class Vote implements Cacheable {
-
-	private long userId;
+	
+	private long pollId = 0 ;
+	private long userId = -1L;
 	private String uniqueId;
 	private long optionId;
 	private Date voteDate;
 	private String ip;
 	
+	public Vote(long pollId , long optionId, long userId, String uniqueId,  String ip) {
+		this.pollId = pollId;
+		this.userId = userId;
+		this.uniqueId = uniqueId;
+		this.optionId = optionId;
+		this.ip = ip;
+		this.voteDate = new Date();
+	}
 
+	public Vote() {
+	}
 
 	/**
 	 * @param pollId
@@ -37,7 +50,7 @@ public class Vote implements Cacheable {
 	 * @param optionIndex
 	 * @param ip
 	 */
-	protected Vote(long optionId, long userId, String uniqueId,  String ip) {
+	public Vote(long optionId, long userId, String uniqueId,  String ip) {
 		this.userId = userId;
 		this.uniqueId = uniqueId;
 		this.optionId = optionId;
@@ -60,6 +73,16 @@ public class Vote implements Cacheable {
 		this.ip = ip;
 		this.voteDate = voteDate;
 	}
+	
+	
+	public long getPollId() {
+		return pollId;
+	}
+
+	public void setPollId(long pollId) {
+		this.pollId = pollId;
+	}
+
 	/**
 	 * @return ip
 	 */
@@ -69,6 +92,7 @@ public class Vote implements Cacheable {
 	/**
 	 * @param ip 설정할 ip
 	 */
+	@JsonIgnore
 	public void setIPAddress(String ip) {
 		this.ip = ip;
 	}
@@ -111,11 +135,6 @@ public class Vote implements Cacheable {
 	}
 
 
-
-
-
-
-
 	public long getOptionId() {
 		return optionId;
 	}
@@ -143,6 +162,12 @@ public class Vote implements Cacheable {
 
 
 
+
+	@Override
+	public String toString() {
+		return "Vote [pollId=" + pollId + ", userId=" + userId + ", uniqueId=" + uniqueId + ", optionId=" + optionId
+				+ ", voteDate=" + voteDate + ", ip=" + ip + "]";
+	}
 
 	@Override
 	public int getCachedSize() {

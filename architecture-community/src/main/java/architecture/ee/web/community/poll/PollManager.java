@@ -73,17 +73,17 @@ public interface PollManager {
 
 	public List<String> getAnomymousVotes(Poll poll, long optionId);
 
-	public void addUserVote(Poll poll, long optionId, User user) throws PollException ;
+	public void addUserVote(Poll poll, long optionId, User user, String IPAddress) throws PollException ;
 	
-	public void addUserVote(Poll poll, long optionId, User user, Date voteDate) throws PollException ;
+	public void addUserVote(Poll poll, long optionId, User user, String IPAddress, Date voteDate) throws PollException ;
 
 	public boolean hasUserVoted(Poll poll, User user);
 
 	public boolean hasAnomyouseVoted(Poll poll, String username) ;
 
-	public void addAnomymousVote(Poll poll, long optionId, String username) throws PollException ;
+	public void addAnomymousVote(Poll poll, long optionId, String username, String IPAddress) throws PollException ;
 
-	public void addAnomymousVote(Poll poll, long optionId, String username, Date voteDate) throws PollException ;
+	public void addAnomymousVote(Poll poll, long optionId, String username, String IPAddress, Date voteDate) throws PollException ;
 
 	public List<PollOption> getUserVotes(Poll poll, User user) ;
 

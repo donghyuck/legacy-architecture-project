@@ -365,4 +365,14 @@ public class DefaultComment implements Comment  {
 		return user.isAnonymous();
 	}
 
+
+	@Override
+	public String toString() {
+		return "DefaultComment [status=" + status + ", commentId=" + commentId + ", parentCommentId=" + parentCommentId
+				+ ", objectType=" + objectType + ", objectId=" + objectId + ", parentObjectType=" + parentObjectType
+				+ ", parentObjectId=" + parentObjectId + ", name=" + name + ", email=" + email + ", url=" + url
+				+ ", ip=" + ip + ", body=" + body + ", creationDate=" + creationDate + ", modifiedDate=" + modifiedDate
+				+ ", images=" + images + ", properties=" + properties + ", user=" + user + "]";
+	}
+
 }
