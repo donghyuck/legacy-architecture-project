@@ -304,15 +304,15 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 		return options;
 	}
 
-	@Override
 	public void batchPollVotes(final List<Vote> votes) {
 		getExtendedJdbcTemplate().batchUpdate(				
 				getBoundSql("ARCHITECTURE_COMMUNITY.INSERT_VOTE").getSql(), 
 				new BatchPreparedStatementSetter() {
-					@Override
+
 					public void setValues(PreparedStatement ps, int i)
 							throws SQLException {
 						Vote vote = votes.get(i);
+						log.debug("[" + i + "]" + vote);
 						ps.setLong(1,  vote.getOptionId());
 						if( vote.getUserId() > 0 )
 							ps.setLong(2, vote.getUserId());
@@ -322,10 +322,9 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 							ps.setNull(3, Types.VARCHAR);
 						else
 							ps.setString(3, vote.getUniqueId());
-						ps.setObject(4, vote.getVoteDate(), Types.TIMESTAMP);
+						ps.setObject(4, new java.sql.Timestamp( vote.getVoteDate().getTime() ), Types.TIMESTAMP);
 						ps.setString(5, vote.getIPAddress());
 					}
-					@Override
 					public int getBatchSize() {
 						return votes.size();
 					}}

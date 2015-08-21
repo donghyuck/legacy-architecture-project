@@ -182,10 +182,81 @@ public class CommunityDataController {
 	public void setAttachmentManager(AttachmentManager attachmentManager) {
 		this.attachmentManager = attachmentManager;
 	}
+
+	
+	@RequestMapping(value={"/comments/create.json"},method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public Result  addComment (
+			@RequestParam(value="objectType", defaultValue="0", required=true ) Integer objectType,
+			@RequestParam(value="objectId", defaultValue="0", required=true ) Long objectId,
+			@RequestParam(value="text", defaultValue="", required=true ) String text,
+			@RequestParam(value="name", defaultValue="", required=false ) String name,
+			@RequestParam(value="email", defaultValue="", required=false ) String email,
+			NativeWebRequest request ) throws NotFoundException {		
+		User user = SecurityHelper.getUser();			
+		String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();		
+		
+		log.debug("objectType=" + objectType);
+		log.debug("objectId=" + objectId);
+		
+		Comment comment = commentManager.createComment(objectType, objectId, user, text);
+		comment.setIPAddress(address);
+		
+		if(StringUtils.isNotEmpty(name))
+			comment.setName(name);
+		
+		if(StringUtils.isNotEmpty(email))
+			comment.setEmail(email);
+		
+		commentManager.addComment(comment);
+		
+		CommentTreeWalker walker = commentManager.getCommentTreeWalker(objectType, objectId);				
+		
+		return Result.newResult(walker.getRecursiveChildCount(commentManager.getRootParent()));
+	}
+	
+	@RequestMapping(value={"/comments/update.json"},method={RequestMethod.POST} )
+	@ResponseBody
+	public Result updateComment(
+		@RequestBody DefaultComment comment,
+		NativeWebRequest request ){
+		
+		User user = SecurityHelper.getUser();			
+		String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();
+		comment.setIPAddress(address);
+		comment.setUser(user);
+		
+		log.debug(comment.toString());
+		commentManager.addComment(comment);
+		CommentTreeWalker walker = commentManager.getCommentTreeWalker(comment.getObjectType(), comment.getObjectId());	
+		return Result.newResult(walker.getRecursiveChildCount(commentManager.getRootParent()));
+	}
+	
+	
+	@RequestMapping(value={"/comments/list.json"},method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public CommentList getComments (
+			@RequestParam(value="objectType", defaultValue="0", required=true ) Integer objectType,
+			@RequestParam(value="objectId", defaultValue="0", required=true ) Long objectId,
+			NativeWebRequest request 
+			){
+		
+		CommentList list = new CommentList();
+		if( objectType < 1 || objectId < 1)
+			return list;
+		
+		CommentTreeWalker walker = commentManager.getCommentTreeWalker(objectType, objectId);
+		Comment PARENT = new DefaultComment();				
+		list.setTotalCount(walker.getRecursiveChildCount(commentManager.getRootParent()));
+		list.setComments( walker.recursiveChildren(commentManager.getRootParent()) );	
+		return list;
+	}	
+	
+	
 	
 	@RequestMapping(value={"/pages/comment.json"},method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
-	public Result  addComment (
+	public Result  addPageComment (
 			@RequestParam(value="objectType", defaultValue="0", required=true ) Integer objectType,
 			@RequestParam(value="objectId", defaultValue="0", required=true ) Long objectId,
 			@RequestParam(value="text", defaultValue="", required=true ) String text,
@@ -544,6 +615,8 @@ public class CommunityDataController {
 		 * 
 		 */
 		public CommentList() {
+			comments = Collections.EMPTY_LIST;
+			totalCount = 0;
 		}
 		/**
 		 * @return pages
@@ -802,6 +875,7 @@ public class CommunityDataController {
 			return temp;
 		}
 	}	
+	
 	
 	public static class PhotoList {
 		
@@ -1086,12 +1160,15 @@ public class CommunityDataController {
 			orgPoll.setStatus(poll.getStatus());
 			
 			pollManager.updatePoll(orgPoll);
+			
 			return orgPoll;
 		}else{
 			if( poll.getObjectType() > 0 && poll.getObjectId() == 0)
 				poll.setObjectId(getObjectId(poll.getObjectType(), user, request));
+			
+			
 			return pollManager.createPoll(poll.getObjectType(), poll.getObjectId(), user, poll.getName());
-		}
+		}		
 	}
 	
 	

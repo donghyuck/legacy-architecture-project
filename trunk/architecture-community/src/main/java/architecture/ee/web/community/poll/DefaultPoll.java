@@ -467,6 +467,10 @@ public class DefaultPoll implements Poll {
 		this.status = status;
 	}
     
+	@JsonIgnore
+	public void setCommentCount(Integer commentCount){
+		
+	}
 	
 	@JsonProperty
 	@Override
@@ -499,7 +503,7 @@ public class DefaultPoll implements Poll {
 		return null;
 	}
 
-	@Override
+	@JsonProperty
 	public int getVoteCount() {
 		if( getPollId() < 1 )
 			return 0;

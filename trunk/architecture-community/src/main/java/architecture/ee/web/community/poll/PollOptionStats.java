@@ -8,11 +8,20 @@ public class PollOptionStats {
 
 	private PollOption pollOption;
 	private int voteCount = 0 ;
+	private int totalVoteCount = 0;
 	private List<User> voteUsers ;
 	
 	public PollOptionStats(PollOption pollOption) {
 		super();
 		this.pollOption = pollOption;
+	}
+
+	public int getTotalVoteCount() {
+		return totalVoteCount;
+	}
+
+	public void setTotalVoteCount(int totalVoteCount) {
+		this.totalVoteCount = totalVoteCount;
 	}
 
 	public int getVoteCount() {
@@ -27,9 +36,25 @@ public class PollOptionStats {
 		return voteUsers;
 	}
 
+	public PollOption getPollOption() {
+		return pollOption;
+	}
+
+	public void setPollOption(PollOption pollOption) {
+		this.pollOption = pollOption;
+	}
+
 	public void setVoteUsers(List<User> voteUsers) {
 		this.voteUsers = voteUsers;
 	}
 
+	public String getVotePercentString(){
+		if(voteCount > 0)
+		{	
+			int percent = (int)((voteCount * 100.0f) / totalVoteCount);
+			return (new Integer(percent)).toString();
+		}
+		return "0";
+	}
 	
 }

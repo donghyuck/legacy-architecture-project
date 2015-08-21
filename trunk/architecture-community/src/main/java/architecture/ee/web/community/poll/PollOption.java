@@ -23,11 +23,13 @@ public class PollOption implements Serializable {
 	private String optionText;
 	private int optionIndex;
 	private long pollId;
+	private int voteCount;
 	
 	public PollOption() {
 		optionId = -1L;
 		optionIndex = 1;
 		pollId = -1L;
+		voteCount = 0;
 	}
 
 	/**
@@ -41,6 +43,7 @@ public class PollOption implements Serializable {
 		this.optionId = optionId;
 		this.optionText = optionText;
 		this.optionIndex = optionIndex;
+		this.voteCount = 0;
 	}
 
 	public PollOption(long pollId, String optionText, int optionIndex) {
@@ -48,8 +51,17 @@ public class PollOption implements Serializable {
 		this.optionId = -1L;
 		this.optionText = optionText;
 		this.optionIndex = optionIndex;
+		this.voteCount = 0;
 	}
 	
+	public int getVoteCount() {
+		return voteCount;
+	}
+
+	public void setVoteCount(int voteCount) {
+		this.voteCount = voteCount;
+	}
+
 	/**
 	 * @return optionId
 	 */

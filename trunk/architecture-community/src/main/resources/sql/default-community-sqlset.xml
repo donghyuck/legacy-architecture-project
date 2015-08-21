@@ -1501,8 +1501,8 @@
 		t2.VOTE_DATE 
 	from v2_poll_option t1, v2_poll_vote t2 
 	where 
-		t1.poll_id = ?
-		t1.option_id = t2.option_id;
+		t1.poll_id = ? AND
+		t1.option_id = t2.option_id
 	]]></sql-query>	
 	
 	<sql-query name="DELETE_VOTE" description="DELETE_VOTE"><![CDATA[
@@ -1520,14 +1520,12 @@
 	]]></sql-query>		
 		
 	<sql-query name="INSERT_VOTE" description="INSERT_VOTE"><![CDATA[
-	insert into V2_POLL_VOTE (
+	INSERT INTO V2_POLL_VOTE (
 		OPTION_ID,
 		USER_ID,
 		GUEST_ID,
 		VOTE_DATE,
 		IP
-	) values ( ?, ?, ?, ?, ?)		
-	]]></sql-query>		
-	
-									
+	) VALUES ( ?, ?, ?, ?, ?)		
+	]]></sql-query>									
 </sqlset>

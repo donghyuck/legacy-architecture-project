@@ -362,12 +362,13 @@ public class DefaultPollManager implements PollManager, EventSource {
 		return list;
 	}
 
-	public void addUserVote(Poll poll, long optionId, User user) throws PollException {
+	public void addUserVote(Poll poll, long optionId, User user, String IPAddress) throws PollException {
 		boolean optionExist = false;
 		for( PollOption option : poll.getOptions()) {
-			if( option.getOptionId() == optionId )
+			if( option.getOptionId() == optionId ){
 				optionExist = true;
 				break;
+			}
 		}
 		if(!optionExist)
 			throw new IllegalArgumentException("option is not valid.");
@@ -379,7 +380,7 @@ public class DefaultPollManager implements PollManager, EventSource {
 			throw new PollException("Cannot add vote : Poll is not active");
 		}
 		
-		Vote vote = new Vote(optionId, user.getUserId(), null, null, new Date() );
+		Vote vote = new Vote(optionId, user.getUserId(), null, IPAddress, new Date() );
 		List<Vote> votes = getVotes(poll);
 		if( (poll.getMode() & Poll.MULTIPLE_SELECTIONS_ALLOWED) == 0L) {
 			for(Vote v : votes){
@@ -399,12 +400,13 @@ public class DefaultPollManager implements PollManager, EventSource {
 		getVoteQueue().add(vote);		
 	}
 
-	public void addUserVote(Poll poll, long optionId, User user, Date voteDate) throws PollException {
+	public void addUserVote(Poll poll, long optionId, User user, String IPAddress, Date voteDate) throws PollException {
 		boolean optionExist = false;
 		for( PollOption option : poll.getOptions()) {
-			if( option.getOptionId() == optionId )
+			if( option.getOptionId() == optionId ){
 				optionExist = true;
 				break;
+			}
 		}
 		if(!optionExist)
 			throw new IllegalArgumentException("option is not valid.");
@@ -416,7 +418,8 @@ public class DefaultPollManager implements PollManager, EventSource {
 			throw new PollException("Cannot add vote : Poll is not active");
 		}
 		
-		Vote vote = new Vote(optionId, user.getUserId(), null, null, voteDate );
+		Vote vote = new Vote(optionId, user.getUserId(), null, IPAddress, voteDate );
+		
 		List<Vote> votes = getVotes(poll);
 		if( (poll.getMode() & Poll.MULTIPLE_SELECTIONS_ALLOWED) == 0L) {
 			for(Vote v : votes){
@@ -462,12 +465,13 @@ public class DefaultPollManager implements PollManager, EventSource {
 		return false;
 	}
 
-	public void addAnomymousVote(Poll poll, long optionId, String username) throws PollException {
+	public void addAnomymousVote(Poll poll, long optionId, String username, String IPAddress) throws PollException {
 		boolean optionExist = false;
 		for( PollOption option : poll.getOptions()) {
-			if( option.getOptionId() == optionId )
+			if( option.getOptionId() == optionId ){
 				optionExist = true;
 				break;
+			}
 		}
 		if(!optionExist)
 			throw new IllegalArgumentException("option is not valid.");
@@ -477,7 +481,7 @@ public class DefaultPollManager implements PollManager, EventSource {
 		if(poll.getStartDate().compareTo(now)>0 || poll.getEndDate().compareTo(now) < 0 ){
 			throw new PollException("Cannot add vote : Poll is not active");
 		}		
-		Vote vote = new Vote(optionId, -1L, username, null, new Date());
+		Vote vote = new Vote(optionId, -1L, username, IPAddress, new Date());
 		List<Vote> votes = getVotes(poll);
 		if( (poll.getMode() & Poll.MULTIPLE_SELECTIONS_ALLOWED) == 0L) {
 			for(Vote v : votes){
@@ -492,12 +496,13 @@ public class DefaultPollManager implements PollManager, EventSource {
 	}
 
 
-	public void addAnomymousVote(Poll poll, long optionId, String username, Date voteDate) throws PollException {
+	public void addAnomymousVote(Poll poll, long optionId, String username, String IPAddress, Date voteDate) throws PollException {
 		boolean optionExist = false;
 		for( PollOption option : poll.getOptions()) {
-			if( option.getOptionId() == optionId )
+			if( option.getOptionId() == optionId ){
 				optionExist = true;
 				break;
+			}
 		}
 		if(!optionExist)
 			throw new IllegalArgumentException("option is not valid.");
@@ -509,7 +514,7 @@ public class DefaultPollManager implements PollManager, EventSource {
 			throw new PollException("Cannot add vote : Poll is not active");
 		}
 		
-		Vote vote = new Vote(optionId, -1L, username, null, voteDate);
+		Vote vote = new Vote(optionId, -1L, username, IPAddress, voteDate);
 		List<Vote> votes = getVotes(poll);
 		if( (poll.getMode() & Poll.MULTIPLE_SELECTIONS_ALLOWED) == 0L) {
 			for(Vote v : votes){
@@ -573,20 +578,24 @@ public class DefaultPollManager implements PollManager, EventSource {
 		ps.setVoteCount(this.getVoteCount(poll));
 		
 		if( !user.isAnonymous()){
+			ps.setUserVoted(this.hasUserVoted(poll, user));
 			ps.setUserVotes(this.getUserVotes(poll, user));
 		}else{
 			ps.setUserVotes(Collections.EMPTY_LIST);
 		}
 		
 		List<PollOptionStats> list = new ArrayList<PollOptionStats>(ps.getPoll().getOptions().size());
-		
+		int totalVoteCount = getVoteCount(poll);
 		for(PollOption po : ps.getPoll().getOptions())
-		{
+		{	
 			PollOptionStats pos = new PollOptionStats(po);
+			pos.setTotalVoteCount(totalVoteCount);
+			pos.setPollOption(po);
 			pos.setVoteCount(this.getVoteCount(poll, po.getOptionId()));
 			pos.setVoteUsers(this.getUserVotes(poll, po.getOptionId()));
 			list.add(pos);
 		}
+		
 		ps.setPollOptionStats(list);
 		return ps;
 	}
