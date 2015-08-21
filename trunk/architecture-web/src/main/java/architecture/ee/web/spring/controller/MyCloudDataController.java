@@ -616,6 +616,8 @@ public class MyCloudDataController {
 		 * @param items
 		 * @param totalCount
 		 */
+		
+		
 		public ItemList(List<?> items, int totalCount) {
 			super();
 			this.items = items;
