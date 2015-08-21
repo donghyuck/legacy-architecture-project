@@ -681,7 +681,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 		}				
 	}
 
-	@Override
+
 	public long getUsage(int objectType, long objectId) {
 		return imageDao.getImageUsage(objectType, objectId);
 	}	

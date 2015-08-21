@@ -242,8 +242,7 @@ public class WebPage extends PropertyModelSupport {
 	public void setLocale(String locale) {
 		this.locale = locale;
 	}
-
-	@Override
+ 
 	public int getCachedSize() {
 		return CacheSizes.sizeOfMap(getProperties()) 
 				+ CacheSizes.sizeOfBoolean()
@@ -254,14 +253,12 @@ public class WebPage extends PropertyModelSupport {
 				+ CacheSizes.sizeOfString(displayName)
 				+ CacheSizes.sizeOfString(name) + CacheSizes.sizeOfLong();
 	}
-
-	@Override
+ 
 	@JsonIgnore
 	public Serializable getPrimaryKeyObject() {
 		return this.getWebPageId();
 	}
-
-	@Override
+ 
 	@JsonIgnore
 	public int getModelObjectType() {
 		return ModelTypeFactory.getTypeIdFromCode("WEBPAGE");

@@ -137,7 +137,7 @@ public class SecureMoSKitoController {
 		List<MBeanServer> servers = MBeanServerFactory.findMBeanServer(null);
 		for (MBeanServer s : servers) {
 			Set<ObjectInstance> instances = s.queryMBeans(null, new QueryExp() {
-				@Override
+ 
 				public boolean apply(ObjectName name)
 						throws BadStringOperationException,
 						BadBinaryOpValueExpException,
@@ -153,8 +153,7 @@ public class SecureMoSKitoController {
 						return false;
 					return true;
 				}
-
-				@Override
+ 
 				public void setMBeanServer(MBeanServer s) {
 				}
 			});
@@ -388,7 +387,7 @@ public class SecureMoSKitoController {
 			NativeWebRequest request) throws NotFoundException {				
 		
 		List<IStatsProducer> producers = producerRegistryAPI.getProducers(new IProducerFilter(){
-			@Override
+  
 			public boolean doesFit(IStatsProducer producer) {
 				if(StringUtils.equals(producer.getProducerId(), "SessionCount") || StringUtils.equals(producer.getProducerId(), "SessionCountByTld") )
 					return true;
