@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-
 import architecture.common.exception.LicenseException;
 import architecture.common.license.License;
 import architecture.common.license.LicenseManager;

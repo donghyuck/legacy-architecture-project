@@ -2,7 +2,6 @@ package architecture.ee.spring.jdbc.support;
 
 import javax.sql.DataSource;
 
-
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 

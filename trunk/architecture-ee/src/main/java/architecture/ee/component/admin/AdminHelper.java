@@ -18,8 +18,6 @@ package architecture.ee.component.admin;
 
 import java.util.Locale;
 
-import net.sf.ehcache.Cache;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.task.AsyncTaskExecutor;
@@ -36,6 +34,7 @@ import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.common.lifecycle.service.AdminService;
 import architecture.ee.spring.lifecycle.SpringAdminService;
 import architecture.ee.util.ApplicationConstants;
+import net.sf.ehcache.Cache;
 
 /**
  * 

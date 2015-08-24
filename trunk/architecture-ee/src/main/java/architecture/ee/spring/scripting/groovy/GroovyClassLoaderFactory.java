@@ -16,9 +16,6 @@
 
 package architecture.ee.spring.scripting.groovy;
 
-import groovy.lang.GroovyClassLoader;
-
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.vfs2.FileObject;
@@ -29,12 +26,13 @@ import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.ClassUtils;
 
-import architecture.common.util.StringUtils;
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.util.L10NUtils;
+import architecture.common.util.StringUtils;
 import architecture.common.util.vfs.VFSUtils;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.util.ApplicationConstants;
+import groovy.lang.GroovyClassLoader;
 
 public class GroovyClassLoaderFactory implements FactoryBean<GroovyClassLoader>, InitializingBean,  ResourceLoaderAware {
 
