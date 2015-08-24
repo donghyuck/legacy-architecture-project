@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import architecture.ee.web.community.social.facebook.Post.PostType;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,6 +34,8 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import architecture.ee.web.community.social.facebook.Post.PostType;
 
 
 @JsonTypeInfo(use=Id.NAME, include=As.PROPERTY, property="postType")

@@ -21,9 +21,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -40,6 +37,8 @@ import architecture.ee.web.community.comment.event.CommentEvent;
 import architecture.ee.web.community.page.Page;
 import architecture.ee.web.community.page.PageManager;
 import architecture.ee.web.community.page.event.PageEvent;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 public class DefaultCommentManager implements CommentManager  {
 

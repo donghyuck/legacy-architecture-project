@@ -20,9 +20,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +32,8 @@ import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.community.streams.dao.StreamsDao;
 import architecture.ee.web.community.streams.impl.PhotoImpl;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 public class DefaultPhotoStreamsManager implements PhotoStreamsManager {
 	

@@ -17,11 +17,11 @@ package architecture.ee.web.community.social.tumblr.json;
 
 import java.util.List;
 
-import architecture.ee.web.community.social.tumblr.BlogInfo;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import architecture.ee.web.community.social.tumblr.BlogInfo;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class UserInfoMixin {

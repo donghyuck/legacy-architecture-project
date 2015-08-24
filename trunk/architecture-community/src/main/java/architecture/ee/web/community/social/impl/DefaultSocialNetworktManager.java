@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import net.sf.ehcache.Cache;
-
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +32,7 @@ import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.SocialNetworkManager;
 import architecture.ee.web.community.social.SocialServiceProvider;
 import architecture.ee.web.community.social.dao.SocialNetworkDao;
+import net.sf.ehcache.Cache;
 
 public class DefaultSocialNetworktManager implements SocialNetworkManager {
 

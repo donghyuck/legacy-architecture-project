@@ -46,6 +46,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
@@ -73,7 +75,6 @@ import architecture.ee.web.community.poll.Poll;
 import architecture.ee.web.community.poll.PollException;
 import architecture.ee.web.community.poll.PollManager;
 import architecture.ee.web.community.poll.PollOption;
-import architecture.ee.web.community.poll.PollOptionStats;
 import architecture.ee.web.community.poll.PollStats;
 import architecture.ee.web.community.poll.Vote;
 import architecture.ee.web.community.stats.ViewCountManager;
@@ -84,8 +85,6 @@ import architecture.ee.web.spring.controller.MyCloudDataController.ItemList;
 import architecture.ee.web.util.WebSiteUtils;
 import architecture.ee.web.ws.Property;
 import architecture.ee.web.ws.Result;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Controller ("community-data-controller")
 @RequestMapping("/data")

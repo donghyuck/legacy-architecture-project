@@ -21,12 +21,12 @@ import java.util.Date;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.PropertyAwareModelObjectSupport;
 import architecture.common.user.Company;
 import architecture.common.user.User;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 public class DefaultSocialConnect extends PropertyAwareModelObjectSupport  implements SocialConnect {

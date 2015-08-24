@@ -20,9 +20,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +41,8 @@ import architecture.ee.web.site.WebSiteNotFoundException;
 import architecture.ee.web.site.dao.WebSiteDao;
 import architecture.ee.web.site.page.WebPage;
 import architecture.ee.web.util.WebSiteUtils;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 public class DefaultWebSiteManager implements WebSiteManager {
 	

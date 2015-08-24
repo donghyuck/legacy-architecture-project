@@ -15,12 +15,12 @@
  */
 package architecture.ee.web.community.streams.remote;
 
+import com.caucho.hessian.client.HessianProxyFactory;
+
 import architecture.common.exception.ComponentDisabledException;
 import architecture.common.util.StringUtils;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.community.streams.PhotoStreamsManager;
-
-import com.caucho.hessian.client.HessianProxyFactory;
 
 public class RemoteServiceLocator {
 

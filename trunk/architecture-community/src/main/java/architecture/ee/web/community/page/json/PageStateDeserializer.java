@@ -17,12 +17,12 @@ package architecture.ee.web.community.page.json;
 
 import java.io.IOException;
 
-import architecture.ee.web.community.page.PageState;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+
+import architecture.ee.web.community.page.PageState;
 
 public class PageStateDeserializer extends JsonDeserializer<PageState> {
 	@Override

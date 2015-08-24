@@ -25,12 +25,12 @@ import org.scribe.model.Response;
 import org.scribe.model.Token;
 import org.scribe.model.Verb;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.web.community.social.AbstractSocialServiceProvider;
 import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.twitter.api.SSLTwitterApi;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TwitterServiceProvider extends AbstractSocialServiceProvider {
 

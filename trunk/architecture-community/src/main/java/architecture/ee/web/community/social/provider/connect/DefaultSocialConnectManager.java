@@ -19,9 +19,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
@@ -33,6 +30,8 @@ import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.community.social.provider.connect.SocialConnect.Media;
 import architecture.ee.web.community.social.provider.connect.dao.SocialConnectDao;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 public class DefaultSocialConnectManager implements SocialConnectManager {
 

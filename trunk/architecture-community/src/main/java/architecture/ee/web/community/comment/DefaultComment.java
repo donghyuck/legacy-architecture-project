@@ -22,14 +22,14 @@ import java.util.Map;
 
 import org.apache.commons.collections.primitives.LongList;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.json.CustomJsonDateSerializer;
 import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.ee.web.community.model.ContentObject;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class DefaultComment implements Comment  {
 	

@@ -18,12 +18,12 @@ package architecture.ee.web.community.social.facebook;
 import java.util.Date;
 import java.util.List;
 
-import architecture.ee.web.community.social.facebook.Photo.Image;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import architecture.ee.web.community.social.facebook.Photo.Image;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -15,11 +15,11 @@
  */
 package architecture.ee.web.community.social.facebook;
 
-import architecture.ee.web.community.social.facebook.Photo.Image;
-import architecture.ee.web.community.social.facebook.PhotoMixin.ImageMixin;
-
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+
+import architecture.ee.web.community.social.facebook.Photo.Image;
+import architecture.ee.web.community.social.facebook.PhotoMixin.ImageMixin;
 
 
 public class FacebookModule extends SimpleModule {

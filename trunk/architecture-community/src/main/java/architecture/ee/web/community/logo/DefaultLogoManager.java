@@ -28,10 +28,6 @@ import java.util.UUID;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import net.coobird.thumbnailator.Thumbnails;
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.logging.Log;
@@ -48,6 +44,9 @@ import architecture.ee.web.logo.LogoImage;
 import architecture.ee.web.logo.LogoImageNotFoundException;
 import architecture.ee.web.logo.LogoManager;
 import architecture.ee.web.site.WebSite;
+import net.coobird.thumbnailator.Thumbnails;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 public class DefaultLogoManager implements LogoManager{
 

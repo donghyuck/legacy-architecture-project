@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 package architecture.ee.web.community.social.tumblr.json;
+import com.fasterxml.jackson.core.Version;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+
 import architecture.ee.web.community.social.tumblr.BlogInfo;
 import architecture.ee.web.community.social.tumblr.Post;
 import architecture.ee.web.community.social.tumblr.Posts;
 import architecture.ee.web.community.social.tumblr.UserInfo;
-
-import com.fasterxml.jackson.core.Version;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 
 public class TumblrModule extends SimpleModule {
     public TumblrModule() {
