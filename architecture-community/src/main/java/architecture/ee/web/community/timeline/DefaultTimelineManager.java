@@ -18,12 +18,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.ee.web.community.timeline.dao.TimelineDao;
 import architecture.ee.web.site.WebSite;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 public class DefaultTimelineManager implements TimelineManager{
 
 	private TimelineDao timelineDao;

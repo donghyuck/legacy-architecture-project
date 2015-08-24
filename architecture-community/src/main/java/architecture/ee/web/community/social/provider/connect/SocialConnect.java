@@ -20,9 +20,9 @@ import java.util.Date;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
 
-import architecture.common.model.PropertyAware;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import architecture.common.model.PropertyAware;
 
 public interface SocialConnect extends PropertyAware {
 	

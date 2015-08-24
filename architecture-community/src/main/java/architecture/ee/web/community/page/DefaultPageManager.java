@@ -18,9 +18,6 @@ package architecture.ee.web.community.page;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.annotation.Propagation;
@@ -34,6 +31,8 @@ import architecture.common.user.UserNotFoundException;
 import architecture.ee.web.community.page.dao.PageDao;
 import architecture.ee.web.community.page.dao.PageVersionDao;
 import architecture.ee.web.community.page.event.PageEvent;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 public class DefaultPageManager implements PageManager, EventSource  {
 

@@ -26,10 +26,6 @@ import java.util.UUID;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import net.coobird.thumbnailator.Thumbnails;
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.logging.Log;
@@ -45,6 +41,9 @@ import architecture.ee.exception.NotFoundException;
 import architecture.ee.exception.SystemException;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.community.profile.dao.ProfileDao;
+import net.coobird.thumbnailator.Thumbnails;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 public class DefaultProfileManager implements ProfileManager {
 

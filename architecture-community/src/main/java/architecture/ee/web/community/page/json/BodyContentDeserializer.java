@@ -20,16 +20,16 @@ import java.io.IOException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import architecture.ee.web.community.page.BodyContent;
-import architecture.ee.web.community.page.BodyType;
-import architecture.ee.web.community.page.DefaultBodyContent;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+
+import architecture.ee.web.community.page.BodyContent;
+import architecture.ee.web.community.page.BodyType;
+import architecture.ee.web.community.page.DefaultBodyContent;
 
 
 public class BodyContentDeserializer extends JsonDeserializer<BodyContent> {

@@ -18,15 +18,15 @@ package architecture.ee.web.community.page;
 import java.util.Date;
 import java.util.Map;
 
-import architecture.common.model.json.CustomJsonDateSerializer;
-import architecture.common.model.json.UserDeserializer;
-import architecture.common.user.User;
-import architecture.ee.web.community.tag.TagDelegator;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import architecture.common.model.json.CustomJsonDateSerializer;
+import architecture.common.model.json.UserDeserializer;
+import architecture.common.user.User;
+import architecture.ee.web.community.tag.TagDelegator;
 
 public class ImmutablePage implements Page {
 

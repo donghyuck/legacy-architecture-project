@@ -19,13 +19,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import architecture.ee.web.community.social.tumblr.ChatMessage;
-import architecture.ee.web.community.social.tumblr.Photo;
-import architecture.ee.web.community.social.tumblr.PhotoSize;
-import architecture.ee.web.community.social.tumblr.Post;
-import architecture.ee.web.community.social.tumblr.PostType;
-import architecture.ee.web.community.social.tumblr.VideoPostPlayer;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -33,6 +26,13 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+
+import architecture.ee.web.community.social.tumblr.ChatMessage;
+import architecture.ee.web.community.social.tumblr.Photo;
+import architecture.ee.web.community.social.tumblr.PhotoSize;
+import architecture.ee.web.community.social.tumblr.Post;
+import architecture.ee.web.community.social.tumblr.PostType;
+import architecture.ee.web.community.social.tumblr.VideoPostPlayer;
 
 @JsonDeserialize(using = PostMixin.PostDeserializer.class)
 class PostMixin {

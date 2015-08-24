@@ -26,9 +26,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -78,6 +75,8 @@ import architecture.ee.web.community.social.provider.connect.SocialConnect;
 import architecture.ee.web.community.social.provider.connect.SocialConnect.Media;
 import architecture.ee.web.community.social.provider.connect.SocialConnectManager;
 import architecture.ee.web.community.social.provider.connect.Status;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 @Controller 
 @RequestMapping("/connect")

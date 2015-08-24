@@ -20,6 +20,11 @@ import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.json.CustomJsonDateDeserializer;
@@ -36,11 +41,6 @@ import architecture.ee.web.community.stats.ViewCountManager;
 import architecture.ee.web.community.tag.DefaultTagDelegator;
 import architecture.ee.web.community.tag.TagDelegator;
 import architecture.ee.web.community.tag.TagManager;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class DefaultPage implements Page {
 

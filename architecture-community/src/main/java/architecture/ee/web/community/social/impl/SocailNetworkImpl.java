@@ -17,13 +17,13 @@ package architecture.ee.web.community.social.impl;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialServiceProvider;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class SocailNetworkImpl extends EntityModelObjectSupport implements SocialNetwork {
 

@@ -15,11 +15,11 @@
  */
 package architecture.ee.web.community.social.tumblr.json;
 
-import architecture.ee.web.community.social.tumblr.UserInfo;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import architecture.ee.web.community.social.tumblr.UserInfo;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class UserInfoResponseMixin {

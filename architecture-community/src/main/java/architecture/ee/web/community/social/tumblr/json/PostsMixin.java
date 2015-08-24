@@ -17,10 +17,10 @@ package architecture.ee.web.community.social.tumblr.json;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import architecture.ee.web.community.social.tumblr.BlogInfo;
 import architecture.ee.web.community.social.tumblr.Post;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @SuppressWarnings("unused")
 class PostsMixin {

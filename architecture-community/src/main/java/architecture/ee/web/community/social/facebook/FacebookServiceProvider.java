@@ -29,14 +29,14 @@ import org.scribe.model.Response;
 import org.scribe.model.Token;
 import org.scribe.model.Verb;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.web.community.social.AbstractSocialServiceProvider;
 import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.facebook.Post.PostType;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class FacebookServiceProvider extends AbstractSocialServiceProvider {
 

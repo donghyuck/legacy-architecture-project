@@ -20,9 +20,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.annotation.Propagation;
@@ -37,6 +34,8 @@ import architecture.ee.web.community.announce.Announce;
 import architecture.ee.web.community.announce.AnnounceManager;
 import architecture.ee.web.community.announce.AnnounceNotFoundException;
 import architecture.ee.web.community.announce.dao.AnnounceDao;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 public class DefaultAnnounceManager implements AnnounceManager, EventSource {
 	

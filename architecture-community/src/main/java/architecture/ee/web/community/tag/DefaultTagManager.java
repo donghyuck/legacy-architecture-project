@@ -21,12 +21,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.google.common.collect.ImmutableList;
 
 import architecture.common.event.api.EventListener;
 import architecture.common.event.api.EventPublisher;
@@ -35,8 +34,8 @@ import architecture.common.util.LockUtils;
 import architecture.ee.web.community.page.PageManager;
 import architecture.ee.web.community.page.event.PageEvent;
 import architecture.ee.web.community.tag.dao.TagDao;
-
-import com.google.common.collect.ImmutableList;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 public class DefaultTagManager implements TagManager {
 	
