@@ -21,7 +21,6 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-
 import architecture.common.jdbc.datasource.DataSourceFactory;
 import architecture.common.jdbc.incrementer.MaxValueIncrementer;
 import architecture.common.spring.jdbc.core.ExtendedJdbcTemplate;

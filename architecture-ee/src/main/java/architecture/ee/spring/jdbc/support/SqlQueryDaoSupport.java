@@ -16,8 +16,6 @@
 package architecture.ee.spring.jdbc.support;
 
 
-import groovy.lang.GroovyObject;
-
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
@@ -35,6 +33,7 @@ import architecture.ee.services.SqlQueryCallback;
 import architecture.ee.services.UnitOfWork;
 import architecture.ee.services.support.UnitOfWorkForSqlQuery;
 import architecture.ee.util.ApplicationHelper;
+import groovy.lang.GroovyObject;
 
 
 /**

@@ -15,8 +15,6 @@
  */
 package architecture.ee.util;
 
-import groovy.lang.GroovyClassLoader;
-
 import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.HashMap;
@@ -40,6 +38,7 @@ import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.common.util.StringUtils;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.spring.lifecycle.SpringAdminService;
+import groovy.lang.GroovyClassLoader;
 
 /**
  * 컴포넌트들에 대한 인터페이스를 제공하는 Helper 클래스.

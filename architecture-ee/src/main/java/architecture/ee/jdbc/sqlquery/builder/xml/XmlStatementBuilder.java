@@ -22,9 +22,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import architecture.common.util.StringUtils;
+
 import architecture.common.jdbc.ParameterMapping;
 import architecture.common.jdbc.ResultMapping;
+import architecture.common.util.StringUtils;
 import architecture.ee.jdbc.sqlquery.builder.AbstractBuilder;
 import architecture.ee.jdbc.sqlquery.builder.SqlBuilderAssistant;
 import architecture.ee.jdbc.sqlquery.builder.xml.dynamic.DynamicSqlNode;

@@ -24,8 +24,6 @@ import java.io.Writer;
 
 import javax.servlet.ServletContext;
 
-import net.anotheria.moskito.aop.annotation.Monitor;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dom4j.io.OutputFormat;

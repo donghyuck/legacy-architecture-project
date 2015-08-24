@@ -15,8 +15,6 @@
  */
 package architecture.ee.spring.scripting.groovy;
 
-import groovy.util.GroovyScriptEngine;
-
 import java.net.URL;
 
 import org.apache.commons.logging.Log;
@@ -34,6 +32,7 @@ import architecture.common.util.StringUtils;
 import architecture.common.util.vfs.VFSUtils;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.util.ApplicationConstants;
+import groovy.util.GroovyScriptEngine;
 
 public class GroovyScriptEngineFactory implements FactoryBean<GroovyScriptEngine>, InitializingBean,  ResourceLoaderAware {
 	

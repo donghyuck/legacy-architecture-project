@@ -8,13 +8,13 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.State;
 import architecture.common.util.ClassUtils;
 import architecture.ee.util.ApplicationHelper;
-
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
 
 /**
  * @author  donghyuck
