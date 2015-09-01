@@ -43,16 +43,16 @@ import architecture.user.spring.annotation.ActiveUser;
 
 @Controller ("user-data-controller")
 @RequestMapping("/data")
-public class UserDataController {
+public class PublicUserDataController {
 
-	private static final Log log = LogFactory.getLog(UserDataController.class);
+	private static final Log log = LogFactory.getLog(PublicUserDataController.class);
 		
 	@Inject
 	@Qualifier("userManager")
 	private UserManager userManager ;
 	
 	
-	public UserDataController() {
+	public PublicUserDataController() {
 	}
 	
 /*	
