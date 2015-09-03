@@ -67,7 +67,6 @@ import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.UserTemplate;
-import architecture.ee.web.community.announce.Announce;
 import architecture.ee.web.community.social.provider.ServiceProviderHelper;
 import architecture.ee.web.community.social.provider.connect.ConnectNotFoundException;
 import architecture.ee.web.community.social.provider.connect.ConnectionFactoryLocator;
@@ -139,7 +138,7 @@ public class SocialConnectController implements InitializingBean  {
 	@ResponseBody
 	public Status connectionStatus(NativeWebRequest request, Model model) {
 		setNoCache(request);
-		return connectionStatus();
+		return listConnectionStatus();
 	}
 
 	
@@ -197,6 +196,7 @@ public class SocialConnectController implements InitializingBean  {
 		if(!StringUtils.isEmpty(onetime) && getOnetimeObject(onetime) != null ){
 			SocialConnect sc = (SocialConnect)getOnetimeObject(onetime);
 			try {
+				log.debug("search account user by:" +  sc.getProviderId() +", "+ sc.getProviderUserId());
 				User founduser = findUser(2, sc.getProviderId(), sc.getProviderUserId());
 				sup.setUser(founduser);
 			} catch (UserNotFoundException e) {
@@ -221,24 +221,39 @@ public class SocialConnectController implements InitializingBean  {
 		}
 		log.debug("signin onetime:" + onetime);
 		if( !StringUtils.isEmpty(onetime)){
-			SocialConnect account = (SocialConnect)getOnetimeObject(onetime);
-			log.debug("signin account:" + account);
-			if( account != null){
-				log.debug("signin account user :" + account.getProviderUserId());
+			SocialConnect socialConnect = (SocialConnect)getOnetimeObject(onetime);
+			log.debug("signin account:" + socialConnect);
+			if( socialConnect != null){
+				log.debug("signin account user :" + socialConnect.getProviderUserId());
 				User foundUser;
 				try {					
-					foundUser = findUser(2, account.getProviderId(), account.getProviderUserId());
+					foundUser = findUser(2, socialConnect.getProviderId(), socialConnect.getProviderUserId());
 					log.debug("signin  foundUser :" + foundUser );
 					if( foundUser != null ){			
+						
 						createSecurityContext(foundUser, request);			
 						UserTemplate template = new UserTemplate(foundUser);
 						template.setLastLoggedIn(new Date());
-						cleanUpOnetimeObject(onetime);
-						request.getSession().removeAttribute("onetime");
+
+						
 						try {
 							userManager.updateUser(template);
 							return foundUser;
-						} catch (Exception e) {} 		
+						} catch (Exception e) {} 
+						
+						try {
+							log.debug("update social connect data ");
+							SocialConnect existSocialConnect = socialConnectManager.getSocialConnect(foundUser, socialConnect.getProviderId());
+							if(isUpdated(existSocialConnect, socialConnect.getConnection())){
+								setConnectionData(existSocialConnect, socialConnect.getConnection());				
+								socialConnectManager.updateSocialConnect(existSocialConnect);
+							}
+						} catch (ConnectNotFoundException e) {
+						}	
+
+						
+						cleanUpOnetimeObject(onetime);
+						request.getSession().removeAttribute("onetime");	
 					}
 				} catch (UserNotFoundException e1) {
 					log.debug(e1);
@@ -248,7 +263,13 @@ public class SocialConnectController implements InitializingBean  {
 		return user;
 	}
 	
-	protected Status connectionStatus(){
+	@RequestMapping(value="/{providerId}/authorize", method=RequestMethod.GET)
+	public View authorize(@PathVariable String providerId, NativeWebRequest request, Model model) {		
+		setNoCache(request);
+		return oauthRedirect( providerId, request);
+	}
+	
+	protected Status listConnectionStatus(){
 		User user = SecurityHelper.getUser();
 		List<SocialConnect> list = socialConnectManager.findSocialConnects(user);		
 		Status status = new Status();
@@ -258,19 +279,33 @@ public class SocialConnectController implements InitializingBean  {
 		status.setConnections(list);
 		status.setMedia(ServiceProviderHelper.getAllServiceProviderConfig());				
 		return status ;
-	}	
+	}
 	
-	@RequestMapping(value="/{providerId}/authorize", method=RequestMethod.GET)
-	public View authorize(@PathVariable String providerId, NativeWebRequest request, Model model) {		
-		setNoCache(request);
-		return oauthRedirect( providerId, request);
+	/**
+	 *  
+	 * @param providerId
+	 * @param request
+	 * @return
+	 */
+	protected RedirectView oauthRedirect(String providerId, NativeWebRequest request){
+		sessionStrategy.removeAttribute(request, PROVIDER_ERROR_ATTRIBUTE);		
+		ConnectionFactory<?> connectionFactory = ConnectionFactoryLocator.getConnectionFactory(providerId);		
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();	
+		try {
+			String callbackUrl = ServiceProviderHelper.getCallbackUrl(providerId);
+			connectSupport.setCallbackUrl(callbackUrl);
+			//String oauthUrl = connectSupport.buildOAuthUrl(connectionFactory, request, parameters);
+			
+			//log.debug("oauth url:" + oauthUrl);	
+			
+			return new RedirectView(connectSupport.buildOAuthUrl(connectionFactory, request, parameters));		
+		} catch (Exception e) {			
+			log.error("woops error..", e);
+			sessionStrategy.setAttribute(request, PROVIDER_ERROR_ATTRIBUTE, e);
+			return connectionStatusRedirect(providerId, request);
+		}		
 	}
-	/*
-	@RequestMapping(value="/{providerId}", method=RequestMethod.POST)
-	public View connect(@PathVariable String providerId, NativeWebRequest request) {		
-		return oauthRedirect( providerId, request);
-	}
-	*/
+	
 	
 	@RequestMapping(value="/{providerId}/profile.json", method=RequestMethod.POST)
 	@ResponseBody
@@ -280,9 +315,6 @@ public class SocialConnectController implements InitializingBean  {
 		SocialConnect account = socialConnectManager.getSocialConnect(user, providerId);
 		return account.getConnection().fetchUserProfile();
 	}
-
-	
-
 	
 	/**
 	 * Render the status of the connections to the service provider to the user as HTML in their web browser.
@@ -292,7 +324,7 @@ public class SocialConnectController implements InitializingBean  {
 	public Object connect(@PathVariable String providerId, NativeWebRequest request, Model model) {		
 		setNoCache(request);
 		SocialConnectController.setOutputFormat(request);
-		
+		log.debug("status connections ==================");
 		User user = SecurityHelper.getUser();
 		SocialConnect account = null;		
 		if( ! user.isAnonymous() ){
@@ -304,13 +336,19 @@ public class SocialConnectController implements InitializingBean  {
 			}
 		}else{
 			String onetime = (String)sessionStrategy.getAttribute(request, "onetime");
+			log.debug("using onetime:" + onetime);
 			if( !StringUtils.isEmpty(onetime)){
 				account = (SocialConnect)getOnetimeObject(onetime);
 				if( account != null ){
+					
 					if(architecture.common.util.StringUtils.equals(account.getProviderId(), providerId)){
 						try {
-							model.addAttribute("profile", account.getConnection().fetchUserProfile());
+							log.debug("getting profile.");
+							UserProfile userProfile = account.getConnection().fetchUserProfile();
+							log.debug("user profile:"+ userProfile);
+							model.addAttribute("profile", userProfile);
 						} catch (Exception e) {
+							log.warn(e);
 							model.addAttribute("error", e.getMessage());
 						}						
 					}else{
@@ -318,18 +356,13 @@ public class SocialConnectController implements InitializingBean  {
 					}	
 				}
 			}
-		}
-		
-		
+		}		
 		if(account == null){
 			account =socialConnectManager.createSocialConnect(user, ServiceProviderHelper.toMedia(providerId));
-		}		
-		
+		}
 		model.addAttribute("user", user);
-		model.addAttribute("connect", account);			
-		
-		request.getNativeResponse(HttpServletResponse.class).setContentType("text/html;charset=UTF-8");		
-		
+		model.addAttribute("connect", account);		
+		request.getNativeResponse(HttpServletResponse.class).setContentType("text/html;charset=UTF-8");	
 		return  "/html/connect/social-status";
 	}	
 
@@ -375,7 +408,9 @@ public class SocialConnectController implements InitializingBean  {
 			OAuth1ConnectionFactory<?> connectionFactory = (OAuth1ConnectionFactory<?>) ConnectionFactoryLocator.getConnectionFactory(media);
 			Connection<?> connection = connectSupport.completeConnection(connectionFactory, request);
 			log.debug("oauth1 connected.");
-			saveOrUpdate(providerId, connection, request);				
+			
+			saveOrUpdate(providerId, connection, request);	
+			
 		} catch (Exception e) {
 			sessionStrategy.setAttribute(request, PROVIDER_ERROR_ATTRIBUTE, e);
 			log.warn("Exception while handling OAuth1 callback (" + e.getMessage() + "). Redirecting to " + providerId +" connection status page.");
@@ -410,6 +445,7 @@ public class SocialConnectController implements InitializingBean  {
 	
 	private void saveOrUpdate(String providerId, Connection<?> connection, NativeWebRequest request){		
 		User user = SecurityHelper.getUser();
+		log.debug("save update social connect ============== " + connection.getDisplayName());
 		if( !user.isAnonymous() ){
 			try {
 				SocialConnect account = socialConnectManager.getSocialConnect(user, providerId);		
@@ -424,40 +460,36 @@ public class SocialConnectController implements InitializingBean  {
 		}else{
 			String onetime = UUID.randomUUID().toString();	
 			log.debug("new onetime token:" + onetime);
-			
-			
-			SocialConnect account = socialConnectManager.createSocialConnect(user, ServiceProviderHelper.toMedia(providerId));
-			
-			log.debug("new connect:" + account.toString());
-			
-			setConnectionData(account, connection);
-			
+			SocialConnect account = socialConnectManager.createSocialConnect(user, ServiceProviderHelper.toMedia(providerId));			
+			log.debug("new connect:" + account.toString());			
+			setConnectionData(account, connection);			
 			setOnetimeObject(onetime, account);
-			log.debug("provider :" + account.getProviderUserId());
+			log.debug("provider :" + account.getProviderUserId());			
 			sessionStrategy.setAttribute(request, "onetime", onetime);
-		}			
+		}	
+		sessionStrategy.removeAttribute(request, PROVIDER_ERROR_ATTRIBUTE);
 	}
 	
-	private boolean isUpdated( SocialConnect account, Connection<?> connection ){
+	private boolean isUpdated( SocialConnect socialConnect, Connection<?> connection ){
 		boolean updated = false;
 		ConnectionData data = connection.createData();
-		if( ! architecture.common.util.StringUtils.equals(account.getProviderUserId() , data.getProviderUserId() ) )
+		if( ! architecture.common.util.StringUtils.equals(socialConnect.getProviderUserId() , data.getProviderUserId() ) )
 		{
 			updated = true;
 			log.debug("ProviderUserId updated");
-		} else if ( ! architecture.common.util.StringUtils.equals(account.getAccessToken() , data.getAccessToken() )){
+		} else if ( ! architecture.common.util.StringUtils.equals(socialConnect.getAccessToken() , data.getAccessToken() )){
 			updated = true;
 			log.debug("access token updated");
-		} else if ( ! architecture.common.util.StringUtils.equals(account.getSecret() , data.getSecret() )){
+		} else if ( ! architecture.common.util.StringUtils.equals(socialConnect.getSecret() , data.getSecret() )){
 			updated = true;
 			log.debug("Secret updated");
-		} else if ( ! architecture.common.util.StringUtils.equals(account.getDisplayName() , data.getDisplayName() )){
+		} else if ( ! architecture.common.util.StringUtils.equals(socialConnect.getDisplayName() , data.getDisplayName() )){
 			updated = true;
 			log.debug("DisplayName updated");
-		} else if ( ! architecture.common.util.StringUtils.equals(account.getProfileUrl() , data.getProfileUrl() )){
+		} else if ( ! architecture.common.util.StringUtils.equals(socialConnect.getProfileUrl() , data.getProfileUrl() )){
 			updated = true;
 			log.debug("ProfileUrl updated");
-		} else if ( ! architecture.common.util.StringUtils.equals(account.getImageUrl() , data.getImageUrl() )){
+		} else if ( ! architecture.common.util.StringUtils.equals(socialConnect.getImageUrl() , data.getImageUrl() )){
 			updated = true;
 			log.debug("ImageUrl updated");
 		}		
@@ -468,8 +500,8 @@ public class SocialConnectController implements InitializingBean  {
 		if( connect instanceof DefaultSocialConnect){
 			Date now = new Date();
 			ConnectionData data = connection.createData();			
-			log.debug( "#################" + data.getProviderUserId() );
-			DefaultSocialConnect connectToUse = (DefaultSocialConnect)connect;
+			log.debug( "################# " + data.getProviderUserId() );
+			DefaultSocialConnect connectToUse = (DefaultSocialConnect) connect;
 			connectToUse.setProviderUserId(data.getProviderUserId());
 			connectToUse.setAccessToken(data.getAccessToken());
 			connectToUse.setSecret(data.getSecret());
@@ -505,19 +537,7 @@ public class SocialConnectController implements InitializingBean  {
 		return socialConnectManager.getSocialConnect(user, media.name().toLowerCase());		 		
 	}
 	
-	protected RedirectView oauthRedirect(String providerId, NativeWebRequest request){
-		ConnectionFactory<?> connectionFactory = ConnectionFactoryLocator.getConnectionFactory(providerId);		
-		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();	
-		try {
-			connectSupport.setCallbackUrl(ServiceProviderHelper.getCallbackUrl(providerId));
-			return new RedirectView(connectSupport.buildOAuthUrl(connectionFactory, request, parameters));
-		} catch (Exception e) {
-			
-			sessionStrategy.setAttribute(request, PROVIDER_ERROR_ATTRIBUTE, e);
-			
-			return connectionStatusRedirect(providerId, request);
-		}		
-	}
+
 	
 	
 	/**
