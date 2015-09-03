@@ -229,31 +229,28 @@ public class SocialConnectController implements InitializingBean  {
 				try {					
 					foundUser = findUser(2, socialConnect.getProviderId(), socialConnect.getProviderUserId());
 					log.debug("signin  foundUser :" + foundUser );
-					if( foundUser != null ){			
-						
+					if( foundUser != null ){
 						createSecurityContext(foundUser, request);			
 						UserTemplate template = new UserTemplate(foundUser);
 						template.setLastLoggedIn(new Date());
-
-						
 						try {
 							userManager.updateUser(template);
-							return foundUser;
 						} catch (Exception e) {} 
 						
 						try {
-							log.debug("update social connect data ");
+							log.debug("UPDATE SOCIAL CONNECT DATA ");
 							SocialConnect existSocialConnect = socialConnectManager.getSocialConnect(foundUser, socialConnect.getProviderId());
 							if(isUpdated(existSocialConnect, socialConnect.getConnection())){
 								setConnectionData(existSocialConnect, socialConnect.getConnection());				
 								socialConnectManager.updateSocialConnect(existSocialConnect);
 							}
 						} catch (ConnectNotFoundException e) {
-						}	
-
-						
+							log.warn(e);
+						}
 						cleanUpOnetimeObject(onetime);
 						request.getSession().removeAttribute("onetime");	
+							
+						return foundUser;
 					}
 				} catch (UserNotFoundException e1) {
 					log.debug(e1);

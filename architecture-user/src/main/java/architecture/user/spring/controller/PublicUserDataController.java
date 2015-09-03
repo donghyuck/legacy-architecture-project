@@ -41,7 +41,7 @@ import architecture.user.security.spring.userdetails.ExtendedUserDetails;
 import architecture.user.spring.annotation.ActiveUser;
 
 
-@Controller ("user-data-controller")
+@Controller ("public-user-data-controller")
 @RequestMapping("/data")
 public class PublicUserDataController {
 

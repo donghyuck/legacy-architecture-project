@@ -21,8 +21,10 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import architecture.common.model.PropertyAware;
+import architecture.common.model.json.CustomJsonDateSerializer;
 
 public interface SocialConnect extends PropertyAware {
 	
@@ -76,14 +78,10 @@ public interface SocialConnect extends PropertyAware {
 	 */
 	public String getProfileUrl() ;
 
-
-
 	/**
 	 * @return imageUrl
 	 */
 	public String getImageUrl();
-
-
 
 	/**
 	 * @return accessToken
@@ -115,13 +113,13 @@ public interface SocialConnect extends PropertyAware {
 	/**
 	 * @return creationDate
 	 */
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getCreationDate();
-
-
 
 	/**
 	 * @return modifiedDate
 	 */
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getModifiedDate();
 	
 	@JsonIgnore
