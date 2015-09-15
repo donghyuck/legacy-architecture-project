@@ -55,8 +55,7 @@ public class PublicUserDataController {
 	public PublicUserDataController() {
 	}
 	
-/*	
-	*/
+
 	@PreAuthorize("permitAll")
 	@RequestMapping(value="/accounts/verify_credentials.json", method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
@@ -71,6 +70,19 @@ public class PublicUserDataController {
 		return new UserDetails(activeUser.getUser(), getRoles(activeUser.getAuthorities()));		
 	}
 	
+
+	@PreAuthorize("permitAll")
+	@RequestMapping(value="/users/lookup.json", method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody 
+	public User getUserProfile(@RequestParam(value="id", defaultValue="0", required=false ) Long userId, @RequestParam(value="username", required=false ) String username, 	@RequestParam(value="email", required=false ) String email, 	NativeWebRequest request ){		
+		UserTemplate template = new UserTemplate(userId);		
+		if(StringUtils.isNotEmpty(username))
+			template.setUsername(username);
+		if(StringUtils.isNotEmpty(email))
+			template.setEmail(email);		
+		return userManager.getUser(template);
+	}
+	
 	protected List<String> getRoles (Collection<GrantedAuthority> authorities) {		
 		List<String> list = new ArrayList<String>();
 		for(GrantedAuthority auth : authorities ) {
@@ -79,6 +91,27 @@ public class PublicUserDataController {
 		return list;
 	}
 	
+/*
+							"media": { type: "string", defaultValue : "internal" },
+							"id": { type: "string" },
+							"username": { type: "string" },
+					        "firstName": { type: "string" },
+					        "lastName": { type: "string" },        
+					        "name": { type: "string" },
+					        "email": { type: "string" },
+					        "locale": { type: "string" },
+					        "location": { type: "string" },
+					        "languages": { type: "string" },
+					        "timezone": { type: "string" },
+					        "gender" : { type: "string" },
+					        "password1": { type: "string" },
+					        "password2": { type: "string" },
+					        "onetime": { type: "string" },
+					        "nameVisible" : { type:"boolean", defaultVlaue: false },
+					        "emailVisible" : { type:"boolean", defaultVlaue: false },
+					        "agree":  { type:"boolean", defaultVlaue: false }	
+ */
+		
 	public static class UserDetails {
 		
 		private User user;
@@ -115,18 +148,5 @@ public class PublicUserDataController {
 		public void setRoles(List<String> roles) {
 			this.roles = roles;
 		}
-	}
-	
-
-	@PreAuthorize("permitAll")
-	@RequestMapping(value="/users/lookup.json", method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public User getUserProfile(@RequestParam(value="id", defaultValue="0", required=false ) Long userId, @RequestParam(value="username", required=false ) String username, 	@RequestParam(value="email", required=false ) String email, 	NativeWebRequest request ){		
-		UserTemplate template = new UserTemplate(userId);		
-		if(StringUtils.isNotEmpty(username))
-			template.setUsername(username);
-		if(StringUtils.isNotEmpty(email))
-			template.setEmail(email);		
-		return userManager.getUser(template);
 	}
 }

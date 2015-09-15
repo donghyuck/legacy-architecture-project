@@ -18,11 +18,16 @@ package architecture.user.util;
 import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
 import architecture.common.user.CompanyNotFoundException;
+import architecture.common.user.CompanyTemplate;
 import architecture.ee.util.ApplicationHelper;
 
 public class CompanyUtils {
 	
+	private static final Company NO_COMPANY = new CompanyTemplate();
+	
 	public static Company getCompany(long companyId) throws CompanyNotFoundException{
+		if( companyId <= 0)
+			return NO_COMPANY;
 		CompanyManager companyManger = getCompanyManager();
 		return companyManger.getCompany(companyId);		
 	}	

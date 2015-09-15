@@ -352,7 +352,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 		try {
 			user = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_BY_ID").getSql(), userMapper, new SqlParameterValue(Types.NUMERIC, userId ) );			
 			try{
-				user.setCompany(CompanyUtils.getCompany(user.getCompanyId()));		
+				user.setCompany(CompanyUtils.getCompany(user.getCompanyId()));
 			} catch (CompanyNotFoundException e) { }
 			user.setProperties(getUserProperties(user.getUserId()));
 		} catch (IncorrectResultSizeDataAccessException e) {

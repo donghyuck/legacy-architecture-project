@@ -59,8 +59,7 @@ public class SecurityController {
 	public String login(NativeWebRequest request, Model model) throws NotFoundException, IOException {
 		User user = SecurityHelper.getUser();
 		WebSite website = getCurrentWebSite(request.getNativeRequest(HttpServletRequest.class));
-		model.addAttribute("action", ActionAdaptor.newBuilder().webSite(website).user(user)
-				.remoteAddr(request.getNativeRequest(HttpServletRequest.class).getRemoteAddr()).build());
+		model.addAttribute("action", ActionAdaptor.newBuilder().webSite(website).user(user).remoteAddr(request.getNativeRequest(HttpServletRequest.class).getRemoteAddr()).build());
 		setContentType(request.getNativeResponse(HttpServletResponse.class));
 		return ApplicationHelper.getApplicationProperty(DEFAULT_LOGIN_TEMPLATE_KEY, DEFAULT_LOGIN_TEMPLATE);
 	}
@@ -73,6 +72,9 @@ public class SecurityController {
 		setContentType(request.getNativeResponse(HttpServletResponse.class));
 		return DEFAULT_SIGNUP_TEMPLATE;
 	}
+	
+	
+	
 	
 	private void setContentType(HttpServletResponse response) {
 		response.setContentType(DEFAULT_CONTENT_TYPE);
