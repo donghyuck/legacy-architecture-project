@@ -13,7 +13,7 @@ import architecture.user.GroupManager;
 import architecture.user.permission.dao.PermissionDao;
 import net.sf.ehcache.Cache;
 
-public class DefaultPermissionManager implements PermissionManager, EventSource {
+public class DefaultPermissionsManager implements PermissionManager, EventSource {
 
 	public static class PermissionsCacheEntry implements Cacheable {
 		
