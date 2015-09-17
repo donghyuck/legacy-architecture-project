@@ -15,8 +15,7 @@ import java.io.Serializable;
 * // Create a permissions object with only read permissions set to true.
 * Permissions perms1 = new Permissions(Permissions.READ_FORUM);
 * // Create a permissions object with read and system admin permissions set to true.
-* Permissions perms2 = new Permissions(Permissions.READ_FORUM |
-*          Permissions.SYSTEM_ADMIN);</pre>
+* Permissions perms2 = new Permissions(Permissions.READ_FORUM | Permissions.SYSTEM_ADMIN);</pre>
 * <p/>
 * If we were to view the bits of each variable, <tt>perms1</tt> would be
 * <tt>0000000000000000000000000000000000000000000000000000000000000001</tt> and
@@ -32,27 +31,28 @@ public class Permissions implements Serializable {
 	 * @author donghyuck son
 	 */
 	enum PermissionAtom {
-		/**
-		 */
-		NONE            (0L),
-        /**
-		 */
+		NONE            		 (0L),
         VIEW_ONLINE_STATUS       (0x100000000000000L),        
-        /**
-		 */
         USER_ADMINISTRATION      (0x200000000000000L),        
-        /**
-		 */
         GROUP_ADMINISTRATION     (0x400000000000000L),        
-        /**
-		 */
         SYSTEM_ADMINISTRATION    (0x800000000000000L),
-        /**
-		 */
         HOSTED_ADMINISTRATION    (0x10000000L),
+        
+        
+        READ_DOCUMENT			 (16384L),
+        READ_COMMENT			 (0x10000L),
+        CREATE_DOCUMENT			 (0x40000L),
+        CREATE_COMMENT			 (0x100000L),
+        RATE_DOCUMENT			 (0x2000000L),
+        CREATE_IMAGE			 (0x4000000L),
+        CREATE_POLL              (16L),
+        
+        VOTE_IN_POLL             (1024L),
+        CREATE_ANNOUNCEMENT		 (4096L),
+        
         /**
 		 */
-        ACCESS                   (1L);
+        VIEW                     (1L);
 		
 		/**
 		 */
@@ -71,13 +71,14 @@ public class Permissions implements Serializable {
         }
 	}
 	
-    public static final long NONE                               = PermissionAtom.NONE.atomId;
-    public static final long VIEW_ONLINE_STATUS         = PermissionAtom.VIEW_ONLINE_STATUS.atomId;
-    public static final long USER_ADMINISTRATION       = PermissionAtom.USER_ADMINISTRATION.atomId;
+    public static final long NONE                     = PermissionAtom.NONE.atomId;
+    public static final long VIEW_ONLINE_STATUS       = PermissionAtom.VIEW_ONLINE_STATUS.atomId;
+    public static final long USER_ADMINISTRATION      = PermissionAtom.USER_ADMINISTRATION.atomId;
     public static final long GROUP_ADMINISTRATION     = PermissionAtom.GROUP_ADMINISTRATION.atomId;
     public static final long SYSTEM_ADMINISTRATION    = PermissionAtom.SYSTEM_ADMINISTRATION.atomId;
     public static final long HOSTED_ADMINISTRATION    = PermissionAtom.HOSTED_ADMINISTRATION.atomId;
-    public static final long ACCESS                              = PermissionAtom.ACCESS.atomId;
+    public static final long CREATE_IMAGE             = PermissionAtom.CREATE_IMAGE.atomId;
+    public static final long VIEW                     = PermissionAtom.VIEW.atomId;
     
 	
 	private long permissions;

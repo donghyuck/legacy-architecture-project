@@ -683,6 +683,9 @@
 	]]></sql-query>
 
 
+	<!--  =====================================  -->
+	<!--   Permissions Mask						 -->
+	<!--  =====================================  -->
 	<sql-query name="SELECT_ALL_PERMISSION_MASK" description="SELECT_ALL_PERMISSION_MASK"><![CDATA[   
 	    SELECT NAME, MASK FROM V2_PERMISSION_MASK
 	]]></sql-query>
@@ -702,4 +705,72 @@
 	    (NAME, MASK) VALUES (?, ?)
 	]]></sql-query>
 
+	<sql-query name="REMOVE_ALL_USER_PERMS" description="REMOVE_ALL_USER_PERMS"><![CDATA[   
+	DELETE FROM V2_USER_PERM WHERE OBJECT_TYPE = ? AND OBJECT_ID = ? AND PERMISSION_TYPE = ?
+	]]></sql-query>
+	<sql-query name="REMOVE_ALL_PERMS" description="REMOVE_ALL_PERMS"><![CDATA[   
+	DELETE FROM V2_USER_PERM WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
+	]]></sql-query>
+	<sql-query name="ADD_GROUP_PERM" description="ADD_GROUP_PERM"><![CDATA[   
+	INSERT V2_GROUP_PERM (OBJECT_TYPE, OBJECT_ID, GROUP_ID, PERMISSION_TYPE, PERMISSION )S	
+	VALUES (
+		?, ?, ?, ?, ?
+	)
+	]]></sql-query>
+	<sql-query name="REMOVE_GROUP_PERM" description="REMOVE_GROUP_PERM"><![CDATA[   
+	DELETE FROM V2_GROUP_PERM 
+	WHERE 
+		OBJECT_TYPE = ? AND OBJECT_ID = ? AND PERMISSION_TYPE = ? AND PERMISSION = ?	
+	]]></sql-query>
+	<sql-query name="REMOVE_ALL_GROUP_PERMS" description="REMOVE_ALL_GROUP_PERMS"><![CDATA[   
+	DELETE FROM V2_GROUP_PERM 
+	WHERE 
+		OBJECT_TYPE = ? AND OBJECT_ID = ? AND PERMISSION_TYPE = ?
+	
+	]]></sql-query>	
+	<sql-query name="OBJECT_IDS_WITH_USER_PERMS" description="OBJECT_IDS_WITH_USER_PERMS"><![CDATA[   
+	SELECT DISTINCT(OBJECT_ID) FROM V2_USER_PERM 
+	WHERE 
+		OBJECT_TYPE = ?
+	]]></sql-query>	
+	<sql-query name="OBJECT_IDS_WITH_GROUP_PERMS" description="OBJECT_IDS_WITH_GROUP_PERMS"><![CDATA[   
+	SELECT DISTINCT(OBJECT_ID) FROM V2_GROUP_PERM 
+	WHERE 
+		OBJECT_TYPE = ?	
+	]]></sql-query>	
+	<sql-query name="SELECT_USER_PERMS" description="SELECT_USER_PERMS"><![CDATA[   
+	SELECT 
+		USER_ID, PERMISSION_TYPE, PERMISSION 
+	FROM V2_USER_PERM
+	WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
+	]]></sql-query>	
+	<sql-query name="SELECT_GROUP_PERMS" description="SELECT_GROUP_PERMS"><![CDATA[   
+	SELECT 
+		GROUP_ID,
+		PERMISSION_TYPE,
+		PERMISSION
+	FROM V2_GROUP_PERM
+	WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?	
+	]]></sql-query>	
+	<sql-query name="ADD_USER_PERM" description="ADD_USER_PERM"><![CDATA[   
+	INSERT INTO V2_USER_PERM 
+	(OBJECT_TYPE, OBJECT_ID, USER_ID, PERMISSION_TYPE, PERMISSION)
+	VALUES
+	(?,?,?,?,?)
+	]]></sql-query>	
+	<sql-query name="REMOVE_USER_PERM" description="REMOVE_USER_PERM"><![CDATA[   
+	DELETE FROM V2_USER_PERM
+	WHERE
+		OBJECT_TYPE = ? AND
+		OBJECT_ID = ? AND
+		USER_ID = ? AND
+		PERMISSION_TYPE = ? AND
+		PERMISSION = ?
+	]]></sql-query>	
+	<sql-query name="CREATE_PERMISSION_MASK" description="CREATE_PERMISSION_MASK"><![CDATA[   
+
+	]]></sql-query>	
+	<sql-query name="CREATE_PERMISSION_MASK" description="CREATE_PERMISSION_MASK"><![CDATA[   
+
+	]]></sql-query>												
 </sqlset>
