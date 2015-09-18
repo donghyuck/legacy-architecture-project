@@ -24,12 +24,12 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+
 import architecture.common.event.api.EventListener;
 import architecture.common.event.spi.ListenerHandler;
 import architecture.common.event.spi.ListenerInvoker;
-
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
 
 /**
  * <p>A listener handler that will check for single parameter methods annotated with the given annotation.</p>

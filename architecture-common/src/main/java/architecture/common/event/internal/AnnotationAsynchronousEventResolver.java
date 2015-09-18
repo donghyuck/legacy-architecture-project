@@ -17,6 +17,7 @@ package architecture.common.event.internal;
 
 
 import static com.google.common.base.Preconditions.checkNotNull;
+
 import architecture.common.event.api.AsynchronousPreferred;
 
 /**

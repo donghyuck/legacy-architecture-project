@@ -25,9 +25,6 @@ import java.util.Map;
 
 import javax.xml.parsers.SAXParserFactory;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.Attributes;
@@ -37,6 +34,9 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
+
+import javolution.util.FastList;
+import javolution.util.FastMap;
 
 public class ModelTypeFactory {
 

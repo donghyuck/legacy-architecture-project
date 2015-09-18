@@ -4,9 +4,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.StringReader;
 import java.util.Date;
-import java.util.UUID;
-
-import org.junit.Test;
 
 import architecture.common.license.License;
 import architecture.common.license.License.Type;

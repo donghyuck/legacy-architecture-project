@@ -21,9 +21,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Set;
 
-import architecture.common.event.spi.ListenerInvoker;
-
 import com.google.common.collect.Sets;
+
+import architecture.common.event.spi.ListenerInvoker;
 
 /**
  * A listener invoker that knows how to call a given single parameter method on

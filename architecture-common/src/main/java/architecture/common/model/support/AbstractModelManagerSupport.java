@@ -15,13 +15,12 @@
  */
 package architecture.common.model.support;
 
-import net.sf.ehcache.Cache;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.model.ModelObject;
+import net.sf.ehcache.Cache;
 
 
 public abstract class AbstractModelManagerSupport {

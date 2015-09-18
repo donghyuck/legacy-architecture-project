@@ -25,6 +25,10 @@ import java.util.regex.Pattern;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import architecture.common.cache.CacheSizes;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
@@ -37,10 +41,6 @@ import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.common.util.StringUtils;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * @author  donghyuck

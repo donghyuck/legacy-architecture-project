@@ -17,15 +17,15 @@ package architecture.common.model.json;
 
 import java.io.IOException;
 
-import architecture.common.user.Company;
-import architecture.common.user.CompanyTemplate;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+
+import architecture.common.user.Company;
+import architecture.common.user.CompanyTemplate;
 
 public class CompanyDeserializer extends JsonDeserializer<Company> {
 

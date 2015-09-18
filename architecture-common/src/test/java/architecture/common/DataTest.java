@@ -15,8 +15,6 @@
  */
 package architecture.common;
 
-import java.util.Calendar;
-
 public class DataTest {
 
 	public static void main(String[] args) {

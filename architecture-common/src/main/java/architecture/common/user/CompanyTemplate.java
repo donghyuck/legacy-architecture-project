@@ -19,11 +19,11 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class CompanyTemplate  extends BaseModelObjectSupport implements Company {
 

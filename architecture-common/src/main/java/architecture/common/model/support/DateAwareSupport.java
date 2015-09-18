@@ -17,11 +17,11 @@ package architecture.common.model.support;
 
 import java.util.Date;
 
-import architecture.common.model.json.CustomJsonDateDeserializer;
-import architecture.common.model.json.CustomJsonDateSerializer;
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import architecture.common.model.json.CustomJsonDateDeserializer;
+import architecture.common.model.json.CustomJsonDateSerializer;
 
 public abstract class DateAwareSupport {
 

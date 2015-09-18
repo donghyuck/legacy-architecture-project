@@ -17,12 +17,12 @@ package architecture.common.model.support;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import architecture.common.model.DateModelObject;
 import architecture.common.model.json.CustomJsonDateDeserializer;
 import architecture.common.model.json.CustomJsonDateSerializer;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public abstract class DateModelObjectSupport implements DateModelObject {
 

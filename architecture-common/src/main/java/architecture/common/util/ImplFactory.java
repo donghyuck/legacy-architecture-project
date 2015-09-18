@@ -16,8 +16,6 @@
 
 package architecture.common.util;
 
-import groovy.lang.GroovyClassLoader;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,9 +26,6 @@ import java.util.Map;
 
 import javax.xml.parsers.SAXParserFactory;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
-
 import org.springframework.core.io.DefaultResourceLoader;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -39,6 +34,10 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
+
+import groovy.lang.GroovyClassLoader;
+import javolution.util.FastList;
+import javolution.util.FastMap;
 
 /**
  * 

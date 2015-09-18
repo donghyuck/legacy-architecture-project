@@ -8,19 +8,21 @@ import java.util.concurrent.ConcurrentMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.MapMaker;
+
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.config.ListenerHandlersConfiguration;
 import architecture.common.event.spi.EventDispatcher;
 import architecture.common.event.spi.ListenerHandler;
 import architecture.common.event.spi.ListenerInvoker;
 import architecture.common.util.ClassUtils;
-
-import com.google.common.base.Function;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.MapMaker;
 
 /**
  * @author  donghyuck
@@ -133,11 +135,18 @@ public class LockFreeEventPublisher implements EventPublisher {
 
     static final class Listeners
     {
-        private final ConcurrentMap invokers = (new MapMaker()).makeComputingMap(
+        private final ConcurrentMap invokers = null;/* CacheBuilder.newBuilder().build(        		
+        		new CacheLoader() {
+					public Object load(Object from) throws Exception {
+						return new Invokers();
+					}
+        		});*/
+        		
+        		/**(new MapMaker()).makeComputingMap(
         		new Function() {
 					public Object apply(Object from) {
 						return new Invokers();
-					}});
+					}});**/
 
         Listeners()
         {

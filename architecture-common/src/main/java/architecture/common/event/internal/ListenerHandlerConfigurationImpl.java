@@ -17,10 +17,10 @@ package architecture.common.event.internal;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
+
 import architecture.common.event.config.ListenerHandlersConfiguration;
 import architecture.common.event.spi.ListenerHandler;
-
-import com.google.common.collect.Lists;
 
 /**
  * <p>The default configuration that only uses the {@link architecture.common.event.internal.AnnotatedMethodsListenerHandler}.</p>

@@ -19,10 +19,10 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
+import com.google.common.base.Preconditions;
+
 import architecture.common.event.config.EventThreadPoolConfiguration;
 import architecture.common.event.spi.EventExecutorFactory;
-
-import com.google.common.base.Preconditions;
 
 /**
  * @author  donghyuck
