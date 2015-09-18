@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.SqlParameterValue;
 import architecture.common.user.Group;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.user.DefaultPermissionMask;
-import architecture.user.permission.Permission;
 import architecture.user.permission.PermissionMask;
 import architecture.user.permission.dao.PermissionsDao;
 
@@ -35,20 +34,20 @@ public class JdbcPermissionsDao extends ExtendedJdbcDaoSupport implements Permis
 		}};	
 		
 		
-	public void removeAllUserPermissions(int objectType, long objectId, int permissionType) {
+	public void removeAllUserPerms(int objectType, long objectId, int permissionType) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.REMOVE_ALL_USER_PERMS").getSql(),
 				new SqlParameterValue(Types.NUMERIC, objectType),
 				new SqlParameterValue(Types.NUMERIC, objectId),
 				new SqlParameterValue(Types.NUMERIC, permissionType));
 	}
 
-	public void removeAllPermissions(int objectType, long objectId) {
+	public void removeAllPerms(int objectType, long objectId) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.REMOVE_ALL_PERMS").getSql(),
 				new SqlParameterValue(Types.NUMERIC, objectType),
 				new SqlParameterValue(Types.NUMERIC, objectId));
 	}
 
-	public void addGroupPermission(int objectType, long objectId, Group group, int permissionType, int permission) {
+	public void addGroupPerms(int objectType, long objectId, Group group, int permissionType, int permission) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.ADD_GROUP_PERM").getSql(),
 				new SqlParameterValue(Types.NUMERIC, objectType),
 				new SqlParameterValue(Types.NUMERIC, objectId),
@@ -58,7 +57,7 @@ public class JdbcPermissionsDao extends ExtendedJdbcDaoSupport implements Permis
 				);
 	}
 
-	public void removeGroupPermission(int objectType, long objectId, Group group, int permissionType, int permission) {
+	public void removeGroupPerms(int objectType, long objectId, Group group, int permissionType, int permission) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.REMOVE_GROUP_PERM").getSql(),
 				new SqlParameterValue(Types.NUMERIC, objectType),
 				new SqlParameterValue(Types.NUMERIC, objectId),
@@ -67,40 +66,40 @@ public class JdbcPermissionsDao extends ExtendedJdbcDaoSupport implements Permis
 				new SqlParameterValue(Types.NUMERIC, permission));
 	}
 
-	public void removeAllGroupPermissions(int objectType, long objectId,int permissionType) {
+	public void removeAllGroupPerms(int objectType, long objectId,int permissionType) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.REMOVE_ALL_GROUP_PERMS").getSql(),
 				new SqlParameterValue(Types.NUMERIC, objectType),
 				new SqlParameterValue(Types.NUMERIC, objectId),
 				new SqlParameterValue(Types.NUMERIC, permissionType));
 	}
 
-	public List<Long> getObjectIdsWithUserPermission(int objectType) {
+	public List<Long> getObjectIdsWithUserPerms(int objectType) {
 		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_SECURITY.OBJECT_IDS_WITH_USER_PERMS").getSql(), 
 				Long.class, 
 				new SqlParameterValue(Types.NUMERIC, objectType));
 	}
 
-	public List<Long> getObjectIdsWithGroupPermission(int objectType) {
+	public List<Long> getObjectIdsWithGroupPerms(int objectType) {
 		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_SECURITY.OBJECT_IDS_WITH_GROUP_PERMS").getSql(), 
 				Long.class, 
 				new SqlParameterValue(Types.NUMERIC, objectType));
 	}
 
-	public List<Perm> getUserPermissions(int objectType, long objectId) {
+	public List<Perm> getUserPerms(int objectType, long objectId) {
 		return getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_PERMS").getSql(), 
 				permRowMapper,
 				new SqlParameterValue(Types.NUMERIC, objectType),
 				new SqlParameterValue(Types.NUMERIC, objectId));
 	}
 
-	public List<Perm> getGroupPermissions(int objectType, long objectId) {
+	public List<Perm> getGroupPerms(int objectType, long objectId) {
 		return getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_SECURITY.SELECT_GROUP_PERMS").getSql(), 
 				permRowMapper,
 				new SqlParameterValue(Types.NUMERIC, objectType),
 				new SqlParameterValue(Types.NUMERIC, objectId));
 	}
 
-	public void addUserPermission(int objectType, long objectId, long userId, int permissionType, int permission) {
+	public void addUserPerms(int objectType, long objectId, long userId, int permissionType, int permission) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.ADD_USER_PERM").getSql(),
 				new SqlParameterValue(Types.NUMERIC, objectType),
 				new SqlParameterValue(Types.NUMERIC, objectId),
@@ -110,7 +109,7 @@ public class JdbcPermissionsDao extends ExtendedJdbcDaoSupport implements Permis
 				);		
 	}
 
-	public void removeUserPermission(int objectType, long objectId, long userId, int permissionType, int permission) {
+	public void removeUserPerms(int objectType, long objectId, long userId, int permissionType, int permission) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.REMOVE_USER_PERM").getSql(),
 				new SqlParameterValue(Types.NUMERIC, objectType),
 				new SqlParameterValue(Types.NUMERIC, objectId),

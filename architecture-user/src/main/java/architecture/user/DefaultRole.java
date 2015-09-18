@@ -17,11 +17,11 @@ package architecture.user;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 public class DefaultRole extends BaseModelObjectSupport  implements Role  {

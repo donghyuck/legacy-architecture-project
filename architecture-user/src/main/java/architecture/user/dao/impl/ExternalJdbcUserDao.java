@@ -33,6 +33,8 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
 
+import com.google.common.collect.Lists;
+
 import architecture.common.user.Company;
 import architecture.common.user.CompanyNotFoundException;
 import architecture.common.user.Group;
@@ -43,8 +45,6 @@ import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.user.dao.ExternalUserProfileDao;
 import architecture.user.dao.UserDao;
 import architecture.user.util.CompanyUtils;
-
-import com.google.common.collect.Lists;
 
 public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	

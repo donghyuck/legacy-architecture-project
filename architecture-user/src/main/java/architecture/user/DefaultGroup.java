@@ -5,6 +5,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.json.CompanyDeserializer;
@@ -16,10 +20,6 @@ import architecture.common.user.Group;
 import architecture.common.user.User;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.UnAuthorizedException;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
 public class DefaultGroup extends BaseModelObjectSupport implements Group {

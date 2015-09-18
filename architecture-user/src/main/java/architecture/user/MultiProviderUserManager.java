@@ -23,11 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.anotheria.moskito.aop.annotation.Monitor;
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
@@ -35,6 +30,8 @@ import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.google.common.collect.Sets;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
@@ -55,8 +52,9 @@ import architecture.ee.component.admin.AdminHelper;
 import architecture.user.dao.UserDao;
 import architecture.user.security.authentication.InvalidProviderUserException;
 import architecture.user.security.spring.userdetails.ExtendedUserDetailsAdaptor;
-
-import com.google.common.collect.Sets;
+import net.anotheria.moskito.aop.annotation.Monitor;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 
 /**

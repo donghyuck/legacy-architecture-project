@@ -15,9 +15,6 @@
  */
 package architecture.user;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -27,6 +24,8 @@ import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
 import architecture.common.user.CompanyNotFoundException;
 import architecture.ee.component.admin.AdminHelper;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 public abstract class AbstractCompanyManager implements CompanyManager , EventSource {
 	

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import architecture.common.user.Group;
-import architecture.user.permission.Permission;
 import architecture.user.permission.PermissionMask;
 
 public interface PermissionsDao {
@@ -45,27 +44,27 @@ public interface PermissionsDao {
 	}
 	
 	
-    public abstract void removeAllUserPermissions(int objectType, long objectId, int permissionType);
+    public abstract void removeAllUserPerms(int objectType, long objectId, int permissionType);
 
-    public abstract void removeAllPermissions(int objectType, long objectId);
+    public abstract void removeAllPerms(int objectType, long objectId);
 
-    public abstract void addGroupPermission(int objectType, long objectId, Group group, int permissionType, int permission);
+    public abstract void addGroupPerms(int objectType, long objectId, Group group, int permissionType, int permission);
 
-    public abstract void removeGroupPermission(int objectType, long objectId, Group group, int permissionType, int permission);
+    public abstract void removeGroupPerms(int objectType, long objectId, Group group, int permissionType, int permission);
 
-    public abstract void removeAllGroupPermissions(int objectType, long objectId, int permissionType);
+    public abstract void removeAllGroupPerms(int objectType, long objectId, int permissionType);
 
-    public abstract List<Long> getObjectIdsWithUserPermission(int objectType);
+    public abstract List<Long> getObjectIdsWithUserPerms(int objectType);
 
-    public abstract List<Long> getObjectIdsWithGroupPermission(int objectType);
+    public abstract List<Long> getObjectIdsWithGroupPerms(int objectType);
 
-    public abstract List<Perm> getUserPermissions(int objectType, long objectId);
+    public abstract List<Perm> getUserPerms(int objectType, long objectId);
 
-    public abstract List<Perm> getGroupPermissions(int objectType, long objectId);
+    public abstract List<Perm> getGroupPerms(int objectType, long objectId);
 
-    public abstract void addUserPermission(int objectType, long objectId, long userId, int permissionType, int permission);
+    public abstract void addUserPerms(int objectType, long objectId, long userId, int permissionType, int permission);
 
-    public abstract void removeUserPermission(int objectType, long objectId, long userId, int permissionType, int permission);
+    public abstract void removeUserPerms(int objectType, long objectId, long userId, int permissionType, int permission);
 
     
     

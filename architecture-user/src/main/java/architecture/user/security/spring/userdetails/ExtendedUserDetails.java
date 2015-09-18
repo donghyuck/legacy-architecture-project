@@ -21,9 +21,9 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-import architecture.common.user.authentication.AuthToken;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import architecture.common.user.authentication.AuthToken;
 
 @SuppressWarnings("serial")
 public class ExtendedUserDetails extends User implements AuthToken {
