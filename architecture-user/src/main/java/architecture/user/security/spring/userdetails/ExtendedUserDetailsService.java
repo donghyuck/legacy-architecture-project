@@ -101,7 +101,7 @@ public class ExtendedUserDetailsService implements UserDetailsService, EventSour
 		for( Role role : userRoles ){
 			roles.add( role.getName() );
 		}		
-		log.debug( "roles:" + roles  + ", authority:" + authority );		
+		log.debug( " authority:" + authority );		
 		if( !architecture.common.util.StringUtils.isEmpty(authority) ){
 			authority = authority.trim();			
 			if (!roles.contains(authority)){

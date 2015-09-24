@@ -82,7 +82,8 @@ public class Permissions implements Serializable {
     public static final long CREATE_IMAGE             = PermissionAtom.CREATE_IMAGE.atomId;
     public static final long VIEW                     = PermissionAtom.VIEW_WEBSITE.atomId;
     public static final long WEBSITE_ADMIN            = PermissionAtom.WEBSITE_ADMIN.atomId;
-	
+    public static final long CREATE_ANNOUNCEMENT            = PermissionAtom.CREATE_ANNOUNCEMENT.atomId;
+    
 	private long permissions;
 
 	public Permissions(long permissions) {

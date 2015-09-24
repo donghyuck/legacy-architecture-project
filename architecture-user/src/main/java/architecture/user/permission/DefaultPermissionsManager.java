@@ -578,7 +578,7 @@ public class DefaultPermissionsManager implements PermissionsManager, EventSourc
 			}else if (principal instanceof AnonymousUser){
 				permissions = getPermissions(-1L, 17, -1L);
 			}else if (principal instanceof ExtendedUserDetails ){
-				ExtendedUserDetails details = (ExtendedUserDetails)principal;
+				ExtendedUserDetails details = (ExtendedUserDetails) principal;
 				// do more...
 			}else if (principal instanceof User){
 				User user = (User)principal;
