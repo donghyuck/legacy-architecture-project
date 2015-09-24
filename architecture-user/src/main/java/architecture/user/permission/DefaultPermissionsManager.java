@@ -693,7 +693,7 @@ public class DefaultPermissionsManager implements PermissionsManager, EventSourc
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void removeAllUserPermissions(int objectType, long objectId, PermissionType permissionType){
 		permissionsDao.removeAllUserPerms(objectType, objectId, permissionType.getId());
-		String bundleKey = this.getPermsCacheKey(objectType, objectId);
+		String bundleKey = getPermsCacheKey(objectType, objectId);
 		userPermsCache.remove(bundleKey);
 		objectsWithPermissionsCache.remove(objectType);
 		//

@@ -30,7 +30,7 @@ public class Permissions implements Serializable {
 	/**
 	 * @author donghyuck son
 	 */
-	enum PermissionAtom {
+	public enum PermissionAtom {
 		NONE            		 (0L),
         VIEW_ONLINE_STATUS       (0x100000000000000L),        
         USER_ADMINISTRATION      (0x200000000000000L),        
@@ -39,21 +39,23 @@ public class Permissions implements Serializable {
         HOSTED_ADMINISTRATION    (0x10000000L),
         
         
-        READ_DOCUMENT			 (16384L),
-        READ_COMMENT			 (0x10000L),
-        CREATE_DOCUMENT			 (0x40000L),
-        CREATE_COMMENT			 (0x100000L),
-        RATE_DOCUMENT			 (0x2000000L),
-        CREATE_IMAGE			 (0x4000000L),
-        CREATE_POLL              (16L),
+        READ_DOCUMENT			 	(16384L),
+        READ_COMMENT			 	(0x10000L),
+        CREATE_DOCUMENT			 	(0x40000L),
+        CREATE_COMMENT			 	(0x100000L),
+        CREATE_DOCUMENT_ATTACHMENT 	(0x200000L),
+        CREATE_DOCUMENT_IMAGE	 	(0x400000L),
+        RATE_DOCUMENT			 	(0x2000000L),
+        CREATE_IMAGE			 	(0x4000000L),
+        CREATE_FILE				 	(0x8000000L),
+        CREATE_POLL             	(16L),
         
-        VOTE_IN_POLL             (1024L),
-        CREATE_ANNOUNCEMENT		 (4096L),
-        
-        /**
-		 */
-        VIEW                     (1L);
-		
+        VIEW_WEBSITE             	(1L),
+        CREATE_MESSAGE			 	(2L),	
+        WEBSITE_ADMIN				(512L),
+        VOTE_IN_POLL             	(1024L),
+        CREATE_ANNOUNCEMENT		 	(4096L);
+        		
 		/**
 		 */
 		private long atomId;
@@ -78,8 +80,8 @@ public class Permissions implements Serializable {
     public static final long SYSTEM_ADMINISTRATION    = PermissionAtom.SYSTEM_ADMINISTRATION.atomId;
     public static final long HOSTED_ADMINISTRATION    = PermissionAtom.HOSTED_ADMINISTRATION.atomId;
     public static final long CREATE_IMAGE             = PermissionAtom.CREATE_IMAGE.atomId;
-    public static final long VIEW                     = PermissionAtom.VIEW.atomId;
-    
+    public static final long VIEW                     = PermissionAtom.VIEW_WEBSITE.atomId;
+    public static final long WEBSITE_ADMIN            = PermissionAtom.WEBSITE_ADMIN.atomId;
 	
 	private long permissions;
 

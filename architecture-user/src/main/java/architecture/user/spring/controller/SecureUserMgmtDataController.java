@@ -99,6 +99,7 @@ public class SecureUserMgmtDataController {
 		return new ItemList( roleManager.getRoles(), totalCount );	
 	}
 
+	
 	@RequestMapping(value="/mgmt/role/create.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public Result createRole(

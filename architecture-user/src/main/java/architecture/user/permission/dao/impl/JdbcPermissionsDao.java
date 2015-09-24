@@ -124,22 +124,22 @@ public class JdbcPermissionsDao extends ExtendedJdbcDaoSupport implements Permis
 	
 	
 	public void addPermissionMask(String name, int mask) {
-		getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.CREATE_PERMISSION_MASK").getSql(), 
-				new Object[]{name, mask}, 
-				new int []{Types.VARCHAR, Types.INTEGER});
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.CREATE_PERM_MASK").getSql(), 
+				new SqlParameterValue(Types.VARCHAR, name),
+				new SqlParameterValue(Types.INTEGER, mask));
 		
 	}
 
 	public void deletePermissionMask(String name) {
-		getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.DELETE_PERMISSION_MASK_BY_NAME").getSql(), 
-				new Object[]{name}, new int []{Types.VARCHAR});
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.DELETE_PERM_MASK_BY_NAME").getSql(), 
+				new SqlParameterValue(Types.VARCHAR, name));
 	}
 
 	public int getPermissionMask(String name) {
 		try {
-			return getExtendedJdbcTemplate().queryForInt(getBoundSql("FRAMEWORK_V2.SELECT_PERMISSION_MASK_BY_NAME").getSql(),
-			    new Object[]{name}, new int [] {Types.VARCHAR}		
-			);
+			return getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.SELECT_PERM_MASK_BY_NAME").getSql(),
+					Integer.class,
+					new SqlParameterValue(Types.VARCHAR, name));
 		} catch (EmptyResultDataAccessException e) {
 			log.debug((new StringBuilder()).append("No mask found for permission '").append(name).append("'").toString());
 			return -1;
@@ -147,6 +147,6 @@ public class JdbcPermissionsDao extends ExtendedJdbcDaoSupport implements Permis
 	}
 	
 	public List<PermissionMask> getPermissionsMask() {
-		return getExtendedJdbcTemplate().query(getBoundSql("FRAMEWORK_V2.SELECT_ALL_PERMISSION_MASK").getSql(), permMaskRowMapper );
+		return getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_PERM_MASK").getSql(), permMaskRowMapper );
 	}
 }

@@ -53,6 +53,9 @@ import architecture.user.GroupAlreadyExistsException;
 import architecture.user.GroupManager;
 import architecture.user.GroupNotFoundException;
 import architecture.user.RoleManager;
+import architecture.user.permission.PermissionType;
+import architecture.user.permission.Permissions;
+import architecture.user.permission.PermissionsManager;
 
 
 @Controller ("secure-user-data-controller")
@@ -76,6 +79,11 @@ public class SecureUserDataController {
 	@Inject
 	@Qualifier("companyManager")
 	private CompanyManager companyManager;
+	
+	@Inject
+	@Qualifier("permissionsManager")
+	private PermissionsManager permissionsManager;
+	
 	
 	
 	public SecureUserDataController() {
@@ -252,6 +260,45 @@ public class SecureUserDataController {
 		}
 	}	
 	
+	@RequestMapping(value="/permissions/add.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public Permission addUserPermission(
+		@RequestParam(value="objectType", defaultValue="0", required=false ) Integer objectType,
+		@RequestParam(value="objectId", defaultValue="0", required=false ) Long objectId,
+		@RequestParam(value="permission", defaultValue="0", required=true ) String permission,
+		@RequestParam(value="type", defaultValue="ADDITIVE", required=false ) String type
+	)
+	{
+		User user = SecurityHelper.getUser();		
+		PermissionType permissionType = PermissionType.valueOf(type);
+		long mask = permissionsManager.getPermissionMask(permission);
+		permissionsManager.addUserPermission(objectType, objectId, user, permissionType, mask);				
+		return new Permission(objectType, objectId, permission, type, true);		
+	}
+	
+	@RequestMapping(value="/me/permissions/has.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public Permission hasPermissions(
+		@RequestParam(value="objectType", defaultValue="0", required=false ) Integer objectType,
+		@RequestParam(value="objectId", defaultValue="0", required=false ) Long objectId,
+		@RequestParam(value="permission", defaultValue="0", required=true ) String permission,
+		@RequestParam(value="type", defaultValue="ADDITIVE", required=false ) String type
+	)
+	{
+		User user = SecurityHelper.getUser();		
+		PermissionType permissionType = PermissionType.valueOf(type);		
+		Permissions perms1 = permissionsManager.getFinalUserPerms(objectType, objectId, user.getUserId(), permissionType);		
+		
+		long mask = 0L;
+		if( Permissions.PermissionAtom.valueOf(permission) != null)
+			mask = Permissions.PermissionAtom.valueOf(permission).getAtomId();
+		else		
+			mask = permissionsManager.getPermissionMask(permission);
+		
+		return new Permission(objectType, objectId, permission, type, perms1.hasPermission(mask));
+	}
+	
+	
 	protected List<Property> toPropertyList (Map<String, String> properties){
 		List<Property> list = new ArrayList<Property>();
 		for (String key : properties.keySet()) {
@@ -259,5 +306,82 @@ public class SecureUserDataController {
 			list.add(new Property(key, value));
 		}
 		return list;
+	}
+	
+	
+	static public class Permission {
+		
+		private int objectType;
+		
+		private long objectId;
+		
+		private String permissionType ;
+		
+		private String permission ;
+		
+		private boolean granted;
+		
+		private long targetId;
+		
+		public Permission() {
+			this.objectType = 0;
+			this.objectId = -1L;
+			this.granted = false;
+			this.targetId = -1L;
+			this.permissionType = "ADDITIVE";			
+		}
+
+		public Permission(int objectType, long objectId, String permissionType, String permission, boolean granted) {
+			this.objectType = objectType;
+			this.objectId = objectId;
+			this.permissionType = permissionType;
+			this.permission = permission;
+			this.granted = granted;
+			this.targetId = -1L;
+		}
+		
+		public long getTargetId() {
+			return targetId;
+		}
+
+		public void setTargetId(long targetId) {
+			this.targetId = targetId;
+		}
+
+		public int getObjectType() {
+			return objectType;
+		}
+
+		public void setObjectType(int objectType) {
+			this.objectType = objectType;
+		}
+
+		public long getObjectId() {
+			return objectId;
+		}
+
+		public void setObjectId(long objectId) {
+			this.objectId = objectId;
+		}
+
+		public String getPermissionType() {
+			return permissionType;
+		}
+		public void setPermissionType(String permissionType) {
+			this.permissionType = permissionType;
+		}
+		public String getPermission() {
+			return permission;
+		}
+		public void setPermission(String permission) {
+			this.permission = permission;
+		}
+		public boolean isGranted() {
+			return granted;
+		}
+		public void setGranted(boolean granted) {
+			this.granted = granted;
+		}
+		
 	}
 }
