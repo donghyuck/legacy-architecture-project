@@ -35,6 +35,7 @@ import architecture.user.permission.dao.PermissionsDao;
 import architecture.user.permission.dao.PermissionsDao.Perm;
 import architecture.user.permission.event.PermissionEvent;
 import architecture.user.security.spring.userdetails.ExtendedUserDetails;
+import net.anotheria.util.ArrayUtils;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
@@ -60,6 +61,7 @@ public class DefaultPermissionsManager implements PermissionsManager, EventSourc
 				array2[max] = temp;
 			}
 		}
+		
 		private long anonymousAdditivePerms;
 		private long anonymousNegativePerms;
 		private long registeredAdditivePerms;
@@ -70,8 +72,7 @@ public class DefaultPermissionsManager implements PermissionsManager, EventSourc
 		private long negativeUserPerms[];
 		private long negativeGroupIds[];
 		private long additiveGroupIds[];
-		private long additiveGroupPerms[];
-		
+		private long additiveGroupPerms[];		
 		private long negativeGroupPerms[];
 		
 		public PermissionsCacheEntry(){
@@ -114,18 +115,6 @@ public class DefaultPermissionsManager implements PermissionsManager, EventSourc
 			}else{
 				return anonymousAdditivePerms;
 			}
-		}
-		
-		@Override
-		public int getCachedSize() {
-			int size = 0;
-			size += CacheSizes.sizeOfObject() ;
-			size += CacheSizes.sizeOfLong() * 4 ;
-			size += additiveUserPerms.length * CacheSizes.sizeOfLong() * 2;
-			size += negativeUserPerms.length * CacheSizes.sizeOfLong() * 2;
-			size += additiveGroupPerms.length * CacheSizes.sizeOfLong() * 2;
-			size += negativeGroupPerms.length * CacheSizes.sizeOfLong() * 2;
-			return size;
 		}
 
 		public long getGroupPerms(long groupId, PermissionType permissionType){
@@ -201,20 +190,53 @@ public class DefaultPermissionsManager implements PermissionsManager, EventSourc
 			else
 			{
 				for( int i = 0 ; i< additiveUserPerms.length ; i ++ ){
+					log.debug("additiveUserPerms[i] & permission) != 0L-" + (( additiveUserPerms[i] & permission) != 0L) );
+					log.debug("additiveUserIds[i] != 2L-" + (additiveUserIds[i] != 2L) );
 					if( (additiveUserPerms[i] & permission) != 0L && additiveUserIds[i] != 2L )
 						users.add(additiveUserIds[i]);
 				}
 				return users;
 			}
 		}
+		
+		
+		@Override
+		public int getCachedSize() {
+			int size = 0;
+			size += CacheSizes.sizeOfObject() ;
+			size += CacheSizes.sizeOfLong() * 4 ;
+			size += additiveUserPerms.length * CacheSizes.sizeOfLong() * 2;
+			size += negativeUserPerms.length * CacheSizes.sizeOfLong() * 2;
+			size += additiveGroupPerms.length * CacheSizes.sizeOfLong() * 2;
+			size += negativeGroupPerms.length * CacheSizes.sizeOfLong() * 2;
+			return size;
+		}
+
+		@Override
+		public String toString() {
+			
+			return "PermissionsCacheEntry [anonymousAdditivePerms=" + anonymousAdditivePerms
+					+ ", anonymousNegativePerms=" + anonymousNegativePerms + ", registeredAdditivePerms="
+					+ registeredAdditivePerms + ", registeredNegativePerms=" + registeredNegativePerms
+					+ ", additiveUserIds=" + Arrays.toString(additiveUserIds) + ", negativeUserIds="
+					+ Arrays.toString(negativeUserIds) + ", additiveUserPerms=" + Arrays.toString(additiveUserPerms)
+					+ ", negativeUserPerms=" + Arrays.toString(negativeUserPerms) + ", negativeGroupIds="
+					+ Arrays.toString(negativeGroupIds) + ", additiveGroupIds=" + Arrays.toString(additiveGroupIds)
+					+ ", additiveGroupPerms=" + Arrays.toString(additiveGroupPerms) + ", negativeGroupPerms="
+					+ Arrays.toString(negativeGroupPerms) + "]";
+		}
+		
+		
 	}
 	
 	public static long fromDbFormat(int permission){
 		return (long)Math.pow(2D, permission);
 	}
+	
 	private static String getPermsCacheKey(int objectType, long objectId){
 		return LockUtils.intern(new StringBuilder().append("perms-cache-").append(objectType).append("-").append(objectId).toString());
 	}
+	
 	public static int toDbFormat(long permission){
 		if(permission < 1L)
 			throw new IllegalArgumentException(new StringBuilder().append("Permission value negative : " ).append(permission).toString());
@@ -227,7 +249,8 @@ public class DefaultPermissionsManager implements PermissionsManager, EventSourc
 		else 
 			return count;
 	}
-	private Log log = LogFactory.getLog(DefaultPermissionsManager.class);
+	
+	private static final Log log = LogFactory.getLog(DefaultPermissionsManager.class);
 	private EventPublisher eventPublisher;
 	private PermissionsDao permissionsDao;
 	private GroupManager groupManager;
@@ -469,9 +492,13 @@ public class DefaultPermissionsManager implements PermissionsManager, EventSourc
 		{
 			bundle = (PermissionsCacheEntry) userPermsCache.get(bundleKey).getValue();
 		}
+		
 		if( bundle == null ){
+			log.debug("create new permissions bundle");
 			synchronized(bundleKey){
+				
 				List<Perm> userPerms = permissionsDao.getUserPerms(objectType, objectId);
+				
 				long anonymousAdditivePerms = Permissions.NONE;
 				long anonymousNegativePerms = Permissions.NONE;
 				long registeredAdditivePerms = Permissions.NONE;
@@ -480,38 +507,47 @@ public class DefaultPermissionsManager implements PermissionsManager, EventSourc
 				LongList negativeUserIds = new ArrayLongList() ;
 				LongList additiveUserPerms = new ArrayLongList() ;
 				LongList negativeUserPerms = new ArrayLongList() ;
+				
 				for(Perm perm : userPerms)
-				{
+				{					
 					long permission = fromDbFormat(perm.getPermission());
-					if( perm.getObjectId() == -1L && perm.getType() == PermissionType.NEGATIVE.getId()){
-						anonymousNegativePerms |= permission;
-					}else if(perm.getObjectId() == -1L){
-						anonymousAdditivePerms |= permission;
-					}else if( perm.getObjectId() == 0L && perm.getType() == PermissionType.NEGATIVE.getId()){
-						registeredNegativePerms |= permission;
-					}else if (perm.getObjectId() == 0L){
-						registeredAdditivePerms |= permission;
-					}else if (perm.getType() == PermissionType.NEGATIVE.getId()){
-						int index = negativeUserIds.indexOf(perm.getObjectId());
-						if( index != -1)
-						{
-							permission |= negativeUserPerms.get(index);
-							negativeUserPerms.removeElementAt(index);
-							negativeUserIds.removeElementAt(index);
-						}
-						negativeUserIds.add(perm.getObjectId());
-						negativeUserPerms.add(permission);
+					log.debug(new StringBuilder("permission:").append(permission).append("(").append(perm.getPermission()).append(")").append(",type=").append(perm.getType()).append(", userId=").append(perm.getObjectId()));
+					if( perm.getObjectId() == -1L ){
+						if( perm.getType() == PermissionType.NEGATIVE.getId()){
+							anonymousNegativePerms |= permission;
+						}else{
+							anonymousAdditivePerms |= permission;
+						}						
+					}else if ( perm.getObjectId() == 0L ){
+						if( perm.getType() == PermissionType.NEGATIVE.getId()){
+							registeredNegativePerms |= permission;
+						}else{
+							registeredAdditivePerms |= permission;
+						}	
 					}else{
-						int index = additiveUserIds.indexOf(perm.getObjectId());
-						if( index != -1){
-							permission |= additiveUserPerms.get(index);
-							additiveUserPerms.removeElementAt(index);
-							additiveUserIds.removeElementAt(index);
-						}
-						additiveUserIds.add(perm.getObjectId());
-						additiveUserPerms.add(permission);
+						if( perm.getType() == PermissionType.NEGATIVE.getId()){
+							int index = negativeUserIds.indexOf(perm.getObjectId());
+							if( index != -1){
+								permission |= negativeUserPerms.get(index);
+								negativeUserPerms.removeElementAt(index);
+								negativeUserIds.removeElementAt(index);
+							}
+							negativeUserIds.add(perm.getObjectId());
+							negativeUserPerms.add(permission);			
+							
+						}else{
+							int index = additiveUserIds.indexOf(perm.getObjectId());
+							if( index != -1){
+								permission |= additiveUserPerms.get(index);
+								additiveUserPerms.removeElementAt(index);
+								additiveUserIds.removeElementAt(index);
+							}
+							additiveUserIds.add(perm.getObjectId());
+							additiveUserPerms.add(permission);
+						}						
 					}
-				}
+				}	
+				
 				List<Perm> groupPerms = permissionsDao.getGroupPerms(objectType, objectId);
 				LongList additiveGroupIds = new ArrayLongList() ;
 				LongList negativeGroupIds = new ArrayLongList() ;
@@ -519,6 +555,8 @@ public class DefaultPermissionsManager implements PermissionsManager, EventSourc
 				LongList negativeGroupPerms = new ArrayLongList() ;
 				for(Perm perm : groupPerms){
 					long permission = fromDbFormat(perm.getPermission());
+					log.debug(new StringBuilder("permission:").append(permission).append("(").append(perm.getPermission()).append(")").append(",type=").append(perm.getType()).append(", groupId=").append(perm.getObjectId()));
+					
 					if(perm.getType() == PermissionType.NEGATIVE.getId())
 					{
 						int index = negativeGroupIds.indexOf(perm.getObjectId());
@@ -549,12 +587,12 @@ public class DefaultPermissionsManager implements PermissionsManager, EventSourc
 					additiveGroupIds.toArray(), negativeGroupIds.toArray(),
 					additiveGroupPerms.toArray(), negativeGroupPerms.toArray()
 				);
+				
+				log.debug(bundle.toString());
 				userPermsCache.put(new Element(bundleKey, bundle));
 			}			
 		}
-		
 		return bundle;
-		
 	}
 
 	public PermissionsDao getPermissionsDao() {
@@ -806,7 +844,10 @@ public class DefaultPermissionsManager implements PermissionsManager, EventSourc
 	}
 
 	public List<User> usersWithPermission(int objectType, long objectId, PermissionType permissionType, long permission) {
-		List<Long> userIds = getPermissionsCacheEntry(objectType, objectId).getUsersWithPerm(permissionType, permission);
+		PermissionsCacheEntry entry = getPermissionsCacheEntry(objectType, objectId);
+		log.debug(entry);
+		
+		List<Long> userIds = entry.getUsersWithPerm(permissionType, permission);
 		List<User> users = new ArrayList<User>(userIds.size());
 		for( Long userId : userIds)
 		{
@@ -823,5 +864,23 @@ public class DefaultPermissionsManager implements PermissionsManager, EventSourc
 	public int usersWithPermissionCount(int objectType, long objectId, PermissionType permissionType, long permission) {		
 		return getPermissionsCacheEntry(objectType, objectId).getUsersWithPerm(permissionType, permission).size();
 	}
-	
+
+	public List<Group> grousWithPermission(int objectType, long objectId, PermissionType permissionType, long permission) {
+		List<Long> groupIds = getPermissionsCacheEntry(objectType, objectId).getGroupsWithPerm(permissionType, permission);
+		List<Group> groups = new ArrayList<Group>(groupIds.size());
+		for( Long groupId : groupIds)
+		{
+			try {
+				groups.add( groupManager.getGroup(groupId) );
+			} catch (GroupNotFoundException e) {
+				log.warn("group not found");
+			}
+		}
+		return groups;
+	}
+
+
+	public int groupsWithPermissionCount(int objectType, long objectId, PermissionType permissionType, long permission) {		
+		return getPermissionsCacheEntry(objectType, objectId).getGroupsWithPerm(permissionType, permission).size();
+	}
 }

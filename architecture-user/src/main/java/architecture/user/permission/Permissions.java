@@ -52,6 +52,7 @@ public class Permissions implements Serializable {
         
         VIEW_WEBSITE             	(1L),
         CREATE_MESSAGE			 	(2L),	
+        MODERATOR					(128L),
         WEBSITE_ADMIN				(512L),
         VOTE_IN_POLL             	(1024L),
         CREATE_ANNOUNCEMENT		 	(4096L);
@@ -79,10 +80,25 @@ public class Permissions implements Serializable {
     public static final long GROUP_ADMINISTRATION     = PermissionAtom.GROUP_ADMINISTRATION.atomId;
     public static final long SYSTEM_ADMINISTRATION    = PermissionAtom.SYSTEM_ADMINISTRATION.atomId;
     public static final long HOSTED_ADMINISTRATION    = PermissionAtom.HOSTED_ADMINISTRATION.atomId;
-    public static final long CREATE_IMAGE             = PermissionAtom.CREATE_IMAGE.atomId;
-    public static final long VIEW                     = PermissionAtom.VIEW_WEBSITE.atomId;
-    public static final long WEBSITE_ADMIN            = PermissionAtom.WEBSITE_ADMIN.atomId;
-    public static final long CREATE_ANNOUNCEMENT            = PermissionAtom.CREATE_ANNOUNCEMENT.atomId;
+  
+    
+    public static final long READ_DOCUMENT			 	= PermissionAtom.READ_DOCUMENT.atomId;
+    public static final long READ_COMMENT			 	= PermissionAtom.READ_COMMENT.atomId;
+    public static final long CREATE_DOCUMENT			= PermissionAtom.CREATE_DOCUMENT.atomId;
+    public static final long CREATE_COMMENT			 	= PermissionAtom.CREATE_COMMENT.atomId;
+    public static final long CREATE_DOCUMENT_ATTACHMENT = PermissionAtom.CREATE_DOCUMENT_ATTACHMENT.atomId;
+    public static final long CREATE_DOCUMENT_IMAGE	 	= PermissionAtom.CREATE_DOCUMENT_IMAGE.atomId;
+    public static final long RATE_DOCUMENT			 	= PermissionAtom.RATE_DOCUMENT.atomId;
+    public static final long CREATE_IMAGE			 	= PermissionAtom.CREATE_IMAGE.atomId;
+    public static final long CREATE_FILE				= PermissionAtom.CREATE_FILE.atomId;
+    public static final long CREATE_POLL             	= PermissionAtom.CREATE_POLL.atomId;
+    
+    public static final long VIEW_WEBSITE             	= PermissionAtom.VIEW_WEBSITE.atomId;
+    public static final long CREATE_MESSAGE			 	= PermissionAtom.CREATE_MESSAGE.atomId;
+    public static final long MODERATOR					= PermissionAtom.MODERATOR.atomId;    
+    public static final long WEBSITE_ADMIN				= PermissionAtom.WEBSITE_ADMIN.atomId;
+    public static final long VOTE_IN_POLL             	= PermissionAtom.VOTE_IN_POLL.atomId;
+    public static final long CREATE_ANNOUNCEMENT		= PermissionAtom.CREATE_ANNOUNCEMENT.atomId;    
     
 	private long permissions;
 

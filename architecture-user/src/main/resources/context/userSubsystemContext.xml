@@ -66,5 +66,24 @@
 	<bean id="menuDao" class="architecture.ee.web.navigator.dao.impl.JdbcMenuDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
 	<bean id="menuRepository" class="architecture.ee.web.navigator.DefaultMenuRepository"  init-method="initialize" destroy-method="destory"  depends-on="menuDao, eventPublisher" 	p:menuDao-ref="menuDao" p:eventPublisher-ref="eventPublisher"  p:menuCache-ref="menuCache"  p:menuIdCache-ref="menuIdCache" />
 	-->	
+	
+	<!-- ====================================  -->
+	<!-- PermissionsManager					   -->
+	<!-- ====================================  -->
+	<bean id="permissionsDao" class="architecture.user.permission.dao.impl.JdbcPermissionsDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" />	
+	
+	<bean id="userPermsCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="userPermsCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0"  p:statisticsEnabled="true" />
+	<bean id="permKeyToAssignedMasksCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="permKeyToAssignedMasksCache" p:maxElementsInMemory="100"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0"  p:statisticsEnabled="true" />
+	<bean id="objectsWithPermissionsCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="objectsWithPermissionsCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0"  p:statisticsEnabled="true" />
+	
+	<bean id="permissionsManager" class="architecture.user.permission.DefaultPermissionsManager"  
+		p:permissionsDao-ref="permissionsDao" 
+		p:objectsWithPermissionsCache-ref="objectsWithPermissionsCache" 
+		p:permKeyToAssignedMasksCache-ref="permKeyToAssignedMasksCache" 
+		p:userPermsCache-ref="userPermsCache"
+		p:eventPublisher-ref="eventPublisher"  p:userManager-ref="userManager" p:groupManager-ref="groupManager" />
+	
+	
+	
 		
 </beans>

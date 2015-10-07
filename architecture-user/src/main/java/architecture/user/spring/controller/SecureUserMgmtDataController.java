@@ -17,8 +17,11 @@ package architecture.user.spring.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.inject.Inject;
 
@@ -59,6 +62,10 @@ import architecture.user.Role;
 import architecture.user.RoleAlreadyExistsException;
 import architecture.user.RoleManager;
 import architecture.user.RoleNotFoundException;
+import architecture.user.permission.PermissionType;
+import architecture.user.permission.Permissions;
+import architecture.user.permission.PermissionsManager;
+import architecture.user.permission.PermissionsManagerHelper;
 
 
 @Controller ("secure-user-mgmt-data-controller")
@@ -82,6 +89,11 @@ public class SecureUserMgmtDataController {
 	@Inject
 	@Qualifier("companyManager")
 	private CompanyManager companyManager;
+	
+	
+	@Inject
+	@Qualifier("permissionsManager")
+	private PermissionsManager permissionsManager;
 	
 	
 	public SecureUserMgmtDataController() {
@@ -967,5 +979,312 @@ public class SecureUserMgmtDataController {
 			list.add(new Property(key, value));
 		}
 		return list;
+	}
+	
+	/** PERMISSIONS MGMT */
+	
+	private PermissionsManagerHelper getPermissionsManagerHelper(int objectType, long objectId){
+		PermissionsManagerHelper helper = new PermissionsManagerHelper(objectType, objectId);
+		helper.setPermissionsManager(permissionsManager);
+		return helper;
+	}
+	
+	@RequestMapping(value="/mgmt/permissions/list.json",method={RequestMethod.POST} )
+	@ResponseBody
+	public Map<String, Object> listAllPermissions(
+		@RequestBody PermsSetForm permsSetGroup
+	){
+		User currentUser = SecurityHelper.getUser();
+		
+		List<PermSet> list1 = new ArrayList<PermSet>();
+		List<PermSet> list2 = new ArrayList<PermSet>();
+		List<UserPermSet> list3 = new ArrayList<UserPermSet>();
+		List<GroupPermSet> list4 = new ArrayList<GroupPermSet>();
+		TreeMap<User, UserPermSet> tree1 = new TreeMap<User, UserPermSet>(new Comparator<User>(){
+			public int compare(User o1, User o2) {
+				return o1.getUsername().toLowerCase().compareTo(o2.getUsername().toLowerCase());
+			}
+		});
+		TreeMap<Group, GroupPermSet> tree2 = new TreeMap<Group, GroupPermSet>(new Comparator<Group>(){
+			public int compare(Group o1, Group o2) {
+				return o1.getName().toLowerCase().compareTo(o2.getName().toLowerCase());
+			}
+		});		
+		PermissionsManagerHelper helper = getPermissionsManagerHelper(permsSetGroup.getObjectType(), permsSetGroup.getObjectId());		
+		
+		for( String permissionName : permsSetGroup.getPerms())
+		{
+			long permission = Permissions.PermissionAtom.valueOf(permissionName).getAtomId();		
+			if( Permissions.PermissionAtom.valueOf(permissionName) != null)
+				permission = Permissions.PermissionAtom.valueOf(permissionName).getAtomId();
+			else		
+				permission = permissionsManager.getPermissionMask(permissionName);
+			
+			
+			log.debug("permission:" + permissionName + "(" + permission + ")");
+			
+			// anonymous 
+			PermSet p1 = new PermSet(permissionName);
+			p1.setAdditive(helper.anonymousUserHasPermission(PermissionType.ADDITIVE, permission));
+			p1.setNegative(helper.anonymousUserHasPermission(PermissionType.NEGATIVE, permission));
+			p1.setInherited(false);
+			list1.add(p1);
+			// member 
+			PermSet p2 = new PermSet(permissionName);
+			p2.setAdditive(helper.registeredUserHasPermission(PermissionType.ADDITIVE, permission));
+			p2.setNegative(helper.registeredUserHasPermission(PermissionType.NEGATIVE, permission));
+			p2.setInherited(false);
+			list2.add(p2);			
+
+			// users 
+
+			
+			log.debug("user : " +  helper.usersWithPermissionCount(PermissionType.ADDITIVE, permission));
+			for(User user : helper.usersWithPermission(PermissionType.ADDITIVE, permission)){
+				if(tree1.containsKey(user))
+				{					
+					UserPermSet up = tree1.get(user);
+					up.getPermSet(permissionName, true).setAdditive(true);					
+				}else{
+					UserPermSet up = new UserPermSet(user);
+					up.getPermSet(permissionName, true).setAdditive(true);	
+					tree1.put(user, up);
+				}				
+			}		
+			for(User user : helper.usersWithPermission(PermissionType.NEGATIVE, permission)){
+				if(tree1.containsKey(user))
+				{					
+					UserPermSet up = tree1.get(user);
+					up.getPermSet(permissionName, true).setNegative(true);					
+				}else{
+					UserPermSet up = new UserPermSet(user);
+					up.getPermSet(permissionName, true).setNegative(true);	
+					tree1.put(user, up);
+				}	
+			}			
+			
+			
+			// groups
+			log.debug("group : " +  helper.groupsWithPermissionCount(PermissionType.ADDITIVE, permission));
+
+			for(Group group : helper.groupsWithPermission(PermissionType.ADDITIVE, permission)){
+				if(tree1.containsKey(group))
+				{					
+					GroupPermSet gp = tree2.get(group);
+					gp.getPermSet(permissionName, true).setAdditive(true);					
+				}else{
+					GroupPermSet gp = new GroupPermSet(group);
+					gp.getPermSet(permissionName, true).setAdditive(true);	
+					tree2.put(group, gp);
+				}				
+			}		
+			for(Group group : helper.groupsWithPermission(PermissionType.NEGATIVE, permission)){
+				if(tree1.containsKey(group))
+				{					
+					GroupPermSet gp = tree2.get(group);
+					gp.getPermSet(permissionName, true).setNegative(true);					
+				}else{
+					GroupPermSet gp = new GroupPermSet(group);
+					gp.getPermSet(permissionName, true).setNegative(true);	
+					tree2.put(group, gp);
+				}	
+			}			
+			
+			
+		}		
+		
+		list3.addAll(tree1.values());
+		list4.addAll(tree2.values());	
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("anonymous", list1);
+		map.put("member", list2);
+		map.put("users", list3);
+		map.put("groups", list4);
+		return map;
+	}
+	
+	
+	
+	static public class PermsSetForm {	
+		
+		private int objectType ;
+		private long objectId ;
+		private List<String> perms;
+		
+		public PermsSetForm() {
+			objectType = 0;
+			objectId = 0 ;
+			perms = Collections.EMPTY_LIST;
+		}
+		
+		public int getObjectType() {
+			return objectType;
+		}
+		public void setObjectType(int objectType) {
+			this.objectType = objectType;
+		}
+		public long getObjectId() {
+			return objectId;
+		}
+		public void setObjectId(long objectId) {
+			this.objectId = objectId;
+		}
+		public List<String> getPerms() {
+			return perms;
+		}
+		public void setPerms(List<String> perms) {
+			this.perms = perms;
+		}		
+	}
+
+	static public class UserPermSet {
+		private User user;
+		private Map<String, PermSet> perms;
+		
+		public UserPermSet(User user) {
+			this.user = user;
+			this.perms = new HashMap<String,PermSet>();
+		}
+
+		public User getUser() {
+			return user;
+		}
+		
+		public void setUser(User user) {
+			this.user = user;
+		}
+		
+		public Map<String, PermSet> getPerms() {
+			return perms;
+		}
+		
+		public void setPerms(Map<String, PermSet> perms) {
+			this.perms = perms;
+		}
+		
+		public PermSet getPermSet(String name, boolean createIfNotExist){
+			PermSet has = perms.get(name);
+			if( has == null && createIfNotExist ){
+				has= new PermSet(name);		
+				has.additive = false;
+				has.inherited = false;
+				has.negative = false;
+				perms.put(name, has);
+			}
+			return has;			
+		}
+		
+		public boolean hasPermSet(String name){
+			
+			if( perms.get(name) == null )
+				return false;
+			else 
+				return true;
+		}
+		
+	}
+	
+	static public class GroupPermSet {
+		private Group groups;
+		private List<PermSet> perms;
+		
+		public GroupPermSet(Group user) {
+			this.groups = user;
+			this.perms = new ArrayList<PermSet>();
+		}
+
+		public Group getUser() {
+			return groups;
+		}
+		
+		public void setUser(Group user) {
+			this.groups = user;
+		}
+		
+		public List<PermSet> getPerms() {
+			return perms;
+		}
+		
+		public void setPerms(List<PermSet> perms) {
+			this.perms = perms;
+		}
+		
+		public PermSet getPermSet(String name, boolean createIfNotExist){
+			PermSet has = null;
+			for(PermSet p : perms){
+				if( p.getName().equals(name) )
+				{		
+					has = p;					
+					break;
+				}
+			}
+			if( has == null && createIfNotExist){
+				has= new PermSet(name);		
+				has.additive = false;
+				has.inherited = false;
+				has.negative = false;
+				perms.add(has);
+			}
+			return has;			
+		}
+		
+		public boolean hasPermSet(String name){
+			boolean has = false;
+			for(PermSet p : perms){
+				if( p.getName().equals(name) )
+				{		
+					has = true;					
+					break;
+				}
+			}
+			return has;
+		}
+		
+	}
+	
+	static public class PermSet {		
+
+		private String name;		
+		private boolean inherited;
+		private boolean additive;		
+		private boolean negative;		
+		
+		public PermSet(String permission) {
+			this.name = permission;
+		}
+
+		public boolean isInherited() {
+			return inherited;
+		}
+
+		public void setInherited(boolean inherited) {
+			this.inherited = inherited;
+		}
+
+		public boolean isAdditive() {
+			return additive;
+		}
+
+		public void setAdditive(boolean additive) {
+			this.additive = additive;
+		}
+
+		public boolean isNegative() {
+			return negative;
+		}
+
+		public void setNegative(boolean negative) {
+			this.negative = negative;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+			
 	}
 }

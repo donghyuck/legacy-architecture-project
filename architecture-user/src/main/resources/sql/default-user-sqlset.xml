@@ -686,25 +686,30 @@
 	<!--  =====================================  -->
 	<!--   Permissions Mask						 -->
 	<!--  =====================================  -->
-	<sql-query name="SELECT_ALL_PERMISSION_MASK" description="SELECT_ALL_PERMISSION_MASK"><![CDATA[   
-	    SELECT NAME, MASK FROM V2_PERMISSION_MASK
+	<sql-query name="SELECT_ALL_PERM_MASK" description="SELECT_ALL_PERM_MASK"><![CDATA[   
+	    SELECT NAME, MASK FROM V2_PERM_MASK
 	]]></sql-query>
 
-	<sql-query name="SELECT_PERMISSION_MASK_BY_NAME" description="SELECT_PERMISSION_MASK_BY_NAME"><![CDATA[   
-	    SELECT MASK FROM V2_PERMISSION_MASK 
+	<sql-query name="SELECT_PERM_MASK_BY_NAME" description="SELECT_PERMISSION_MASK_BY_NAME"><![CDATA[   
+	    SELECT MASK FROM V2_PERM_MASK 
 	    WHERE NAME = ?
 	]]></sql-query>
 
-	<sql-query name="DELETE_PERMISSION_MASK_BY_NAME" description="DELETE_PERMISSION_MASK_BY_NAME"><![CDATA[   
-	    DELETE FROM V2_PERMISSION_MASK 
+	<sql-query name="DELETE_PERM_MASK_BY_NAME" description="DELETE_PERMISSION_MASK_BY_NAME"><![CDATA[   
+	    DELETE FROM V2_PERM_MASK 
 	    WHERE NAME = ?
 	]]></sql-query>
 
-	<sql-query name="CREATE_PERMISSION_MASK" description="CREATE_PERMISSION_MASK"><![CDATA[   
-	    INSERT INTO V2_PERMISSION_MASK 
+	<sql-query name="CREATE_PERM_MASK" description="CREATE_PERMISSION_MASK"><![CDATA[   
+	    INSERT INTO V2_PERM_MASK 
 	    (NAME, MASK) VALUES (?, ?)
 	]]></sql-query>
 
+	<sql-query name="CREATE_PERM_MASK" description="CREATE_PERMISSION_MASK"><![CDATA[   
+	INSERT INTO V2_PERM_MASK (NAME, MASK) VALUES (?,?)
+	]]></sql-query>		
+	
+	
 	<sql-query name="REMOVE_ALL_USER_PERMS" description="REMOVE_ALL_USER_PERMS"><![CDATA[   
 	DELETE FROM V2_USER_PERM WHERE OBJECT_TYPE = ? AND OBJECT_ID = ? AND PERMISSION_TYPE = ?
 	]]></sql-query>
@@ -767,10 +772,6 @@
 		PERMISSION_TYPE = ? AND
 		PERMISSION = ?
 	]]></sql-query>	
-	<sql-query name="CREATE_PERMISSION_MASK" description="CREATE_PERMISSION_MASK"><![CDATA[   
 
-	]]></sql-query>	
-	<sql-query name="CREATE_PERMISSION_MASK" description="CREATE_PERMISSION_MASK"><![CDATA[   
-
-	]]></sql-query>												
+										
 </sqlset>
