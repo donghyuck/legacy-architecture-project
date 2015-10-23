@@ -17,7 +17,10 @@ package architecture.ee.web.community.page;
 
 public enum BodyType {
 
-	RAW(1), XHTML(2), FREEMARKER(3), VELOCITY(4);
+	RAW(1), 
+	XHTML(2), 
+	FREEMARKER(3), 
+	VELOCITY(4);
 
 	private int id;
 	
@@ -31,11 +34,7 @@ public enum BodyType {
 	public int getId() {
 		return id;
 	}
-
-	/* (비Javadoc)
-	 * @see java.lang.Enum#toString()
-	 */
-	@Override
+ 
 	public String toString() {
 		StringBuilder builder = new StringBuilder("BodyType:");
 		 switch(id)

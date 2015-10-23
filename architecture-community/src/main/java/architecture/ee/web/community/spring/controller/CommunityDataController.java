@@ -51,6 +51,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
+import architecture.common.user.UserAlreadyExistsException;
+import architecture.common.user.UserManager;
+import architecture.common.user.UserTemplate;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.AttachmentManager;
@@ -91,6 +94,10 @@ import architecture.ee.web.ws.Result;
 public class CommunityDataController {
 	private static final Log log = LogFactory.getLog(CommunityDataController.class);
 
+	@Inject
+	@Qualifier("userManager")
+	private UserManager userManager ;
+	
 	@Inject
 	@Qualifier("photoStreamsManager")
 	private PhotoStreamsManager photoStreamsManager ;
@@ -182,6 +189,200 @@ public class CommunityDataController {
 		this.attachmentManager = attachmentManager;
 	}
 
+	
+	/** ======================================== **/
+	/**  USER SIGNUP			      			 **/
+	/** ======================================== **/
+	public static class SignupForm{
+		
+		private String media;
+		private String id ;
+		private String gender;
+		private String firstName;
+		private String lastName;
+		private String name;
+		private String email;
+		private String locale;
+		private String location;
+		private String languages ;
+		private String timezone;
+		private String username;
+		private String password1;
+		private String password2;
+		private String onetime;
+		private boolean nameVisible;
+		private boolean emailVisible;
+		private boolean agree;
+		
+		
+		
+		public SignupForm() {
+			this.media = "internal";
+			this.nameVisible = false;
+			this.emailVisible = false;
+			this.agree = false;
+		}
+		
+		public String getMedia() {
+			return media;
+		}
+		public void setMedia(String media) {
+			this.media = media;
+		}
+		public String getId() {
+			return id;
+		}
+		public void setId(String id) {
+			this.id = id;
+		}
+		public String getGender() {
+			return gender;
+		}
+		public void setGender(String gender) {
+			this.gender = gender;
+		}
+		public String getFirstName() {
+			return firstName;
+		}
+		public void setFirstName(String firstName) {
+			this.firstName = firstName;
+		}
+		public String getLastName() {
+			return lastName;
+		}
+		public void setLastName(String lastName) {
+			this.lastName = lastName;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public String getEmail() {
+			return email;
+		}
+		public void setEmail(String email) {
+			this.email = email;
+		}
+		public String getLocale() {
+			return locale;
+		}
+		public void setLocale(String locale) {
+			this.locale = locale;
+		}
+		public String getLocation() {
+			return location;
+		}
+		public void setLocation(String location) {
+			this.location = location;
+		}
+		public String getLanguages() {
+			return languages;
+		}
+		public void setLanguages(String languages) {
+			this.languages = languages;
+		}
+		public String getTimezone() {
+			return timezone;
+		}
+		public void setTimezone(String timezone) {
+			this.timezone = timezone;
+		}
+		public String getUsername() {
+			return username;
+		}
+		public void setUsername(String username) {
+			this.username = username;
+		}
+		public String getPassword1() {
+			return password1;
+		}
+		public void setPassword1(String password1) {
+			this.password1 = password1;
+		}
+		public String getPassword2() {
+			return password2;
+		}
+		public void setPassword2(String password2) {
+			this.password2 = password2;
+		}
+		public String getOnetime() {
+			return onetime;
+		}
+		public void setOnetime(String onetime) {
+			this.onetime = onetime;
+		}
+		public boolean isNameVisible() {
+			return nameVisible;
+		}
+		public void setNameVisible(boolean nameVisible) {
+			this.nameVisible = nameVisible;
+		}
+		public boolean isEmailVisible() {
+			return emailVisible;
+		}
+		public void setEmailVisible(boolean emailVisible) {
+			this.emailVisible = emailVisible;
+		}
+		public boolean isAgree() {
+			return agree;
+		}
+		public void setAgree(boolean agree) {
+			this.agree = agree;
+		}
+
+		@Override
+		public String toString() {
+			return "SignupForm [media=" + media + ", id=" + id + ", gender=" + gender + ", firstName=" + firstName
+					+ ", lastName=" + lastName + ", name=" + name + ", email=" + email + ", locale=" + locale
+					+ ", location=" + location + ", languages=" + languages + ", timezone=" + timezone + ", username="
+					+ username + ", password1=" + password1 + ", password2=" + password2 + ", onetime=" + onetime
+					+ ", nameVisible=" + nameVisible + ", emailVisible=" + emailVisible + ", agree=" + agree + "]";
+		}
+		
+	}
+	
+	@RequestMapping(value="/accounts/register.json", method={RequestMethod.POST} )
+	@ResponseBody
+	public Result register(
+			@RequestBody SignupForm form,		
+			NativeWebRequest request
+	) throws UserAlreadyExistsException{
+		
+		String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();			
+		String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
+		boolean match = form.getPassword1().matches(pattern);
+		if( match && form.isAgree() ){			
+			if(StringUtils.equals(form.getMedia(), "internal") ){
+				UserTemplate t = new UserTemplate(form.getUsername(), form.getPassword1(), form.getEmail(), form.getName() );
+				t.setEmailVisible(form.isEmailVisible());
+				t.setNameVisible(form.isNameVisible());
+				t.setCompanyId(-1L);				
+				User targetUser = userManager.createApplicationUser(t);
+				
+			}else{
+				
+			}
+			
+		}
+		log.debug("password valid:" + match);
+		
+		log.debug(">>>" + form);
+		return Result.newResult();
+	}	
+	
+	/**
+	 * 
+	 * @param objectType
+	 * @param objectId
+	 * @param text
+	 * @param name
+	 * @param email
+	 * @param request
+	 * @return
+	 * @throws NotFoundException
+	 */
 	
 	@RequestMapping(value={"/comments/create.json"},method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody

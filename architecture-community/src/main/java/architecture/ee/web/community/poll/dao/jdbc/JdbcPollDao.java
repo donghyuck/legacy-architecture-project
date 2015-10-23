@@ -308,7 +308,6 @@ public class JdbcPollDao extends ExtendedJdbcDaoSupport  implements PollDao{
 		getExtendedJdbcTemplate().batchUpdate(				
 				getBoundSql("ARCHITECTURE_COMMUNITY.INSERT_VOTE").getSql(), 
 				new BatchPreparedStatementSetter() {
-
 					public void setValues(PreparedStatement ps, int i)
 							throws SQLException {
 						Vote vote = votes.get(i);

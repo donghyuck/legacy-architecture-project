@@ -15,6 +15,7 @@
  */
 package architecture.ee.web.community.spring.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -67,6 +68,7 @@ import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.UserTemplate;
+import architecture.ee.web.community.social.provider.ServiceProviderConfig;
 import architecture.ee.web.community.social.provider.ServiceProviderHelper;
 import architecture.ee.web.community.social.provider.connect.ConnectNotFoundException;
 import architecture.ee.web.community.social.provider.connect.ConnectionFactoryLocator;
@@ -265,6 +267,86 @@ public class SocialConnectController implements InitializingBean  {
 		setNoCache(request);
 		return oauthRedirect( providerId, request);
 	}
+	
+	
+	public static class  SocialNetwork {
+		
+		private ServiceProviderConfig config;
+		private SocialConnect connect;
+
+		public SocialNetwork(ServiceProviderConfig config) {
+			this.config = config;
+		}
+
+		public SocialConnect getConnect() {
+			return connect;
+		}
+
+		public void setConnect(SocialConnect connect) {
+			this.connect = connect;
+		}
+		
+		public String getName(){
+			return this.config.getProvider();
+		}
+		
+		public boolean isConnected(){
+			if( this.connect != null)
+				return true;
+			return false;
+		}
+		
+		public boolean isAllowSignin() {
+			return config.isAllowSignin();
+		}
+		
+		/**
+		 * @return allowSignup
+		 */
+		public boolean isAllowSignup() {
+			return config.isAllowSignup();
+		}			
+		
+	}
+	
+	@RequestMapping(value="/all.json", method=RequestMethod.POST)
+	@ResponseBody
+	public List<SocialNetwork> connectionStatus2(NativeWebRequest request, Model model) {
+		setNoCache(request);
+		User user = SecurityHelper.getUser();
+		
+		List<SocialConnect> connections = socialConnectManager.findSocialConnects(user);		
+		List<ServiceProviderConfig> providers = ServiceProviderHelper.getAllServiceProviderConfig();
+		List<SocialNetwork> list = new ArrayList<SocialNetwork>(providers.size());
+		
+		for( ServiceProviderConfig provider : providers ){
+			SocialNetwork social = new SocialNetwork(provider);
+			SocialConnect connect = getSocialConnectByProvider(connections, provider.getProvider());
+			if( connect != null ){
+				social.setConnect(connect);
+			}
+			list.add(social);
+		}
+		
+		
+		
+		return list;
+	}	
+	
+	
+	protected SocialConnect getSocialConnectByProvider( List<SocialConnect> connections , String providerId){
+		SocialConnect connection = null;	
+		for(SocialConnect connect : connections ){
+			boolean match = architecture.common.util.StringUtils.equals(providerId.trim(), connect.getProviderId().trim());
+			log.debug( providerId + ":" + connect.getProviderId() + "  - " + match);
+			if( match){
+				connection =  connect;
+				break;
+			}
+		}
+		return connection;
+	}
+	
 	
 	protected Status listConnectionStatus(){
 		User user = SecurityHelper.getUser();
