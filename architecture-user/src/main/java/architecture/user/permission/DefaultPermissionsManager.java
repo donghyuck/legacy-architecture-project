@@ -35,7 +35,6 @@ import architecture.user.permission.dao.PermissionsDao;
 import architecture.user.permission.dao.PermissionsDao.Perm;
 import architecture.user.permission.event.PermissionEvent;
 import architecture.user.security.spring.userdetails.ExtendedUserDetails;
-import net.anotheria.util.ArrayUtils;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
