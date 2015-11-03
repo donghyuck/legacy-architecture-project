@@ -1,16 +1,9 @@
 package architecture.ee.test;
 
-import groovy.lang.GroovyClassLoader;
-import groovy.lang.GroovyCodeSource;
-import groovy.lang.GroovyObject;
-import groovy.util.GroovyScriptEngine;
-
 import java.io.File;
 import java.lang.reflect.Method;
 
-import org.apache.commons.vfs2.FileSystemException;
 import org.codehaus.groovy.control.CompilerConfiguration;
-import org.junit.Test;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.SpringTransactionAnnotationParser;
@@ -21,6 +14,10 @@ import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.ClassUtils;
 
 import architecture.ee.util.ApplicationHelper;
+import groovy.lang.GroovyClassLoader;
+import groovy.lang.GroovyCodeSource;
+import groovy.lang.GroovyObject;
+import groovy.util.GroovyScriptEngine;
 
 
 public class GroovyTest {

@@ -18,7 +18,6 @@ package architecture.ee.test;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
