@@ -57,6 +57,8 @@ public interface ApplicationConstants extends architecture.common.lifecycle.Appl
 	
 	public static final int USER = 1;
 	
+	public static final int SYSTEM = 14;
+	
 	/** SESSION PROPERTY KEY */	
 	
 	
