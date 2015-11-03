@@ -1,9 +1,11 @@
 package architecture.common;
 
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.Date;
+
+import org.junit.Test;
 
 import architecture.common.license.License;
 import architecture.common.license.License.Type;
@@ -14,21 +16,22 @@ import architecture.common.license.validator.CheckSignatureValidator;
 
 public class LicenseTest {
 
-	//@Test
+	@Test
 	public void testPrivateKeyAndWriteLicense() {
 		
 		
         
-		License license = new License("APPLICATION ARCHITECTURE for JAVA", "STANDARD", 1, 0, 3, "ANY", "ANY");
-		license.setID(20130614);
+		License license = new License("APPLICATION ARCHITECTURE for JAVA", "STANDARD", 2, 0, 0, "ANY", "ANY");
+		//license.setID(20130614);
+		license.setID(20150921);
 		license.setType(Type.COMMERCIAL);
 		license.setModule("architecture-common");
 		license.setModule("architecture-ee");
-		license.setModule("architecture-user");
 		license.setModule("architecture-web");
+		license.setModule("architecture-user");		
+		license.setModule("architecture-community");
 		license.setCreationDate(new Date());
-		license.setClient("www.inkium.com","INKIUM");
-		
+		license.setClient("www.podosoftware.co.kr","PODO SOFTWARE");
 		
 		try {
 			
@@ -39,7 +42,12 @@ public class LicenseTest {
             //  signer.sign(license);
             
             LicenseWriter writer = new LicenseWriter(license, signer);
-            writer.write(new FileWriter(  "C:/TOOLS/workspace/profile/license.xml"  ));
+            
+            StringWriter sw = new StringWriter(); 
+            writer.write(sw);
+            System.out.println(sw.toString());
+            
+            //writer.write(new FileWriter(  "C:/TOOLS/workspace/profile/license.xml"  ));
             
 		} catch (Exception e) {
 			e.printStackTrace();
