@@ -324,33 +324,43 @@ public class SecureUserMgmtDataController {
 			@RequestParam(value="nameOrEmail", defaultValue="", required=true ) String nameOrEmail,
 			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
 			@RequestParam(value="pageSize", defaultValue="0", required=false ) Integer pageSize,			
-			NativeWebRequest request) throws  UserNotFoundException, CompanyNotFoundException, GroupNotFoundException {				
+			NativeWebRequest request) throws  UserNotFoundException, CompanyNotFoundException, GroupNotFoundException {		
+		
 		User user = SecurityHelper.getUser();
-		Company company = companyManager.getCompany(companyId);			
+		
 		String nameOrEmailToUse = "%";
+		
 		if( !StringUtils.isBlank(nameOrEmail)){
 			nameOrEmailToUse = "%"+ nameOrEmail + "%";
 		}
+		
 		List<User> list = Collections.EMPTY_LIST;		
-		int totalCount = 0;
-		if( groupId >0){
-			Group group = groupManager.getGroup(groupId);
-			if( company.getCompanyId() == group.getCompanyId() ){
-				totalCount = userManager.getFoundUserCountWithGroupFilter(company, group, nameOrEmailToUse);
+		int totalCount = 0;		
+		if(companyId > 0){
+			Company company = companyManager.getCompany(companyId);	
+			if( groupId >0){
+				Group group = groupManager.getGroup(groupId);
+				if( company.getCompanyId() == group.getCompanyId() ){
+					totalCount = userManager.getFoundUserCountWithGroupFilter(company, group, nameOrEmailToUse);
+					if( pageSize > 0 ){		
+						list = userManager.findUsersWithGroupFilter(company, group, nameOrEmailToUse, startIndex, pageSize);				
+					}else{
+						list = userManager.findUsersWithGroupFilter(company, group, nameOrEmailToUse);
+					}
+				}
+			}else{			
+				totalCount = userManager.getFoundUserCount(company, nameOrEmailToUse);		
 				if( pageSize > 0 ){		
-					list = userManager.findUsersWithGroupFilter(company, group, nameOrEmailToUse, startIndex, pageSize);				
+					list = userManager.findUsers(company, nameOrEmailToUse, startIndex, pageSize);				
 				}else{
-					list = userManager.findUsersWithGroupFilter(company, group, nameOrEmailToUse);
+					list = userManager.findUsers(company, nameOrEmailToUse);
 				}
 			}
-		}else{			
-			totalCount = userManager.getFoundUserCount(company, nameOrEmailToUse);		
-			if( pageSize > 0 ){		
-				list = userManager.findUsers(company, nameOrEmailToUse, startIndex, pageSize);				
-			}else{
-				list = userManager.findUsers(company, nameOrEmailToUse);
-			}
-		}				
+		}else{
+			totalCount = userManager.getFoundUserCount(nameOrEmailToUse);
+			if( totalCount > 0)
+				list = userManager.findUsers(nameOrEmailToUse);
+		}		
 		return new ItemList(list, totalCount );
 	}	
 	

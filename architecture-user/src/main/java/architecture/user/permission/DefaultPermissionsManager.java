@@ -272,7 +272,7 @@ public class DefaultPermissionsManager implements PermissionsManager, EventSourc
 		userPermsCache.remove(bundleKey);
 		objectsWithPermissionsCache.remove(objectType);
 		//
-		Map params = new HashMap();
+		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("objectType", objectType);
 		params.put("objectId", objectId);
 		params.put("type", permissionType.getId());
