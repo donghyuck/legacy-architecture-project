@@ -8,7 +8,7 @@
 	<model id="18" code="MENU" />		
 	-->
 	<model id="19" code="SOCIAL_NETWORK" />
-	<model id="20" code="CONTENT" />
+	<model id="20" code="CATEGORY" />
 	<model id="21" code="TEMPLATE" />
 	<model id="22" code="ANNOUNCE" />
 	<model id="23" code="PROFILE_IMAGE" />
