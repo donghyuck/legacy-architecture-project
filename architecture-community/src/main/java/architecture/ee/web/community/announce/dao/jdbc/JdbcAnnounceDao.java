@@ -50,7 +50,6 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 		public Announce mapRow(ResultSet rs, int rowNum) throws SQLException {
 			long announceId = rs.getLong("ANNOUNCE_ID");
 			DefaultAnnounce announce = new DefaultAnnounce(announceId);
-			//announce.setAnnounceId(rs.getLong("ANNOUNCE_ID"));
 			announce.setObjectType(rs.getInt("OBJECT_TYPE"));
 			announce.setObjectId(rs.getLong("OBJECT_ID"));
 			announce.setUserId(rs.getLong("USER_ID"));

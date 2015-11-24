@@ -17,9 +17,6 @@ package architecture.ee.web.community.page.json;
 
 import java.io.IOException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
@@ -34,7 +31,7 @@ import architecture.ee.web.community.page.DefaultBodyContent;
 
 public class BodyContentDeserializer extends JsonDeserializer<BodyContent> {
 
-	private final Log log = LogFactory.getLog(BodyContentDeserializer.class);
+	//private final Log log = LogFactory.getLog(BodyContentDeserializer.class);
 	
 	@Override
 	public BodyContent deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)

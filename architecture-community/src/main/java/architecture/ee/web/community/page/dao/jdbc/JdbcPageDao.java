@@ -303,14 +303,16 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 	private void cleanupVersionsOnPublish(Page page){
 		if( page.getVersionId() > 0 ){
 			try {
-				int pubishedVersion = getExtendedJdbcTemplate().queryForInt(
+				int pubishedVersion = getExtendedJdbcTemplate().queryForObject(
 					getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PUBLISHED_PAGE_VERSION_NUMBER").getSql(), 
+					Integer.class,
 					new SqlParameterValue(Types.NUMERIC, page.getPageId() )	
 				);
 				page.setVersionId(pubishedVersion + 1);
 			} catch (EmptyResultDataAccessException e) {
-				int maxArchiveId =  getExtendedJdbcTemplate().queryForInt(
+				int maxArchiveId =  getExtendedJdbcTemplate().queryForObject(
 					getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_MAX_ARCHIVED_PAGE_VERSION_NUMBER").getSql(), 
+					Integer.class,
 					new SqlParameterValue(Types.NUMERIC, page.getPageId() )	
 				);
 				if( maxArchiveId > 0 )
@@ -396,8 +398,9 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 		int prevVersionId = page.getVersionId();
 		Date now = Calendar.getInstance().getTime();
 		if( isNewVersion ){
-			int maxVersionId = getExtendedJdbcTemplate().queryForInt(
+			int maxVersionId = getExtendedJdbcTemplate().queryForObject(
 					getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_MAX_PAGE_VERSION_NUMBER").getSql(), 
+					Integer.class,
 					new SqlParameterValue(Types.NUMERIC, page.getPageId() )	
 				);
 			page.setVersionId(maxVersionId + 1);			
@@ -457,8 +460,9 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 		long bodyId = -1L;
 		
 		try {
-			bodyId = getExtendedJdbcTemplate().queryForLong(
+			bodyId = getExtendedJdbcTemplate().queryForObject(
 					getBoundSql("ARCHITECTURE_COMMUNITY.SELETE_PAGE_BODY_ID").getSql(), 
+					Long.class,
 					new SqlParameterValue(Types.NUMERIC, page.getPageId() ),	
 					new SqlParameterValue(Types.NUMERIC, prevVersionId )	
 				);
@@ -572,11 +576,13 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 			page.setBodyContent(bodyContent);
 		} catch (EmptyResultDataAccessException e) {			
 		}	
+		
 		if( page.getBodyText() == null ){
 			long bodyId = -1L;
 			try {
-				bodyId = getExtendedJdbcTemplate().queryForLong(
+				bodyId = getExtendedJdbcTemplate().queryForObject(
 						getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_PAGE_BODY_VERSION").getSql(), 
+						Long.class,
 						new SqlParameterValue(Types.NUMERIC, page.getPageId()), 
 						new SqlParameterValue(Types.NUMERIC, page.getVersionId() )
 						);
@@ -609,8 +615,9 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 	public Page getPageByName(String name) {
 		long pageId = -1L;
 		try {
-			pageId = getExtendedJdbcTemplate().queryForLong(
-					getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_ID_BY_NAME").getSql(), 		
+			pageId = getExtendedJdbcTemplate().queryForObject(
+					getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_ID_BY_NAME").getSql(), 	
+					Long.class,
 					new SqlParameterValue(Types.VARCHAR, name )					
 			);
 		} catch (DataAccessException e) {
@@ -623,8 +630,9 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 	public Page getPageByName(String name, int versionNumber) {
 		long pageId = -1L;
 		try {
-			pageId = getExtendedJdbcTemplate().queryForLong(
+			pageId = getExtendedJdbcTemplate().queryForObject(
 					getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_ID_BY_NAME").getSql(), 		
+					Long.class,
 					new SqlParameterValue(Types.VARCHAR, name )					
 			);
 		} catch (DataAccessException e) {
@@ -652,8 +660,9 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 	}
 
 	public int getPageCount(int objectType, long objectId) {		
-		return getExtendedJdbcTemplate().queryForInt(
-				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_PAGE_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 		
+		return getExtendedJdbcTemplate().queryForObject(
+				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_PAGE_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 	
+				Integer.class,
 				new SqlParameterValue(Types.NUMERIC, objectType ),
 				new SqlParameterValue(Types.NUMERIC, objectId )
 		);
