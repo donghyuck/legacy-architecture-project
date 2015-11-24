@@ -13,12 +13,15 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.vfs2.FileObject;
+import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import architecture.common.util.vfs.VFSUtils;
 
@@ -36,15 +39,16 @@ public class ExcelReader {
 	 */
     private int sheetIndex = 0 ;
 
-	public ExcelReader(File file) throws IOException {
+	public ExcelReader(File file) throws IOException, EncryptedDocumentException, InvalidFormatException {
 		this.workbook = read(new FileInputStream(file));
 	}
 	
-	public ExcelReader(InputStream inputStream) throws IOException {
+	public ExcelReader(InputStream inputStream) throws IOException, EncryptedDocumentException, InvalidFormatException {
 		this.workbook = read(inputStream);
 	}
+
 	
-	public ExcelReader(String uri) throws IOException {
+	public ExcelReader(String uri) throws IOException, EncryptedDocumentException, InvalidFormatException {
 		FileObject fo = VFSUtils.resolveFile(uri);		
 		this.workbook = read(fo.getContent().getInputStream());
 	}
@@ -186,17 +190,21 @@ public class ExcelReader {
 		return false;		
 	}
 
-	private Workbook read (InputStream inputStream) throws IOException {
-		if(inputStream.markSupported()){
+	private Workbook read (InputStream inputStream) throws IOException, EncryptedDocumentException, InvalidFormatException {
+		/*if(inputStream.markSupported()){
 			inputStream = new PushbackInputStream(inputStream, 8);
-		}
+		}*/
+		/*
 		if(POIFSFileSystem.hasPOIFSHeader(inputStream)){
 			
 		}
-		//if(POIXMLDocument.hasOOXMLHeader(inp)) {
-		//	return new XSSFWorkbook(OPCPackage.open(inp));
-		//}
-		return new HSSFWorkbook (inputStream);
+		if(POIXMLDocument.hasOOXMLHeader(inp)) {
+			return new XSSFWorkbook(OPCPackage.open(inp));
+		}
+		*/
+		return WorkbookFactory.create(inputStream);
+		
+		//return new HSSFWorkbook (inputStream);
 	}
 	
 	/**

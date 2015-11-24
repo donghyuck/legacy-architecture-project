@@ -22,18 +22,24 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSelectInfo;
 import org.apache.commons.vfs2.FileSelector;
 import org.apache.commons.vfs2.FileSystemException;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.util.ObjectUtils;
 
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
@@ -62,6 +68,9 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 	private final Configuration configuration;
 	
 	protected List<String> resourceLocations;
+	
+	private Resource[] sqlLocations;
+	
 			
 	public AbstractSqlQueryFactory(Configuration configuration) {
 		this.configuration = configuration;
@@ -92,6 +101,16 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 	
 
 
+	public Resource[] getSqlLocations() {
+		return sqlLocations;
+	}
+
+
+	public void setSqlLocations(Resource[] sqlLocations) {
+		this.sqlLocations = sqlLocations;
+	}
+
+
 	public Configuration getConfiguration(){
 		return configuration;
 	}
@@ -100,6 +119,7 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 		XmlSqlBuilder builder = new XmlSqlBuilder(inputStream, configuration);
 		builder.build();
 	}
+	
 	
 	private FileObject[] findSqlFiles ( FileObject fo ) throws FileSystemException {
 		return fo.findFiles(new FileSelector(){
@@ -113,11 +133,32 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 		}});			
 	}
 	
+	
+	
+	protected boolean isEmpty(Object[]array){
+		return ObjectUtils.isEmpty(array);
+	} 
+	
 	protected void loadResourceLocations() {
 		
 		List<FileObject> list = new ArrayList<FileObject>();				
 		Repository repository = Bootstrap.getBootstrapComponent(Repository.class);
+		/**
+		log.debug("searching sql in jar ...");
+		if(!isEmpty(this.sqlLocations)){
+			for(Resource sqlLocation : sqlLocations ){
+				if(sqlLocation == null)
+					continue;
+				
+				
+				// 
+				log.debug(sqlLocation.toString());
+			}
+		}
+		**/
+
 		
+/*
 		String value = repository.getSetupApplicationProperties().getStringProperty("resources.sql", "");
 		String[] resources = StringUtils.split(value);
 		if( resources.length > 0 ){
@@ -143,7 +184,8 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 					log.warn(path + " not found.", e);
 				}
 			}				
-		}
+		}		
+*/	
 		
 		try {
 			log.debug("searching sql ...");
@@ -179,6 +221,7 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 				log.warn(e);
 			}			
 		}
+		
 	}
 	
 	
@@ -273,21 +316,8 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 			// if (log.isDebugEnabled())
 			// log.info(MessageFormatter.format("011023",
 			// file.getAbsolutePath()));
-		}
-
-		//if( log.isDebugEnabled() )
-		//	log.debug(file.getPath() + "validate:" + valid);
-		
+		}		
 		return valid;
 	}
-
-	/**
-	 * Setter of the property <tt>configuration</tt>
-	 * @param configuration  The configuration to set.
-	 * @uml.property  name="configuration"
-	 */
-/*	public void setConfiguration(Configuration configuration) {
-		this.configuration = configuration;
-	}*/
 	
 }

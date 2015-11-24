@@ -244,7 +244,7 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 						}
 					});
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.error(e);
 		}
 	}
