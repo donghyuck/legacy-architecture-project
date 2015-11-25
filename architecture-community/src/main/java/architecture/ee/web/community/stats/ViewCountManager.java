@@ -56,9 +56,9 @@ public class ViewCountManager {
 	public ViewCountManager(TaskEngine taskEngine){
 		this.viewCountsEnabled = ApplicationHelper.getApplicationBooleanProperty("components.viewCounts.enabled", true);
 		log.debug("view count enabled : " +viewCountsEnabled );		
-		if( viewCountsEnabled ){
-			queue = initQueue();
-			task = new PersistenceTask();
+		if( this.viewCountsEnabled ){
+			this.queue = initQueue();
+			this.task = new PersistenceTask();
 			taskEngine.schedule(task, DEFAULT_PERIOD_TIME, DEFAULT_PERIOD_TIME);
 		}
 	}
