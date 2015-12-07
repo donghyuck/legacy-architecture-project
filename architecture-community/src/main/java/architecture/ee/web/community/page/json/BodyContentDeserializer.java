@@ -33,7 +33,7 @@ public class BodyContentDeserializer extends JsonDeserializer<BodyContent> {
 
 	//private final Log log = LogFactory.getLog(BodyContentDeserializer.class);
 	
-	@Override
+
 	public BodyContent deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
 			throws IOException, JsonProcessingException {
 		ObjectCodec oc = jsonParser.getCodec();
