@@ -37,12 +37,12 @@ public class WebComponentsConfig {
 	 * @return
 	 */
 	@Bean
-	  public MultipartResolver multipartResolver() {
+	public MultipartResolver multipartResolver() {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
 		long maxUploadSize = ApplicationHelper.getApplicationLongProperty("components.multipart.maxUploadSize",  10485760 );
 		resolver.setMaxUploadSize(maxUploadSize);
 		return resolver;
-	  }
+	}
 	
 	
 	

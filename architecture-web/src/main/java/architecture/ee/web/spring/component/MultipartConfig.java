@@ -33,7 +33,7 @@ public class MultipartConfig {
 	public MultipartResolver multipartResolver() {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
 		// default size 10 mb;
-		log.debug("multipart resolver register ...");
+		log.debug("Multipart resolver register ...");
 		long maxUploadSize = ApplicationHelper.getApplicationLongProperty("components.multipart.maxUploadSize", 52428800);
 		resolver.setMaxUploadSize(maxUploadSize);
 		return resolver;
