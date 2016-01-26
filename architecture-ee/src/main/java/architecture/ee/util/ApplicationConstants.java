@@ -43,8 +43,8 @@ public interface ApplicationConstants extends architecture.common.lifecycle.Appl
 	public static final String LOCALE_CHARACTER_ENCODING_PROP_NAME = "locale.characterEncoding";		
 	public static final String LOCALE_TIMEZONE_PROP_NAME = "locale.timeZone";
 			
-	public static final String RESOURCE_SQL_LOCATION_PROP_NAME = "resoruce.sql.location";	
-	public static final String RESOURCE_TEMPLATE_LOCATION_PROP_NAME = "resoruce.template.location";	
+	public static final String RESOURCE_SQL_LOCATION_PROP_NAME = "resource.sql.location";	
+	public static final String RESOURCE_TEMPLATE_LOCATION_PROP_NAME = "resource.template.location";	
 	
 	
 	public static final String SCRIPTING_GROOVY_SOURCE_LOCATION_PROP_NAME = "scripting.groovy.source.location";	
