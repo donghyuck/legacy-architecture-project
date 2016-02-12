@@ -248,6 +248,29 @@ public class DisplayController {
 		return getFreemarkerView(page.getTemplate(), DEFAULT_PAGE_TEMPLATE );
 	}
 
+	@RequestMapping(value="/{catelogy:[a-zA-Z][a-zA-Z_0-9]}/{filename:.+}", method=RequestMethod.GET)
+	public String webpage (
+		@PathVariable String catelogy, 
+		@PathVariable String filename, 
+		HttpServletRequest request, 
+		HttpServletResponse response, Model model) throws IOException {			
+		
+		User user = SecurityHelper.getUser();			
+		String restOfTheUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		log.debug(filename  + ":" + restOfTheUrl);				
+		WebSite website = null;
+		WebPage page = null;
+		try{
+			website = getWebSite(0L, request) ;
+			page = webSiteManager.getWebPageByName(website, filename);			
+			setPageActionAdaptor(new PageAdaptor(page), website, user, model, request, response);
+		} catch (NotFoundException e) {
+			response.sendError(404);
+		}			
+		setContentType(page.getContentType(), response);
+		return getFreemarkerView(page.getTemplate(), DEFAULT_PAGE_TEMPLATE );
+	}
+	
 	@RequestMapping(value = "/", method=RequestMethod.GET, params={"source"})
 	public String page(
 			@RequestParam(value="source") String source, 
