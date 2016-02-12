@@ -207,7 +207,7 @@ public class DisplayController {
 	
 	protected WebSite getWebSite(long webSiteId, HttpServletRequest request) throws WebSiteNotFoundException{
 		WebSite website; 
-		if( webSiteId == 0 )
+		if( webSiteId < 1 )
 			website = WebSiteUtils.getWebSite(request);
 		else
 			website = webSiteManager.getWebSiteById(webSiteId);		
@@ -244,11 +244,14 @@ public class DisplayController {
 		} catch (NotFoundException e) {
 			response.sendError(404);
 		}			
-		setContentType(page.getContentType(), response);
+		
+		setContentType(page.getContentType(), response);		
 		return getFreemarkerView(page.getTemplate(), DEFAULT_PAGE_TEMPLATE );
 	}
 
-	@RequestMapping(value="/{catelogy:[a-zA-Z][a-zA-Z_0-9]}/{filename:.+}", method=RequestMethod.GET)
+	
+	
+	@RequestMapping(value="/{catelogy:[a-zA-Z][a-zA-Z_0-9]+}/{filename:.+}", method=RequestMethod.GET)
 	public String webpage (
 		@PathVariable String catelogy, 
 		@PathVariable String filename, 
