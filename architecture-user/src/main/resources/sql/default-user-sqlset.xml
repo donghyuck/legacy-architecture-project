@@ -600,7 +600,7 @@
     	DESCRIPTION, 
     	CREATION_DATE, 
     	MODIFIED_DATE 
-    ) VALUES ( ?, ?, ?, ?, ? )
+    ) VALUES ( ?, ?, ?, ?, ?,? )
     ]]></sql-query>
 
 	<sql-query name="DELETE_ROLE" description="CREATE_ROLE"><![CDATA[                 
