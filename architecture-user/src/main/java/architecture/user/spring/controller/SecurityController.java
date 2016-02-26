@@ -19,6 +19,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,7 +27,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.RedirectView;
 
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
@@ -42,7 +46,7 @@ import architecture.ee.web.util.WebSiteUtils;
 @RequestMapping("/accounts")
 public class SecurityController {
 
-	private static final Log log = LogFactory.getLog(PublicUserDataController.class);
+	private static final Log log = LogFactory.getLog(UserDataController.class);
 
 	private static final String DEFAULT_CONTENT_TYPE = "text/html;charset=UTF-8";
 
@@ -56,21 +60,27 @@ public class SecurityController {
 	}
 
 	@RequestMapping(value = "/login", method = { RequestMethod.POST, RequestMethod.GET })
-	public String login(NativeWebRequest request, Model model) throws NotFoundException, IOException {
+	public String login(@RequestParam(value="url", required=false ) String url, NativeWebRequest request, Model model) throws NotFoundException, IOException {
 		User user = SecurityHelper.getUser();
 		WebSite website = getCurrentWebSite(request.getNativeRequest(HttpServletRequest.class));
-		model.addAttribute("action", ActionAdaptor.newBuilder().webSite(website).user(user).remoteAddr(request.getNativeRequest(HttpServletRequest.class).getRemoteAddr()).build());
+		model.addAttribute("action", ActionAdaptor.newBuilder().webSite(website).user(user).remoteAddr(request.getNativeRequest(HttpServletRequest.class).getRemoteAddr()).url(url).build());
 		setContentType(request.getNativeResponse(HttpServletResponse.class));
 		return ApplicationHelper.getApplicationProperty(DEFAULT_LOGIN_TEMPLATE_KEY, DEFAULT_LOGIN_TEMPLATE);
 	}
 
 	@RequestMapping(value = "/signup", method = { RequestMethod.POST, RequestMethod.GET })
-	public String signup(NativeWebRequest request, Model model) throws NotFoundException, IOException {
+	public String signup(@RequestParam(value="url", required=false ) String url, NativeWebRequest request, Model model) throws NotFoundException, IOException {
 		User user = SecurityHelper.getUser();
 		WebSite website = getCurrentWebSite(request.getNativeRequest(HttpServletRequest.class));
-		model.addAttribute("action", ActionAdaptor.newBuilder().webSite(website).user(user).remoteAddr(request.getNativeRequest(HttpServletRequest.class).getRemoteAddr()).build());
+		model.addAttribute("action", ActionAdaptor.newBuilder().webSite(website).user(user).remoteAddr(request.getNativeRequest(HttpServletRequest.class).getRemoteAddr()).url(url).build());
 		setContentType(request.getNativeResponse(HttpServletResponse.class));
 		return DEFAULT_SIGNUP_TEMPLATE;
+	}
+	
+	@RequestMapping(value = "/logout", method = { RequestMethod.POST, RequestMethod.GET })
+	public View logout(@RequestParam(value="url", defaultValue="/", required=false ) String url, HttpSession session, NativeWebRequest request) throws NotFoundException, IOException {
+		session.invalidate();
+		return new RedirectView(url, true);
 	}
 	
 	
@@ -88,6 +98,7 @@ public class SecurityController {
 
 		private String remoteAddr;
 		private User user;
+		private String url;
 
 		private WebSite webSite;
 
@@ -164,6 +175,14 @@ public class SecurityController {
 			this.webSite = webSite;
 		}
 
+		public String getUrl() {
+			return url;
+		}
+
+		public void setUrl(String url) {
+			this.url = url;
+		}
+
 		public static class Builder {
 			ActionAdaptor actionAdaptor = new ActionAdaptor();
 
@@ -172,6 +191,11 @@ public class SecurityController {
 				return this;
 			}
 
+			public Builder url(String url) {
+				this.actionAdaptor.url = url;
+				return this;
+			}
+			
 			public Builder user(User user) {
 				this.actionAdaptor.user = user;
 				return this;

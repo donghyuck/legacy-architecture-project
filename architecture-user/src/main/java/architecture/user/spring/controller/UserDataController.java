@@ -41,18 +41,18 @@ import architecture.user.security.spring.userdetails.ExtendedUserDetails;
 import architecture.user.spring.annotation.ActiveUser;
 
 
-@Controller ("public-user-data-controller")
+@Controller ("user-data-controller")
 @RequestMapping("/data")
-public class PublicUserDataController {
+public class UserDataController {
 
-	private static final Log log = LogFactory.getLog(PublicUserDataController.class);
+	private static final Log log = LogFactory.getLog(UserDataController.class);
 		
 	@Inject
 	@Qualifier("userManager")
 	private UserManager userManager ;
 	
 	
-	public PublicUserDataController() {
+	public UserDataController() {
 	}
 	
 
