@@ -158,8 +158,7 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 				if( ! list.contains( path) )
 					list.add(path);
 			}
-			logger.debug("template source paths : " + list );
-			
+			logger.debug("template source paths : " + list );			
 			String[] pathsToUse = new String[list.size()] ; 
 			list.toArray(pathsToUse);
 			super.setTemplateLoaderPaths( pathsToUse );
@@ -185,7 +184,6 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 	
     @Override
     protected TemplateLoader getTemplateLoaderForPath(String templateLoaderPath) {
-    	    	
         if (isPreferFileSystemAccess()) {
             // Try to load via the file system, fall back to SpringTemplateLoader
             // (for hot detection of template changes, if possible).
