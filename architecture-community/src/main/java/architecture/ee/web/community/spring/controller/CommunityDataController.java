@@ -83,6 +83,7 @@ import architecture.ee.web.community.poll.Vote;
 import architecture.ee.web.community.stats.ViewCountManager;
 import architecture.ee.web.community.streams.Photo;
 import architecture.ee.web.community.streams.PhotoStreamsManager;
+import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteNotFoundException;
 import architecture.ee.web.spring.controller.MyCloudDataController.ItemList;
 import architecture.ee.web.util.WebSiteUtils;
@@ -353,12 +354,22 @@ public class CommunityDataController {
 		String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();			
 		String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
 		boolean match = form.getPassword1().matches(pattern);
+		
 		if( match && form.isAgree() ){			
 			if(StringUtils.equals(form.getMedia(), "internal") ){
+				
+				
+				
 				UserTemplate t = new UserTemplate(form.getUsername(), form.getPassword1(), form.getEmail(), form.getName() );
 				t.setEmailVisible(form.isEmailVisible());
 				t.setNameVisible(form.isNameVisible());
-				t.setCompanyId(-1L);				
+				t.setCompanyId(-1L);	
+				try {
+					WebSite site = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class));
+					t.setCompanyId(site.getCompany().getCompanyId());
+				} catch (WebSiteNotFoundException e) {
+				}
+				
 				User targetUser = userManager.createApplicationUser(t);
 				
 			}else{
@@ -924,22 +935,22 @@ public class CommunityDataController {
 	}
 	
 	private PhotoList getStreamPhotoList(int objectType, int startIndex, int pageSize, boolean random, HttpServletRequest request) throws NotFoundException{			
+		
 		User user = SecurityHelper.getUser();
 		long objectId = user.getUserId();		
+		
 		if( objectType == 1 ){
-			objectId = user.getCompanyId();			
+			objectId = user.getCompanyId();	
 		}else if ( objectType == 30){
 			objectId = WebSiteUtils.getWebSite(request).getWebSiteId();
 		}				
 		PhotoList list = new PhotoList();
-		
+
 		if(objectType > 0 && objectId == 0)
 			list.setTotalCount( photoStreamsManager.getPhotoCount(objectType ));
 		else if (objectType > 0 && objectId > 0)
 			list.setTotalCount( photoStreamsManager.getPhotoCount(objectType, objectId));		
-		else
-			list.setTotalCount(photoStreamsManager.getTotalPhotoCount());
-
+		
 		if(objectType > 0 && objectId == 0){
 			if( random )
 				list.setPhotos(photoStreamsManager.getPhotosByRandom(objectType, startIndex, pageSize));
@@ -950,12 +961,15 @@ public class CommunityDataController {
 				list.setPhotos(photoStreamsManager.getPhotosByRandom(objectType, objectId, startIndex, pageSize));
 			else
 				list.setPhotos(photoStreamsManager.getPhotos(objectType, objectId, startIndex, pageSize));
-		}else{
+		}
+		
+		if( list.getTotalCount() == 0 ){
+			list.setTotalCount(photoStreamsManager.getTotalPhotoCount());
 			if( random )
 				list.setPhotos(photoStreamsManager.getPhotosByRandom(startIndex, pageSize));
 			else
-				list.setPhotos(photoStreamsManager.getPhotos(startIndex, pageSize));
-		}
+				list.setPhotos(photoStreamsManager.getPhotos(startIndex, pageSize));			
+		}		
 		return list;
 	}
 	

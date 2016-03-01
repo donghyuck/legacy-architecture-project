@@ -32,7 +32,8 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 public class CrawlerTest {
-	@Test
+	
+	
 	public void crawlling() throws Exception {
 		CrawlConfig config = new CrawlConfig();
 		config.setCrawlStorageFolder("/Users/donghyuck/Documents/temp");
@@ -84,6 +85,7 @@ public class CrawlerTest {
 	    controller.start(MyCrawler.class, 1);
 		
 	}
+	
 	@Test
 	public void visit() {
 

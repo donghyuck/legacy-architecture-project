@@ -103,7 +103,7 @@ public class DisplayController {
 	 * @throws PageNotFoundException
 	 * @throws WebSiteNotFoundException
 	 */
-	@RequestMapping(value="/{objectType}/{objectId}/{filename:.+}", method=RequestMethod.GET)
+	@RequestMapping(value="/{objectType}/{objectId}/{filename:.+}", method={RequestMethod.POST, RequestMethod.GET})
 	public String page (
 			@PathVariable Integer objectType, 
 			@PathVariable Long objectId, 
@@ -146,7 +146,7 @@ public class DisplayController {
 	 * @throws NotFoundException
 	 * @throws IOException
 	 */
-	@RequestMapping(value="/{filename:.+}", method=RequestMethod.GET)
+	@RequestMapping(value="/{filename:.+}", method={RequestMethod.POST, RequestMethod.GET})
 	public String page(
 			@PathVariable String filename, 
 			@RequestParam(value="siteId", defaultValue="0", required=false ) int siteId,
@@ -225,7 +225,7 @@ public class DisplayController {
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping(value="/{siteId:[\\p{Digit}]+}/{filename:.+}", method=RequestMethod.GET)
+	@RequestMapping(value="/{siteId:[\\p{Digit}]+}/{filename:.+}", method={RequestMethod.POST, RequestMethod.GET})
 	public String webpage (
 		@PathVariable Long siteId, 
 		@PathVariable String filename, 
@@ -251,7 +251,7 @@ public class DisplayController {
 
 	
 	
-	@RequestMapping(value="/{catelogy:[a-zA-Z][a-zA-Z_0-9]+}/{filename:.+}", method=RequestMethod.GET)
+	@RequestMapping(value="/{catelogy:[a-zA-Z][a-zA-Z_0-9]+}/{filename:.+}", method={RequestMethod.POST, RequestMethod.GET})
 	public String webpage (
 		@PathVariable String catelogy, 
 		@PathVariable String filename, 
