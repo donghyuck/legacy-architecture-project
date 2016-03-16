@@ -92,8 +92,6 @@ public final class AsynchronousAbleEventDispatcher implements EventDispatcher
 
     private Executor getExecutor(ListenerInvoker invoker, Object event)
     {
-        return asynchronousEventResolver.isAsynchronousEvent(event)
-                && invoker.supportAsynchronousEvents()
-                ? asynchronousExecutor : SYNCHRONOUS_EXECUTOR;
+        return asynchronousEventResolver.isAsynchronousEvent(event) && invoker.supportAsynchronousEvents() ? asynchronousExecutor : SYNCHRONOUS_EXECUTOR;
     }
 }

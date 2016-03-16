@@ -87,8 +87,8 @@ public final class EventPublisherImpl implements EventPublisher {
 	 *            the event dispatcher to be used with the publisher
 	 * @param listenerHandlersConfiguration
 	 *            the list of listener handlers to be used with this publisher
-	 * @see architecture.ee.event.internal.AsynchronousAbleEventDispatcher
-	 * @see architecture.ee.event.internal.EventThreadFactory
+	 * @see architecture.common.event.internal.AsynchronousAbleEventDispatcher
+	 * @see architecture.common.event.internal.EventThreadFactory
 	 */
 	public EventPublisherImpl(EventDispatcher eventDispatcher, ListenerHandlersConfiguration listenerHandlersConfiguration) {
 		this.eventDispatcher = checkNotNull(eventDispatcher);
@@ -122,10 +122,8 @@ public final class EventPublisherImpl implements EventPublisher {
 		 * synchronize block is there
 		 */
 		synchronized (listenerInvokers) {
-			for (Iterator<Map.Entry<Class<?>, KeyedListenerInvoker>> invokerIterator = listenerInvokers
-					.entries().iterator(); invokerIterator.hasNext();) {
-				if (invokerIterator.next().getValue().getKey()
-						.equals(listenerKey)) {
+			for (Iterator<Map.Entry<Class<?>, KeyedListenerInvoker>> invokerIterator = listenerInvokers.entries().iterator(); invokerIterator.hasNext();) {
+				if (invokerIterator.next().getValue().getKey().equals(listenerKey)) {
 					invokerIterator.remove();
 				}
 			}
@@ -139,7 +137,6 @@ public final class EventPublisherImpl implements EventPublisher {
 										 */
 		{
 			unregisterListener(listenerKey);
-
 			final List<ListenerInvoker> invokers = Lists.newArrayList();
 			for (ListenerHandler listenerHandler : listenerHandlers) {
 				invokers.addAll(listenerHandler.getInvokers(listener));
@@ -147,35 +144,27 @@ public final class EventPublisherImpl implements EventPublisher {
 			if (!invokers.isEmpty()) {
 				registerListenerInvokers(listenerKey, invokers);
 			} else {
-				throw new IllegalArgumentException(
-						"No listener invokers were found for listener <"
-								+ listener + ">");
+				throw new IllegalArgumentException("No listener invokers were found for listener <" + listener + ">");
 			}
 		}
 	}
 
-	private Set<KeyedListenerInvoker> findListenerInvokersForEvent(Object event) {
-		
+	private Set<KeyedListenerInvoker> findListenerInvokersForEvent(Object event) {		
 		final Set<KeyedListenerInvoker> invokersForEvent = Sets.newHashSet();
-
 		for (Class<?> eventClass : ClassUtils.findAllTypes(checkNotNull(event).getClass())) {
 			invokersForEvent.addAll(listenerInvokers.get(eventClass));
 		}
 		return invokersForEvent;
 	}
 
-	private void invokeListeners(
-			Collection<KeyedListenerInvoker> listenerInvokers, Object event) {
-		
-		log.debug("publish [" + event + "]" );
-		
+	private void invokeListeners(Collection<KeyedListenerInvoker> listenerInvokers, Object event) {		
+		log.debug("publish [" + event + "]" );		
 		for (KeyedListenerInvoker keyedInvoker : listenerInvokers) {
 			eventDispatcher.dispatch(keyedInvoker.getInvoker(), event);
 		}
 	}
 
-	private void registerListenerInvokers(String listenerKey,
-			List<? extends ListenerInvoker> invokers) {
+	private void registerListenerInvokers(String listenerKey, List<? extends ListenerInvoker> invokers) {
 		for (ListenerInvoker invoker : invokers) {
 			registerListenerInvoker(listenerKey, invoker);
 		}
@@ -185,15 +174,13 @@ public final class EventPublisherImpl implements EventPublisher {
 			ListenerInvoker invoker) {
 		// if supported classes is empty, then all events are supported.
 		if (invoker.getSupportedEventTypes().isEmpty()) {
-			listenerInvokers.put(Object.class, new KeyedListenerInvoker(
-					listenerKey, invoker));
+			listenerInvokers.put(Object.class, new KeyedListenerInvoker(listenerKey, invoker));
 		}
 
 		// if it it empty, we won't loop, otherwise register the invoker against
 		// all its classes
 		for (Class<?> eventClass : invoker.getSupportedEventTypes()) {
-			listenerInvokers.put(eventClass, new KeyedListenerInvoker(
-					listenerKey, invoker));
+			listenerInvokers.put(eventClass, new KeyedListenerInvoker(listenerKey, invoker));
 		}
 	}
 
@@ -234,8 +221,7 @@ public final class EventPublisherImpl implements EventPublisher {
 
 		@Override
 		public int hashCode() {
-			return new HashCodeBuilder(5, 23).append(key).append(invoker)
-					.toHashCode();
+			return new HashCodeBuilder(5, 23).append(key).append(invoker).toHashCode();
 		}
 
 		@Override
@@ -247,8 +233,7 @@ public final class EventPublisherImpl implements EventPublisher {
 				return false;
 			}
 			final KeyedListenerInvoker kli = (KeyedListenerInvoker) obj;
-			return new EqualsBuilder().append(key, kli.key)
-					.append(invoker, kli.invoker).isEquals();
+			return new EqualsBuilder().append(key, kli.key).append(invoker, kli.invoker).isEquals();
 		}
 	}
 

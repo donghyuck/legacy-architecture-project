@@ -20,7 +20,15 @@ import architecture.common.jdbc.schema.DatabaseType;
 public class DatabaseInfo {
 	
     private static String ISOLATION_LEVELS[] = {
-        "Read committed", "Read uncommitted", "Read committed", null, "Repeatable read", null, null, null, "Serializable"
+        "Read committed", 
+        "Read uncommitted", 
+        "Read committed", 
+        null, 
+        "Repeatable read", 
+        null, 
+        null, 
+        null, 
+        "Serializable"
     };
     private String name;
     
@@ -44,18 +52,15 @@ public class DatabaseInfo {
 	public DatabaseInfo() {
 	}
 
-	public DatabaseInfo(DatabaseType databaseType) {
-		
+	public DatabaseInfo(DatabaseType databaseType) {		
 		driverName = databaseType.jdbcDriverName;
 		driverVersion = databaseType.jdbcDriverVersion;
 		databaseName = databaseType.databaseProductName;
-		databaseVersion = databaseType.databaseProductVersion;
-		
+		databaseVersion = databaseType.databaseProductVersion;		
 		 if(databaseType.transactionIsolation < 0 || databaseType.transactionIsolation >= ISOLATION_LEVELS.length)
 			 isolationLevel = null;
-         else
-        	 isolationLevel = ISOLATION_LEVELS[databaseType.transactionIsolation];
-		 
+		 else
+        	 isolationLevel = ISOLATION_LEVELS[databaseType.transactionIsolation];		 
 	}
 	
 	
