@@ -17,15 +17,15 @@ package architecture.ee.web.model.json;
 
 import java.io.IOException;
 
-import architecture.ee.web.navigator.DefaultMenu;
-import architecture.ee.web.navigator.Menu;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+
+import architecture.ee.web.navigator.DefaultMenu;
+import architecture.ee.web.navigator.Menu;
 
 public class MenuDeserializer extends JsonDeserializer<Menu> {
 

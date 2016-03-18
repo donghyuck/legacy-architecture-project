@@ -20,59 +20,59 @@ import architecture.common.cache.Cacheable;
 
 public class ImageLink implements Cacheable {
 
-	private Long imageId = -1L;
-	
-	private String linkId;
-	
-	private boolean publicShared = false;
-	
-	/**
-	 * @param linkId
-	 * @param imageId
-	 * @param publicShared
-	 */
-	public ImageLink(String linkId, Long imageId, boolean publicShared) {
-		super();
-		this.linkId = linkId;
-		this.imageId = imageId;
-		this.publicShared = publicShared;
-	}
+    private Long imageId = -1L;
 
-	/**
-	 * @return imageId
-	 */
-	public Long getImageId() {
-		return imageId;
-	}
+    private String linkId;
 
-	/**
-	 * @return linkId
-	 */
-	public String getLinkId() {
-		return linkId;
-	}
+    private boolean publicShared = false;
 
-	/**
-	 * @return publicShared
-	 */
-	public boolean isPublicShared() {
-		return publicShared;
-	}
+    /**
+     * @param linkId
+     * @param imageId
+     * @param publicShared
+     */
+    public ImageLink(String linkId, Long imageId, boolean publicShared) {
+	super();
+	this.linkId = linkId;
+	this.imageId = imageId;
+	this.publicShared = publicShared;
+    }
 
-	public int getCachedSize() {
-		return  CacheSizes.sizeOfBoolean() + CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(linkId) ;
-	}
+    /**
+     * @return imageId
+     */
+    public Long getImageId() {
+	return imageId;
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ImageLink [");
-		if (imageId != null)
-			builder.append("imageId=").append(imageId).append(", ");
-		if (linkId != null)
-			builder.append("linkId=").append(linkId).append(", ");
-		builder.append("publicShared=").append(publicShared).append("]");
-		return builder.toString();
-	}	
-	
+    /**
+     * @return linkId
+     */
+    public String getLinkId() {
+	return linkId;
+    }
+
+    /**
+     * @return publicShared
+     */
+    public boolean isPublicShared() {
+	return publicShared;
+    }
+
+    public int getCachedSize() {
+	return CacheSizes.sizeOfBoolean() + CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(linkId);
+    }
+
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("ImageLink [");
+	if (imageId != null)
+	    builder.append("imageId=").append(imageId).append(", ");
+	if (linkId != null)
+	    builder.append("linkId=").append(linkId).append(", ");
+	builder.append("publicShared=").append(publicShared).append("]");
+	return builder.toString();
+    }
+
 }

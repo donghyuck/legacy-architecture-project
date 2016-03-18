@@ -20,132 +20,160 @@ import java.io.InputStream;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
-import architecture.common.model.support.EntityModelObjectSupport;
+import architecture.common.model.json.UserDeserializer;
+import architecture.common.model.support.PropertyAndDateAwareSupport;
+import architecture.common.user.User;
+import architecture.common.user.UserTemplate;
 import architecture.ee.web.attachment.Image;
 
-public class ImageImpl extends EntityModelObjectSupport  implements Image {
+public class ImageImpl extends PropertyAndDateAwareSupport implements Image {
 
-	private String name;
-	private Long imageId;
-	private Integer size;
-	private String contentType;
-	private Integer objectType;
-	private Long objectId;
-	private InputStream inputStream;
-	private Integer thumbnailSize = 0;
-	private String thumbnailContentType = "png";
-	
-	@JsonIgnore
-	public Serializable getPrimaryKeyObject() {
-		return imageId;
-	}
-	
-	@JsonIgnore
-	public int getModelObjectType() {
-		return ModelTypeFactory.getTypeIdFromCode("IMAGE");
-	}
+    private String name;
+    private Long imageId;
+    private Integer size;
+    private String contentType;
+    private Integer objectType;
+    private Long objectId;
+    private InputStream inputStream;
+    private Integer thumbnailSize = 0;
+    private String thumbnailContentType = "png";
+    private User user ;
 
-	@JsonIgnore
-	public int getCachedSize() {
-		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName())
-				+ CacheSizes.sizeOfString(contentType)
-				+ CacheSizes.sizeOfInt()
-				+ CacheSizes.sizeOfLong() 
-				+ CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate();
-	}
+    
+    public ImageImpl() {
+	this.user = new UserTemplate(-1L);
+	this.imageId =-1L;
+	this.objectType = -1;
+	this.objectId = -1L;
+	this.name = null;
+    }
+    
+    /**
+     * @return user
+     */
+    public User getUser() {
+	return user;
+    }
 
-	public long getImageId() {
-		return imageId;
-	}
+    /**
+     * @param user
+     *            설정할 user
+     */
+    @JsonDeserialize(using = UserDeserializer.class)
+    public void setUser(User user) {
+	this.user = user;
+    }
+    
+    @JsonIgnore
+    public Serializable getPrimaryKeyObject() {
+	return imageId;
+    }
 
-	public void setImageId(Long imageId) {
-		this.imageId = imageId;
-	}
+    @JsonIgnore
+    public int getModelObjectType() {
+	return ModelTypeFactory.getTypeIdFromCode("IMAGE");
+    }
 
-	public void setSize(int size) {
-		this.size = size;
-	}
+    @JsonIgnore
+    public int getCachedSize() {
+	return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName()) + CacheSizes.sizeOfString(contentType)
+		+ CacheSizes.sizeOfInt() + CacheSizes.sizeOfLong() + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate();
+    }
 
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-	}
+    public long getImageId() {
+	return imageId;
+    }
 
-	public String getContentType() {
-		return contentType;
-	}
+    public void setImageId(Long imageId) {
+	this.imageId = imageId;
+    }
 
-	public int getSize() {
-		return size ;
-	}
+    public void setSize(int size) {
+	this.size = size;
+    }
 
-	@JsonIgnore
-	public InputStream getInputStream() throws IOException {
-		return inputStream;
-	}
+    public void setContentType(String contentType) {
+	this.contentType = contentType;
+    }
 
-	public int getObjectType() {
-		return objectType;
-	}
+    public String getContentType() {
+	return contentType;
+    }
 
-	public void setObjectType(Integer objectType) {
-		this.objectType = objectType;
-	}
+    public int getSize() {
+	return size;
+    }
 
-	public long getObjectId() {
-		return objectId;
-	}
+    @JsonIgnore
+    public InputStream getInputStream() throws IOException {
+	return inputStream;
+    }
 
-	public void setObjectId(Long objectId) {
-		this.objectId = objectId;
-	}
+    public int getObjectType() {
+	return objectType;
+    }
 
-	public void setInputStream(InputStream inputStream) {
-		this.inputStream = inputStream;
-	}
+    public void setObjectType(Integer objectType) {
+	this.objectType = objectType;
+    }
 
-	public Integer getThumbnailSize() {
-		return thumbnailSize;
-	}
+    public long getObjectId() {
+	return objectId;
+    }
 
-	public void setThumbnailSize(Integer thumbnailSize) {
-		this.thumbnailSize = thumbnailSize;
-	}
+    public void setObjectId(Long objectId) {
+	this.objectId = objectId;
+    }
 
-	public String getThumbnailContentType() {
-		return thumbnailContentType;
-	}
+    public void setInputStream(InputStream inputStream) {
+	this.inputStream = inputStream;
+    }
 
-	public void setThumbnailContentType(String thumbnailContentType) {
-		this.thumbnailContentType = thumbnailContentType;
-	}
+    public Integer getThumbnailSize() {
+	return thumbnailSize;
+    }
 
-	/**
-	 * @return name
-	 */
-	public String getName() {
-		return name;
-	}
+    public void setThumbnailSize(Integer thumbnailSize) {
+	this.thumbnailSize = thumbnailSize;
+    }
 
-	/**
-	 * @param name 설정할 name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getThumbnailContentType() {
+	return thumbnailContentType;
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Image{");
-	    sb.append("imageId=").append(imageId);
-	    sb.append(",name=").append(getName());
-	    sb.append(",contentType=").append(contentType);
-	    sb.append("size=").append(size);
-		sb.append("}");
-		return sb.toString();
-	}
+    public void setThumbnailContentType(String thumbnailContentType) {
+	this.thumbnailContentType = thumbnailContentType;
+    }
+
+    /**
+     * @return name
+     */
+    public String getName() {
+	return name;
+    }
+
+    /**
+     * @param name
+     *            설정할 name
+     */
+    public void setName(String name) {
+	this.name = name;
+    }
+
+    @Override
+    public String toString() {
+	StringBuilder sb = new StringBuilder();
+	sb.append("Image{");
+	sb.append("imageId=").append(imageId);
+	sb.append(",name=").append(getName());
+	sb.append(",contentType=").append(contentType);
+	sb.append("size=").append(size);
+	sb.append("}");
+	return sb.toString();
+    }
 
 }

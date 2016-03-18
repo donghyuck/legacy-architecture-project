@@ -25,10 +25,6 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import net.coobird.thumbnailator.Thumbnails;
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
@@ -44,284 +40,277 @@ import architecture.ee.exception.SystemException;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.attachment.dao.AttachmentDao;
 import architecture.ee.web.attachment.impl.AttachmentImpl;
+import net.coobird.thumbnailator.Thumbnails;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 public class DefaultAttachmentManager extends AbstractAttachmentManager implements AttachmentManager {
 
-	
-	private AttachmentDao attachmentDao;
+    private AttachmentDao attachmentDao;
 
-	private Cache attachmentCache;
-	
-	private File attachmentDir;	
-	
+    private Cache attachmentCache;
 
+    private File attachmentDir;
 
-	public AttachmentDao getAttachmentDao() {
-		return attachmentDao;
+    public AttachmentDao getAttachmentDao() {
+	return attachmentDao;
+    }
+
+    public void setAttachmentDao(AttachmentDao attachmentDao) {
+	this.attachmentDao = attachmentDao;
+    }
+
+    public Cache getAttachmentCache() {
+	return attachmentCache;
+    }
+
+    public void setAttachmentCache(Cache attachmentCache) {
+	this.attachmentCache = attachmentCache;
+    }
+
+    protected synchronized File getAttachmentDir() {
+	if (attachmentDir == null) {
+	    attachmentDir = ApplicationHelper.getRepository().getFile("attachments");
+	    if (!attachmentDir.exists()) {
+		boolean result = attachmentDir.mkdir();
+		if (!result)
+		    log.error((new StringBuilder()).append("Unable to create attachment directory: '")
+			    .append(attachmentDir).append("'").toString());
+	    }
 	}
+	return attachmentDir;
+    }
 
-	public void setAttachmentDao(AttachmentDao attachmentDao) {
-		this.attachmentDao = attachmentDao;
+    public Attachment getAttachment(long attachmentId) throws NotFoundException {
+
+	Attachment attachment = getAttachmentInCache(attachmentId);
+	if (attachment == null) {
+	    try {
+		attachment = attachmentDao.getByAttachmentId(attachmentId);
+	    } catch (DataAccessException e) {
+		throw new NotFoundException(e);
+	    }
+	    attachmentCache.put(new Element(attachmentId, attachment));
 	}
-	
+	return attachment;
+    }
 
-	public Cache getAttachmentCache() {
-		return attachmentCache;
+    public List<Attachment> getAttachments(int objectType, long objectId) {
+	return attachmentDao.getByObjectTypeAndObjectId(objectType, objectId);
+    }
+
+    protected Attachment getAttachmentInCache(long attachmentId) {
+	if (attachmentCache.get(attachmentId) != null && attachmentId > 0L)
+	    return (Attachment) attachmentCache.get(attachmentId).getValue();
+	else
+	    return null;
+    }
+
+    public Attachment createAttachment(int objectType, long objectId, String name, String contentType, File file) {
+
+	AttachmentImpl attachment = new AttachmentImpl();
+	attachment.setObjectType(objectType);
+	attachment.setObjectId(objectId);
+	attachment.setName(name);
+	attachment.setContentType(contentType);
+	attachment.setSize((int) FileUtils.sizeOf(file));
+	try {
+	    attachment.setInputStream(FileUtils.openInputStream(file));
+	} catch (IOException e) {
+	    log.debug(e);
 	}
+	return attachment;
+    }
 
-	public void setAttachmentCache(Cache attachmentCache) {
-		this.attachmentCache = attachmentCache;
+    public Attachment createAttachment(int objectType, long objectId, String name, String contentType,
+	    InputStream inputStream) {
+
+	AttachmentImpl attachment = new AttachmentImpl();
+	attachment.setObjectType(objectType);
+	attachment.setObjectId(objectId);
+	attachment.setName(name);
+	attachment.setContentType(contentType);
+	attachment.setInputStream(inputStream);
+	try {
+	    attachment.setSize(IOUtils.toByteArray(inputStream).length);
+	} catch (IOException e) {
+	    log.debug(e);
 	}
+	return attachment;
+    }
 
-	protected synchronized File getAttachmentDir() {
-		if(attachmentDir == null)
-        {
-			attachmentDir = ApplicationHelper.getRepository().getFile("attachments");
-			if(!attachmentDir.exists())
-            {
-                boolean result = attachmentDir.mkdir();
-                if(!result)
-                    log.error((new StringBuilder()).append("Unable to create attachment directory: '").append(attachmentDir).append("'").toString());
-            }
-        }
-        return attachmentDir;
+    public Attachment createAttachment(int objectType, long objectId, String name, String contentType,
+	    InputStream inputStream, int size) {
+
+	AttachmentImpl attachment = new AttachmentImpl();
+	attachment.setObjectType(objectType);
+	attachment.setObjectId(objectId);
+	attachment.setName(name);
+	attachment.setContentType(contentType);
+	attachment.setInputStream(inputStream);
+	attachment.setSize(size);
+	return attachment;
+    }
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public Attachment saveAttachment(Attachment attachment) {
+
+	Date now = new Date();
+	Attachment attachmentToUse = attachment;
+	if (attachmentToUse.getAttachmentId() > 0) {
+	    attachmentCache.remove(attachmentToUse.getAttachmentId());
+	    attachmentToUse.setModifiedDate(now);
+	    attachmentDao.updateAttachment(attachmentToUse);
+
+	    attachmentCache.remove(attachmentToUse.getAttachmentId());
+
+	} else {
+	    attachmentToUse.setCreationDate(now);
+	    attachmentToUse.setModifiedDate(now);
+	    attachmentToUse = attachmentDao.createAttachment(attachmentToUse);
 	}
-	
-
-	public Attachment getAttachment(long attachmentId) throws NotFoundException {
-		
-		Attachment attachment = getAttachmentInCache(attachmentId);
-		if( attachment == null){
-			try {
-				attachment = attachmentDao.getByAttachmentId(attachmentId);
-			} catch (DataAccessException e) {
-				throw new NotFoundException(e);
-			}
-			attachmentCache.put(new Element(attachmentId, attachment ));
+	try {
+	    if (attachmentToUse.getInputStream() != null) {
+		attachmentDao.saveAttachmentData(attachmentToUse, attachmentToUse.getInputStream());
+		Collection<File> files = FileUtils.listFiles(getAttachmentCacheDir(),
+			FileFilterUtils.prefixFileFilter(attachment.getAttachmentId() + ""), null);
+		for (File file : files) {
+		    FileUtils.deleteQuietly(file);
 		}
-		return attachment;
+	    }
+
+	    return getAttachment(attachment.getAttachmentId());
+	} catch (Exception e) {
+	    throw new SystemException(e);
+	}
+    }
+
+    public InputStream getAttachmentInputStream(Attachment attachment) {
+	try {
+	    File file = getAttachmentFromCacheIfExist(attachment);
+	    return FileUtils.openInputStream(file);
+	} catch (IOException e) {
+	    throw new SystemException(e);
+	}
+    }
+
+    protected File getAttachmentFromCacheIfExist(Attachment attachment) throws IOException {
+	File dir = getAttachmentCacheDir();
+
+	StringBuilder sb = new StringBuilder();
+	sb.append(attachment.getAttachmentId()).append(".bin");
+
+	File file = new File(dir, sb.toString());
+	if (file.exists()) {
+	    long size = FileUtils.sizeOf(file);
+	    if (size != attachment.getSize()) {
+		// size different make cache new one....
+		InputStream inputStream = attachmentDao.getAttachmentData(attachment);
+		FileUtils.copyInputStreamToFile(inputStream, file);
+	    }
+	} else {
+	    // doesn't exist, make new one ..
+	    InputStream inputStream = attachmentDao.getAttachmentData(attachment);
+	    FileUtils.copyInputStreamToFile(inputStream, file);
+	}
+	return file;
+    }
+
+    protected File getAttachmentCacheDir() {
+	File dir = new File(getAttachmentDir(), "cache");
+	if (!dir.exists())
+	    dir.mkdir();
+
+	return dir;
+    }
+
+    public void initialize() {
+	log.debug("initializing attachement manager");
+	getAttachmentDir();
+    }
+
+    public void destroy() {
+
+    }
+
+    public InputStream getAttachmentImageThumbnailInputStream(Attachment image, int width, int height) {
+	try {
+
+	    File file = getThumbnailFromCacheIfExist(image, width, height);
+	    return FileUtils.openInputStream(file);
+	} catch (IOException e) {
+	    throw new SystemException(e);
+	}
+    }
+
+    public InputStream getImageThumbnailInputStream(Attachment image, int width, int height) {
+	try {
+
+	    File file = getThumbnailFromCacheIfExist(image, width, height);
+	    return FileUtils.openInputStream(file);
+	} catch (IOException e) {
+	    throw new SystemException(e);
+	}
+    }
+
+    protected File getThumbnailFromCacheIfExist(Attachment attach, int width, int height) throws IOException {
+
+	log.debug("thumbnail generation " + width + "x" + height);
+	File dir = getAttachmentCacheDir();
+	File file = new File(dir, toThumbnailFilename(attach, width, height));
+	File originalFile = getAttachmentFromCacheIfExist(attach);
+	log.debug("source: " + originalFile.getAbsoluteFile() + ", " + originalFile.length());
+	log.debug("thumbnail:" + file.getAbsoluteFile());
+
+	if (file.exists() && file.length() > 0) {
+	    attach.setThumbnailSize((int) file.length());
+	    return file;
 	}
 
-	public List<Attachment> getAttachments(int objectType, long objectId) {
-		return attachmentDao.getByObjectTypeAndObjectId(objectType, objectId);
-	}
-	
-	protected Attachment getAttachmentInCache(long attachmentId){
-		if( attachmentCache.get(attachmentId) != null && attachmentId > 0L )
-			return  (Attachment) attachmentCache.get( attachmentId ).getValue();
-		else 
-			return null;
-	}
-	
-	
-	public Attachment createAttachment(int objectType, long objectId, String name, String contentType, File file) {
-		
-		AttachmentImpl attachment = new AttachmentImpl();
-		attachment.setObjectType(objectType);
-		attachment.setObjectId(objectId);
-		attachment.setName(name);
-		attachment.setContentType(contentType);		
-		attachment.setSize( (int) FileUtils.sizeOf(file));
-		try {
-			attachment.setInputStream(FileUtils.openInputStream(file));
-		} catch (IOException e) {
-			log.debug(e);
-		}	
-		return attachment;
-	}
-	
-	public Attachment createAttachment(int objectType, long objectId, String name, String contentType, InputStream inputStream) {
-		
-		AttachmentImpl attachment = new AttachmentImpl();
-		attachment.setObjectType(objectType);
-		attachment.setObjectId(objectId);
-		attachment.setName(name);
-		attachment.setContentType(contentType);
-		attachment.setInputStream(inputStream);		
-		try {
-			attachment.setSize( IOUtils.toByteArray(inputStream).length );
-		} catch (IOException e) {
-			log.debug(e);
-		}		
-		return attachment;
-	}
-	
-	public Attachment createAttachment(int objectType, long objectId, String name, String contentType, InputStream inputStream, int size) {
-		
-		AttachmentImpl attachment = new AttachmentImpl();
-		attachment.setObjectType(objectType);
-		attachment.setObjectId(objectId);
-		attachment.setName(name);
-		attachment.setContentType(contentType);
-		attachment.setInputStream(inputStream);		
-		attachment.setSize(size);
-		return attachment;
+	if (StringUtils.endsWithIgnoreCase(attach.getContentType(), "pdf")) {
+	    PDDocument document = PDDocument.load(originalFile);
+	    List<PDPage> pages = document.getDocumentCatalog().getAllPages();
+	    PDPage page = pages.get(0);
+	    BufferedImage image = page.convertToImage(BufferedImage.TYPE_INT_RGB, 72);
+	    ImageIO.write(Thumbnails.of(image).size(width, height).asBufferedImage(), "png", file);
+	    attach.setThumbnailSize((int) file.length());
+	    return file;
+	} else if (StringUtils.startsWithIgnoreCase(attach.getContentType(), "image")) {
+	    BufferedImage originalImage = ImageIO.read(originalFile);
+	    if (originalImage.getHeight() < height || originalImage.getWidth() < width) {
+		attach.setThumbnailSize(0);
+		return originalFile;
+	    }
+	    BufferedImage thumbnail = Thumbnails.of(originalImage).size(width, height).asBufferedImage();
+	    ImageIO.write(thumbnail, "png", file);
+	    attach.setThumbnailSize((int) file.length());
+	    return file;
 	}
 
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
-	public Attachment saveAttachment(Attachment attachment) {
-		
-		Date now = new Date();
-		Attachment attachmentToUse = attachment ;
-		if( attachmentToUse.getAttachmentId() > 0 ){
-			attachmentCache.remove(attachmentToUse.getAttachmentId());			
-			attachmentToUse.setModifiedDate(now);
-			attachmentDao.updateAttachment(attachmentToUse);			
-			
-			attachmentCache.remove(attachmentToUse.getAttachmentId());		
-			
-		}else{			
-			attachmentToUse.setCreationDate(now);
-			attachmentToUse.setModifiedDate(now);
-			attachmentToUse = attachmentDao.createAttachment(attachmentToUse);
-		}		
-		try {			
-			if( attachmentToUse.getInputStream() != null )
-			{
-				attachmentDao.saveAttachmentData(attachmentToUse, attachmentToUse.getInputStream());				
-				Collection<File> files = FileUtils.listFiles(getAttachmentCacheDir(), FileFilterUtils.prefixFileFilter(attachment.getAttachmentId() + ""), null);
-				for(File file : files){
-					FileUtils.deleteQuietly(file);
-				}
-			}
-			
-			return getAttachment(attachment.getAttachmentId());
-		} catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
+	return null;
+    }
 
-	
-	public InputStream getAttachmentInputStream(Attachment attachment) {
-		try {
-			File file = getAttachmentFromCacheIfExist(attachment);
-			return FileUtils.openInputStream(file);
-		} catch (IOException e) {
-			throw new SystemException(e);
-		}
-	}
-	
-	protected File getAttachmentFromCacheIfExist(Attachment attachment) throws IOException{		
-		File dir = getAttachmentCacheDir();
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append( attachment.getAttachmentId() ).append(".bin");		
-		
-		File file = new File(dir, sb.toString() );		
-		if( file.exists() ){
-			long size = FileUtils.sizeOf(file);
-			if( size != attachment.getSize() ){
-				// size different make cache new one....
-				InputStream inputStream = attachmentDao.getAttachmentData(attachment);
-				FileUtils.copyInputStreamToFile(inputStream, file);
-			}
-		}else{
-			// doesn't exist, make new one ..
-			InputStream inputStream = attachmentDao.getAttachmentData(attachment);
-			FileUtils.copyInputStreamToFile(inputStream, file);
-		}		
-		return file;
-	}	
-	
-	protected File getAttachmentCacheDir(){
-		File dir = new File(getAttachmentDir(), "cache" );	
-		if( !dir.exists() )
-			dir.mkdir();
-		
-		return dir;
-	}
-	
+    protected String toThumbnailFilename(Attachment image, int width, int height) {
+	StringBuilder sb = new StringBuilder();
+	sb.append(image.getAttachmentId()).append("_").append(width).append("_").append(height).append(".bin");
+	return sb.toString();
+    }
 
-	public void  initialize() {		
-		log.debug( "initializing attachement manager" );		
-		getAttachmentDir();
-	}	
-	public void destroy(){
-		
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public void removeAttachment(Attachment attachment) {
+	Attachment attachmentToUse = attachment;
+	if (attachmentToUse.getAttachmentId() > 0) {
+	    attachmentCache.remove(attachmentToUse.getAttachmentId());
+	    attachmentDao.deleteAttachment(attachmentToUse);
+	    attachmentDao.deleteAttachmentData(attachmentToUse);
 	}
-	
-	public InputStream getAttachmentImageThumbnailInputStream(Attachment image, int width, int height ) {		
-		try {
-			
-			File file = getThumbnailFromCacheIfExist(image, width, height);
-			return FileUtils.openInputStream(file);
-		} catch (IOException e) {
-			throw new SystemException(e);
-		}
-	}
+    }
 
-	
-	public InputStream getImageThumbnailInputStream(Attachment image, int width, int height ) {		
-		try {
-			
-			File file = getThumbnailFromCacheIfExist(image, width, height);
-			return FileUtils.openInputStream(file);
-		} catch (IOException e) {
-			throw new SystemException(e);
-		}
-	}
+    public int getTotalAttachmentCount(int objectType, long objectId) {
+	return attachmentDao.getAttachmentCount(objectType, objectId);
+    }
 
-
-	protected File getThumbnailFromCacheIfExist(Attachment attach,  int width, int height ) throws IOException{		
-		
-		log.debug( "thumbnail generation " + width + "x" + height );
-		File dir = getAttachmentCacheDir();		
-		File file = new File(dir, toThumbnailFilename(attach, width, height) );		
-		File originalFile = getAttachmentFromCacheIfExist( attach );			
-		log.debug( "source: " + originalFile.getAbsoluteFile() + ", " + originalFile.length() );
-		log.debug( "thumbnail:" + file.getAbsoluteFile());
-		
-		if( file.exists() && file.length() > 0 ){
-			attach.setThumbnailSize((int)file.length());
-			return file;
-		}	
-		
-		if(StringUtils.endsWithIgnoreCase(attach.getContentType(), "pdf")){
-			PDDocument document = PDDocument.load(originalFile);			
-			List<PDPage> pages = document.getDocumentCatalog().getAllPages();
-			PDPage page = pages.get(0);
-			BufferedImage image = page.convertToImage(BufferedImage.TYPE_INT_RGB, 72);
-			ImageIO.write(Thumbnails.of(image).size(width, height).asBufferedImage(), "png", file );
-			attach.setThumbnailSize((int)file.length());			
-			return file;
-		}else 	if (StringUtils.startsWithIgnoreCase(attach.getContentType(), "image")){
-			BufferedImage originalImage = ImageIO.read(originalFile);		
-			if( originalImage.getHeight() < height || originalImage.getWidth() < width ){
-				attach.setThumbnailSize(0);
-				return originalFile ;
-			}			
-			BufferedImage thumbnail = Thumbnails.of(originalImage).size(width, height).asBufferedImage();
-			ImageIO.write(thumbnail, "png", file );
-			attach.setThumbnailSize((int)file.length());			
-			return file;		
-		}
-		
-		return null;
-	}
-	
-
-	protected String toThumbnailFilename(Attachment image,  int width, int height){
-		StringBuilder sb = new StringBuilder();
-		sb.append( image.getAttachmentId() ).append("_").append(width).append("_").append(height).append(".bin");	
-		return sb.toString();
-	}
-	
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
-	public void removeAttachment(Attachment attachment) {		
-		Attachment attachmentToUse = attachment ;		
-		if( attachmentToUse.getAttachmentId() > 0 ){
-			attachmentCache.remove(attachmentToUse.getAttachmentId());		
-			attachmentDao.deleteAttachment(attachmentToUse);
-			attachmentDao.deleteAttachmentData(attachmentToUse);
-		}
-	}
-
-	public int getTotalAttachmentCount(int objectType, long objectId) {
-		return attachmentDao.getAttachmentCount(objectType, objectId);
-	}
-
-
-	public long getUsage(int objectType, long objectId) {
-		return attachmentDao.getAttachmentUsage(objectType, objectId);
-	}
+    public long getUsage(int objectType, long objectId) {
+	return attachmentDao.getAttachmentUsage(objectType, objectId);
+    }
 }

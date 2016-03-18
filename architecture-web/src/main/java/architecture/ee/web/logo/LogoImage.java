@@ -68,6 +68,5 @@ public interface LogoImage extends Cacheable {
 	public Date getModifiedDate();
 
 	public void setModifiedDate(Date modifiedDate);
-
 	
 }

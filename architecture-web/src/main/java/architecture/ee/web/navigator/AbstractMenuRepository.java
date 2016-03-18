@@ -15,15 +15,14 @@
  */
 package architecture.ee.web.navigator;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-
 import org.apache.commons.collections.map.LinkedMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 public abstract class AbstractMenuRepository implements MenuRepository, EventSource {
 

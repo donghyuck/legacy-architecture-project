@@ -43,6 +43,11 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.Tag;
+import com.drew.metadata.exif.ExifSubIFDDirectory;
+
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
@@ -57,11 +62,6 @@ import architecture.ee.web.attachment.impl.ImageImpl;
 import architecture.ee.web.util.WebSiteUtils;
 import architecture.ee.web.ws.Property;
 import architecture.ee.web.ws.Usage;
-
-import com.drew.imaging.ImageMetadataReader;
-import com.drew.metadata.Metadata;
-import com.drew.metadata.Tag;
-import com.drew.metadata.exif.ExifSubIFDDirectory;
 
 @Controller ("my-cloud-data-controller")
 @RequestMapping("/data")

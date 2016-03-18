@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 
-import net.sf.ehcache.Cache;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.MethodInvoker;
@@ -34,6 +32,7 @@ import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.support.WebSiteAware;
 import architecture.ee.web.template.Template;
 import freemarker.cache.FileTemplateLoader;
+import net.sf.ehcache.Cache;
 /**
  * 
  * @author donghyuck

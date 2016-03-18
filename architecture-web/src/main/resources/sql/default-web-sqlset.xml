@@ -135,6 +135,7 @@
 		CONTENT_TYPE,
 		FILE_NAME,
 		FILE_SIZE,
+		USER_ID,
 		CREATION_DATE,
 		MODIFIED_DATE
     FROM 
@@ -148,6 +149,7 @@
 		CONTENT_TYPE,
 		FILE_NAME,
 		FILE_SIZE,
+		USER_ID,
 		CREATION_DATE,
 		MODIFIED_DATE
     FROM 
@@ -163,6 +165,7 @@
 		CONTENT_TYPE,
 		FILE_NAME,
 		FILE_SIZE,
+		USER_ID,
 		CREATION_DATE,
 		MODIFIED_DATE
     FROM 
@@ -188,9 +191,10 @@
 		CONTENT_TYPE,
 		FILE_NAME,
 		FILE_SIZE,
+		USER_ID,
 		CREATION_DATE,
 		MODIFIED_DATE
-	) VALUES ( 	?,?,?,?,?,?,?,? )
+	) VALUES ( 	?,?,?,?,?,?,?,?, ? )
     ]]></sql-query>
 
     <sql-query name="UPDATE_ATTACHMENT" description="첨부파일  생성"><![CDATA[    
@@ -294,9 +298,10 @@
 			FILE_NAME,
 			FILE_SIZE,
 			CONTENT_TYPE,
+			USER_ID,
 			CREATION_DATE,
 			MODIFIED_DATE
-		) VALUES ( ?, ? ,?, ?, ?, ?, ?, ? )
+		) VALUES ( ?, ? ,?, ?, ?, ?, ?, ? , ?)
     ]]></sql-query>
 	
 	<sql-query name="UPDATE_IMAGE" description="ID로 IMAGE 조회"><![CDATA[    
@@ -319,6 +324,7 @@
 			FILE_NAME,
 			FILE_SIZE,
 			CONTENT_TYPE,
+			USER_ID,
 			CREATION_DATE,
 			MODIFIED_DATE
 		FROM V2_IMAGE WHERE IMAGE_ID = ?
@@ -356,6 +362,7 @@
 			FILE_NAME,
 			FILE_SIZE,
 			CONTENT_TYPE,
+			USER_ID,
 			CREATION_DATE,
 			MODIFIED_DATE
     FROM 

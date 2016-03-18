@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.SqlParameterValue;
 import org.springframework.jdbc.core.support.SqlLobValue;
 
 import architecture.common.jdbc.schema.DatabaseType;
+import architecture.common.user.UserTemplate;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.jdbc.sqlquery.SqlQueryHelper;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
@@ -33,6 +34,7 @@ public class JdbcAttachmentDao extends ExtendedJdbcDaoSupport implements Attachm
 			image.setName(rs.getString("FILE_NAME"));
 			image.setSize(rs.getInt("FILE_SIZE"));
 			image.setContentType(rs.getString("CONTENT_TYPE"));
+			image.setUser(new UserTemplate(rs.getLong("USER_ID")));
 			image.setCreationDate(rs.getDate("CREATION_DATE"));
 			image.setModifiedDate(rs.getDate("MODIFIED_DATE"));			
 			return image;
@@ -142,7 +144,8 @@ public class JdbcAttachmentDao extends ExtendedJdbcDaoSupport implements Attachm
 					new SqlParameterValue (Types.INTEGER, toUse.getObjectId() ), 
 					new SqlParameterValue (Types.VARCHAR, toUse.getContentType()), 
 					new SqlParameterValue (Types.VARCHAR, toUse.getName() ), 
-					new SqlParameterValue (Types.INTEGER, toUse.getSize() ), 					
+					new SqlParameterValue (Types.INTEGER, toUse.getSize() ), 	
+					new SqlParameterValue (Types.NUMERIC, toUse.getUser().getUserId()), 
 					new SqlParameterValue(Types.DATE, toUse.getCreationDate()),
 					new SqlParameterValue(Types.DATE, toUse.getModifiedDate()));		
 		if(!attachment.getProperties().isEmpty())

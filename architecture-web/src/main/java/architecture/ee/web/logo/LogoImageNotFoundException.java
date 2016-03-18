@@ -20,42 +20,34 @@ import architecture.ee.exception.NotFoundException;
 public class LogoImageNotFoundException extends NotFoundException {
 
 	public LogoImageNotFoundException() {
-		// TODO 자동 생성된 생성자 스텁
 	}
 
 	public LogoImageNotFoundException(int errorCode, String msg, Throwable cause) {
 		super(errorCode, msg, cause);
-		// TODO 자동 생성된 생성자 스텁
 	}
 
 	public LogoImageNotFoundException(int errorCode, String msg) {
 		super(errorCode, msg);
-		// TODO 자동 생성된 생성자 스텁
 	}
 
 	public LogoImageNotFoundException(int errorCode, Throwable cause) {
 		super(errorCode, cause);
-		// TODO 자동 생성된 생성자 스텁
 	}
 
 	public LogoImageNotFoundException(int errorCode) {
 		super(errorCode);
-		// TODO 자동 생성된 생성자 스텁
 	}
 
 	public LogoImageNotFoundException(String msg, Throwable cause) {
 		super(msg, cause);
-		// TODO 자동 생성된 생성자 스텁
 	}
 
 	public LogoImageNotFoundException(String msg) {
 		super(msg);
-		// TODO 자동 생성된 생성자 스텁
 	}
 
 	public LogoImageNotFoundException(Throwable cause) {
 		super(cause);
-		// TODO 자동 생성된 생성자 스텁
 	}
 
 }

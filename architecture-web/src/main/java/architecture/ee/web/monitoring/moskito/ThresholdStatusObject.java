@@ -17,10 +17,9 @@ package architecture.ee.web.monitoring.moskito;
 
 import java.util.Date;
 
-import architecture.common.model.json.CustomJsonDateSerializer;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import architecture.common.model.json.CustomJsonDateSerializer;
 import net.anotheria.moskito.core.threshold.ThresholdStatus;
 
 public class ThresholdStatusObject {

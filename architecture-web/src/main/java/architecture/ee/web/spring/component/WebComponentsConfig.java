@@ -15,14 +15,13 @@
  */
 package architecture.ee.web.spring.component;
 
-import net.sf.ehcache.Ehcache;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import architecture.ee.util.ApplicationHelper;
+import net.sf.ehcache.Ehcache;
 
 @Configuration
 public class WebComponentsConfig {

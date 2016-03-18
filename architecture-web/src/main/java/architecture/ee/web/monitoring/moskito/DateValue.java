@@ -17,9 +17,9 @@ package architecture.ee.web.monitoring.moskito;
 
 import java.util.Date;
 
-import architecture.common.model.json.CustomJsonDateSerializer;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import architecture.common.model.json.CustomJsonDateSerializer;
 
 public class DateValue extends StatValue {
 

@@ -17,13 +17,12 @@ package architecture.ee.web.monitoring.moskito;
 
 import java.util.Date;
 
-import net.anotheria.util.maven.MavenVersion;
-
 import org.configureme.util.DateUtils;
 
-import architecture.common.model.json.CustomJsonDateSerializer;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import architecture.common.model.json.CustomJsonDateSerializer;
+import net.anotheria.util.maven.MavenVersion;
 
 public class LibraryObject {
 	/**

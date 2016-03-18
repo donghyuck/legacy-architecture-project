@@ -27,6 +27,7 @@ import org.springframework.jdbc.core.SqlParameterValue;
 import org.springframework.jdbc.core.support.SqlLobValue;
 
 import architecture.common.jdbc.schema.DatabaseType;
+import architecture.common.user.UserTemplate;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.jdbc.sqlquery.SqlQueryHelper;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
@@ -122,6 +123,7 @@ public class JdbcImageDao  extends ExtendedJdbcDaoSupport implements ImageDao {
 			image.setName(rs.getString("FILE_NAME"));
 			image.setSize(rs.getInt("FILE_SIZE"));
 			image.setContentType(rs.getString("CONTENT_TYPE"));
+			image.setUser(new UserTemplate(rs.getLong("USER_ID")));
 			image.setCreationDate(rs.getTimestamp("CREATION_DATE"));
 			image.setModifiedDate(rs.getTimestamp("MODIFIED_DATE"));			
 			return image;
@@ -145,6 +147,7 @@ public class JdbcImageDao  extends ExtendedJdbcDaoSupport implements ImageDao {
 					new SqlParameterValue (Types.VARCHAR, image.getName() ), 
 					new SqlParameterValue (Types.INTEGER, image.getSize() ), 
 					new SqlParameterValue (Types.VARCHAR, image.getContentType()), 
+					new SqlParameterValue (Types.NUMERIC, image.getUser().getUserId()), 
 					new SqlParameterValue(Types.TIMESTAMP, image.getCreationDate()),
 					new SqlParameterValue(Types.TIMESTAMP, image.getModifiedDate()));	
 			

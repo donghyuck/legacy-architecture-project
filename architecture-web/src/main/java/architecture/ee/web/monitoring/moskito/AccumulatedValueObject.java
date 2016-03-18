@@ -19,9 +19,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import architecture.common.model.json.CustomJsonDateSerializer;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import architecture.common.model.json.CustomJsonDateSerializer;
 
 public class AccumulatedValueObject {
 	

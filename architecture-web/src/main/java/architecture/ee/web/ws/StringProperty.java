@@ -17,51 +17,51 @@ package architecture.ee.web.ws;
 
 public class StringProperty {
 
-    
     private String name;
     private String value;
-    
-	public StringProperty() {
-		
-	}
 
-	/**
-	 * @return name
-	 */
-	public String getName() {
-		return name;
-	}
+    public StringProperty() {
 
-	/**
-	 * @param name 설정할 name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    }
 
-	/**
-	 * @return value
-	 */
-	public String getValue() {
-		return value;
-	}
+    /**
+     * @return name
+     */
+    public String getName() {
+	return name;
+    }
 
-	/**
-	 * @param value 설정할 value
-	 */
-	public void setValue(String value) {
-		this.value = value;
-	}
+    /**
+     * @param name
+     *            설정할 name
+     */
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	/**
-	 * @param name
-	 * @param value
-	 */
-	public StringProperty(String name, String value) {
-		super();
-		this.name = name;
-		this.value = value;
-	}
+    /**
+     * @return value
+     */
+    public String getValue() {
+	return value;
+    }
 
-	
+    /**
+     * @param value
+     *            설정할 value
+     */
+    public void setValue(String value) {
+	this.value = value;
+    }
+
+    /**
+     * @param name
+     * @param value
+     */
+    public StringProperty(String name, String value) {
+	super();
+	this.name = name;
+	this.value = value;
+    }
+
 }

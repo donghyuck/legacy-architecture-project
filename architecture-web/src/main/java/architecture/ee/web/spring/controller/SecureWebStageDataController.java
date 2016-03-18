@@ -26,12 +26,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
-import net.anotheria.moskito.core.producers.IStatsProducer;
-import net.anotheria.moskito.core.registry.IProducerRegistry;
-import net.anotheria.moskito.core.registry.ProducerReference;
-import net.anotheria.moskito.core.registry.ProducerRegistryFactory;
-import net.sf.ehcache.Cache;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +58,11 @@ import architecture.ee.web.logo.LogoManager;
 import architecture.ee.web.navigator.MenuRepository;
 import architecture.ee.web.site.WebSiteManager;
 import architecture.ee.web.ws.Property;
+import net.anotheria.moskito.core.producers.IStatsProducer;
+import net.anotheria.moskito.core.registry.IProducerRegistry;
+import net.anotheria.moskito.core.registry.ProducerReference;
+import net.anotheria.moskito.core.registry.ProducerRegistryFactory;
+import net.sf.ehcache.Cache;
 
 @Controller ("secure-web-stage-data-controller")
 @RequestMapping("/secure/data")

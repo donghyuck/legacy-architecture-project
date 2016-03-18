@@ -35,27 +35,6 @@ import javax.management.ObjectInstance;
 import javax.management.ObjectName;
 import javax.management.QueryExp;
 
-import net.anotheria.moskito.core.accumulation.AccumulatedValue;
-import net.anotheria.moskito.core.accumulation.Accumulator;
-import net.anotheria.moskito.core.accumulation.AccumulatorRepository;
-import net.anotheria.moskito.core.predefined.IMemoryPoolStats;
-import net.anotheria.moskito.core.predefined.OSStats;
-import net.anotheria.moskito.core.predefined.RequestOrientedStats;
-import net.anotheria.moskito.core.predefined.RuntimeStats;
-import net.anotheria.moskito.core.producers.IStats;
-import net.anotheria.moskito.core.producers.IStatsProducer;
-import net.anotheria.moskito.core.registry.IProducerFilter;
-import net.anotheria.moskito.core.registry.IProducerRegistry;
-import net.anotheria.moskito.core.registry.IProducerRegistryAPI;
-import net.anotheria.moskito.core.registry.ProducerRegistryAPIFactory;
-import net.anotheria.moskito.core.registry.ProducerRegistryFactory;
-import net.anotheria.moskito.core.threshold.Threshold;
-import net.anotheria.moskito.core.threshold.ThresholdRepository;
-import net.anotheria.moskito.core.threshold.alerts.AlertHistory;
-import net.anotheria.moskito.core.threshold.alerts.ThresholdAlert;
-import net.anotheria.moskito.web.session.SessionCountStats;
-import net.anotheria.util.maven.MavenVersionReader;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -77,6 +56,26 @@ import architecture.ee.web.monitoring.moskito.StatLineObject;
 import architecture.ee.web.monitoring.moskito.StatValue;
 import architecture.ee.web.monitoring.moskito.ThresholdAlertObject;
 import architecture.ee.web.monitoring.moskito.ThresholdStatusObject;
+import net.anotheria.moskito.core.accumulation.AccumulatedValue;
+import net.anotheria.moskito.core.accumulation.Accumulator;
+import net.anotheria.moskito.core.accumulation.AccumulatorRepository;
+import net.anotheria.moskito.core.predefined.IMemoryPoolStats;
+import net.anotheria.moskito.core.predefined.OSStats;
+import net.anotheria.moskito.core.predefined.RequestOrientedStats;
+import net.anotheria.moskito.core.predefined.RuntimeStats;
+import net.anotheria.moskito.core.producers.IStats;
+import net.anotheria.moskito.core.producers.IStatsProducer;
+import net.anotheria.moskito.core.registry.IProducerFilter;
+import net.anotheria.moskito.core.registry.IProducerRegistry;
+import net.anotheria.moskito.core.registry.IProducerRegistryAPI;
+import net.anotheria.moskito.core.registry.ProducerRegistryAPIFactory;
+import net.anotheria.moskito.core.registry.ProducerRegistryFactory;
+import net.anotheria.moskito.core.threshold.Threshold;
+import net.anotheria.moskito.core.threshold.ThresholdRepository;
+import net.anotheria.moskito.core.threshold.alerts.AlertHistory;
+import net.anotheria.moskito.core.threshold.alerts.ThresholdAlert;
+import net.anotheria.moskito.web.session.SessionCountStats;
+import net.anotheria.util.maven.MavenVersionReader;
 
 @Controller ("secure-moskito-data-controller")
 @RequestMapping("/secure/data")

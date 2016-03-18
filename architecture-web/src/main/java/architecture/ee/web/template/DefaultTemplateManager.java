@@ -18,7 +18,6 @@ package architecture.ee.web.template;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.ehcache.Element;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.AbstractModelManagerSupport;
 import architecture.common.user.Company;
@@ -26,6 +25,7 @@ import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.template.dao.TemplateDao;
+import net.sf.ehcache.Element;
 
 public class DefaultTemplateManager extends AbstractModelManagerSupport implements TemplateManager {
 
