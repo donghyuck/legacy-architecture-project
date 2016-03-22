@@ -25,77 +25,77 @@ import java.util.List;
 import architecture.common.util.RuntimeHelper;
 
 public class RuntimeHelperImpl implements RuntimeHelper {
-	
-	private final MemoryMXBean memoryMB = ManagementFactory.getMemoryMXBean();
-	
-	private final RuntimeMXBean runtimeMB = ManagementFactory.getRuntimeMXBean();
 
-	public long getTotalHeapMemory() {
-		return memoryMB.getHeapMemoryUsage().getMax();
+    private final MemoryMXBean memoryMB = ManagementFactory.getMemoryMXBean();
+
+    private final RuntimeMXBean runtimeMB = ManagementFactory.getRuntimeMXBean();
+
+    public long getTotalHeapMemory() {
+	return memoryMB.getHeapMemoryUsage().getMax();
+    }
+
+    public long getTotalHeapMemoryUsed() {
+	return memoryMB.getHeapMemoryUsage().getUsed();
+    }
+
+    public String getJvmInputArguments() {
+	StringBuilder sb = new StringBuilder();
+	for (String arg : runtimeMB.getInputArguments()) {
+	    sb.append(arg).append(" ");
 	}
+	return sb.toString();
+    }
 
-	public long getTotalHeapMemoryUsed() {
-		return memoryMB.getHeapMemoryUsage().getUsed();
+    public List<MemoryInformation> getMemoryPoolInformation() {
+	List<MemoryPoolMXBean> mbs = ManagementFactory.getMemoryPoolMXBeans();
+	List<MemoryInformation> list = new ArrayList<MemoryInformation>(mbs.size());
+	for (MemoryPoolMXBean mb : mbs) {
+	    list.add(new DefaultMemoryInformation(mb));
 	}
+	return list;
+    }
 
-	public String getJvmInputArguments() {
-		StringBuilder sb= new StringBuilder();
-		for(String arg :  runtimeMB.getInputArguments()){
-			sb.append( arg ).append( " ");			
-		}		
-		return sb.toString();
+    public long getTotalPermGenMemory() {
+	return getPermGen().getTotal();
+    }
+
+    public long getTotalPermGenMemoryUsed() {
+	return getPermGen().getUsed();
+    }
+
+    public long getTotalNonHeapMemory() {
+	return memoryMB.getNonHeapMemoryUsage().getMax();
+    }
+
+    public long getTotalNonHeapMemoryUsed() {
+	return memoryMB.getNonHeapMemoryUsage().getUsed();
+    }
+
+    private MemoryInformation getPermGen() {
+	for (MemoryInformation mi : getMemoryPoolInformation()) {
+	    String name = mi.getName().toLowerCase();
+	    if (name.contains("perm gen"))
+		return mi;
 	}
+	return new MemoryInformation() {
 
-	public List<MemoryInformation> getMemoryPoolInformation() {
-		List<MemoryPoolMXBean> mbs = ManagementFactory.getMemoryPoolMXBeans();
-		List<MemoryInformation> list = new ArrayList<MemoryInformation>(mbs.size());
-		for( MemoryPoolMXBean mb : mbs){
-			list.add(new DefaultMemoryInformation( mb ));
-		}
-		return list;
-	}
+	    public String getName() {
+		return "";
+	    }
 
-	public long getTotalPermGenMemory() {
-		return getPermGen().getTotal();
-	}
+	    public long getTotal() {
+		return -1L;
+	    }
 
-	public long getTotalPermGenMemoryUsed() {
-		return getPermGen().getUsed();
-	}
+	    public long getUsed() {
+		return -1L;
+	    }
 
-	public long getTotalNonHeapMemory() {
-		return memoryMB.getNonHeapMemoryUsage().getMax();
-	}
+	    public long getFree() {
+		return -1L;
+	    }
 
-	public long getTotalNonHeapMemoryUsed() {
-		return memoryMB.getNonHeapMemoryUsage().getUsed();
-	}
-	
-	private MemoryInformation getPermGen(){
-		for( MemoryInformation mi : getMemoryPoolInformation() ){
-			String name = mi.getName().toLowerCase();
-			if( name.contains("perm gen"))
-				return mi;
-		}
-		return new MemoryInformation(){
-
-			public String getName() {
-				return "";
-			}
-
-			public long getTotal() {
-				return -1L;
-			}
-
-			public long getUsed() {
-				return -1L;
-			}
-
-			public long getFree() {
-				return -1L;
-			}
-			
-		};
-	}
+	};
+    }
 
 }

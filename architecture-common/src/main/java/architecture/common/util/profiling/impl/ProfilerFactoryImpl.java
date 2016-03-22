@@ -6,47 +6,46 @@ import architecture.common.util.profiling.ProfilerFactory;
 /**
  * 
  * 
- * @author  donghyuck
+ * @author donghyuck
  */
 public class ProfilerFactoryImpl implements ProfilerFactory.Implementation {
 
-	private ThreadLocal<Profiler> profiler = new ThreadLocal<Profiler>();
+    private ThreadLocal<Profiler> profiler = new ThreadLocal<Profiler>();
 
-	private boolean enabled = false;
-	
-	/**
-	 * @return
-	 */
-	public boolean isEnabled() {
-		return enabled;
-	}
+    private boolean enabled = false;
 
-	/**
-	 * @param enabled
-	 */
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+    /**
+     * @return
+     */
+    public boolean isEnabled() {
+	return enabled;
+    }
 
-	/**
-	 * @return
-	 */
-	public Profiler getProfiler() {
-        Profiler p = (Profiler)profiler.get();
-        if(p == null)
-        {
-            p = new Profiler();
-            profiler.set(p);            
-        }
-        p.setProfilingEnabled(enabled);
-        return p;
-	}
+    /**
+     * @param enabled
+     */
+    public void setEnabled(boolean enabled) {
+	this.enabled = enabled;
+    }
 
-	public boolean isProfilingEnabled() {
-		return enabled;
+    /**
+     * @return
+     */
+    public Profiler getProfiler() {
+	Profiler p = (Profiler) profiler.get();
+	if (p == null) {
+	    p = new Profiler();
+	    profiler.set(p);
 	}
+	p.setProfilingEnabled(enabled);
+	return p;
+    }
 
-	public void setProfilingEnabled(boolean enabled) {
-		this.enabled = enabled;		
-	}
+    public boolean isProfilingEnabled() {
+	return enabled;
+    }
+
+    public void setProfilingEnabled(boolean enabled) {
+	this.enabled = enabled;
+    }
 }

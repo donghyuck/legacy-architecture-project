@@ -17,48 +17,48 @@ package architecture.common.i18n;
 
 import architecture.common.model.DateModelObject;
 
-public interface I18nText  extends  DateModelObject {
+public interface I18nText extends DateModelObject {
 
-	public abstract String getName();
-	
-	public abstract void setName(String name);
-	
-	/**
-	 * @return textId
-	 */
-	public abstract long getTextId();
-	
-	/**
-	 * @param  textId
-	 */
-	public abstract void setTextId(long textId);
-	
-	/**
-	 * @return localeCode
-	 */
-	public abstract String getLocaleCode();
-	
-	/**
-	 * @param  localeCode
-	 */
-	public abstract void setLocaleCode(String localeCode);
-	
-	/**
-	 * 
-	 * @return text
-	 */
-	public abstract String getText();
-	
-	/**
-	 * 
-	 * @param  text
-	 */
-	public abstract void setText(String text);
+    public abstract String getName();
 
-	public abstract String getResourceBundleKey();
-	
-	public abstract String getCategoryName();
-	
-	public abstract  void setCategoryName(String categoryName);
-		
+    public abstract void setName(String name);
+
+    /**
+     * @return textId
+     */
+    public abstract long getTextId();
+
+    /**
+     * @param textId
+     */
+    public abstract void setTextId(long textId);
+
+    /**
+     * @return localeCode
+     */
+    public abstract String getLocaleCode();
+
+    /**
+     * @param localeCode
+     */
+    public abstract void setLocaleCode(String localeCode);
+
+    /**
+     * 
+     * @return text
+     */
+    public abstract String getText();
+
+    /**
+     * 
+     * @param text
+     */
+    public abstract void setText(String text);
+
+    public abstract String getResourceBundleKey();
+
+    public abstract String getCategoryName();
+
+    public abstract void setCategoryName(String categoryName);
+
 }

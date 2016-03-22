@@ -18,53 +18,49 @@ package architecture.common.user;
 import java.util.List;
 
 public interface CompanyManager {
-	
-	public abstract Company createCompany(String name) throws CompanyAlreadyExistsException;
-	
-	public abstract Company createCompany(String name, String displayName) throws CompanyAlreadyExistsException;
 
-	public abstract Company createCompany(String name, String displayName, String description) throws CompanyAlreadyExistsException;
-	
-	public abstract Company createCompany(String name, String displayName, String domainName, String description) throws CompanyAlreadyExistsException;
-	
-	public abstract Company getCompany(long groupId) throws CompanyNotFoundException;
+    public abstract Company createCompany(String name) throws CompanyAlreadyExistsException;
 
-	public abstract Company getCompany(String name) throws CompanyNotFoundException;
-	
-	public abstract Company getCompanyByDomainName(String domainName) throws CompanyNotFoundException;
-			
-	public abstract List<DomainMatcher> getDomainMatchers();
-	
-	public abstract void updateCompany(Company group) throws CompanyNotFoundException, CompanyAlreadyExistsException;
-	
-	
-	public abstract int getTotalCompanyCount();
+    public abstract Company createCompany(String name, String displayName) throws CompanyAlreadyExistsException;
 
-	public abstract List<Company> getCompanies();
+    public abstract Company createCompany(String name, String displayName, String description)
+	    throws CompanyAlreadyExistsException;
 
-	public abstract List<Company> getCompanies(int startIndex, int numResults);
-	
-	
-	public abstract int getTotalCompanyGroupCount(Company group);
-	
-	public abstract List<Group> getCompanyGroups(Company group);
+    public abstract Company createCompany(String name, String displayName, String domainName, String description)
+	    throws CompanyAlreadyExistsException;
 
-	public abstract List<Group> getCompanyGroups(Company group, int startIndex, int numResults);
-	
-	
-	public abstract int getTotalCompanyUserCount(Company company);	
-	
-	public abstract List<User> getCompanyUsers(Company company);
+    public abstract Company getCompany(long groupId) throws CompanyNotFoundException;
 
-	public abstract List<User> getCompanyUsers(Company company, int startIndex, int numResults);
-	
-	
-	public abstract List<User> findCompanyUsers(Company company, String nameOrEmail);
-	
-	public abstract List<User> findCompanyUsers(Company company, String nameOrEmail, int startIndex, int numResults);
-	
-	public abstract int getFoundCompanyUserCount(Company company, String nameOrEmail);
-	
-	
-	
+    public abstract Company getCompany(String name) throws CompanyNotFoundException;
+
+    public abstract Company getCompanyByDomainName(String domainName) throws CompanyNotFoundException;
+
+    public abstract List<DomainMatcher> getDomainMatchers();
+
+    public abstract void updateCompany(Company group) throws CompanyNotFoundException, CompanyAlreadyExistsException;
+
+    public abstract int getTotalCompanyCount();
+
+    public abstract List<Company> getCompanies();
+
+    public abstract List<Company> getCompanies(int startIndex, int numResults);
+
+    public abstract int getTotalCompanyGroupCount(Company group);
+
+    public abstract List<Group> getCompanyGroups(Company group);
+
+    public abstract List<Group> getCompanyGroups(Company group, int startIndex, int numResults);
+
+    public abstract int getTotalCompanyUserCount(Company company);
+
+    public abstract List<User> getCompanyUsers(Company company);
+
+    public abstract List<User> getCompanyUsers(Company company, int startIndex, int numResults);
+
+    public abstract List<User> findCompanyUsers(Company company, String nameOrEmail);
+
+    public abstract List<User> findCompanyUsers(Company company, String nameOrEmail, int startIndex, int numResults);
+
+    public abstract int getFoundCompanyUserCount(Company company, String nameOrEmail);
+
 }

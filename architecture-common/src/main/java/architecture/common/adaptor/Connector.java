@@ -20,6 +20,6 @@ import org.apache.commons.logging.LogFactory;
 
 public interface Connector {
 
-	public static final Log LOG = LogFactory.getLog(Connector.class);
-	
+    public static final Log LOG = LogFactory.getLog(Connector.class);
+
 }

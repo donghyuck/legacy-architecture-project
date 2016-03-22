@@ -22,104 +22,103 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author   donghyuck
+ * @author donghyuck
  */
 public class Table implements Serializable {
 
-	private String name;
+    private String name;
 
-	private String catalog;
+    private String catalog;
 
-	private String schema;
-	
-	private Map<String, Column> columns = new LinkedHashMap<String, Column>();
+    private String schema;
 
-	private Column primaryKey;
+    private Map<String, Column> columns = new LinkedHashMap<String, Column>();
 
-	public Table(String name) {
-		this.name = name;
-	}
+    private Column primaryKey;
 
-	/**
-	 * @return
-	 */
-	public String getName() {
-		return name;
-	}
+    public Table(String name) {
+	this.name = name;
+    }
 
-	/**
-	 * @return
-	 */
-	public String getCatalog() {
-		return catalog;
-	}
+    /**
+     * @return
+     */
+    public String getName() {
+	return name;
+    }
 
-	/**
-	 * @param  catalog
-	 */
-	public void setCatalog(String catalog) {
-		this.catalog = catalog;
-	}
+    /**
+     * @return
+     */
+    public String getCatalog() {
+	return catalog;
+    }
 
-	/**
-	 * @return
-	 */
-	public String getSchema() {
-		return schema;
-	}
+    /**
+     * @param catalog
+     */
+    public void setCatalog(String catalog) {
+	this.catalog = catalog;
+    }
 
-	/**
-	 * @param  schema
-	 */
-	public void setSchema(String schema) {
-		this.schema = schema;
-	}
+    /**
+     * @return
+     */
+    public String getSchema() {
+	return schema;
+    }
 
-	public void addColumn(Column col) {
-		columns.put(col.getName().toUpperCase(), col);
-	}
+    /**
+     * @param schema
+     */
+    public void setSchema(String schema) {
+	this.schema = schema;
+    }
 
-	public Column getColumn(String name) {
-		return columns.get(name.toUpperCase());
-	}
+    public void addColumn(Column col) {
+	columns.put(col.getName().toUpperCase(), col);
+    }
 
-	public String[] getColumnNames() {
-		return columns.keySet().toArray(new String[columns.size()]);
-	}
+    public Column getColumn(String name) {
+	return columns.get(name.toUpperCase());
+    }
 
-	
-	public List<Column> getColumns(){
-		List<Column> list = new ArrayList(columns.values());		
-		return list;
-	}
-	
-	/**
-	 * @param  column
-	 */
-	public void setPrimaryKey(Column column) {
-		primaryKey = column;
-	}
+    public String[] getColumnNames() {
+	return columns.keySet().toArray(new String[columns.size()]);
+    }
 
-	/**
-	 * @return
-	 */
-	public Column getPrimaryKey() {
-		return primaryKey;
-	}
+    public List<Column> getColumns() {
+	List<Column> list = new ArrayList(columns.values());
+	return list;
+    }
 
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		final Table table = (Table) o;
-		if (name != null ? !name.equals(table.name) : table.name != null)
-			return false;
-		return true;
-	}
+    /**
+     * @param column
+     */
+    public void setPrimaryKey(Column column) {
+	primaryKey = column;
+    }
 
-	public int hashCode() {
-		return (name != null ? name.hashCode() : 0);
-	}
+    /**
+     * @return
+     */
+    public Column getPrimaryKey() {
+	return primaryKey;
+    }
+
+    public boolean equals(Object o) {
+	if (this == o)
+	    return true;
+	if (o == null || getClass() != o.getClass())
+	    return false;
+	final Table table = (Table) o;
+	if (name != null ? !name.equals(table.name) : table.name != null)
+	    return false;
+	return true;
+    }
+
+    public int hashCode() {
+	return (name != null ? name.hashCode() : 0);
+    }
 
 }

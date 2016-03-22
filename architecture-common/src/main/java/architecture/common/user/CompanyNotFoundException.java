@@ -17,39 +17,39 @@ package architecture.common.user;
 
 import architecture.common.exception.CodeableException;
 
-public class CompanyNotFoundException extends CodeableException  {
+public class CompanyNotFoundException extends CodeableException {
 
-	/**
-	 * 
-	 */
-	public CompanyNotFoundException() {
-		super();
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * 
+     */
+    public CompanyNotFoundException() {
+	super();
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param msg
-	 * @param cause
-	 */
-	public CompanyNotFoundException(String msg, Throwable cause) {
-		super(msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param msg
+     * @param cause
+     */
+    public CompanyNotFoundException(String msg, Throwable cause) {
+	super(msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param msg
-	 */
-	public CompanyNotFoundException(String msg) {
-		super(msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param msg
+     */
+    public CompanyNotFoundException(String msg) {
+	super(msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param cause
-	 */
-	public CompanyNotFoundException(Throwable cause) {
-		super(cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param cause
+     */
+    public CompanyNotFoundException(Throwable cause) {
+	super(cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
 }

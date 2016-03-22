@@ -20,107 +20,106 @@ import architecture.common.util.RuntimeHelperFactory;
 
 public class MemoryInfo {
 
-	public static class Bytes {
-		
-		private final long value ;
-		
-		public Bytes ( long value){
-			this.value = value;
-		}
-		
-		public long bytes(){
-			return value;
-		}
-		
-		public long getBytes(){
-			return bytes();
-		}
-		
-		public long getMegabytes(){
-			return megabytes();
-		}
-						
-		public long megabytes(){
-			return value / MEGABYTE ;
-		}
-		
-		public Bytes plus ( Bytes b){
-			return new Bytes(value + b.bytes());
-		}
-		
-		public Bytes minus(Bytes b){
-			return new Bytes(value - b.bytes());
-		}
-		
-		public String toString(){
-			return Long.toString(value);
-		}	
-			
-		public boolean equals(Object obj){
-			if( this == obj )
-				return true;
-			if( obj == null || getClass() != obj.getClass())
-				return false;
-			Bytes bytes = (Bytes)obj;
-			return value == bytes.value;
-		}
-		
-		public int hashCode(){
-			return (int) (value^value >>> 32);
-		}
+    public static class Bytes {
+
+	private final long value;
+
+	public Bytes(long value) {
+	    this.value = value;
 	}
-	
-	private static final long MEGABYTE = 0x100000L;
-	private final Bytes maxHeap ;
-	private final Bytes freeAllocatedHeap;
-	private final Bytes allocatedHeap ;
-	private final Bytes maxPermGen ;
-	private final Bytes usedPermGen ;
-	
-	public MemoryInfo(){
-		
-		Runtime rt = Runtime.getRuntime();
-		RuntimeHelper info = RuntimeHelperFactory.getRuntimeHelper();
-		
-		this.freeAllocatedHeap = new Bytes(rt.freeMemory());
-		this.allocatedHeap = new Bytes(rt.totalMemory());
-		this.maxHeap = new Bytes( rt.maxMemory());
-		this.maxPermGen = new Bytes( info.getTotalPermGenMemory());
-		this.usedPermGen = new Bytes( info.getTotalPermGenMemoryUsed());
-		
+
+	public long bytes() {
+	    return value;
 	}
-	
-	public Bytes getAvailableHeap(){
-		return maxHeap.minus(allocatedHeap).plus(freeAllocatedHeap);
+
+	public long getBytes() {
+	    return bytes();
 	}
-	
-	public Bytes getFreeAllocatedHeap(){
-		return freeAllocatedHeap;
+
+	public long getMegabytes() {
+	    return megabytes();
 	}
-	
-	public Bytes getMaxHeap(){
-		return maxHeap;
+
+	public long megabytes() {
+	    return value / MEGABYTE;
 	}
-	
-	public Bytes getAllocateHeap(){
-		return allocatedHeap;
+
+	public Bytes plus(Bytes b) {
+	    return new Bytes(value + b.bytes());
 	}
-	
-	public Bytes getUsedHeap(){
-		return getAllocateHeap().minus(getFreeAllocatedHeap());
+
+	public Bytes minus(Bytes b) {
+	    return new Bytes(value - b.bytes());
 	}
-	
-	public Bytes getMaxPermGen(){
-		return maxPermGen;
+
+	public String toString() {
+	    return Long.toString(value);
 	}
-	
-	public Bytes getUsedPermGen(){
-		return usedPermGen;
+
+	public boolean equals(Object obj) {
+	    if (this == obj)
+		return true;
+	    if (obj == null || getClass() != obj.getClass())
+		return false;
+	    Bytes bytes = (Bytes) obj;
+	    return value == bytes.value;
 	}
-	
-	public Bytes getAvailablePermGen(){
-		return maxPermGen.minus(usedPermGen );
+
+	public int hashCode() {
+	    return (int) (value ^ value >>> 32);
 	}
-	
-	
+    }
+
+    private static final long MEGABYTE = 0x100000L;
+    private final Bytes maxHeap;
+    private final Bytes freeAllocatedHeap;
+    private final Bytes allocatedHeap;
+    private final Bytes maxPermGen;
+    private final Bytes usedPermGen;
+
+    public MemoryInfo() {
+
+	Runtime rt = Runtime.getRuntime();
+	RuntimeHelper info = RuntimeHelperFactory.getRuntimeHelper();
+
+	this.freeAllocatedHeap = new Bytes(rt.freeMemory());
+	this.allocatedHeap = new Bytes(rt.totalMemory());
+	this.maxHeap = new Bytes(rt.maxMemory());
+	this.maxPermGen = new Bytes(info.getTotalPermGenMemory());
+	this.usedPermGen = new Bytes(info.getTotalPermGenMemoryUsed());
+
+    }
+
+    public Bytes getAvailableHeap() {
+	return maxHeap.minus(allocatedHeap).plus(freeAllocatedHeap);
+    }
+
+    public Bytes getFreeAllocatedHeap() {
+	return freeAllocatedHeap;
+    }
+
+    public Bytes getMaxHeap() {
+	return maxHeap;
+    }
+
+    public Bytes getAllocateHeap() {
+	return allocatedHeap;
+    }
+
+    public Bytes getUsedHeap() {
+	return getAllocateHeap().minus(getFreeAllocatedHeap());
+    }
+
+    public Bytes getMaxPermGen() {
+	return maxPermGen;
+    }
+
+    public Bytes getUsedPermGen() {
+	return usedPermGen;
+    }
+
+    public Bytes getAvailablePermGen() {
+	return maxPermGen.minus(usedPermGen);
+    }
+
 }

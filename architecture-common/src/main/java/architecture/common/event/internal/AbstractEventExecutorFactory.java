@@ -25,32 +25,29 @@ import architecture.common.event.config.EventThreadPoolConfiguration;
 import architecture.common.event.spi.EventExecutorFactory;
 
 /**
- * @author  donghyuck
+ * @author donghyuck
  */
 public abstract class AbstractEventExecutorFactory implements EventExecutorFactory {
-
 
     private final EventThreadPoolConfiguration configuration;
 
     private final EventThreadFactory eventThreadFactory;
-    
-    public AbstractEventExecutorFactory(EventThreadPoolConfiguration configuration, EventThreadFactory eventThreadFactory)
-    {
-        this.configuration = (EventThreadPoolConfiguration)Preconditions.checkNotNull(configuration);
-        this.eventThreadFactory = (EventThreadFactory)Preconditions.checkNotNull(eventThreadFactory);
+
+    public AbstractEventExecutorFactory(EventThreadPoolConfiguration configuration,
+	    EventThreadFactory eventThreadFactory) {
+	this.configuration = (EventThreadPoolConfiguration) Preconditions.checkNotNull(configuration);
+	this.eventThreadFactory = (EventThreadFactory) Preconditions.checkNotNull(eventThreadFactory);
     }
 
-    public AbstractEventExecutorFactory(EventThreadPoolConfiguration configuration)
-    {
-        this(configuration, new EventThreadFactory());
+    public AbstractEventExecutorFactory(EventThreadPoolConfiguration configuration) {
+	this(configuration, new EventThreadFactory());
     }
 
     protected abstract BlockingQueue getQueue();
 
-    public Executor getExecutor()
-    {
-        return new ThreadPoolExecutor(configuration.getCorePoolSize(), configuration.getMaximumPoolSize(), configuration.getKeepAliveTime(), configuration.getTimeUnit(), getQueue(), eventThreadFactory);
+    public Executor getExecutor() {
+	return new ThreadPoolExecutor(configuration.getCorePoolSize(), configuration.getMaximumPoolSize(),
+		configuration.getKeepAliveTime(), configuration.getTimeUnit(), getQueue(), eventThreadFactory);
     }
-
 
 }

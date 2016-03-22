@@ -16,56 +16,48 @@
 package architecture.common.jdbc.schema;
 
 /**
- * @author   donghyuck
+ * @author donghyuck
  */
 public enum DatabaseType {
-	
-	oracle,
-	postgresql,
-	mysql,
-	hsqldb,
-	db2,
-	sqlserver,
-	interbase,
-	derby,
-	unknown;
-	
-	public  boolean transactionsSupported;
-	
-	public int transactionIsolation;
 
-	// True if the database requires large text fields to be streamed.
-	public boolean streamTextRequired;
+    oracle, postgresql, mysql, hsqldb, db2, sqlserver, interbase, derby, unknown;
 
-	// True if the database supports the Statement.setMaxRows() method.
-	public boolean streamBlobRequired;
+    public boolean transactionsSupported;
 
-	// True if the database supports the Statement.setFetchSize() method.
-	public boolean fetchSizeSupported;
+    public int transactionIsolation;
 
-	// True if the database supports correlated subqueries.
-	public boolean subqueriesSupported;
+    // True if the database requires large text fields to be streamed.
+    public boolean streamTextRequired;
 
-	public boolean maxRowsSupported;
+    // True if the database supports the Statement.setMaxRows() method.
+    public boolean streamBlobRequired;
 
-	public boolean deleteSubqueriesSupported;
+    // True if the database supports the Statement.setFetchSize() method.
+    public boolean fetchSizeSupported;
 
-	// True if the database supports scroll-insensitive results.
-	public boolean scrollResultsSupported;
+    // True if the database supports correlated subqueries.
+    public boolean subqueriesSupported;
 
-	// True if the database supports batch updates.
-	public boolean batchUpdatesSupported;
+    public boolean maxRowsSupported;
 
-	// databse product name.
-	public String databaseProductName;
+    public boolean deleteSubqueriesSupported;
 
-	// database product version.
-	public String databaseProductVersion;
+    // True if the database supports scroll-insensitive results.
+    public boolean scrollResultsSupported;
 
-	// database jdbc driver name.
-	public String jdbcDriverName;
+    // True if the database supports batch updates.
+    public boolean batchUpdatesSupported;
 
-	// jdbc driver version.
-	public String jdbcDriverVersion;
-	
+    // databse product name.
+    public String databaseProductName;
+
+    // database product version.
+    public String databaseProductVersion;
+
+    // database jdbc driver name.
+    public String jdbcDriverName;
+
+    // jdbc driver version.
+    public String jdbcDriverVersion;
+
 }

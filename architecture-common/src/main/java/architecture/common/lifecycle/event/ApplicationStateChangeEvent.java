@@ -19,10 +19,10 @@ import architecture.common.lifecycle.State;
 
 public class ApplicationStateChangeEvent extends StateChangeEvent {
 
-	private static final long serialVersionUID = -4416955727194560837L;
+    private static final long serialVersionUID = -4416955727194560837L;
 
-	public ApplicationStateChangeEvent(Object source, State oldState, State newState) {
-		super(source, oldState, newState);
-	}
+    public ApplicationStateChangeEvent(Object source, State oldState, State newState) {
+	super(source, oldState, newState);
+    }
 
 }

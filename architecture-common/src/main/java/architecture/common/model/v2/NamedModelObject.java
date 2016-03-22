@@ -17,20 +17,21 @@ package architecture.common.model.v2;
 
 public class NamedModelObject implements NamedModel {
 
-	private String name;
+    private String name;
 
-	/**
-	 * @return name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * @return name
+     */
+    public String getName() {
+	return name;
+    }
 
-	/**
-	 * @param name 설정할 name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @param name
+     *            설정할 name
+     */
+    public void setName(String name) {
+	this.name = name;
+    }
 
 }

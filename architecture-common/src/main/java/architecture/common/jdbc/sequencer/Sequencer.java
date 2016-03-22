@@ -16,23 +16,22 @@
 package architecture.common.jdbc.sequencer;
 
 /**
- * @author                   donghyuck
+ * @author donghyuck
  */
-public interface Sequencer
-{
+public interface Sequencer {
 
-	public abstract String getName();
-	
-	public abstract long getNext() ;
+    public abstract String getName();
+
+    public abstract long getNext();
 
     /**
-	 * @return blockSize
-	 */
+     * @return blockSize
+     */
     public abstract int getBlockSize();
-    
+
     /**
-	 * @param  blockSize
-	 */
+     * @param blockSize
+     */
     public abstract void setBlockSize(int blockSize);
-    
+
 }

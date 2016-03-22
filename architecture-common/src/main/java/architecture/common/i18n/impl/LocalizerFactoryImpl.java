@@ -20,54 +20,50 @@ import java.util.ResourceBundle;
 
 import architecture.common.i18n.Localizer;
 import architecture.common.i18n.LocalizerFactory;
+
 /**
  * 
  * 
  * @author DongHyuck, Son
  */
 public class LocalizerFactoryImpl implements LocalizerFactory.Implementation {
-/*
-	private static class LocalizerResourceBundleControl extends ResourceBundle.Control {
+    /*
+     * private static class LocalizerResourceBundleControl extends
+     * ResourceBundle.Control {
+     * 
+     * public static final String XML = "xml";
+     * 
+     * public static final List<String> FORMAT_DEFAULT =
+     * Collections.unmodifiableList(Arrays.asList("java.properties", XML));
+     * 
+     * public List<String> getFormats(String baseName) { return FORMAT_DEFAULT;
+     * }
+     * 
+     * public ResourceBundle newBundle(String baseName, Locale locale, String
+     * format, ClassLoader loader, boolean reload) throws
+     * IllegalAccessException, InstantiationException, IOException {
+     * 
+     * if ((baseName == null) || (locale == null) || (format == null) || (loader
+     * == null)) { throw new NullPointerException(); }
+     * 
+     * ResourceBundle bundle = null; if (format.equals(XML)) {
+     * 
+     * } else { bundle = super.newBundle(baseName, locale, format, loader,
+     * reload); } return bundle; } }
+     */
 
-		public static final String XML = "xml";
+    public Localizer getLocalizer(String baseName) {
+	ResourceBundle bundle = ResourceBundle.getBundle(baseName);
+	return new Localizer(bundle);
+    }
 
-		public static final List<String> FORMAT_DEFAULT = Collections.unmodifiableList(Arrays.asList("java.properties", XML));
+    public Localizer getLocalizer(String baseName, Locale targetLocale) {
+	ResourceBundle bundle = ResourceBundle.getBundle(baseName, targetLocale);
+	return new Localizer(bundle);
+    }
 
-		public List<String> getFormats(String baseName) {
-			return FORMAT_DEFAULT;
-		}
-
-		public ResourceBundle newBundle(String baseName, Locale locale,
-				String format, ClassLoader loader, boolean reload)
-				throws IllegalAccessException, InstantiationException,
-				IOException {
-
-			if ((baseName == null) || (locale == null) || (format == null) || (loader == null)) {
-				throw new NullPointerException();
-			}
-
-			ResourceBundle bundle = null;
-			if (format.equals(XML)) {
-
-			} else {
-				bundle = super.newBundle(baseName, locale, format, loader, reload);
-			}
-			return bundle;
-		}
-	}*/
-
-	public Localizer getLocalizer(String baseName) {
-		ResourceBundle bundle = ResourceBundle.getBundle(baseName);
-		return new Localizer(bundle);
-	}
-
-	public Localizer getLocalizer(String baseName, Locale targetLocale) {
-		ResourceBundle bundle = ResourceBundle.getBundle(baseName, targetLocale );
-		return new Localizer(bundle);
-	}
-
-	public Localizer getLocalizer(String baseName, Locale targetLocale, ClassLoader cl) {
-		ResourceBundle bundle = ResourceBundle.getBundle(baseName, targetLocale, cl );
-		return new Localizer(bundle);
-	}
+    public Localizer getLocalizer(String baseName, Locale targetLocale, ClassLoader cl) {
+	ResourceBundle bundle = ResourceBundle.getBundle(baseName, targetLocale, cl);
+	return new Localizer(bundle);
+    }
 }

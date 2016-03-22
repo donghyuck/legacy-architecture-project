@@ -21,26 +21,27 @@ import java.util.Map;
 public class CacheSizes {
 
     /**
-     * Returns the size in bytes of a basic Object. This method should only
-     * be used for actual Object objects and not classes that extend Object.
+     * Returns the size in bytes of a basic Object. This method should only be
+     * used for actual Object objects and not classes that extend Object.
      *
      * @return the size of an Object.
      */
     public static int sizeOfObject() {
-        return 4;
+	return 4;
     }
 
     /**
      * Returns the size in bytes of a String.
      *
-     * @param string the String to determine the size of.
+     * @param string
+     *            the String to determine the size of.
      * @return the size of a String.
      */
     public static int sizeOfString(String string) {
-        if (string == null) {
-            return 0;
-        }
-        return 4 + string.getBytes().length;
+	if (string == null) {
+	    return 0;
+	}
+	return 4 + string.getBytes().length;
     }
 
     /**
@@ -49,7 +50,7 @@ public class CacheSizes {
      * @return the size of a primitive int.
      */
     public static int sizeOfInt() {
-        return 4;
+	return 4;
     }
 
     /**
@@ -58,7 +59,7 @@ public class CacheSizes {
      * @return the size of a primitive char.
      */
     public static int sizeOfChar() {
-        return 2;
+	return 2;
     }
 
     /**
@@ -67,7 +68,7 @@ public class CacheSizes {
      * @return the size of a primitive boolean.
      */
     public static int sizeOfBoolean() {
-        return 1;
+	return 1;
     }
 
     /**
@@ -76,7 +77,7 @@ public class CacheSizes {
      * @return the size of a primitive long.
      */
     public static int sizeOfLong() {
-        return 8;
+	return 8;
     }
 
     /**
@@ -85,7 +86,7 @@ public class CacheSizes {
      * @return the size of a primitive double.
      */
     public static int sizeOfDouble() {
-        return 8;
+	return 8;
     }
 
     /**
@@ -94,73 +95,73 @@ public class CacheSizes {
      * @return the size of a Date.
      */
     public static int sizeOfDate() {
-        return 12;
+	return 12;
     }
 
     /**
-     * Returns the size in bytes of a Map object. All keys and
-     * values <b>must be Strings</b>.
+     * Returns the size in bytes of a Map object. All keys and values <b>must be
+     * Strings</b>.
      *
-     * @param map the Map object to determine the size of.
+     * @param map
+     *            the Map object to determine the size of.
      * @return the size of the Map object.
      */
     public static int sizeOfMap(Map<String, String> map) {
-        if (map == null) {
-            return 0;
-        }
-        // Base map object -- should be something around this size.
-        int size = 36;
-        
-        // Add in size of each value
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-			size += sizeOfString(entry.getKey());
-            size += sizeOfString(entry.getValue());
-        }
-        return size;
+	if (map == null) {
+	    return 0;
+	}
+	// Base map object -- should be something around this size.
+	int size = 36;
+
+	// Add in size of each value
+	for (Map.Entry<String, String> entry : map.entrySet()) {
+	    size += sizeOfString(entry.getKey());
+	    size += sizeOfString(entry.getValue());
+	}
+	return size;
     }
 
     public static int sizeOfObjectMap(Map<String, Object> map) {
-        if (map == null) {
-            return 0;
-        }
-        // Base map object -- should be something around this size.
-        int size = 36;
-        
-        // Add in size of each value
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-			size += sizeOfString(entry.getKey());
-            size += sizeOfObject();
-        }
-        return size;
+	if (map == null) {
+	    return 0;
+	}
+	// Base map object -- should be something around this size.
+	int size = 36;
+
+	// Add in size of each value
+	for (Map.Entry<String, Object> entry : map.entrySet()) {
+	    size += sizeOfString(entry.getKey());
+	    size += sizeOfObject();
+	}
+	return size;
     }
-    
+
     /**
-     * Returns the size in bytes of a Collection object. Elements are assumed to be
-     * <tt>String</tt>s, <tt>Long</tt>s or <tt>Cacheable</tt> objects.
+     * Returns the size in bytes of a Collection object. Elements are assumed to
+     * be <tt>String</tt>s, <tt>Long</tt>s or <tt>Cacheable</tt> objects.
      *
-     * @param list the Collection object to determine the size of.
+     * @param list
+     *            the Collection object to determine the size of.
      * @return the size of the Collection object.
      */
     public static int sizeOfCollection(Collection list) {
-        if (list == null) {
-            return 0;
-        }
-        // Base list object (approximate)
-        int size = 36;
-        // Add in size of each value
-        Object[] values = list.toArray();
-        for (int i = 0; i < values.length; i++) {
-            Object obj = values[i];
-            if (obj instanceof String) {
-                size += sizeOfString((String)obj);
-            }
-            else if (obj instanceof Long) {
-                size += sizeOfLong() + sizeOfObject();
-            }
-            else {
-                size += ((Cacheable)obj).getCachedSize();
-            }
-        }
-        return size;
+	if (list == null) {
+	    return 0;
+	}
+	// Base list object (approximate)
+	int size = 36;
+	// Add in size of each value
+	Object[] values = list.toArray();
+	for (int i = 0; i < values.length; i++) {
+	    Object obj = values[i];
+	    if (obj instanceof String) {
+		size += sizeOfString((String) obj);
+	    } else if (obj instanceof Long) {
+		size += sizeOfLong() + sizeOfObject();
+	    } else {
+		size += ((Cacheable) obj).getCachedSize();
+	    }
+	}
+	return size;
     }
 }

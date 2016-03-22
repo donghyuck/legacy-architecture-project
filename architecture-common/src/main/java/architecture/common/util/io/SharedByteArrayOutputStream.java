@@ -20,36 +20,28 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-
-public class SharedByteArrayOutputStream extends SharedOutputStream
-{
+public class SharedByteArrayOutputStream extends SharedOutputStream {
 
     private ByteArrayOutputStream outputStream;
-    
-    public SharedByteArrayOutputStream()
-    {
-        outputStream = new ByteArrayOutputStream();
+
+    public SharedByteArrayOutputStream() {
+	outputStream = new ByteArrayOutputStream();
     }
 
-    public SharedByteArrayOutputStream(int size)
-    {
-        outputStream = new ByteArrayOutputStream(size);
+    public SharedByteArrayOutputStream(int size) {
+	outputStream = new ByteArrayOutputStream(size);
     }
 
-    public InputStream getInputStream()
-    {
-        return new ByteArrayInputStream(outputStream.toByteArray());
+    public InputStream getInputStream() {
+	return new ByteArrayInputStream(outputStream.toByteArray());
     }
 
-    public int getSize()
-    {
-        return outputStream.size();
+    public int getSize() {
+	return outputStream.size();
     }
 
-    public void write(int b)
-        throws IOException
-    {
-        outputStream.write(b);
+    public void write(int b) throws IOException {
+	outputStream.write(b);
     }
 
 }

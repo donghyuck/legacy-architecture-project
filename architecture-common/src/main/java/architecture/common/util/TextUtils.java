@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 package architecture.common.util;
+
 import java.awt.Color;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -32,188 +33,203 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
+
 public class TextUtils {
-    //~ Static fields/initializers /////////////////////////////////////////////
+    // ~ Static fields/initializers
+    // /////////////////////////////////////////////
 
     /**
-     * An array of HTML tags that, in HTML, don't require closing tags. Note that
-     * XHTML doesn't work this way.
+     * An array of HTML tags that, in HTML, don't require closing tags. Note
+     * that XHTML doesn't work this way.
      */
-    public final static String[] SINGLE_TAGS = {"br", "p", "hr"};
+    public final static String[] SINGLE_TAGS = { "br", "p", "hr" };
 
-    //~ Methods ////////////////////////////////////////////////////////////////
+    // ~ Methods
+    // ////////////////////////////////////////////////////////////////
 
     /**
      * Convert line breaks to html <code>&lt;br&gt;</code> tag.
-     * @param s the String to convert
+     * 
+     * @param s
+     *            the String to convert
      * @return the converted string
      */
     public final static String br(String s) {
-        s = noNull(s);
+	s = noNull(s);
 
-        StringBuffer str = new StringBuffer();
+	StringBuffer str = new StringBuffer();
 
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '\n') {
-                str.append("<br/>");
-            }
+	for (int i = 0; i < s.length(); i++) {
+	    if (s.charAt(i) == '\n') {
+		str.append("<br/>");
+	    }
 
-            str.append(s.charAt(i));
-        }
+	    str.append(s.charAt(i));
+	}
 
-        return str.toString();
+	return str.toString();
     }
 
     /**
-     * Search through a String for any tags that have been opened and append closing tags
-     * for those that have not been closed.
-     * @param str A string possibly containing unclosed HTML tags
-     * @return the converted string
-     * #see #SINGLE_TAGS
+     * Search through a String for any tags that have been opened and append
+     * closing tags for those that have not been closed.
+     * 
+     * @param str
+     *            A string possibly containing unclosed HTML tags
+     * @return the converted string #see #SINGLE_TAGS
      */
     public final static String closeTags(String str) {
-        Map<String, Integer> openTags = new HashMap<String, Integer>();
-        str = noNull(str);
+	Map<String, Integer> openTags = new HashMap<String, Integer>();
+	str = noNull(str);
 
-        boolean inTag = false;
-        boolean inTagName = false;
-        boolean inOpenTag = true;
-        String tagName = "";
-        List<String> singleTags = Arrays.asList(SINGLE_TAGS);
+	boolean inTag = false;
+	boolean inTagName = false;
+	boolean inOpenTag = true;
+	String tagName = "";
+	List<String> singleTags = Arrays.asList(SINGLE_TAGS);
 
-        char[] strA = str.toCharArray();
+	char[] strA = str.toCharArray();
 
-        for (int i = 0; i < strA.length; i++) {
-            char c = strA[i];
+	for (int i = 0; i < strA.length; i++) {
+	    char c = strA[i];
 
-            if (!inTag) // not in a tag
-             {
-                if (c == '<') // start of a tag
-                 {
-                    // reset all state variables at start of each new tag
-                    inTag = true;
-                    inTagName = true;
-                    inOpenTag = true;
-                    tagName = "";
-                }
-            } else // in a tag
-             {
-                if ((tagName.length() == 0) && (c == '/')) // start of a close tag
-                 {
-                    inOpenTag = false;
-                } else if (inTagName && ((c == ' ') || (c == '>') || (c == '/'))) // end of the tagname or tag
-                 {
-                    inTagName = false;
+	    if (!inTag) // not in a tag
+	    {
+		if (c == '<') // start of a tag
+		{
+		    // reset all state variables at start of each new tag
+		    inTag = true;
+		    inTagName = true;
+		    inOpenTag = true;
+		    tagName = "";
+		}
+	    } else // in a tag
+	    {
+		if ((tagName.length() == 0) && (c == '/')) // start of a close
+							   // tag
+		{
+		    inOpenTag = false;
+		} else if (inTagName && ((c == ' ') || (c == '>') || (c == '/'))) // end
+										  // of
+										  // the
+										  // tagname
+										  // or
+										  // tag
+		{
+		    inTagName = false;
 
-                    if (inOpenTag && !singleTags.contains(tagName.toLowerCase())) {
-                        // count this tag in the list of open tags
-                        if (openTags.get(tagName) == null) {
-                            openTags.put(tagName, new Integer(1));
-                        } else {
-                            int tagCount = ((Integer) openTags.get(tagName)).intValue();
-                            openTags.put(tagName, new Integer(tagCount + 1));
-                        }
-                    } else // in close tag
-                     {
-                        // remove it from closetags
-                        if (openTags.get(tagName) != null) {
-                            int tagCount = ((Integer) openTags.get(tagName)).intValue();
+		    if (inOpenTag && !singleTags.contains(tagName.toLowerCase())) {
+			// count this tag in the list of open tags
+			if (openTags.get(tagName) == null) {
+			    openTags.put(tagName, new Integer(1));
+			} else {
+			    int tagCount = ((Integer) openTags.get(tagName)).intValue();
+			    openTags.put(tagName, new Integer(tagCount + 1));
+			}
+		    } else // in close tag
+		    {
+			// remove it from closetags
+			if (openTags.get(tagName) != null) {
+			    int tagCount = ((Integer) openTags.get(tagName)).intValue();
 
-                            if (tagCount > 1) {
-                                openTags.put(tagName, new Integer(tagCount - 1));
-                            } else {
-                                openTags.remove(tagName);
-                            }
-                        }
-                    }
+			    if (tagCount > 1) {
+				openTags.put(tagName, new Integer(tagCount - 1));
+			    } else {
+				openTags.remove(tagName);
+			    }
+			}
+		    }
 
-                    if (c == '>') // end of tag
-                     {
-                        inTag = false;
-                    }
-                } else if (inTagName) // still in tag name
-                 {
-                    tagName += c;
-                } else if (c == '>') // end of tag and there were attributes
-                 {
-                    inTag = false;
-                }
-            }
-        }
+		    if (c == '>') // end of tag
+		    {
+			inTag = false;
+		    }
+		} else if (inTagName) // still in tag name
+		{
+		    tagName += c;
+		} else if (c == '>') // end of tag and there were attributes
+		{
+		    inTag = false;
+		}
+	    }
+	}
 
-        // cycle through remaining open tags and close them
-        Iterator<String> openTagNames = openTags.keySet().iterator();
-        StringBuffer closedString = new StringBuffer(str);
+	// cycle through remaining open tags and close them
+	Iterator<String> openTagNames = openTags.keySet().iterator();
+	StringBuffer closedString = new StringBuffer(str);
 
-        while (openTagNames.hasNext()) {
-            String openTagName = (String) openTagNames.next();
+	while (openTagNames.hasNext()) {
+	    String openTagName = (String) openTagNames.next();
 
-            //System.out.println("removing " + openTagName);
-            for (int i = 0;
-                    i < ((Integer) openTags.get(openTagName)).intValue();
-                    i++) {
-                //System.out.println("appended </ " + openTagName + ">");
-                closedString.append("</").append(openTagName).append('>');
-            }
-        }
+	    // System.out.println("removing " + openTagName);
+	    for (int i = 0; i < ((Integer) openTags.get(openTagName)).intValue(); i++) {
+		// System.out.println("appended </ " + openTagName + ">");
+		closedString.append("</").append(openTagName).append('>');
+	    }
+	}
 
-        // return closed string
-        return closedString.toString();
+	// return closed string
+	return closedString.toString();
     }
 
     /**
      * Convert Color to html hex string. (#012345)
-     * @param c the Color to convert
+     * 
+     * @param c
+     *            the Color to convert
      * @return A string with a hexadecimal RGB encoding
      */
     public final static String colorToHex(java.awt.Color c) {
-        String r = Integer.toHexString(c.getRed());
-        String g = Integer.toHexString(c.getGreen());
-        String b = Integer.toHexString(c.getBlue());
+	String r = Integer.toHexString(c.getRed());
+	String g = Integer.toHexString(c.getGreen());
+	String b = Integer.toHexString(c.getBlue());
 
-        if (r.length() < 2) {
-            r = '0' + r;
-        }
+	if (r.length() < 2) {
+	    r = '0' + r;
+	}
 
-        if (g.length() < 2) {
-            g = '0' + g;
-        }
+	if (g.length() < 2) {
+	    g = '0' + g;
+	}
 
-        if (b.length() < 2) {
-            b = '0' + b;
-        }
+	if (b.length() < 2) {
+	    b = '0' + b;
+	}
 
-        return '#' + r + g + b;
+	return '#' + r + g + b;
     }
 
     /**
      * Decode binary data from String using base64.
+     * 
      * @see #encodeBytes(byte[])
      */
     public final static byte[] decodeBytes(String str) throws IOException {
-        return Base64.decodeBase64(str);
+	return Base64.decodeBase64(str);
     }
 
     /**
      * Decode Object from a String by decoding with base64 then deserializing.
+     * 
      * @see #encodeObject(java.lang.Object)
      */
     public final static Object decodeObject(String str) throws IOException, ClassNotFoundException {
-        ByteArrayInputStream bytes = new ByteArrayInputStream(Base64.decodeBase64(str));
-        ObjectInputStream stream = new ObjectInputStream(bytes);
-        Object result = stream.readObject();
-        stream.close();
+	ByteArrayInputStream bytes = new ByteArrayInputStream(Base64.decodeBase64(str));
+	ObjectInputStream stream = new ObjectInputStream(bytes);
+	Object result = stream.readObject();
+	stream.close();
 
-        return result;
+	return result;
     }
 
     /**
      * Encode binary data into String using base64.
+     * 
      * @see #decodeBytes(java.lang.String)
      */
     public final static String encodeBytes(byte[] data) throws IOException {
-    	
-        return Base64.encodeBase64String(data);
+
+	return Base64.encodeBase64String(data);
     }
 
     /**
@@ -222,13 +238,13 @@ public class TextUtils {
      * @see #decodeObject(java.lang.String)
      */
     public final static String encodeObject(Object o) throws IOException {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        ObjectOutputStream stream = new ObjectOutputStream(bytes);
-        stream.writeObject(o);
-        stream.close();
-        bytes.flush();
-        
-        return Base64.encodeBase64String(bytes.toByteArray());
+	ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+	ObjectOutputStream stream = new ObjectOutputStream(bytes);
+	stream.writeObject(o);
+	stream.close();
+	bytes.flush();
+
+	return Base64.encodeBase64String(bytes.toByteArray());
     }
 
     /**
@@ -254,272 +270,285 @@ public class TextUtils {
      *   null                     -&gt;     "0"
      * </pre>
      *
-     * @param in    Original String containing number to be extracted.
-     * @return      String stripped of all non-numeric chars.
+     * @param in
+     *            Original String containing number to be extracted.
+     * @return String stripped of all non-numeric chars.
      *
      * @see #parseInt(String)
      * @see #parseLong(String)
      */
     public final static String extractNumber(String in) {
-        if (in == null) {
-            return "0";
-        }
+	if (in == null) {
+	    return "0";
+	}
 
-        StringBuffer result = new StringBuffer();
-        boolean seenDot = false;
-        boolean seenMinus = false;
-        boolean seenNumber = false;
+	StringBuffer result = new StringBuffer();
+	boolean seenDot = false;
+	boolean seenMinus = false;
+	boolean seenNumber = false;
 
-        for (int i = 0; i < in.length(); i++) {
-            char c = in.charAt(i);
+	for (int i = 0; i < in.length(); i++) {
+	    char c = in.charAt(i);
 
-            if (c == '.') {
-                // insert dot if not yet encountered
-                if (!seenDot) {
-                    seenDot = true;
+	    if (c == '.') {
+		// insert dot if not yet encountered
+		if (!seenDot) {
+		    seenDot = true;
 
-                    if (!seenNumber) {
-                        result.append('0'); // padding zero if no number yet
-                    }
+		    if (!seenNumber) {
+			result.append('0'); // padding zero if no number yet
+		    }
 
-                    result.append('.');
-                }
-            } else if (c == '-') {
-                // insert minus sign if not yet encountered
-                if (!seenMinus) {
-                    seenMinus = true;
-                    result.append('-');
-                }
-            } else if ((c == '0') || ((c >= '1') && (c <= '9'))) {
-                // add number
-                seenNumber = true;
-                result.append(c);
-            }
-        }
+		    result.append('.');
+		}
+	    } else if (c == '-') {
+		// insert minus sign if not yet encountered
+		if (!seenMinus) {
+		    seenMinus = true;
+		    result.append('-');
+		}
+	    } else if ((c == '0') || ((c >= '1') && (c <= '9'))) {
+		// add number
+		seenNumber = true;
+		result.append(c);
+	    }
+	}
 
-        // remove trailing .
-        int length = result.length();
+	// remove trailing .
+	int length = result.length();
 
-        if ((length > 0) && (result.charAt(length - 1) == '.')) {
-            result.deleteCharAt(length - 1);
-        }
+	if ((length > 0) && (result.charAt(length - 1) == '.')) {
+	    result.deleteCharAt(length - 1);
+	}
 
-        return (result.length() == 0) ? "0" : result.toString(); // if nothing left, return 0
+	return (result.length() == 0) ? "0" : result.toString(); // if nothing
+								 // left, return
+								 // 0
     }
 
     /**
-     * Convert html hex string to Color. If the hexadecimal string is not
-     * a valid character, <code>Color.black</code> is returned.
-     * Only the first six hexadecimal characters are considered; any
-     * extraneous values are discarded. Also, a leading "#", if any, is allowed
-     * (and ignored).
-     * @param color the String (in RGB hexadecimal format) to convert
+     * Convert html hex string to Color. If the hexadecimal string is not a
+     * valid character, <code>Color.black</code> is returned. Only the first six
+     * hexadecimal characters are considered; any extraneous values are
+     * discarded. Also, a leading "#", if any, is allowed (and ignored).
+     * 
+     * @param color
+     *            the String (in RGB hexadecimal format) to convert
      * @return the java.awt.Color
      */
     public final static Color hexToColor(String color) {
-        try {
-            if (color.charAt(0) == '#') {
-                color = color.substring(1, 7);
-            }
+	try {
+	    if (color.charAt(0) == '#') {
+		color = color.substring(1, 7);
+	    }
 
-            int[] col = new int[3];
+	    int[] col = new int[3];
 
-            for (int i = 0; i < 3; i++) {
-                col[i] = Integer.parseInt(color.substring(i * 2, (i * 2) + 2), 16);
-            }
+	    for (int i = 0; i < 3; i++) {
+		col[i] = Integer.parseInt(color.substring(i * 2, (i * 2) + 2), 16);
+	    }
 
-            return new Color(col[0], col[1], col[2]);
-        } catch (Exception e) {
-            return Color.black;
-        }
+	    return new Color(col[0], col[1], col[2]);
+	} catch (Exception e) {
+	    return Color.black;
+	}
     }
 
     /**
-     * Escape html entity characters and high characters (eg "curvy" Word quotes).
+     * Escape html entity characters and high characters (eg "curvy" Word
+     * quotes).
      *
      * Note this method can also be used to encode XML now
      *
      * @deprecated use htmlEncode(String) instead.
      */
     public final static String html(String s) {
-        return htmlEncode(s);
+	return htmlEncode(s);
     }
 
     public final static String htmlEncode(String s) {
-        return htmlEncode(s, true);
+	return htmlEncode(s, true);
     }
 
     /**
-     * Escape html entity characters and high characters (eg "curvy" Word quotes).
-     * Note this method can also be used to encode XML.
-     * @param s the String to escape.
-     * @param encodeSpecialChars if true high characters will be encode other wise not.
+     * Escape html entity characters and high characters (eg "curvy" Word
+     * quotes). Note this method can also be used to encode XML.
+     * 
+     * @param s
+     *            the String to escape.
+     * @param encodeSpecialChars
+     *            if true high characters will be encode other wise not.
      * @return the escaped string
      */
     public final static String htmlEncode(String s, boolean encodeSpecialChars) {
-        s = noNull(s);
+	s = noNull(s);
 
-        StringBuffer str = new StringBuffer();
+	StringBuffer str = new StringBuffer();
 
-        for (int j = 0; j < s.length(); j++) {
-            char c = s.charAt(j);
+	for (int j = 0; j < s.length(); j++) {
+	    char c = s.charAt(j);
 
-            // encode standard ASCII characters into HTML entities where needed
-            if (c < '\200') {
-                switch (c) {
-                case '"':
-                    str.append("&quot;");
+	    // encode standard ASCII characters into HTML entities where needed
+	    if (c < '\200') {
+		switch (c) {
+		case '"':
+		    str.append("&quot;");
 
-                    break;
+		    break;
 
-                case '&':
-                    str.append("&amp;");
+		case '&':
+		    str.append("&amp;");
 
-                    break;
+		    break;
 
-                case '<':
-                    str.append("&lt;");
+		case '<':
+		    str.append("&lt;");
 
-                    break;
+		    break;
 
-                case '>':
-                    str.append("&gt;");
+		case '>':
+		    str.append("&gt;");
 
-                    break;
+		    break;
 
-                default:
-                    str.append(c);
-                }
-            }
-            // encode 'ugly' characters (ie Word "curvy" quotes etc)
-            else if (encodeSpecialChars && (c < '\377')) {
-                String hexChars = "0123456789ABCDEF";
-                int a = c % 16;
-                int b = (c - a) / 16;
-                String hex = "" + hexChars.charAt(b) + hexChars.charAt(a);
-                str.append("&#x" + hex + ";");
-            }
-            //add other characters back in - to handle charactersets
-            //other than ascii
-            else {
-                str.append(c);
-            }
-        }
+		default:
+		    str.append(c);
+		}
+	    }
+	    // encode 'ugly' characters (ie Word "curvy" quotes etc)
+	    else if (encodeSpecialChars && (c < '\377')) {
+		String hexChars = "0123456789ABCDEF";
+		int a = c % 16;
+		int b = (c - a) / 16;
+		String hex = "" + hexChars.charAt(b) + hexChars.charAt(a);
+		str.append("&#x" + hex + ";");
+	    }
+	    // add other characters back in - to handle charactersets
+	    // other than ascii
+	    else {
+		str.append(c);
+	    }
+	}
 
-        return str.toString();
+	return str.toString();
     }
 
     /**
      * Convert all URLs and E-mail addresses in a string into hyperlinks.
      *
-     * @param text The block of text to hyperlink.
+     * @param text
+     *            The block of text to hyperlink.
      * @return the text with known uri formats hyperlinked
      *
      * @see #hyperlink(String, String)
      */
     public final static String hyperlink(String text) {
-        return hyperlink(text, null);
+	return hyperlink(text, null);
     }
 
     /**
      * Convert all URLs and E-mail addresses in a string into hyperlinks.
      *
-     * @param text The block of text to hyperlink.
-     * @param target The target attribute to use for href (optional).
+     * @param text
+     *            The block of text to hyperlink.
+     * @param target
+     *            The target attribute to use for href (optional).
      * @return the text with known uri formats hyperlinked
      *
      * @see #linkEmail(String)
      * @see #linkURL(String)
      */
     public final static String hyperlink(String text, String target) {
-        text = noNull(text);
+	text = noNull(text);
 
-        StringBuffer sb = new StringBuffer((int) (text.length() * 1.1));
-        sb.append(text);
-        linkEmail(sb);
-        linkURL(sb, target);
+	StringBuffer sb = new StringBuffer((int) (text.length() * 1.1));
+	sb.append(text);
+	linkEmail(sb);
+	linkURL(sb, target);
 
-        return sb.toString();
+	return sb.toString();
     }
 
     /**
      * Indent a String with line-breaks.
      *
-     * @param string String to indent.
-     * @param indentSize Number of spaces to indent by. 0 will indent using a tab.
-     * @param initialLine Whether to indent initial line.
+     * @param string
+     *            String to indent.
+     * @param indentSize
+     *            Number of spaces to indent by. 0 will indent using a tab.
+     * @param initialLine
+     *            Whether to indent initial line.
      * @return Indented string.
      */
     public final static String indent(String string, int indentSize, boolean initialLine) {
-        // Create indent String
-        String indent;
+	// Create indent String
+	String indent;
 
-        if (indentSize == 0) {
-            indent = "\t";
-        } else {
-            StringBuffer s = new StringBuffer();
+	if (indentSize == 0) {
+	    indent = "\t";
+	} else {
+	    StringBuffer s = new StringBuffer();
 
-            for (int i = 0; i < indentSize; i++) {
-                s.append(' ');
-            }
+	    for (int i = 0; i < indentSize; i++) {
+		s.append(' ');
+	    }
 
-            indent = s.toString();
-        }
+	    indent = s.toString();
+	}
 
-        // Apply indent to input
-        StringBuffer result = new StringBuffer();
+	// Apply indent to input
+	StringBuffer result = new StringBuffer();
 
-        if (initialLine) {
-            result.append(indent);
-        }
+	if (initialLine) {
+	    result.append(indent);
+	}
 
-        for (int i = 0; i < string.length(); i++) {
-            char c = string.charAt(i);
-            result.append(c);
+	for (int i = 0; i < string.length(); i++) {
+	    char c = string.charAt(i);
+	    result.append(c);
 
-            if (c == '\n') {
-                result.append(indent);
-            }
-        }
+	    if (c == '\n') {
+		result.append(indent);
+	    }
+	}
 
-        return result.toString();
+	return result.toString();
     }
 
     /**
-     * Returns a string that has whitespace removed from
-     * both ends of the String, as well as duplicate whitespace
-     * removed from within the String.
+     * Returns a string that has whitespace removed from both ends of the
+     * String, as well as duplicate whitespace removed from within the String.
      */
     public final static String innerTrim(String s) {
-        StringBuffer b = new StringBuffer(s);
-        int index = 0;
+	StringBuffer b = new StringBuffer(s);
+	int index = 0;
 
-        while ((b.length() != 0) && (b.charAt(0) == ' ')) {
-            b.deleteCharAt(0);
-        }
+	while ((b.length() != 0) && (b.charAt(0) == ' ')) {
+	    b.deleteCharAt(0);
+	}
 
-        while (index < b.length()) {
-            if (Character.isWhitespace(b.charAt(index))) {
-                if (((index + 1) < b.length()) && (Character.isWhitespace(b.charAt(index + 1)))) {
-                    b.deleteCharAt(index + 1);
-                    index--; // let's restart at this character!
-                }
-            }
+	while (index < b.length()) {
+	    if (Character.isWhitespace(b.charAt(index))) {
+		if (((index + 1) < b.length()) && (Character.isWhitespace(b.charAt(index + 1)))) {
+		    b.deleteCharAt(index + 1);
+		    index--; // let's restart at this character!
+		}
+	    }
 
-            index++;
-        }
+	    index++;
+	}
 
-        if (b.length() > 0) {
-            int l = b.length() - 1;
+	if (b.length() > 0) {
+	    int l = b.length() - 1;
 
-            if (b.charAt(l) == ' ') {
-                b.setLength(l);
-            }
-        }
+	    if (b.charAt(l) == ' ') {
+		b.setLength(l);
+	    }
+	}
 
-        String result = b.toString();
+	String result = b.toString();
 
-        return result;
+	return result;
     }
 
     /**
@@ -528,224 +557,257 @@ public class TextUtils {
      * <h5>Example</h5>
      *
      * <pre>
-     *   // get Iterator of Strings ("abc","def","123");
-     *   Iterator i = getIterator();
-     *   out.print( TextUtils.join(", ",i) );
-     *   // prints: "abc, def, 123"
+     * // get Iterator of Strings ("abc","def","123");
+     * Iterator i = getIterator();
+     * out.print(TextUtils.join(", ", i));
+     * // prints: "abc, def, 123"
      * </pre>
      *
-     * @param glue Token to place between Strings.
-     * @param pieces Iteration of Strings to join.
+     * @param glue
+     *            Token to place between Strings.
+     * @param pieces
+     *            Iteration of Strings to join.
      * @return String presentation of joined Strings.
      */
     public final static String join(String glue, Iterator pieces) {
-        StringBuffer s = new StringBuffer();
+	StringBuffer s = new StringBuffer();
 
-        while (pieces.hasNext()) {
-            s.append(pieces.next().toString());
+	while (pieces.hasNext()) {
+	    s.append(pieces.next().toString());
 
-            if (pieces.hasNext()) {
-                s.append(glue);
-            }
-        }
+	    if (pieces.hasNext()) {
+		s.append(glue);
+	    }
+	}
 
-        return s.toString();
+	return s.toString();
     }
 
     /**
      * Join an array of Strings together.
      *
-     * @param glue Token to place between Strings.
-     * @param pieces Array of Strings to join.
+     * @param glue
+     *            Token to place between Strings.
+     * @param pieces
+     *            Array of Strings to join.
      * @return String presentation of joined Strings.
      *
      * @see #join(String, java.util.Iterator)
      */
     public final static String join(String glue, String[] pieces) {
-        return join(glue, Arrays.asList(pieces).iterator());
+	return join(glue, Arrays.asList(pieces).iterator());
     }
 
     /**
      * Join a Collection of Strings together.
      *
-     * @param glue Token to place between Strings.
-     * @param pieces Collection of Strings to join.
+     * @param glue
+     *            Token to place between Strings.
+     * @param pieces
+     *            Collection of Strings to join.
      * @return String presentation of joined Strings.
      *
      * @see #join(String, java.util.Iterator)
      */
     public final static String join(String glue, Collection pieces) {
-        return join(glue, pieces.iterator());
+	return join(glue, pieces.iterator());
     }
 
     /**
-     * Finds all leading spaces on each line and replaces it with
-     * an HTML space (&amp;nbsp;)
+     * Finds all leading spaces on each line and replaces it with an HTML space
+     * (&amp;nbsp;)
      *
-     * @param s string containing text to replaced with &amp;nbsp;
+     * @param s
+     *            string containing text to replaced with &amp;nbsp;
      * @return the new string
      */
     public final static String leadingSpaces(String s) {
-        s = noNull(s);
+	s = noNull(s);
 
-        StringBuffer str = new StringBuffer();
-        boolean justAfterLineBreak = true;
+	StringBuffer str = new StringBuffer();
+	boolean justAfterLineBreak = true;
 
-        for (int i = 0; i < s.length(); i++) {
-            if (justAfterLineBreak) {
-                if (s.charAt(i) == ' ') {
-                    str.append("&nbsp;");
-                } else if (s.charAt(i) == '\n') {
-                    str.append(s.charAt(i));
-                } else {
-                    str.append(s.charAt(i));
-                    justAfterLineBreak = false;
-                }
-            } else {
-                if (s.charAt(i) == '\n') {
-                    justAfterLineBreak = true;
-                }
+	for (int i = 0; i < s.length(); i++) {
+	    if (justAfterLineBreak) {
+		if (s.charAt(i) == ' ') {
+		    str.append("&nbsp;");
+		} else if (s.charAt(i) == '\n') {
+		    str.append(s.charAt(i));
+		} else {
+		    str.append(s.charAt(i));
+		    justAfterLineBreak = false;
+		}
+	    } else {
+		if (s.charAt(i) == '\n') {
+		    justAfterLineBreak = true;
+		}
 
-                str.append(s.charAt(i));
-            }
-        }
+		str.append(s.charAt(i));
+	    }
+	}
 
-        return str.toString();
+	return str.toString();
     }
 
     /**
-     * Returns the leftmost n chars of the string.  If n is larger than the length of the string,
-     * return the whole string unchanged.
+     * Returns the leftmost n chars of the string. If n is larger than the
+     * length of the string, return the whole string unchanged.
      *
-     * @param s - the string to operate on.
-     * @param n - the number of chars to return.
+     * @param s
+     *            - the string to operate on.
+     * @param n
+     *            - the number of chars to return.
      */
     public final static String left(String s, int n) {
-        if (n >= s.length()) {
-            return s;
-        }
+	if (n >= s.length()) {
+	    return s;
+	}
 
-        return s.substring(0, n);
+	return s.substring(0, n);
     }
 
     /**
      * Wrap all email addresses in specified string with href tags.
-     * @param string The block of text to check.
-     * @return String The block of text with all email addresses placed in href tags.
+     * 
+     * @param string
+     *            The block of text to check.
+     * @return String The block of text with all email addresses placed in href
+     *         tags.
      */
     public final static String linkEmail(String string) {
-        StringBuffer str = new StringBuffer((int) (string.length() * 1.05));
-        str.append(string);
-        linkEmail(str);
+	StringBuffer str = new StringBuffer((int) (string.length() * 1.05));
+	str.append(string);
+	linkEmail(str);
 
-        return str.toString();
+	return str.toString();
     }
 
     /**
-     * Wrap all urls ('http://', 'www.', and 'ftp://') in specified string with href tags.
-     * @param str The block of text to check.
+     * Wrap all urls ('http://', 'www.', and 'ftp://') in specified string with
+     * href tags.
+     * 
+     * @param str
+     *            The block of text to check.
      * @return String The block of text with all url's placed in href tags.
      */
     public final static String linkURL(String str) {
-        return linkURL(str, null);
+	return linkURL(str, null);
     }
 
     /**
-     * Wrap all urls ('abc://' and 'www.abc') in specified string with href tags.
+     * Wrap all urls ('abc://' and 'www.abc') in specified string with href
+     * tags.
      *
-     * @param str The block of text to check.
-     * @param target The target to use for the href (optional).
+     * @param str
+     *            The block of text to check.
+     * @param target
+     *            The target to use for the href (optional).
      * @return String The block of text with all url's placed in href tags.
      */
     public final static String linkURL(String str, String target) {
-        StringBuffer sb = new StringBuffer((int) (str.length() * 1.05));
-        sb.append(str);
-        linkURL(sb, target);
+	StringBuffer sb = new StringBuffer((int) (str.length() * 1.05));
+	sb.append(str);
+	linkURL(sb, target);
 
-        return sb.toString();
+	return sb.toString();
     }
 
     /**
-     * Create <li> elements in a piece of plain text;
-     * Will convert lines starting with - or *. It might have been
-     * useful for the people writing earlier versions of this module's Javadocs.
-     * <tt>;)</tt>
-     * @param str A string, possibly containing a plaintext "list"
+     * Create
+     * <li>elements in a piece of plain text; Will convert lines starting with -
+     * or *. It might have been useful for the people writing earlier versions
+     * of this module's Javadocs. <tt>;)</tt>
+     * 
+     * @param str
+     *            A string, possibly containing a plaintext "list"
      * @return a converted string
      */
     public final static String list(String str) {
-        str = noNull(str);
+	str = noNull(str);
 
-        String strToRet = "";
+	String strToRet = "";
 
-        boolean inList = false;
+	boolean inList = false;
 
-        if (str.startsWith("-") || str.startsWith("*")) {
-            // if first char is '-' or '*' then put a linebreak before str so that the following
-            // code will take it as a list...
-            str = '\n' + str;
-        }
+	if (str.startsWith("-") || str.startsWith("*")) {
+	    // if first char is '-' or '*' then put a linebreak before str so
+	    // that the following
+	    // code will take it as a list...
+	    str = '\n' + str;
+	}
 
-        for (int i = 0; i < str.length(); i++) {
-            // look at whether the character at i is '\n'...
-            if (str.charAt(i) == '\n') {
-                // if so, look at the next char and see whether it's '-' or '*'...
-                if (i != (str.length() - 1)) {
-                    if ((str.charAt(i + 1) == '-') || (str.charAt(i + 1) == '*')) {
-                        // if so, and if we are not currently in a list, we start
-                        // a list...
-                        if (!inList) {
-                            strToRet += "<ul>";
-                            inList = true;
-                        } else {
-                            // if we are already in a list, then the previous point is unclosed...
-                            strToRet += "</li>";
-                        }
+	for (int i = 0; i < str.length(); i++) {
+	    // look at whether the character at i is '\n'...
+	    if (str.charAt(i) == '\n') {
+		// if so, look at the next char and see whether it's '-' or
+		// '*'...
+		if (i != (str.length() - 1)) {
+		    if ((str.charAt(i + 1) == '-') || (str.charAt(i + 1) == '*')) {
+			// if so, and if we are not currently in a list, we
+			// start
+			// a list...
+			if (!inList) {
+			    strToRet += "<ul>";
+			    inList = true;
+			} else {
+			    // if we are already in a list, then the previous
+			    // point is unclosed...
+			    strToRet += "</li>";
+			}
 
-                        // we add the <li> tag since a new point is started...
-                        strToRet += "<li>";
+			// we add the <li> tag since a new point is started...
+			strToRet += "<li>";
 
-                        i++; // since we've taken care of the '-' or '*' char already...
-                    } else {
-                        // if we are currently in a list, and we have a linebreak char but
-                        // no '-' or '*' after it, then that means the list is closed...
-                        if (inList) {
-                            strToRet += "</li></ul>";
-                            inList = false;
-                        } else {
-                            // if we are not currently in a list, simply add the linebreak
-                            // char to the string...
-                            strToRet += str.charAt(i);
-                        }
-                    }
-                } else {
-                    // there is no next char since this char is the last char in the string...
-                    // if we are in a list, then we close the list (and the current point in the list)
-                    // by adding </li> and </ul> tags...
-                    if (inList) {
-                        strToRet += "</li></ul>";
-                    }
-                }
-            } else {
-                // not a linebreak char - simply add the char to the string...
-                strToRet += str.charAt(i);
-            }
-        }
+			i++; // since we've taken care of the '-' or '*' char
+			     // already...
+		    } else {
+			// if we are currently in a list, and we have a
+			// linebreak char but
+			// no '-' or '*' after it, then that means the list is
+			// closed...
+			if (inList) {
+			    strToRet += "</li></ul>";
+			    inList = false;
+			} else {
+			    // if we are not currently in a list, simply add the
+			    // linebreak
+			    // char to the string...
+			    strToRet += str.charAt(i);
+			}
+		    }
+		} else {
+		    // there is no next char since this char is the last char in
+		    // the string...
+		    // if we are in a list, then we close the list (and the
+		    // current point in the list)
+		    // by adding </li> and </ul> tags...
+		    if (inList) {
+			strToRet += "</li></ul>";
+		    }
+		}
+	    } else {
+		// not a linebreak char - simply add the char to the string...
+		strToRet += str.charAt(i);
+	    }
+	}
 
-        // if we're still in a list, then we close it...
-        if (inList) {
-            strToRet += "</li></ul>";
-        }
+	// if we're still in a list, then we close it...
+	if (inList) {
+	    strToRet += "</li></ul>";
+	}
 
-        return strToRet;
+	return strToRet;
     }
 
     /**
      * Return <code>string</code>, or <code>defaultString</code> if
-     * <code>string</code> is <code>null</code> or <code>""</code>.
-     * Never returns <code>null</code>.
+     * <code>string</code> is <code>null</code> or <code>""</code>. Never
+     * returns <code>null</code>.
      *
-     * <p>Examples:</p>
+     * <p>
+     * Examples:
+     * </p>
+     * 
      * <pre>
      * // prints "hello"
      * String s=null;
@@ -760,216 +822,237 @@ public class TextUtils {
      * System.out.println(TextUtils.noNull(s, "hello");
      * </pre>
      *
-     * @param string the String to check.
-     * @param defaultString The default string to return if <code>string</code> is <code>null</code> or <code>""</code>
-     * @return <code>string</code> if <code>string</code> is non-empty, and <code>defaultString</code> otherwise
+     * @param string
+     *            the String to check.
+     * @param defaultString
+     *            The default string to return if <code>string</code> is
+     *            <code>null</code> or <code>""</code>
+     * @return <code>string</code> if <code>string</code> is non-empty, and
+     *         <code>defaultString</code> otherwise
      * @see #stringSet(java.lang.String)
      */
     public final static String noNull(String string, String defaultString) {
-        return (stringSet(string)) ? string : defaultString;
+	return (stringSet(string)) ? string : defaultString;
     }
 
     /**
-     * Return <code>string</code>, or <code>""</code> if <code>string</code>
-     * is <code>null</code>. Never returns <code>null</code>.
-     * <p>Examples:</p>
+     * Return <code>string</code>, or <code>""</code> if <code>string</code> is
+     * <code>null</code>. Never returns <code>null</code>.
+     * <p>
+     * Examples:
+     * </p>
+     * 
      * <pre>
      * // prints 0
-     * String s=null;
+     * String s = null;
      * System.out.println(TextUtils.noNull(s).length());
      *
      * // prints 1
-     * s="a";
+     * s = "a";
      * System.out.println(TextUtils.noNull(s).length());
      * </pre>
-     * @param string the String to check
+     * 
+     * @param string
+     *            the String to check
      * @return a valid (non-null) string reference
      */
     public final static String noNull(String string) {
-        return noNull(string, "");
+	return noNull(string, "");
     }
 
     /**
-     * Convert a String to an boolean.
-     * Accepts: 1/0, yes/no, true/false - case insensitive. If the value does
-     * not map to "true,", <code>false</code> is returned.
+     * Convert a String to an boolean. Accepts: 1/0, yes/no, true/false - case
+     * insensitive. If the value does not map to "true,", <code>false</code> is
+     * returned.
      *
-     * @param in String to be parsed.
+     * @param in
+     *            String to be parsed.
      * @return boolean representation of String.
      */
     public final static boolean parseBoolean(String in) {
-        in = noNull(in);
+	in = noNull(in);
 
-        if (in.length() == 0) {
-            return false;
-        }
+	if (in.length() == 0) {
+	    return false;
+	}
 
-        switch (in.charAt(0)) {
-        case '1':
-        case 'y':
-        case 'Y':
-        case 't':
-        case 'T':
-            return true;
-        }
+	switch (in.charAt(0)) {
+	case '1':
+	case 'y':
+	case 'Y':
+	case 't':
+	case 'T':
+	    return true;
+	}
 
-        return false;
+	return false;
     }
 
     /**
-     * Given 3 Strings representing the the year, month and day, return a Date object.
-     * This is only valid for Gregorian calendars.
+     * Given 3 Strings representing the the year, month and day, return a Date
+     * object. This is only valid for Gregorian calendars.
      *
-     * <p>If the day cannot be determined, 1st will be used.
-     * If the month cannot be determined, Jan will be used.</p>
+     * <p>
+     * If the day cannot be determined, 1st will be used. If the month cannot be
+     * determined, Jan will be used.
+     * </p>
      *
-     * @param year Year : 4 digit
-     * @param month Month : 1 or 2 digit (1=jan, 2=feb, ...) or name (jan, JAN, January, etc). If null, default is Jan.
-     * @param day Day of month : 1 or 2 digit, prefix will be stripped (1, 30, 05, 3rd). If null, default is 1st.
+     * @param year
+     *            Year : 4 digit
+     * @param month
+     *            Month : 1 or 2 digit (1=jan, 2=feb, ...) or name (jan, JAN,
+     *            January, etc). If null, default is Jan.
+     * @param day
+     *            Day of month : 1 or 2 digit, prefix will be stripped (1, 30,
+     *            05, 3rd). If null, default is 1st.
      */
     public final static Date parseDate(String year, String month, String day) {
-        year = noNull(year);
-        month = noNull(month);
-        day = noNull(day);
+	year = noNull(year);
+	month = noNull(month);
+	day = noNull(day);
 
-        int y = parseInt(year);
-        int m = parseInt(month) - 1;
-        int d = parseInt(extractNumber(day));
+	int y = parseInt(year);
+	int m = parseInt(month) - 1;
+	int d = parseInt(extractNumber(day));
 
-        if (m == -1) { // month was not a number, parse text
+	if (m == -1) { // month was not a number, parse text
 
-            // @todo i18n support
-            if (month.length() < 3) {
-                month = month + "   ";
-            }
+	    // @todo i18n support
+	    if (month.length() < 3) {
+		month = month + "   ";
+	    }
 
-            String str = month.toLowerCase().substring(0, 3);
+	    String str = month.toLowerCase().substring(0, 3);
 
-            if (str.equals("jan")) {
-                m = 0;
-            } else if (str.equals("feb")) {
-                m = 1;
-            } else if (str.equals("mar")) {
-                m = 2;
-            } else if (str.equals("apr")) {
-                m = 3;
-            } else if (str.equals("may")) {
-                m = 4;
-            } else if (str.equals("jun")) {
-                m = 5;
-            } else if (str.equals("jul")) {
-                m = 6;
-            } else if (str.equals("aug")) {
-                m = 7;
-            } else if (str.equals("sep")) {
-                m = 8;
-            } else if (str.equals("oct")) {
-                m = 9;
-            } else if (str.equals("nov")) {
-                m = 10;
-            } else if (str.equals("dec")) {
-                m = 11;
-            } else {
-                m = 0; // jan
-            }
-        }
+	    if (str.equals("jan")) {
+		m = 0;
+	    } else if (str.equals("feb")) {
+		m = 1;
+	    } else if (str.equals("mar")) {
+		m = 2;
+	    } else if (str.equals("apr")) {
+		m = 3;
+	    } else if (str.equals("may")) {
+		m = 4;
+	    } else if (str.equals("jun")) {
+		m = 5;
+	    } else if (str.equals("jul")) {
+		m = 6;
+	    } else if (str.equals("aug")) {
+		m = 7;
+	    } else if (str.equals("sep")) {
+		m = 8;
+	    } else if (str.equals("oct")) {
+		m = 9;
+	    } else if (str.equals("nov")) {
+		m = 10;
+	    } else if (str.equals("dec")) {
+		m = 11;
+	    } else {
+		m = 0; // jan
+	    }
+	}
 
-        if (d == 0) {
-            d = 1; // if no day, set to 1st
-        }
+	if (d == 0) {
+	    d = 1; // if no day, set to 1st
+	}
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(y, m, d);
+	Calendar cal = Calendar.getInstance();
+	cal.set(y, m, d);
 
-        return cal.getTime();
+	return cal.getTime();
     }
 
     /**
      * Convert a String to a double.
      *
-     * @param in String containing number to be parsed.
+     * @param in
+     *            String containing number to be parsed.
      * @return Double value of number or 0 if error.
      *
      * @see #extractNumber(String)
      */
     public final static double parseDouble(String in) {
-        double d = 0;
+	double d = 0;
 
-        try {
-            d = Double.parseDouble(in);
-        } catch (Exception e) {
-        }
+	try {
+	    d = Double.parseDouble(in);
+	} catch (Exception e) {
+	}
 
-        ;
+	;
 
-        return d;
+	return d;
     }
 
     /**
      * Convert a String to a float.
      *
-     * @param in String containing number to be parsed.
+     * @param in
+     *            String containing number to be parsed.
      * @return Float value of number or 0 if error.
      *
      * @see #extractNumber(String)
      */
     public final static float parseFloat(String in) {
-        float f = 0;
+	float f = 0;
 
-        try {
-            f = Float.parseFloat(in);
-        } catch (Exception e) {
-        }
+	try {
+	    f = Float.parseFloat(in);
+	} catch (Exception e) {
+	}
 
-        ;
+	;
 
-        return f;
+	return f;
     }
 
     /**
-     * Convert a String to an int. Truncates numbers if it's a float string;
-     * for example, 4.5 yields a value of 4.
+     * Convert a String to an int. Truncates numbers if it's a float string; for
+     * example, 4.5 yields a value of 4.
      *
-     * @param in String containing number to be parsed.
+     * @param in
+     *            String containing number to be parsed.
      * @return Integer value of number or 0 if error.
      *
      * @see #extractNumber(String)
      */
     public final static int parseInt(String in) {
-        int i;
+	int i;
 
-        try {
-            i = Integer.parseInt(in);
-        } catch (Exception e) {
-            i = (int) parseFloat(in);
-        }
+	try {
+	    i = Integer.parseInt(in);
+	} catch (Exception e) {
+	    i = (int) parseFloat(in);
+	}
 
-        ;
+	;
 
-        return i;
+	return i;
     }
 
     /**
-     * Convert a String to a long. Truncates numbers if it's a float or double string;
-     * for example, 4.5 yields a value of 4.
+     * Convert a String to a long. Truncates numbers if it's a float or double
+     * string; for example, 4.5 yields a value of 4.
      *
-     * @param in String containing number to be parsed.
+     * @param in
+     *            String containing number to be parsed.
      * @return Long value of number or 0 if error.
      *
      * @see #extractNumber(String)
      */
     public final static long parseLong(String in) {
-        long l;
+	long l;
 
-        try {
-            l = Long.parseLong(in);
-        } catch (Exception e) {
-            l = (long) parseDouble(in);
-        }
+	try {
+	    l = Long.parseLong(in);
+	} catch (Exception e) {
+	    l = (long) parseDouble(in);
+	}
 
-        ;
+	;
 
-        return l;
+	return l;
     }
 
     /**
@@ -981,19 +1064,20 @@ public class TextUtils {
      * <li>hyperlinks link and email addresses
      * </ul>
      *
-     * @param str - String containing the plain text.
+     * @param str
+     *            - String containing the plain text.
      * @return the escaped string
      */
     public final static String plainTextToHtml(String str) {
-        return plainTextToHtml(str, null);
+	return plainTextToHtml(str, null);
     }
 
     public final static String plainTextToHtml(String str, boolean encodeSpecialChars) {
-        return plainTextToHtml(str, null, encodeSpecialChars);
+	return plainTextToHtml(str, null, encodeSpecialChars);
     }
 
     public final static String plainTextToHtml(String str, String target) {
-        return plainTextToHtml(str, target, true);
+	return plainTextToHtml(str, target, true);
     }
 
     /**
@@ -1005,716 +1089,808 @@ public class TextUtils {
      * <li>hyperlinks link and email addresses
      * </ul>
      *
-     * @param str - String containing the plain text.
-     * @param target - Target for href tags (optional).
-     * @param encodeSpecialChars - if true high characters will be encode other wise not.
+     * @param str
+     *            - String containing the plain text.
+     * @param target
+     *            - Target for href tags (optional).
+     * @param encodeSpecialChars
+     *            - if true high characters will be encode other wise not.
      * @return the escaped string
      */
     public final static String plainTextToHtml(String str, String target, boolean encodeSpecialChars) {
-        str = noNull(str);
+	str = noNull(str);
 
-        //First, convert all the special chars...
-        str = htmlEncode(str, encodeSpecialChars);
+	// First, convert all the special chars...
+	str = htmlEncode(str, encodeSpecialChars);
 
-        //Convert all leading whitespaces
-        str = leadingSpaces(str);
+	// Convert all leading whitespaces
+	str = leadingSpaces(str);
 
-        //Then convert all line breaks...
-        str = br(str);
+	// Then convert all line breaks...
+	str = br(str);
 
-        //Then create hyperlinks...
-        str = hyperlink(str, target);
+	// Then create hyperlinks...
+	str = hyperlink(str, target);
 
-        return str;
+	return str;
     }
 
     /**
-     * Removes part of the original string starting at removeAndInsertStart and ending at removeEnd.
-     * Then insert another string at the same position where the part was removed (ie. at removeAndInsertStart).
+     * Removes part of the original string starting at removeAndInsertStart and
+     * ending at removeEnd. Then insert another string at the same position
+     * where the part was removed (ie. at removeAndInsertStart).
      *
-     * @param str - the original string.
-     * @param removeAndInsertStart - the index within the original string at which removal is to start.
-     * @param removeEnd - the index within the original string at which removal is to end (exclusive - ie. does not
-     * remove the character at that index).
-     * @param insertStr - the string to be inserted.
+     * @param str
+     *            - the original string.
+     * @param removeAndInsertStart
+     *            - the index within the original string at which removal is to
+     *            start.
+     * @param removeEnd
+     *            - the index within the original string at which removal is to
+     *            end (exclusive - ie. does not remove the character at that
+     *            index).
+     * @param insertStr
+     *            - the string to be inserted.
      */
     public final static String removeAndInsert(String str, int removeAndInsertStart, int removeEnd, String insertStr) {
-        //Take the part of the str before removeAndInsertStart, the part including and after removeEnd, and add
-        //the insertStr between those two parts...
-        String partBefore = str.substring(0, removeAndInsertStart);
-        String partAfter = str.substring(removeEnd);
+	// Take the part of the str before removeAndInsertStart, the part
+	// including and after removeEnd, and add
+	// the insertStr between those two parts...
+	String partBefore = str.substring(0, removeAndInsertStart);
+	String partAfter = str.substring(removeEnd);
 
-        str = partBefore + insertStr + partAfter;
+	str = partBefore + insertStr + partAfter;
 
-        return str;
+	return str;
     }
 
     /**
      * Escape chars that need slashes in front of them.
-     * @param s the String to add escape characters to
+     * 
+     * @param s
+     *            the String to add escape characters to
      * @return the converted String
      */
     public final static String slashes(String s) {
-        s = noNull(s);
+	s = noNull(s);
 
-        StringBuffer str = new StringBuffer();
-        char[] chars = s.toCharArray();
+	StringBuffer str = new StringBuffer();
+	char[] chars = s.toCharArray();
 
-        for (int i = 0; i < chars.length; i++) {
-            if ((chars[i] == '\\') || (chars[i] == '\"') || (chars[i] == '\'')) {
-                str.append('\\');
-            }
+	for (int i = 0; i < chars.length; i++) {
+	    if ((chars[i] == '\\') || (chars[i] == '\"') || (chars[i] == '\'')) {
+		str.append('\\');
+	    }
 
-            str.append(chars[i]);
-        }
+	    str.append(chars[i]);
+	}
 
-        return str.toString();
+	return str.toString();
     }
 
     /**
-     * Check whether <code>string</code> has been set to
-     * something other than <code>""</code> or <code>null</code>.
-     * @param string the <code>String</code> to check
-     * @return a boolean indicating whether the string was non-empty (and non-null)
+     * Check whether <code>string</code> has been set to something other than
+     * <code>""</code> or <code>null</code>.
+     * 
+     * @param string
+     *            the <code>String</code> to check
+     * @return a boolean indicating whether the string was non-empty (and
+     *         non-null)
      */
     public final static boolean stringSet(String string) {
-        return (string != null) && !"".equals(string);
+	return (string != null) && !"".equals(string);
     }
 
     /**
-     * Trim a String to the specified length. However, if the cutoff
-     * point is in the middle of a sentence (remember that a String can contain many
-     * sentences), trim the string such that it ends with an ending char, which is
-     * defined in the isEndingChar() method.
+     * Trim a String to the specified length. However, if the cutoff point is in
+     * the middle of a sentence (remember that a String can contain many
+     * sentences), trim the string such that it ends with an ending char, which
+     * is defined in the isEndingChar() method.
      *
-     * @param str - String to trim.
-     * @param len - length to which string is to be trimmed.
+     * @param str
+     *            - String to trim.
+     * @param len
+     *            - length to which string is to be trimmed.
      * @return the trimmed string
      */
     public final static String trimToEndingChar(String str, int len) {
-        boolean inTag = false;
-        boolean anyTags = false;
-        String result = "";
-        int goodChars = 0;
-        int lastEndingCharPos = -1;
+	boolean inTag = false;
+	boolean anyTags = false;
+	String result = "";
+	int goodChars = 0;
+	int lastEndingCharPos = -1;
 
-        if (str.length() < len) {
-            return str;
-        }
+	if (str.length() < len) {
+	    return str;
+	}
 
-        char[] strA = str.toCharArray();
+	char[] strA = str.toCharArray();
 
-        for (int i = 0; i < strA.length; i++) {
-            if ((strA[i] == '<') && !inTag) {
-                anyTags = true;
-                inTag = true;
-            }
+	for (int i = 0; i < strA.length; i++) {
+	    if ((strA[i] == '<') && !inTag) {
+		anyTags = true;
+		inTag = true;
+	    }
 
-            if ((strA[i] == '>') && inTag) {
-                inTag = false;
-            }
+	    if ((strA[i] == '>') && inTag) {
+		inTag = false;
+	    }
 
-            if (!inTag) {
-                // loop through ending chars
-                // if this char == ending char, record last seen
-                if (isEndingChar(strA[i])) {
-                    lastEndingCharPos = i;
-                }
+	    if (!inTag) {
+		// loop through ending chars
+		// if this char == ending char, record last seen
+		if (isEndingChar(strA[i])) {
+		    lastEndingCharPos = i;
+		}
 
-                goodChars++;
-            }
+		goodChars++;
+	    }
 
-            result += strA[i];
+	    result += strA[i];
 
-            if (goodChars == len) {
-                break;
-            }
-        }
+	    if (goodChars == len) {
+		break;
+	    }
+	}
 
-        // ok, now we have a string consisting of a bunch of tags and tagless characters.
-        // we now see whether the last char is an ending char (by comparing lastEndingCharPos+1 with
-        // the length of the string). If it is not, then it means that the end of the string is the middle
-        // of some sentence in the original string. In this case, we would have to trim the string further so
-        // that the end of the string corresponds to the end of some sentence, but keeping the length of the string
-        // closest to the specified len. We do this by utilising lastEndingCharPos...
-        if ((lastEndingCharPos + 1) != result.length()) {
-            if (lastEndingCharPos != -1) {
-                result = result.substring(0, lastEndingCharPos + 1);
-            } else {
-                // there aren't any ending chars...
-                // best thing we could do is to trim the result to the nearest word...
-                // if there aren't any spaces in the result, then we can do nothing at all.
-                int spacePos = result.lastIndexOf(' ');
+	// ok, now we have a string consisting of a bunch of tags and tagless
+	// characters.
+	// we now see whether the last char is an ending char (by comparing
+	// lastEndingCharPos+1 with
+	// the length of the string). If it is not, then it means that the end
+	// of the string is the middle
+	// of some sentence in the original string. In this case, we would have
+	// to trim the string further so
+	// that the end of the string corresponds to the end of some sentence,
+	// but keeping the length of the string
+	// closest to the specified len. We do this by utilising
+	// lastEndingCharPos...
+	if ((lastEndingCharPos + 1) != result.length()) {
+	    if (lastEndingCharPos != -1) {
+		result = result.substring(0, lastEndingCharPos + 1);
+	    } else {
+		// there aren't any ending chars...
+		// best thing we could do is to trim the result to the nearest
+		// word...
+		// if there aren't any spaces in the result, then we can do
+		// nothing at all.
+		int spacePos = result.lastIndexOf(' ');
 
-                if (spacePos != -1) {
-                    result = result.substring(0, spacePos);
-                }
-            }
-        }
+		if (spacePos != -1) {
+		    result = result.substring(0, spacePos);
+		}
+	    }
+	}
 
-        if (anyTags) {
-            return closeTags(result); //Put closing tags and return the result...
-        }
+	if (anyTags) {
+	    return closeTags(result); // Put closing tags and return the
+				      // result...
+	}
 
-        return result;
+	return result;
     }
 
     /**
-     * Verify that the given string is a valid email address.
-     * "Validity" in this context only means that the address conforms
-     * to the correct syntax (not if the address actually exists).
+     * Verify that the given string is a valid email address. "Validity" in this
+     * context only means that the address conforms to the correct syntax (not
+     * if the address actually exists).
      *
-     * @param email The email address to verify.
-     * @return a boolean indicating whether the email address is correctly formatted.
+     * @param email
+     *            The email address to verify.
+     * @return a boolean indicating whether the email address is correctly
+     *         formatted.
      */
     public final static boolean verifyEmail(String email) {
-        return verifyEmail(email);
+	return verifyEmail(email);
     }
 
     /**
      * Verify That the given String is in valid URL format.
-     * @param url The url string to verify.
+     * 
+     * @param url
+     *            The url string to verify.
      * @return a boolean indicating whether the URL seems to be incorrect.
      */
     public final static boolean verifyUrl(String url) {
-        if (url == null) {
-            return false;
-        }
+	if (url == null) {
+	    return false;
+	}
 
-        if (url.startsWith("https://")) {
-            // URL doesn't understand the https protocol, hack it
-            url = "http://" + url.substring(8);
-        }
+	if (url.startsWith("https://")) {
+	    // URL doesn't understand the https protocol, hack it
+	    url = "http://" + url.substring(8);
+	}
 
-        try {
-            new URL(url);
+	try {
+	    new URL(url);
 
-            return true;
-        } catch (MalformedURLException e) {
-            return false;
-        }
+	    return true;
+	} catch (MalformedURLException e) {
+	    return false;
+	}
     }
 
     /**
-     * Wrap paragraphs in html <code>&lt;p&gt;</code> tags.
-     * Paragraphs are seperated by blank lines.
-     * @param s the String to reformat
+     * Wrap paragraphs in html <code>&lt;p&gt;</code> tags. Paragraphs are
+     * seperated by blank lines.
+     * 
+     * @param s
+     *            the String to reformat
      * @return the reformatted string
      */
     public final static String wrapParagraph(String s) {
-        s = noNull(s);
+	s = noNull(s);
 
-        StringBuffer result = new StringBuffer();
-        result.append("<p>");
+	StringBuffer result = new StringBuffer();
+	result.append("<p>");
 
-        char lastC = 0;
-        char thisC;
+	char lastC = 0;
+	char thisC;
 
-        for (int i = 0; i < s.length(); i++) {
-            thisC = s.charAt(i);
+	for (int i = 0; i < s.length(); i++) {
+	    thisC = s.charAt(i);
 
-            if ((thisC == '\n') && (lastC == '\n')) {
-                result.append("</p>\n\n<p>");
-            } else {
-                result.append(thisC);
-            }
+	    if ((thisC == '\n') && (lastC == '\n')) {
+		result.append("</p>\n\n<p>");
+	    } else {
+		result.append(thisC);
+	    }
 
-            lastC = thisC;
-        }
+	    lastC = thisC;
+	}
 
-        result.append("</p>");
+	result.append("</p>");
 
-        return result.toString();
+	return result.toString();
     }
 
     /**
      * Determine if <code>c</code> is a valid end-of-sentence character.
      * Currently, only English characters are included.
      *
-     * @param c a character to consider
+     * @param c
+     *            a character to consider
      * @return whether the character is a valid end-of-sentence mark in English
      */
     private final static boolean isEndingChar(char c) {
-        return ((c == '.') || (c == '!') || (c == ',') || (c == '?'));
+	return ((c == '.') || (c == '!') || (c == ',') || (c == '?'));
     }
 
     /**
      * Get the starting index of a URL (either 'abc://' or 'www.')
      */
     private static final int getStartUrl(StringBuffer str, int startIndex) {
-        int schemeIndex = getSchemeIndex(str, startIndex);
-        final int wwwIndex = str.indexOf("www.", startIndex + 1);
+	int schemeIndex = getSchemeIndex(str, startIndex);
+	final int wwwIndex = str.indexOf("www.", startIndex + 1);
 
-        if ((schemeIndex == -1) && (wwwIndex == -1)) {
-            return -1;
-        } else if (schemeIndex == -1) {
-            return wwwIndex;
-        } else if (wwwIndex == -1) {
-            return schemeIndex;
-        }
+	if ((schemeIndex == -1) && (wwwIndex == -1)) {
+	    return -1;
+	} else if (schemeIndex == -1) {
+	    return wwwIndex;
+	} else if (wwwIndex == -1) {
+	    return schemeIndex;
+	}
 
-        return Math.min(schemeIndex, wwwIndex);
+	return Math.min(schemeIndex, wwwIndex);
     }
 
     private final static void linkEmail(StringBuffer str) {
-        int lastEndIndex = -1; //Store the index position of the end char of last email address found...
+	int lastEndIndex = -1; // Store the index position of the end char of
+			       // last email address found...
 
-main: 
-        while (true) {
-            // get index of '@'...
-            int atIndex = str.indexOf("@", lastEndIndex + 1);
+	main: while (true) {
+	    // get index of '@'...
+	    int atIndex = str.indexOf("@", lastEndIndex + 1);
 
-            if (atIndex == -1) {
-                break;
-            } else {
-                //Get the whole email address...
-                //Get the part before '@' by moving backwards and taking each character
-                //until we encounter an invalid URL char...
-                String partBeforeAt = "";
-                int linkStartIndex = atIndex;
-                boolean reachedStart = false;
+	    if (atIndex == -1) {
+		break;
+	    } else {
+		// Get the whole email address...
+		// Get the part before '@' by moving backwards and taking each
+		// character
+		// until we encounter an invalid URL char...
+		String partBeforeAt = "";
+		int linkStartIndex = atIndex;
+		boolean reachedStart = false;
 
-                while (!reachedStart) {
-                    linkStartIndex--;
+		while (!reachedStart) {
+		    linkStartIndex--;
 
-                    if (linkStartIndex < 0) {
-                        reachedStart = true;
-                    } else {
-                        char c = str.charAt(linkStartIndex);
+		    if (linkStartIndex < 0) {
+			reachedStart = true;
+		    } else {
+			char c = str.charAt(linkStartIndex);
 
-                        //if we find these chars in an email, then it's part of a url, so lets leave it alone
-                        //Are there any other chars we should abort email checking for??
-                        if ((c == '?') || (c == '&') || (c == '=') || (c == '/') || (c == '%')) {
-                            lastEndIndex = atIndex + 1;
+			// if we find these chars in an email, then it's part of
+			// a url, so lets leave it alone
+			// Are there any other chars we should abort email
+			// checking for??
+			if ((c == '?') || (c == '&') || (c == '=') || (c == '/') || (c == '%')) {
+			    lastEndIndex = atIndex + 1;
 
-                            continue main;
-                        }
+			    continue main;
+			}
 
-                        if (isValidEmailChar(c)) {
-                            partBeforeAt = c + partBeforeAt;
-                        } else {
-                            reachedStart = true;
-                        }
-                    }
-                }
+			if (isValidEmailChar(c)) {
+			    partBeforeAt = c + partBeforeAt;
+			} else {
+			    reachedStart = true;
+			}
+		    }
+		}
 
-                //Increment linkStartIndex back by 1 to reflect the real starting index of the
-                //email address...
-                linkStartIndex++;
+		// Increment linkStartIndex back by 1 to reflect the real
+		// starting index of the
+		// email address...
+		linkStartIndex++;
 
-                //Get the part after '@' by doing pretty much the same except moving
-                //forward instead of backwards.
-                String partAfterAt = "";
-                int linkEndIndex = atIndex;
-                boolean reachedEnd = false;
+		// Get the part after '@' by doing pretty much the same except
+		// moving
+		// forward instead of backwards.
+		String partAfterAt = "";
+		int linkEndIndex = atIndex;
+		boolean reachedEnd = false;
 
-                while (!reachedEnd) {
-                    linkEndIndex++;
+		while (!reachedEnd) {
+		    linkEndIndex++;
 
-                    if (linkEndIndex == str.length()) {
-                        reachedEnd = true;
-                    } else {
-                        char c = str.charAt(linkEndIndex);
+		    if (linkEndIndex == str.length()) {
+			reachedEnd = true;
+		    } else {
+			char c = str.charAt(linkEndIndex);
 
-                        if (isValidEmailChar(c)) {
-                            partAfterAt += c;
-                        } else {
-                            reachedEnd = true;
-                        }
-                    }
-                }
+			if (isValidEmailChar(c)) {
+			    partAfterAt += c;
+			} else {
+			    reachedEnd = true;
+			}
+		    }
+		}
 
-                //Decrement linkEndIndex back by 1 to reflect the real ending index of the
-                //email address...
-                linkEndIndex--;
+		// Decrement linkEndIndex back by 1 to reflect the real ending
+		// index of the
+		// email address...
+		linkEndIndex--;
 
-                //Reassemble the whole email address...
-                String emailStr = partBeforeAt + '@' + partAfterAt;
+		// Reassemble the whole email address...
+		String emailStr = partBeforeAt + '@' + partAfterAt;
 
-                //If the last chars of emailStr is a '.', ':', '-', '/' or '~' then we exclude those chars.
-                //The '.' at the end could be just a fullstop to a sentence and we don't want
-                //that to be part of an email address (which would then be invalid).
-                //Pretty much the same for the other symbols - we don't want them at the end of any email
-                //address cos' this would stuff the address up.
-                while (true) {
-                    char lastChar = emailStr.charAt(emailStr.length() - 1);
+		// If the last chars of emailStr is a '.', ':', '-', '/' or '~'
+		// then we exclude those chars.
+		// The '.' at the end could be just a fullstop to a sentence and
+		// we don't want
+		// that to be part of an email address (which would then be
+		// invalid).
+		// Pretty much the same for the other symbols - we don't want
+		// them at the end of any email
+		// address cos' this would stuff the address up.
+		while (true) {
+		    char lastChar = emailStr.charAt(emailStr.length() - 1);
 
-                    if ((lastChar == '.') || (lastChar == ':') || (lastChar == '-') || (lastChar == '/') || (lastChar == '~')) {
-                        emailStr = emailStr.substring(0, emailStr.length() - 1);
-                        linkEndIndex--;
-                    } else {
-                        break;
-                    }
-                }
+		    if ((lastChar == '.') || (lastChar == ':') || (lastChar == '-') || (lastChar == '/')
+			    || (lastChar == '~')) {
+			emailStr = emailStr.substring(0, emailStr.length() - 1);
+			linkEndIndex--;
+		    } else {
+			break;
+		    }
+		}
 
-                //Verify if email is valid...
-                if (verifyEmail(emailStr)) {
-                    //Construct the hyperlink for the email address...
-                    String emailLink = "<a href='mailto:" + emailStr + "'>" + emailStr + "</a>";
+		// Verify if email is valid...
+		if (verifyEmail(emailStr)) {
+		    // Construct the hyperlink for the email address...
+		    String emailLink = "<a href='mailto:" + emailStr + "'>" + emailStr + "</a>";
 
-                    //Take the part of the str before the email address, the part after, and add
-                    //the emailLink between those two parts, so that in effect the original email
-                    //address is replaced by a hyperlink to it...
-                    str.replace(linkStartIndex, linkEndIndex + 1, emailLink);
+		    // Take the part of the str before the email address, the
+		    // part after, and add
+		    // the emailLink between those two parts, so that in effect
+		    // the original email
+		    // address is replaced by a hyperlink to it...
+		    str.replace(linkStartIndex, linkEndIndex + 1, emailLink);
 
-                    //Set lastEndIndex to reflect the position of the end of emailLink
-                    //within the whole string...
-                    lastEndIndex = (linkStartIndex - 1) + emailLink.length();
-                } else {
-                    //lastEndIndex is different from the one above cos' there's no
-                    //<a href...> tags added...
-                    lastEndIndex = (linkStartIndex - 1) + emailStr.length();
-                }
-            }
-        }
+		    // Set lastEndIndex to reflect the position of the end of
+		    // emailLink
+		    // within the whole string...
+		    lastEndIndex = (linkStartIndex - 1) + emailLink.length();
+		} else {
+		    // lastEndIndex is different from the one above cos' there's
+		    // no
+		    // <a href...> tags added...
+		    lastEndIndex = (linkStartIndex - 1) + emailStr.length();
+		}
+	    }
+	}
     }
 
     private final static void linkURL(StringBuffer str, String target) {
-        String urlToDisplay;
+	String urlToDisplay;
 
-        int lastEndIndex = -1; //Stores the index position, within the whole string, of the ending char of the last URL found.
+	int lastEndIndex = -1; // Stores the index position, within the whole
+			       // string, of the ending char of the last URL
+			       // found.
 
-        String targetString = ((target == null) || (target.trim().length() == 0)) ? "" : (" target=\"" + target.trim() + '\"');
+	String targetString = ((target == null) || (target.trim().length() == 0)) ? ""
+		: (" target=\"" + target.trim() + '\"');
 
-        while (true) {
-            int linkStartIndex = getStartUrl(str, lastEndIndex);
+	while (true) {
+	    int linkStartIndex = getStartUrl(str, lastEndIndex);
 
-            //if no more links found - then end the loop
-            if (linkStartIndex == -1) {
-                break;
-            } else {
-                //Get the whole URL...
-                //We move forward and add each character to the URL string until we encounter
-                //an invalid URL character (we assume that the URL ends there).
-                int linkEndIndex = linkStartIndex;
-                String urlStr = "";
+	    // if no more links found - then end the loop
+	    if (linkStartIndex == -1) {
+		break;
+	    } else {
+		// Get the whole URL...
+		// We move forward and add each character to the URL string
+		// until we encounter
+		// an invalid URL character (we assume that the URL ends there).
+		int linkEndIndex = linkStartIndex;
+		String urlStr = "";
 
-                while (true) {
-                    // if char at linkEndIndex is '&' then we look at the next 4 chars
-                    // to see if they make up "&amp;" altogether. This is the html coded
-                    // '&' and will pretty much stuff up an otherwise valid link becos of the ';'.
-                    // We therefore have to remove it before proceeding...
-                    if (str.charAt(linkEndIndex) == '&') {
-                        if (((linkEndIndex + 6) <= str.length()) && "&quot;".equals(str.substring(linkEndIndex, linkEndIndex + 6))) {
-                            break;
-                        } else if (((linkEndIndex + 5) <= str.length()) && "&amp;".equals(str.substring(linkEndIndex, linkEndIndex + 5))) {
-                            str.replace(linkEndIndex, linkEndIndex + 5, "&");
-                        }
-                    }
+		while (true) {
+		    // if char at linkEndIndex is '&' then we look at the next 4
+		    // chars
+		    // to see if they make up "&amp;" altogether. This is the
+		    // html coded
+		    // '&' and will pretty much stuff up an otherwise valid link
+		    // becos of the ';'.
+		    // We therefore have to remove it before proceeding...
+		    if (str.charAt(linkEndIndex) == '&') {
+			if (((linkEndIndex + 6) <= str.length())
+				&& "&quot;".equals(str.substring(linkEndIndex, linkEndIndex + 6))) {
+			    break;
+			} else if (((linkEndIndex + 5) <= str.length())
+				&& "&amp;".equals(str.substring(linkEndIndex, linkEndIndex + 5))) {
+			    str.replace(linkEndIndex, linkEndIndex + 5, "&");
+			}
+		    }
 
-                    if (isValidURLChar(str.charAt(linkEndIndex))) {
-                        urlStr += str.charAt(linkEndIndex);
-                        linkEndIndex++;
+		    if (isValidURLChar(str.charAt(linkEndIndex))) {
+			urlStr += str.charAt(linkEndIndex);
+			linkEndIndex++;
 
-                        if (linkEndIndex == str.length()) { //Reached end of str...
+			if (linkEndIndex == str.length()) { // Reached end of
+							    // str...
 
-                            break;
-                        }
-                    } else {
-                        break;
-                    }
-                }
+			    break;
+			}
+		    } else {
+			break;
+		    }
+		}
 
-                //if the characters before the linkStart equal 'href="' then don't link the url - CORE-44
-                if (linkStartIndex >= 6) { //6 = "href\"".length()
+		// if the characters before the linkStart equal 'href="' then
+		// don't link the url - CORE-44
+		if (linkStartIndex >= 6) { // 6 = "href\"".length()
 
-                    String prefix = str.substring(linkStartIndex - 6, linkStartIndex);
+		    String prefix = str.substring(linkStartIndex - 6, linkStartIndex);
 
-                    if ("href=\"".equals(prefix)) {
-                        lastEndIndex = linkEndIndex;
+		    if ("href=\"".equals(prefix)) {
+			lastEndIndex = linkEndIndex;
 
-                        continue;
-                    }
-                }
+			continue;
+		    }
+		}
 
-                //if the characters after the linkEnd are '</a>' then this url is probably already linked - CORE-44
-                if (str.length() >= (linkEndIndex + 4)) { //4 = "</a>".length()
+		// if the characters after the linkEnd are '</a>' then this url
+		// is probably already linked - CORE-44
+		if (str.length() >= (linkEndIndex + 4)) { // 4 = "</a>".length()
 
-                    String suffix = str.substring(linkEndIndex, linkEndIndex + 4);
+		    String suffix = str.substring(linkEndIndex, linkEndIndex + 4);
 
-                    if ("</a>".equals(suffix)) {
-                        lastEndIndex = linkEndIndex + 4;
+		    if ("</a>".equals(suffix)) {
+			lastEndIndex = linkEndIndex + 4;
 
-                        continue;
-                    }
-                }
+			continue;
+		    }
+		}
 
-                //Decrement linkEndIndex back by 1 to reflect the real ending index position of the URL...
-                linkEndIndex--;
+		// Decrement linkEndIndex back by 1 to reflect the real ending
+		// index position of the URL...
+		linkEndIndex--;
 
-                // If the last char of urlStr is a '.' we exclude it. It is most likely a full stop and
-                // we don't want that to be part of an url.
-                while (true) {
-                    char lastChar = urlStr.charAt(urlStr.length() - 1);
+		// If the last char of urlStr is a '.' we exclude it. It is most
+		// likely a full stop and
+		// we don't want that to be part of an url.
+		while (true) {
+		    char lastChar = urlStr.charAt(urlStr.length() - 1);
 
-                    if (lastChar == '.') {
-                        urlStr = urlStr.substring(0, urlStr.length() - 1);
-                        linkEndIndex--;
-                    } else {
-                        break;
-                    }
-                }
+		    if (lastChar == '.') {
+			urlStr = urlStr.substring(0, urlStr.length() - 1);
+			linkEndIndex--;
+		    } else {
+			break;
+		    }
+		}
 
-                //if the URL had a '(' before it, and has a ')' at the end, trim the last ')' from the url
-                //ie '(www.opensymphony.com)' => '(<a href="http://www.openymphony.com/">www.opensymphony.com</a>)'
-                char lastChar = urlStr.charAt(urlStr.length() - 1);
+		// if the URL had a '(' before it, and has a ')' at the end,
+		// trim the last ')' from the url
+		// ie '(www.opensymphony.com)' => '(<a
+		// href="http://www.openymphony.com/">www.opensymphony.com</a>)'
+		char lastChar = urlStr.charAt(urlStr.length() - 1);
 
-                if (lastChar == ')') {
-                    if ((linkStartIndex > 0) && ('(' == (str.charAt(linkStartIndex - 1)))) {
-                        urlStr = urlStr.substring(0, urlStr.length() - 1);
-                        linkEndIndex--;
-                    }
-                } else if (lastChar == '\'') {
-                    if ((linkStartIndex > 0) && ('\'' == (str.charAt(linkStartIndex - 1)))) {
-                        urlStr = urlStr.substring(0, urlStr.length() - 1);
-                        linkEndIndex--;
-                    }
-                }
-                //perhaps we ended with '&gt;', '&lt;' or '&quot;'
-                //We need to strip these
-                //ie '&quot;www.opensymphony.com&quot;' => '&quot;<a href="http://www.openymphony.com/">www.opensymphony.com</a>&quot;'
-                //ie '&lt;www.opensymphony.com&gt;' => '&lt;<a href="http://www.openymphony.com/">www.opensymphony.com</a>&gt;'
-                else if (lastChar == ';') {
-                    // 6 = "&quot;".length()
-                    if ((urlStr.length() > 6) && "&quot;".equalsIgnoreCase(urlStr.substring(urlStr.length() - 6))) {
-                        urlStr = urlStr.substring(0, urlStr.length() - 6);
-                        linkEndIndex -= 6;
-                    }
-                    // 4 = "&lt;".length()  || "&gt;".length()
-                    else if (urlStr.length() > 4) {
-                        final String endingStr = urlStr.substring(urlStr.length() - 4);
+		if (lastChar == ')') {
+		    if ((linkStartIndex > 0) && ('(' == (str.charAt(linkStartIndex - 1)))) {
+			urlStr = urlStr.substring(0, urlStr.length() - 1);
+			linkEndIndex--;
+		    }
+		} else if (lastChar == '\'') {
+		    if ((linkStartIndex > 0) && ('\'' == (str.charAt(linkStartIndex - 1)))) {
+			urlStr = urlStr.substring(0, urlStr.length() - 1);
+			linkEndIndex--;
+		    }
+		}
+		// perhaps we ended with '&gt;', '&lt;' or '&quot;'
+		// We need to strip these
+		// ie '&quot;www.opensymphony.com&quot;' => '&quot;<a
+		// href="http://www.openymphony.com/">www.opensymphony.com</a>&quot;'
+		// ie '&lt;www.opensymphony.com&gt;' => '&lt;<a
+		// href="http://www.openymphony.com/">www.opensymphony.com</a>&gt;'
+		else if (lastChar == ';') {
+		    // 6 = "&quot;".length()
+		    if ((urlStr.length() > 6) && "&quot;".equalsIgnoreCase(urlStr.substring(urlStr.length() - 6))) {
+			urlStr = urlStr.substring(0, urlStr.length() - 6);
+			linkEndIndex -= 6;
+		    }
+		    // 4 = "&lt;".length() || "&gt;".length()
+		    else if (urlStr.length() > 4) {
+			final String endingStr = urlStr.substring(urlStr.length() - 4);
 
-                        if ("&lt;".equalsIgnoreCase(endingStr) || "&gt;".equalsIgnoreCase(endingStr)) {
-                            urlStr = urlStr.substring(0, urlStr.length() - 4);
-                            linkEndIndex -= 4;
-                        }
-                    }
-                }
+			if ("&lt;".equalsIgnoreCase(endingStr) || "&gt;".equalsIgnoreCase(endingStr)) {
+			    urlStr = urlStr.substring(0, urlStr.length() - 4);
+			    linkEndIndex -= 4;
+			}
+		    }
+		}
 
-                // we got the URL string, now we validate it and convert it into a hyperlink...
-                urlToDisplay = htmlEncode(urlStr);
+		// we got the URL string, now we validate it and convert it into
+		// a hyperlink...
+		urlToDisplay = htmlEncode(urlStr);
 
-                if (urlStr.toLowerCase().startsWith("www.")) {
-                    urlStr = "http://" + urlStr;
-                }
+		if (urlStr.toLowerCase().startsWith("www.")) {
+		    urlStr = "http://" + urlStr;
+		}
 
-                if (verifyHierachicalURI(urlStr, new String[] {
-                                "javascript"
-                            })) {
-                    //Construct the hyperlink for the url...
-                    String urlLink = "<a href=\"" + urlStr + '\"' + targetString + '>' + urlToDisplay + "</a>";
+		if (verifyHierachicalURI(urlStr, new String[] { "javascript" })) {
+		    // Construct the hyperlink for the url...
+		    String urlLink = "<a href=\"" + urlStr + '\"' + targetString + '>' + urlToDisplay + "</a>";
 
-                    //Remove the original urlStr from str and put urlLink there instead...
-                    str.replace(linkStartIndex, linkEndIndex + 1, urlLink);
+		    // Remove the original urlStr from str and put urlLink there
+		    // instead...
+		    str.replace(linkStartIndex, linkEndIndex + 1, urlLink);
 
-                    //Set lastEndIndex to reflect the position of the end of urlLink
-                    //within the whole string...
-                    lastEndIndex = (linkStartIndex - 1) + urlLink.length();
-                } else {
-                    //lastEndIndex is different from the one above cos' there's no
-                    //<a href...> tags added...
-                    lastEndIndex = (linkStartIndex - 1) + urlStr.length();
-                }
-            }
-        }
+		    // Set lastEndIndex to reflect the position of the end of
+		    // urlLink
+		    // within the whole string...
+		    lastEndIndex = (linkStartIndex - 1) + urlLink.length();
+		} else {
+		    // lastEndIndex is different from the one above cos' there's
+		    // no
+		    // <a href...> tags added...
+		    lastEndIndex = (linkStartIndex - 1) + urlStr.length();
+		}
+	    }
+	}
     }
 
     /**
-     * Given a string, and the index to start looking at, find the index of the start of the scheme. Eg.
+     * Given a string, and the index to start looking at, find the index of the
+     * start of the scheme. Eg.
+     * 
      * <pre>
      * getSchemeIndex("notes://abc", 0) -> 0
      * getSchemeIndex("abc notes://abc", 0) -> 4
      * </pre>
-     * @param str    The string to search for
-     * @param startIndex   Where to start looking at
-     * @return The location the string was found, ot -1 if the string was not found.
+     * 
+     * @param str
+     *            The string to search for
+     * @param startIndex
+     *            Where to start looking at
+     * @return The location the string was found, ot -1 if the string was not
+     *         found.
      */
     private static int getSchemeIndex(StringBuffer str, int startIndex) {
-        int schemeIndex = str.indexOf(SCHEME_URL, startIndex + 1);
+	int schemeIndex = str.indexOf(SCHEME_URL, startIndex + 1);
 
-        //if it was not found, or found at the start of the string, then return 'not found'
-        if (schemeIndex <= 0) {
-            return -1;
-        }
+	// if it was not found, or found at the start of the string, then return
+	// 'not found'
+	if (schemeIndex <= 0) {
+	    return -1;
+	}
 
-        //walk backwards through the scheme until we find the first non valid character
-        int schemeStart;
+	// walk backwards through the scheme until we find the first non valid
+	// character
+	int schemeStart;
 
-        for (schemeStart = schemeIndex - 1; schemeStart >= 0; schemeStart--) {
-            char currentChar = str.charAt(schemeStart);
+	for (schemeStart = schemeIndex - 1; schemeStart >= 0; schemeStart--) {
+	    char currentChar = str.charAt(schemeStart);
 
-            if (!isValidSchemeChar(currentChar)) {
-                break;
-            }
-        }
+	    if (!isValidSchemeChar(currentChar)) {
+		break;
+	    }
+	}
 
-        //reset the scheme to the starting character
-        schemeStart++;
+	// reset the scheme to the starting character
+	schemeStart++;
 
-        // we don't want to do this, otherwise an invalid scheme would ruin the linking for later schemes
-        //        if (UrlUtils.isValidScheme(str.substring(schemeStart, schemeIndex)))
-        //            return schemeStart;
-        //        else
-        //            return -1;
-        return schemeStart;
+	// we don't want to do this, otherwise an invalid scheme would ruin the
+	// linking for later schemes
+	// if (UrlUtils.isValidScheme(str.substring(schemeStart, schemeIndex)))
+	// return schemeStart;
+	// else
+	// return -1;
+	return schemeStart;
     }
-    
+
     // URL UTILS ======================================
-    
-    //~ Static fields/initializers /////////////////////////////////////////////
+
+    // ~ Static fields/initializers
+    // /////////////////////////////////////////////
 
     public static final String SCHEME_URL = "://";
 
-    //~ Methods ////////////////////////////////////////////////////////////////
+    // ~ Methods
+    // ////////////////////////////////////////////////////////////////
 
     /**
-     * Acceptable characters in a URI, but are reserved according to RFC 2396 Section 2.2
+     * Acceptable characters in a URI, but are reserved according to RFC 2396
+     * Section 2.2
      */
     public final static boolean isAcceptableReservedChar(char c) {
-        return (c == ';') || (c == '/') || (c == '?') || (c == ':') || (c == '@') || (c == '&') || (c == '=') || (c == '+') || (c == '$') || (c == ',');
+	return (c == ';') || (c == '/') || (c == '?') || (c == ':') || (c == '@') || (c == '&') || (c == '=')
+		|| (c == '+') || (c == '$') || (c == ',');
     }
 
     public final static boolean isAlpha(char c) {
-        return ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z'));
+	return ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z'));
     }
 
     public final static boolean isDigit(char c) {
-        return ((c >= '0') && (c <= '9'));
+	return ((c >= '0') && (c <= '9'));
     }
 
     /**
-     * Other characters which are 'delims' according to RFC 2396 Section 2.4.3, but we include them anyhow
+     * Other characters which are 'delims' according to RFC 2396 Section 2.4.3,
+     * but we include them anyhow
      */
     public final static boolean isOtherChar(char c) {
-        return (c == '#') || (c == '%');
+	return (c == '#') || (c == '%');
     }
 
     /**
-     *  Unreserved characters in a URI, according to RFC 2396 Section 2.3
+     * Unreserved characters in a URI, according to RFC 2396 Section 2.3
      */
     public final static boolean isUnreservedChar(char c) {
-        return (c == '-') || (c == '_') || (c == '.') || (c == '!') || (c == '~') || (c == '*') || (c == '\'') || (c == '(') || (c == ')');
+	return (c == '-') || (c == '_') || (c == '.') || (c == '!') || (c == '~') || (c == '*') || (c == '\'')
+		|| (c == '(') || (c == ')');
     }
 
     public final static boolean isValidEmailChar(char c) {
-        //RFC 1035 Section 2.3.1 specifies letter, digit, '-' or '.' for domain names.  '_' is assumed as allowed for email addresses
-        return (isAlpha(c) || isDigit(c) || (c == '_') || (c == '-') || (c == '.'));
+	// RFC 1035 Section 2.3.1 specifies letter, digit, '-' or '.' for domain
+	// names. '_' is assumed as allowed for email addresses
+	return (isAlpha(c) || isDigit(c) || (c == '_') || (c == '-') || (c == '.'));
     }
 
     /**
      * According to RFC 2396 Section 3.1, a valid scheme is:
+     * 
      * <pre>
-     * scheme        = alpha *( alpha | digit | "+" | "-" | "." )
+     * scheme = alpha * (alpha | digit | "+" | "-" | ".")
      * </pre>
-     * @param scheme    The scheme name (without '://')
-     * @return  true    if the string is a valid scheme name
+     * 
+     * @param scheme
+     *            The scheme name (without '://')
+     * @return true if the string is a valid scheme name
      */
     public final static boolean isValidScheme(String scheme) {
-        if ((scheme == null) || (scheme.length() == 0)) {
-            return false;
-        }
+	if ((scheme == null) || (scheme.length() == 0)) {
+	    return false;
+	}
 
-        char[] schemeChars = scheme.toCharArray();
+	char[] schemeChars = scheme.toCharArray();
 
-        // /test for first alpha character
-        if (!isAlpha(schemeChars[0])) {
-            return false;
-        }
+	// /test for first alpha character
+	if (!isAlpha(schemeChars[0])) {
+	    return false;
+	}
 
-        //test the rest of the scheme
-        for (int i = 1; i < schemeChars.length; i++) {
-            char schemeChar = schemeChars[i];
+	// test the rest of the scheme
+	for (int i = 1; i < schemeChars.length; i++) {
+	    char schemeChar = schemeChars[i];
 
-            if (!(isValidSchemeChar(schemeChar))) {
-                return false;
-            }
-        }
+	    if (!(isValidSchemeChar(schemeChar))) {
+		return false;
+	    }
+	}
 
-        //all tests passed
-        return true;
+	// all tests passed
+	return true;
     }
 
     public final static boolean isValidSchemeChar(char c) {
-        return isAlpha(c) || isDigit(c) || (c == '+') || (c == '-') || (c == '.');
+	return isAlpha(c) || isDigit(c) || (c == '+') || (c == '-') || (c == '.');
     }
 
     public final static boolean isValidURLChar(char c) {
-        return isAlpha(c) || isDigit(c) || isAcceptableReservedChar(c) || isUnreservedChar(c) || isOtherChar(c);
+	return isAlpha(c) || isDigit(c) || isAcceptableReservedChar(c) || isUnreservedChar(c) || isOtherChar(c);
     }
 
     /**
      * Validate a URL according to RFC 2396
      */
     public static boolean verifyHierachicalURI(String uri) {
-        return verifyHierachicalURI(uri, null);
+	return verifyHierachicalURI(uri, null);
     }
 
     /**
-     * Validate an URI according to RFC 2396.  It will use schemesConsideredInvalid to indicate that
-     * URI schemes are considered invalid.  For example javascript: might be considered harmful
-     * in some cases.
+     * Validate an URI according to RFC 2396. It will use
+     * schemesConsideredInvalid to indicate that URI schemes are considered
+     * invalid. For example javascript: might be considered harmful in some
+     * cases.
      *
-     * @param uri                      the URI string to check
-     * @param schemesConsideredInvalid an array of Strings of URI schemes considered invalid.  Accepts null, matches case insensitive.
-     * @return true if the URI is valid according to RFC 2396 and does not have one of the invalid  schemes
+     * @param uri
+     *            the URI string to check
+     * @param schemesConsideredInvalid
+     *            an array of Strings of URI schemes considered invalid. Accepts
+     *            null, matches case insensitive.
+     * @return true if the URI is valid according to RFC 2396 and does not have
+     *         one of the invalid schemes
      */
     public static boolean verifyHierachicalURI(String uri, String[] schemesConsideredInvalid) {
-        if ((uri == null) || (uri.length() < SCHEME_URL.length())) {
-            return false;
-        }
+	if ((uri == null) || (uri.length() < SCHEME_URL.length())) {
+	    return false;
+	}
 
-        int schemeUrlIndex = uri.indexOf(SCHEME_URL);
+	int schemeUrlIndex = uri.indexOf(SCHEME_URL);
 
-        if (schemeUrlIndex == -1) {
-            return false;
-        }
+	if (schemeUrlIndex == -1) {
+	    return false;
+	}
 
-        final String scheme = uri.substring(0, schemeUrlIndex);
+	final String scheme = uri.substring(0, schemeUrlIndex);
 
-        if (!isValidScheme(scheme)) {
-            return false;
-        }
+	if (!isValidScheme(scheme)) {
+	    return false;
+	}
 
-        // ok check if the caller doesnt want this scheme
-        if (schemesConsideredInvalid != null) {
-            for (int i = 0; i < schemesConsideredInvalid.length; i++) {
-                String invalidScheme = schemesConsideredInvalid[i];
+	// ok check if the caller doesnt want this scheme
+	if (schemesConsideredInvalid != null) {
+	    for (int i = 0; i < schemesConsideredInvalid.length; i++) {
+		String invalidScheme = schemesConsideredInvalid[i];
 
-                if (scheme.equalsIgnoreCase(invalidScheme)) {
-                    return false;
-                }
-            }
-        }
+		if (scheme.equalsIgnoreCase(invalidScheme)) {
+		    return false;
+		}
+	    }
+	}
 
-        //ensure that the URL has at least one character after '://'
-        if (uri.length() < (schemeUrlIndex + SCHEME_URL.length() + 1)) {
-            return false;
-        }
+	// ensure that the URL has at least one character after '://'
+	if (uri.length() < (schemeUrlIndex + SCHEME_URL.length() + 1)) {
+	    return false;
+	}
 
-        for (int i = schemeUrlIndex + SCHEME_URL.length(); i < uri.length();
-                i++) {
-            char c = uri.charAt(i);
+	for (int i = schemeUrlIndex + SCHEME_URL.length(); i < uri.length(); i++) {
+	    char c = uri.charAt(i);
 
-            if (!isValidURLChar(c)) {
-                return false;
-            }
-        }
+	    if (!isValidURLChar(c)) {
+		return false;
+	    }
+	}
 
-        return true;
+	return true;
     }
-    
-    public static final String VALID_IP_ADDRESS_REGEX = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
-	public static final String VALID_HOSTNAME_REGEX = "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$";
 
-	public static boolean isValidHostname(String hostname) {
-		if( StringUtils.isEmpty(hostname))
-			return false;
-		return hostname.matches(VALID_HOSTNAME_REGEX);
-	}
-	
-	public static boolean isValidIpAddress(String ipAddress) {
-		if( StringUtils.isEmpty(ipAddress))
-			return false;
-		return ipAddress.matches(VALID_IP_ADDRESS_REGEX);
-	}
+    public static final String VALID_IP_ADDRESS_REGEX = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
+    public static final String VALID_HOSTNAME_REGEX = "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$";
+
+    public static boolean isValidHostname(String hostname) {
+	if (StringUtils.isEmpty(hostname))
+	    return false;
+	return hostname.matches(VALID_HOSTNAME_REGEX);
+    }
+
+    public static boolean isValidIpAddress(String ipAddress) {
+	if (StringUtils.isEmpty(ipAddress))
+	    return false;
+	return ipAddress.matches(VALID_IP_ADDRESS_REGEX);
+    }
 }

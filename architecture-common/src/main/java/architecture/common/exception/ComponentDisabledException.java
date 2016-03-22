@@ -15,33 +15,32 @@
  */
 package architecture.common.exception;
 
-
 /**
  * 
- * @author DongHyuck, Son 
+ * @author DongHyuck, Son
  *
  */
 public class ComponentDisabledException extends Exception {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -9130521639406869163L;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -9130521639406869163L;
 
-	public ComponentDisabledException() {
-		super();
-	}
+    public ComponentDisabledException() {
+	super();
+    }
 
-	public ComponentDisabledException(String msg) {
-		super(msg);
-	}
+    public ComponentDisabledException(String msg) {
+	super(msg);
+    }
 
-	public ComponentDisabledException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    public ComponentDisabledException(String msg, Throwable cause) {
+	super(msg, cause);
+    }
 
-	public ComponentDisabledException(Throwable cause) {
-		super(cause);
-	}
+    public ComponentDisabledException(Throwable cause) {
+	super(cause);
+    }
 
 }

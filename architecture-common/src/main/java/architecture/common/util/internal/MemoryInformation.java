@@ -17,11 +17,11 @@ package architecture.common.util.internal;
 
 public interface MemoryInformation {
 
-	public abstract String getName();
-	
-	public abstract long getTotal();
-	
-	public abstract long getUsed();
-	
-	public abstract long getFree();
+    public abstract String getName();
+
+    public abstract long getTotal();
+
+    public abstract long getUsed();
+
+    public abstract long getFree();
 }

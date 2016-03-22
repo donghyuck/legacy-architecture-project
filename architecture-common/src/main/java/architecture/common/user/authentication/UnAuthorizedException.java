@@ -19,19 +19,19 @@ import architecture.common.exception.CodeableRuntimeException;
 
 public class UnAuthorizedException extends CodeableRuntimeException {
 
-	public UnAuthorizedException() {
-	}
+    public UnAuthorizedException() {
+    }
 
-	public UnAuthorizedException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    public UnAuthorizedException(String msg, Throwable cause) {
+	super(msg, cause);
+    }
 
-	public UnAuthorizedException(String msg) {
-		super(msg);
-	}
+    public UnAuthorizedException(String msg) {
+	super(msg);
+    }
 
-	public UnAuthorizedException(Throwable cause) {
-		super(cause);
-	}
+    public UnAuthorizedException(Throwable cause) {
+	super(cause);
+    }
 
 }

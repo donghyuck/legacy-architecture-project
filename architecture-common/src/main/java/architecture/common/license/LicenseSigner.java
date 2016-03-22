@@ -35,62 +35,50 @@ import org.apache.commons.logging.LogFactory;
 import architecture.common.exception.LicenseException;
 import architecture.common.util.L10NUtils;
 
-public class LicenseSigner
-{
-	private static String privateKeyPath = "C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/private.key";
-	
+public class LicenseSigner {
+    private static String privateKeyPath = "C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/private.key";
+
     private static final Log log = LogFactory.getLog(LicenseSigner.class);
-    
+
     private Signature sig;
-    
-    public LicenseSigner()
-    {
-        try
-        {
-            String keyFile = privateKeyPath ; //System.getProperty("jive.private.key");
-            if(keyFile == null)
-                log.fatal(L10NUtils.format("002113"));
-            init(new FileReader(keyFile));
-        }
-        catch(Exception e)
-        {
-            log.fatal(L10NUtils.format("002114"), e);
-            throw new LicenseException(e);
-        }
+
+    public LicenseSigner() {
+	try {
+	    String keyFile = privateKeyPath; // System.getProperty("jive.private.key");
+	    if (keyFile == null)
+		log.fatal(L10NUtils.format("002113"));
+	    init(new FileReader(keyFile));
+	} catch (Exception e) {
+	    log.fatal(L10NUtils.format("002114"), e);
+	    throw new LicenseException(e);
+	}
     }
 
-    public LicenseSigner(Reader privateKey)
-    {
-        try
-        {
-            init(privateKey);
-        }
-        catch(Exception e)
-        {
-            log.fatal(L10NUtils.format("002114"), e);
-            throw new LicenseException(e);
-        }
+    public LicenseSigner(Reader privateKey) {
+	try {
+	    init(privateKey);
+	} catch (Exception e) {
+	    log.fatal(L10NUtils.format("002114"), e);
+	    throw new LicenseException(e);
+	}
     }
 
-    protected void init(Reader keyReader)
-        throws IOException, NoSuchAlgorithmException, DecoderException, InvalidKeySpecException, InvalidKeyException
-    {    	
-        BufferedReader in = new BufferedReader(keyReader);
-        String privateKey = in.readLine();
-        in.close();
-        KeyFactory keyFactory = KeyFactory.getInstance("DSA");
-        sig = Signature.getInstance("SHA1withDSA");
-        PKCS8EncodedKeySpec privKeySpec = new PKCS8EncodedKeySpec(Hex.decodeHex(privateKey.toCharArray()));
-        java.security.PrivateKey privKey = keyFactory.generatePrivate(privKeySpec);        
-        sig.initSign(privKey);
+    protected void init(Reader keyReader) throws IOException, NoSuchAlgorithmException, DecoderException,
+	    InvalidKeySpecException, InvalidKeyException {
+	BufferedReader in = new BufferedReader(keyReader);
+	String privateKey = in.readLine();
+	in.close();
+	KeyFactory keyFactory = KeyFactory.getInstance("DSA");
+	sig = Signature.getInstance("SHA1withDSA");
+	PKCS8EncodedKeySpec privKeySpec = new PKCS8EncodedKeySpec(Hex.decodeHex(privateKey.toCharArray()));
+	java.security.PrivateKey privKey = keyFactory.generatePrivate(privKeySpec);
+	sig.initSign(privKey);
     }
 
-    public synchronized void sign(License license)
-        throws Exception
-    {
-        sig.update(license.getFingerprint());
-        String signature = new String(Hex.encodeHex(sig.sign()));
-        license.setSignature(signature);
+    public synchronized void sign(License license) throws Exception {
+	sig.update(license.getFingerprint());
+	String signature = new String(Hex.encodeHex(sig.sign()));
+	license.setSignature(signature);
     }
 
 }

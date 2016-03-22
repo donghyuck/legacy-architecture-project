@@ -19,31 +19,32 @@ import java.util.Date;
 
 public interface EntityModelObject extends PropertyModelObject {
 
-	public String getName();
-	
-	public void setName(String name);
+    public String getName();
 
+    public void setName(String name);
 
-	/**
-	 * @return 생성일을 리턴한다.
-	 */
-	public Date getCreationDate() ;
-	
-	/**
-	 * 
-	 * @param  creationDate 생성일
-	 */
-	public void setCreationDate(Date creationDate);
-	
-	/**
-	 * @return 수정일을 리턴한다.
-	 */
-	public Date getModifiedDate();
-	
-	/**
-	 * 
-	 * @param  modifiedDate 수정일
-	 */
-	public void setModifiedDate(Date modifiedDate);
-	
+    /**
+     * @return 생성일을 리턴한다.
+     */
+    public Date getCreationDate();
+
+    /**
+     * 
+     * @param creationDate
+     *            생성일
+     */
+    public void setCreationDate(Date creationDate);
+
+    /**
+     * @return 수정일을 리턴한다.
+     */
+    public Date getModifiedDate();
+
+    /**
+     * 
+     * @param modifiedDate
+     *            수정일
+     */
+    public void setModifiedDate(Date modifiedDate);
+
 }

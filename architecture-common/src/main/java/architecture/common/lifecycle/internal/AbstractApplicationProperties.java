@@ -24,30 +24,30 @@ import architecture.common.util.StringUtils;
 
 public abstract class AbstractApplicationProperties implements ApplicationProperties {
 
-	protected Log log = LogFactory.getLog(getClass());
-	
-	public boolean getBooleanProperty(String propertyKey) {
-		return Boolean.valueOf(get(propertyKey)).booleanValue();
-	}
+    protected Log log = LogFactory.getLog(getClass());
 
-	public boolean getBooleanProperty(String propertyKey, boolean defaultValue) {
-		String value = get(propertyKey);
-		if (value != null)
-			return Boolean.valueOf(value).booleanValue();
-		else
-			return defaultValue;
-	}
+    public boolean getBooleanProperty(String propertyKey) {
+	return Boolean.valueOf(get(propertyKey)).booleanValue();
+    }
 
-	public int getIntProperty(String property, int defaultValue) {
-		return NumberUtils.toInt(get(property), defaultValue);
-	}
+    public boolean getBooleanProperty(String propertyKey, boolean defaultValue) {
+	String value = get(propertyKey);
+	if (value != null)
+	    return Boolean.valueOf(value).booleanValue();
+	else
+	    return defaultValue;
+    }
 
-	public long getLongProperty(String property, long defaultValue) {
-		return NumberUtils.toLong(get(property), defaultValue);
-	}
-	
-	public String getStringProperty(String property, String defaultValue) {
-		
-		return StringUtils.defaultString(get(property), defaultValue);
-	}
+    public int getIntProperty(String property, int defaultValue) {
+	return NumberUtils.toInt(get(property), defaultValue);
+    }
+
+    public long getLongProperty(String property, long defaultValue) {
+	return NumberUtils.toLong(get(property), defaultValue);
+    }
+
+    public String getStringProperty(String property, String defaultValue) {
+
+	return StringUtils.defaultString(get(property), defaultValue);
+    }
 }

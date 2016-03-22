@@ -19,64 +19,66 @@ import architecture.common.util.StringUtils;
 
 public class DomainMatcher implements java.io.Serializable {
 
-		private Integer objectType = 0;
-		
-		private Long objectId = -1L;
-		
-		private String patten ;
+    private Integer objectType = 0;
 
-		/**
-		 * @param companyId
-		 * @param patten
-		 */
-		public DomainMatcher(Integer objectType, Long objectId, String patten) {
-			this.objectId = objectId;
-			this.patten = patten;
-		}
+    private Long objectId = -1L;
 
-		/**
-		 * @return objectType
-		 */
-		public Integer getObjectType() {
-			return objectType;
-		}
+    private String patten;
 
-		/**
-		 * @return objectId
-		 */
-		public Long getObjectId() {
-			return objectId;
-		}
+    /**
+     * @param companyId
+     * @param patten
+     */
+    public DomainMatcher(Integer objectType, Long objectId, String patten) {
+	this.objectId = objectId;
+	this.patten = patten;
+    }
 
-		/**
-		 * @return patten
-		 */
-		public String getPatten() {
-			return patten;
-		}		
-		
-		public boolean match ( String str , boolean isCaseSensitive ){
-			if( isCaseSensitive )
-				return StringUtils.equalsIgnoreCase(patten, str);
-			else
-				return StringUtils.equalsIgnoreCase(patten, str);
-		}
+    /**
+     * @return objectType
+     */
+    public Integer getObjectType() {
+	return objectType;
+    }
 
-		/* (비Javadoc)
-		 * @see java.lang.Object#toString()
-		 */
-		@Override
-		public String toString() {
-			StringBuilder builder = new StringBuilder();
-			builder.append("DomainMatcher [");
-			if (objectType != null)
-				builder.append("objectType=").append(objectType).append(", ");
-			if (objectId != null)
-				builder.append("objectId=").append(objectId).append(", ");
-			if (patten != null)
-				builder.append("patten=").append(patten);
-			builder.append("]");
-			return builder.toString();
-		}
-		
+    /**
+     * @return objectId
+     */
+    public Long getObjectId() {
+	return objectId;
+    }
+
+    /**
+     * @return patten
+     */
+    public String getPatten() {
+	return patten;
+    }
+
+    public boolean match(String str, boolean isCaseSensitive) {
+	if (isCaseSensitive)
+	    return StringUtils.equalsIgnoreCase(patten, str);
+	else
+	    return StringUtils.equalsIgnoreCase(patten, str);
+    }
+
+    /*
+     * (비Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("DomainMatcher [");
+	if (objectType != null)
+	    builder.append("objectType=").append(objectType).append(", ");
+	if (objectId != null)
+	    builder.append("objectId=").append(objectId).append(", ");
+	if (patten != null)
+	    builder.append("patten=").append(patten);
+	builder.append("]");
+	return builder.toString();
+    }
+
 }

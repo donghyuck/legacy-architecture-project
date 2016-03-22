@@ -29,21 +29,19 @@ import architecture.common.user.CompanyTemplate;
 
 public class CompanyDeserializer extends JsonDeserializer<Company> {
 
-	@Override
-	public Company  deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
-				
-		ObjectCodec oc = jsonParser.getCodec();
-		JsonNode node = oc.readTree(jsonParser);
-		CompanyTemplate c = new CompanyTemplate(node.get("companyId").longValue());
-		c.setName(node.get("name").textValue());
-		c.setDisplayName(node.get("displayName").textValue());
-		c.setDomainName(node.get("domainName").textValue());
-		c.setDescription(node.get("description").textValue());
-				
-		
-		return c;
-	}
+    @Override
+    public Company deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
+	    throws IOException, JsonProcessingException {
 
+	ObjectCodec oc = jsonParser.getCodec();
+	JsonNode node = oc.readTree(jsonParser);
+	CompanyTemplate c = new CompanyTemplate(node.get("companyId").longValue());
+	c.setName(node.get("name").textValue());
+	c.setDisplayName(node.get("displayName").textValue());
+	c.setDomainName(node.get("domainName").textValue());
+	c.setDescription(node.get("description").textValue());
 
+	return c;
+    }
 
 }

@@ -29,24 +29,22 @@ import architecture.common.user.UserTemplate;
 
 public class UserDeserializer extends JsonDeserializer<User> {
 
+    @Override
+    public User deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
+	    throws IOException, JsonProcessingException {
+	ObjectCodec oc = jsonParser.getCodec();
+	JsonNode node = oc.readTree(jsonParser);
 
-	@Override
-	public User deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
-		ObjectCodec oc = jsonParser.getCodec();
-		JsonNode node = oc.readTree(jsonParser);
-		
-		UserTemplate u = new UserTemplate(node.get("userId").longValue());
-		u.setUsername(node.get("username").textValue());
-		u.setCompanyId(node.get("companyId").longValue());
-		u.setName(node.get("name").textValue());
-		u.setEmail(node.get("email").textValue());
-		
-		u.setEmailVisible(node.get("emailVisible").asBoolean());
-		u.setNameVisible(node.get("nameVisible").asBoolean());
+	UserTemplate u = new UserTemplate(node.get("userId").longValue());
+	u.setUsername(node.get("username").textValue());
+	u.setCompanyId(node.get("companyId").longValue());
+	u.setName(node.get("name").textValue());
+	u.setEmail(node.get("email").textValue());
 
-		return u;
-	}
+	u.setEmailVisible(node.get("emailVisible").asBoolean());
+	u.setNameVisible(node.get("nameVisible").asBoolean());
 
-
+	return u;
+    }
 
 }

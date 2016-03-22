@@ -17,48 +17,45 @@ package architecture.common.lifecycle.event;
 
 import architecture.common.lifecycle.State;
 
-
 /**
- * @author    donghyuck
+ * @author donghyuck
  */
 public class StateChangeEvent extends Event {
-   
-	private static final long serialVersionUID = -1533891374616205989L;
 
-	/**
-	 * @uml.property  name="oldState"
-	 * @uml.associationEnd  
-	 */
+    private static final long serialVersionUID = -1533891374616205989L;
+
+    /**
+     * @uml.property name="oldState"
+     * @uml.associationEnd
+     */
     private State oldState;
-    
+
     /**
-	 * @uml.property  name="newState"
-	 * @uml.associationEnd  
-	 */
+     * @uml.property name="newState"
+     * @uml.associationEnd
+     */
     private State newState;;
-    
-    public StateChangeEvent(Object source, State oldState, State newState)
-    {
-        super(source);
-        this.oldState = oldState;
-        this.newState = newState;
+
+    public StateChangeEvent(Object source, State oldState, State newState) {
+	super(source);
+	this.oldState = oldState;
+	this.newState = newState;
     }
 
     /**
-	 * @return
-	 * @uml.property  name="newState"
-	 */
-    public State getNewState()
-    {
-        return newState;
+     * @return
+     * @uml.property name="newState"
+     */
+    public State getNewState() {
+	return newState;
     }
+
     /**
-	 * @return
-	 * @uml.property  name="oldState"
-	 */
-    public State getOldState()
-    {
-        return oldState;
+     * @return
+     * @uml.property name="oldState"
+     */
+    public State getOldState() {
+	return oldState;
     }
-    
+
 }

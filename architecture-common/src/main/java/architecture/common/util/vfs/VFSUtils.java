@@ -26,75 +26,75 @@ import org.apache.commons.vfs2.FileType;
 import org.apache.commons.vfs2.VFS;
 
 public class VFSUtils {
-	
-	private static final Log log = LogFactory.getLog(VFSUtils.class);
-	
-	public static FileObject resolveFile(File file, String filename) {
-		try {
-			FileObject fo = VFS.getManager().resolveFile(file, filename);		
-			return fo; 
-		} catch (FileSystemException e) {
-		}
-		return null;		
-	}
 
-	public static FileObject resolveFile(FileObject file, String filename) {
-		try {
-			FileObject fo = VFS.getManager().resolveFile(file, filename);		
-			return fo; 
-		} catch (FileSystemException e) {
-		}
-		return null;		
-	}
+    private static final Log log = LogFactory.getLog(VFSUtils.class);
 
-	
-	public static FileObject resolveFile(String uri) {
-		try {
-			return  VFS.getManager().resolveFile(uri);
-		} catch (FileSystemException e) {
-			log.warn(e);
-		}
-		return null;		
+    public static FileObject resolveFile(File file, String filename) {
+	try {
+	    FileObject fo = VFS.getManager().resolveFile(file, filename);
+	    return fo;
+	} catch (FileSystemException e) {
 	}
-	
-	/**
-	 * uri 값을 분석하여 FileName 값을 리턴한다.
-	 * @param uri
-	 * @return
-	 */
-	public static FileName resolveUri(String uri){
-		try {
-			return VFS.getManager().resolveURI(uri);
-		} catch (FileSystemException e) {
-		}
-		return null;
+	return null;
+    }
+
+    public static FileObject resolveFile(FileObject file, String filename) {
+	try {
+	    FileObject fo = VFS.getManager().resolveFile(file, filename);
+	    return fo;
+	} catch (FileSystemException e) {
 	}
-	
-	public static FileObject toFileObject(File file){
-		try {
-			return VFS.getManager().toFileObject(file);
-		} catch (FileSystemException e) {
-		}
-		return null;
+	return null;
+    }
+
+    public static FileObject resolveFile(String uri) {
+	try {
+	    return VFS.getManager().resolveFile(uri);
+	} catch (FileSystemException e) {
+	    log.warn(e);
 	}
-	
-	public static boolean isFile(FileObject fo){
-		try {
-			if( fo.getType() == FileType.FILE )
-				return true;
-		} catch (FileSystemException e) {
-			log.warn(e);
-		}
-		return false;
+	return null;
+    }
+
+    /**
+     * uri 값을 분석하여 FileName 값을 리턴한다.
+     * 
+     * @param uri
+     * @return
+     */
+    public static FileName resolveUri(String uri) {
+	try {
+	    return VFS.getManager().resolveURI(uri);
+	} catch (FileSystemException e) {
 	}
-	
-	public static boolean isFolder(FileObject fo){
-		try {
-			if( fo.getType() == FileType.FOLDER )
-				return true;
-		} catch (FileSystemException e) {
-			log.warn(e);
-		}
-		return false;
+	return null;
+    }
+
+    public static FileObject toFileObject(File file) {
+	try {
+	    return VFS.getManager().toFileObject(file);
+	} catch (FileSystemException e) {
 	}
+	return null;
+    }
+
+    public static boolean isFile(FileObject fo) {
+	try {
+	    if (fo.getType() == FileType.FILE)
+		return true;
+	} catch (FileSystemException e) {
+	    log.warn(e);
+	}
+	return false;
+    }
+
+    public static boolean isFolder(FileObject fo) {
+	try {
+	    if (fo.getType() == FileType.FOLDER)
+		return true;
+	} catch (FileSystemException e) {
+	    log.warn(e);
+	}
+	return false;
+    }
 }

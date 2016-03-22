@@ -31,31 +31,31 @@ import java.util.Set;
  * @since 2.0
  */
 public interface ListenerInvoker {
-	/**
-	 * The types of events supported by this invoker. I.e.
-	 * {@link #invoke(Object)} can be safely called with any object that is an
-	 * instance of at least one of those types.
-	 * 
-	 * @return the set of supported event types.
-	 */
-	public abstract Set<Class<?>> getSupportedEventTypes();
+    /**
+     * The types of events supported by this invoker. I.e.
+     * {@link #invoke(Object)} can be safely called with any object that is an
+     * instance of at least one of those types.
+     * 
+     * @return the set of supported event types.
+     */
+    public abstract Set<Class<?>> getSupportedEventTypes();
 
-	/**
-	 * Invokes the underlying listener for the given event.
-	 * 
-	 * @param event
-	 *            the event to tell the listener about.
-	 * @throws IllegalArgumentException
-	 *             if the event is not an instance of any of the types returned
-	 *             by {@link #getSupportedEventTypes()}
-	 */
-	public abstract void invoke(Object event);
+    /**
+     * Invokes the underlying listener for the given event.
+     * 
+     * @param event
+     *            the event to tell the listener about.
+     * @throws IllegalArgumentException
+     *             if the event is not an instance of any of the types returned
+     *             by {@link #getSupportedEventTypes()}
+     */
+    public abstract void invoke(Object event);
 
-	/**
-	 * Whether or not the underlying listener can handle asynchronous event.
-	 * 
-	 * @return {@code true} if the underlying listener can handle asynchronous
-	 *         events, {@code false} otherwise
-	 */
-	public abstract boolean supportAsynchronousEvents();
+    /**
+     * Whether or not the underlying listener can handle asynchronous event.
+     * 
+     * @return {@code true} if the underlying listener can handle asynchronous
+     *         events, {@code false} otherwise
+     */
+    public abstract boolean supportAsynchronousEvents();
 }

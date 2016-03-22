@@ -16,54 +16,52 @@
 package architecture.common.lifecycle;
 
 /**
- * @author                 donghyuck
+ * @author donghyuck
  */
 public enum State {
-	
-	/**
-	 */
-	NONE("NONE"),	
-	/**
-	 */
-	INITIALIZING("INITIALIZING"),
-	/**
-	 */
-	INITIALIZED("INITIALIZED"),	
-	/**
-	 */
-	STARTING("STARTING"),
-	/**
-	 */
-	STARTED("STARTED"),	
-	/**
-	 */
-	STOPING("STOPING"),
-	/**
-	 */
-	RUNNING("RUNNING"),
-	/**
-	 */
-	STOPED("STOPED"),	
-	/**
-	 */
-	DESTROYING("DESTROYING"),
-	/**
-	 */
-	DESTROYED("DESTROYED"),
-	
-	/**
-	 */
-	POST_UPGRADE_STARTED("POST_UPGRADE_STARTED");
-	
-	private String desc;
-	
-	private State(String desc)
-    {
-        this.desc = desc;
+
+    /**
+     */
+    NONE("NONE"),
+    /**
+     */
+    INITIALIZING("INITIALIZING"),
+    /**
+     */
+    INITIALIZED("INITIALIZED"),
+    /**
+     */
+    STARTING("STARTING"),
+    /**
+     */
+    STARTED("STARTED"),
+    /**
+     */
+    STOPING("STOPING"),
+    /**
+     */
+    RUNNING("RUNNING"),
+    /**
+     */
+    STOPED("STOPED"),
+    /**
+     */
+    DESTROYING("DESTROYING"),
+    /**
+     */
+    DESTROYED("DESTROYED"),
+
+    /**
+     */
+    POST_UPGRADE_STARTED("POST_UPGRADE_STARTED");
+
+    private String desc;
+
+    private State(String desc) {
+	this.desc = desc;
     }
-	
-    public String toString()
-    {
-        return desc;
+
+    public String toString() {
+	return desc;
     }
 }

@@ -24,83 +24,88 @@ import java.util.concurrent.ConcurrentMap;
 
 public final class LockUtils {
 
-	static class InternHolderComparator implements Comparator<InternHolder> {
+    static class InternHolderComparator implements Comparator<InternHolder> {
 
-		InternHolderComparator() {
-		}
-		public int compare(InternHolder o1, InternHolder o2) {
-			return o1.lastAccessTime <= o2.lastAccessTime ? o1.lastAccessTime != o2.lastAccessTime ? -1 : 0 : 1;
-		}
-
+	InternHolderComparator() {
 	}
 
-	static class InternHolder {
-		public final String string;
-		public volatile long lastAccessTime;
-		public void updateAccessTime() {
-			lastAccessTime = System.currentTimeMillis();
-		}
-		public String toString() {
-			return (new StringBuilder()).append("Key:").append(string).append(", lastAccessTime:").append(lastAccessTime).toString();
-		}
-		public InternHolder(String s) {
-			string = s;
-			lastAccessTime = System.currentTimeMillis();
-		}
-	}
-	
-	private static final ConcurrentMap<String, InternHolder> map = new ConcurrentHashMap<String, InternHolder>();
-	
-	public LockUtils() {
+	public int compare(InternHolder o1, InternHolder o2) {
+	    return o1.lastAccessTime <= o2.lastAccessTime ? o1.lastAccessTime != o2.lastAccessTime ? -1 : 0 : 1;
 	}
 
-	public static String internFallBack(String s) {
-		return s.intern();
+    }
+
+    static class InternHolder {
+	public final String string;
+	public volatile long lastAccessTime;
+
+	public void updateAccessTime() {
+	    lastAccessTime = System.currentTimeMillis();
 	}
 
-	public static String intern(String s) {
-		InternHolder result =map.get(s);
-		if (result == null) {
-			InternHolder holder = new InternHolder(s);
-			result = map.putIfAbsent(s, holder);
-			if (result == null)
-				result = holder;
-		}
-		result.updateAccessTime();
-		return result.string;
+	public String toString() {
+	    return (new StringBuilder()).append("Key:").append(string).append(", lastAccessTime:")
+		    .append(lastAccessTime).toString();
 	}
 
-	public void printDetails(PrintStream stream) {
-		stream.println("----Strings interned Start----");
-		for(String s :  map.keySet()){
-			stream.println( map.get(s).toString());			
-		}
-		stream.println("----Strings interned End----");
+	public InternHolder(String s) {
+	    string = s;
+	    lastAccessTime = System.currentTimeMillis();
 	}
-	
-	public static long internedCount() {
-		return (long) map.size();
-	}
+    }
 
-	public static long internedSize() {
-		long size = 0L;
-		for(InternHolder holder : map.values()){
-			size += holder.string.length();			
-		}
-		return size;
-	}
+    private static final ConcurrentMap<String, InternHolder> map = new ConcurrentHashMap<String, InternHolder>();
 
-	public static void doCleanup(long highWaterMark, long minLRUTime) {
-		if ((long) map.size() <= highWaterMark)
-			return;
-		ArrayList<InternHolder> holderList = new ArrayList<InternHolder>(map.values());
-		Collections.sort(holderList, new InternHolderComparator());
-		long now = System.currentTimeMillis();
-		for(InternHolder holder : holderList){
-			if (minLRUTime >= now - holder.lastAccessTime)
-				break;
-			map.remove(holder.string);
-		}
+    public LockUtils() {
+    }
+
+    public static String internFallBack(String s) {
+	return s.intern();
+    }
+
+    public static String intern(String s) {
+	InternHolder result = map.get(s);
+	if (result == null) {
+	    InternHolder holder = new InternHolder(s);
+	    result = map.putIfAbsent(s, holder);
+	    if (result == null)
+		result = holder;
 	}
+	result.updateAccessTime();
+	return result.string;
+    }
+
+    public void printDetails(PrintStream stream) {
+	stream.println("----Strings interned Start----");
+	for (String s : map.keySet()) {
+	    stream.println(map.get(s).toString());
+	}
+	stream.println("----Strings interned End----");
+    }
+
+    public static long internedCount() {
+	return (long) map.size();
+    }
+
+    public static long internedSize() {
+	long size = 0L;
+	for (InternHolder holder : map.values()) {
+	    size += holder.string.length();
+	}
+	return size;
+    }
+
+    public static void doCleanup(long highWaterMark, long minLRUTime) {
+	if ((long) map.size() <= highWaterMark)
+	    return;
+	ArrayList<InternHolder> holderList = new ArrayList<InternHolder>(map.values());
+	Collections.sort(holderList, new InternHolderComparator());
+	long now = System.currentTimeMillis();
+	for (InternHolder holder : holderList) {
+	    if (minLRUTime >= now - holder.lastAccessTime)
+		break;
+	    map.remove(holder.string);
+	}
+    }
 
 }

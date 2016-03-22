@@ -10,13 +10,4 @@
 	<model id="13" code="ANONYMOUS" />
 	<model id="14" code="SYSTEM" />
 	<model id="15" code="I18N_LOCALE" />
-	<!-- 
-	<model id="16" code="IMAGE" />
-	<model id="17" code="ATTACHMENT" />
-	<model id="18" code="MENU" />
-	<model id="19" code="SOCAIL_ACCOUNT" />
-	<model id="20" code="CONTENT" />
-	<model id="20" code="TEMPLATE" />
-	<model id="20" code="ANNOUNCE" />
-	 -->
 </models>

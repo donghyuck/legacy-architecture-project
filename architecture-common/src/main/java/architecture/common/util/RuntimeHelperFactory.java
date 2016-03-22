@@ -15,20 +15,19 @@
  */
 package architecture.common.util;
 
-
 public class RuntimeHelperFactory {
 
-	public static interface Implementation {
-		public abstract RuntimeHelper getRuntimeHelper();
-	}
-	
-	private static Implementation impl = null;
+    public static interface Implementation {
+	public abstract RuntimeHelper getRuntimeHelper();
+    }
 
-	static {
-		impl = (Implementation) ImplFactory.loadImplFromKey(RuntimeHelperFactory.Implementation.class);
-	}
+    private static Implementation impl = null;
 
-	public static RuntimeHelper getRuntimeHelper() {
-		return impl.getRuntimeHelper();
-	}
+    static {
+	impl = (Implementation) ImplFactory.loadImplFromKey(RuntimeHelperFactory.Implementation.class);
+    }
+
+    public static RuntimeHelper getRuntimeHelper() {
+	return impl.getRuntimeHelper();
+    }
 }

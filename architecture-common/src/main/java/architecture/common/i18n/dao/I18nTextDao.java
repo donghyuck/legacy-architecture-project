@@ -22,38 +22,40 @@ import architecture.common.i18n.I18nText;
 
 public interface I18nTextDao {
 
-	/**
-	 * I18nText 를 생성한다.
-	 * 
-	 * @param list
-	 */
+    /**
+     * I18nText 를 생성한다.
+     * 
+     * @param list
+     */
     public abstract void createTexts(List<I18nText> list);
 
     /**
      * I18nText 를 업데이트 한다.
+     * 
      * @param list
      */
     public abstract void updateTexts(List<I18nText> list);
 
     /**
      * I18nText 를 삭제한다.
+     * 
      * @param list
      */
     public abstract void deleteTexts(List<I18nText> list);
 
     public abstract I18nText getText(long textId);
-    
+
     /**
      * 모든 I18nText 를 리턴한다.
+     * 
      * @return
      */
     public abstract List<I18nText> getTexts();
-    
+
     public abstract List<I18nText> getTexts(Locale locale);
-    
+
     public abstract List<I18nText> getTexts(String categoryName);
 
     public abstract List<I18nText> getTexts(String categoryName, String localeCode);
-    
-    
+
 }

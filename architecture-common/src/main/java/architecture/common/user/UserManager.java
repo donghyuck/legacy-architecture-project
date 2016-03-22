@@ -19,93 +19,95 @@ import java.util.Date;
 import java.util.List;
 
 public interface UserManager {
-	
-	/**
-	 * 새로운 사용자를 생성한다.
-	 * @param user
-	 * @return
-	 * @throws UserAlreadyExistsException
-	 * @throws UnsupportedOperationException
-	 * @throws EmailAlreadyExistsException
-	 */
-	public abstract User createUser(User user) throws UserAlreadyExistsException, UnsupportedOperationException, EmailAlreadyExistsException;
 
+    /**
+     * 새로운 사용자를 생성한다.
+     * 
+     * @param user
+     * @return
+     * @throws UserAlreadyExistsException
+     * @throws UnsupportedOperationException
+     * @throws EmailAlreadyExistsException
+     */
+    public abstract User createUser(User user)
+	    throws UserAlreadyExistsException, UnsupportedOperationException, EmailAlreadyExistsException;
 
-	/**
-	 * 새로운 로컬 사용자를 생성한다.
-	 * @param user
-	 * @return
-	 * @throws UserAlreadyExistsException
-	 */
-	public abstract User createUser(User user, Company company) throws UserAlreadyExistsException, UnsupportedOperationException, EmailAlreadyExistsException;
-	
-	/**
-	 * 새로운 로컬 사용자를 생성한다.
-	 * @param user
-	 * @return
-	 * @throws UserAlreadyExistsException
-	 */
-	public abstract User createApplicationUser(User user) throws UserAlreadyExistsException;
+    /**
+     * 새로운 로컬 사용자를 생성한다.
+     * 
+     * @param user
+     * @return
+     * @throws UserAlreadyExistsException
+     */
+    public abstract User createUser(User user, Company company)
+	    throws UserAlreadyExistsException, UnsupportedOperationException, EmailAlreadyExistsException;
 
+    /**
+     * 새로운 로컬 사용자를 생성한다.
+     * 
+     * @param user
+     * @return
+     * @throws UserAlreadyExistsException
+     */
+    public abstract User createApplicationUser(User user) throws UserAlreadyExistsException;
 
-	
-	
-	public abstract User getUser(User user);
+    public abstract User getUser(User user);
 
-	public abstract User getUser(User user, boolean flag);
+    public abstract User getUser(User user, boolean flag);
 
-	public abstract User getUser(String username) throws UserNotFoundException;
+    public abstract User getUser(String username) throws UserNotFoundException;
 
-	public abstract User getUser(long userID) throws UserNotFoundException;
-	
-	public abstract void deleteUser(User user) throws UnsupportedOperationException, UserNotFoundException;
+    public abstract User getUser(long userID) throws UserNotFoundException;
 
-	public abstract void deleteUserAndContent(User user) throws UnsupportedOperationException, UserNotFoundException;
+    public abstract void deleteUser(User user) throws UnsupportedOperationException, UserNotFoundException;
 
-	public abstract int getApplicationUserCount();
+    public abstract void deleteUserAndContent(User user) throws UnsupportedOperationException, UserNotFoundException;
 
-	public abstract List<User> getApplicationUsers();
+    public abstract int getApplicationUserCount();
 
-	public abstract List<User> getApplicationUsers(int i, int j);
+    public abstract List<User> getApplicationUsers();
 
-	public abstract int getAuthenticatedUserCount();
+    public abstract List<User> getApplicationUsers(int i, int j);
 
-	public abstract int getTotalUserCount();
-	
-	public abstract int getRecentUserCount(Date date);
+    public abstract int getAuthenticatedUserCount();
 
-	public abstract List<User> getUsers();
+    public abstract int getTotalUserCount();
 
-	public abstract List<User> getUsers(int startIndex, int numResults);
+    public abstract int getRecentUserCount(Date date);
 
-	public abstract boolean isCreationSupported();
+    public abstract List<User> getUsers();
 
-	public abstract User updateUser(User user) throws UserNotFoundException, UserAlreadyExistsException;
+    public abstract List<User> getUsers(int startIndex, int numResults);
 
-	public abstract void enableUser(User user);
-	
-	public abstract List<User> findUsers(String nameOrEmail);
-	
-	public abstract List<User> findUsers(String nameOrEmail, int startIndex, int numResults);
-	
-	public abstract int getFoundUserCount(String nameOrEmail);	
-	
-	public abstract int getUserCount(Company company);
-	
-	public abstract List<User> getUsers(Company company);
+    public abstract boolean isCreationSupported();
 
-	public abstract List<User> getUsers(Company company, int startIndex, int numResults);
-		
-	public abstract List<User> findUsers(Company company, String nameOrEmail);
-	
-	public abstract List<User> findUsers(Company company, String nameOrEmail, int startIndex, int numResults);
-	
-	public abstract int getFoundUserCount(Company company, String nameOrEmail);
-	
-	public abstract List<User> findUsersWithGroupFilter(Company company, Group group, String nameOrEmail);
-	
-	public abstract List<User> findUsersWithGroupFilter(Company company, Group group, String nameOrEmail, int startIndex, int numResults);
-	
-	public abstract int getFoundUserCountWithGroupFilter(Company company, Group group, String nameOrEmail);
-	
+    public abstract User updateUser(User user) throws UserNotFoundException, UserAlreadyExistsException;
+
+    public abstract void enableUser(User user);
+
+    public abstract List<User> findUsers(String nameOrEmail);
+
+    public abstract List<User> findUsers(String nameOrEmail, int startIndex, int numResults);
+
+    public abstract int getFoundUserCount(String nameOrEmail);
+
+    public abstract int getUserCount(Company company);
+
+    public abstract List<User> getUsers(Company company);
+
+    public abstract List<User> getUsers(Company company, int startIndex, int numResults);
+
+    public abstract List<User> findUsers(Company company, String nameOrEmail);
+
+    public abstract List<User> findUsers(Company company, String nameOrEmail, int startIndex, int numResults);
+
+    public abstract int getFoundUserCount(Company company, String nameOrEmail);
+
+    public abstract List<User> findUsersWithGroupFilter(Company company, Group group, String nameOrEmail);
+
+    public abstract List<User> findUsersWithGroupFilter(Company company, Group group, String nameOrEmail,
+	    int startIndex, int numResults);
+
+    public abstract int getFoundUserCountWithGroupFilter(Company company, Group group, String nameOrEmail);
+
 }

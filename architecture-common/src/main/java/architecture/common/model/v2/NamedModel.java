@@ -16,9 +16,9 @@
 package architecture.common.model.v2;
 
 public interface NamedModel {
-	
-	public String getName();
-	
-	public void setName(String name);
-	
+
+    public String getName();
+
+    public void setName(String name);
+
 }

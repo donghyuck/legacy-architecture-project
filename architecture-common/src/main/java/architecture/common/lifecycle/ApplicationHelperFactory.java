@@ -24,21 +24,20 @@ import architecture.common.util.ImplFactory;
  */
 public class ApplicationHelperFactory {
 
-	public static interface Implementation
-    {		
-		
-		public abstract ApplicationHelper getApplicationHelper();
-		
+    public static interface Implementation {
+
+	public abstract ApplicationHelper getApplicationHelper();
+
     }
-	private static Implementation impl = null;
-    
-    static 
-    {
-        impl = (Implementation)ImplFactory.loadImplFromKey(ApplicationHelperFactory.Implementation.class);
+
+    private static Implementation impl = null;
+
+    static {
+	impl = (Implementation) ImplFactory.loadImplFromKey(ApplicationHelperFactory.Implementation.class);
     }
-    
-	public static ApplicationHelper getApplicationHelper(){
-		return impl.getApplicationHelper();
-	}
-    
+
+    public static ApplicationHelper getApplicationHelper() {
+	return impl.getApplicationHelper();
+    }
+
 }

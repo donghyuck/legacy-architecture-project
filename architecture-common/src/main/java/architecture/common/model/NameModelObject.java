@@ -17,8 +17,8 @@ package architecture.common.model;
 
 public interface NameModelObject extends ModelObject {
 
-	public String getName();
-	
-	public void setName(String name);
-	
+    public String getName();
+
+    public void setName(String name);
+
 }

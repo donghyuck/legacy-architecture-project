@@ -19,38 +19,37 @@ import architecture.common.exception.CodeableException;
 
 public class CompanyAlreadyExistsException extends CodeableException {
 
-	/**
-	 * 
-	 */
-	public CompanyAlreadyExistsException() {
-		super();
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * 
+     */
+    public CompanyAlreadyExistsException() {
+	super();
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param msg
-	 * @param cause
-	 */
-	public CompanyAlreadyExistsException(String msg, Throwable cause) {
-		super(msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param msg
+     * @param cause
+     */
+    public CompanyAlreadyExistsException(String msg, Throwable cause) {
+	super(msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param msg
-	 */
-	public CompanyAlreadyExistsException(String msg) {
-		super(msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param msg
+     */
+    public CompanyAlreadyExistsException(String msg) {
+	super(msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param cause
-	 */
-	public CompanyAlreadyExistsException(Throwable cause) {
-		super(cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
-
+    /**
+     * @param cause
+     */
+    public CompanyAlreadyExistsException(Throwable cause) {
+	super(cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
 }

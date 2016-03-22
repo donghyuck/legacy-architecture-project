@@ -18,21 +18,22 @@ package architecture.common.model.support;
 import architecture.common.model.BaseModelObject;
 
 public abstract class BaseModelObjectSupport extends EntityModelObjectSupport implements BaseModelObject {
-	
-	private String description = null;
 
-	/**
-	 * @return description
-	 */
-	public String getDescription() {
-		return description;
-	}
+    private String description = null;
 
-	/**
-	 * @param description 설정할 description
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    /**
+     * @return description
+     */
+    public String getDescription() {
+	return description;
+    }
+
+    /**
+     * @param description
+     *            설정할 description
+     */
+    public void setDescription(String description) {
+	this.description = description;
+    }
 
 }

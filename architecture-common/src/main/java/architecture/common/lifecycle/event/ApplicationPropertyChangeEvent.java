@@ -16,53 +16,54 @@
 package architecture.common.lifecycle.event;
 
 /**
- * @author    donghyuck
+ * @author donghyuck
  */
 public class ApplicationPropertyChangeEvent extends PropertyChangeEvent {
-       
+
     /**
-	 * @author                 donghyuck
-	 */
+     * @author donghyuck
+     */
     public enum Type {
-        /**
-		 * @uml.property  name="aDDED"
-		 * @uml.associationEnd  
-		 */
-        ADDED, 
-        /**
-		 * @uml.property  name="rEMOVED"
-		 * @uml.associationEnd  
-		 */
-        REMOVED, 
-        /**
-		 * @uml.property  name="mODIFIED"
-		 * @uml.associationEnd  
-		 */
-        MODIFIED,
+	/**
+	 * @uml.property name="aDDED"
+	 * @uml.associationEnd
+	 */
+	ADDED,
+	/**
+	 * @uml.property name="rEMOVED"
+	 * @uml.associationEnd
+	 */
+	REMOVED,
+	/**
+	 * @uml.property name="mODIFIED"
+	 * @uml.associationEnd
+	 */
+	MODIFIED,
     }
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -128656485808459081L;
-    
     /**
-	 * @uml.property  name="eventType"
-	 * @uml.associationEnd  
-	 */
-    private Type eventType;
-    
-	public ApplicationPropertyChangeEvent(Object source, Type eventType, String propertyName, Object oldValue, Object newValue) {
-		super(source, propertyName, oldValue, newValue);
-		this.eventType = eventType;
-	}
+     * 
+     */
+    private static final long serialVersionUID = -128656485808459081L;
 
-	/**
-	 * @return
-	 * @uml.property  name="eventType"
-	 */
-	public Type getEventType() {
-		return eventType;
-	}
+    /**
+     * @uml.property name="eventType"
+     * @uml.associationEnd
+     */
+    private Type eventType;
+
+    public ApplicationPropertyChangeEvent(Object source, Type eventType, String propertyName, Object oldValue,
+	    Object newValue) {
+	super(source, propertyName, oldValue, newValue);
+	this.eventType = eventType;
+    }
+
+    /**
+     * @return
+     * @uml.property name="eventType"
+     */
+    public Type getEventType() {
+	return eventType;
+    }
 
 }

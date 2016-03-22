@@ -28,22 +28,22 @@ import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import architecture.common.exception.RuntimeError;
 
 public class CustomJsonDateDeserializer extends JsonDeserializer<Date> {
-	
-	//private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-	private static final ISO8601DateFormat formatter = new ISO8601DateFormat();
-	
-	@Override
-	public Date deserialize(JsonParser jsonparser,
-			DeserializationContext deserializationcontext) throws IOException,
-			JsonProcessingException {
 
-		String date = jsonparser.getText();
-		
-		try {
-			return formatter.parse(date);
-		} catch (ParseException e) {
-			throw new RuntimeError(e);
-		}
+    // private static final SimpleDateFormat format = new
+    // SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+    private static final ISO8601DateFormat formatter = new ISO8601DateFormat();
 
+    @Override
+    public Date deserialize(JsonParser jsonparser, DeserializationContext deserializationcontext)
+	    throws IOException, JsonProcessingException {
+
+	String date = jsonparser.getText();
+
+	try {
+	    return formatter.parse(date);
+	} catch (ParseException e) {
+	    throw new RuntimeError(e);
 	}
+
+    }
 }

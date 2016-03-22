@@ -23,75 +23,74 @@ import architecture.common.user.authentication.UnAuthorizedException;
 public interface Group extends BaseModelObject {
 
     /**
-	 * @return
-	 */
+     * @return
+     */
     public abstract long getGroupId();
-    
+
     /**
-	 * @param  groupId
-	 */
+     * @param groupId
+     */
     public abstract void setGroupId(long groupId);
 
     public abstract void setCompanyId(long companyId);
-    
+
     public abstract long getCompanyId();
-    
+
     public abstract void setCompany(Company company);
-    
+
     public abstract Company getCompany();
-    
+
     public abstract String getDisplayName();
-    
+
     public abstract void setDisplayName(String displayName);
-    
+
     /**
-	 * @return
-	 */
+     * @return
+     */
     public abstract String getName();
 
     /**
-	 * @param name
-	 * @throws UnAuthorizedException
-	 */
+     * @param name
+     * @throws UnAuthorizedException
+     */
     public abstract void setName(String name) throws UnAuthorizedException;
 
     /**
-	 * @return
-	 */
+     * @return
+     */
     public abstract String getDescription();
 
     /**
-	 * @param description
-	 * @throws UnAuthorizedException
-	 */
+     * @param description
+     * @throws UnAuthorizedException
+     */
     public abstract void setDescription(String description) throws UnAuthorizedException;
-        
-            
-	/**
-	 * @return
-	 */
-	public abstract List<Long> getAdministratorIds();
 
-	/**
-	 * @param  administrators
-	 */
-	public abstract void setAdministratorIds(List<Long> administrators) ;
+    /**
+     * @return
+     */
+    public abstract List<Long> getAdministratorIds();
 
-	/**
-	 * @return
-	 */
-	public abstract List<Long> getMemberIds();
-	
-	/**
-	 * @param  members
-	 */
-	public abstract void setMemberIds(List<Long> members);
-	
-	public abstract boolean isMember(User user);
-	
-	public abstract boolean isAdministrator(User user);
-	
-	public abstract int getMemberCount();	
-	
-	public abstract int getAdministratorCount();
+    /**
+     * @param administrators
+     */
+    public abstract void setAdministratorIds(List<Long> administrators);
+
+    /**
+     * @return
+     */
+    public abstract List<Long> getMemberIds();
+
+    /**
+     * @param members
+     */
+    public abstract void setMemberIds(List<Long> members);
+
+    public abstract boolean isMember(User user);
+
+    public abstract boolean isAdministrator(User user);
+
+    public abstract int getMemberCount();
+
+    public abstract int getAdministratorCount();
 }

@@ -21,20 +21,20 @@ import architecture.common.util.internal.MemoryInformation;
 
 public interface RuntimeHelper {
 
-	public abstract long getTotalHeapMemory();
-	
-	public abstract long getTotalHeapMemoryUsed();
-	
-	public abstract String getJvmInputArguments();
-	
-	public abstract List<MemoryInformation> getMemoryPoolInformation();
-	
-	public abstract long getTotalPermGenMemory();
-	
-	public abstract long getTotalPermGenMemoryUsed();
-	
-	public abstract long getTotalNonHeapMemory();
-	
-	public abstract long getTotalNonHeapMemoryUsed();
-	
+    public abstract long getTotalHeapMemory();
+
+    public abstract long getTotalHeapMemoryUsed();
+
+    public abstract String getJvmInputArguments();
+
+    public abstract List<MemoryInformation> getMemoryPoolInformation();
+
+    public abstract long getTotalPermGenMemory();
+
+    public abstract long getTotalPermGenMemoryUsed();
+
+    public abstract long getTotalNonHeapMemory();
+
+    public abstract long getTotalNonHeapMemoryUsed();
+
 }

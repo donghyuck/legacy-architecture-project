@@ -14,24 +14,24 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public class JsonMapPropertyDeserializer extends JsonDeserializer<Map<String, String>> {
 
-	public JsonMapPropertyDeserializer() {
-	}
+    public JsonMapPropertyDeserializer() {
+    }
 
-	public Map<String, String> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
-			throws IOException, JsonProcessingException {
-		ObjectCodec oc = jsonParser.getCodec();
-		JsonNode node = oc.readTree(jsonParser);
-		
-		Iterator<JsonNode> iter = node.elements();
-		Map<String, String> map = new HashMap<String, String>();
-		 
-		while(iter.hasNext()){
-			JsonNode child = iter.next();
-			String key = child.get("name").textValue();
-			String value = child.get("value").textValue();
-			map.put(key, value);
-		}
-		return map;
+    public Map<String, String> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
+	    throws IOException, JsonProcessingException {
+	ObjectCodec oc = jsonParser.getCodec();
+	JsonNode node = oc.readTree(jsonParser);
+
+	Iterator<JsonNode> iter = node.elements();
+	Map<String, String> map = new HashMap<String, String>();
+
+	while (iter.hasNext()) {
+	    JsonNode child = iter.next();
+	    String key = child.get("name").textValue();
+	    String value = child.get("value").textValue();
+	    map.put(key, value);
 	}
+	return map;
+    }
 
 }

@@ -17,10 +17,10 @@ package architecture.common.model.v2;
 
 public interface TypeModel {
 
-	public ModelObjectType getModelObjectType();
-	
-	public Long getModelObjectTypeId();
-	
-	public void setModelObjectType( ModelObjectType modelObjType);
-	
+    public ModelObjectType getModelObjectType();
+
+    public Long getModelObjectTypeId();
+
+    public void setModelObjectType(ModelObjectType modelObjType);
+
 }

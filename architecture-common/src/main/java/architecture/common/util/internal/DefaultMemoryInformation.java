@@ -19,31 +19,31 @@ import java.lang.management.MemoryPoolMXBean;
 
 public class DefaultMemoryInformation implements MemoryInformation {
 
-	private final MemoryPoolMXBean memoryPool;
-	
-	public DefaultMemoryInformation(MemoryPoolMXBean memoryPool) {
-		this.memoryPool = memoryPool;
-	}
+    private final MemoryPoolMXBean memoryPool;
 
-	public String getName() {
-		return memoryPool.getName();
-	}
+    public DefaultMemoryInformation(MemoryPoolMXBean memoryPool) {
+	this.memoryPool = memoryPool;
+    }
 
-	public long getTotal() {
-		return memoryPool.getUsage().getMax();
-	}
+    public String getName() {
+	return memoryPool.getName();
+    }
 
-	public long getUsed() {
-		return memoryPool.getUsage().getUsed();
-	}
+    public long getTotal() {
+	return memoryPool.getUsage().getMax();
+    }
 
-	public long getFree() {
-		return getTotal() - getUsed();
-	}
+    public long getUsed() {
+	return memoryPool.getUsage().getUsed();
+    }
 
-	public String toString(){
-		StringBuilder sb = new StringBuilder();
-		sb.append(memoryPool.getName()).append(": ").append(memoryPool.getUsage().toString());
-		return sb.toString();
-	}
+    public long getFree() {
+	return getTotal() - getUsed();
+    }
+
+    public String toString() {
+	StringBuilder sb = new StringBuilder();
+	sb.append(memoryPool.getName()).append(": ").append(memoryPool.getUsage().toString());
+	return sb.toString();
+    }
 }

@@ -22,44 +22,43 @@ import architecture.common.adaptor.WriteConnector;
 
 /**
  * 
- * @author  donghyuck
+ * @author donghyuck
  */
 public class DataSyncProcessor implements DataProcessor {
 
-	private ReadConnector readConnector;
+    private ReadConnector readConnector;
 
-	private WriteConnector writeConnector;
-		
-	public Object process(Object... args) {
+    private WriteConnector writeConnector;
 
-		Context context = getContext();		
-		
-		Object data = getReadConnector().pull(context);		
-		
-		context.setObject("data",  data);		
-		
-		return getWriteConnector().deliver(context);
-	}
+    public Object process(Object... args) {
 
-	public Context getContext() {
-		return null;
-	}
+	Context context = getContext();
 
-	public ReadConnector getReadConnector() {
-		return readConnector;
-	}
+	Object data = getReadConnector().pull(context);
 
-	public void setReadConnector(ReadConnector readConnector) {
-		this.readConnector = readConnector;
-	}
+	context.setObject("data", data);
 
-	public WriteConnector getWriteConnector() {
-		return writeConnector;
-	}
+	return getWriteConnector().deliver(context);
+    }
 
-	public void setWriteConnector(WriteConnector writeConnector) {
-		this.writeConnector = writeConnector;
-	}
-	
+    public Context getContext() {
+	return null;
+    }
+
+    public ReadConnector getReadConnector() {
+	return readConnector;
+    }
+
+    public void setReadConnector(ReadConnector readConnector) {
+	this.readConnector = readConnector;
+    }
+
+    public WriteConnector getWriteConnector() {
+	return writeConnector;
+    }
+
+    public void setWriteConnector(WriteConnector writeConnector) {
+	this.writeConnector = writeConnector;
+    }
 
 }

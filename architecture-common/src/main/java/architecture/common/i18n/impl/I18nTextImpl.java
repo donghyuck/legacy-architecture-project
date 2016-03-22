@@ -23,58 +23,69 @@ import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.DateModelObjectSupport;
 import architecture.common.util.I18nTextUtils;
 
-public class I18nTextImpl extends DateModelObjectSupport  implements I18nText {
-	
-	private long textId = -1L ;
-	private String name;
-	private String text;
-	private String categoryName;
-	private String localeCode ;
-	
-	public long getTextId() {
-		return textId;
-	}
-	public void setTextId(long textId) {
-		this.textId = textId;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getText() {
-		return text;
-	}
-	public void setText(String text) {
-		this.text = text;
-	}
-	
-	public String getCategoryName() {
-		return categoryName;
-	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
-	public String getLocaleCode() {
-		return localeCode;
-	}
-	public void setLocaleCode(String localeCode) {
-		this.localeCode = localeCode;
-	}
-	
-	public Serializable getPrimaryKeyObject() {
-		return getTextId();
-	}
-	public int  getModelObjectType() {
-		return ModelTypeFactory.getTypeIdFromCode(".I18N_TEXT");
-	}
-	public int getCachedSize() {
-		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName()) +  CacheSizes.sizeOfString( this.categoryName ) + CacheSizes.sizeOfString( getLocaleCode() )  + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate() ;		
-	}
-	public String getResourceBundleKey() {
-		return I18nTextUtils.generateResourceBundleKey(categoryName, name);
-	}
+public class I18nTextImpl extends DateModelObjectSupport implements I18nText {
 
-		
+    private long textId = -1L;
+    private String name;
+    private String text;
+    private String categoryName;
+    private String localeCode;
+
+    public long getTextId() {
+	return textId;
+    }
+
+    public void setTextId(long textId) {
+	this.textId = textId;
+    }
+
+    public String getName() {
+	return name;
+    }
+
+    public void setName(String name) {
+	this.name = name;
+    }
+
+    public String getText() {
+	return text;
+    }
+
+    public void setText(String text) {
+	this.text = text;
+    }
+
+    public String getCategoryName() {
+	return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+	this.categoryName = categoryName;
+    }
+
+    public String getLocaleCode() {
+	return localeCode;
+    }
+
+    public void setLocaleCode(String localeCode) {
+	this.localeCode = localeCode;
+    }
+
+    public Serializable getPrimaryKeyObject() {
+	return getTextId();
+    }
+
+    public int getModelObjectType() {
+	return ModelTypeFactory.getTypeIdFromCode(".I18N_TEXT");
+    }
+
+    public int getCachedSize() {
+	return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName()) + CacheSizes.sizeOfString(this.categoryName)
+		+ CacheSizes.sizeOfString(getLocaleCode()) + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate();
+    }
+
+    public String getResourceBundleKey() {
+	return I18nTextUtils.generateResourceBundleKey(categoryName, name);
+    }
+
 }

@@ -17,8 +17,8 @@ package architecture.common.model;
 
 public interface DescriptionAware {
 
-	public String getDescription();
-	
-	public void setDescription(String description);
+    public String getDescription();
+
+    public void setDescription(String description);
 
 }

@@ -18,17 +18,17 @@ package architecture.common.event.config;
 import java.util.concurrent.TimeUnit;
 
 /**
- * A configuration object for thread pools used by asynchronous event dispatchers
+ * A configuration object for thread pools used by asynchronous event
+ * dispatchers
  */
-public interface EventThreadPoolConfiguration
-{
-	
-	public abstract int getCorePoolSize();
+public interface EventThreadPoolConfiguration {
 
-	public abstract int getMaximumPoolSize();
+    public abstract int getCorePoolSize();
 
-	public abstract long getKeepAliveTime();
+    public abstract int getMaximumPoolSize();
 
-	public abstract TimeUnit getTimeUnit();
-	
+    public abstract long getKeepAliveTime();
+
+    public abstract TimeUnit getTimeUnit();
+
 }

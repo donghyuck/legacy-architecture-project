@@ -18,123 +18,127 @@ package architecture.common.lifecycle;
 import architecture.common.jdbc.schema.DatabaseType;
 
 public class DatabaseInfo {
-	
-    private static String ISOLATION_LEVELS[] = {
-        "Read committed", 
-        "Read uncommitted", 
-        "Read committed", 
-        null, 
-        "Repeatable read", 
-        null, 
-        null, 
-        null, 
-        "Serializable"
-    };
+
+    private static String ISOLATION_LEVELS[] = { "Read committed", "Read uncommitted", "Read committed", null,
+	    "Repeatable read", null, null, null, "Serializable" };
     private String name;
-    
-	public String getName() {
-		return name;
-	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+	return name;
+    }
 
-	private String url;
-	private String dialect;
-	private String isolationLevel;
-	private String driverName;
-	private String driverVersion;
-	private String databaseName;
-	private String databaseVersion;
-	private Long exampleLatency;
-		
-	public DatabaseInfo() {
-	}
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	public DatabaseInfo(DatabaseType databaseType) {		
-		driverName = databaseType.jdbcDriverName;
-		driverVersion = databaseType.jdbcDriverVersion;
-		databaseName = databaseType.databaseProductName;
-		databaseVersion = databaseType.databaseProductVersion;		
-		 if(databaseType.transactionIsolation < 0 || databaseType.transactionIsolation >= ISOLATION_LEVELS.length)
-			 isolationLevel = null;
-		 else
-        	 isolationLevel = ISOLATION_LEVELS[databaseType.transactionIsolation];		 
-	}
-	
-	
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	public String getDialect() {
-		return dialect;
-	}
-	public void setDialect(String dialect) {
-		this.dialect = dialect;
-	}
-	public String getIsolationLevel() {
-		return isolationLevel;
-	}
-	public void setIsolationLevel(String isolationLevel) {
-		this.isolationLevel = isolationLevel;
-	}
-	public String getDriverName() {
-		return driverName;
-	}
-	public void setDriverName(String driverName) {
-		this.driverName = driverName;
-	}
-	public String getDriverVersion() {
-		return driverVersion;
-	}
-	public void setDriverVersion(String driverVersion) {
-		this.driverVersion = driverVersion;
-	}
-	public String getDatabaseName() {
-		return databaseName;
-	}
-	public void setDatabaseName(String databaseName) {
-		this.databaseName = databaseName;
-	}
-	public String getDatabaseVersion() {
-		return databaseVersion;
-	}
-	public void setDatabaseVersion(String databaseVersion) {
-		this.databaseVersion = databaseVersion;
-	}
-	public Long getExampleLatency() {
-		return exampleLatency;
-	}
-	public void setExampleLatency(Long exampleLatency) {
-		this.exampleLatency = exampleLatency;
-	}
+    private String url;
+    private String dialect;
+    private String isolationLevel;
+    private String driverName;
+    private String driverVersion;
+    private String databaseName;
+    private String databaseVersion;
+    private Long exampleLatency;
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("DatabaseInfo [url=");
-		builder.append(url);
-		builder.append(", dialect=");
-		builder.append(dialect);
-		builder.append(", isolationLevel=");
-		builder.append(isolationLevel);
-		builder.append(", driverName=");
-		builder.append(driverName);
-		builder.append(", driverVersion=");
-		builder.append(driverVersion);
-		builder.append(", databaseName=");
-		builder.append(databaseName);
-		builder.append(", databaseVersion=");
-		builder.append(databaseVersion);
-		builder.append(", exampleLatency=");
-		builder.append(exampleLatency);
-		builder.append("]");
-		return builder.toString();
-	}
-	
-	
+    public DatabaseInfo() {
+    }
+
+    public DatabaseInfo(DatabaseType databaseType) {
+	driverName = databaseType.jdbcDriverName;
+	driverVersion = databaseType.jdbcDriverVersion;
+	databaseName = databaseType.databaseProductName;
+	databaseVersion = databaseType.databaseProductVersion;
+	if (databaseType.transactionIsolation < 0 || databaseType.transactionIsolation >= ISOLATION_LEVELS.length)
+	    isolationLevel = null;
+	else
+	    isolationLevel = ISOLATION_LEVELS[databaseType.transactionIsolation];
+    }
+
+    public String getUrl() {
+	return url;
+    }
+
+    public void setUrl(String url) {
+	this.url = url;
+    }
+
+    public String getDialect() {
+	return dialect;
+    }
+
+    public void setDialect(String dialect) {
+	this.dialect = dialect;
+    }
+
+    public String getIsolationLevel() {
+	return isolationLevel;
+    }
+
+    public void setIsolationLevel(String isolationLevel) {
+	this.isolationLevel = isolationLevel;
+    }
+
+    public String getDriverName() {
+	return driverName;
+    }
+
+    public void setDriverName(String driverName) {
+	this.driverName = driverName;
+    }
+
+    public String getDriverVersion() {
+	return driverVersion;
+    }
+
+    public void setDriverVersion(String driverVersion) {
+	this.driverVersion = driverVersion;
+    }
+
+    public String getDatabaseName() {
+	return databaseName;
+    }
+
+    public void setDatabaseName(String databaseName) {
+	this.databaseName = databaseName;
+    }
+
+    public String getDatabaseVersion() {
+	return databaseVersion;
+    }
+
+    public void setDatabaseVersion(String databaseVersion) {
+	this.databaseVersion = databaseVersion;
+    }
+
+    public Long getExampleLatency() {
+	return exampleLatency;
+    }
+
+    public void setExampleLatency(Long exampleLatency) {
+	this.exampleLatency = exampleLatency;
+    }
+
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("DatabaseInfo [url=");
+	builder.append(url);
+	builder.append(", dialect=");
+	builder.append(dialect);
+	builder.append(", isolationLevel=");
+	builder.append(isolationLevel);
+	builder.append(", driverName=");
+	builder.append(driverName);
+	builder.append(", driverVersion=");
+	builder.append(driverVersion);
+	builder.append(", databaseName=");
+	builder.append(databaseName);
+	builder.append(", databaseVersion=");
+	builder.append(databaseVersion);
+	builder.append(", exampleLatency=");
+	builder.append(exampleLatency);
+	builder.append("]");
+	return builder.toString();
+    }
+
 }

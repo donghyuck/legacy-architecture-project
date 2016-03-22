@@ -35,6 +35,6 @@ public interface I18nTextManager {
     public abstract List<I18nText> getTexts(String categoryName, String localeCode);
 
     public abstract Map<Locale, ResourceBundle> getResourceBundles();
-    
+
     public abstract void refresh();
 }

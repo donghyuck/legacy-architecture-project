@@ -20,10 +20,9 @@ import java.util.concurrent.TimeUnit;
 import architecture.common.event.config.EventThreadPoolConfiguration;
 
 /**
- * @author    donghyuck
+ * @author donghyuck
  */
-public class EventThreadPoolConfigurationImpl implements EventThreadPoolConfiguration
-{
+public class EventThreadPoolConfigurationImpl implements EventThreadPoolConfiguration {
 
     private static final int CORE_POOL_SIZE = 16;
 
@@ -31,23 +30,19 @@ public class EventThreadPoolConfigurationImpl implements EventThreadPoolConfigur
 
     private static final long KEEP_ALIVE_TIME = 60L;
 
-    public int getCorePoolSize()
-    {
-        return CORE_POOL_SIZE;
+    public int getCorePoolSize() {
+	return CORE_POOL_SIZE;
     }
 
-    public int getMaximumPoolSize()
-    {
-        return MAXIMUM_POOL_SIZE;
+    public int getMaximumPoolSize() {
+	return MAXIMUM_POOL_SIZE;
     }
 
-    public long getKeepAliveTime()
-    {
-        return KEEP_ALIVE_TIME;
+    public long getKeepAliveTime() {
+	return KEEP_ALIVE_TIME;
     }
 
-    public TimeUnit getTimeUnit()
-    {
-        return TimeUnit.SECONDS;
+    public TimeUnit getTimeUnit() {
+	return TimeUnit.SECONDS;
     }
 }

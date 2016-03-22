@@ -30,6 +30,5 @@ public interface SystemInformationService extends Component {
     public abstract List<DatabaseInfo> getDatabaseInfos();
 
     public abstract List<DiskUsage> getDiskUsages();
-		
-	
+
 }

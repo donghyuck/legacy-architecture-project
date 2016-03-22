@@ -35,17 +35,14 @@ import architecture.common.event.spi.ListenerInvoker;
  * 
  * @since 2.0
  */
-public final class AsynchronousAbleEventDispatcher implements EventDispatcher
-{
+public final class AsynchronousAbleEventDispatcher implements EventDispatcher {
     /**
      * An executor that execute commands synchronously
      */
-    private static final Executor SYNCHRONOUS_EXECUTOR = new Executor()
-    {
-        public void execute(Runnable command)
-        {
-            command.run();
-        }
+    private static final Executor SYNCHRONOUS_EXECUTOR = new Executor() {
+	public void execute(Runnable command) {
+	    command.run();
+	}
     };
 
     /**
@@ -55,43 +52,39 @@ public final class AsynchronousAbleEventDispatcher implements EventDispatcher
 
     private final AsynchronousEventResolver asynchronousEventResolver;
 
-    
     /**
-     * The only public constructor, uses an {@link architecture.common.event.internal.AnnotationAsynchronousEventResolver}
-     * @param executorFactory the executor to use for asynchronous event listener invocations
+     * The only public constructor, uses an
+     * {@link architecture.common.event.internal.AnnotationAsynchronousEventResolver}
+     * 
+     * @param executorFactory
+     *            the executor to use for asynchronous event listener
+     *            invocations
      */
-    public AsynchronousAbleEventDispatcher(EventExecutorFactory executorFactory)
-    {
-        this(executorFactory, new AnnotationAsynchronousEventResolver());
-    }
-    
-    
-    public AsynchronousAbleEventDispatcher(Executor asynchronousExecutor)
-    {
-        this.asynchronousEventResolver = checkNotNull( new AnnotationAsynchronousEventResolver());
-        this.asynchronousExecutor = checkNotNull(asynchronousExecutor);
-    }
-     
-
-    AsynchronousAbleEventDispatcher(EventExecutorFactory executorFactory, AsynchronousEventResolver asynchronousEventResolver)
-    {
-        this.asynchronousEventResolver = checkNotNull(asynchronousEventResolver);
-        this.asynchronousExecutor = checkNotNull(checkNotNull(executorFactory).getExecutor());
+    public AsynchronousAbleEventDispatcher(EventExecutorFactory executorFactory) {
+	this(executorFactory, new AnnotationAsynchronousEventResolver());
     }
 
-    public void dispatch(final ListenerInvoker invoker, final Object event)
-    {
-        getExecutor(checkNotNull(invoker), checkNotNull(event)).execute(new Runnable()
-        {
-            public void run()
-            {
-                invoker.invoke(event);
-            }
-        });
+    public AsynchronousAbleEventDispatcher(Executor asynchronousExecutor) {
+	this.asynchronousEventResolver = checkNotNull(new AnnotationAsynchronousEventResolver());
+	this.asynchronousExecutor = checkNotNull(asynchronousExecutor);
     }
 
-    private Executor getExecutor(ListenerInvoker invoker, Object event)
-    {
-        return asynchronousEventResolver.isAsynchronousEvent(event) && invoker.supportAsynchronousEvents() ? asynchronousExecutor : SYNCHRONOUS_EXECUTOR;
+    AsynchronousAbleEventDispatcher(EventExecutorFactory executorFactory,
+	    AsynchronousEventResolver asynchronousEventResolver) {
+	this.asynchronousEventResolver = checkNotNull(asynchronousEventResolver);
+	this.asynchronousExecutor = checkNotNull(checkNotNull(executorFactory).getExecutor());
+    }
+
+    public void dispatch(final ListenerInvoker invoker, final Object event) {
+	getExecutor(checkNotNull(invoker), checkNotNull(event)).execute(new Runnable() {
+	    public void run() {
+		invoker.invoke(event);
+	    }
+	});
+    }
+
+    private Executor getExecutor(ListenerInvoker invoker, Object event) {
+	return asynchronousEventResolver.isAsynchronousEvent(event) && invoker.supportAsynchronousEvents()
+		? asynchronousExecutor : SYNCHRONOUS_EXECUTOR;
     }
 }

@@ -17,10 +17,10 @@ package architecture.common.model.v2;
 
 public interface ModelObjectType {
 
-	public abstract Long getId();
-	
-	public abstract String getCode();
-		
-	public abstract boolean isEnabled();
-	
+    public abstract Long getId();
+
+    public abstract String getCode();
+
+    public abstract boolean isEnabled();
+
 }

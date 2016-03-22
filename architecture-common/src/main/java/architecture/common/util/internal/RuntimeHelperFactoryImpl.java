@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 package architecture.common.util.internal;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -21,52 +22,53 @@ import architecture.common.util.PlatformHelper;
 import architecture.common.util.RuntimeHelper;
 import architecture.common.util.RuntimeHelperFactory;
 
-public class RuntimeHelperFactoryImpl implements  RuntimeHelperFactory.Implementation {
+public class RuntimeHelperFactoryImpl implements RuntimeHelperFactory.Implementation {
 
-	private RuntimeHelper helper = null ;
-	
-	public RuntimeHelper getRuntimeHelper() {
-		
-		if( helper == null){
-			// Java 1.5 이상인 경우...
-			if( PlatformHelper.isJvmVersion(1.5F) ){
-				helper = new RuntimeHelperImpl();
-			}else{
-				helper = new RuntimeHelper(){
-					public long getTotalHeapMemory() {
-						return 0;
-					}
+    private RuntimeHelper helper = null;
 
-					public long getTotalHeapMemoryUsed() {
-						return 0;
-					}
+    public RuntimeHelper getRuntimeHelper() {
 
-					public String getJvmInputArguments() {
-						return "Unknown";
-					}
-					public List<MemoryInformation> getMemoryPoolInformation() {
-						return Collections.EMPTY_LIST;
-					}
+	if (helper == null) {
+	    // Java 1.5 이상인 경우...
+	    if (PlatformHelper.isJvmVersion(1.5F)) {
+		helper = new RuntimeHelperImpl();
+	    } else {
+		helper = new RuntimeHelper() {
+		    public long getTotalHeapMemory() {
+			return 0;
+		    }
 
-					public long getTotalPermGenMemory() {
-						return 0;
-					}
+		    public long getTotalHeapMemoryUsed() {
+			return 0;
+		    }
 
-					public long getTotalPermGenMemoryUsed() {
-						return 0;
-					}
+		    public String getJvmInputArguments() {
+			return "Unknown";
+		    }
 
-					public long getTotalNonHeapMemory() {
-						return 0;
-					}
+		    public List<MemoryInformation> getMemoryPoolInformation() {
+			return Collections.EMPTY_LIST;
+		    }
 
-					public long getTotalNonHeapMemoryUsed() {
-						return 0;
-					}
-				} ;
-			}
-		}
-		return helper;
+		    public long getTotalPermGenMemory() {
+			return 0;
+		    }
+
+		    public long getTotalPermGenMemoryUsed() {
+			return 0;
+		    }
+
+		    public long getTotalNonHeapMemory() {
+			return 0;
+		    }
+
+		    public long getTotalNonHeapMemoryUsed() {
+			return 0;
+		    }
+		};
+	    }
 	}
+	return helper;
+    }
 
 }

@@ -22,10 +22,9 @@ import architecture.common.license.validator.Validator;
 /**
  * 
  * 
- * @author  <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
+ * @author <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
  */
-public interface LicenseProvider
-{
+public interface LicenseProvider {
 
     public abstract String getName();
 
@@ -34,5 +33,5 @@ public interface LicenseProvider
     public abstract Collection<Validator> getValidators();
 
     public abstract Collection<License.Module> getInstalledModules();
-    
+
 }

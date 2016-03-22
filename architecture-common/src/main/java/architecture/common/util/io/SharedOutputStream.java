@@ -18,15 +18,12 @@ package architecture.common.util.io;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public abstract class SharedOutputStream extends OutputStream
-{
+public abstract class SharedOutputStream extends OutputStream {
 
-    public SharedOutputStream()
-    {
+    public SharedOutputStream() {
     }
 
     public abstract InputStream getInputStream();
 
     public abstract int getSize();
 }
-

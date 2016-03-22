@@ -17,39 +17,38 @@ package architecture.common.user;
 
 import architecture.common.model.UserModel;
 
-
 public interface User extends UserModel {
-	
-	enum Status {
-		
-		none(0),
 
-		approved(1),
+    enum Status {
 
-		rejected(2),
+	none(0),
 
-		validated(3),
+	approved(1),
 
-		registered(4);
-		
-		int id ;
-		
-		public int getId(){
-			return id;
-		}
-		
-		private Status(int id) {
-			this.id = id;
-		}		
-		
-		public static Status getById(int i){
-			
-			for( Status status : values()){
-			    if(status.getId() == i)
-			    	return status;
-			}			
-			return none;
-		}
+	rejected(2),
+
+	validated(3),
+
+	registered(4);
+
+	int id;
+
+	public int getId() {
+	    return id;
 	}
-	
+
+	private Status(int id) {
+	    this.id = id;
+	}
+
+	public static Status getById(int i) {
+
+	    for (Status status : values()) {
+		if (status.getId() == i)
+		    return status;
+	    }
+	    return none;
+	}
+    }
+
 }

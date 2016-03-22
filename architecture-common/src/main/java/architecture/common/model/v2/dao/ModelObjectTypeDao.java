@@ -17,8 +17,8 @@ package architecture.common.model.v2.dao;
 
 public interface ModelObjectTypeDao {
 
-	public abstract void addModelObjectType( String code, int typeId );
-	
-	public abstract String getModelObjectTypeCode(int typeId);
-	
+    public abstract void addModelObjectType(String code, int typeId);
+
+    public abstract String getModelObjectTypeCode(int typeId);
+
 }

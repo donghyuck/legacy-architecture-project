@@ -19,57 +19,65 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 
 import architecture.common.util.ImplFactory;
+
 /**
- * @author    DongHyuck, Son
+ * @author DongHyuck, Son
  */
 public class LocalizerFactory {
 
-	public static interface Implementation {
+    public static interface Implementation {
 
-		/**
-		 * 
-		 * @param location 리소스 파일 경로
-		 * @param locale 로케일
-		 * @param classloader
-		 * @return
-		 * @throws MissingResourceException
-		 */
-		public Localizer getLocalizer(String location, Locale locale, ClassLoader classloader) throws MissingResourceException;
+	/**
+	 * 
+	 * @param location
+	 *            리소스 파일 경로
+	 * @param locale
+	 *            로케일
+	 * @param classloader
+	 * @return
+	 * @throws MissingResourceException
+	 */
+	public Localizer getLocalizer(String location, Locale locale, ClassLoader classloader)
+		throws MissingResourceException;
 
-		/**
-		 * 
-		 * @param location 리소스 파일 경로
-		 * @param locale 로케일
-		 * @return
-		 * @throws MissingResourceException
-		 */
-		public Localizer getLocalizer(String location, Locale locale) throws MissingResourceException;
+	/**
+	 * 
+	 * @param location
+	 *            리소스 파일 경로
+	 * @param locale
+	 *            로케일
+	 * @return
+	 * @throws MissingResourceException
+	 */
+	public Localizer getLocalizer(String location, Locale locale) throws MissingResourceException;
 
-		/**
-		 * 
-		 * @param location 리소스 파일 경로
-		 * @return
-		 * @throws MissingResourceException
-		 */
-		public Localizer getLocalizer(String location) throws MissingResourceException;
+	/**
+	 * 
+	 * @param location
+	 *            리소스 파일 경로
+	 * @return
+	 * @throws MissingResourceException
+	 */
+	public Localizer getLocalizer(String location) throws MissingResourceException;
 
-	}
+    }
 
-	private static Implementation impl = null;
+    private static Implementation impl = null;
 
-	static {
-		impl = (Implementation) ImplFactory.loadImplFromKey(LocalizerFactory.Implementation.class);
-	}
+    static {
+	impl = (Implementation) ImplFactory.loadImplFromKey(LocalizerFactory.Implementation.class);
+    }
 
-	public static Localizer getLocalizer(String location) throws MissingResourceException {
-		return impl.getLocalizer(location, Locale.getDefault());
-	}
+    public static Localizer getLocalizer(String location) throws MissingResourceException {
+	return impl.getLocalizer(location, Locale.getDefault());
+    }
 
-	public static Localizer getLocalizer(String location, Locale locale)throws MissingResourceException {
-		return impl.getLocalizer(location, locale);
-	}
+    public static Localizer getLocalizer(String location, Locale locale) throws MissingResourceException {
+	return impl.getLocalizer(location, locale);
+    }
 
-	public static Localizer getLocalizer(String location, Locale locale, ClassLoader classloader) throws MissingResourceException {
-		return impl.getLocalizer(location, locale, classloader);
-	}
+    public static Localizer getLocalizer(String location, Locale locale, ClassLoader classloader)
+	    throws MissingResourceException {
+	return impl.getLocalizer(location, locale, classloader);
+    }
 }

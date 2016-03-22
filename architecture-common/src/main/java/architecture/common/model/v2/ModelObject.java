@@ -19,8 +19,8 @@ import java.io.Serializable;
 
 public interface ModelObject<T> {
 
-	public Serializable getPrimaryKeyObject();	
-	
-	public void setPrimaryKeyObject(Serializable primaryKeyObj);
-	
+    public Serializable getPrimaryKeyObject();
+
+    public void setPrimaryKeyObject(Serializable primaryKeyObj);
+
 }

@@ -27,13 +27,17 @@ import java.lang.annotation.Target;
  * one parameter which is the event to be handled.
  * <p/>
  * For example, the following class implements a simple event listener:
- * <pre><tt>      public class TestListener {
+ * 
+ * <pre>
+ * <tt>      public class TestListener {
  *        &#64;EventListener
  *        public void onEvent(SampleEvent event) {
  *            System.out.println("Handled an event: " + event);
  *        }
  *    }
- * </tt></pre>
+ * </tt>
+ * </pre>
+ * 
  * @see architecture.ee.event.internal.AnnotatedMethodsListenerHandler
  * @since 2.0
  */
@@ -41,6 +45,5 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 @Target(METHOD)
 @Documented
-public @interface EventListener
-{
+public @interface EventListener {
 }

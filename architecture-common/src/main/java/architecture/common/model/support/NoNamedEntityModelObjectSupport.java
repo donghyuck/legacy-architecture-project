@@ -24,30 +24,29 @@ import architecture.common.model.NoNamedEntityModelObject;
 import architecture.common.model.json.CustomJsonDateDeserializer;
 import architecture.common.model.json.CustomJsonDateSerializer;
 
-public abstract class NoNamedEntityModelObjectSupport extends PropertyModelSupport  implements NoNamedEntityModelObject {
+public abstract class NoNamedEntityModelObjectSupport extends PropertyModelSupport implements NoNamedEntityModelObject {
 
-	@JsonSerialize(using = CustomJsonDateSerializer.class)	
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
-	private Date creationDate = null;
-	
-	@JsonSerialize(using = CustomJsonDateSerializer.class)	
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
-	private Date modifiedDate = null;
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    @JsonDeserialize(using = CustomJsonDateDeserializer.class)
+    private Date creationDate = null;
 
-	
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    @JsonDeserialize(using = CustomJsonDateDeserializer.class)
+    private Date modifiedDate = null;
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    public Date getCreationDate() {
+	return creationDate;
+    }
 
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
+    public void setCreationDate(Date creationDate) {
+	this.creationDate = creationDate;
+    }
 
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
+    public Date getModifiedDate() {
+	return modifiedDate;
+    }
+
+    public void setModifiedDate(Date modifiedDate) {
+	this.modifiedDate = modifiedDate;
+    }
 }

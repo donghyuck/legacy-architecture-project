@@ -17,8 +17,8 @@ package architecture.common.model.v2;
 
 public interface DescriptionModel {
 
-	public String getDescription();
-	
-	public void setDescription(String description);
-	
+    public String getDescription();
+
+    public void setDescription(String description);
+
 }

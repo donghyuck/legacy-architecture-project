@@ -20,40 +20,39 @@ import javax.sql.DataSource;
 import architecture.common.util.ImplFactory;
 
 /**
- * @author   donghyuck
+ * @author donghyuck
  */
 public class DataSourceFactory {
 
-	public static interface Implementation {	
-		
-		/**
-		 * setup 설정 값 에서 제공하는 프로퍼티 값을  사용하여 데이터소스를 생성한다.
-		 * 
-		 * @param configService
-		 * @return
-		 */
-		public abstract DataSource getDataSource();
-		
-		public abstract DataSource getDataSource(String name);
-	
-	}
-	
+    public static interface Implementation {
+
 	/**
-	 * @uml.property  name="impl"
-	 * @uml.associationEnd  
+	 * setup 설정 값 에서 제공하는 프로퍼티 값을 사용하여 데이터소스를 생성한다.
+	 * 
+	 * @param configService
+	 * @return
 	 */
-	private static Implementation impl = null;
-    
-    static 
-    {
-        impl = (Implementation)ImplFactory.loadImplFromKey(DataSourceFactory.Implementation.class);
-    }
-       
-    public static DataSource getDataSource(){
-    	return impl.getDataSource();
+	public abstract DataSource getDataSource();
+
+	public abstract DataSource getDataSource(String name);
+
     }
 
-    public static DataSource getDataSource(String name){
-    	return impl.getDataSource(name);
+    /**
+     * @uml.property name="impl"
+     * @uml.associationEnd
+     */
+    private static Implementation impl = null;
+
+    static {
+	impl = (Implementation) ImplFactory.loadImplFromKey(DataSourceFactory.Implementation.class);
+    }
+
+    public static DataSource getDataSource() {
+	return impl.getDataSource();
+    }
+
+    public static DataSource getDataSource(String name) {
+	return impl.getDataSource(name);
     }
 }

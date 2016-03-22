@@ -30,42 +30,40 @@ import architecture.common.util.StringUtils;
  */
 public class JdbcReadConnector extends AbstractJdbcConnector implements ReadConnector {
 
-	
-	@SuppressWarnings("unchecked")
-	public Object pull(Context context) {			
-				
-		log.debug("pull : " + context );
-		
-		String queryString = context.getObject("queryString", String.class);
-		if(StringUtils.isEmpty(queryString)){
-			String queryName = context.getObject("queryName", String.class);
-			if(!StringUtils.isEmpty(queryName)){
-				queryString = getQueryString(queryName);
-			}else{
-				// 쿼리가 존재하지 않는 경우는 어떻게..
-			}
-		}
-		
-		List<ParameterMapping> parameterMappings = context.getObject("parameterMappings", List.class);		
-		Object[] data = context.getObject("data", Object[].class);		
-		
-		if( parameterMappings == null ){
-			parameterMappings = Collections.EMPTY_LIST;
-		}
-		
-		if( data == null)
-		{
-			data = new Object[0];
-		}
-		
-		//Object output;		
-		
-		return pull(queryString, parameterMappings, data);
+    @SuppressWarnings("unchecked")
+    public Object pull(Context context) {
 
+	log.debug("pull : " + context);
+
+	String queryString = context.getObject("queryString", String.class);
+	if (StringUtils.isEmpty(queryString)) {
+	    String queryName = context.getObject("queryName", String.class);
+	    if (!StringUtils.isEmpty(queryName)) {
+		queryString = getQueryString(queryName);
+	    } else {
+		// 쿼리가 존재하지 않는 경우는 어떻게..
+	    }
 	}
 
-	@Override
-	protected String getQueryString(String key) {
-		return null;
+	List<ParameterMapping> parameterMappings = context.getObject("parameterMappings", List.class);
+	Object[] data = context.getObject("data", Object[].class);
+
+	if (parameterMappings == null) {
+	    parameterMappings = Collections.EMPTY_LIST;
 	}
+
+	if (data == null) {
+	    data = new Object[0];
+	}
+
+	// Object output;
+
+	return pull(queryString, parameterMappings, data);
+
+    }
+
+    @Override
+    protected String getQueryString(String key) {
+	return null;
+    }
 }

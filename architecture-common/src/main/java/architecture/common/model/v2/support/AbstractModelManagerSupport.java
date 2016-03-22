@@ -22,58 +22,65 @@ import architecture.common.event.api.EventPublisher;
 import architecture.common.model.v2.ModelObject;
 import net.sf.ehcache.Cache;
 
-
 public abstract class AbstractModelManagerSupport {
-	
-	protected Log log = LogFactory.getLog(getClass());
-	
-	protected EventPublisher eventPublisher;
-	protected Cache objectCache;
-    protected Cache objectIdCache ;
-	/**
-	 * @return eventPublisher
-	 */
-	public EventPublisher getEventPublisher() {
-		return eventPublisher;
-	}
-	/**
-	 * @param eventPublisher 설정할 eventPublisher
-	 */
-	public void setEventPublisher(EventPublisher eventPublisher) {
-		this.eventPublisher = eventPublisher;
-	}
-	/**
-	 * @return objectCache
-	 */
-	public Cache getObjectCache() {
-		return objectCache;
-	}
-	/**
-	 * @param objectCache 설정할 objectCache
-	 */
-	public void setObjectCache(Cache objectCache) {
-		this.objectCache = objectCache;
-	}
-	/**
-	 * @return objectIdCache
-	 */
-	public Cache getObjectIdCache() {
-		return objectIdCache;
-	}
-	/**
-	 * @param objectIdCache 설정할 objectIdCache
-	 */
-	public void setObjectIdCache(Cache objectIdCache) {
-		this.objectIdCache = objectIdCache;
-	}
-    
-    protected void objectNameUpdated(String oldGroupName){
-    	objectIdCache.remove(oldGroupName);	
+
+    protected Log log = LogFactory.getLog(getClass());
+
+    protected EventPublisher eventPublisher;
+    protected Cache objectCache;
+    protected Cache objectIdCache;
+
+    /**
+     * @return eventPublisher
+     */
+    public EventPublisher getEventPublisher() {
+	return eventPublisher;
     }
 
-    
-	protected void clearObjectFromCache(ModelObject object){
-		objectCache.remove(object.getPrimaryKeyObject());
-	}
+    /**
+     * @param eventPublisher
+     *            설정할 eventPublisher
+     */
+    public void setEventPublisher(EventPublisher eventPublisher) {
+	this.eventPublisher = eventPublisher;
+    }
+
+    /**
+     * @return objectCache
+     */
+    public Cache getObjectCache() {
+	return objectCache;
+    }
+
+    /**
+     * @param objectCache
+     *            설정할 objectCache
+     */
+    public void setObjectCache(Cache objectCache) {
+	this.objectCache = objectCache;
+    }
+
+    /**
+     * @return objectIdCache
+     */
+    public Cache getObjectIdCache() {
+	return objectIdCache;
+    }
+
+    /**
+     * @param objectIdCache
+     *            설정할 objectIdCache
+     */
+    public void setObjectIdCache(Cache objectIdCache) {
+	this.objectIdCache = objectIdCache;
+    }
+
+    protected void objectNameUpdated(String oldGroupName) {
+	objectIdCache.remove(oldGroupName);
+    }
+
+    protected void clearObjectFromCache(ModelObject object) {
+	objectCache.remove(object.getPrimaryKeyObject());
+    }
 
 }

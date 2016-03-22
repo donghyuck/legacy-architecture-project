@@ -23,70 +23,68 @@ import architecture.common.model.v2.DateModel;
 import architecture.common.model.v2.PropertyModel;
 import architecture.common.util.StringUtils;
 
-
 @SuppressWarnings("serial")
 public abstract class PropertyEntityModelSupport<T> extends EntityModelSupport<T> implements PropertyModel, DateModel {
 
-	private Map<String, String> properties = null;
-	
-	private Date creationDate = null;
-	
-	private Date modifiedDate = null;
-	
+    private Map<String, String> properties = null;
 
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    private Date creationDate = null;
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    private Date modifiedDate = null;
 
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
+    public Date getCreationDate() {
+	return creationDate;
+    }
 
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
-	
-	/**
-	 * @param properties
-	 */
-	public void setProperties(Map<String, String> properties) {
-		this.properties = properties;
-	}
+    public void setCreationDate(Date creationDate) {
+	this.creationDate = creationDate;
+    }
 
-	public Map<String, String> getProperties() {
-		synchronized (this) {
-			if (properties == null) {
-				properties = new ConcurrentHashMap<String, String>();
-			}
-		}
-		return properties;
-	}
+    public Date getModifiedDate() {
+	return modifiedDate;
+    }
 
-	public boolean getBooleanProperty(String name, boolean defaultValue) {
-		String value = getProperties().get(name);		
-		String valueToUse = StringUtils.defaultString(value, Boolean.toString(defaultValue));
-		return Boolean.parseBoolean(valueToUse);
-	}
+    public void setModifiedDate(Date modifiedDate) {
+	this.modifiedDate = modifiedDate;
+    }
 
-	public long getLongProperty(String name, long defaultValue) {
-		String value = getProperties().get(name);		
-		String valueToUse = StringUtils.defaultString(value, Long.toString(defaultValue));
-		return Long.parseLong(valueToUse);
-	}
+    /**
+     * @param properties
+     */
+    public void setProperties(Map<String, String> properties) {
+	this.properties = properties;
+    }
 
-	public int getIntProperty(String name, int defaultValue) {
-		String value = getProperties().get(name);		
-		String valueToUse = StringUtils.defaultString(value, Integer.toString(defaultValue));
-		return Integer.parseInt(valueToUse);
+    public Map<String, String> getProperties() {
+	synchronized (this) {
+	    if (properties == null) {
+		properties = new ConcurrentHashMap<String, String>();
+	    }
 	}
+	return properties;
+    }
 
-	public String getProperty(String name, String defaultString) {
-		String value = getProperties().get(name);
-		return StringUtils.defaultString(value, defaultString);
-	}
-	
+    public boolean getBooleanProperty(String name, boolean defaultValue) {
+	String value = getProperties().get(name);
+	String valueToUse = StringUtils.defaultString(value, Boolean.toString(defaultValue));
+	return Boolean.parseBoolean(valueToUse);
+    }
+
+    public long getLongProperty(String name, long defaultValue) {
+	String value = getProperties().get(name);
+	String valueToUse = StringUtils.defaultString(value, Long.toString(defaultValue));
+	return Long.parseLong(valueToUse);
+    }
+
+    public int getIntProperty(String name, int defaultValue) {
+	String value = getProperties().get(name);
+	String valueToUse = StringUtils.defaultString(value, Integer.toString(defaultValue));
+	return Integer.parseInt(valueToUse);
+    }
+
+    public String getProperty(String name, String defaultString) {
+	String value = getProperties().get(name);
+	return StringUtils.defaultString(value, defaultString);
+    }
+
 }

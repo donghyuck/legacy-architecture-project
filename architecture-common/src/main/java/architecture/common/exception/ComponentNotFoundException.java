@@ -15,34 +15,33 @@
  */
 package architecture.common.exception;
 
-
 /**
  * 
  * 
- * @author DongHyuck, Son 
+ * @author DongHyuck, Son
  *
  */
 public class ComponentNotFoundException extends RuntimeException {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6833205543454491023L;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -6833205543454491023L;
 
-	public ComponentNotFoundException() {
-		super();
-	}
+    public ComponentNotFoundException() {
+	super();
+    }
 
-	public ComponentNotFoundException(String msg) {
-		super(msg);
-	}
+    public ComponentNotFoundException(String msg) {
+	super(msg);
+    }
 
-	public ComponentNotFoundException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    public ComponentNotFoundException(String msg, Throwable cause) {
+	super(msg, cause);
+    }
 
-	public ComponentNotFoundException(Throwable cause) {
-		super(cause);
-	}
+    public ComponentNotFoundException(Throwable cause) {
+	super(cause);
+    }
 
 }

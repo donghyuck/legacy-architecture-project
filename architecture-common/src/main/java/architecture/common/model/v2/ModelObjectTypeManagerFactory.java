@@ -17,24 +17,20 @@ package architecture.common.model.v2;
 
 import architecture.common.util.ImplFactory;
 
-
 public class ModelObjectTypeManagerFactory {
 
-	public static interface Implementation {	
-		public abstract ModelObjectTypeManager getModelObjectTypeManager();
-	}
-	
-	
-	/**
-	 * @uml.property  name="impl"
-	 * @uml.associationEnd  
-	 */
-	private static Implementation impl = null;
-    
-    static 
-    {
-        impl = (Implementation)ImplFactory.loadImplFromKey(ModelObjectTypeManagerFactory.Implementation.class);
+    public static interface Implementation {
+	public abstract ModelObjectTypeManager getModelObjectTypeManager();
     }
-       
+
+    /**
+     * @uml.property name="impl"
+     * @uml.associationEnd
+     */
+    private static Implementation impl = null;
+
+    static {
+	impl = (Implementation) ImplFactory.loadImplFromKey(ModelObjectTypeManagerFactory.Implementation.class);
+    }
 
 }

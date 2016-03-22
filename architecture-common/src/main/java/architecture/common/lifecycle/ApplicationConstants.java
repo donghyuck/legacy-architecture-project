@@ -16,32 +16,31 @@
 package architecture.common.lifecycle;
 
 public interface ApplicationConstants {
-	
-	public static final String DEFAULT_ARCHITECTURE_RUNTIME_INIT_FILENAME = "architecture-runtime-init.properties";
-	
-	public static final String DEFAULT_STARTUP_FILENAME = "startup-config.xml";
+
+    public static final String DEFAULT_ARCHITECTURE_RUNTIME_INIT_FILENAME = "architecture-runtime-init.properties";
+
+    public static final String DEFAULT_STARTUP_FILENAME = "startup-config.xml";
 
     public static final String ARCHITECTURE_PROFILE_ROOT_KEY = "architecture.profile.root";
 
     public static final String ARCHITECTURE_CONFIG_ROOT_KEY = "architecture.config.root";
-    
+
     public static final String ARCHITECTURE_PROFILE_ROOT_ENV_KEY = "ARCHITECTURE_PROFILE_ROOT";
-   
+
     public static final String ARCHITECTURE_CONFIG_ROOT_ENV_KEY = "ARCHITECTURE_CONFIG_ROOT";
-    	
-	public static final String EOL = System.getProperty("line.separator");
-	
-    public static final String DEFAULT_CHAR_ENCODING = "UTF-8";	
-        
-    
+
+    public static final String EOL = System.getProperty("line.separator");
+
+    public static final String DEFAULT_CHAR_ENCODING = "UTF-8";
+
     public static final long SECOND = 1000L;
-    
+
     public static final long MINUTE = 60000L;
-    
+
     public static final long HOUR = 0x36ee80L;
-    
+
     public static final long DAY = 0x5265c00L;
-    
+
     public static final long WEEK = 0x240c8400L;
-    
+
 }

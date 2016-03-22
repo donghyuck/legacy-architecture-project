@@ -19,16 +19,16 @@ import java.util.List;
 
 public interface ModelObjectTypeManager {
 
-	public abstract void register(ModelObjectType objectType);
-	
-	public abstract void unregister(ModelObjectType objectType);	
-	
-	public abstract List<ModelObjectType> getModelObjectTypes();
-	
-	public abstract ModelObjectType getModelObjectType( Class clazz );
-	
-	public abstract ModelObjectType getModelObjectType( String code );
-	
-	public abstract ModelObjectType getModelObjectType( Long objectId );
-	
+    public abstract void register(ModelObjectType objectType);
+
+    public abstract void unregister(ModelObjectType objectType);
+
+    public abstract List<ModelObjectType> getModelObjectTypes();
+
+    public abstract ModelObjectType getModelObjectType(Class clazz);
+
+    public abstract ModelObjectType getModelObjectType(String code);
+
+    public abstract ModelObjectType getModelObjectType(Long objectId);
+
 }

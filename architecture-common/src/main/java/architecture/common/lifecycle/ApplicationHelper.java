@@ -24,6 +24,6 @@ package architecture.common.lifecycle;
  */
 public interface ApplicationHelper extends Container {
 
-	public abstract boolean isReady();
-	
+    public abstract boolean isReady();
+
 }

@@ -14,25 +14,26 @@
  * limitations under the License.
  */
 package architecture.common.model.support;
+
 import architecture.common.model.NameModelObject;
 
-public abstract class NameModelObjectSupport implements NameModelObject{
+public abstract class NameModelObjectSupport implements NameModelObject {
 
+    private String name;
 
-	private String name;
+    /**
+     * @return name
+     */
+    public String getName() {
+	return name;
+    }
 
-	/**
-	 * @return name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name 설정할 name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @param name
+     *            설정할 name
+     */
+    public void setName(String name) {
+	this.name = name;
+    }
 
 }

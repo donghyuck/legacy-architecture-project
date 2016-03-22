@@ -15,70 +15,78 @@
  */
 package architecture.common.lifecycle.event;
 
-
 /**
- * @author    donghyuck
+ * @author donghyuck
  */
 public class PropertyChangeEvent extends Event {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3698156475373981206L;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3698156475373981206L;
 
-	/**
-	 * name of the property that changed. May be null, if not known.
-	 * @serial
-	 * @uml.property  name="propertyName"
-	 */
-	private String propertyName;
+    /**
+     * name of the property that changed. May be null, if not known.
+     * 
+     * @serial
+     * @uml.property name="propertyName"
+     */
+    private String propertyName;
 
-	/**
-	 * New value for property. May be null if not known.
-	 * @serial
-	 * @uml.property  name="newValue"
-	 */
-	private Object newValue;
+    /**
+     * New value for property. May be null if not known.
+     * 
+     * @serial
+     * @uml.property name="newValue"
+     */
+    private Object newValue;
 
-	/**
-	 * Previous value for property. May be null if not known.
-	 * @serial
-	 * @uml.property  name="oldValue"
-	 */
-	private Object oldValue;
+    /**
+     * Previous value for property. May be null if not known.
+     * 
+     * @serial
+     * @uml.property name="oldValue"
+     */
+    private Object oldValue;
 
-	public PropertyChangeEvent(Object source, String propertyName, Object oldValue, Object newValue) {
-		super(source);
-		this.propertyName = propertyName;
-		this.newValue = newValue;
-		this.oldValue = oldValue;
-	}
+    public PropertyChangeEvent(Object source, String propertyName, Object oldValue, Object newValue) {
+	super(source);
+	this.propertyName = propertyName;
+	this.newValue = newValue;
+	this.oldValue = oldValue;
+    }
 
-	/**
-	 * Gets the new value for the property, expressed as an Object.
-	 * @return    The new value for the property, expressed as an Object. May be  null if multiple properties have changed.
-	 * @uml.property  name="newValue"
-	 */
-	public Object getNewValue() {
-		return newValue;
-	}
+    /**
+     * Gets the new value for the property, expressed as an Object.
+     * 
+     * @return The new value for the property, expressed as an Object. May be
+     *         null if multiple properties have changed.
+     * @uml.property name="newValue"
+     */
+    public Object getNewValue() {
+	return newValue;
+    }
 
-	/**
-	 * Gets the old value for the property, expressed as an Object.
-	 * @return    The old value for the property, expressed as an Object. May be  null if multiple properties have changed.
-	 * @uml.property  name="oldValue"
-	 */
-	public Object getOldValue() {
-		return oldValue;
-	}
+    /**
+     * Gets the old value for the property, expressed as an Object.
+     * 
+     * @return The old value for the property, expressed as an Object. May be
+     *         null if multiple properties have changed.
+     * @uml.property name="oldValue"
+     */
+    public Object getOldValue() {
+	return oldValue;
+    }
 
-	/**
-	 * Gets the programmatic name of the property that was changed.
-	 * @return    The programmatic name of the property that was changed. May be  null if multiple properties have changed.
-	 * @uml.property  name="propertyName"
-	 */
-	public String getPropertyName() {
-		return propertyName;
-	}
+    /**
+     * Gets the programmatic name of the property that was changed.
+     * 
+     * @return The programmatic name of the property that was changed. May be
+     *         null if multiple properties have changed.
+     * @uml.property name="propertyName"
+     */
+    public String getPropertyName() {
+	return propertyName;
+    }
 
 }

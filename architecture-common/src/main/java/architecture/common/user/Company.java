@@ -19,24 +19,23 @@ package architecture.common.user;
 import architecture.common.model.BaseModelObject;
 
 public interface Company extends BaseModelObject {
-	
-	/**
-	 * @return companyId
-	 */
-	public abstract long getCompanyId();
 
-	/**
-	 * @param  companyId
-	 */
-	public abstract void setCompanyId(long companyId);
-	
+    /**
+     * @return companyId
+     */
+    public abstract long getCompanyId();
 
-	public abstract String getDisplayName();
-	
-	public abstract void setDisplayName(String displayName);
-	
-	public String getDomainName();
-	
-	public void setDomainName(String domainName);
-	
+    /**
+     * @param companyId
+     */
+    public abstract void setCompanyId(long companyId);
+
+    public abstract String getDisplayName();
+
+    public abstract void setDisplayName(String displayName);
+
+    public String getDomainName();
+
+    public void setDomainName(String domainName);
+
 }

@@ -19,39 +19,38 @@ import architecture.common.user.authentication.AuthToken;
 import architecture.common.util.ImplFactory;
 
 public class SecurityHelper {
-	
-	public static interface Implementation {
-		
-		public void checkUserStatus(String username, User.Status status);
-		
-		public AuthToken getAuthToken();
-		
-		public User getUser();
-		
-		public boolean isUserInRole(String role);
-		
-	}
 
-	private static Implementation impl = null;
-    
-    static 
-    {
-        impl = (Implementation)ImplFactory.loadImplFromKey(SecurityHelper.Implementation.class);
+    public static interface Implementation {
+
+	public void checkUserStatus(String username, User.Status status);
+
+	public AuthToken getAuthToken();
+
+	public User getUser();
+
+	public boolean isUserInRole(String role);
+
     }
 
-    public static void checkUserStatus(String username, User.Status status){
-    	impl.checkUserStatus(username, status);
-    }
-    
-    public static AuthToken getAuthToken(){
-    	return impl.getAuthToken();
-    }
-    
-    public static User getUser(){
-    	return impl.getUser();
-    }    
+    private static Implementation impl = null;
 
-    public static boolean isUserInRole(String role){
-    	return impl.isUserInRole(role);
-    }   
+    static {
+	impl = (Implementation) ImplFactory.loadImplFromKey(SecurityHelper.Implementation.class);
+    }
+
+    public static void checkUserStatus(String username, User.Status status) {
+	impl.checkUserStatus(username, status);
+    }
+
+    public static AuthToken getAuthToken() {
+	return impl.getAuthToken();
+    }
+
+    public static User getUser() {
+	return impl.getUser();
+    }
+
+    public static boolean isUserInRole(String role) {
+	return impl.isUserInRole(role);
+    }
 }

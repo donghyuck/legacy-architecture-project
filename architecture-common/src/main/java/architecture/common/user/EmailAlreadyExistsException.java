@@ -19,20 +19,20 @@ import architecture.common.exception.CodeableException;
 
 public class EmailAlreadyExistsException extends CodeableException {
 
-	public EmailAlreadyExistsException() {
-		super();
-	}
+    public EmailAlreadyExistsException() {
+	super();
+    }
 
-	public EmailAlreadyExistsException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    public EmailAlreadyExistsException(String msg, Throwable cause) {
+	super(msg, cause);
+    }
 
-	public EmailAlreadyExistsException(String msg) {
-		super(msg);
-	}
+    public EmailAlreadyExistsException(String msg) {
+	super(msg);
+    }
 
-	public EmailAlreadyExistsException(Throwable cause) {
-		super(cause);
-	}
+    public EmailAlreadyExistsException(Throwable cause) {
+	super(cause);
+    }
 
 }

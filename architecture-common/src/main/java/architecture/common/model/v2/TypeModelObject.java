@@ -17,18 +17,18 @@ package architecture.common.model.v2;
 
 public class TypeModelObject implements TypeModel {
 
-	private ModelObjectType modelObjectType;
-	
-	public ModelObjectType getModelObjectType() {
-		return modelObjectType;
-	}
+    private ModelObjectType modelObjectType;
 
-	public Long getModelObjectTypeId() {
-		return modelObjectType.getId();
-	}
+    public ModelObjectType getModelObjectType() {
+	return modelObjectType;
+    }
 
-	public void setModelObjectType(ModelObjectType modelObjType) {
-		this.modelObjectType = modelObjectType;
-	}
+    public Long getModelObjectTypeId() {
+	return modelObjectType.getId();
+    }
+
+    public void setModelObjectType(ModelObjectType modelObjType) {
+	this.modelObjectType = modelObjectType;
+    }
 
 }

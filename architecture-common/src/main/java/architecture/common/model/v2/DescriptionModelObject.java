@@ -17,21 +17,21 @@ package architecture.common.model.v2;
 
 public class DescriptionModelObject implements DescriptionModel {
 
-	
-	private String description = null;
+    private String description = null;
 
-	/**
-	 * @return description
-	 */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * @return description
+     */
+    public String getDescription() {
+	return description;
+    }
 
-	/**
-	 * @param description 설정할 description
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
+    /**
+     * @param description
+     *            설정할 description
+     */
+    public void setDescription(String description) {
+	this.description = description;
+    }
+
 }

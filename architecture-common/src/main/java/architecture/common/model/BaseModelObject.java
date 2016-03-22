@@ -23,8 +23,8 @@ package architecture.common.model;
  */
 public interface BaseModelObject extends EntityModelObject {
 
-	public String getDescription();
-	
-	public void setDescription(String description);
-	
+    public String getDescription();
+
+    public void setDescription(String description);
+
 }

@@ -24,20 +24,18 @@ import architecture.common.jdbc.ParameterMapping;
 
 public class FtpReadConnector extends AbstractFtpConnector implements ReadConnector {
 
-	public Object pull(Context context) {
-		
-		List<ParameterMapping> parameterMappings = context.getObject("parameterMappings", List.class);		
-		Object[] data = context.getObject("data", Object[].class);
-		if( parameterMappings == null ){
-			parameterMappings = Collections.EMPTY_LIST;
-		}		
-		if( data == null)
-		{
-			data = new Object[0];
-		}
-		
-		
-		return null;
+    public Object pull(Context context) {
+
+	List<ParameterMapping> parameterMappings = context.getObject("parameterMappings", List.class);
+	Object[] data = context.getObject("data", Object[].class);
+	if (parameterMappings == null) {
+	    parameterMappings = Collections.EMPTY_LIST;
 	}
+	if (data == null) {
+	    data = new Object[0];
+	}
+
+	return null;
+    }
 
 }

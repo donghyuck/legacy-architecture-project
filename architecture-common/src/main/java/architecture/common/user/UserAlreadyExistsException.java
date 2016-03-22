@@ -19,20 +19,20 @@ import architecture.common.exception.CodeableException;
 
 public class UserAlreadyExistsException extends CodeableException {
 
-	public UserAlreadyExistsException() {
-		super();
-	}
+    public UserAlreadyExistsException() {
+	super();
+    }
 
-	public UserAlreadyExistsException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    public UserAlreadyExistsException(String msg, Throwable cause) {
+	super(msg, cause);
+    }
 
-	public UserAlreadyExistsException(String msg) {
-		super(msg);
-	}
+    public UserAlreadyExistsException(String msg) {
+	super(msg);
+    }
 
-	public UserAlreadyExistsException(Throwable cause) {
-		super(cause);
-	}
+    public UserAlreadyExistsException(Throwable cause) {
+	super(cause);
+    }
 
 }

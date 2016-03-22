@@ -15,28 +15,27 @@
  */
 package architecture.common.exception;
 
-
 public class ConfigurationWarning extends RuntimeException {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4891487084047187129L;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -4891487084047187129L;
 
-	public ConfigurationWarning() {
-		super();
-	}
+    public ConfigurationWarning() {
+	super();
+    }
 
-	public ConfigurationWarning(String msg) {
-		super(msg);
-	}
+    public ConfigurationWarning(String msg) {
+	super(msg);
+    }
 
-	public ConfigurationWarning(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    public ConfigurationWarning(String msg, Throwable cause) {
+	super(msg, cause);
+    }
 
-	public ConfigurationWarning(Throwable cause) {
-		super(cause);
-	}
+    public ConfigurationWarning(Throwable cause) {
+	super(cause);
+    }
 
 }

@@ -32,35 +32,34 @@ import architecture.common.event.spi.ListenerInvoker;
  * @since 2.0
  */
 final class SingleParameterMethodListenerInvoker implements ListenerInvoker {
-	private final Method method;
-	private final Object listener;
+    private final Method method;
+    private final Object listener;
 
-	public SingleParameterMethodListenerInvoker(Object listener, Method method) {
-		this.listener = checkNotNull(listener);
-		this.method = checkNotNull(method);
-	}
+    public SingleParameterMethodListenerInvoker(Object listener, Method method) {
+	this.listener = checkNotNull(listener);
+	this.method = checkNotNull(method);
+    }
 
-	public Set<Class<?>> getSupportedEventTypes() {
-		return Sets.newHashSet(method.getParameterTypes());
-	}
+    public Set<Class<?>> getSupportedEventTypes() {
+	return Sets.newHashSet(method.getParameterTypes());
+    }
 
-	public void invoke(Object event) {
-		try {
-			method.invoke(listener, event);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		} catch (InvocationTargetException e) {
-			if (e.getCause() == null)
-				throw new RuntimeException(e);
-			if (e.getCause().getMessage() == null)
-				throw new RuntimeException(e.getCause());
-			else
-				throw new RuntimeException(e.getCause().getMessage(),
-						e.getCause());
-		}
+    public void invoke(Object event) {
+	try {
+	    method.invoke(listener, event);
+	} catch (IllegalAccessException e) {
+	    throw new RuntimeException(e);
+	} catch (InvocationTargetException e) {
+	    if (e.getCause() == null)
+		throw new RuntimeException(e);
+	    if (e.getCause().getMessage() == null)
+		throw new RuntimeException(e.getCause());
+	    else
+		throw new RuntimeException(e.getCause().getMessage(), e.getCause());
 	}
+    }
 
-	public boolean supportAsynchronousEvents() {
-		return true;
-	}
+    public boolean supportAsynchronousEvents() {
+	return true;
+    }
 }

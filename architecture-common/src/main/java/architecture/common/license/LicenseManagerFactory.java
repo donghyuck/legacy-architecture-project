@@ -19,22 +19,22 @@ import architecture.common.util.ImplFactory;
 
 /**
  * 
- * @author  <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
+ * @author <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
  *
  */
 public class LicenseManagerFactory {
 
-	public static interface Implementation {
-		public abstract LicenseManager getLicenseManager();
-	}
-	
-	private static Implementation impl = null;
+    public static interface Implementation {
+	public abstract LicenseManager getLicenseManager();
+    }
 
-	static {
-		impl = (Implementation) ImplFactory.loadImplFromKey(LicenseManagerFactory.Implementation.class);
-	}
+    private static Implementation impl = null;
 
-	public static LicenseManager getLicenseManager() {
-		return impl.getLicenseManager();
-	}
+    static {
+	impl = (Implementation) ImplFactory.loadImplFromKey(LicenseManagerFactory.Implementation.class);
+    }
+
+    public static LicenseManager getLicenseManager() {
+	return impl.getLicenseManager();
+    }
 }

@@ -30,96 +30,89 @@ import architecture.common.adaptor.Connector;
  * @author donghyuck
  *
  */
-public class AbstractFtpConnector implements Connector  {
+public class AbstractFtpConnector implements Connector {
 
-	protected Log log = LogFactory.getLog(getClass());
-	
-	private FTPClient ftp = new FTPClient();
-	
-	private String hostname;
+    protected Log log = LogFactory.getLog(getClass());
 
-	private int port = 0;
+    private FTPClient ftp = new FTPClient();
 
-	private String username;
+    private String hostname;
 
-	private String password;
+    private int port = 0;
 
-	public String getHostname() {
-		return hostname;
-	}
+    private String username;
 
-	public void setHostname(String hostname) {
-		this.hostname = hostname;
-	}
+    private String password;
 
-	public int getPort() {
-		return port;
-	}
+    public String getHostname() {
+	return hostname;
+    }
 
-	public void setPort(int port) {
-		this.port = port;
-	}
+    public void setHostname(String hostname) {
+	this.hostname = hostname;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public int getPort() {
+	return port;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setPort(int port) {
+	this.port = port;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getUsername() {
+	return username;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	protected Object pull(){
-		
+    public void setUsername(String username) {
+	this.username = username;
+    }
+
+    public String getPassword() {
+	return password;
+    }
+
+    public void setPassword(String password) {
+	this.password = password;
+    }
+
+    protected Object pull() {
+
+	try {
+	    int reply;
+	    if (port > 0)
+		ftp.connect(hostname, port);
+	    else
+		ftp.connect(hostname);
+
+	    log.debug("Connected to " + hostname + " on " + (port > 0 ? port : ftp.getDefaultPort()));
+	    // After connection attempt, you should check the reply code to
+	    // verify
+	    // success.
+	    reply = ftp.getReplyCode();
+
+	    if (!FTPReply.isPositiveCompletion(reply)) {
+		ftp.disconnect();
+		log.error("FTP server refused connection.");
+	    }
+
+	    if (!ftp.login(username, password)) {
+		ftp.logout();
+	    }
+
+	    log.debug("Remote system is " + ftp.getSystemType());
+
+	} catch (Exception e) {
+	    if (ftp.isConnected()) {
 		try {
-			int reply;
-			if( port > 0)
-				ftp.connect(hostname, port);
-			else
-				ftp.connect(hostname);
-			
-			log.debug("Connected to " + hostname + " on " + (port>0 ? port : ftp.getDefaultPort()));
-			// After connection attempt, you should check the reply code to verify
-			// success.
-			reply = ftp.getReplyCode();
-			
-			if (!FTPReply.isPositiveCompletion(reply))
-			{
-			    ftp.disconnect();
-			    log.error("FTP server refused connection.");
-			}
-			
-			if (!ftp.login(username, password)){
-				ftp.logout();
-			}
-			
-			log.debug("Remote system is " + ftp.getSystemType());
-			
-			
-			
-			
-		} catch (Exception e) {
-			if (ftp.isConnected())
-            {
-                try
-                {
-                    ftp.disconnect();
-                }
-                catch (IOException f)
-                {
-                    // do nothing
-                }
-                log.error("FTP server refused connection.");
-            }
+		    ftp.disconnect();
+		} catch (IOException f) {
+		    // do nothing
 		}
-		return null;
+		log.error("FTP server refused connection.");
+	    }
 	}
-	
+	return null;
+    }
+
 }

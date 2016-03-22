@@ -23,8 +23,8 @@ package architecture.common.exception;
  */
 public interface Codeable {
 
-	public int getErrorCode();
-	
-	public String getErrorCodeString();
-	
+    public int getErrorCode();
+
+    public String getErrorCodeString();
+
 }

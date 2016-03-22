@@ -26,231 +26,217 @@ import architecture.common.user.Company;
 import architecture.common.user.User;
 
 /**
- * @author  donghyuck
+ * @author donghyuck
  */
 public class AnonymousUser extends BaseModelObjectSupport implements AuthToken, User {
 
+    private static final long serialVersionUID = 6602216613448436301L;
 
-	private static final long serialVersionUID = 6602216613448436301L;
+    public static final long ANONYMOUS_ID = -1L;
 
-	public static final long ANONYMOUS_ID = -1L;
-	
-	public static final String ANONYMOUS_USERNAME = "ANONYMOUS";
-	
-	private Company company  = null;
+    public static final String ANONYMOUS_USERNAME = "ANONYMOUS";
 
-	private String username ;
-	
-	public AnonymousUser() {
-		this.username = ANONYMOUS_USERNAME ;
-	}
-		
+    private Company company = null;
 
-	public AnonymousUser(String username, String password) {
-	}
+    private String username;
 
-	public AnonymousUser(Company company) {
-		this.company = company;
-	}
-		
-	public Object getPrimaryKey() {		
-		return getUserId();
-	}
+    public AnonymousUser() {
+	this.username = ANONYMOUS_USERNAME;
+    }
 
-	public int getModelObjectType() {
-		return ModelTypeFactory.getTypeIdFromCode("ANONYMOUS");
-	}
-	
-	/**
-	 * @return
-	 */
-	public String getUsername() {
-		return username;
-	}
+    public AnonymousUser(String username, String password) {
+    }
 
-	public String getName() {
-		return null;
-	}
+    public AnonymousUser(Company company) {
+	this.company = company;
+    }
 
-	public String getFirstName() {
-		return null;
-	}
+    public Object getPrimaryKey() {
+	return getUserId();
+    }
 
-	public String getLastName() {
-		return null;
-	}
+    public int getModelObjectType() {
+	return ModelTypeFactory.getTypeIdFromCode("ANONYMOUS");
+    }
 
-	public boolean isNameVisible() {
-		return false;
-	}
+    /**
+     * @return
+     */
+    public String getUsername() {
+	return username;
+    }
 
-	public String getPasswordHash() throws UnAuthorizedException {
-		return "";
-	}
+    public String getName() {
+	return null;
+    }
 
-	public String getPassword() throws UnAuthorizedException {
-		return "";
-	}
+    public String getFirstName() {
+	return null;
+    }
 
-	public String getEmail() {
-		return null;
-	}
+    public String getLastName() {
+	return null;
+    }
 
-	public boolean isEmailVisible() {
-		return false;
-	}
+    public boolean isNameVisible() {
+	return false;
+    }
 
-	public Date getCreationDate() {
-		return null;
-	}
+    public String getPasswordHash() throws UnAuthorizedException {
+	return "";
+    }
 
-	public Date getModifiedDate() {
-		return null;
-	}
+    public String getPassword() throws UnAuthorizedException {
+	return "";
+    }
 
-	public Map<String, String> getProperties() {
-		return Collections.EMPTY_MAP;
-	}
+    public String getEmail() {
+	return null;
+    }
 
-	public Date getLastLoggedIn() {
-		return null;
-	}
+    public boolean isEmailVisible() {
+	return false;
+    }
 
-	public Date getLastProfileUpdate() {
-		return null;
-	}
+    public Date getCreationDate() {
+	return null;
+    }
 
-	public boolean isEnabled() {
-		return true;
-	}
+    public Date getModifiedDate() {
+	return null;
+    }
 
-	public boolean isFederated() {
-		return false;
-	}
+    public Map<String, String> getProperties() {
+	return Collections.EMPTY_MAP;
+    }
 
-	public boolean isExternal() {
-		return false;
-	}
+    public Date getLastLoggedIn() {
+	return null;
+    }
 
-	public boolean isSetPasswordSupported() {
-		return false;
-	}
+    public Date getLastProfileUpdate() {
+	return null;
+    }
 
-	public boolean isGetPasswordHashSupported() {
-		return false;
-	}
+    public boolean isEnabled() {
+	return true;
+    }
 
-	public boolean isSetPasswordHashSupported() {
-		return false;
-	}
+    public boolean isFederated() {
+	return false;
+    }
 
-	public boolean isSetNameSupported() {
-		return false;
-	}
+    public boolean isExternal() {
+	return false;
+    }
 
-	public boolean isSetUsernameSupported() {
-		return false;
-	}
+    public boolean isSetPasswordSupported() {
+	return false;
+    }
 
-	public boolean isSetEmailSupported() {
-		return false;
-	}
+    public boolean isGetPasswordHashSupported() {
+	return false;
+    }
 
-	public boolean isSetNameVisibleSupported() {
-		return false;
-	}
+    public boolean isSetPasswordHashSupported() {
+	return false;
+    }
 
-	public boolean isSetEmailVisibleSupported() {
-		return false;
-	}
+    public boolean isSetNameSupported() {
+	return false;
+    }
 
-	public boolean isPropertyEditSupported() {
-		return false;
-	}
+    public boolean isSetUsernameSupported() {
+	return false;
+    }
 
-	public int compareTo(User o) {
-		return 0;
-	}
+    public boolean isSetEmailSupported() {
+	return false;
+    }
 
-	public long getUserId() {
-		return ANONYMOUS_ID;
-	}
+    public boolean isSetNameVisibleSupported() {
+	return false;
+    }
 
-	public boolean isAnonymous() {
-		return true;
-	}
+    public boolean isSetEmailVisibleSupported() {
+	return false;
+    }
 
-	public Serializable getPrimaryKeyObject() {
-		return ANONYMOUS_ID;
-	}
+    public boolean isPropertyEditSupported() {
+	return false;
+    }
 
-	public void setPrimaryKeyObject(Serializable primaryKeyObj) {		
-	}
+    public int compareTo(User o) {
+	return 0;
+    }
 
-	public int getCachedSize() {
-		return 0;
-	}
+    public long getUserId() {
+	return ANONYMOUS_ID;
+    }
 
+    public boolean isAnonymous() {
+	return true;
+    }
 
-	public Date getLastProfileUpdated() {
-		return null;
-	}
+    public Serializable getPrimaryKeyObject() {
+	return ANONYMOUS_ID;
+    }
 
-	public boolean isSetNameVisbleSupported() {
-		return false;
-	}
+    public void setPrimaryKeyObject(Serializable primaryKeyObj) {
+    }
 
+    public int getCachedSize() {
+	return 0;
+    }
 
-	public Status getStatus() {
-		return Status.none;
-	}
+    public Date getLastProfileUpdated() {
+	return null;
+    }
 
+    public boolean isSetNameVisbleSupported() {
+	return false;
+    }
 
-	public void setCreationDate(Date creationDate) {	
-	}
+    public Status getStatus() {
+	return Status.none;
+    }
 
+    public void setCreationDate(Date creationDate) {
+    }
 
-	public void setModifiedDate(Date modifiedDate) {		
-	}
+    public void setModifiedDate(Date modifiedDate) {
+    }
 
+    public long getCompanyId() {
+	return -1L;
+    }
 
-	public long getCompanyId() {
-		return -1L;
-	}
+    public Company getCompany() {
+	return company;
+    }
 
+    public boolean isProfileSupported() {
+	return false;
+    }
 
-	public Company getCompany() {
-		return company;
-	}
+    public boolean isProfileEditSupported() {
+	return false;
+    }
 
+    public Map<String, Object> getProfile() {
+	return Collections.EMPTY_MAP;
+    }
 
-	public boolean isProfileSupported() {
-		return false;
-	}
+    public <T> T getProfileFieldValue(String fieldName, Class<T> elementType) {
+	return null;
+    }
 
+    public String getProfileFieldValueString(String fieldName) {
+	return null;
+    }
 
-	public boolean isProfileEditSupported() {
-		return false;
-	}
-
-
-	public Map<String, Object> getProfile() {
-		return Collections.EMPTY_MAP;
-	}
-
-
-	public <T> T getProfileFieldValue(String fieldName, Class<T> elementType) {
-		return null;
-	}
-
-
-	public String getProfileFieldValueString(String fieldName) {
-		return null;
-	}
-
-
-	@Override
-	public boolean hasCompany() {
-		return false;
-	}
+    @Override
+    public boolean hasCompany() {
+	return false;
+    }
 }

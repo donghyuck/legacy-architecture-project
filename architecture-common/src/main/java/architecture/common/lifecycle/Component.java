@@ -22,27 +22,30 @@ import architecture.common.exception.RuntimeError;
 import architecture.common.exception.RuntimeWarning;
 
 public interface Component {
-	
-	/**
-	 * 컴포넌트 이름 또는 아이디을 리턴한다.
-	 * @return
-	 */
+
+    /**
+     * 컴포넌트 이름 또는 아이디을 리턴한다.
+     * 
+     * @return
+     */
     public abstract String getName();
 
     /**
      * 컴포넌트의 상태를 리턴한다.
+     * 
      * @return
      */
     public abstract State getState();
-        
+
     /**
      * 컴포넌트를 초기화 한다.
+     * 
      * @throws ComponentDisabledException
      * @throws ConfigurationWarning
      * @throws ConfigurationError
      */
     public abstract void initialize() throws ComponentDisabledException, ConfigurationWarning, ConfigurationError;
-    
+
     /**
      * 컴포넌트를 시작한다.
      * 
@@ -50,20 +53,19 @@ public interface Component {
      * @throws RuntimeWarning
      */
     public abstract void start() throws RuntimeError, RuntimeWarning;
-    
+
     /**
      * 컴포넌트를 종료한다.
      */
     public abstract void stop();
-    
+
     /**
      * 컴포넌트를 파괴한다.
      */
     public abstract void destroy();
-    
-    public void removeStateChangeListener(Object listener);
-    
-    public void addStateChangeListener(Object listener);
-    
-}
 
+    public void removeStateChangeListener(Object listener);
+
+    public void addStateChangeListener(Object listener);
+
+}

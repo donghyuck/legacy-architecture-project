@@ -14,23 +14,22 @@ import architecture.common.model.Property;
 
 public class JsonMapPropertySerializer extends JsonSerializer<Map<String, String>> {
 
-	public JsonMapPropertySerializer() {
-	}
+    public JsonMapPropertySerializer() {
+    }
 
-	public void serialize(Map<String, String> value, JsonGenerator jgen, SerializerProvider provider)
-			throws IOException, JsonProcessingException {		
-		
-		jgen.writeObject(toList(value));
-		
+    public void serialize(Map<String, String> value, JsonGenerator jgen, SerializerProvider provider)
+	    throws IOException, JsonProcessingException {
+
+	jgen.writeObject(toList(value));
+
+    }
+
+    protected List<Property> toList(Map<String, String> properties) {
+	List<Property> list = new ArrayList<Property>();
+	for (String key : properties.keySet()) {
+	    String value = properties.get(key);
+	    list.add(new Property(key, value));
 	}
-	
-	
-	protected List<Property> toList (Map<String, String> properties){
-		List<Property> list = new ArrayList<Property>();
-		for (String key : properties.keySet()) {
-			String value = properties.get(key);
-			list.add(new Property(key, value));
-		}
-		return list;
-	}
+	return list;
+    }
 }

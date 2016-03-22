@@ -25,90 +25,91 @@ import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
 
-public class CompanyTemplate  extends BaseModelObjectSupport implements Company {
+public class CompanyTemplate extends BaseModelObjectSupport implements Company {
 
-	private Long companyId;
-	private String displayName;
-	private String domainName;
-	private int memberCount;
-	
-	public CompanyTemplate() {
-		this.companyId = -1L;
-		this.displayName = "unknown";
-		Date now = Calendar.getInstance().getTime();
-		this.setCreationDate(now);
-		this.setModifiedDate(now);
-		this.memberCount = 0;
-	}
-	
-	/**
-	 * @param companyId
-	 * @param displayName
-	 * @param domainName
-	 */
-	public CompanyTemplate(Long companyId) {
-		this.companyId = companyId;
-	}
+    private Long companyId;
+    private String displayName;
+    private String domainName;
+    private int memberCount;
 
-	public String getDisplayName() {
-		return displayName;
-	}
+    public CompanyTemplate() {
+	this.companyId = -1L;
+	this.displayName = "unknown";
+	Date now = Calendar.getInstance().getTime();
+	this.setCreationDate(now);
+	this.setModifiedDate(now);
+	this.memberCount = 0;
+    }
 
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
-	}
+    /**
+     * @param companyId
+     * @param displayName
+     * @param domainName
+     */
+    public CompanyTemplate(Long companyId) {
+	this.companyId = companyId;
+    }
 
-	public long getCompanyId() {
-		return companyId;
-	}
+    public String getDisplayName() {
+	return displayName;
+    }
 
-	/**
-	 * @return domainName
-	 */
-	public String getDomainName() {
-		return domainName;
-	}
+    public void setDisplayName(String displayName) {
+	this.displayName = displayName;
+    }
 
-	/**
-	 * @param domainName 설정할 domainName
-	 */
-	public void setDomainName(String domainName) {
-		this.domainName = domainName;
-	}
+    public long getCompanyId() {
+	return companyId;
+    }
 
-	@JsonIgnore
-	public Serializable getPrimaryKeyObject() {
-		return companyId;
-	}
+    /**
+     * @return domainName
+     */
+    public String getDomainName() {
+	return domainName;
+    }
 
-	@JsonIgnore
-	public int getModelObjectType() {
-		return ModelTypeFactory.getTypeIdFromCode("COMPANY");
-	}
+    /**
+     * @param domainName
+     *            설정할 domainName
+     */
+    public void setDomainName(String domainName) {
+	this.domainName = domainName;
+    }
 
-	
-	public void setCompanyId(long companyId) {
-		this.companyId = companyId;
-	}
-	
-	/**
-	 * @return memberCount
-	 */
-	public int getMemberCount() {
-		return memberCount;
-	}
+    @JsonIgnore
+    public Serializable getPrimaryKeyObject() {
+	return companyId;
+    }
 
-	/**
-	 * @param memberCount 설정할 memberCount
-	 */
-	public void setMemberCount(int memberCount) {
-		this.memberCount = memberCount;
-	}
+    @JsonIgnore
+    public int getModelObjectType() {
+	return ModelTypeFactory.getTypeIdFromCode("COMPANY");
+    }
 
-	@JsonIgnore
-	public int getCachedSize() {
-		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName())  +  CacheSizes.sizeOfString(getDisplayName()) + CacheSizes.sizeOfString( getDescription() ) + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate() ;
-	}
+    public void setCompanyId(long companyId) {
+	this.companyId = companyId;
+    }
 
-	
+    /**
+     * @return memberCount
+     */
+    public int getMemberCount() {
+	return memberCount;
+    }
+
+    /**
+     * @param memberCount
+     *            설정할 memberCount
+     */
+    public void setMemberCount(int memberCount) {
+	this.memberCount = memberCount;
+    }
+
+    @JsonIgnore
+    public int getCachedSize() {
+	return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName()) + CacheSizes.sizeOfString(getDisplayName())
+		+ CacheSizes.sizeOfString(getDescription()) + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate();
+    }
+
 }

@@ -20,87 +20,86 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
-
 public class EmptyApplicationProperties extends AbstractApplicationProperties {
 
+    /**
+     * @author donghyuck
+     */
+    private static class InstanceHolder {
+
 	/**
-	 * @author    donghyuck
+	 * @uml.property name="instance"
+	 * @uml.associationEnd
 	 */
-	private static class InstanceHolder {
+	private static final EmptyApplicationProperties instance = new EmptyApplicationProperties();
 
-		/**
-		 * @uml.property  name="instance"
-		 * @uml.associationEnd  
-		 */
-		private static final EmptyApplicationProperties instance = new EmptyApplicationProperties();
-
-		private InstanceHolder() {
-		}
+	private InstanceHolder() {
 	}
+    }
 
-	private EmptyApplicationProperties() {}
+    private EmptyApplicationProperties() {
+    }
 
-	public static EmptyApplicationProperties getInstance() {
-		return InstanceHolder.instance;
-	}
+    public static EmptyApplicationProperties getInstance() {
+	return InstanceHolder.instance;
+    }
 
-	public Collection<String> getChildrenNames(String name) {
-		return Collections.emptyList();
-	}
+    public Collection<String> getChildrenNames(String name) {
+	return Collections.emptyList();
+    }
 
-	public Collection<String> getPropertyNames() {
-		return Collections.emptyList();
-	}
+    public Collection<String> getPropertyNames() {
+	return Collections.emptyList();
+    }
 
-	public void clear() {
-	}
+    public void clear() {
+    }
 
-	public boolean containsKey(Object key) {
-		return false;
-	}
+    public boolean containsKey(Object key) {
+	return false;
+    }
 
-	public boolean containsValue(Object value) {
-		return false;
-	}
+    public boolean containsValue(Object value) {
+	return false;
+    }
 
-	public Set<java.util.Map.Entry<String, String>> entrySet() {
-		return null;
-	}
+    public Set<java.util.Map.Entry<String, String>> entrySet() {
+	return null;
+    }
 
-	public String get(Object key) {
-		return null;
-	}
+    public String get(Object key) {
+	return null;
+    }
 
-	public Collection<String> values() {
-	   return Collections.emptyList();
-	}
+    public Collection<String> values() {
+	return Collections.emptyList();
+    }
 
+    public Set<String> keySet() {
+	return Collections.emptySet();
+    }
 
-	public Set<String> keySet() {
-		return Collections.emptySet();
-	}
+    public String put(String key, String value) {
+	return null;
+    }
 
-	public String put(String key, String value) {
-		return null;
-	}
+    public void putAll(Map<? extends String, ? extends String> m) {
+    }
 
-	public void putAll(Map<? extends String, ? extends String> m) {
-	}
+    public String remove(Object key) {
+	return null;
+    }
 
-	public String remove(Object key) {
-		return null;
-	}
+    public int size() {
+	return 0;
+    }
 
-	public int size() {
-		return 0;
-	}
+    public boolean isEmpty() {
+	return true;
+    }
 
-	public boolean isEmpty() {
-		return true;
-	}
+    public String getStringProperty(String name, String defaultValue) {
+	return defaultValue;
+    }
 
-	public String getStringProperty(String name, String defaultValue) {
-		return defaultValue;
-	}
-
- }
+}

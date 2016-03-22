@@ -19,66 +19,64 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * @author    donghyuck
+ * @author donghyuck
  */
 public abstract class Event extends java.util.EventObject {
- 
-	/**
-	 * @uml.property  name="uuid"
-	 */
-	private UUID uuid;
-	   
-	/**
-	 * @uml.property  name="actor"
-	 */
-	private Object actor;
-    
-	private Date createdDate;
-    	
-	public Event(Object source) {
-		super(source);	
-		this.uuid = UUID.randomUUID();
-		this.createdDate = new Date();
-	}
 
     /**
-	 * @return
-	 * @uml.property  name="actor"
-	 */
+     * @uml.property name="uuid"
+     */
+    private UUID uuid;
+
+    /**
+     * @uml.property name="actor"
+     */
+    private Object actor;
+
+    private Date createdDate;
+
+    public Event(Object source) {
+	super(source);
+	this.uuid = UUID.randomUUID();
+	this.createdDate = new Date();
+    }
+
+    /**
+     * @return
+     * @uml.property name="actor"
+     */
     public Object getActor() {
-        return actor;
+	return actor;
     }
-    
-    public Date getDate()
-    {
-        return createdDate;
+
+    public Date getDate() {
+	return createdDate;
     }
 
     /**
-	 * @return
-	 * @uml.property  name="uuid"
-	 */
-    public UUID getUuid()
-    {
-        return uuid;
+     * @return
+     * @uml.property name="uuid"
+     */
+    public UUID getUuid() {
+	return uuid;
     }
 
     /**
-	 * @param  actor
-	 * @uml.property  name="actor"
-	 */
+     * @param actor
+     * @uml.property name="actor"
+     */
     public void setActor(Object actor) {
-        this.actor = actor;
+	this.actor = actor;
     }
-    
-    public void setDate(Date createdDate)
-    {
-        this.createdDate = createdDate;
+
+    public void setDate(Date createdDate) {
+	this.createdDate = createdDate;
     }
-    
-    public String toString()
-    {
-        return (new StringBuilder()).append("Event{uuid=").append(uuid.toString()).append(", eventType=").append(getClass().getName()).append(", createdDate=").append(createdDate).append(", actor=").append(actor).append('}').toString();
+
+    public String toString() {
+	return (new StringBuilder()).append("Event{uuid=").append(uuid.toString()).append(", eventType=")
+		.append(getClass().getName()).append(", createdDate=").append(createdDate).append(", actor=")
+		.append(actor).append('}').toString();
     }
 
 }

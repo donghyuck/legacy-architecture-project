@@ -26,104 +26,77 @@ import java.io.OutputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
-public class SharedFileOutputStream extends SharedOutputStream
-{
-	private static final Log log = LogFactory.getLog(SharedFileOutputStream.class);
+public class SharedFileOutputStream extends SharedOutputStream {
+    private static final Log log = LogFactory.getLog(SharedFileOutputStream.class);
 
     private File file;
     private final OutputStream out;
     private int size;
-    
-    public SharedFileOutputStream(File file)
-        throws IOException
-    {
-        size = 0;
-        this.file = file;
-        out = new FileOutputStream(file);
+
+    public SharedFileOutputStream(File file) throws IOException {
+	size = 0;
+	this.file = file;
+	out = new FileOutputStream(file);
     }
 
-    public void write(int b)
-        throws IOException
-    {
-        size++;
-        out.write(b);
+    public void write(int b) throws IOException {
+	size++;
+	out.write(b);
     }
 
-    public void write(byte b[])
-        throws IOException
-    {
-        size += b.length;
-        out.write(b);
+    public void write(byte b[]) throws IOException {
+	size += b.length;
+	out.write(b);
     }
 
-    public void write(byte b[], int off, int len)
-        throws IOException
-    {
-        size += len;
-        out.write(b, off, len);
+    public void write(byte b[], int off, int len) throws IOException {
+	size += len;
+	out.write(b, off, len);
     }
 
-    public void flush()
-        throws IOException
-    {
-        out.flush();
+    public void flush() throws IOException {
+	out.flush();
     }
 
-    public void close()
-        throws IOException
-    {
-        out.close();
-        try
-        {
-            if(file.exists() && file.canWrite())
-            {
-                boolean success = file.delete();
-                if(!success)
-                    log.error((new StringBuilder()).append("Could not Delete File on Close: ").append(file.getName()).toString());
-            }
-        }
-        catch(Exception e) { }
+    public void close() throws IOException {
+	out.close();
+	try {
+	    if (file.exists() && file.canWrite()) {
+		boolean success = file.delete();
+		if (!success)
+		    log.error((new StringBuilder()).append("Could not Delete File on Close: ").append(file.getName())
+			    .toString());
+	    }
+	} catch (Exception e) {
+	}
     }
 
-    public int getSize()
-    {
-        return size;
+    public int getSize() {
+	return size;
     }
 
-    public InputStream getInputStream()
-    {
-        try
-        {
-            return new FileInputStream(file) {
+    public InputStream getInputStream() {
+	try {
+	    return new FileInputStream(file) {
 
-                public void close() throws IOException
-                {
-                    super.close();
-                    try
-                    {
-                        if(file.exists() && file.canWrite())
-                            file.delete();
-                    }
-                    catch(Exception e)
-                    {
-                        log.error(e);
-                    }
-                }
-            };
-        }
-        catch(FileNotFoundException e)
-        {
-            return null;
-        }
+		public void close() throws IOException {
+		    super.close();
+		    try {
+			if (file.exists() && file.canWrite())
+			    file.delete();
+		    } catch (Exception e) {
+			log.error(e);
+		    }
+		}
+	    };
+	} catch (FileNotFoundException e) {
+	    return null;
+	}
     }
 
-    protected void finalize()
-        throws Throwable
-    {
-        super.finalize();
-        file.delete();
+    protected void finalize() throws Throwable {
+	super.finalize();
+	file.delete();
     }
-
 
 }

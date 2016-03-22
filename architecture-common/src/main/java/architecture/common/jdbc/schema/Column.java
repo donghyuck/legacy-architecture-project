@@ -18,192 +18,174 @@ package architecture.common.jdbc.schema;
 import java.io.Serializable;
 
 /**
- * @author  donghyuck
+ * @author donghyuck
  */
 public class Column implements Serializable {
 
-	/**
-	 * @uml.property  name="name"
-	 */
-	private String name;
-	/**
-	 * @uml.property  name="type"
-	 */
-	private int type;
+    /**
+     * @uml.property name="name"
+     */
+    private String name;
+    /**
+     * @uml.property name="type"
+     */
+    private int type;
 
-	private String typeName;
-	
-	private int size;
-	
-	private String nullable ;
-	
-	private String comment ;
-	
-	private boolean primaryKey;
-	
-	private int ordinalPosition ;
-	
-	
-	public Column(String name, int type) {
-		this.name = name;
-		this.type = type;
-		this.typeName = null;
-		this.nullable = null;
-		this.primaryKey = false;
-		this.comment = null;
-		this.size = 0;
-		this.ordinalPosition = 0;
-	}
+    private String typeName;
 
-	
-	
-	/**
-	 * @param name
-	 * @param type
-	 * @param typeName
-	 * @param size
-	 * @param nullable
-	 * @param comment
-	 */
-	public Column(String name, int type, String typeName, int size, String nullable, String comment) {
-		this.name = name;
-		this.type = type;
-		this.typeName = typeName;
-		this.size = size;
-		this.nullable = nullable;
-		this.comment = comment;
-		this.ordinalPosition = 0;
-	}
-	
-	/**
-	 * @return ordinalPosition
-	 */
-	public int getOrdinalPosition() {
-		return ordinalPosition;
-	}
+    private int size;
 
+    private String nullable;
 
+    private String comment;
 
-	/**
-	 * @param name
-	 * @param type
-	 * @param typeName
-	 * @param size
-	 * @param nullable
-	 * @param comment
-	 */
-	public Column(String name, int type, String typeName, int size, String nullable, String comment, int ordinalPosition) {
-		this.name = name;
-		this.type = type;
-		this.typeName = typeName;
-		this.size = size;
-		this.nullable = nullable;
-		this.comment = comment;
-		this.ordinalPosition = ordinalPosition;
-	}
+    private boolean primaryKey;
 
+    private int ordinalPosition;
 
+    public Column(String name, int type) {
+	this.name = name;
+	this.type = type;
+	this.typeName = null;
+	this.nullable = null;
+	this.primaryKey = false;
+	this.comment = null;
+	this.size = 0;
+	this.ordinalPosition = 0;
+    }
 
-	/**
-	 * @return primaryKey
-	 */
-	public boolean isPrimaryKey() {
-		return primaryKey;
-	}
+    /**
+     * @param name
+     * @param type
+     * @param typeName
+     * @param size
+     * @param nullable
+     * @param comment
+     */
+    public Column(String name, int type, String typeName, int size, String nullable, String comment) {
+	this.name = name;
+	this.type = type;
+	this.typeName = typeName;
+	this.size = size;
+	this.nullable = nullable;
+	this.comment = comment;
+	this.ordinalPosition = 0;
+    }
 
+    /**
+     * @return ordinalPosition
+     */
+    public int getOrdinalPosition() {
+	return ordinalPosition;
+    }
 
+    /**
+     * @param name
+     * @param type
+     * @param typeName
+     * @param size
+     * @param nullable
+     * @param comment
+     */
+    public Column(String name, int type, String typeName, int size, String nullable, String comment,
+	    int ordinalPosition) {
+	this.name = name;
+	this.type = type;
+	this.typeName = typeName;
+	this.size = size;
+	this.nullable = nullable;
+	this.comment = comment;
+	this.ordinalPosition = ordinalPosition;
+    }
 
-	/**
-	 * @param primaryKey 설정할 primaryKey
-	 */
-	public void setPrimaryKey(boolean primaryKey) {
-		this.primaryKey = primaryKey;
-	}
+    /**
+     * @return primaryKey
+     */
+    public boolean isPrimaryKey() {
+	return primaryKey;
+    }
 
+    /**
+     * @param primaryKey
+     *            설정할 primaryKey
+     */
+    public void setPrimaryKey(boolean primaryKey) {
+	this.primaryKey = primaryKey;
+    }
 
+    /**
+     * @return typeName
+     */
+    public String getTypeName() {
+	return typeName;
+    }
 
-	/**
-	 * @return typeName
-	 */
-	public String getTypeName() {
-		return typeName;
-	}
+    /**
+     * @return size
+     */
+    public int getSize() {
+	return size;
+    }
 
+    /**
+     * @return nullable
+     */
+    public String getNullable() {
+	return nullable;
+    }
 
+    /**
+     * @return comment
+     */
+    public String getComment() {
+	return comment;
+    }
 
-	/**
-	 * @return size
-	 */
-	public int getSize() {
-		return size;
-	}
+    /**
+     * @param type
+     *            설정할 type
+     */
+    public void setType(int type) {
+	this.type = type;
+    }
 
+    /**
+     * @return
+     * @uml.property name="name"
+     */
+    public String getName() {
+	return name;
+    }
 
+    /**
+     * @return
+     * @uml.property name="type"
+     */
+    public int getType() {
+	return type;
+    }
 
-	/**
-	 * @return nullable
-	 */
-	public String getNullable() {
-		return nullable;
-	}
+    public boolean equals(Object o) {
+	if (this == o)
+	    return true;
+	if (o == null || getClass() != o.getClass())
+	    return false;
 
+	final Column column = (Column) o;
 
+	if (type != column.type)
+	    return false;
+	if (name != null ? !name.equals(column.name) : column.name != null)
+	    return false;
 
-	/**
-	 * @return comment
-	 */
-	public String getComment() {
-		return comment;
-	}
+	return true;
+    }
 
-
-
-	/**
-	 * @param type 설정할 type
-	 */
-	public void setType(int type) {
-		this.type = type;
-	}
-
-
-
-	/**
-	 * @return
-	 * @uml.property  name="name"
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @return
-	 * @uml.property  name="type"
-	 */
-	public int getType() {
-		return type;
-	}
-
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-
-		final Column column = (Column) o;
-
-		if (type != column.type)
-			return false;
-		if (name != null ? !name.equals(column.name) : column.name != null)
-			return false;
-
-		return true;
-	}
-
-	public int hashCode() {
-		int result;
-		result = (name != null ? name.hashCode() : 0);
-		result = 29 * result + type;
-		return result;
-	}
+    public int hashCode() {
+	int result;
+	result = (name != null ? name.hashCode() : 0);
+	result = 29 * result + type;
+	return result;
+    }
 
 }

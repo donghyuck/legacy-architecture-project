@@ -15,25 +15,24 @@
  */
 package architecture.common.exception;
 
-
 public class LicenseException extends RuntimeException {
 
-	private static final long serialVersionUID = 8541463362674661215L;
+    private static final long serialVersionUID = 8541463362674661215L;
 
-	public LicenseException() {
-		super();
-	}
+    public LicenseException() {
+	super();
+    }
 
-	public LicenseException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    public LicenseException(String msg, Throwable cause) {
+	super(msg, cause);
+    }
 
-	public LicenseException(String msg) {
-		super(msg);
-	}
+    public LicenseException(String msg) {
+	super(msg);
+    }
 
-	public LicenseException(Throwable cause) {
-		super(cause);
-	}
+    public LicenseException(Throwable cause) {
+	super(cause);
+    }
 
 }
