@@ -20,27 +20,27 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class WorkEntry implements Serializable {
 
-	private final Reference employer;
+    private final Reference employer;
 
-	private final String startDate;
+    private final String startDate;
 
-	private final String endDate;
+    private final String endDate;
 
-	public WorkEntry(Reference employer, String startDate, String endDate) {
-		this.employer = employer;
-		this.startDate = startDate;
-		this.endDate = endDate;
-	}
+    public WorkEntry(Reference employer, String startDate, String endDate) {
+	this.employer = employer;
+	this.startDate = startDate;
+	this.endDate = endDate;
+    }
 
-	public Reference getEmployer() {
-		return employer;
-	}
+    public Reference getEmployer() {
+	return employer;
+    }
 
-	public String getStartDate() {
-		return startDate;
-	}
+    public String getStartDate() {
+	return startDate;
+    }
 
-	public String getEndDate() {
-		return endDate;
-	}
+    public String getEndDate() {
+	return endDate;
+    }
 }

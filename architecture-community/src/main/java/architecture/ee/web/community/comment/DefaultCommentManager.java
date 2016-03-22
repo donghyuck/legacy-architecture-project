@@ -40,257 +40,256 @@ import architecture.ee.web.community.page.event.PageEvent;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
-public class DefaultCommentManager implements CommentManager  {
+public class DefaultCommentManager implements CommentManager {
 
-	
-	private static final Log log = LogFactory.getLog(DefaultCommentManager.class);
-	private CommentDao commentDao;
-	private EventPublisher eventPublisher;
-	private Cache commentCache;
-	private Cache treeWalkerCache;
-	private PageManager pageManager;
-	private UserManager userManager;
-	private Comment rootParent = new DefaultComment();
-	
-	public DefaultCommentManager() {
+    private static final Log log = LogFactory.getLog(DefaultCommentManager.class);
+    private CommentDao commentDao;
+    private EventPublisher eventPublisher;
+    private Cache commentCache;
+    private Cache treeWalkerCache;
+    private PageManager pageManager;
+    private UserManager userManager;
+    private Comment rootParent = new DefaultComment();
+
+    public DefaultCommentManager() {
+    }
+
+    public void initialize() {
+	this.eventPublisher.register(this);
+    }
+
+    /**
+     * @return commentDao
+     */
+    public CommentDao getCommentDao() {
+	return commentDao;
+    }
+
+    /**
+     * @return userManager
+     */
+    public UserManager getUserManager() {
+	return userManager;
+    }
+
+    /**
+     * @param userManager
+     *            설정할 userManager
+     */
+    public void setUserManager(UserManager userManager) {
+	this.userManager = userManager;
+    }
+
+    /**
+     * @return eventPublisher
+     */
+    public EventPublisher getEventPublisher() {
+	return eventPublisher;
+    }
+
+    /**
+     * @return commentCache
+     */
+    public Cache getCommentCache() {
+	return commentCache;
+    }
+
+    /**
+     * @return treeWalkerCache
+     */
+    public Cache getTreeWalkerCache() {
+	return treeWalkerCache;
+    }
+
+    /**
+     * @return pageManager
+     */
+    public PageManager getPageManager() {
+	return pageManager;
+    }
+
+    /**
+     * @param commentCache
+     *            설정할 commentCache
+     */
+    public void setCommentCache(Cache commentCache) {
+	this.commentCache = commentCache;
+    }
+
+    /**
+     * @param treeWalkerCache
+     *            설정할 treeWalkerCache
+     */
+    public void setTreeWalkerCache(Cache treeWalkerCache) {
+	this.treeWalkerCache = treeWalkerCache;
+    }
+
+    /**
+     * @param commentDao
+     *            설정할 commentDao
+     */
+    public void setCommentDao(CommentDao commentDao) {
+	this.commentDao = commentDao;
+    }
+
+    /**
+     * @param pageManager
+     *            설정할 pageManager
+     */
+    public void setPageManager(PageManager pageManager) {
+	this.pageManager = pageManager;
+    }
+
+    /**
+     * @param eventPublisher
+     *            설정할 eventPublisher
+     */
+    public void setEventPublisher(EventPublisher eventPublisher) {
+	this.eventPublisher = eventPublisher;
+    }
+
+    @EventListener
+    public void onEvent(PageEvent event) {
+	log.debug("page event : " + event.getType().name());
+	Page page = (Page) event.getSource();
+	if (event.getType() == PageEvent.Type.CREATED) {
+
+	} else if (event.getType() == PageEvent.Type.DELETED) {
+
 	}
-	
-	public void initialize(){
-		this.eventPublisher.register(this);		
+    }
+
+    @Override
+    public Comment getComment(long commentId) throws CommentNotFoundException {
+	if (commentId < 1L)
+	    throw new CommentNotFoundException();
+	Comment comment;
+	if (commentCache.get(commentId) != null) {
+	    comment = (Comment) commentCache.get(commentId).getValue();
+	} else {
+	    comment = commentDao.getCommentById(commentId);
+	    setUserInComment(comment);
+	    commentCache.put(new Element(comment.getCommentId(), comment));
 	}
-	
+	return comment;
+    }
 
-	/**
-	 * @return commentDao
-	 */
-	public CommentDao getCommentDao() {
-		return commentDao;
+    protected void setUserInComment(Comment comment) {
+	long userId = comment.getUser().getUserId();
+	try {
+	    comment.setUser(userManager.getUser(userId));
+	} catch (UserNotFoundException e) {
 	}
+    }
 
-
-
-	/**
-	 * @return userManager
-	 */
-	public UserManager getUserManager() {
-		return userManager;
+    protected void clearCache(Comment comment) {
+	String key = getTreeWalkerCacheKey(comment.getObjectType(), comment.getObjectId());
+	commentCache.remove(comment.getCommentId());
+	synchronized (key) {
+	    treeWalkerCache.remove(key);
 	}
+    }
 
-	/**
-	 * @param userManager 설정할 userManager
-	 */
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
-	}
+    @Override
+    public void update(Comment comment) throws UnAuthorizedException {
+	Date now = Calendar.getInstance().getTime();
+	comment.setModifiedDate(now);
+	commentDao.update(comment);
+	clearCache(comment);
+	Map params = new HashMap();
+	eventPublisher.publish(new CommentEvent(comment, CommentEvent.Type.UPDATED, params));
+    }
 
-	/**
-	 * @return eventPublisher
-	 */
-	public EventPublisher getEventPublisher() {
-		return eventPublisher;
-	}
-
-	/**
-	 * @return commentCache
-	 */
-	public Cache getCommentCache() {
-		return commentCache;
-	}
-
-	/**
-	 * @return treeWalkerCache
-	 */
-	public Cache getTreeWalkerCache() {
-		return treeWalkerCache;
-	}
-
-	/**
-	 * @return pageManager
-	 */
-	public PageManager getPageManager() {
-		return pageManager;
-	}
-
-	/**
-	 * @param commentCache 설정할 commentCache
-	 */
-	public void setCommentCache(Cache commentCache) {
-		this.commentCache = commentCache;
-	}
-
-	/**
-	 * @param treeWalkerCache 설정할 treeWalkerCache
-	 */
-	public void setTreeWalkerCache(Cache treeWalkerCache) {
-		this.treeWalkerCache = treeWalkerCache;
-	}
-
-	/**
-	 * @param commentDao 설정할 commentDao
-	 */
-	public void setCommentDao(CommentDao commentDao) {
-		this.commentDao = commentDao;
-	}
-
-
-
-	/**
-	 * @param pageManager 설정할 pageManager
-	 */
-	public void setPageManager(PageManager pageManager) {
-		this.pageManager = pageManager;
-	}
-
-	/**
-	 * @param eventPublisher 설정할 eventPublisher
-	 */
-	public void setEventPublisher(EventPublisher eventPublisher) {
-		this.eventPublisher = eventPublisher;
-	}
-	
-	@EventListener
-	public void onEvent(PageEvent event) {
-		log.debug("page event : " + event.getType().name());
-		Page page = (Page)event.getSource();
-		if( event.getType() == PageEvent.Type.CREATED ){
-
-		}else if ( event.getType() == PageEvent.Type.DELETED ){
-
-		}
-	}
-	
-
-	@Override
-	public Comment getComment(long commentId) throws CommentNotFoundException {
-        if(commentId < 1L)
-            throw new CommentNotFoundException();
-        Comment comment;
-		if( commentCache.get(commentId)!= null){
-			comment = (Comment)commentCache.get(commentId).getValue();
-		}else{
-			comment = commentDao.getCommentById(commentId);
-			setUserInComment(comment);
-			commentCache.put(new Element(comment.getCommentId(), comment));
-		}		
-		return comment;
-	}
-
-	protected void setUserInComment(Comment comment){
-		long userId = comment.getUser().getUserId();
-		try {
-			comment.setUser(userManager.getUser(userId));
-		} catch (UserNotFoundException e) {
-		}		
-	}
-	
-	protected void clearCache(Comment comment){
-		 String key = getTreeWalkerCacheKey( comment.getObjectType(), comment.getObjectId());
-		commentCache.remove(comment.getCommentId());
-		synchronized(key){
-			treeWalkerCache.remove(key);
-		}
-	}
-	
-	@Override
-	public void update(Comment comment) throws UnAuthorizedException {
-		Date now = Calendar.getInstance().getTime();
-		comment.setModifiedDate(now);
-		commentDao.update(comment);		
-		clearCache(comment);
-		Map params = new HashMap();
-		eventPublisher.publish(new CommentEvent(comment, CommentEvent.Type.UPDATED, params));		
-	}
-
-	@Override
-	public void setBody(Comment comment, String text) {
-		if(text == null)
-			throw new IllegalArgumentException("Body cannot be null");	
-		try {
-			Comment c = getComment(comment.getCommentId());
-			Date now = Calendar.getInstance().getTime();
-			c.setBody(text);
-			c.setModifiedDate(now);
-			commentDao.update(c);			
-			clearCache(comment);			
-			Map params = new HashMap();
-			params.put("Type", "bodyModify");
-			params.put("originalValue", comment.getBody());
-			eventPublisher.publish(new CommentEvent(c, CommentEvent.Type.UPDATED, params));
-		} catch (CommentNotFoundException e) {
-		}
-		
+    @Override
+    public void setBody(Comment comment, String text) {
+	if (text == null)
+	    throw new IllegalArgumentException("Body cannot be null");
+	try {
+	    Comment c = getComment(comment.getCommentId());
+	    Date now = Calendar.getInstance().getTime();
+	    c.setBody(text);
+	    c.setModifiedDate(now);
+	    commentDao.update(c);
+	    clearCache(comment);
+	    Map params = new HashMap();
+	    params.put("Type", "bodyModify");
+	    params.put("originalValue", comment.getBody());
+	    eventPublisher.publish(new CommentEvent(c, CommentEvent.Type.UPDATED, params));
+	} catch (CommentNotFoundException e) {
 	}
 
-	@Override
-	public void addComment(Comment comment) throws UnAuthorizedException {
-		addComment(null, comment);
+    }
+
+    @Override
+    public void addComment(Comment comment) throws UnAuthorizedException {
+	addComment(null, comment);
+    }
+
+    public void addComment(Comment parentComment, Comment newComment) {
+	if (newComment == null)
+	    throw new IllegalStateException("Comment cannot be null");
+
+	int objectType = newComment.getObjectType();
+	long objectId = newComment.getObjectId();
+	boolean isAuthor = false;
+
+	if (newComment.getCommentId() != -1L) {
+	    throw new IllegalStateException(
+		    "Comment cannot be attached to this object since it is already attached to another object");
+	}
+	if (parentComment != null) {
+	    DefaultComment bean = (DefaultComment) newComment;
+	    bean.setParentCommentId(parentComment.getCommentId());
+	    bean.setParentObjectType(parentComment.getObjectType());
+	    bean.setParentObjectId(parentComment.getObjectId());
 	}
 
-	public void addComment(Comment parentComment, Comment newComment) {
-		if (newComment == null)
-			throw new IllegalStateException("Comment cannot be null");		
-		
-		int objectType = newComment.getObjectType();
-		long objectId = newComment.getObjectId();
-		boolean isAuthor = false;				
-	
-		if(newComment.getCommentId() != -1L){
-			throw new IllegalStateException("Comment cannot be attached to this object since it is already attached to another object");			
-		}		
-		 if(parentComment != null){
-			 DefaultComment bean= (DefaultComment)newComment;
-			 bean.setParentCommentId(parentComment.getCommentId());
-			 bean.setParentObjectType(parentComment.getObjectType());
-			 bean.setParentObjectId(parentComment.getObjectId());
-		}		 
-		
-		 // source post checking
-		commentDao.create(newComment);	 
-		String key = getTreeWalkerCacheKey(objectType, objectId);
-		synchronized (key) {
-			treeWalkerCache.remove(key);
-		}	
-		Map paramMap = Collections.emptyMap();
-		eventPublisher.publish(new CommentEvent(newComment, CommentEvent.Type.CREATED, paramMap));
+	// source post checking
+	commentDao.create(newComment);
+	String key = getTreeWalkerCacheKey(objectType, objectId);
+	synchronized (key) {
+	    treeWalkerCache.remove(key);
 	}
-	
-	
-	@Override
-	public Comment createComment(int objectType, long objectId, User user, String text) throws UnAuthorizedException {
-		
-		if( !(ModelTypeFactory.getTypeIdFromCode("PAGE") == objectType) ){
-			throw new IllegalStateException("Comment not allowed for objectType[" + objectType + "]");		
-		}		
-		DefaultComment comment = new DefaultComment();
-		comment.setObjectType(objectType);
-		comment.setObjectId(objectId);
-		comment.setBody(text);
-		comment.setUser(user);
-		
-		return comment;
-	}
+	Map paramMap = Collections.emptyMap();
+	eventPublisher.publish(new CommentEvent(newComment, CommentEvent.Type.CREATED, paramMap));
+    }
 
-	public CommentTreeWalker getCommentTreeWalker(int objectType, long objectId)
-	{
-		String key = getTreeWalkerCacheKey(objectType, objectId);
-		CommentTreeWalker treeWalker ;
-		if(treeWalkerCache.get(key) != null ){
-			treeWalker = (CommentTreeWalker)treeWalkerCache.get(key).getValue();
-		}else{
-			synchronized(key){
-				treeWalker = commentDao.getCommentTreeWalker(objectType, objectId);
-				treeWalkerCache.put(new Element(key, treeWalker));
-			}
-		}				
-		return treeWalker;
-	}
-	
-	 private static String getTreeWalkerCacheKey( int objectType, long objectId) {
-		 return LockUtils.intern((new StringBuilder("commentTreeWalker-")).append(objectType).append("-").append(objectId).toString());
-	 }
+    @Override
+    public Comment createComment(int objectType, long objectId, User user, String text) throws UnAuthorizedException {
 
-	@Override
-	public Comment getRootParent() {
-		return rootParent;
+	if (!(ModelTypeFactory.getTypeIdFromCode("PAGE") == objectType)) {
+	    throw new IllegalStateException("Comment not allowed for objectType[" + objectType + "]");
 	}
+	DefaultComment comment = new DefaultComment();
+	comment.setObjectType(objectType);
+	comment.setObjectId(objectId);
+	comment.setBody(text);
+	comment.setUser(user);
+
+	return comment;
+    }
+
+    public CommentTreeWalker getCommentTreeWalker(int objectType, long objectId) {
+	String key = getTreeWalkerCacheKey(objectType, objectId);
+	CommentTreeWalker treeWalker;
+	if (treeWalkerCache.get(key) != null) {
+	    treeWalker = (CommentTreeWalker) treeWalkerCache.get(key).getValue();
+	} else {
+	    synchronized (key) {
+		treeWalker = commentDao.getCommentTreeWalker(objectType, objectId);
+		treeWalkerCache.put(new Element(key, treeWalker));
+	    }
+	}
+	return treeWalker;
+    }
+
+    private static String getTreeWalkerCacheKey(int objectType, long objectId) {
+	return LockUtils.intern(
+		(new StringBuilder("commentTreeWalker-")).append(objectType).append("-").append(objectId).toString());
+    }
+
+    @Override
+    public Comment getRootParent() {
+	return rootParent;
+    }
 }

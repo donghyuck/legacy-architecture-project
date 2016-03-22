@@ -24,16 +24,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class MusicPostMixin extends PostMixin {
 
-	@JsonCreator
-	MusicPostMixin(
-			@JsonProperty("id") String id, 
-			@JsonProperty("from") Reference from, 
-			@JsonProperty("created_time") Date createdTime,
-			@JsonProperty("updated_time") Date updatedTime) {
-		super(id, from, createdTime, updatedTime);
-	}
-	
-	@JsonProperty("source")
-	String source;
-	
+    @JsonCreator
+    MusicPostMixin(@JsonProperty("id") String id, @JsonProperty("from") Reference from,
+	    @JsonProperty("created_time") Date createdTime, @JsonProperty("updated_time") Date updatedTime) {
+	super(id, from, createdTime, updatedTime);
+    }
+
+    @JsonProperty("source")
+    String source;
+
 }

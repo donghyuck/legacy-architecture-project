@@ -21,86 +21,84 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ServiceProviderConfig implements Serializable {
 
-	private String provider;
-	private String clientId;
-	private String clientSecret;
-	private String callbackUrl;
-	private String scope;
-	boolean allowSignin;
-	boolean allowSignup;
-	
-	
-	/**
-	 * @param provider
-	 * @param clientId
-	 * @param clientSecret
-	 * @param callbackUrl
-	 * @param scope
-	 * @param allowSignin
-	 * @param allowSignup
-	 */
-	public ServiceProviderConfig(String provider, String clientId, String clientSecret, String callbackUrl, String scope, boolean allowSignin, boolean allowSignup) {
-		this.provider = provider;
-		this.clientId = clientId;
-		this.clientSecret = clientSecret;
-		this.callbackUrl = callbackUrl;
-		this.scope = scope;
-		this.allowSignin = allowSignin;
-		this.allowSignup = allowSignup;
-	}
+    private String provider;
+    private String clientId;
+    private String clientSecret;
+    private String callbackUrl;
+    private String scope;
+    boolean allowSignin;
+    boolean allowSignup;
 
-	
-	/**
-	 * @return callbackUrl
-	 */
-	@JsonIgnore
-	public String getCallbackUrl() {
-		return callbackUrl;
-	}
+    /**
+     * @param provider
+     * @param clientId
+     * @param clientSecret
+     * @param callbackUrl
+     * @param scope
+     * @param allowSignin
+     * @param allowSignup
+     */
+    public ServiceProviderConfig(String provider, String clientId, String clientSecret, String callbackUrl,
+	    String scope, boolean allowSignin, boolean allowSignup) {
+	this.provider = provider;
+	this.clientId = clientId;
+	this.clientSecret = clientSecret;
+	this.callbackUrl = callbackUrl;
+	this.scope = scope;
+	this.allowSignin = allowSignin;
+	this.allowSignup = allowSignup;
+    }
 
+    /**
+     * @return callbackUrl
+     */
+    @JsonIgnore
+    public String getCallbackUrl() {
+	return callbackUrl;
+    }
 
-	/**
-	 * @return clientId
-	 */
-	@JsonIgnore
-	public String getClientId() {
-		return clientId;
-	}
+    /**
+     * @return clientId
+     */
+    @JsonIgnore
+    public String getClientId() {
+	return clientId;
+    }
 
-	/**
-	 * @return clientSecret
-	 */
-	@JsonIgnore
-	public String getClientSecret() {
-		return clientSecret;
-	}
+    /**
+     * @return clientSecret
+     */
+    @JsonIgnore
+    public String getClientSecret() {
+	return clientSecret;
+    }
 
-	/**
-	 * @return provider
-	 */
-	public String getProvider() {
-		return provider;
-	}
+    /**
+     * @return provider
+     */
+    public String getProvider() {
+	return provider;
+    }
 
-	/**
-	 * @return scope
-	 */
-	@JsonIgnore
-	public String getScope() {
-		return scope;
-	}
-	
-	/**
-	 * @return allowSignin
-	 */
-	public boolean isAllowSignin() {
-		return allowSignin;
-	}
-	
-	/**
-	 * @return allowSignup
-	 */
-	public boolean isAllowSignup() {
-		return allowSignup;
-	}		
+    /**
+     * @return scope
+     */
+    @JsonIgnore
+    public String getScope() {
+	return scope;
+    }
+
+    /**
+     * @return allowSignin
+     */
+    public boolean isAllowSignin() {
+	return allowSignin;
+    }
+
+    /**
+     * @return allowSignup
+     */
+    public boolean isAllowSignup() {
+	return allowSignup;
+    }
 }

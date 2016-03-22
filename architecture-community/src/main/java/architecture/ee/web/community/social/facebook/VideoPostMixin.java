@@ -23,27 +23,23 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class VideoPostMixin extends PostMixin {
 
-	@JsonCreator
-	VideoPostMixin(
-			@JsonProperty("id") String id, 
-			@JsonProperty("from") Reference from, 
-			@JsonProperty("created_time") Date createdTime,
-			@JsonProperty("updated_time") Date updatedTime) {
-		super(id, from, createdTime, updatedTime);
-	}
-	
-	@JsonProperty("source")
-	String source;
-	
-	@JsonProperty("object_id")
-	String videoId;
-	
-	@JsonProperty("tags")
-	@JsonDeserialize(using=TagListDeserializer.class)
-	List<Tag> tags;
-	
+    @JsonCreator
+    VideoPostMixin(@JsonProperty("id") String id, @JsonProperty("from") Reference from,
+	    @JsonProperty("created_time") Date createdTime, @JsonProperty("updated_time") Date updatedTime) {
+	super(id, from, createdTime, updatedTime);
+    }
+
+    @JsonProperty("source")
+    String source;
+
+    @JsonProperty("object_id")
+    String videoId;
+
+    @JsonProperty("tags")
+    @JsonDeserialize(using = TagListDeserializer.class)
+    List<Tag> tags;
+
 }

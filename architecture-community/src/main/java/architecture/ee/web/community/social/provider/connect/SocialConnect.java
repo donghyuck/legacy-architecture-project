@@ -27,105 +27,90 @@ import architecture.common.model.PropertyAware;
 import architecture.common.model.json.CustomJsonDateSerializer;
 
 public interface SocialConnect extends PropertyAware {
-	
-	public enum Media {
-		TWITTER, 
-		FACEBOOK,
-		LINKEDIN,
-		TUMBLR,
-		GITHUB,
-		TRIPIT,
-		INSTAGRAM,
-		DAUM,
-		LIVE,
-		GOOGLE,
-		UNKNOWN
-	};	
-		
-	/**
-	 * @return socialConnectId
-	 */
-	public Long getSocialConnectId();
 
-	/**
-	 * @return objectType
-	 */
-	public Integer getObjectType() ;
+    public enum Media {
+	TWITTER, FACEBOOK, LINKEDIN, TUMBLR, GITHUB, TRIPIT, INSTAGRAM, DAUM, LIVE, GOOGLE, UNKNOWN
+    };
 
+    /**
+     * @return socialConnectId
+     */
+    public Long getSocialConnectId();
 
-	/**
-	 * @return objectId
-	 */
-	public Long getObjectId();
+    /**
+     * @return objectType
+     */
+    public Integer getObjectType();
 
-	/**
-	 * @return providerId
-	 */
-	public String getProviderId() ;
-	/**
-	 * @return providerUserId
-	 */
-	public String getProviderUserId() ;
+    /**
+     * @return objectId
+     */
+    public Long getObjectId();
 
-	/**
-	 * @return displayName
-	 */
-	public String getDisplayName();
+    /**
+     * @return providerId
+     */
+    public String getProviderId();
 
+    /**
+     * @return providerUserId
+     */
+    public String getProviderUserId();
 
-	/**
-	 * @return profileUrl
-	 */
-	public String getProfileUrl() ;
+    /**
+     * @return displayName
+     */
+    public String getDisplayName();
 
-	/**
-	 * @return imageUrl
-	 */
-	public String getImageUrl();
+    /**
+     * @return profileUrl
+     */
+    public String getProfileUrl();
 
-	/**
-	 * @return accessToken
-	 */
-	 @JsonIgnore
-	public String getAccessToken();
+    /**
+     * @return imageUrl
+     */
+    public String getImageUrl();
 
+    /**
+     * @return accessToken
+     */
+    @JsonIgnore
+    public String getAccessToken();
 
+    /**
+     * @return secret
+     */
+    @JsonIgnore
+    public String getSecret();
 
-	/**
-	 * @return secret
-	 */
-	 @JsonIgnore
-	public String getSecret() ;
+    /**
+     * @return refreshToken
+     */
+    @JsonIgnore
+    public String getRefreshToken();
 
+    /**
+     * @return expireTime
+     */
+    public Long getExpireTime();
 
-	/**
-	 * @return refreshToken
-	 */
-	 @JsonIgnore
-	public String getRefreshToken() ;
+    /**
+     * @return creationDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getCreationDate();
 
+    /**
+     * @return modifiedDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getModifiedDate();
 
-	/**
-	 * @return expireTime
-	 */
-	public Long getExpireTime();
+    @JsonIgnore
+    public Connection<?> getConnection();
 
-	/**
-	 * @return creationDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getCreationDate();
+    @JsonIgnore
+    public ConnectionData getConnectionData();
 
-	/**
-	 * @return modifiedDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getModifiedDate();
-	
-	@JsonIgnore
-	public Connection<?> getConnection();
-	
-	 @JsonIgnore
-	public ConnectionData getConnectionData();
-	
 }

@@ -16,15 +16,15 @@
 package architecture.ee.web.community.social.tumblr;
 
 public enum PostState {
-	PUBLISHED("published"), DRAFT("draft"), QUEUE("queue");
+    PUBLISHED("published"), DRAFT("draft"), QUEUE("queue");
 
-	private String state;
+    private String state;
 
-	PostState(String state) {
-		this.state = state;
-	}
+    PostState(String state) {
+	this.state = state;
+    }
 
-	public String getState() {
-		return state;
-	}
+    public String getState() {
+	return state;
+    }
 }

@@ -16,5 +16,5 @@
 package architecture.ee.web.community.social.facebook;
 
 public enum ImageType {
-	SMALL, NORMAL, LARGE, SQUARE
+    SMALL, NORMAL, LARGE, SQUARE
 }

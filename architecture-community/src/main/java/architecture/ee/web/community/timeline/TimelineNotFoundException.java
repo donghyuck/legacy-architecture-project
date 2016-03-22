@@ -19,43 +19,43 @@ import architecture.ee.exception.NotFoundException;
 
 public class TimelineNotFoundException extends NotFoundException {
 
-	public TimelineNotFoundException() {
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TimelineNotFoundException() {
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public TimelineNotFoundException(int errorCode) {
-		super(errorCode);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TimelineNotFoundException(int errorCode) {
+	super(errorCode);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public TimelineNotFoundException(String msg) {
-		super(msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TimelineNotFoundException(String msg) {
+	super(msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public TimelineNotFoundException(Throwable cause) {
-		super(cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TimelineNotFoundException(Throwable cause) {
+	super(cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public TimelineNotFoundException(int errorCode, String msg) {
-		super(errorCode, msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TimelineNotFoundException(int errorCode, String msg) {
+	super(errorCode, msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public TimelineNotFoundException(int errorCode, Throwable cause) {
-		super(errorCode, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TimelineNotFoundException(int errorCode, Throwable cause) {
+	super(errorCode, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public TimelineNotFoundException(String msg, Throwable cause) {
-		super(msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TimelineNotFoundException(String msg, Throwable cause) {
+	super(msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public TimelineNotFoundException(int errorCode, String msg, Throwable cause) {
-		super(errorCode, msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TimelineNotFoundException(int errorCode, String msg, Throwable cause) {
+	super(errorCode, msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
 }

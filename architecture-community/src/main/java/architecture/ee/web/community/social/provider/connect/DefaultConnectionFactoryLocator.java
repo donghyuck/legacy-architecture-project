@@ -31,57 +31,59 @@ import architecture.ee.web.community.social.provider.connect.ConnectionFactoryLo
 import architecture.ee.web.community.social.provider.connect.SocialConnect.Media;
 
 public class DefaultConnectionFactoryLocator implements Implementation {
-	
-	private Log log = LogFactory.getLog(getClass());
-	
-	private ConnectionFactoryRegistry registry;
 
-	public DefaultConnectionFactoryLocator() {
-		
-		this.registry = new ConnectionFactoryRegistry();			 
-		for(ServiceProviderConfig provider : ServiceProviderHelper.getAllServiceProviderConfig()){
-			Media media = Media.valueOf(provider.getProvider().toUpperCase());
-			if( log.isDebugEnabled())
-			{
-				log.debug(	"clientId:" +provider.getProvider() + "\n" +
-								"clientSecret:" + provider.getScope() + "\n" +
-								"callbackUrl"+provider.getCallbackUrl());				
-			}
-			
-			if( media == Media.FACEBOOK ){
-				FacebookConnectionFactory factory = new FacebookConnectionFactory(provider.getClientId(), provider.getClientSecret());				
-				factory.setScope(provider.getScope());					
-				registry.addConnectionFactory(factory);
-			}else if (media == Media.TWITTER){
-				TwitterConnectionFactory factory = new TwitterConnectionFactory(provider.getClientId(), provider.getClientSecret());
-				registry.addConnectionFactory(factory);
-			} else if (media == Media.TUMBLR){
-				TumblrConnectionFactory factory = new TumblrConnectionFactory(provider.getClientId(), provider.getClientSecret());
-				registry.addConnectionFactory(factory);
-			}else if (media == Media.GOOGLE){
-				GoogleConnectionFactory factory = new GoogleConnectionFactory(provider.getClientId(), provider.getClientSecret());
-				if( StringUtils.isNotBlank(provider.getScope() )){
-					factory.setScope(provider.getScope());
-				}
-				registry.addConnectionFactory(factory);
-			}
+    private Log log = LogFactory.getLog(getClass());
+
+    private ConnectionFactoryRegistry registry;
+
+    public DefaultConnectionFactoryLocator() {
+
+	this.registry = new ConnectionFactoryRegistry();
+	for (ServiceProviderConfig provider : ServiceProviderHelper.getAllServiceProviderConfig()) {
+	    Media media = Media.valueOf(provider.getProvider().toUpperCase());
+	    if (log.isDebugEnabled()) {
+		log.debug("clientId:" + provider.getProvider() + "\n" + "clientSecret:" + provider.getScope() + "\n"
+			+ "callbackUrl" + provider.getCallbackUrl());
+	    }
+
+	    if (media == Media.FACEBOOK) {
+		FacebookConnectionFactory factory = new FacebookConnectionFactory(provider.getClientId(),
+			provider.getClientSecret());
+		factory.setScope(provider.getScope());
+		registry.addConnectionFactory(factory);
+	    } else if (media == Media.TWITTER) {
+		TwitterConnectionFactory factory = new TwitterConnectionFactory(provider.getClientId(),
+			provider.getClientSecret());
+		registry.addConnectionFactory(factory);
+	    } else if (media == Media.TUMBLR) {
+		TumblrConnectionFactory factory = new TumblrConnectionFactory(provider.getClientId(),
+			provider.getClientSecret());
+		registry.addConnectionFactory(factory);
+	    } else if (media == Media.GOOGLE) {
+		GoogleConnectionFactory factory = new GoogleConnectionFactory(provider.getClientId(),
+			provider.getClientSecret());
+		if (StringUtils.isNotBlank(provider.getScope())) {
+		    factory.setScope(provider.getScope());
 		}
+		registry.addConnectionFactory(factory);
+	    }
 	}
-	
-	public void refresh(){
-		
-	}
-	
-	public ConnectionFactoryRegistry getConnectionFactoryLocator(){
-		return registry;
-	}
+    }
 
-	public <A> ConnectionFactory<A> getConnectionFactory(Class<A> apiType) {
-		return registry.getConnectionFactory(apiType);
-	}
-	
-	public ConnectionFactory<?>  getConnectionFactory(String providerId) {
-		return registry.getConnectionFactory(providerId);
-	}
+    public void refresh() {
+
+    }
+
+    public ConnectionFactoryRegistry getConnectionFactoryLocator() {
+	return registry;
+    }
+
+    public <A> ConnectionFactory<A> getConnectionFactory(Class<A> apiType) {
+	return registry.getConnectionFactory(apiType);
+    }
+
+    public ConnectionFactory<?> getConnectionFactory(String providerId) {
+	return registry.getConnectionFactory(providerId);
+    }
 
 }

@@ -21,16 +21,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class EducationEntryMixin {
 
-	@JsonCreator
-	EducationEntryMixin(
-			@JsonProperty("school") Reference school, 
-			@JsonProperty("year") Reference year, 
-			@JsonProperty("concentration") List<Reference> concentration,
-			@JsonProperty("type") String type) {}
-	
-}
+    @JsonCreator
+    EducationEntryMixin(@JsonProperty("school") Reference school, @JsonProperty("year") Reference year,
+	    @JsonProperty("concentration") List<Reference> concentration, @JsonProperty("type") String type) {
+    }
 
+}

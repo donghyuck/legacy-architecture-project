@@ -19,67 +19,66 @@ import architecture.ee.exception.NotFoundException;
 
 public class CommentNotFoundException extends NotFoundException {
 
-	/**
-	 * 
-	 */
-	public CommentNotFoundException() {
-		super();
-	}
+    /**
+     * 
+     */
+    public CommentNotFoundException() {
+	super();
+    }
 
-	/**
-	 * @param errorCode
-	 * @param msg
-	 * @param cause
-	 */
-	public CommentNotFoundException(int errorCode, String msg, Throwable cause) {
-		super(errorCode, msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param errorCode
+     * @param msg
+     * @param cause
+     */
+    public CommentNotFoundException(int errorCode, String msg, Throwable cause) {
+	super(errorCode, msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param errorCode
-	 * @param msg
-	 */
-	public CommentNotFoundException(int errorCode, String msg) {
-		super(errorCode, msg);
-	}
+    /**
+     * @param errorCode
+     * @param msg
+     */
+    public CommentNotFoundException(int errorCode, String msg) {
+	super(errorCode, msg);
+    }
 
-	/**
-	 * @param errorCode
-	 * @param cause
-	 */
-	public CommentNotFoundException(int errorCode, Throwable cause) {
-		super(errorCode, cause);
-	}
+    /**
+     * @param errorCode
+     * @param cause
+     */
+    public CommentNotFoundException(int errorCode, Throwable cause) {
+	super(errorCode, cause);
+    }
 
-	/**
-	 * @param errorCode
-	 */
-	public CommentNotFoundException(int errorCode) {
-		super(errorCode);
-	}
+    /**
+     * @param errorCode
+     */
+    public CommentNotFoundException(int errorCode) {
+	super(errorCode);
+    }
 
-	/**
-	 * @param msg
-	 * @param cause
-	 */
-	public CommentNotFoundException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    /**
+     * @param msg
+     * @param cause
+     */
+    public CommentNotFoundException(String msg, Throwable cause) {
+	super(msg, cause);
+    }
 
-	/**
-	 * @param msg
-	 */
-	public CommentNotFoundException(String msg) {
-		super(msg);
-	}
+    /**
+     * @param msg
+     */
+    public CommentNotFoundException(String msg) {
+	super(msg);
+    }
 
-	/**
-	 * @param cause
-	 */
-	public CommentNotFoundException(Throwable cause) {
-		super(cause);
-	}
-
+    /**
+     * @param cause
+     */
+    public CommentNotFoundException(Throwable cause) {
+	super(cause);
+    }
 
 }

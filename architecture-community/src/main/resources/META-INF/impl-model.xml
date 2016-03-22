@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <models>
 	<rank>1000</rank>
-	<!--  from web -->
-	<!-- 
-	<model id="16" code="IMAGE" />
-	<model id="17" code="ATTACHMENT" />
-	<model id="18" code="MENU" />		
-	-->
+
 	<model id="19" code="SOCIAL_NETWORK" />
 	<model id="20" code="CATEGORY" />
 	<model id="21" code="TEMPLATE" />

@@ -25,12 +25,12 @@ import architecture.ee.web.community.social.tumblr.Post;
 @SuppressWarnings("unused")
 class PostsMixin {
 
-	@JsonProperty("blog")
-	private BlogInfo blogInfo;
+    @JsonProperty("blog")
+    private BlogInfo blogInfo;
 
-	@JsonProperty("total_posts")
-	private int totalPosts;
+    @JsonProperty("total_posts")
+    private int totalPosts;
 
-	@JsonProperty("posts")
-	private List<Post> posts;
+    @JsonProperty("posts")
+    private List<Post> posts;
 }

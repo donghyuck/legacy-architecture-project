@@ -6,32 +6,32 @@ import architecture.common.cache.Cacheable;
 
 public interface Category extends Cacheable {
 
-	public long getCategoryId();
+    public long getCategoryId();
 
-	public void setCategoryId(long categoryId);
+    public void setCategoryId(long categoryId);
 
-	public String getName();
+    public String getName();
 
-	public void setName(String name);
+    public void setName(String name);
 
-	public String getDescription();
+    public String getDescription();
 
-	public void setDescription(String description);
+    public void setDescription(String description);
 
-	public Date getCreationDate();
+    public Date getCreationDate();
 
-	public void setCreationDate(Date creationDate);
+    public void setCreationDate(Date creationDate);
 
-	public Date getModifiedDate();
+    public Date getModifiedDate();
 
-	public void setModifiedDate(Date modifiedDate);
+    public void setModifiedDate(Date modifiedDate);
 
-	public boolean isInternal();
+    public boolean isInternal();
 
-	public void setInternal(boolean internal);
+    public void setInternal(boolean internal);
 
-	public boolean isHidden();
+    public boolean isHidden();
 
-	public void setHidden(boolean hidden);
+    public void setHidden(boolean hidden);
 
 }

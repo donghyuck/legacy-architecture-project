@@ -23,30 +23,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import architecture.ee.web.community.social.tumblr.BlogInfo;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserInfoMixin {
 
-	@JsonCreator
-	public UserInfoMixin(
-			@JsonProperty("following") int following, 
-			@JsonProperty("default_post_format") String defaultPostFormat, 
-			@JsonProperty("name") String name, 
-			@JsonProperty("likes") int likes,
-			@JsonProperty("blogs") List<BlogInfo> blogInfos ){}
-			
-	@JsonProperty("default_post_format")
-	private String defaultPostFormat;
+    @JsonCreator
+    public UserInfoMixin(@JsonProperty("following") int following,
+	    @JsonProperty("default_post_format") String defaultPostFormat, @JsonProperty("name") String name,
+	    @JsonProperty("likes") int likes, @JsonProperty("blogs") List<BlogInfo> blogInfos) {
+    }
 
-	@JsonProperty("blogs")
-	private List<BlogInfo> blogInfos;
-	
-	@JsonProperty("following")
-	private int following;
-	
-	@JsonProperty("likes")
-	private int likes;
-	
-	@JsonProperty("name")
-	private String name;
-	
+    @JsonProperty("default_post_format")
+    private String defaultPostFormat;
+
+    @JsonProperty("blogs")
+    private List<BlogInfo> blogInfos;
+
+    @JsonProperty("following")
+    private int following;
+
+    @JsonProperty("likes")
+    private int likes;
+
+    @JsonProperty("name")
+    private String name;
+
 }

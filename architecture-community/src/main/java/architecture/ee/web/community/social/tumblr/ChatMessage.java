@@ -17,32 +17,32 @@ package architecture.ee.web.community.social.tumblr;
 
 import java.io.Serializable;
 
-public class ChatMessage  implements Serializable  {
-	private String label;
-	private String name;
-	private String phrase;
+public class ChatMessage implements Serializable {
+    private String label;
+    private String name;
+    private String phrase;
 
-	public String getLabel() {
-		return label;
-	}
+    public String getLabel() {
+	return label;
+    }
 
-	public void setLabel(String label) {
-		this.label = label;
-	}
+    public void setLabel(String label) {
+	this.label = label;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+	return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	public String getPhrase() {
-		return phrase;
-	}
+    public String getPhrase() {
+	return phrase;
+    }
 
-	public void setPhrase(String phrase) {
-		this.phrase = phrase;
-	}
+    public void setPhrase(String phrase) {
+	this.phrase = phrase;
+    }
 }

@@ -21,13 +21,13 @@ import architecture.ee.web.community.page.PageState;
 
 public class PageStateTest {
 
-	public PageStateTest() {
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PageStateTest() {
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	@Test
-	public void testGetPageState(){
-		PageState.valueOf("incomplete".toUpperCase());
-		
-	}
+    @Test
+    public void testGetPageState() {
+	PageState.valueOf("incomplete".toUpperCase());
+
+    }
 }

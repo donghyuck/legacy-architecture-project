@@ -19,15 +19,14 @@ import org.junit.Test;
 
 public class ViewCountTest {
 
-	public ViewCountTest() {
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public ViewCountTest() {
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	
-		@Test
-		public void testNumber(){
-			
-			long i = 0x2bf20L;
-			System.out.println(i);	
-		}
+    @Test
+    public void testNumber() {
+
+	long i = 0x2bf20L;
+	System.out.println(i);
+    }
 }

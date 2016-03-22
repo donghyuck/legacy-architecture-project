@@ -18,22 +18,23 @@ package architecture.ee.web.community.social.tumblr;
 import java.io.Serializable;
 import java.util.List;
 
-public class Photo  implements Serializable  {
-	private String caption;
-	private List<PhotoSize> sizes;
-	public String getCaption() {
-		return caption;
-	}
+public class Photo implements Serializable {
+    private String caption;
+    private List<PhotoSize> sizes;
 
-	public void setCaption(String caption) {
-		this.caption = caption;
-	}
+    public String getCaption() {
+	return caption;
+    }
 
-	public List<PhotoSize> getSizes() {
-		return sizes;
-	}
+    public void setCaption(String caption) {
+	this.caption = caption;
+    }
 
-	public void setSizes(List<PhotoSize> sizes) {
-		this.sizes = sizes;
-	}
+    public List<PhotoSize> getSizes() {
+	return sizes;
+    }
+
+    public void setSizes(List<PhotoSize> sizes) {
+	this.sizes = sizes;
+    }
 }

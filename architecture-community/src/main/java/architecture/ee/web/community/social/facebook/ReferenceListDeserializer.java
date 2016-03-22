@@ -27,23 +27,24 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 class ReferenceListDeserializer extends JsonDeserializer<List<Reference>> {
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Reference> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-		
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(new FacebookModule());
-				
-		jp.setCodec(mapper);
-		if (jp.hasCurrentToken()) {
-			TreeNode data =  jp.readValueAsTree().get("data");
-			if (data != null) {			
-				return (List<Reference>) mapper.readValue(data.traverse(), new TypeReference<List<Reference>>() {});
-			}
-		}
-		
-		return Collections.emptyList();
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Reference> deserialize(JsonParser jp, DeserializationContext ctxt)
+	    throws IOException, JsonProcessingException {
+
+	ObjectMapper mapper = new ObjectMapper();
+	mapper.registerModule(new FacebookModule());
+
+	jp.setCodec(mapper);
+	if (jp.hasCurrentToken()) {
+	    TreeNode data = jp.readValueAsTree().get("data");
+	    if (data != null) {
+		return (List<Reference>) mapper.readValue(data.traverse(), new TypeReference<List<Reference>>() {
+		});
+	    }
 	}
+
+	return Collections.emptyList();
+    }
 }

@@ -19,12 +19,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 class HashTagEntityMixin {
 
-	@JsonCreator
-	public HashTagEntityMixin(
-		@JsonProperty("text") String text, 
-		@JsonProperty("indices")int[] indices) {}
-	
+    @JsonCreator
+    public HashTagEntityMixin(@JsonProperty("text") String text, @JsonProperty("indices") int[] indices) {
+    }
+
 }

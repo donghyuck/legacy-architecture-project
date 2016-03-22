@@ -22,29 +22,29 @@ import architecture.ee.web.community.announce.Announce;
 import architecture.ee.web.community.announce.AnnounceNotFoundException;
 
 public interface AnnounceDao {
-	
-	public abstract Announce load(long announceId) throws AnnounceNotFoundException ;
-	
-	public abstract Long nextId();
-	
-	public abstract void update( Announce annoucne );
-	
-	public abstract void insert( Announce annoucne );
-	
-	public abstract void delete( Announce annoucne );
-	
-	public abstract void move( Long fromId, Long toId);
-	
-	public abstract List<Long> getAnnounceIdsForUser ( long userId );
-	
-	public abstract List<Long> getAnnounceIds ( int objectType, long objectId );
-	
-	public abstract List<Long> getAnnounceIds ();
-	
-	public abstract int getAnnounceCount ( int objectType, long objectId );
-	
-	public abstract int getAnnounceCount ( int objectType, long objectId, Date endDate );
-	
-	public abstract int getAnnounceCount(int objectType, long objectId, Date startDate, Date endDate) ;
-	
+
+    public abstract Announce load(long announceId) throws AnnounceNotFoundException;
+
+    public abstract Long nextId();
+
+    public abstract void update(Announce annoucne);
+
+    public abstract void insert(Announce annoucne);
+
+    public abstract void delete(Announce annoucne);
+
+    public abstract void move(Long fromId, Long toId);
+
+    public abstract List<Long> getAnnounceIdsForUser(long userId);
+
+    public abstract List<Long> getAnnounceIds(int objectType, long objectId);
+
+    public abstract List<Long> getAnnounceIds();
+
+    public abstract int getAnnounceCount(int objectType, long objectId);
+
+    public abstract int getAnnounceCount(int objectType, long objectId, Date endDate);
+
+    public abstract int getAnnounceCount(int objectType, long objectId, Date startDate, Date endDate);
+
 }

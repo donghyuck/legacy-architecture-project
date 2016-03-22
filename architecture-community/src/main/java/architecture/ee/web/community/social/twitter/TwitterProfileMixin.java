@@ -24,93 +24,91 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * Mixin class for adding Jackson annotations to TwitterProfile.
+ * 
  * @author Craig Walls
  */
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 abstract class TwitterProfileMixin {
-	@JsonCreator
-	TwitterProfileMixin(
-			@JsonProperty("id") long id, 
-			@JsonProperty("screen_name") String screenName, 
-			@JsonProperty("name") String name, 
-			@JsonProperty("url") String url, 
-			@JsonProperty("profile_image_url") String profileImageUrl, 
-			@JsonProperty("description") String description, 
-			@JsonProperty("location") String location, 
-			@JsonProperty("created_at") @JsonDeserialize(using=TimelineDateDeserializer.class) Date createdDate) {}
-	
-	@JsonProperty("notifications")
-	private boolean notificationsEnabled;
+    @JsonCreator
+    TwitterProfileMixin(@JsonProperty("id") long id, @JsonProperty("screen_name") String screenName,
+	    @JsonProperty("name") String name, @JsonProperty("url") String url,
+	    @JsonProperty("profile_image_url") String profileImageUrl, @JsonProperty("description") String description,
+	    @JsonProperty("location") String location,
+	    @JsonProperty("created_at") @JsonDeserialize(using = TimelineDateDeserializer.class) Date createdDate) {
+    }
 
-	@JsonProperty("lang")
-	private String language;
+    @JsonProperty("notifications")
+    private boolean notificationsEnabled;
 
-	@JsonProperty("statuses_count")
-	private int statusesCount;
+    @JsonProperty("lang")
+    private String language;
 
-	@JsonProperty("listed_count")
-	private int listedCount;
+    @JsonProperty("statuses_count")
+    private int statusesCount;
 
-	@JsonProperty("friends_count")
-	private int friendsCount;
+    @JsonProperty("listed_count")
+    private int listedCount;
 
-	@JsonProperty("followers_count")
-	private int followersCount;
+    @JsonProperty("friends_count")
+    private int friendsCount;
 
-	@JsonProperty("favourites_count")
-	private int favoritesCount;
+    @JsonProperty("followers_count")
+    private int followersCount;
 
-	@JsonProperty("following")
-	private boolean following;
-	
-	@JsonProperty("follow_request_sent")
-	private boolean followRequestSent;
+    @JsonProperty("favourites_count")
+    private int favoritesCount;
 
-	@JsonProperty("protected")
-	private boolean isProtected;
+    @JsonProperty("following")
+    private boolean following;
 
-	@JsonProperty("verified")
-	private boolean verified;
-	
-	@JsonProperty("geo_enabled")
-	private boolean geoEnabled;
-	
-	@JsonProperty("contributors_enabled")
-	private boolean contributorsEnabled;
+    @JsonProperty("follow_request_sent")
+    private boolean followRequestSent;
 
-	@JsonProperty("is_translator")
-	private boolean translator;
+    @JsonProperty("protected")
+    private boolean isProtected;
 
-	@JsonProperty("time_zone")
-	private String timeZone;
-	
-	@JsonProperty("utc_offset")
-	private int utcOffset;
+    @JsonProperty("verified")
+    private boolean verified;
 
-	@JsonProperty("profile_use_background_image")
-	private boolean useBackgroundImage;
-	
-	@JsonProperty("profile_sidebar_border_color")
-	private String sidebarBorderColor;
+    @JsonProperty("geo_enabled")
+    private boolean geoEnabled;
 
-	@JsonProperty("profile_sidebar_fill_color")
-	private String sidebarFillColor;
+    @JsonProperty("contributors_enabled")
+    private boolean contributorsEnabled;
 
-	@JsonProperty("profile_background_color")
-	private String backgroundColor;
+    @JsonProperty("is_translator")
+    private boolean translator;
 
-	@JsonProperty("profile_background_image_url")
-	private String backgroundImageUrl;
+    @JsonProperty("time_zone")
+    private String timeZone;
 
-	@JsonProperty("profile_background_tile")
-	private boolean backgroundImageTiled;
-	
-	@JsonProperty("profile_text_color")
-	private String textColor;
+    @JsonProperty("utc_offset")
+    private int utcOffset;
 
-	@JsonProperty("profile_link_color")
-	private String linkColor;
+    @JsonProperty("profile_use_background_image")
+    private boolean useBackgroundImage;
 
-	@JsonProperty("show_all_inline_media")
-	private boolean showAllInlineMedia;
+    @JsonProperty("profile_sidebar_border_color")
+    private String sidebarBorderColor;
+
+    @JsonProperty("profile_sidebar_fill_color")
+    private String sidebarFillColor;
+
+    @JsonProperty("profile_background_color")
+    private String backgroundColor;
+
+    @JsonProperty("profile_background_image_url")
+    private String backgroundImageUrl;
+
+    @JsonProperty("profile_background_tile")
+    private boolean backgroundImageTiled;
+
+    @JsonProperty("profile_text_color")
+    private String textColor;
+
+    @JsonProperty("profile_link_color")
+    private String linkColor;
+
+    @JsonProperty("show_all_inline_media")
+    private boolean showAllInlineMedia;
 }

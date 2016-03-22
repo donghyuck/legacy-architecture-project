@@ -25,10 +25,10 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import architecture.ee.web.community.page.PageState;
 
 public class PageStateDeserializer extends JsonDeserializer<PageState> {
- 
-	public PageState deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
-			throws IOException, JsonProcessingException {
-		return PageState.valueOf( jsonParser.getText().toUpperCase() );
-	}
+
+    public PageState deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
+	    throws IOException, JsonProcessingException {
+	return PageState.valueOf(jsonParser.getText().toUpperCase());
+    }
 
 }

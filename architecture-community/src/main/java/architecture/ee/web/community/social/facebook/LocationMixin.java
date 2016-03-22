@@ -21,25 +21,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class LocationMixin {
-	
-	@JsonCreator
-	LocationMixin(
-			@JsonProperty("latitude") double latitude, 
-			@JsonProperty("longitude") double longitude) {}
-	
-	@JsonProperty("street")
-	String street;
 
-	@JsonProperty("city")
-	String city;
+    @JsonCreator
+    LocationMixin(@JsonProperty("latitude") double latitude, @JsonProperty("longitude") double longitude) {
+    }
 
-	@JsonProperty("state")
-	String state;
+    @JsonProperty("street")
+    String street;
 
-	@JsonProperty("country")
-	String country;
+    @JsonProperty("city")
+    String city;
 
-	@JsonProperty("zip")
-	String zip;
+    @JsonProperty("state")
+    String state;
+
+    @JsonProperty("country")
+    String country;
+
+    @JsonProperty("zip")
+    String zip;
 
 }

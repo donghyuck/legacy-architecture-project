@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 package architecture.ee.web.community.social.tumblr.json;
+
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
@@ -24,16 +25,16 @@ import architecture.ee.web.community.social.tumblr.UserInfo;
 
 public class TumblrModule extends SimpleModule {
     public TumblrModule() {
-        super("TumblrModule", new Version(1, 0, 0, null, "architecture.ee.web.community", "social-tumblr"));
+	super("TumblrModule", new Version(1, 0, 0, null, "architecture.ee.web.community", "social-tumblr"));
     }
 
     @Override
     public void setupModule(SetupContext context) {
-        context.setMixInAnnotations(TumblrResponse.class, TumblrResponseMixin.class);
-        context.setMixInAnnotations(UserInfoResponse.class, UserInfoResponseMixin.class);
-        context.setMixInAnnotations(BlogInfo.class, BlogInfoMixin.class);
-        context.setMixInAnnotations(UserInfo.class, UserInfoMixin.class);
-        context.setMixInAnnotations(Post.class, PostMixin.class);
-        context.setMixInAnnotations(Posts.class, PostsMixin.class);
+	context.setMixInAnnotations(TumblrResponse.class, TumblrResponseMixin.class);
+	context.setMixInAnnotations(UserInfoResponse.class, UserInfoResponseMixin.class);
+	context.setMixInAnnotations(BlogInfo.class, BlogInfoMixin.class);
+	context.setMixInAnnotations(UserInfo.class, UserInfoMixin.class);
+	context.setMixInAnnotations(Post.class, PostMixin.class);
+	context.setMixInAnnotations(Posts.class, PostsMixin.class);
     }
 }

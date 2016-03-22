@@ -23,451 +23,490 @@ import architecture.ee.web.community.social.UserProfile;
 
 public class FacebookProfile implements UserProfile {
 
-	private final String id;
+    private final String id;
 
-	private final String username;
+    private final String username;
 
-	private final String name;
+    private final String name;
 
-	private final String firstName;
-	
-	private String middleName;
+    private final String firstName;
 
-	private final String lastName;
+    private String middleName;
 
-	private final String gender;
+    private final String lastName;
 
-	private final Locale locale;
+    private final String gender;
 
-	private String link;
+    private final Locale locale;
 
-	private String website;
+    private String link;
 
-	private String email;
-	
-	private String thirdPartyId;
+    private String website;
 
-	private Integer timezone;
-	
-	private Date updatedTime;
+    private String email;
 
-	private Boolean verified;
+    private String thirdPartyId;
 
-	private String about;	
+    private Integer timezone;
 
-	private String bio;
-	
-	private String birthday;
-	
-	private Reference location;
-	
-	private Reference hometown;
-	
-	private List<String> interestedIn;
+    private Date updatedTime;
 
-	private List<Reference> inspirationalPeople;
+    private Boolean verified;
 
-	private List<Reference> languages;
-	
-	private List<Reference> sports;
-	
-	private List<Reference> favoriteTeams;
-	
-	private List<Reference> favoriteAthletes;
+    private String about;
 
-	private String religion;
+    private String bio;
 
-	private String political;
+    private String birthday;
 
-	private String quotes;
+    private Reference location;
 
-	private String relationshipStatus;
+    private Reference hometown;
 
-	private Reference significantOther;
-	
-	private List<WorkEntry> work;
-	
-	private List<EducationEntry> education;
+    private List<String> interestedIn;
 
-	public FacebookProfile(String id, String username, String name, String firstName, String lastName, String gender, Locale locale) {
-		this.id = id;
-		this.username = username;
-		this.name = name;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.gender = gender;
-		this.locale = locale;
-	}
+    private List<Reference> inspirationalPeople;
 
-	/**
-	 * The user's Facebook ID
-	 * @return The user's Facebook ID
-	 */
-	public String getId() {
-		return id;
-	}
-	
-	/**
-	 * The user's Facebook username
-	 * @return the user's Facebook username
-	 */
-	public String getUsername() {
-		return username;
-	}
+    private List<Reference> languages;
 
-	/**
-	 * The user's full name
-	 * @return The user's full name
-	 */
-	public String getName() {
-		return name;
-	}
+    private List<Reference> sports;
 
-	/**
-	 * The user's first name
-	 * @return The user's first name
-	 */
-	public String getFirstName() {
-		return firstName;
-	}
+    private List<Reference> favoriteTeams;
 
-	/**
-	 * The user's middle name
-	 * @return The user's middle name
-	 */
-	public String getMiddleName() {
-		return middleName;
-	}
+    private List<Reference> favoriteAthletes;
 
-	/**
-	 * The user's last name
-	 * @return The user's last name
-	 */
-	public String getLastName() {
-		return lastName;
-	}
+    private String religion;
 
-	/**
-	 * The user's gender
-	 * @return the user's gender
-	 */
-	public String getGender() {
-		return gender;
-	}
+    private String political;
 
-	/**
-	 * The user's locale
-	 * @return the user's locale
-	 */
-	public Locale getLocale() {
-		return locale;
-	}
+    private String quotes;
 
-	/**
-	 * The user's email address.
-	 * Available only with "email" permission.
-	 * @return The user's email address
-	 */
-	public String getEmail() {
-	    return email;
+    private String relationshipStatus;
+
+    private Reference significantOther;
+
+    private List<WorkEntry> work;
+
+    private List<EducationEntry> education;
+
+    public FacebookProfile(String id, String username, String name, String firstName, String lastName, String gender,
+	    Locale locale) {
+	this.id = id;
+	this.username = username;
+	this.name = name;
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.gender = gender;
+	this.locale = locale;
     }
-	
-	/**
-	 * A link to the user's profile on Facebook.
-	 * Available only if requested by an authenticated user.
-	 * @return the user's profile link or null if requested anonymously
-	 */
-	public String getLink() {
-		return link;
-	}
 
-	/**
-	 * A link to the user's personal website. Available only with "user_website"
-	 * or "friends_website" permission.
-	 * 
-	 * @return a link to the user's personal website.
-	 */
-	public String getWebsite() {
-		return website;
-	}
+    /**
+     * The user's Facebook ID
+     * 
+     * @return The user's Facebook ID
+     */
+    public String getId() {
+	return id;
+    }
 
-	/**
-	 * An anonymous, but unique identifier for the user. Available only if
-	 * requested by an authenticated user.
-	 * 
-	 * @return the user's third-party ID or null if not available
-	 */
-	public String getThirdPartyId() {
-		return thirdPartyId;
-	}
-	
-	/**
-	 * The user's timezone offset from UTC.
-	 * Available only for the authenticated user.
-	 * @return the user's timezone offset from UTC or null if the user isn't the authenticated user
-	 */
-	public Integer getTimezone() {
-		return timezone;
-	}
-	
-	/**
-	 * The last time the user's profile was updated.
-	 * @return the time that the user's profile was updated
-	 */
-	public Date getUpdatedTime() {
-		return updatedTime;
-	}
-	
-	/**
-	 * The user's account verification status.
-	 * Available only if requested by an authenticated user.
-	 * @return true if the profile has been verified, false if it has not, or null if not available.
-	 */
-	public Boolean isVerified() {
-		return verified;
-	}
-	
-	/**
-	 * The user's brief about blurb.
-	 * Available only with "user_about_me" permission for the authenticated user or "friends_about_me" for the authenticated user's friends.
-	 * @return the user's about blurb, if available.
-	 */
-	public String getAbout() {
-		return about;
-	}
+    /**
+     * The user's Facebook username
+     * 
+     * @return the user's Facebook username
+     */
+    public String getUsername() {
+	return username;
+    }
 
-	/**
-	 * The user's bio.
-	 * Available only with "user_about_me" permission for the authenticated user.
-	 * @return the user's bio, if available.
-	 */
-	public String getBio() {
-		return bio;
-	}
-	
-	/**
-	 * The user's birthday.
-	 * Available only with "user_birthday" permission for the authentication user or "friends_birthday" permission for the user's friends.
-	 * @return the user's birthday
-	 */
-	public String getBirthday() {
-		return birthday;
-	}
-	
-	/**
-	 * The user's location.
-	 * Available only with "user_location" or "friends_location" permission.
-	 * @return a {@link Reference} to the user's location, if available
-	 */
-	public Reference getLocation() {
-		return location;
-	}
-	
-	/**
-	 * The user's hometown.
-	 * Available only with "user_hometown" or "friends_hometown" permission.
-	 * @return a {@link Reference} to the user's hometown, if available
-	 */
-	public Reference getHometown() {
-		return hometown;
-	}
-	
-	/**
-	 * A list of the genders the user is interested in.
-	 * Available only with "user_relationship_details" or "friends_relationship_details" permission.
-	 * @return a list of genders the user is interested in, if available.
-	 */
-	public List<String> getInterestedIn() {
-		return interestedIn;
-	}
-	
-	/**
-	 * A list of references to people the user is inspired by.
-	 * @return a list of {@link Reference} to people the user is inspired by, if available.
-	 */
-	public List<Reference> getInspirationalPeople() {
-		return inspirationalPeople;
-	}
-	
-	/**
-	 * A list of references to languages the user claims to know.
-	 * @return a list of {@link Reference} to languages the user knows, if available.
-	 */
-	public List<Reference> getLanguages() {
-		return languages;
-	}
-	
-	/**
-	 * A list of references to sports the user plays
-	 * @return a list of {@link Reference}s to sports the user plays, if available.
-	 */
-	public List<Reference> getSports() {
-		return sports;
-	}
-	
-	/**
-	 * A list of references to the user's favorite sports teams.
-	 * @return a list of {@link Reference}s to sports teams the user is a fan of, if available.
-	 */
-	public List<Reference> getFavoriteTeams() {
-		return favoriteTeams;
-	}
-	
-	/**
-	 * A list of references to the user's favorite athletes.
-	 * @return a list of {@link Reference}s to athletes the user is a fan of, if available.
-	 */
-	public List<Reference> getFavoriteAtheletes() {
-		return favoriteAthletes;
-	}
+    /**
+     * The user's full name
+     * 
+     * @return The user's full name
+     */
+    public String getName() {
+	return name;
+    }
 
-	/**
-	 * The user's religion. 
-	 * Available only with "user_religion_politics" or "friends_religion_politics" permission.
-	 * @return the user's religion, if available.
-	 */
-	public String getReligion() {
-		return religion;
-	}
+    /**
+     * The user's first name
+     * 
+     * @return The user's first name
+     */
+    public String getFirstName() {
+	return firstName;
+    }
 
-	/**
-	 * The user's political affiliation. 
-	 * Available only with "user_religion_politics" or "friends_religion_politics" permission.
-	 * @return the user's political affiliation, if available.
-	 */
-	public String getPolitical() {
-		return political;
-	}
+    /**
+     * The user's middle name
+     * 
+     * @return The user's middle name
+     */
+    public String getMiddleName() {
+	return middleName;
+    }
 
-	/**
-	 * The user's quotations. 
-	 * Available only with "user_about_me" permission.
-	 * @return the user's quotations, if available.
-	 */
-	public String getQuotes() {
-		return quotes;
-	}
+    /**
+     * The user's last name
+     * 
+     * @return The user's last name
+     */
+    public String getLastName() {
+	return lastName;
+    }
 
-	/**
-	 * The user's relationship status. 
-	 * Available only with "user_relationships" or "friends_relationships" permission.
-	 * @return the user's relationship status, if available.
-	 */
-	public String getRelationshipStatus() {
-		return relationshipStatus;
-	}
+    /**
+     * The user's gender
+     * 
+     * @return the user's gender
+     */
+    public String getGender() {
+	return gender;
+    }
 
-	/**
-	 * The user's significant other. 
-	 * Available only for certain relationship statuses and with "user_relationship_details" or "friends_relationship_details" permission.
-	 * @return a {@link Reference} to the user's significant other, if available.
-	 */
-	public Reference getSignificantOther() {
-		return significantOther;
-	}
+    /**
+     * The user's locale
+     * 
+     * @return the user's locale
+     */
+    public Locale getLocale() {
+	return locale;
+    }
 
-	/**
-	 * The user's work history.
-	 * Available only with "user_work_history" or "friends_work_history" permission.
-	 * @return a list of {@link WorkEntry} items, one for each entry in the user's work history.
-	 */
-	public List<WorkEntry> getWork() {
-		return work;
-	}
-	
-	/**
-	 * The user's education history.
-	 * Available only with "user_education_history" or "friends_education_history" permission.
-	 * @return a list of {@link EducationEntry} items, one for each entry in the user's education history.
-	 */
-	public List<EducationEntry> getEducation() {
-		return education;
-	}
+    /**
+     * The user's email address. Available only with "email" permission.
+     * 
+     * @return The user's email address
+     */
+    public String getEmail() {
+	return email;
+    }
 
+    /**
+     * A link to the user's profile on Facebook. Available only if requested by
+     * an authenticated user.
+     * 
+     * @return the user's profile link or null if requested anonymously
+     */
+    public String getLink() {
+	return link;
+    }
 
+    /**
+     * A link to the user's personal website. Available only with "user_website"
+     * or "friends_website" permission.
+     * 
+     * @return a link to the user's personal website.
+     */
+    public String getWebsite() {
+	return website;
+    }
 
-	/* (비Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("FacebookProfile [");
-		if (id != null)
-			builder.append("id=").append(id).append(", ");
-		if (username != null)
-			builder.append("username=").append(username).append(", ");
-		if (name != null)
-			builder.append("name=").append(name).append(", ");
-		if (firstName != null)
-			builder.append("firstName=").append(firstName).append(", ");
-		if (middleName != null)
-			builder.append("middleName=").append(middleName).append(", ");
-		if (lastName != null)
-			builder.append("lastName=").append(lastName).append(", ");
-		if (gender != null)
-			builder.append("gender=").append(gender).append(", ");
-		if (locale != null)
-			builder.append("locale=").append(locale).append(", ");
-		if (link != null)
-			builder.append("link=").append(link).append(", ");
-		if (website != null)
-			builder.append("website=").append(website).append(", ");
-		if (email != null)
-			builder.append("email=").append(email).append(", ");
-		if (thirdPartyId != null)
-			builder.append("thirdPartyId=").append(thirdPartyId).append(", ");
-		if (timezone != null)
-			builder.append("timezone=").append(timezone).append(", ");
-		if (updatedTime != null)
-			builder.append("updatedTime=").append(updatedTime).append(", ");
-		if (verified != null)
-			builder.append("verified=").append(verified).append(", ");
-		if (about != null)
-			builder.append("about=").append(about).append(", ");
-		if (bio != null)
-			builder.append("bio=").append(bio).append(", ");
-		if (birthday != null)
-			builder.append("birthday=").append(birthday).append(", ");
-		if (location != null)
-			builder.append("location=").append(location).append(", ");
-		if (hometown != null)
-			builder.append("hometown=").append(hometown).append(", ");
-		if (interestedIn != null)
-			builder.append("interestedIn=").append(interestedIn).append(", ");
-		if (inspirationalPeople != null)
-			builder.append("inspirationalPeople=").append(inspirationalPeople)
-					.append(", ");
-		if (languages != null)
-			builder.append("languages=").append(languages).append(", ");
-		if (sports != null)
-			builder.append("sports=").append(sports).append(", ");
-		if (favoriteTeams != null)
-			builder.append("favoriteTeams=").append(favoriteTeams).append(", ");
-		if (favoriteAthletes != null)
-			builder.append("favoriteAthletes=").append(favoriteAthletes)
-					.append(", ");
-		if (religion != null)
-			builder.append("religion=").append(religion).append(", ");
-		if (political != null)
-			builder.append("political=").append(political).append(", ");
-		if (quotes != null)
-			builder.append("quotes=").append(quotes).append(", ");
-		if (relationshipStatus != null)
-			builder.append("relationshipStatus=").append(relationshipStatus)
-					.append(", ");
-		if (significantOther != null)
-			builder.append("significantOther=").append(significantOther)
-					.append(", ");
-		if (work != null)
-			builder.append("work=").append(work).append(", ");
-		if (education != null)
-			builder.append("education=").append(education);
-		builder.append("]");
-		return builder.toString();
-	}
-	
-	public String getPrimaryKeyString() {
-		return getId();
-	}
+    /**
+     * An anonymous, but unique identifier for the user. Available only if
+     * requested by an authenticated user.
+     * 
+     * @return the user's third-party ID or null if not available
+     */
+    public String getThirdPartyId() {
+	return thirdPartyId;
+    }
+
+    /**
+     * The user's timezone offset from UTC. Available only for the authenticated
+     * user.
+     * 
+     * @return the user's timezone offset from UTC or null if the user isn't the
+     *         authenticated user
+     */
+    public Integer getTimezone() {
+	return timezone;
+    }
+
+    /**
+     * The last time the user's profile was updated.
+     * 
+     * @return the time that the user's profile was updated
+     */
+    public Date getUpdatedTime() {
+	return updatedTime;
+    }
+
+    /**
+     * The user's account verification status. Available only if requested by an
+     * authenticated user.
+     * 
+     * @return true if the profile has been verified, false if it has not, or
+     *         null if not available.
+     */
+    public Boolean isVerified() {
+	return verified;
+    }
+
+    /**
+     * The user's brief about blurb. Available only with "user_about_me"
+     * permission for the authenticated user or "friends_about_me" for the
+     * authenticated user's friends.
+     * 
+     * @return the user's about blurb, if available.
+     */
+    public String getAbout() {
+	return about;
+    }
+
+    /**
+     * The user's bio. Available only with "user_about_me" permission for the
+     * authenticated user.
+     * 
+     * @return the user's bio, if available.
+     */
+    public String getBio() {
+	return bio;
+    }
+
+    /**
+     * The user's birthday. Available only with "user_birthday" permission for
+     * the authentication user or "friends_birthday" permission for the user's
+     * friends.
+     * 
+     * @return the user's birthday
+     */
+    public String getBirthday() {
+	return birthday;
+    }
+
+    /**
+     * The user's location. Available only with "user_location" or
+     * "friends_location" permission.
+     * 
+     * @return a {@link Reference} to the user's location, if available
+     */
+    public Reference getLocation() {
+	return location;
+    }
+
+    /**
+     * The user's hometown. Available only with "user_hometown" or
+     * "friends_hometown" permission.
+     * 
+     * @return a {@link Reference} to the user's hometown, if available
+     */
+    public Reference getHometown() {
+	return hometown;
+    }
+
+    /**
+     * A list of the genders the user is interested in. Available only with
+     * "user_relationship_details" or "friends_relationship_details" permission.
+     * 
+     * @return a list of genders the user is interested in, if available.
+     */
+    public List<String> getInterestedIn() {
+	return interestedIn;
+    }
+
+    /**
+     * A list of references to people the user is inspired by.
+     * 
+     * @return a list of {@link Reference} to people the user is inspired by, if
+     *         available.
+     */
+    public List<Reference> getInspirationalPeople() {
+	return inspirationalPeople;
+    }
+
+    /**
+     * A list of references to languages the user claims to know.
+     * 
+     * @return a list of {@link Reference} to languages the user knows, if
+     *         available.
+     */
+    public List<Reference> getLanguages() {
+	return languages;
+    }
+
+    /**
+     * A list of references to sports the user plays
+     * 
+     * @return a list of {@link Reference}s to sports the user plays, if
+     *         available.
+     */
+    public List<Reference> getSports() {
+	return sports;
+    }
+
+    /**
+     * A list of references to the user's favorite sports teams.
+     * 
+     * @return a list of {@link Reference}s to sports teams the user is a fan
+     *         of, if available.
+     */
+    public List<Reference> getFavoriteTeams() {
+	return favoriteTeams;
+    }
+
+    /**
+     * A list of references to the user's favorite athletes.
+     * 
+     * @return a list of {@link Reference}s to athletes the user is a fan of, if
+     *         available.
+     */
+    public List<Reference> getFavoriteAtheletes() {
+	return favoriteAthletes;
+    }
+
+    /**
+     * The user's religion. Available only with "user_religion_politics" or
+     * "friends_religion_politics" permission.
+     * 
+     * @return the user's religion, if available.
+     */
+    public String getReligion() {
+	return religion;
+    }
+
+    /**
+     * The user's political affiliation. Available only with
+     * "user_religion_politics" or "friends_religion_politics" permission.
+     * 
+     * @return the user's political affiliation, if available.
+     */
+    public String getPolitical() {
+	return political;
+    }
+
+    /**
+     * The user's quotations. Available only with "user_about_me" permission.
+     * 
+     * @return the user's quotations, if available.
+     */
+    public String getQuotes() {
+	return quotes;
+    }
+
+    /**
+     * The user's relationship status. Available only with "user_relationships"
+     * or "friends_relationships" permission.
+     * 
+     * @return the user's relationship status, if available.
+     */
+    public String getRelationshipStatus() {
+	return relationshipStatus;
+    }
+
+    /**
+     * The user's significant other. Available only for certain relationship
+     * statuses and with "user_relationship_details" or
+     * "friends_relationship_details" permission.
+     * 
+     * @return a {@link Reference} to the user's significant other, if
+     *         available.
+     */
+    public Reference getSignificantOther() {
+	return significantOther;
+    }
+
+    /**
+     * The user's work history. Available only with "user_work_history" or
+     * "friends_work_history" permission.
+     * 
+     * @return a list of {@link WorkEntry} items, one for each entry in the
+     *         user's work history.
+     */
+    public List<WorkEntry> getWork() {
+	return work;
+    }
+
+    /**
+     * The user's education history. Available only with
+     * "user_education_history" or "friends_education_history" permission.
+     * 
+     * @return a list of {@link EducationEntry} items, one for each entry in the
+     *         user's education history.
+     */
+    public List<EducationEntry> getEducation() {
+	return education;
+    }
+
+    /*
+     * (비Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("FacebookProfile [");
+	if (id != null)
+	    builder.append("id=").append(id).append(", ");
+	if (username != null)
+	    builder.append("username=").append(username).append(", ");
+	if (name != null)
+	    builder.append("name=").append(name).append(", ");
+	if (firstName != null)
+	    builder.append("firstName=").append(firstName).append(", ");
+	if (middleName != null)
+	    builder.append("middleName=").append(middleName).append(", ");
+	if (lastName != null)
+	    builder.append("lastName=").append(lastName).append(", ");
+	if (gender != null)
+	    builder.append("gender=").append(gender).append(", ");
+	if (locale != null)
+	    builder.append("locale=").append(locale).append(", ");
+	if (link != null)
+	    builder.append("link=").append(link).append(", ");
+	if (website != null)
+	    builder.append("website=").append(website).append(", ");
+	if (email != null)
+	    builder.append("email=").append(email).append(", ");
+	if (thirdPartyId != null)
+	    builder.append("thirdPartyId=").append(thirdPartyId).append(", ");
+	if (timezone != null)
+	    builder.append("timezone=").append(timezone).append(", ");
+	if (updatedTime != null)
+	    builder.append("updatedTime=").append(updatedTime).append(", ");
+	if (verified != null)
+	    builder.append("verified=").append(verified).append(", ");
+	if (about != null)
+	    builder.append("about=").append(about).append(", ");
+	if (bio != null)
+	    builder.append("bio=").append(bio).append(", ");
+	if (birthday != null)
+	    builder.append("birthday=").append(birthday).append(", ");
+	if (location != null)
+	    builder.append("location=").append(location).append(", ");
+	if (hometown != null)
+	    builder.append("hometown=").append(hometown).append(", ");
+	if (interestedIn != null)
+	    builder.append("interestedIn=").append(interestedIn).append(", ");
+	if (inspirationalPeople != null)
+	    builder.append("inspirationalPeople=").append(inspirationalPeople).append(", ");
+	if (languages != null)
+	    builder.append("languages=").append(languages).append(", ");
+	if (sports != null)
+	    builder.append("sports=").append(sports).append(", ");
+	if (favoriteTeams != null)
+	    builder.append("favoriteTeams=").append(favoriteTeams).append(", ");
+	if (favoriteAthletes != null)
+	    builder.append("favoriteAthletes=").append(favoriteAthletes).append(", ");
+	if (religion != null)
+	    builder.append("religion=").append(religion).append(", ");
+	if (political != null)
+	    builder.append("political=").append(political).append(", ");
+	if (quotes != null)
+	    builder.append("quotes=").append(quotes).append(", ");
+	if (relationshipStatus != null)
+	    builder.append("relationshipStatus=").append(relationshipStatus).append(", ");
+	if (significantOther != null)
+	    builder.append("significantOther=").append(significantOther).append(", ");
+	if (work != null)
+	    builder.append("work=").append(work).append(", ");
+	if (education != null)
+	    builder.append("education=").append(education);
+	builder.append("]");
+	return builder.toString();
+    }
+
+    public String getPrimaryKeyString() {
+	return getId();
+    }
 }

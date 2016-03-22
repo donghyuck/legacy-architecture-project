@@ -39,64 +39,67 @@ import architecture.ee.web.community.social.provider.connect.SocialConnect;
 import architecture.ee.web.community.social.provider.connect.SocialConnect.Media;
 import architecture.ee.web.community.social.provider.connect.SocialConnectManager;
 
-@Controller 
+@Controller
 @RequestMapping("/connect/twitter")
 public class TwitterController {
 
-	@Autowired
-	@Qualifier("socialConnectManager") private SocialConnectManager socialConnectManager ;
-	
-	public TwitterController() {
-	}
+    @Autowired
+    @Qualifier("socialConnectManager")
+    private SocialConnectManager socialConnectManager;
 
+    public TwitterController() {
+    }
 
-	@RequestMapping(value="/user/lookup.json", method=RequestMethod.POST)
-	@ResponseBody
-	public TwitterProfile  lookupUser(@RequestParam(value="userId", defaultValue="0", required=false ) Integer userId, @RequestParam(value="screenName", defaultValue="", required=false ) String screenName, NativeWebRequest request, Model model) throws Exception  {		
-	
-		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TWITTER );		
-		Twitter api = (Twitter) account.getConnection().getApi();		
-		
-		UserOperations userOperations = api.userOperations();
-		TwitterProfile profile = null ;
-		if(profile == null && userId > 0 ){
-			profile = userOperations.getUserProfile(userId); 
-		}		
-		if(profile == null && StringUtils.hasText(screenName) ){
-			profile = userOperations.getUserProfile(screenName); 
-		}
-		if(profile == null){
-			profile = userOperations.getUserProfile();
-		}		
-		return profile;
-	}
-	
-	@RequestMapping(value="/user_timeline.json", method=RequestMethod.POST)
-	@ResponseBody 
-	public List<Tweet> getUserTimeline() throws Exception {
-		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TWITTER );		
-		Twitter api = (Twitter) account.getConnection().getApi();		
-		return api.timelineOperations().getUserTimeline();		
-	}
-	
-	@RequestMapping(value="/home_timeline.json", method=RequestMethod.POST)
-	@ResponseBody
-	public List<Tweet> getHomeTimeline() throws Exception {
-		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TWITTER );		
-		Twitter api = (Twitter) account.getConnection().getApi();		
-		return api.timelineOperations().getHomeTimeline();	
-	}
+    @RequestMapping(value = "/user/lookup.json", method = RequestMethod.POST)
+    @ResponseBody
+    public TwitterProfile lookupUser(
+	    @RequestParam(value = "userId", defaultValue = "0", required = false) Integer userId,
+	    @RequestParam(value = "screenName", defaultValue = "", required = false) String screenName,
+	    NativeWebRequest request, Model model) throws Exception {
 
-	@RequestMapping(value="/favorites.json", method=RequestMethod.POST)
-	@ResponseBody
-	public List<Tweet> getFavorites() throws Exception {
-		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TWITTER );		
-		Twitter api = (Twitter) account.getConnection().getApi();		
-		return api.timelineOperations().getFavorites();
+	SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TWITTER);
+	Twitter api = (Twitter) account.getConnection().getApi();
+
+	UserOperations userOperations = api.userOperations();
+	TwitterProfile profile = null;
+	if (profile == null && userId > 0) {
+	    profile = userOperations.getUserProfile(userId);
 	}
-	
-	protected SocialConnect getSocialConnect(User user, Media media) throws ConnectNotFoundException{
-		return socialConnectManager.getSocialConnect(user, media.name().toLowerCase());		 		
+	if (profile == null && StringUtils.hasText(screenName)) {
+	    profile = userOperations.getUserProfile(screenName);
 	}
-	
+	if (profile == null) {
+	    profile = userOperations.getUserProfile();
+	}
+	return profile;
+    }
+
+    @RequestMapping(value = "/user_timeline.json", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Tweet> getUserTimeline() throws Exception {
+	SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TWITTER);
+	Twitter api = (Twitter) account.getConnection().getApi();
+	return api.timelineOperations().getUserTimeline();
+    }
+
+    @RequestMapping(value = "/home_timeline.json", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Tweet> getHomeTimeline() throws Exception {
+	SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TWITTER);
+	Twitter api = (Twitter) account.getConnection().getApi();
+	return api.timelineOperations().getHomeTimeline();
+    }
+
+    @RequestMapping(value = "/favorites.json", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Tweet> getFavorites() throws Exception {
+	SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TWITTER);
+	Twitter api = (Twitter) account.getConnection().getApi();
+	return api.timelineOperations().getFavorites();
+    }
+
+    protected SocialConnect getSocialConnect(User user, Media media) throws ConnectNotFoundException {
+	return socialConnectManager.getSocialConnect(user, media.name().toLowerCase());
+    }
+
 }

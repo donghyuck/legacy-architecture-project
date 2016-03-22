@@ -25,25 +25,24 @@ import architecture.ee.web.logo.LogoImageNotFoundException;
 
 public interface LogoImageDao {
 
-	public void addLogoImage(LogoImage logoImage, File file);
-	
-	public void addLogoImage(LogoImage logoImage, InputStream is);
+    public void addLogoImage(LogoImage logoImage, File file);
 
-	public void updateLogoImage(LogoImage logoImage, File file);
-	
-	public void updateLogoImage(LogoImage logoImage, InputStream is);
-	
-	public void removeLogoImage(LogoImage logoImage);
-	
-	public InputStream getInputStream(LogoImage logoImage) throws IOException;
-	
-	public Long getPrimaryLogoImageId(int objectType, long objectId) throws LogoImageNotFoundException;
-	
-	public LogoImage getLogoImageById(long logoId)throws LogoImageNotFoundException;
-	
-	public List<Long> getLogoImageIds(int objectType, long objectId);
-	
-	public int getLogoImageCount(int objectType, long objectId);
-	
-	
+    public void addLogoImage(LogoImage logoImage, InputStream is);
+
+    public void updateLogoImage(LogoImage logoImage, File file);
+
+    public void updateLogoImage(LogoImage logoImage, InputStream is);
+
+    public void removeLogoImage(LogoImage logoImage);
+
+    public InputStream getInputStream(LogoImage logoImage) throws IOException;
+
+    public Long getPrimaryLogoImageId(int objectType, long objectId) throws LogoImageNotFoundException;
+
+    public LogoImage getLogoImageById(long logoId) throws LogoImageNotFoundException;
+
+    public List<Long> getLogoImageIds(int objectType, long objectId);
+
+    public int getLogoImageCount(int objectType, long objectId);
+
 }

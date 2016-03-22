@@ -22,62 +22,62 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BlogInfoMixin {
 
-	@JsonProperty("title")
-	private String title; // – string: the title of the blog
+    @JsonProperty("title")
+    private String title; // – string: the title of the blog
 
-	@JsonProperty("posts")
-	private int posts;
+    @JsonProperty("posts")
+    private int posts;
 
-	@JsonProperty("name")
-	private String name; // – string: the short name of the blog
+    @JsonProperty("name")
+    private String name; // – string: the short name of the blog
 
-	@JsonProperty("updated")
-	private long updated;
+    @JsonProperty("updated")
+    private long updated;
 
-	@JsonProperty("description")
-	private String description;
+    @JsonProperty("description")
+    private String description;
 
-	@JsonProperty("ask")
-	private boolean ask;
+    @JsonProperty("ask")
+    private boolean ask;
 
-	@JsonProperty("ask_anon")
-	private boolean askAnon;
+    @JsonProperty("ask_anon")
+    private boolean askAnon;
 
-	@JsonProperty("likes")
-	private int likes;
+    @JsonProperty("likes")
+    private int likes;
 
-	@JsonProperty("url")
-	private String url; // – string: the URL of the blog
+    @JsonProperty("url")
+    private String url; // – string: the URL of the blog
 
-	@JsonProperty("share_likes")
-	private boolean shareLikes; // – boolean: indicates if this is the user's // primary blog
-								
-	@JsonProperty("primary")
-	private boolean primary;
-	
-	@JsonProperty("followers")
-	private int followers; // – number: total count of followers for this blog
+    @JsonProperty("share_likes")
+    private boolean shareLikes; // – boolean: indicates if this is the user's //
+				// primary blog
 
-	@JsonProperty("type")
-	private String type; // – indicates whether a blog is public or private
+    @JsonProperty("primary")
+    private boolean primary;
 
-	@JsonProperty("drafts")
-	private int drafts; // – number: total count of followers for this blog
-	
+    @JsonProperty("followers")
+    private int followers; // – number: total count of followers for this blog
 
-	@JsonProperty("messages")
-	private int messages; // – number: total count of followers for this blog
-	
-	@JsonProperty("facebook_opengraph_enabled")
-	@JsonDeserialize(using = BooleanYNDeserializer.class)
-	private boolean facebookOpengraphEnabled;
-	
-	@JsonProperty("tweet") 
-	@JsonDeserialize(using = BooleanYNDeserializer.class)
-	boolean tweet;
-	
-	@JsonProperty("facebook") 
-	@JsonDeserialize(using = BooleanYNDeserializer.class)
-	boolean facebook;
+    @JsonProperty("type")
+    private String type; // – indicates whether a blog is public or private
+
+    @JsonProperty("drafts")
+    private int drafts; // – number: total count of followers for this blog
+
+    @JsonProperty("messages")
+    private int messages; // – number: total count of followers for this blog
+
+    @JsonProperty("facebook_opengraph_enabled")
+    @JsonDeserialize(using = BooleanYNDeserializer.class)
+    private boolean facebookOpengraphEnabled;
+
+    @JsonProperty("tweet")
+    @JsonDeserialize(using = BooleanYNDeserializer.class)
+    boolean tweet;
+
+    @JsonProperty("facebook")
+    @JsonDeserialize(using = BooleanYNDeserializer.class)
+    boolean facebook;
 
 }

@@ -19,21 +19,20 @@ import java.util.List;
 
 import architecture.ee.web.community.social.provider.connect.SocialConnect;
 
-
 public interface SocialConnectDao {
-		
-	public List<Long> getSocialConnectIds( int objectType, long objectId);
-	
-	public List<Long> getSocialConnectIds(int objectType, String providerId, String providerUserId);
 
-	public Long getSocialConnectId(int objectType, long objectId, String providerId);
-		
-	public SocialConnect getSocialConnectById(long socialConnectId);
-	
-	public void addSocialConnect(SocialConnect socialConnect);
-	
-	public void updateSocialConnect(SocialConnect socialConnect);
-		
-	public void removeSocialConnect(SocialConnect socialNetwork);
-	
+    public List<Long> getSocialConnectIds(int objectType, long objectId);
+
+    public List<Long> getSocialConnectIds(int objectType, String providerId, String providerUserId);
+
+    public Long getSocialConnectId(int objectType, long objectId, String providerId);
+
+    public SocialConnect getSocialConnectById(long socialConnectId);
+
+    public void addSocialConnect(SocialConnect socialConnect);
+
+    public void updateSocialConnect(SocialConnect socialConnect);
+
+    public void removeSocialConnect(SocialConnect socialNetwork);
+
 }

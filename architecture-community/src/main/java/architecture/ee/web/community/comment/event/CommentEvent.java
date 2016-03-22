@@ -23,44 +23,41 @@ import architecture.ee.web.community.comment.Comment;
 
 public class CommentEvent extends Event {
 
-	public enum Type {
-		CREATED,
-		UPDATED,
-		DELETED
-	};
-	
-	private Type type;
-	private Date date;
-	private Map params;
-	
-	public CommentEvent( Comment comment, Type type, Map params ) {
-		super(comment);
-	}
+    public enum Type {
+	CREATED, UPDATED, DELETED
+    };
 
-	/**
-	 * @return type
-	 */
-	public Type getType() {
-		return type;
-	}
+    private Type type;
+    private Date date;
+    private Map params;
 
-	/**
-	 * @return date
-	 */
-	public Date getDate() {
-		return date;
-	}
+    public CommentEvent(Comment comment, Type type, Map params) {
+	super(comment);
+    }
 
-	/**
-	 * @return params
-	 */
-	public Map getParams() {
-		return params;
-	}
-	
-    public Comment getComment()
-    {
-        return (Comment)getSource();
+    /**
+     * @return type
+     */
+    public Type getType() {
+	return type;
+    }
+
+    /**
+     * @return date
+     */
+    public Date getDate() {
+	return date;
+    }
+
+    /**
+     * @return params
+     */
+    public Map getParams() {
+	return params;
+    }
+
+    public Comment getComment() {
+	return (Comment) getSource();
     }
 
 }

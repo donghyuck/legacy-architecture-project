@@ -19,73 +19,73 @@ import architecture.ee.exception.ApplicationException;
 
 public class PhotoNotFoundException extends ApplicationException {
 
-	/**
-	 * 
-	 */
-	public PhotoNotFoundException() {
-		super();
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * 
+     */
+    public PhotoNotFoundException() {
+	super();
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param errorCode
-	 * @param msg
-	 * @param cause
-	 */
-	public PhotoNotFoundException(int errorCode, String msg, Throwable cause) {
-		super(errorCode, msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param errorCode
+     * @param msg
+     * @param cause
+     */
+    public PhotoNotFoundException(int errorCode, String msg, Throwable cause) {
+	super(errorCode, msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param errorCode
-	 * @param msg
-	 */
-	public PhotoNotFoundException(int errorCode, String msg) {
-		super(errorCode, msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param errorCode
+     * @param msg
+     */
+    public PhotoNotFoundException(int errorCode, String msg) {
+	super(errorCode, msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param errorCode
-	 * @param cause
-	 */
-	public PhotoNotFoundException(int errorCode, Throwable cause) {
-		super(errorCode, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param errorCode
+     * @param cause
+     */
+    public PhotoNotFoundException(int errorCode, Throwable cause) {
+	super(errorCode, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param errorCode
-	 */
-	public PhotoNotFoundException(int errorCode) {
-		super(errorCode);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param errorCode
+     */
+    public PhotoNotFoundException(int errorCode) {
+	super(errorCode);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param msg
-	 * @param cause
-	 */
-	public PhotoNotFoundException(String msg, Throwable cause) {
-		super(msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param msg
+     * @param cause
+     */
+    public PhotoNotFoundException(String msg, Throwable cause) {
+	super(msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param msg
-	 */
-	public PhotoNotFoundException(String msg) {
-		super(msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param msg
+     */
+    public PhotoNotFoundException(String msg) {
+	super(msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param cause
-	 */
-	public PhotoNotFoundException(Throwable cause) {
-		super(cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param cause
+     */
+    public PhotoNotFoundException(Throwable cause) {
+	super(cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
 }

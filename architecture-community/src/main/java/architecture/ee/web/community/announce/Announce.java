@@ -24,109 +24,118 @@ import architecture.ee.web.attachment.Attachment;
 
 public interface Announce extends NoNamedEntityModelObject {
 
-	/**
-	 * @return announceId
-	 */
-	public Long getAnnounceId();
+    /**
+     * @return announceId
+     */
+    public Long getAnnounceId();
 
-	/**
-	 * @param announceId 설정할 announceId
-	 */
-	public void setAnnounceId(Long announceId);
+    /**
+     * @param announceId
+     *            설정할 announceId
+     */
+    public void setAnnounceId(Long announceId);
 
-	/**
-	 * @return objectType
-	 */
-	public int getObjectType() ;
+    /**
+     * @return objectType
+     */
+    public int getObjectType();
 
-	/**
-	 * @param objectType 설정할 objectType
-	 */
-	public void setObjectType(int objectType);
-	/**
-	 * @return objectId
-	 */
-	public Long getObjectId();
+    /**
+     * @param objectType
+     *            설정할 objectType
+     */
+    public void setObjectType(int objectType);
 
-	/**
-	 * @param objectId 설정할 objectId
-	 */
-	public void setObjectId(Long objectId) ;
+    /**
+     * @return objectId
+     */
+    public Long getObjectId();
 
-	/**
-	 * @return userId
-	 */
-	public Long getUserId() ;
+    /**
+     * @param objectId
+     *            설정할 objectId
+     */
+    public void setObjectId(Long objectId);
 
-	/**
-	 * @param userId 설정할 userId
-	 */
-	public void setUserId(Long userId);
+    /**
+     * @return userId
+     */
+    public Long getUserId();
 
-	/**
-	 * @return subject
-	 */
-	public String getSubject();
+    /**
+     * @param userId
+     *            설정할 userId
+     */
+    public void setUserId(Long userId);
 
-	/**
-	 * @return attachments
-	 */
-	public List getAttachments();
+    /**
+     * @return subject
+     */
+    public String getSubject();
 
+    /**
+     * @return attachments
+     */
+    public List getAttachments();
 
-	/**
-	 * @param attachments 설정할 attachments
-	 */
-	public void setAttachments(List attachments);
+    /**
+     * @param attachments
+     *            설정할 attachments
+     */
+    public void setAttachments(List attachments);
 
+    /**
+     * @param subject
+     *            설정할 subject
+     */
+    public void setSubject(String subject);
 
-	/**
-	 * @param subject 설정할 subject
-	 */
-	public void setSubject(String subject) ;
+    /**
+     * @return body
+     */
+    public String getBody();
 
-	/**
-	 * @return body
-	 */
-	public String getBody() ;
+    /**
+     * @param body
+     *            설정할 body
+     */
+    public void setBody(String body);
 
-	/**
-	 * @param body 설정할 body
-	 */
-	public void setBody(String body);
-	/**
-	 * @return startDate
-	 */
-	public Date getStartDate() ;
+    /**
+     * @return startDate
+     */
+    public Date getStartDate();
 
-	/**
-	 * @param startDate 설정할 startDate
-	 */
-	public void setStartDate(Date startDate) ;
+    /**
+     * @param startDate
+     *            설정할 startDate
+     */
+    public void setStartDate(Date startDate);
 
-	/**
-	 * @return endDate
-	 */
-	public Date getEndDate() ;
+    /**
+     * @return endDate
+     */
+    public Date getEndDate();
 
-	/**
-	 * @param endDate 설정할 endDate
-	 */
-	public void setEndDate(Date endDate);
+    /**
+     * @param endDate
+     *            설정할 endDate
+     */
+    public void setEndDate(Date endDate);
 
+    /**
+     * @return user
+     */
+    public User getUser();
 
-	/**
-	 * @return user
-	 */
-	public User getUser() ;
+    /**
+     * @param user
+     *            설정할 user
+     */
+    public void setUser(User user);
 
-	/**
-	 * @param user 설정할 user
-	 */
-	public void setUser(User user);
-	
-	public void deleteAttachments(Attachment attachment);
-	
-	public int attachmentCount();
-	
+    public void deleteAttachments(Attachment attachment);
+
+    public int attachmentCount();
+
 }

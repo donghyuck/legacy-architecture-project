@@ -19,6 +19,6 @@ import java.io.Serializable;
 
 public interface UserProfile extends Serializable {
 
-	public String getPrimaryKeyString();
-	
+    public String getPrimaryKeyString();
+
 }

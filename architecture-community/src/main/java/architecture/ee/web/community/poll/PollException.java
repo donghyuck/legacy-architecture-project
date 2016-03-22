@@ -19,43 +19,43 @@ import architecture.ee.exception.ApplicationException;
 
 public class PollException extends ApplicationException {
 
-	public PollException() {
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PollException() {
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public PollException(int errorCode) {
-		super(errorCode);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PollException(int errorCode) {
+	super(errorCode);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public PollException(String msg, Throwable cause) {
-		super(msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PollException(String msg, Throwable cause) {
+	super(msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public PollException(int errorCode, String msg, Throwable cause) {
-		super(errorCode, msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PollException(int errorCode, String msg, Throwable cause) {
+	super(errorCode, msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public PollException(String msg) {
-		super(msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PollException(String msg) {
+	super(msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public PollException(int errorCode, String msg) {
-		super(errorCode, msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PollException(int errorCode, String msg) {
+	super(errorCode, msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public PollException(Throwable cause) {
-		super(cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PollException(Throwable cause) {
+	super(cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public PollException(int errorCode, Throwable cause) {
-		super(errorCode, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PollException(int errorCode, Throwable cause) {
+	super(errorCode, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
 }

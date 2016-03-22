@@ -22,145 +22,148 @@ import architecture.ee.web.community.streams.Photo;
 
 public class PhotoImpl implements Photo {
 
-	private Date creationDate = null;
-	
-	private Date modifiedDate = null;
-	
-	private long creatorId;
-	
-	private long imageId;
-	
-	private String externalId ;
-	
-	private boolean publicShared;
-		
-	private User creator;
-	
-	
-	
-	/**
-	 * @param creatorId
-	 * @param imageId
-	 * @param publicShared
-	 * @param creator
-	 */
-	public PhotoImpl(String externalId, long imageId, boolean publicShared, User creator) {
-		this.externalId = externalId;
-		this.imageId = imageId;
-		this.publicShared = publicShared;
-		this.creator = creator;
-		this.creatorId = creator.getUserId();
-	}
+    private Date creationDate = null;
 
-	public PhotoImpl(String externalId, long imageId, boolean publicShared, long creatorId) {
-		this.externalId = externalId;
-		this.imageId = imageId;
-		this.publicShared = publicShared;
-		this.creatorId = creatorId ;
-	}
+    private Date modifiedDate = null;
 
-	
-	/**
-	 * @return creator
-	 */
-	public User getCreator() {
-		return creator;
-	}
+    private long creatorId;
 
-	/**
-	 * @param creator 설정할 creator
-	 */
-	public void setCreator(User creator) {
-		this.creator = creator;
-	}
+    private long imageId;
 
-	/**
-	 * @return creationDate
-	 */
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    private String externalId;
 
-	/**
-	 * @param creationDate 설정할 creationDate
-	 */
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    private boolean publicShared;
 
-	/**
-	 * @return modifiedDate
-	 */
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
+    private User creator;
 
-	/**
-	 * @param modifiedDate 설정할 modifiedDate
-	 */
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
+    /**
+     * @param creatorId
+     * @param imageId
+     * @param publicShared
+     * @param creator
+     */
+    public PhotoImpl(String externalId, long imageId, boolean publicShared, User creator) {
+	this.externalId = externalId;
+	this.imageId = imageId;
+	this.publicShared = publicShared;
+	this.creator = creator;
+	this.creatorId = creator.getUserId();
+    }
 
-	/**
-	 * @return creatorId
-	 */
-	public long getCreatorId() {
-		return creatorId;
-	}
+    public PhotoImpl(String externalId, long imageId, boolean publicShared, long creatorId) {
+	this.externalId = externalId;
+	this.imageId = imageId;
+	this.publicShared = publicShared;
+	this.creatorId = creatorId;
+    }
 
-	/**
-	 * @param creatorId 설정할 creatorId
-	 */
-	public void setCreatorId(long creatorId) {
-		this.creatorId = creatorId;
-	}
+    /**
+     * @return creator
+     */
+    public User getCreator() {
+	return creator;
+    }
 
-	/**
-	 * @return imageId
-	 */
-	public long getImageId() {
-		return imageId;
-	}
+    /**
+     * @param creator
+     *            설정할 creator
+     */
+    public void setCreator(User creator) {
+	this.creator = creator;
+    }
 
-	/**
-	 * @param imageId 설정할 imageId
-	 */
-	public void setImageId(long imageId) {
-		this.imageId = imageId;
-	}
+    /**
+     * @return creationDate
+     */
+    public Date getCreationDate() {
+	return creationDate;
+    }
 
-	/**
-	 * @return externalId
-	 */
-	public String getExternalId() {
-		return externalId;
-	}
+    /**
+     * @param creationDate
+     *            설정할 creationDate
+     */
+    public void setCreationDate(Date creationDate) {
+	this.creationDate = creationDate;
+    }
 
-	/**
-	 * @param externalId 설정할 externalId
-	 */
-	public void setExternalId(String externalId) {
-		this.externalId = externalId;
-	}
+    /**
+     * @return modifiedDate
+     */
+    public Date getModifiedDate() {
+	return modifiedDate;
+    }
 
-	/**
-	 * @return publicShared
-	 */
-	public boolean isPublicShared() {
-		return publicShared;
-	}
+    /**
+     * @param modifiedDate
+     *            설정할 modifiedDate
+     */
+    public void setModifiedDate(Date modifiedDate) {
+	this.modifiedDate = modifiedDate;
+    }
 
-	/**
-	 * @param publicShared 설정할 publicShared
-	 */
-	public void setPublicShared(boolean publicShared) {
-		this.publicShared = publicShared;
-	}
+    /**
+     * @return creatorId
+     */
+    public long getCreatorId() {
+	return creatorId;
+    }
 
+    /**
+     * @param creatorId
+     *            설정할 creatorId
+     */
+    public void setCreatorId(long creatorId) {
+	this.creatorId = creatorId;
+    }
 
-	public int getCachedSize() {
-		return 0;
-	}
+    /**
+     * @return imageId
+     */
+    public long getImageId() {
+	return imageId;
+    }
+
+    /**
+     * @param imageId
+     *            설정할 imageId
+     */
+    public void setImageId(long imageId) {
+	this.imageId = imageId;
+    }
+
+    /**
+     * @return externalId
+     */
+    public String getExternalId() {
+	return externalId;
+    }
+
+    /**
+     * @param externalId
+     *            설정할 externalId
+     */
+    public void setExternalId(String externalId) {
+	this.externalId = externalId;
+    }
+
+    /**
+     * @return publicShared
+     */
+    public boolean isPublicShared() {
+	return publicShared;
+    }
+
+    /**
+     * @param publicShared
+     *            설정할 publicShared
+     */
+    public void setPublicShared(boolean publicShared) {
+	this.publicShared = publicShared;
+    }
+
+    public int getCachedSize() {
+	return 0;
+    }
 
 }

@@ -31,348 +31,355 @@ import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.ee.web.community.model.ContentObject;
 
-public class DefaultComment implements Comment  {
-	
-	private ContentObject.Status status;
-	private Long commentId;
-	private Long parentCommentId;
-	private Integer objectType;
-	private Long objectId;
-	private Integer parentObjectType;
-	private Long parentObjectId;	
-	private String name;
-	private String email;
-	private String url;
-	private String ip;
-	private String body;
-	private Date creationDate;
-	private Date modifiedDate;	
-	private LongList images;
-	private Map<String, String> properties;
-	private User user;
-	
-	public DefaultComment() {
-		this.commentId = -1L;
-		this.parentCommentId = -1L;
-		this.objectType = -1;
-		this.objectId = -1L;
-		this.parentObjectType = -1;
-		this.parentObjectId = -1L;	
-		this.user = new UserTemplate(-1L);
-		this.name = null;
-		this.email = null;
-		this.url = null;
-		this.creationDate = Calendar.getInstance().getTime();
-		this.modifiedDate = this.creationDate;
-		this.properties = new HashMap<String, String>();
-		this.status = ContentObject.Status.PUBLISHED;
-		this.body = null;
-	}
+public class DefaultComment implements Comment {
 
-	
-	/**
-	 * @param commentId
-	 */
-	public DefaultComment(Long commentId) {
-		this();
-		this.commentId = commentId;
-	}
+    private ContentObject.Status status;
+    private Long commentId;
+    private Long parentCommentId;
+    private Integer objectType;
+    private Long objectId;
+    private Integer parentObjectType;
+    private Long parentObjectId;
+    private String name;
+    private String email;
+    private String url;
+    private String ip;
+    private String body;
+    private Date creationDate;
+    private Date modifiedDate;
+    private LongList images;
+    private Map<String, String> properties;
+    private User user;
 
+    public DefaultComment() {
+	this.commentId = -1L;
+	this.parentCommentId = -1L;
+	this.objectType = -1;
+	this.objectId = -1L;
+	this.parentObjectType = -1;
+	this.parentObjectId = -1L;
+	this.user = new UserTemplate(-1L);
+	this.name = null;
+	this.email = null;
+	this.url = null;
+	this.creationDate = Calendar.getInstance().getTime();
+	this.modifiedDate = this.creationDate;
+	this.properties = new HashMap<String, String>();
+	this.status = ContentObject.Status.PUBLISHED;
+	this.body = null;
+    }
 
-	/**
-	 * @return parentObjectType
-	 */
-	public Integer getParentObjectType() {
-		return parentObjectType;
-	}
+    /**
+     * @param commentId
+     */
+    public DefaultComment(Long commentId) {
+	this();
+	this.commentId = commentId;
+    }
 
+    /**
+     * @return parentObjectType
+     */
+    public Integer getParentObjectType() {
+	return parentObjectType;
+    }
 
-	/**
-	 * @param parentObjectType 설정할 parentObjectType
-	 */
-	public void setParentObjectType(Integer parentObjectType) {
-		this.parentObjectType = parentObjectType;
-	}
+    /**
+     * @param parentObjectType
+     *            설정할 parentObjectType
+     */
+    public void setParentObjectType(Integer parentObjectType) {
+	this.parentObjectType = parentObjectType;
+    }
 
+    /**
+     * @return parentObjectId
+     */
+    public Long getParentObjectId() {
+	return parentObjectId;
+    }
 
-	/**
-	 * @return parentObjectId
-	 */
-	public Long getParentObjectId() {
-		return parentObjectId;
-	}
+    /**
+     * @param parentObjectId
+     *            설정할 parentObjectId
+     */
+    public void setParentObjectId(Long parentObjectId) {
+	this.parentObjectId = parentObjectId;
+    }
 
+    /**
+     * @return user
+     */
+    public User getUser() {
+	return user;
+    }
 
-	/**
-	 * @param parentObjectId 설정할 parentObjectId
-	 */
-	public void setParentObjectId(Long parentObjectId) {
-		this.parentObjectId = parentObjectId;
-	}
+    /**
+     * @param user
+     *            설정할 user
+     */
+    public void setUser(User user) {
+	this.user = user;
+    }
 
+    /**
+     * @return status
+     */
+    public ContentObject.Status getStatus() {
+	return status;
+    }
 
-	/**
-	 * @return user
-	 */
-	public User getUser() {
-		return user;
-	}
+    /**
+     * @param status
+     *            설정할 status
+     */
+    public void setStatus(ContentObject.Status status) {
+	this.status = status;
+    }
 
-	/**
-	 * @param user 설정할 user
-	 */
-	public void setUser(User user) {
-		this.user = user;
-	}
+    /**
+     * @return commentId
+     */
+    public Long getCommentId() {
+	return commentId;
+    }
 
-	/**
-	 * @return status
-	 */
-	public ContentObject.Status getStatus() {
-		return status;
-	}
+    /**
+     * @param commentId
+     *            설정할 commentId
+     */
+    public void setCommentId(Long commentId) {
+	this.commentId = commentId;
+    }
 
-	/**
-	 * @param status 설정할 status
-	 */
-	public void setStatus(ContentObject.Status status) {
-		this.status = status;
-	}
+    /**
+     * @return parentCommentId
+     */
+    public Long getParentCommentId() {
+	return parentCommentId;
+    }
 
-	/**
-	 * @return commentId
-	 */
-	public Long getCommentId() {
-		return commentId;
-	}
+    /**
+     * @param parentCommentId
+     *            설정할 parentCommentId
+     */
+    public void setParentCommentId(Long parentCommentId) {
+	this.parentCommentId = parentCommentId;
+    }
 
-	/**
-	 * @param commentId 설정할 commentId
-	 */
-	public void setCommentId(Long commentId) {
-		this.commentId = commentId;
-	}
+    /**
+     * @return objectType
+     */
+    public Integer getObjectType() {
+	return objectType;
+    }
 
-	/**
-	 * @return parentCommentId
-	 */
-	public Long getParentCommentId() {
-		return parentCommentId;
-	}
+    /**
+     * @param objectType
+     *            설정할 objectType
+     */
+    public void setObjectType(Integer objectType) {
+	this.objectType = objectType;
+    }
 
-	/**
-	 * @param parentCommentId 설정할 parentCommentId
-	 */
-	public void setParentCommentId(Long parentCommentId) {
-		this.parentCommentId = parentCommentId;
-	}
+    /**
+     * @return objectId
+     */
+    public Long getObjectId() {
+	return objectId;
+    }
 
-	/**
-	 * @return objectType
-	 */
-	public Integer getObjectType() {
-		return objectType;
-	}
+    /**
+     * @param objectId
+     *            설정할 objectId
+     */
+    public void setObjectId(Long objectId) {
+	this.objectId = objectId;
+    }
 
-	/**
-	 * @param objectType 설정할 objectType
-	 */
-	public void setObjectType(Integer objectType) {
-		this.objectType = objectType;
-	}
+    /**
+     * @return name
+     */
+    public String getName() {
+	if (!user.isAnonymous() && user.isNameVisible())
+	    return user.getName();
 
-	/**
-	 * @return objectId
-	 */
-	public Long getObjectId() {
-		return objectId;
-	}
+	return name;
+    }
 
-	/**
-	 * @param objectId 설정할 objectId
-	 */
-	public void setObjectId(Long objectId) {
-		this.objectId = objectId;
-	}
+    /**
+     * @param name
+     *            설정할 name
+     */
+    public void setName(String name) {
+	this.name = name;
+    }
 
+    /**
+     * @return email
+     */
+    public String getEmail() {
+	if (!user.isAnonymous() && user.isEmailVisible())
+	    return user.getEmail();
 
-	/**
-	 * @return name
-	 */
-	public String getName() {
-		if(!user.isAnonymous() && user.isNameVisible())
-			return user.getName();
-		
-		return name;
-	}
+	return email;
+    }
 
-	/**
-	 * @param name 설정할 name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @param email
+     *            설정할 email
+     */
+    public void setEmail(String email) {
+	this.email = email;
+    }
 
-	/**
-	 * @return email
-	 */
-	public String getEmail() {
-		if(!user.isAnonymous() && user.isEmailVisible())
-			return user.getEmail();
-		
-		return email;
-	}
+    /**
+     * @return url
+     */
+    public String getURL() {
+	return url;
+    }
 
-	/**
-	 * @param email 설정할 email
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    /**
+     * @param url
+     *            설정할 url
+     */
+    public void setURL(String url) {
+	this.url = url;
+    }
 
-	/**
-	 * @return url
-	 */
-	public String getURL() {
-		return url;
-	}
+    /**
+     * @return ip
+     */
+    public String getIPAddress() {
+	return ip;
+    }
 
-	/**
-	 * @param url 설정할 url
-	 */
-	public void setURL(String url) {
-		this.url = url;
-	}
+    /**
+     * @param ip
+     *            설정할 ip
+     */
+    public void setIPAddress(String ip) {
+	this.ip = ip;
+    }
 
-	/**
-	 * @return ip
-	 */
-	public String getIPAddress() {
-		return ip;
-	}
+    /**
+     * @return body
+     */
+    public String getBody() {
+	return body;
+    }
 
-	/**
-	 * @param ip 설정할 ip
-	 */
-	public void setIPAddress(String ip) {
-		this.ip = ip;
-	}
+    /**
+     * @param body
+     *            설정할 body
+     */
+    public void setBody(String body) {
+	this.body = body;
+    }
 
-	/**
-	 * @return body
-	 */
-	public String getBody() {
-		return body;
-	}
+    /**
+     * @return creationDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getCreationDate() {
+	return creationDate;
+    }
 
-	/**
-	 * @param body 설정할 body
-	 */
-	public void setBody(String body) {
-		this.body = body;
-	}
+    /**
+     * @param creationDate
+     *            설정할 creationDate
+     */
+    public void setCreationDate(Date creationDate) {
+	this.creationDate = creationDate;
+    }
 
-	/**
-	 * @return creationDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    /**
+     * @return modifiedDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getModifiedDate() {
+	return modifiedDate;
+    }
 
-	/**
-	 * @param creationDate 설정할 creationDate
-	 */
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    /**
+     * @param modifiedDate
+     *            설정할 modifiedDate
+     */
+    public void setModifiedDate(Date modifiedDate) {
+	this.modifiedDate = modifiedDate;
+    }
 
-	/**
-	 * @return modifiedDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
+    /**
+     * @return images
+     */
+    public LongList getImages() {
+	return images;
+    }
 
-	/**
-	 * @param modifiedDate 설정할 modifiedDate
-	 */
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
+    /**
+     * @param images
+     *            설정할 images
+     */
+    public void setImages(LongList images) {
+	this.images = images;
+    }
 
-	/**
-	 * @return images
-	 */
-	public LongList getImages() {
-		return images;
-	}
+    /**
+     * @return properties
+     */
+    public Map<String, String> getProperties() {
+	return properties;
+    }
 
-	/**
-	 * @param images 설정할 images
-	 */
-	public void setImages(LongList images) {
-		this.images = images;
-	}
+    /**
+     * @param properties
+     *            설정할 properties
+     */
+    public void setProperties(Map<String, String> properties) {
+	this.properties = properties;
+    }
 
-	/**
-	 * @return properties
-	 */
-	public Map<String, String> getProperties() {
-		return properties;
-	}
+    @JsonIgnore
+    @Override
+    public int getCachedSize() {
+	int size = 0;
+	size += CacheSizes.sizeOfObject();
+	size += CacheSizes.sizeOfLong();
+	size += CacheSizes.sizeOfLong();
+	size += CacheSizes.sizeOfInt();
+	size += CacheSizes.sizeOfLong();
+	size += CacheSizes.sizeOfInt();
+	size += CacheSizes.sizeOfLong();
+	size += CacheSizes.sizeOfLong();
+	size += CacheSizes.sizeOfString(name);
+	size += CacheSizes.sizeOfString(email);
+	size += CacheSizes.sizeOfString(url);
+	size += CacheSizes.sizeOfString(ip);
+	size += CacheSizes.sizeOfString(body);
+	size += CacheSizes.sizeOfLong();
+	size += CacheSizes.sizeOfLong();
+	size += CacheSizes.sizeOfBoolean();
+	size += CacheSizes.sizeOfMap(properties);
+	size += CacheSizes.sizeOfBoolean();
+	size += CacheSizes.sizeOfInt();
+	if (images != null)
+	    size += CacheSizes.sizeOfLong() * images.size() + CacheSizes.sizeOfObject();
+	return size;
+    }
 
-	/**
-	 * @param properties 설정할 properties
-	 */
-	public void setProperties(Map<String, String> properties) {
-		this.properties = properties;
-	}
-	
-	
-	
-	@JsonIgnore
-	@Override
-	public int getCachedSize() {
-        int size = 0;
-        size += CacheSizes.sizeOfObject();
-        size += CacheSizes.sizeOfLong();
-        size += CacheSizes.sizeOfLong();
-        size += CacheSizes.sizeOfInt();
-        size += CacheSizes.sizeOfLong();
-        size += CacheSizes.sizeOfInt();
-        size += CacheSizes.sizeOfLong();
-        size += CacheSizes.sizeOfLong();
-        size += CacheSizes.sizeOfString(name);
-        size += CacheSizes.sizeOfString(email);
-        size += CacheSizes.sizeOfString(url);
-        size += CacheSizes.sizeOfString(ip);
-        size += CacheSizes.sizeOfString(body);
-        size += CacheSizes.sizeOfLong();
-        size += CacheSizes.sizeOfLong();
-        size += CacheSizes.sizeOfBoolean();
-        size += CacheSizes.sizeOfMap(properties);
-        size += CacheSizes.sizeOfBoolean();
-        size += CacheSizes.sizeOfInt();
-        if(images != null)
-            size += CacheSizes.sizeOfLong() * images.size() + CacheSizes.sizeOfObject();
-        return size;
-	}
+    @Override
+    public boolean isAnonymous() {
+	return user.isAnonymous();
+    }
 
-	@Override
-	public boolean isAnonymous() {
-		return user.isAnonymous();
-	}
-
-
-	@Override
-	public String toString() {
-		return "DefaultComment [status=" + status + ", commentId=" + commentId + ", parentCommentId=" + parentCommentId
-				+ ", objectType=" + objectType + ", objectId=" + objectId + ", parentObjectType=" + parentObjectType
-				+ ", parentObjectId=" + parentObjectId + ", name=" + name + ", email=" + email + ", url=" + url
-				+ ", ip=" + ip + ", body=" + body + ", creationDate=" + creationDate + ", modifiedDate=" + modifiedDate
-				+ ", images=" + images + ", properties=" + properties + ", user=" + user + "]";
-	}
+    @Override
+    public String toString() {
+	return "DefaultComment [status=" + status + ", commentId=" + commentId + ", parentCommentId=" + parentCommentId
+		+ ", objectType=" + objectType + ", objectId=" + objectId + ", parentObjectType=" + parentObjectType
+		+ ", parentObjectId=" + parentObjectId + ", name=" + name + ", email=" + email + ", url=" + url
+		+ ", ip=" + ip + ", body=" + body + ", creationDate=" + creationDate + ", modifiedDate=" + modifiedDate
+		+ ", images=" + images + ", properties=" + properties + ", user=" + user + "]";
+    }
 
 }

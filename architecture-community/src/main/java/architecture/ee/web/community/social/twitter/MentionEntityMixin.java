@@ -19,15 +19,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 class MentionEntityMixin {
 
-	@JsonCreator
-	public MentionEntityMixin(
-			@JsonProperty("id") long id, 
-			@JsonProperty("screen_name") String screenName, 
-			@JsonProperty("name") String name, 
-			@JsonProperty("indices") int[] indices) {}
+    @JsonCreator
+    public MentionEntityMixin(@JsonProperty("id") long id, @JsonProperty("screen_name") String screenName,
+	    @JsonProperty("name") String name, @JsonProperty("indices") int[] indices) {
+    }
 
 }

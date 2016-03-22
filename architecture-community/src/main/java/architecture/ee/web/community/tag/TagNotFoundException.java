@@ -19,43 +19,43 @@ import architecture.ee.exception.NotFoundException;
 
 public class TagNotFoundException extends NotFoundException {
 
-	public TagNotFoundException() {
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TagNotFoundException() {
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public TagNotFoundException(int errorCode, String msg, Throwable cause) {
-		super(errorCode, msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TagNotFoundException(int errorCode, String msg, Throwable cause) {
+	super(errorCode, msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public TagNotFoundException(int errorCode, String msg) {
-		super(errorCode, msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TagNotFoundException(int errorCode, String msg) {
+	super(errorCode, msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public TagNotFoundException(int errorCode, Throwable cause) {
-		super(errorCode, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TagNotFoundException(int errorCode, Throwable cause) {
+	super(errorCode, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public TagNotFoundException(int errorCode) {
-		super(errorCode);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TagNotFoundException(int errorCode) {
+	super(errorCode);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public TagNotFoundException(String msg, Throwable cause) {
-		super(msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TagNotFoundException(String msg, Throwable cause) {
+	super(msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public TagNotFoundException(String msg) {
-		super(msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TagNotFoundException(String msg) {
+	super(msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public TagNotFoundException(Throwable cause) {
-		super(cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TagNotFoundException(Throwable cause) {
+	super(cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
 }

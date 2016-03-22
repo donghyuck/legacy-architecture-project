@@ -19,13 +19,13 @@ import java.util.Date;
 
 public class SwfPost extends Post {
 
-	private String source;
+    private String source;
 
-	public SwfPost(String id, Reference from, Date createdTime, Date updatedTime) {
-		super(id, from, createdTime, updatedTime);
-	}
-	
-	public String getSource() {
-		return source;
-	}
+    public SwfPost(String id, Reference from, Date createdTime, Date updatedTime) {
+	super(id, from, createdTime, updatedTime);
+    }
+
+    public String getSource() {
+	return source;
+    }
 }

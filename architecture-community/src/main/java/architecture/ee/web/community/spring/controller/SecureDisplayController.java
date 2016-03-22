@@ -42,54 +42,56 @@ import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteManager;
 import architecture.ee.web.util.WebSiteUtils;
 
-@Controller ("community-secure-display-controller")
+@Controller("community-secure-display-controller")
 @RequestMapping("/secure/display")
 public class SecureDisplayController {
 
-	private static final Log log = LogFactory.getLog(DisplayController.class);
-	private static final String DEFAULT_CONTENT_TYPE = "text/html;charset=UTF-8";
-	
-	@Inject
-	@Qualifier("pageManager")
-	private PageManager pageManager ;
+    private static final Log log = LogFactory.getLog(DisplayController.class);
+    private static final String DEFAULT_CONTENT_TYPE = "text/html;charset=UTF-8";
 
-	@Inject
-	@Qualifier("freemarkerConfig")
-	private FreeMarkerConfig freeMarkerConfig ;
-	
-	@Inject
-	@Qualifier("webSiteManager")
-	private WebSiteManager webSiteManager;
-	
-	@Inject
-	@Qualifier("companyManager")
-	private CompanyManager companyManager;
-	
-	public SecureDisplayController() {
+    @Inject
+    @Qualifier("pageManager")
+    private PageManager pageManager;
 
-	}
+    @Inject
+    @Qualifier("freemarkerConfig")
+    private FreeMarkerConfig freeMarkerConfig;
 
-	@RequestMapping(value = "/", method=RequestMethod.GET)
-	public String template(@RequestParam(value="source") String view, @RequestParam(value="companyId", defaultValue="0") Long companyId, HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException, IOException {		
-		
-		User user = SecurityHelper.getUser();		
-		WebSite website = WebSiteUtils.getWebSite(request);
-		
-		DisplayController.PageActionAdaptor.Builder builder = PageActionAdaptor.newBuilder();
-		if( companyId > 0 )
-			try {
-				builder.company(companyManager.getCompany(companyId));
-			} catch (CompanyNotFoundException e) {
-				// ignore
-			}		
-		model.addAttribute("action", builder.webSite(website).user(user).build());		
-		setContentType(response);
-		log.debug("path:" + view 	);		
-		return view;
-	}
-	
-	protected void setContentType(HttpServletResponse response){
-		response.setContentType("text/html;charset=UTF-8");
-	}
+    @Inject
+    @Qualifier("webSiteManager")
+    private WebSiteManager webSiteManager;
+
+    @Inject
+    @Qualifier("companyManager")
+    private CompanyManager companyManager;
+
+    public SecureDisplayController() {
+
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String template(@RequestParam(value = "source") String view,
+	    @RequestParam(value = "companyId", defaultValue = "0") Long companyId, HttpServletRequest request,
+	    HttpServletResponse response, Model model) throws NotFoundException, IOException {
+
+	User user = SecurityHelper.getUser();
+	WebSite website = WebSiteUtils.getWebSite(request);
+
+	DisplayController.PageActionAdaptor.Builder builder = PageActionAdaptor.newBuilder();
+	if (companyId > 0)
+	    try {
+		builder.company(companyManager.getCompany(companyId));
+	    } catch (CompanyNotFoundException e) {
+		// ignore
+	    }
+	model.addAttribute("action", builder.webSite(website).user(user).build());
+	setContentType(response);
+	log.debug("path:" + view);
+	return view;
+    }
+
+    protected void setContentType(HttpServletResponse response) {
+	response.setContentType("text/html;charset=UTF-8");
+    }
 
 }

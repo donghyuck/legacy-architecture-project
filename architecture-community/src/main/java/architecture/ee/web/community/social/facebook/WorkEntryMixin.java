@@ -21,11 +21,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class WorkEntryMixin {
-	
-	@JsonCreator
-	WorkEntryMixin(
-			@JsonProperty("employer") Reference employer, 
-			@JsonProperty("start_date") String startDate, 
-			@JsonProperty("end_date") String endDate) {}
-	
+
+    @JsonCreator
+    WorkEntryMixin(@JsonProperty("employer") Reference employer, @JsonProperty("start_date") String startDate,
+	    @JsonProperty("end_date") String endDate) {
+    }
+
 }

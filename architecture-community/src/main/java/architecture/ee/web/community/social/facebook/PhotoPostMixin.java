@@ -23,25 +23,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class PhotoPostMixin extends PostMixin {
 
-	@JsonCreator
-	PhotoPostMixin(
-			@JsonProperty("id") String id, 
-			@JsonProperty("from") Reference from, 
-			@JsonProperty("created_time") Date createdTime,
-			@JsonProperty("updated_time") Date updatedTime) {
-		super(id, from, createdTime, updatedTime);
-	}
-	
-	@JsonProperty("object_id")
-	String photoId;
+    @JsonCreator
+    PhotoPostMixin(@JsonProperty("id") String id, @JsonProperty("from") Reference from,
+	    @JsonProperty("created_time") Date createdTime, @JsonProperty("updated_time") Date updatedTime) {
+	super(id, from, createdTime, updatedTime);
+    }
 
-	@JsonProperty("tags")
-	@JsonDeserialize(using=TagListDeserializer.class)
-	List<Tag> tags;
+    @JsonProperty("object_id")
+    String photoId;
+
+    @JsonProperty("tags")
+    @JsonDeserialize(using = TagListDeserializer.class)
+    List<Tag> tags;
 
 }
-

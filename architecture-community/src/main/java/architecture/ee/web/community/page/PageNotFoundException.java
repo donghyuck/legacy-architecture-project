@@ -19,43 +19,43 @@ import architecture.ee.exception.NotFoundException;
 
 public class PageNotFoundException extends NotFoundException {
 
-	public PageNotFoundException() {
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PageNotFoundException() {
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public PageNotFoundException(int errorCode, String msg, Throwable cause) {
-		super(errorCode, msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PageNotFoundException(int errorCode, String msg, Throwable cause) {
+	super(errorCode, msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public PageNotFoundException(int errorCode, String msg) {
-		super(errorCode, msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PageNotFoundException(int errorCode, String msg) {
+	super(errorCode, msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public PageNotFoundException(int errorCode, Throwable cause) {
-		super(errorCode, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PageNotFoundException(int errorCode, Throwable cause) {
+	super(errorCode, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public PageNotFoundException(int errorCode) {
-		super(errorCode);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PageNotFoundException(int errorCode) {
+	super(errorCode);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public PageNotFoundException(String msg, Throwable cause) {
-		super(msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PageNotFoundException(String msg, Throwable cause) {
+	super(msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public PageNotFoundException(String msg) {
-		super(msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PageNotFoundException(String msg) {
+	super(msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public PageNotFoundException(Throwable cause) {
-		super(cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public PageNotFoundException(Throwable cause) {
+	super(cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
 }

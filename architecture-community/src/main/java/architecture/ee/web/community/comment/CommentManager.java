@@ -19,26 +19,26 @@ import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
 
 public interface CommentManager {
-	
+
     public static final int COMMENTS_NONE = 1;
     public static final int COMMENTS_OPEN = 2;
     public static final int COMMENTS_CLOSED = 3;
     public static final int COMMENTS_MODERATED = 4;
     public static final int COMMENTS_DEFAULT = 2;
-    
+
     public abstract Comment getRootParent();
-    
-	public abstract Comment getComment(long commentId) throws CommentNotFoundException;
 
-	public abstract void update(Comment comment) throws UnAuthorizedException;
+    public abstract Comment getComment(long commentId) throws CommentNotFoundException;
 
-	public abstract void setBody(Comment comment, String text);
-	
-	public abstract void addComment(Comment comment) throws UnAuthorizedException;
+    public abstract void update(Comment comment) throws UnAuthorizedException;
 
-	public abstract Comment createComment(int objectType, long objectId, User user , String text) throws UnAuthorizedException;
-	
-	public CommentTreeWalker getCommentTreeWalker(int objectType, long objectId);
-	
-	
+    public abstract void setBody(Comment comment, String text);
+
+    public abstract void addComment(Comment comment) throws UnAuthorizedException;
+
+    public abstract Comment createComment(int objectType, long objectId, User user, String text)
+	    throws UnAuthorizedException;
+
+    public CommentTreeWalker getCommentTreeWalker(int objectType, long objectId);
+
 }

@@ -19,8 +19,8 @@ import java.util.Date;
 
 public class StatusPost extends Post {
 
-	public StatusPost(String id, Reference from, Date createdTime, Date updatedTime) {
-		super(id, from, createdTime, updatedTime);
-	}
-	
+    public StatusPost(String id, Reference from, Date createdTime, Date updatedTime) {
+	super(id, from, createdTime, updatedTime);
+    }
+
 }

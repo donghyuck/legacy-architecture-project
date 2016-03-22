@@ -25,36 +25,35 @@ import architecture.ee.web.community.social.provider.connect.SocialConnect.Media
 
 public interface SocialConnectManager {
 
-	public abstract SocialConnect createSocialConnect(Company company, Media media);
-	
-	public abstract SocialConnect createSocialConnect(User user, Media media);
-	
-	public abstract SocialConnect createSocialConnect(User user, Connection<?> connection);
-	
-	public abstract SocialConnect createSocialConnect( SocialConnect socialConnect );	
-	
-	public abstract List<SocialConnect> findSocialConnects(int objectType, long objectId);
-		
-	public abstract List<SocialConnect> findSocialConnects(Company company);
-	
-	public abstract List<SocialConnect> findSocialConnects(User user);
-	
-	public abstract List<SocialConnect> findSocialConnects(int objectType, String providerId, String providerUserId);
-	
-	public abstract SocialConnect getSocialConnect(int objectType, long objectId, String providerId)throws ConnectNotFoundException ;
-	
-	public abstract SocialConnect getSocialConnect(Company company, String providerId) throws ConnectNotFoundException ;
-	
-	public abstract SocialConnect getSocialConnect(User user, String providerId) throws ConnectNotFoundException ;
-	
-	public abstract SocialConnect getSocialConnectById(long socialConnectId) throws ConnectNotFoundException ;
-				
-	
-	
-	public abstract void updateSocialConnect( SocialConnect socialConnect );	
+    public abstract SocialConnect createSocialConnect(Company company, Media media);
 
-	public abstract void removeSocialConnect( SocialConnect socialConnect );
-	
-	public abstract void updateSocialConnectProperties( SocialConnect socialConnect );
-	
+    public abstract SocialConnect createSocialConnect(User user, Media media);
+
+    public abstract SocialConnect createSocialConnect(User user, Connection<?> connection);
+
+    public abstract SocialConnect createSocialConnect(SocialConnect socialConnect);
+
+    public abstract List<SocialConnect> findSocialConnects(int objectType, long objectId);
+
+    public abstract List<SocialConnect> findSocialConnects(Company company);
+
+    public abstract List<SocialConnect> findSocialConnects(User user);
+
+    public abstract List<SocialConnect> findSocialConnects(int objectType, String providerId, String providerUserId);
+
+    public abstract SocialConnect getSocialConnect(int objectType, long objectId, String providerId)
+	    throws ConnectNotFoundException;
+
+    public abstract SocialConnect getSocialConnect(Company company, String providerId) throws ConnectNotFoundException;
+
+    public abstract SocialConnect getSocialConnect(User user, String providerId) throws ConnectNotFoundException;
+
+    public abstract SocialConnect getSocialConnectById(long socialConnectId) throws ConnectNotFoundException;
+
+    public abstract void updateSocialConnect(SocialConnect socialConnect);
+
+    public abstract void removeSocialConnect(SocialConnect socialConnect);
+
+    public abstract void updateSocialConnectProperties(SocialConnect socialConnect);
+
 }

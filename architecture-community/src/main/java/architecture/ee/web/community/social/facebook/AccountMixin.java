@@ -19,16 +19,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AccountMixin {
-	
-	@JsonCreator
-	AccountMixin(
-			@JsonProperty("id") String id, 
-			@JsonProperty("name") String name, 
-			@JsonProperty("category") String category, 
-			@JsonProperty("access_token") String accessToken) {}
-	
-}
 
+    @JsonCreator
+    AccountMixin(@JsonProperty("id") String id, @JsonProperty("name") String name,
+	    @JsonProperty("category") String category, @JsonProperty("access_token") String accessToken) {
+    }
+
+}

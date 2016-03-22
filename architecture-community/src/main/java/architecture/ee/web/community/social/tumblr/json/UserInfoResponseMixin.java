@@ -21,14 +21,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import architecture.ee.web.community.social.tumblr.UserInfo;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserInfoResponseMixin {
 
-	@JsonCreator
-	public UserInfoResponseMixin(			
-		@JsonProperty("user") UserInfo user){}
-			
-	@JsonProperty("user")
-	private UserInfo user;
+    @JsonCreator
+    public UserInfoResponseMixin(@JsonProperty("user") UserInfo user) {
+    }
+
+    @JsonProperty("user")
+    private UserInfo user;
 
 }

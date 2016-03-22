@@ -24,22 +24,21 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 class PictureDeserializer extends JsonDeserializer<String> {
 
-	@Override
-	public String deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-		
-		if( jp.getCodec() == null )
-			jp.setCodec(new ObjectMapper());
-		
-		JsonNode tree = jp.readValueAsTree();
-		if (tree.isObject() && tree.has("data")) {
-			return tree.get("data").get("url").asText();
-		} else if (tree.isTextual()) {
-			return tree.asText();
-		}
-		return null;
-	}	
+    @Override
+    public String deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+
+	if (jp.getCodec() == null)
+	    jp.setCodec(new ObjectMapper());
+
+	JsonNode tree = jp.readValueAsTree();
+	if (tree.isObject() && tree.has("data")) {
+	    return tree.get("data").get("url").asText();
+	} else if (tree.isTextual()) {
+	    return tree.asText();
+	}
+	return null;
+    }
 
 }

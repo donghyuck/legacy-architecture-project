@@ -27,17 +27,19 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 class TagListDeserializer extends JsonDeserializer<List<Tag>> {
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Tag> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-		ObjectMapper mapper = new ObjectMapper();
-//		mapper.setDeserializationConfig(ctxt.getConfig());
-		jp.setCodec(mapper);
-		if(jp.hasCurrentToken()) {
-			TreeNode data = jp.readValueAsTree().get("data");
-			return (List<Tag>) mapper.readValue(data.traverse(), new TypeReference<List<Tag>>() {});
-		}
-		
-		return null;
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Tag> deserialize(JsonParser jp, DeserializationContext ctxt)
+	    throws IOException, JsonProcessingException {
+	ObjectMapper mapper = new ObjectMapper();
+	// mapper.setDeserializationConfig(ctxt.getConfig());
+	jp.setCodec(mapper);
+	if (jp.hasCurrentToken()) {
+	    TreeNode data = jp.readValueAsTree().get("data");
+	    return (List<Tag>) mapper.readValue(data.traverse(), new TypeReference<List<Tag>>() {
+	    });
 	}
+
+	return null;
+    }
 }

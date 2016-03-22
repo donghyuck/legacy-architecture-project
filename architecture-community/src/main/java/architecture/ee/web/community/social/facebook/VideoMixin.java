@@ -23,29 +23,25 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 abstract class VideoMixin {
 
-	@JsonCreator
-	VideoMixin(
-			@JsonProperty("id") String id, 
-			@JsonProperty("from") Reference from, 
-			@JsonProperty("picture") @JsonDeserialize(using=PictureDeserializer.class) String picture,
-			@JsonProperty("embed_html") String embedHtml,
-			@JsonProperty("icon") String icon, 
-			@JsonProperty("source") String source,
-			@JsonProperty("created_time") Date createdTime, 
-			@JsonProperty("updated_time") Date updatedTime) {}
-	
-	@JsonProperty("tags")
-	@JsonDeserialize(using=TagListDeserializer.class)
-	List<Tag> tags;
-	
-	@JsonProperty("name")
-	String name;
-	
-	@JsonProperty("description")
-	String description;
+    @JsonCreator
+    VideoMixin(@JsonProperty("id") String id, @JsonProperty("from") Reference from,
+	    @JsonProperty("picture") @JsonDeserialize(using = PictureDeserializer.class) String picture,
+	    @JsonProperty("embed_html") String embedHtml, @JsonProperty("icon") String icon,
+	    @JsonProperty("source") String source, @JsonProperty("created_time") Date createdTime,
+	    @JsonProperty("updated_time") Date updatedTime) {
+    }
+
+    @JsonProperty("tags")
+    @JsonDeserialize(using = TagListDeserializer.class)
+    List<Tag> tags;
+
+    @JsonProperty("name")
+    String name;
+
+    @JsonProperty("description")
+    String description;
 
 }

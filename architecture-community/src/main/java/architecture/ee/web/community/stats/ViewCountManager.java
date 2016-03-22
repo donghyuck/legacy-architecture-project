@@ -40,261 +40,254 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
 public class ViewCountManager {
-	
-	public static final Long DEFAULT_PERIOD_TIME = 180000L;
-	
-	private static final Log log = LogFactory.getLog(ViewCountManager.class);
-	
-	private Lock lock = new ReentrantLock();
-	private boolean viewCountsEnabled = false;
+
+    public static final Long DEFAULT_PERIOD_TIME = 180000L;
+
+    private static final Log log = LogFactory.getLog(ViewCountManager.class);
+
+    private Lock lock = new ReentrantLock();
+    private boolean viewCountsEnabled = false;
     private static Map<String, ViewCountInfo> queue;
     private static PersistenceTask task;
     private Cache pageCountCache;
     private ViewCountDao viewCountDao;
     private EventPublisher eventPublisher;
-    
-	public ViewCountManager(TaskEngine taskEngine){
-		this.viewCountsEnabled = ApplicationHelper.getApplicationBooleanProperty("components.viewCounts.enabled", true);
-		log.debug("view count enabled : " +viewCountsEnabled );		
-		if( this.viewCountsEnabled ){
-			this.queue = initQueue();
-			this.task = new PersistenceTask();
-			taskEngine.schedule(task, DEFAULT_PERIOD_TIME, DEFAULT_PERIOD_TIME);
+
+    public ViewCountManager(TaskEngine taskEngine) {
+	this.viewCountsEnabled = ApplicationHelper.getApplicationBooleanProperty("components.viewCounts.enabled", true);
+	log.debug("view count enabled : " + viewCountsEnabled);
+	if (this.viewCountsEnabled) {
+	    this.queue = initQueue();
+	    this.task = new PersistenceTask();
+	    taskEngine.schedule(task, DEFAULT_PERIOD_TIME, DEFAULT_PERIOD_TIME);
+	}
+    }
+
+    public void initialize() {
+	this.eventPublisher.register(this);
+    }
+
+    /**
+     * @return pageCountCache
+     */
+    public Cache getPageCountCache() {
+	return pageCountCache;
+    }
+
+    /**
+     * @param pageCountCache
+     *            설정할 pageCountCache
+     */
+    public void setPageCountCache(Cache pageCountCache) {
+	this.pageCountCache = pageCountCache;
+    }
+
+    /**
+     * @return eventPublisher
+     */
+    public EventPublisher getEventPublisher() {
+	return eventPublisher;
+    }
+
+    /**
+     * @param eventPublisher
+     *            설정할 eventPublisher
+     */
+    public void setEventPublisher(EventPublisher eventPublisher) {
+	this.eventPublisher = eventPublisher;
+    }
+
+    public void addPageCount(Page page) {
+	if (viewCountsEnabled) {
+	    addCount(ModelTypeFactory.getTypeIdFromCode("PAGE"), page.getPageId(), -1, pageCountCache, 1);
+	}
+    }
+
+    public int getPageCount(Page page) {
+	if (viewCountsEnabled) {
+	    return getCachedCount(page.getPageId(), ModelTypeFactory.getTypeIdFromCode("PAGE"), -1L);
+	} else {
+	    return -1;
+	}
+    }
+
+    public void clearCount(Page page) throws UnAuthorizedException {
+	if (viewCountsEnabled) {
+	    String key = getCacheKey(ModelTypeFactory.getTypeIdFromCode("PAGE"), page.getPageId());
+	    queue.remove(key);
+	    clearCount(1, page.getPageId());
+	}
+    }
+
+    protected void updateViewCounts(List<ViewCountInfo> views) {
+	viewCountDao.updateViewCounts(views);
+    }
+
+    /**
+     * @return viewCountDao
+     */
+    public ViewCountDao getViewCountDao() {
+	return viewCountDao;
+    }
+
+    /**
+     * @param viewCountDao
+     *            설정할 viewCountDao
+     */
+    public void setViewCountDao(ViewCountDao viewCountDao) {
+	this.viewCountDao = viewCountDao;
+    }
+
+    private synchronized void clearCount(int objectType, long objectId) {
+	viewCountDao.deleteViewCount(objectType, objectId);
+    }
+
+    private void addCount(int objectType, long objectId, long parentObjectId, Cache cache, int amount) {
+
+	int count = -1;
+	String cacheKey = getCacheKey(objectType, objectId);
+
+	if (cache.get(cacheKey) != null)
+	    count = (Integer) cache.get(cacheKey).getValue();
+	else
+	    count = viewCountDao.getViewCount(objectType, objectId, parentObjectId);
+	count += amount;
+	cache.put(new Element(cacheKey, Integer.valueOf(count)));
+	Map<String, ViewCountInfo> queueRef = queue;
+	synchronized (queueRef) {
+	    queueRef.put(cacheKey, new ViewCountInfo(objectType, objectId, parentObjectId, count));
+	}
+    }
+
+    private int getCachedCount(Long objectId, Integer objectType, Long parentObjectId) {
+	Cache cache;
+	switch (objectType) {
+	case 31: // page
+	    cache = pageCountCache;
+	    break;
+	default:
+	    return -1;
+	}
+	Integer cachedCount;
+	String cacheKey = getCacheKey(objectType, objectId);
+	if (cache.get(getCacheKey(objectType, objectId)) != null) {
+	    cachedCount = (Integer) cache.get(cacheKey).getValue();
+	} else {
+	    lock.lock();
+	    try {
+		cachedCount = viewCountDao.getViewCount(objectType, objectId, parentObjectId);
+		cache.put(new Element(cacheKey, cachedCount));
+	    } finally {
+		lock.unlock();
+	    }
+	}
+	return cachedCount;
+    }
+
+    @EventListener
+    public void onEvent(PageEvent event) {
+	log.debug("page event : " + event.getType().name());
+	if (viewCountsEnabled) {
+	    Page page = (Page) event.getSource();
+	    int objectType = ModelTypeFactory.getTypeIdFromCode("PAGE");
+	    String key = getCacheKey(objectType, page.getPageId());
+	    if (event.getType() == PageEvent.Type.CREATED) {
+		if (pageCountCache.get(key) == null) {
+		    viewCountDao.insertInitialViewCount(objectType, page.getPageId(), -1L, 0);
+		    pageCountCache.put(new Element(key, Integer.valueOf(0)));
 		}
-	}
-	
-	public void initialize(){
-		this.eventPublisher.register(this);		
-	}
-	
-	
-	/**
-	 * @return pageCountCache
-	 */
-	public Cache getPageCountCache() {
-		return pageCountCache;
-	}
+	    } else if (event.getType() == PageEvent.Type.DELETED) {
+		queue.remove(key);
+		viewCountDao.deleteViewCount(objectType, page.getPageId());
+		pageCountCache.remove(key);
+	    } else {
 
-
-	/**
-	 * @param pageCountCache 설정할 pageCountCache
-	 */
-	public void setPageCountCache(Cache pageCountCache) {
-		this.pageCountCache = pageCountCache;
+	    }
 	}
+    }
 
+    public void destroy() throws Exception {
+	eventPublisher.unregister(this);
+    }
 
-	/**
-	 * @return eventPublisher
-	 */
-	public EventPublisher getEventPublisher() {
-		return eventPublisher;
+    /**
+     * @return viewCountsEnabled
+     */
+    public boolean isViewCountsEnabled() {
+	return viewCountsEnabled;
+    }
+
+    private static Map initQueue() {
+	return Collections.synchronizedMap(new HashMap());
+    }
+
+    private static String getCacheKey(int objectType, long objectId) {
+	StringBuffer buf = new StringBuffer();
+	buf.append(objectType).append(",").append(objectId);
+	return buf.toString();
+    }
+
+    static class PersistenceTask extends TimerTask {
+	public void run() {
+	    log.debug((new StringBuilder()).append("Starting a save of view counts to the database. Thread: ")
+		    .append(Thread.currentThread().getName()).toString());
+	    Map<String, ViewCountInfo> localQueue = ViewCountManager.queue;
+	    log.debug("queue: " + localQueue.size());
+	    ViewCountManager.queue = ViewCountManager.initQueue();
+	    if (localQueue.size() > 0) {
+		// batch update. ..
+		// update V2_VIEW_COUNT set view_count = ? where objectType = ?
+		// and objectId = ?
+		List<ViewCountInfo> list = new ArrayList<ViewCountInfo>(localQueue.values());
+		ApplicationHelper.getComponent(ViewCountManager.class).updateViewCounts(list);
+		log.debug((new StringBuilder()).append("Saving ").append(localQueue.size())
+			.append(" view counts to the db...").toString());
+	    }
 	}
+    }
 
+    public static class ViewCountInfo {
+	private int objectType;
+	private long objectId;
+	private long parentObjectId;
+	private int count;
 
-	/**
-	 * @param eventPublisher 설정할 eventPublisher
-	 */
-	public void setEventPublisher(EventPublisher eventPublisher) {
-		this.eventPublisher = eventPublisher;
-	}
-
-
-	public void addPageCount(Page page){
-		if(viewCountsEnabled){			
-			addCount(ModelTypeFactory.getTypeIdFromCode("PAGE"), page.getPageId(), -1, pageCountCache, 1);
-		}
-	}
-	
-	public int getPageCount(Page page){
-		if(viewCountsEnabled){
-			return getCachedCount(page.getPageId(), ModelTypeFactory.getTypeIdFromCode("PAGE"), -1L);
-		}else{
-			return -1;
-		}
-	}	
-	
-	public void clearCount(Page page)throws UnAuthorizedException{
-		if(viewCountsEnabled){
-			String key = getCacheKey(ModelTypeFactory.getTypeIdFromCode("PAGE"), page.getPageId());
-			queue.remove(key);
-			clearCount(1, page.getPageId());
-		}
-	}
-	
-	protected void updateViewCounts(List<ViewCountInfo> views){
-		viewCountDao.updateViewCounts(views);
-	}
-	
-	/**
-	 * @return viewCountDao
-	 */
-	public ViewCountDao getViewCountDao() {
-		return viewCountDao;
+	ViewCountInfo(int objectType, long objectId, long parentObjectId, int totalCount) {
+	    count = 0;
+	    this.objectType = objectType;
+	    this.objectId = objectId;
+	    this.parentObjectId = parentObjectId;
+	    count = totalCount;
 	}
 
-	/**
-	 * @param viewCountDao 설정할 viewCountDao
-	 */
-	public void setViewCountDao(ViewCountDao viewCountDao) {
-		this.viewCountDao = viewCountDao;
+	public int getObjectType() {
+	    return objectType;
 	}
 
-	private synchronized void clearCount(int objectType, long objectId){		
-		viewCountDao.deleteViewCount(objectType, objectId);
-	}
-	
-	
-	private void addCount( int objectType, long objectId, long parentObjectId, Cache cache, int amount ){
-		
-		int count = -1;	
-		String cacheKey = getCacheKey(objectType, objectId);
-		
-		if( cache.get( cacheKey )!= null)
-			count = (Integer)cache.get(cacheKey).getValue();
-		else
-			count = viewCountDao.getViewCount( objectType, objectId , parentObjectId );		
-		count += amount;		
-		cache.put(new Element(cacheKey, Integer.valueOf(count)));
-		Map<String, ViewCountInfo> queueRef = queue;
-		synchronized(queueRef){
-			queueRef.put(cacheKey, new ViewCountInfo(objectType, objectId, parentObjectId, count));
-		}
-	}
-	
-	
-	private int getCachedCount(Long objectId, Integer objectType, Long parentObjectId){
-		Cache cache ;
-		switch(objectType){
-		case 31: // page
-			cache = pageCountCache;
-			break;
-		default:
-			return -1;
-		}
-		Integer cachedCount ;
-		String cacheKey = getCacheKey(objectType, objectId);
-		if( cache.get(getCacheKey(objectType, objectId)) != null ){
-			 cachedCount =(Integer) cache.get(cacheKey).getValue();
-		}else{
-			lock.lock();
-			try{
-				cachedCount = viewCountDao.getViewCount( objectType, objectId , parentObjectId );
-				cache.put(new Element(cacheKey, cachedCount));
-			}finally{
-				lock.unlock();
-			}
-		}	
-		return cachedCount;
-	}
-	
-	
-	@EventListener
-	public void onEvent(PageEvent event) {
-		log.debug("page event : " + event.getType().name());
-		if(viewCountsEnabled){
-			Page page = (Page)event.getSource();
-			int objectType = ModelTypeFactory.getTypeIdFromCode("PAGE");
-			String key = getCacheKey(objectType, page.getPageId());
-			if( event.getType() == PageEvent.Type.CREATED ){
-				if( pageCountCache.get(key)== null){
-					viewCountDao.insertInitialViewCount(objectType, page.getPageId(), -1L, 0);
-					pageCountCache.put(new Element( key, Integer.valueOf(0)));
-				}
-			}else if ( event.getType() == PageEvent.Type.DELETED ){
-				queue.remove(key);
-				viewCountDao.deleteViewCount(objectType, page.getPageId());
-				pageCountCache.remove(key);
-			}else{
-				
-			}
-		}
-	}	
-	
-	public void destroy() throws Exception
-	{
-		eventPublisher.unregister(this);
-	}
-	
-	/**
-	 * @return viewCountsEnabled
-	 */
-	public boolean isViewCountsEnabled() {
-		return viewCountsEnabled;
+	public long getObjectId() {
+	    return objectId;
 	}
 
-	private static Map initQueue() {
-		return Collections.synchronizedMap(new HashMap());
+	public long getParentObjectID() {
+	    return parentObjectId;
 	}
 
-	private static String getCacheKey(int objectType, long objectId) {
-		StringBuffer buf = new StringBuffer();
-		buf.append(objectType).append(",").append(objectId);
-		return buf.toString();
+	public int getCount() {
+	    return count;
 	}
-	
-	 static class PersistenceTask extends TimerTask
-     {
-		public void run() {						
-			log.debug((new StringBuilder()).append("Starting a save of view counts to the database. Thread: ").append(Thread.currentThread().getName()).toString());			
-			Map<String, ViewCountInfo> localQueue = ViewCountManager.queue;			
-			log.debug("queue: " + localQueue.size() );			
-			ViewCountManager.queue = ViewCountManager.initQueue();			
-			if( localQueue.size() > 0 ){
-			    // batch update. ..
-				// update V2_VIEW_COUNT set view_count = ? where objectType = ? and objectId = ?
-				List<ViewCountInfo> list = new ArrayList<ViewCountInfo>(localQueue.values());
-				ApplicationHelper.getComponent(ViewCountManager.class).updateViewCounts(list);
-				log.debug((new StringBuilder()).append("Saving ").append(localQueue.size()).append(" view counts to the db...").toString());
-			}			
-		}
-     }
-     
-	public static class ViewCountInfo {
-		private int objectType;
-		private long objectId;
-		private long parentObjectId;
-		private int count;
 
-		ViewCountInfo(int objectType, long objectId, long parentObjectId,
-				int totalCount) {
-			count = 0;
-			this.objectType = objectType;
-			this.objectId = objectId;
-			this.parentObjectId = parentObjectId;
-			count = totalCount;
-		}
-
-		public int getObjectType() {
-			return objectType;
-		}
-
-		public long getObjectId() {
-			return objectId;
-		}
-
-		public long getParentObjectID() {
-			return parentObjectId;
-		}
-
-		public int getCount() {
-			return count;
-		}
-
-		public void incrementCount() {
-			count++;
-		}
-
-		public void incrementCount(int amount) {
-			count += amount;
-		}
-
-		public String toString() {
-			return (new StringBuilder()).append("ViewCountInfo(type: ")
-					.append(String.valueOf(objectType)).append(", id: ")
-					.append(String.valueOf(objectId)).append(", parent id: ")
-					.append(String.valueOf(parentObjectId)).append(", count: ")
-					.append(count).append(")").toString();
-		}
+	public void incrementCount() {
+	    count++;
 	}
+
+	public void incrementCount(int amount) {
+	    count += amount;
+	}
+
+	public String toString() {
+	    return (new StringBuilder()).append("ViewCountInfo(type: ").append(String.valueOf(objectType))
+		    .append(", id: ").append(String.valueOf(objectId)).append(", parent id: ")
+		    .append(String.valueOf(parentObjectId)).append(", count: ").append(count).append(")").toString();
+	}
+    }
 }

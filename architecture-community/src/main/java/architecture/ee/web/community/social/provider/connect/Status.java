@@ -23,49 +23,51 @@ import architecture.ee.web.community.social.provider.ServiceProviderConfig;
 
 public class Status {
 
-	private List<ServiceProviderConfig> media ; 
-	
-	private List<SocialConnect> connections ; 
-	
-	public Status() {
-		media = Collections.EMPTY_LIST;
-		connections = Collections.EMPTY_LIST;
-	}
+    private List<ServiceProviderConfig> media;
 
-	/**
-	 * @return media
-	 */
-	public List<ServiceProviderConfig> getMedia() {
-		return media;
-	}
+    private List<SocialConnect> connections;
 
-	/**
-	 * @param media 설정할 media
-	 */
-	public void setMedia(List<ServiceProviderConfig> media) {
-		this.media = media;
-	}
+    public Status() {
+	media = Collections.EMPTY_LIST;
+	connections = Collections.EMPTY_LIST;
+    }
 
-	/**
-	 * @return connections
-	 */
-	public List<SocialConnect> getConnections() {
-		return connections;
-	}
+    /**
+     * @return media
+     */
+    public List<ServiceProviderConfig> getMedia() {
+	return media;
+    }
 
-	/**
-	 * @param connections 설정할 connections
-	 */
-	public void setConnections(List<SocialConnect> connections) {
-		this.connections = connections;
-	}
-	
-	public void setConnection(SocialConnect connection){
-		if(connections == null)
-			connections = new ArrayList<SocialConnect>();
-		
-		connections.add(connection);
-		
-	}
-	
+    /**
+     * @param media
+     *            설정할 media
+     */
+    public void setMedia(List<ServiceProviderConfig> media) {
+	this.media = media;
+    }
+
+    /**
+     * @return connections
+     */
+    public List<SocialConnect> getConnections() {
+	return connections;
+    }
+
+    /**
+     * @param connections
+     *            설정할 connections
+     */
+    public void setConnections(List<SocialConnect> connections) {
+	this.connections = connections;
+    }
+
+    public void setConnection(SocialConnect connection) {
+	if (connections == null)
+	    connections = new ArrayList<SocialConnect>();
+
+	connections.add(connection);
+
+    }
+
 }

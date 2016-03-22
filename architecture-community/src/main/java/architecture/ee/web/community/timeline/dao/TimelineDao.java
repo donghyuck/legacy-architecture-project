@@ -22,14 +22,14 @@ import architecture.ee.web.community.timeline.TimelineNotFoundException;
 
 public interface TimelineDao {
 
-	public Timeline getTimelineById(long timelineId) throws TimelineNotFoundException ;
-	
-	public List<Long> getTimelineIds( int objectType, long objectId );
-	
-	public int getTimelineCount( int objectType, long objectId );
-	
-	public void updateTimeline(Timeline timeline);
-	
-	public void deleteTimeline(Timeline timeline);
-		
+    public Timeline getTimelineById(long timelineId) throws TimelineNotFoundException;
+
+    public List<Long> getTimelineIds(int objectType, long objectId);
+
+    public int getTimelineCount(int objectType, long objectId);
+
+    public void updateTimeline(Timeline timeline);
+
+    public void deleteTimeline(Timeline timeline);
+
 }

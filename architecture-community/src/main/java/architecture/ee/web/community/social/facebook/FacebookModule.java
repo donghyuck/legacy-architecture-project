@@ -21,45 +21,46 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import architecture.ee.web.community.social.facebook.Photo.Image;
 import architecture.ee.web.community.social.facebook.PhotoMixin.ImageMixin;
 
-
 public class FacebookModule extends SimpleModule {
 
-	public FacebookModule() {
-		super("FacebookModule", new Version(1, 0, 0, null));
-	}
-	
-	@Override
-	public void setupModule(SetupContext context) {
-		context.setMixInAnnotations(FacebookProfile.class, FacebookProfileMixin.class);
-		context.setMixInAnnotations(WorkEntry.class, WorkEntryMixin.class);
-		context.setMixInAnnotations(EducationEntry.class, EducationEntryMixin.class);
-		context.setMixInAnnotations(Reference.class, ReferenceMixin.class);
-		//context.setMixInAnnotations(GroupMemberReference.class, GroupMemberReferenceMixin.class);
-		//context.setMixInAnnotations(Album.class, AlbumMixin.class);
-		//context.setMixInAnnotations(Group.class, GroupMixin.class);
-		//context.setMixInAnnotations(Event.class, EventMixin.class);
-		//context.setMixInAnnotations(Invitation.class, InvitationMixin.class);
-		//context.setMixInAnnotations(EventInvitee.class, EventInviteeMixin.class);
-		//context.setMixInAnnotations(Checkin.class, CheckinMixin.class);
-		context.setMixInAnnotations(Page.class, PageMixin.class);
-		context.setMixInAnnotations(Location.class, LocationMixin.class);
-		context.setMixInAnnotations(Comment.class, CommentMixin.class);
-		context.setMixInAnnotations(Tag.class, TagMixin.class);
-		context.setMixInAnnotations(Video.class, VideoMixin.class);
-		context.setMixInAnnotations(Photo.class, PhotoMixin.class);
-		context.setMixInAnnotations(Image.class, ImageMixin.class);
-		context.setMixInAnnotations(Post.class, PostMixin.class);
-		context.setMixInAnnotations(CheckinPost.class, CheckinPostMixin.class);
-		context.setMixInAnnotations(LinkPost.class, LinkPostMixin.class);
-		context.setMixInAnnotations(NotePost.class, NotePostMixin.class);
-		context.setMixInAnnotations(PhotoPost.class, PhotoPostMixin.class);
-		context.setMixInAnnotations(StatusPost.class, StatusPostMixin.class);
-		context.setMixInAnnotations(VideoPost.class, VideoPostMixin.class);
-		context.setMixInAnnotations(Account.class, AccountMixin.class);
-		context.setMixInAnnotations(SwfPost.class, SwfPostMixin.class);
-		context.setMixInAnnotations(MusicPost.class, MusicPostMixin.class);
-		//context.setMixInAnnotations(GroupMembership.class, GroupMembershipMixin.class);
-		context.setMixInAnnotations(CoverPhoto.class, CoverPhotoMixin.class);
-	}
-}
+    public FacebookModule() {
+	super("FacebookModule", new Version(1, 0, 0, null));
+    }
 
+    @Override
+    public void setupModule(SetupContext context) {
+	context.setMixInAnnotations(FacebookProfile.class, FacebookProfileMixin.class);
+	context.setMixInAnnotations(WorkEntry.class, WorkEntryMixin.class);
+	context.setMixInAnnotations(EducationEntry.class, EducationEntryMixin.class);
+	context.setMixInAnnotations(Reference.class, ReferenceMixin.class);
+	// context.setMixInAnnotations(GroupMemberReference.class,
+	// GroupMemberReferenceMixin.class);
+	// context.setMixInAnnotations(Album.class, AlbumMixin.class);
+	// context.setMixInAnnotations(Group.class, GroupMixin.class);
+	// context.setMixInAnnotations(Event.class, EventMixin.class);
+	// context.setMixInAnnotations(Invitation.class, InvitationMixin.class);
+	// context.setMixInAnnotations(EventInvitee.class,
+	// EventInviteeMixin.class);
+	// context.setMixInAnnotations(Checkin.class, CheckinMixin.class);
+	context.setMixInAnnotations(Page.class, PageMixin.class);
+	context.setMixInAnnotations(Location.class, LocationMixin.class);
+	context.setMixInAnnotations(Comment.class, CommentMixin.class);
+	context.setMixInAnnotations(Tag.class, TagMixin.class);
+	context.setMixInAnnotations(Video.class, VideoMixin.class);
+	context.setMixInAnnotations(Photo.class, PhotoMixin.class);
+	context.setMixInAnnotations(Image.class, ImageMixin.class);
+	context.setMixInAnnotations(Post.class, PostMixin.class);
+	context.setMixInAnnotations(CheckinPost.class, CheckinPostMixin.class);
+	context.setMixInAnnotations(LinkPost.class, LinkPostMixin.class);
+	context.setMixInAnnotations(NotePost.class, NotePostMixin.class);
+	context.setMixInAnnotations(PhotoPost.class, PhotoPostMixin.class);
+	context.setMixInAnnotations(StatusPost.class, StatusPostMixin.class);
+	context.setMixInAnnotations(VideoPost.class, VideoPostMixin.class);
+	context.setMixInAnnotations(Account.class, AccountMixin.class);
+	context.setMixInAnnotations(SwfPost.class, SwfPostMixin.class);
+	context.setMixInAnnotations(MusicPost.class, MusicPostMixin.class);
+	// context.setMixInAnnotations(GroupMembership.class,
+	// GroupMembershipMixin.class);
+	context.setMixInAnnotations(CoverPhoto.class, CoverPhotoMixin.class);
+    }
+}

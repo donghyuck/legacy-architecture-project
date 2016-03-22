@@ -46,476 +46,489 @@ import architecture.ee.web.community.tag.TagManager;
 
 public class DefaultPoll implements Poll {
 
-	private static final Log log = LogFactory.getLog(DefaultPoll.class);
-	
-	private long pollId;
+    private static final Log log = LogFactory.getLog(DefaultPoll.class);
 
-	private int objectType;
+    private long pollId;
 
-	private long objectId;
+    private int objectType;
 
-	private User user;
+    private long objectId;
 
-	private String name;
+    private User user;
 
-	private String description;
+    private String name;
 
-	private Date creationDate;
+    private String description;
 
-	private Date modifiedDate;
+    private Date creationDate;
 
-	private Date startDate;
+    private Date modifiedDate;
 
-	private Date endDate;
+    private Date startDate;
 
-	private Date expireDate;
+    private Date endDate;
 
-	private long mode;
+    private Date expireDate;
 
-	private int commentStatus;
+    private long mode;
 
-	private List<PollOption> options;
+    private int commentStatus;
 
-	private Status status;
+    private List<PollOption> options;
 
-	
-	public DefaultPoll() {
-		this.pollId = -1L;
-		this.objectType = -1;
-		this.objectId = -1L;
-		this.user = new UserTemplate(-1L);
-		this.name = null;
-		this.description = null;
-		this.mode = 0L;
-		this.commentStatus = 2;
-		this.status = Status.PUBLISHED;
-		this.options = new ArrayList<PollOption>();
-	}
+    private Status status;
 
-	/**
-	 * @param pollId
-	 */
-	protected DefaultPoll(long pollId) {
-		this();
-		this.pollId = pollId;
-	}
-		
-
-	/**
-	 * @param objectType
-	 * @param objectId
-	 * @param user
-	 * @param name
-	 */
-	protected DefaultPoll(int objectType, long objectId, User user, String name) {		
-		this();		
-		this.objectType = objectType;
-		this.objectId = objectId;
-		this.user = user;
-		this.name = name;
-		this.mode = 0L;
-		this.commentStatus = 2;
-		this.status = Status.PUBLISHED;
-		this.options =  new ArrayList<PollOption>();
-		
-		if(name == null)
-			throw new IllegalArgumentException("Name cannot be null");
-		
-		Calendar cal = Calendar.getInstance();
-		Date now = cal.getTime();
-		
-		this.creationDate = now;
-		this.modifiedDate = now;
-		this.startDate = now;
-		
-		cal.add(Calendar.YEAR, 1);
-		this.endDate =  cal.getTime();
-		this.expireDate = endDate;		
-	}
-
-	
-	
-	@JsonIgnore
-	public Serializable getPrimaryKeyObject() {
-		return pollId;
-	}
-
-	@JsonIgnore
-	public int getModelObjectType() {
-		return 40;
-	}
-
-	@JsonIgnore
-	public int getCachedSize() {
-        int size = CacheSizes.sizeOfObject();
-        size += CacheSizes.sizeOfLong();
-        size += CacheSizes.sizeOfLong();
-        size += CacheSizes.sizeOfInt();
-        size += CacheSizes.sizeOfLong();
-        size += CacheSizes.sizeOfString(name);
-        size += CacheSizes.sizeOfString(description);
-        size += CacheSizes.sizeOfDate() * 5;
-        size += CacheSizes.sizeOfLong();
-        size += CacheSizes.sizeOfInt();
-        size += CacheSizes.sizeOfCollection(options);
-        return size;
-	}
-	
-	@JsonIgnore
-    public String toString()
-    {
-    	StringBuffer buf = new StringBuffer();
-    	buf.append(pollId).append(" (").append(objectType).append(",").append(objectId).append(")");
-    	return buf.toString();
+    public DefaultPoll() {
+	this.pollId = -1L;
+	this.objectType = -1;
+	this.objectId = -1L;
+	this.user = new UserTemplate(-1L);
+	this.name = null;
+	this.description = null;
+	this.mode = 0L;
+	this.commentStatus = 2;
+	this.status = Status.PUBLISHED;
+	this.options = new ArrayList<PollOption>();
     }
 
-	/**
-	 * @return pollId
-	 */
-	public long getPollId() {
-		return pollId;
-	}
+    /**
+     * @param pollId
+     */
+    protected DefaultPoll(long pollId) {
+	this();
+	this.pollId = pollId;
+    }
 
-	/**
-	 * @param pollId 설정할 pollId
-	 */
-	public void setPollId(long pollId) {
-		this.pollId = pollId;
-	}
+    /**
+     * @param objectType
+     * @param objectId
+     * @param user
+     * @param name
+     */
+    protected DefaultPoll(int objectType, long objectId, User user, String name) {
+	this();
+	this.objectType = objectType;
+	this.objectId = objectId;
+	this.user = user;
+	this.name = name;
+	this.mode = 0L;
+	this.commentStatus = 2;
+	this.status = Status.PUBLISHED;
+	this.options = new ArrayList<PollOption>();
 
-	/**
-	 * @return objectType
-	 */
-	public int getObjectType() {
-		return objectType;
-	}
+	if (name == null)
+	    throw new IllegalArgumentException("Name cannot be null");
 
-	/**
-	 * @param objectType 설정할 objectType
-	 */
-	public void setObjectType(int objectType) {
-		this.objectType = objectType;
-	}
+	Calendar cal = Calendar.getInstance();
+	Date now = cal.getTime();
 
-	/**
-	 * @return objectId
-	 */
-	public long getObjectId() {
-		return objectId;
-	}
+	this.creationDate = now;
+	this.modifiedDate = now;
+	this.startDate = now;
 
-	/**
-	 * @param objectId 설정할 objectId
-	 */
-	public void setObjectId(long objectId) {
-		this.objectId = objectId;
-	}
+	cal.add(Calendar.YEAR, 1);
+	this.endDate = cal.getTime();
+	this.expireDate = endDate;
+    }
 
-	/**
-	 * @return user
-	 */
-	public User getUser() {
-		return user;
-	}
+    @JsonIgnore
+    public Serializable getPrimaryKeyObject() {
+	return pollId;
+    }
 
-	/**
-	 * @param user 설정할 user
-	 */
-	@JsonDeserialize(using = UserDeserializer.class)
-	public void setUser(User user) {
-		this.user = user;
-	}
+    @JsonIgnore
+    public int getModelObjectType() {
+	return 40;
+    }
 
-	/**
-	 * @return name
-	 */
-	public String getName() {
-		return name;
-	}
+    @JsonIgnore
+    public int getCachedSize() {
+	int size = CacheSizes.sizeOfObject();
+	size += CacheSizes.sizeOfLong();
+	size += CacheSizes.sizeOfLong();
+	size += CacheSizes.sizeOfInt();
+	size += CacheSizes.sizeOfLong();
+	size += CacheSizes.sizeOfString(name);
+	size += CacheSizes.sizeOfString(description);
+	size += CacheSizes.sizeOfDate() * 5;
+	size += CacheSizes.sizeOfLong();
+	size += CacheSizes.sizeOfInt();
+	size += CacheSizes.sizeOfCollection(options);
+	return size;
+    }
 
-	/**
-	 * @param name 설정할 name
-	 */
-	public void setName(String name) {
-		if( name == null)
-			throw new IllegalArgumentException("name can not be null.");
-		this.name = name;
-	}
+    @JsonIgnore
+    public String toString() {
+	StringBuffer buf = new StringBuffer();
+	buf.append(pollId).append(" (").append(objectType).append(",").append(objectId).append(")");
+	return buf.toString();
+    }
 
-	/**
-	 * @return description
-	 */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * @return pollId
+     */
+    public long getPollId() {
+	return pollId;
+    }
 
-	/**
-	 * @param description 설정할 description
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    /**
+     * @param pollId
+     *            설정할 pollId
+     */
+    public void setPollId(long pollId) {
+	this.pollId = pollId;
+    }
 
-	/**
-	 * @return creationDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    /**
+     * @return objectType
+     */
+    public int getObjectType() {
+	return objectType;
+    }
 
-	/**
-	 * @param creationDate 설정할 creationDate
-	 */
-	
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    /**
+     * @param objectType
+     *            설정할 objectType
+     */
+    public void setObjectType(int objectType) {
+	this.objectType = objectType;
+    }
 
-	/**
-	 * @return modifiedDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
+    /**
+     * @return objectId
+     */
+    public long getObjectId() {
+	return objectId;
+    }
 
-	/**
-	 * @param modifiedDate 설정할 modifiedDate
-	 */
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
+    /**
+     * @param objectId
+     *            설정할 objectId
+     */
+    public void setObjectId(long objectId) {
+	this.objectId = objectId;
+    }
 
-	/**
-	 * @return startDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getStartDate() {
-		return startDate;
-	}
+    /**
+     * @return user
+     */
+    public User getUser() {
+	return user;
+    }
 
-	/**
-	 * @param startDate 설정할 startDate
-	 */
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
-	public void setStartDate(Date startDate) {
-		if( startDate == null || this.endDate != null && startDate.compareTo(this.endDate) > 0)
-			throw new IllegalArgumentException("Start date can not be null or greater than endDate.");
-		this.startDate = startDate;
-	}
+    /**
+     * @param user
+     *            설정할 user
+     */
+    @JsonDeserialize(using = UserDeserializer.class)
+    public void setUser(User user) {
+	this.user = user;
+    }
 
-	/**
-	 * @return endDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getEndDate() {
-		return endDate;
-	}
+    /**
+     * @return name
+     */
+    public String getName() {
+	return name;
+    }
 
-	/**
-	 * @param endDate 설정할 endDate
-	 */
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
-	public void setEndDate(Date endDate) {
-		if( endDate == null || this.startDate != null && this.startDate.compareTo(endDate) > 0)
-			throw new IllegalArgumentException("End date can not be null or less than startDate.");
-		
-		this.endDate = endDate;
-	}
+    /**
+     * @param name
+     *            설정할 name
+     */
+    public void setName(String name) {
+	if (name == null)
+	    throw new IllegalArgumentException("name can not be null.");
+	this.name = name;
+    }
 
-	/**
-	 * @return expireDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getExpireDate() {
-		return expireDate;
-	}
+    /**
+     * @return description
+     */
+    public String getDescription() {
+	return description;
+    }
 
-	/**
-	 * @param expireDate 설정할 expireDate
-	 */
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
-	public void setExpireDate(Date expireDate) {
-		if( expireDate == null || endDate != null && endDate.compareTo(expireDate)>0)
-			throw new IllegalArgumentException("Expire date can not be null or less than end Date.");
-		this.expireDate = expireDate;
-	}
+    /**
+     * @param description
+     *            설정할 description
+     */
+    public void setDescription(String description) {
+	this.description = description;
+    }
 
-	@JsonProperty
-	public boolean isMultipleSelectAllowed(){
-		return isModeEnabled(Poll.MULTIPLE_SELECTIONS_ALLOWED);
-	}
-	
-	public void setMultipleSelectAllowed( boolean allowed){
-		if( isModeEnabled(Poll.MULTIPLE_SELECTIONS_ALLOWED) ){
-			if( !allowed )
-				setMode(Poll.MULTIPLE_SELECTIONS_ALLOWED, allowed);
-		}else{
-			if( allowed )
-				setMode(Poll.MULTIPLE_SELECTIONS_ALLOWED, allowed);			
-		}
-	}
-	
-	public boolean isAnonymousVoteAllowed(){
-		return isModeEnabled(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION);
-	}
+    /**
+     * @return creationDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getCreationDate() {
+	return creationDate;
+    }
 
-	public void setAnonymousVoteAllowed( boolean allowed){
-		if( isModeEnabled(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION) ){
-			if( !allowed )
-				setMode(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION, allowed);
-		}else{
-			if( allowed )
-				setMode(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION, allowed);			
-		}
-	}
+    /**
+     * @param creationDate
+     *            설정할 creationDate
+     */
 
-	public boolean isUserVoteAllowed(){
-		return isModeEnabled(Poll.ALLOW_USER_VOTE_MODIFICATION);
-	}
-	
-	public void setUserVoteAllowed( boolean allowed){
-		if( isModeEnabled(Poll.ALLOW_USER_VOTE_MODIFICATION) ){
-			if( !allowed )
-				setMode(Poll.ALLOW_USER_VOTE_MODIFICATION, allowed);
-		}else{
-			if( allowed )
-				setMode(Poll.ALLOW_USER_VOTE_MODIFICATION, allowed);			
-		}
-	}
-	
-	/**
-	 * @return mode
-	 */
-	public long getMode() {
-		return mode;
-	}
+    @JsonDeserialize(using = CustomJsonDateDeserializer.class)
+    public void setCreationDate(Date creationDate) {
+	this.creationDate = creationDate;
+    }
 
-	/**
-	 * @param mode 설정할 mode
-	 */
-	public void setMode(long mode) {
-		this.mode = mode;
-	}
+    /**
+     * @return modifiedDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getModifiedDate() {
+	return modifiedDate;
+    }
 
-	public boolean isModeEnabled(long mode) {
-		return (this.mode & mode) != 0L;
-	}
+    /**
+     * @param modifiedDate
+     *            설정할 modifiedDate
+     */
+    @JsonDeserialize(using = CustomJsonDateDeserializer.class)
+    public void setModifiedDate(Date modifiedDate) {
+	this.modifiedDate = modifiedDate;
+    }
 
-	public void setMode(long mode, boolean enabled) {
-		if (enabled) {
-			this.mode = this.mode | mode;
-		} else {
-			mode = ~mode;
-			this.mode = this.mode & mode;
-		}
-	}
-	/**
-	 * @return commentStatus
-	 */
-	@JsonIgnore
-	public int getCommentStatus() {
-		return commentStatus;
-	}
+    /**
+     * @return startDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getStartDate() {
+	return startDate;
+    }
 
-	/**
-	 * @param commentStatus 설정할 commentStatus
-	 */
-	@JsonIgnore
-	public void setCommentStatus(int commentStatus) {
-		this.commentStatus = commentStatus;
-	}
+    /**
+     * @param startDate
+     *            설정할 startDate
+     */
+    @JsonDeserialize(using = CustomJsonDateDeserializer.class)
+    public void setStartDate(Date startDate) {
+	if (startDate == null || this.endDate != null && startDate.compareTo(this.endDate) > 0)
+	    throw new IllegalArgumentException("Start date can not be null or greater than endDate.");
+	this.startDate = startDate;
+    }
 
-	
-	public int getOptionCount(){
-		return options.size();
-	}
-	/**
-	 * @return options
-	 */
-	public List<PollOption> getOptions() {
-		return options;
-	}
+    /**
+     * @return endDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getEndDate() {
+	return endDate;
+    }
 
-	/**
-	 * @param options 설정할 options
-	 */
-	
-	public void setOptions(List<PollOption> options) {
-		this.options = options;
-	}
-	
-	public void addOption(PollOption option){
-		this.options.add(option);
-	}
-	
+    /**
+     * @param endDate
+     *            설정할 endDate
+     */
+    @JsonDeserialize(using = CustomJsonDateDeserializer.class)
+    public void setEndDate(Date endDate) {
+	if (endDate == null || this.startDate != null && this.startDate.compareTo(endDate) > 0)
+	    throw new IllegalArgumentException("End date can not be null or less than startDate.");
 
-	/**
-	 * @return status
-	 */
-	public Status getStatus() {
-		return status;
-	}
+	this.endDate = endDate;
+    }
 
-	/**
-	 * @param status 설정할 status
-	 */
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-    
-	@JsonIgnore
-	public void setCommentCount(Integer commentCount){
-		
-	}
-	
-	@JsonProperty
-	@Override
-	public Integer getCommentCount() {
-		try {
-			CommentManager cmg = ApplicationHelper.getComponent(CommentManager.class);
-			return cmg.getCommentTreeWalker(ModelTypeFactory.getTypeIdFromCode("POLL"), getPollId()).getRecursiveChildCount(cmg.getRootParent());
-		} catch (ComponentNotFoundException e) {
-			return 0;
-		}
-	}
+    /**
+     * @return expireDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getExpireDate() {
+	return expireDate;
+    }
 
-	@JsonIgnore
-	public TagDelegator getTagDelegator() {
-		if( this.getPollId() < 1)
-			throw new IllegalStateException("Cannot retrieve tag manager prior to document being saved.");
-		else{
-			TagManager tmg = ApplicationHelper.getComponent(TagManager.class);
-			return new DefaultTagDelegator(ModelTypeFactory.getTypeIdFromCode("POLL"), this.getPollId(), tmg);
-		}
-	}
+    /**
+     * @param expireDate
+     *            설정할 expireDate
+     */
+    @JsonDeserialize(using = CustomJsonDateDeserializer.class)
+    public void setExpireDate(Date expireDate) {
+	if (expireDate == null || endDate != null && endDate.compareTo(expireDate) > 0)
+	    throw new IllegalArgumentException("Expire date can not be null or less than end Date.");
+	this.expireDate = expireDate;
+    }
 
-	@JsonIgnore
-	public void setTagsString(String tagsString){}
-	
-	@JsonProperty
-	public String getTagsString() {		
-		if( this.getPollId() > 0 )
-			return getTagDelegator().getTagsAsString();		
-		return null;
-	}
+    @JsonProperty
+    public boolean isMultipleSelectAllowed() {
+	return isModeEnabled(Poll.MULTIPLE_SELECTIONS_ALLOWED);
+    }
 
-	@JsonProperty
-	public int getVoteCount() {
-		if( getPollId() < 1 )
-			return 0;
-		
-		try {
-			PollManager pm = ApplicationHelper.getComponent(PollManager.class);
-			return pm.getVoteCount(this);
-		} catch (ComponentNotFoundException e) {
-			return 0;
-		}
+    public void setMultipleSelectAllowed(boolean allowed) {
+	if (isModeEnabled(Poll.MULTIPLE_SELECTIONS_ALLOWED)) {
+	    if (!allowed)
+		setMode(Poll.MULTIPLE_SELECTIONS_ALLOWED, allowed);
+	} else {
+	    if (allowed)
+		setMode(Poll.MULTIPLE_SELECTIONS_ALLOWED, allowed);
 	}
-	
-	@JsonIgnore
-	public void setVoteCount(int voteCount){}
+    }
+
+    public boolean isAnonymousVoteAllowed() {
+	return isModeEnabled(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION);
+    }
+
+    public void setAnonymousVoteAllowed(boolean allowed) {
+	if (isModeEnabled(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION)) {
+	    if (!allowed)
+		setMode(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION, allowed);
+	} else {
+	    if (allowed)
+		setMode(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION, allowed);
+	}
+    }
+
+    public boolean isUserVoteAllowed() {
+	return isModeEnabled(Poll.ALLOW_USER_VOTE_MODIFICATION);
+    }
+
+    public void setUserVoteAllowed(boolean allowed) {
+	if (isModeEnabled(Poll.ALLOW_USER_VOTE_MODIFICATION)) {
+	    if (!allowed)
+		setMode(Poll.ALLOW_USER_VOTE_MODIFICATION, allowed);
+	} else {
+	    if (allowed)
+		setMode(Poll.ALLOW_USER_VOTE_MODIFICATION, allowed);
+	}
+    }
+
+    /**
+     * @return mode
+     */
+    public long getMode() {
+	return mode;
+    }
+
+    /**
+     * @param mode
+     *            설정할 mode
+     */
+    public void setMode(long mode) {
+	this.mode = mode;
+    }
+
+    public boolean isModeEnabled(long mode) {
+	return (this.mode & mode) != 0L;
+    }
+
+    public void setMode(long mode, boolean enabled) {
+	if (enabled) {
+	    this.mode = this.mode | mode;
+	} else {
+	    mode = ~mode;
+	    this.mode = this.mode & mode;
+	}
+    }
+
+    /**
+     * @return commentStatus
+     */
+    @JsonIgnore
+    public int getCommentStatus() {
+	return commentStatus;
+    }
+
+    /**
+     * @param commentStatus
+     *            설정할 commentStatus
+     */
+    @JsonIgnore
+    public void setCommentStatus(int commentStatus) {
+	this.commentStatus = commentStatus;
+    }
+
+    public int getOptionCount() {
+	return options.size();
+    }
+
+    /**
+     * @return options
+     */
+    public List<PollOption> getOptions() {
+	return options;
+    }
+
+    /**
+     * @param options
+     *            설정할 options
+     */
+
+    public void setOptions(List<PollOption> options) {
+	this.options = options;
+    }
+
+    public void addOption(PollOption option) {
+	this.options.add(option);
+    }
+
+    /**
+     * @return status
+     */
+    public Status getStatus() {
+	return status;
+    }
+
+    /**
+     * @param status
+     *            설정할 status
+     */
+    public void setStatus(Status status) {
+	this.status = status;
+    }
+
+    @JsonIgnore
+    public void setCommentCount(Integer commentCount) {
+
+    }
+
+    @JsonProperty
+    @Override
+    public Integer getCommentCount() {
+	try {
+	    CommentManager cmg = ApplicationHelper.getComponent(CommentManager.class);
+	    return cmg.getCommentTreeWalker(ModelTypeFactory.getTypeIdFromCode("POLL"), getPollId())
+		    .getRecursiveChildCount(cmg.getRootParent());
+	} catch (ComponentNotFoundException e) {
+	    return 0;
+	}
+    }
+
+    @JsonIgnore
+    public TagDelegator getTagDelegator() {
+	if (this.getPollId() < 1)
+	    throw new IllegalStateException("Cannot retrieve tag manager prior to document being saved.");
+	else {
+	    TagManager tmg = ApplicationHelper.getComponent(TagManager.class);
+	    return new DefaultTagDelegator(ModelTypeFactory.getTypeIdFromCode("POLL"), this.getPollId(), tmg);
+	}
+    }
+
+    @JsonIgnore
+    public void setTagsString(String tagsString) {
+    }
+
+    @JsonProperty
+    public String getTagsString() {
+	if (this.getPollId() > 0)
+	    return getTagDelegator().getTagsAsString();
+	return null;
+    }
+
+    @JsonProperty
+    public int getVoteCount() {
+	if (getPollId() < 1)
+	    return 0;
+
+	try {
+	    PollManager pm = ApplicationHelper.getComponent(PollManager.class);
+	    return pm.getVoteCount(this);
+	} catch (ComponentNotFoundException e) {
+	    return 0;
+	}
+    }
+
+    @JsonIgnore
+    public void setVoteCount(int voteCount) {
+    }
 }

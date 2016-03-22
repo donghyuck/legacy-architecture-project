@@ -19,75 +19,73 @@ import architecture.ee.exception.NotFoundException;
 
 public class ConnectNotFoundException extends NotFoundException {
 
-	/**
-	 * 
-	 */
-	public ConnectNotFoundException() {
-		super();
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * 
+     */
+    public ConnectNotFoundException() {
+	super();
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param errorCode
-	 * @param msg
-	 * @param cause
-	 */
-	public ConnectNotFoundException(int errorCode, String msg, Throwable cause) {
-		super(errorCode, msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param errorCode
+     * @param msg
+     * @param cause
+     */
+    public ConnectNotFoundException(int errorCode, String msg, Throwable cause) {
+	super(errorCode, msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param errorCode
-	 * @param msg
-	 */
-	public ConnectNotFoundException(int errorCode, String msg) {
-		super(errorCode, msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param errorCode
+     * @param msg
+     */
+    public ConnectNotFoundException(int errorCode, String msg) {
+	super(errorCode, msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param errorCode
-	 * @param cause
-	 */
-	public ConnectNotFoundException(int errorCode, Throwable cause) {
-		super(errorCode, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param errorCode
+     * @param cause
+     */
+    public ConnectNotFoundException(int errorCode, Throwable cause) {
+	super(errorCode, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param errorCode
-	 */
-	public ConnectNotFoundException(int errorCode) {
-		super(errorCode);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param errorCode
+     */
+    public ConnectNotFoundException(int errorCode) {
+	super(errorCode);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param msg
-	 * @param cause
-	 */
-	public ConnectNotFoundException(String msg, Throwable cause) {
-		super(msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param msg
+     * @param cause
+     */
+    public ConnectNotFoundException(String msg, Throwable cause) {
+	super(msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param msg
-	 */
-	public ConnectNotFoundException(String msg) {
-		super(msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param msg
+     */
+    public ConnectNotFoundException(String msg) {
+	super(msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param cause
-	 */
-	public ConnectNotFoundException(Throwable cause) {
-		super(cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
-
-
+    /**
+     * @param cause
+     */
+    public ConnectNotFoundException(Throwable cause) {
+	super(cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
 }

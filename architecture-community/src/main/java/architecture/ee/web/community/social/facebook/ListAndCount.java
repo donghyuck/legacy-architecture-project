@@ -17,24 +17,23 @@ package architecture.ee.web.community.social.facebook;
 
 import java.util.List;
 
-
 public class ListAndCount<T> {
-	
-	private final List<T> list;
-	
-	private final int count;
-	
-	public ListAndCount(List<T> list, int count) {
-		this.list = list;
-		this.count = count;
-	}
 
-	public int getCount() {
-		return count;
-	}
+    private final List<T> list;
 
-	public List<T> getList() {
-		return list;
-	}
+    private final int count;
+
+    public ListAndCount(List<T> list, int count) {
+	this.list = list;
+	this.count = count;
+    }
+
+    public int getCount() {
+	return count;
+    }
+
+    public List<T> getList() {
+	return list;
+    }
 
 }

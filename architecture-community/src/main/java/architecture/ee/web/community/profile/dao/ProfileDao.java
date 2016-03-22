@@ -24,18 +24,18 @@ import architecture.ee.web.community.profile.ProfileImageNotFoundException;
 
 public interface ProfileDao {
 
-	public void removeProfileImage(ProfileImage image);
-	
-	public void addProfileImage(ProfileImage image, File file);
-	
-	public ProfileImage getProfileImageById(Long profileImageId) throws ProfileImageNotFoundException ;
-	
-	public Long getPrimaryProfileImageByUser(Long userId) throws ProfileImageNotFoundException;
-	
-	public List<Long> getProfileImageIds(Long userId);
-	
-	public Integer getProfileImageCount(Long userId);
-	
-	public InputStream getInputStream(ProfileImage image);
+    public void removeProfileImage(ProfileImage image);
+
+    public void addProfileImage(ProfileImage image, File file);
+
+    public ProfileImage getProfileImageById(Long profileImageId) throws ProfileImageNotFoundException;
+
+    public Long getPrimaryProfileImageByUser(Long userId) throws ProfileImageNotFoundException;
+
+    public List<Long> getProfileImageIds(Long userId);
+
+    public Integer getProfileImageCount(Long userId);
+
+    public InputStream getInputStream(ProfileImage image);
 
 }

@@ -19,34 +19,34 @@ import architecture.common.cache.Cacheable;
 import architecture.common.model.DateAware;
 
 public interface ProfileImage extends Cacheable, DateAware {
-	
-	public static final String DEFAULT_THUMBNAIL_CONTENT_TYPE ="image/png" ;
-	
-	public Long getProfileImageId();
-	
-	public Long getUserId();
-	
-	public Boolean isPrimary();
-	
-	public void setPrimary(Boolean primary) ;
-	
-	public String getImageContentType();
-	
-	public void setImageContentType(String imageContentType);
-	
-	public Integer getImageSize();
-	
-	public void setImageSize(Integer imageSize);
-	
-	public String getThumbnailContentType();
-	
-	public Integer getThumbnailSize();
-	
-	public void setThumbnailContentType(String thumbnailContentType);
-	
-	public void setThumbnailSize(Integer thumbnailSize);
-	
-	public String getFilename();
 
-	public void setFilename(String filename) ;
+    public static final String DEFAULT_THUMBNAIL_CONTENT_TYPE = "image/png";
+
+    public Long getProfileImageId();
+
+    public Long getUserId();
+
+    public Boolean isPrimary();
+
+    public void setPrimary(Boolean primary);
+
+    public String getImageContentType();
+
+    public void setImageContentType(String imageContentType);
+
+    public Integer getImageSize();
+
+    public void setImageSize(Integer imageSize);
+
+    public String getThumbnailContentType();
+
+    public Integer getThumbnailSize();
+
+    public void setThumbnailContentType(String thumbnailContentType);
+
+    public void setThumbnailSize(Integer thumbnailSize);
+
+    public String getFilename();
+
+    public void setFilename(String filename);
 }

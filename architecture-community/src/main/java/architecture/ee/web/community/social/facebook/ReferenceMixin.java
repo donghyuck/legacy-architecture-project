@@ -19,13 +19,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class ReferenceMixin {
 
-	@JsonCreator
-	ReferenceMixin(
-			@JsonProperty("id") String id, 
-			@JsonProperty("name") String name) {}
+    @JsonCreator
+    ReferenceMixin(@JsonProperty("id") String id, @JsonProperty("name") String name) {
+    }
 }
-

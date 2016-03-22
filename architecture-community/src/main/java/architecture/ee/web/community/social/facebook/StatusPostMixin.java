@@ -21,17 +21,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class StatusPostMixin extends PostMixin {
 
-	@JsonCreator
-	StatusPostMixin(
-			@JsonProperty("id") String id, 
-			@JsonProperty("from") Reference from, 
-			@JsonProperty("created_time") Date createdTime,
-			@JsonProperty("updated_time") Date updatedTime) {
-		super(id, from, createdTime, updatedTime);
-	}
-	
+    @JsonCreator
+    StatusPostMixin(@JsonProperty("id") String id, @JsonProperty("from") Reference from,
+	    @JsonProperty("created_time") Date createdTime, @JsonProperty("updated_time") Date updatedTime) {
+	super(id, from, createdTime, updatedTime);
+    }
+
 }

@@ -15,50 +15,49 @@
  */
 package architecture.ee.web.community.social.facebook;
 
-
 public class CoverPhoto {
-	
-	private final String id;
-	
-	private final String source;
-	
-	private final int offsetX;
-	
-	private final int offsetY;
 
-	public CoverPhoto(String id, String source, int offsetX, int offsetY) {
-		this.id = id;
-		this.source = source;
-		this.offsetX = offsetX;
-		this.offsetY = offsetY;
-	}
-	
-	/**
-	 * @return The ID of the cover photo's Photo object.
-	 */
-	public String getId() {
-		return id;
-	}
+    private final String id;
 
-	/**
-	 * @return A link to the cover photo's image.
-	 */
-	public String getSource() {
-		return source;
-	}
+    private final String source;
 
-	/**
-	 * @return The percentage of offset from left (0-100).
-	 */
-	public int getOffsetX() {
-		return offsetX;
-	}
+    private final int offsetX;
 
-	/**
-	 * @return The percentage of offset from top (0-100).
-	 */
-	public int getOffsetY() {
-		return offsetY;
-	}
+    private final int offsetY;
+
+    public CoverPhoto(String id, String source, int offsetX, int offsetY) {
+	this.id = id;
+	this.source = source;
+	this.offsetX = offsetX;
+	this.offsetY = offsetY;
+    }
+
+    /**
+     * @return The ID of the cover photo's Photo object.
+     */
+    public String getId() {
+	return id;
+    }
+
+    /**
+     * @return A link to the cover photo's image.
+     */
+    public String getSource() {
+	return source;
+    }
+
+    /**
+     * @return The percentage of offset from left (0-100).
+     */
+    public int getOffsetX() {
+	return offsetX;
+    }
+
+    /**
+     * @return The percentage of offset from top (0-100).
+     */
+    public int getOffsetY() {
+	return offsetY;
+    }
 
 }

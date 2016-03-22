@@ -20,26 +20,25 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Reference implements Serializable {
 
-	private final String id;
+    private final String id;
 
-	private final String name;
+    private final String name;
 
-	public Reference(String id) {
-		this(id, null);
-	}
+    public Reference(String id) {
+	this(id, null);
+    }
 
-	public Reference(String id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+    public Reference(String id, String name) {
+	this.id = id;
+	this.name = name;
+    }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+	return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+	return name;
+    }
 
 }
-

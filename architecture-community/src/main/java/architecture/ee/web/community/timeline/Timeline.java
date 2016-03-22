@@ -19,37 +19,37 @@ import java.util.Date;
 
 import architecture.common.cache.Cacheable;
 
-public interface Timeline  extends Cacheable {
+public interface Timeline extends Cacheable {
 
-	public long getTimelineId();
-	
-	public int getObjectType();
-	
-	public long getObjectId();
-	
-	public String getHeadline();
-	
-	public String getBody();
-	
-	public Media getMedia();
-	
-	public Date getStartDate();
-	
-	public Date getEndDate();
-	
-	public boolean isHasMedia();
-	
-	public void setObjectType(int objectType);
-	
-	public void setObjectId(long objectId);
-	
-	public void setHeadline(String headline);
-	
-	public void setBody(String body);
-	
-	public void setMedia(Media media);
-	
-	public void setStartDate(Date startDate);
-	
-	public void setEndDate(Date endDate);
+    public long getTimelineId();
+
+    public int getObjectType();
+
+    public long getObjectId();
+
+    public String getHeadline();
+
+    public String getBody();
+
+    public Media getMedia();
+
+    public Date getStartDate();
+
+    public Date getEndDate();
+
+    public boolean isHasMedia();
+
+    public void setObjectType(int objectType);
+
+    public void setObjectId(long objectId);
+
+    public void setHeadline(String headline);
+
+    public void setBody(String body);
+
+    public void setMedia(Media media);
+
+    public void setStartDate(Date startDate);
+
+    public void setEndDate(Date endDate);
 }

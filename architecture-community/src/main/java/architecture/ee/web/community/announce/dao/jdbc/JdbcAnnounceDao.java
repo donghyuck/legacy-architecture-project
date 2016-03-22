@@ -36,228 +36,226 @@ import architecture.ee.web.community.announce.impl.DefaultAnnounce;
 
 public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceDao {
 
-	
-	private ExtendedPropertyDao extendedPropertyDao;	
-	private String sequencerName = "ANNOUNCE";
-	private String announcePropertyTableName = "V2_ANNOUNCE_PROPERTY";
-	private String announcePropertyPrimaryColumnName = "ANNOUNCE_ID";
-	
-	/**
-	 * 
-	 *  2014.07.25 - fixed setStartDate error in RowMapper
-	 */
-	private final RowMapper<Announce> announceMapper = new RowMapper<Announce>(){
-		public Announce mapRow(ResultSet rs, int rowNum) throws SQLException {
-			long announceId = rs.getLong("ANNOUNCE_ID");
-			DefaultAnnounce announce = new DefaultAnnounce(announceId);
-			announce.setObjectType(rs.getInt("OBJECT_TYPE"));
-			announce.setObjectId(rs.getLong("OBJECT_ID"));
-			announce.setUserId(rs.getLong("USER_ID"));
-			announce.setSubject(rs.getString("SUBJECT"));
-			announce.setBody(rs.getString("BODY"));
-			announce.setStartDate(rs.getTimestamp("START_DATE"));
-			announce.setEndDate(rs.getTimestamp("END_DATE"));		
-			announce.setCreationDate(rs.getDate("CREATION_DATE"));
-			announce.setModifiedDate(rs.getDate("MODIFIED_DATE"));					
-			return announce;
-		}		
-	};
-		/**
-		 * 			ANNOUNCE_ID				INTEGER NOT NULL,
-			OBJECT_TYPE						INTEGER NOT NULL,
-			OBJECT_ID							INTEGER NOT NULL,	 		
-			USER_ID								INTEGER NOT NULL,	 		
-			SUBJECT								VARCHAR2(255) NOT NULL,
-			BODY								VARCHAR2(255) NOT NULL,
-			START_DATE						DATE DEFAULT  SYSDATE NOT NULL,
-			END_DATE							DATE DEFAULT  SYSDATE NOT NULL,
-			STATUS								NUMBER(1, 0)  DEFAULT 0, 
-			CREATION_DATE					DATE DEFAULT  SYSDATE NOT NULL,
-			MODIFIED_DATE					DATE DEFAULT  SYSDATE NOT NULL,
-		 */
-	
-	public Long nextId( ){
-		return getNextId(sequencerName);
-	}
-	
-	/**
-	 * @return extendedPropertyDao
-	 */
-	public ExtendedPropertyDao getExtendedPropertyDao() {
-		return extendedPropertyDao;
-	}
-	/**
-	 * @param extendedPropertyDao 설정할 extendedPropertyDao
-	 */
-	public void setExtendedPropertyDao(ExtendedPropertyDao extendedPropertyDao) {
-		this.extendedPropertyDao = extendedPropertyDao;
-	}
-	/**
-	 * @return sequencerName
-	 */
-	public String getSequencerName() {
-		return sequencerName;
-	}
-	/**
-	 * @param sequencerName 설정할 sequencerName
-	 */
-	public void setSequencerName(String sequencerName) {
-		this.sequencerName = sequencerName;
-	}
-	/**
-	 * @return announcePropertyTableName
-	 */
-	public String getAnnouncePropertyTableName() {
-		return announcePropertyTableName;
-	}
-	/**
-	 * @param announcePropertyTableName 설정할 announcePropertyTableName
-	 */
-	public void setAnnouncePropertyTableName(String announcePropertyTableName) {
-		this.announcePropertyTableName = announcePropertyTableName;
-	}
-	/**
-	 * @return announcePropertyPrimaryColumnName
-	 */
-	public String getAnnouncePropertyPrimaryColumnName() {
-		return announcePropertyPrimaryColumnName;
-	}
-	/**
-	 * @param announcePropertyPrimaryColumnName 설정할 announcePropertyPrimaryColumnName
-	 */
-	public void setAnnouncePropertyPrimaryColumnName(
-			String announcePropertyPrimaryColumnName) {
-		this.announcePropertyPrimaryColumnName = announcePropertyPrimaryColumnName;
-	}
-	
+    private ExtendedPropertyDao extendedPropertyDao;
+    private String sequencerName = "ANNOUNCE";
+    private String announcePropertyTableName = "V2_ANNOUNCE_PROPERTY";
+    private String announcePropertyPrimaryColumnName = "ANNOUNCE_ID";
 
-	public Map<String, String> getAnnounceProperties(long announceId) {
-		return extendedPropertyDao.getProperties(announcePropertyTableName, announcePropertyPrimaryColumnName, announceId);
+    /**
+     * 
+     * 2014.07.25 - fixed setStartDate error in RowMapper
+     */
+    private final RowMapper<Announce> announceMapper = new RowMapper<Announce>() {
+	public Announce mapRow(ResultSet rs, int rowNum) throws SQLException {
+	    long announceId = rs.getLong("ANNOUNCE_ID");
+	    DefaultAnnounce announce = new DefaultAnnounce(announceId);
+	    announce.setObjectType(rs.getInt("OBJECT_TYPE"));
+	    announce.setObjectId(rs.getLong("OBJECT_ID"));
+	    announce.setUserId(rs.getLong("USER_ID"));
+	    announce.setSubject(rs.getString("SUBJECT"));
+	    announce.setBody(rs.getString("BODY"));
+	    announce.setStartDate(rs.getTimestamp("START_DATE"));
+	    announce.setEndDate(rs.getTimestamp("END_DATE"));
+	    announce.setCreationDate(rs.getDate("CREATION_DATE"));
+	    announce.setModifiedDate(rs.getDate("MODIFIED_DATE"));
+	    return announce;
 	}
+    };
 
-	public void deleteAnnounceProperties(long announceId) {
-		extendedPropertyDao.deleteProperties(announcePropertyTableName, announcePropertyPrimaryColumnName, announceId);
-	}
-	
-	public void setAnnounceProperties(long announceId, Map<String, String> props) {
-		extendedPropertyDao.updateProperties(announcePropertyTableName, announcePropertyPrimaryColumnName, announceId, props);
-	}
-	public Announce load(long announceId) throws AnnounceNotFoundException {		
-		try {
-			Announce announce = getExtendedJdbcTemplate().queryForObject(
-					getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ANNOUNCE_BY_ID").getSql(), 
-					announceMapper, 
-					new SqlParameterValue (Types.NUMERIC, announceId ));
-			announce.setProperties( getAnnounceProperties(announceId) );
-			return announce;
-		} catch (DataAccessException e) {
-			throw new AnnounceNotFoundException(e);
-		}
-	}
-	public void update(Announce annoucne) {
-		
-		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_ANNOUNCE").getSql(), 	
-				new SqlParameterValue (Types.VARCHAR, annoucne.getSubject()), 
-				new SqlParameterValue (Types.VARCHAR, annoucne.getBody() ), 
-				new SqlParameterValue(Types.TIMESTAMP, annoucne.getStartDate()),
-				new SqlParameterValue(Types.DATE, annoucne.getEndDate()),
-				new SqlParameterValue(Types.DATE, annoucne.getModifiedDate()),
-				new SqlParameterValue (Types.NUMERIC, annoucne.getAnnounceId()) );		
-		
-		setAnnounceProperties(annoucne.getAnnounceId(), annoucne.getProperties());		
-	}
-	
-	public void insert(Announce announce) {
-		
-		long announceIdToUse = announce.getAnnounceId();
-		if( announceIdToUse < 0 )
-			announceIdToUse = getNextId(sequencerName);
-		announce.setAnnounceId(announceIdToUse);
-		
-		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.INSERT_ANNOUNCE").getSql(), 	
-				new SqlParameterValue (Types.NUMERIC, announce.getAnnounceId()),
-				new SqlParameterValue (Types.NUMERIC, announce.getObjectType()),
-				new SqlParameterValue (Types.NUMERIC, announce.getObjectId()),
-				new SqlParameterValue (Types.NUMERIC, announce.getUserId()),
-				new SqlParameterValue (Types.VARCHAR, announce.getSubject()), 
-				new SqlParameterValue (Types.VARCHAR, announce.getBody() ), 
-				new SqlParameterValue(Types.TIMESTAMP, announce.getStartDate()),
-				new SqlParameterValue(Types.TIMESTAMP, announce.getEndDate()),
-				new SqlParameterValue(Types.DATE, announce.getCreationDate()),
-				new SqlParameterValue(Types.DATE, announce.getModifiedDate()) );				
-		setAnnounceProperties(announce.getAnnounceId(), announce.getProperties());				
-		
-	}	
-	
-	public void delete(Announce annoucne) {
-		getJdbcTemplate().update(
-				getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_ANNOUNCE" ).getSql(),
-				new SqlParameterValue (Types.NUMERIC, annoucne.getAnnounceId())
-		);
-		deleteAnnounceProperties(annoucne.getAnnounceId());		
-	}
-	
-	public void move(Long fromId, Long toId) {
-		
-	}
-	
-	public List<Long> getAnnounceIdsForUser(long userId) {
-		return getExtendedJdbcTemplate().query(
-				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ANNOUNCE_IDS_BY_USER_ID").getSql(),
-				new RowMapper<Long>(){
-					public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
-						return rs.getLong(1);
-					}
-				},
-				new SqlParameterValue (Types.NUMERIC, userId ));		
-		
-	}
-	
-	public List<Long> getAnnounceIds(int objectType, long objectId) {
-		return getExtendedJdbcTemplate().query(
-				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ANNOUNCE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(),
-				new RowMapper<Long>(){
-					public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
-						return rs.getLong(1);
-					}
-				},
-				new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectId ));		
-	}
-	
-	public List<Long> getAnnounceIds() {
-		return getExtendedJdbcTemplate().query(
-				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ALL_ANNOUNCE_IDS" ).getSql(),
-				new RowMapper<Long>(){
-					public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
-						return rs.getLong(1);
-					}}
-		);
-	}
+    /**
+     * ANNOUNCE_ID INTEGER NOT NULL, OBJECT_TYPE INTEGER NOT NULL, OBJECT_ID
+     * INTEGER NOT NULL, USER_ID INTEGER NOT NULL, SUBJECT VARCHAR2(255) NOT
+     * NULL, BODY VARCHAR2(255) NOT NULL, START_DATE DATE DEFAULT SYSDATE NOT
+     * NULL, END_DATE DATE DEFAULT SYSDATE NOT NULL, STATUS NUMBER(1, 0) DEFAULT
+     * 0, CREATION_DATE DATE DEFAULT SYSDATE NOT NULL, MODIFIED_DATE DATE
+     * DEFAULT SYSDATE NOT NULL,
+     */
 
-	public int getAnnounceCount(int objectType, long objectId) {
-		return getExtendedJdbcTemplate().queryForInt(
-				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
-				new SqlParameterValue(Types.NUMERIC, objectType ),
-				new SqlParameterValue(Types.NUMERIC, objectId ));
-	}
+    public Long nextId() {
+	return getNextId(sequencerName);
+    }
 
-	public int getAnnounceCount(int objectType, long objectId, Date endDate) {
-		return getExtendedJdbcTemplate().queryForInt(
-				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_END_DATE").getSql(), 
-				new SqlParameterValue(Types.NUMERIC, objectType ),
-				new SqlParameterValue(Types.NUMERIC, objectId ),
-				new SqlParameterValue(Types.TIMESTAMP, endDate == null ? Calendar.getInstance().getTime() :  endDate ));
-	}
-	
+    /**
+     * @return extendedPropertyDao
+     */
+    public ExtendedPropertyDao getExtendedPropertyDao() {
+	return extendedPropertyDao;
+    }
 
-	public int getAnnounceCount(int objectType, long objectId, Date startDate, Date endDate) {
-		return getExtendedJdbcTemplate().queryForInt(
-				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_START_DATE_AND_END_DATE").getSql(), 
-				new SqlParameterValue(Types.NUMERIC, objectType ),
-				new SqlParameterValue(Types.NUMERIC, objectId ),
-				new SqlParameterValue(Types.TIMESTAMP, startDate == null ? new Date(0x8000000000000000L) :  startDate ),
-				new SqlParameterValue(Types.TIMESTAMP, endDate == null ? Calendar.getInstance().getTime() :  endDate ));
-	}	
-	
-	
+    /**
+     * @param extendedPropertyDao
+     *            설정할 extendedPropertyDao
+     */
+    public void setExtendedPropertyDao(ExtendedPropertyDao extendedPropertyDao) {
+	this.extendedPropertyDao = extendedPropertyDao;
+    }
+
+    /**
+     * @return sequencerName
+     */
+    public String getSequencerName() {
+	return sequencerName;
+    }
+
+    /**
+     * @param sequencerName
+     *            설정할 sequencerName
+     */
+    public void setSequencerName(String sequencerName) {
+	this.sequencerName = sequencerName;
+    }
+
+    /**
+     * @return announcePropertyTableName
+     */
+    public String getAnnouncePropertyTableName() {
+	return announcePropertyTableName;
+    }
+
+    /**
+     * @param announcePropertyTableName
+     *            설정할 announcePropertyTableName
+     */
+    public void setAnnouncePropertyTableName(String announcePropertyTableName) {
+	this.announcePropertyTableName = announcePropertyTableName;
+    }
+
+    /**
+     * @return announcePropertyPrimaryColumnName
+     */
+    public String getAnnouncePropertyPrimaryColumnName() {
+	return announcePropertyPrimaryColumnName;
+    }
+
+    /**
+     * @param announcePropertyPrimaryColumnName
+     *            설정할 announcePropertyPrimaryColumnName
+     */
+    public void setAnnouncePropertyPrimaryColumnName(String announcePropertyPrimaryColumnName) {
+	this.announcePropertyPrimaryColumnName = announcePropertyPrimaryColumnName;
+    }
+
+    public Map<String, String> getAnnounceProperties(long announceId) {
+	return extendedPropertyDao.getProperties(announcePropertyTableName, announcePropertyPrimaryColumnName,
+		announceId);
+    }
+
+    public void deleteAnnounceProperties(long announceId) {
+	extendedPropertyDao.deleteProperties(announcePropertyTableName, announcePropertyPrimaryColumnName, announceId);
+    }
+
+    public void setAnnounceProperties(long announceId, Map<String, String> props) {
+	extendedPropertyDao.updateProperties(announcePropertyTableName, announcePropertyPrimaryColumnName, announceId,
+		props);
+    }
+
+    public Announce load(long announceId) throws AnnounceNotFoundException {
+	try {
+	    Announce announce = getExtendedJdbcTemplate().queryForObject(
+		    getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ANNOUNCE_BY_ID").getSql(), announceMapper,
+		    new SqlParameterValue(Types.NUMERIC, announceId));
+	    announce.setProperties(getAnnounceProperties(announceId));
+	    return announce;
+	} catch (DataAccessException e) {
+	    throw new AnnounceNotFoundException(e);
+	}
+    }
+
+    public void update(Announce annoucne) {
+
+	getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_ANNOUNCE").getSql(),
+		new SqlParameterValue(Types.VARCHAR, annoucne.getSubject()),
+		new SqlParameterValue(Types.VARCHAR, annoucne.getBody()),
+		new SqlParameterValue(Types.TIMESTAMP, annoucne.getStartDate()),
+		new SqlParameterValue(Types.DATE, annoucne.getEndDate()),
+		new SqlParameterValue(Types.DATE, annoucne.getModifiedDate()),
+		new SqlParameterValue(Types.NUMERIC, annoucne.getAnnounceId()));
+
+	setAnnounceProperties(annoucne.getAnnounceId(), annoucne.getProperties());
+    }
+
+    public void insert(Announce announce) {
+
+	long announceIdToUse = announce.getAnnounceId();
+	if (announceIdToUse < 0)
+	    announceIdToUse = getNextId(sequencerName);
+	announce.setAnnounceId(announceIdToUse);
+
+	getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.INSERT_ANNOUNCE").getSql(),
+		new SqlParameterValue(Types.NUMERIC, announce.getAnnounceId()),
+		new SqlParameterValue(Types.NUMERIC, announce.getObjectType()),
+		new SqlParameterValue(Types.NUMERIC, announce.getObjectId()),
+		new SqlParameterValue(Types.NUMERIC, announce.getUserId()),
+		new SqlParameterValue(Types.VARCHAR, announce.getSubject()),
+		new SqlParameterValue(Types.VARCHAR, announce.getBody()),
+		new SqlParameterValue(Types.TIMESTAMP, announce.getStartDate()),
+		new SqlParameterValue(Types.TIMESTAMP, announce.getEndDate()),
+		new SqlParameterValue(Types.DATE, announce.getCreationDate()),
+		new SqlParameterValue(Types.DATE, announce.getModifiedDate()));
+	setAnnounceProperties(announce.getAnnounceId(), announce.getProperties());
+
+    }
+
+    public void delete(Announce annoucne) {
+	getJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_ANNOUNCE").getSql(),
+		new SqlParameterValue(Types.NUMERIC, annoucne.getAnnounceId()));
+	deleteAnnounceProperties(annoucne.getAnnounceId());
+    }
+
+    public void move(Long fromId, Long toId) {
+
+    }
+
+    public List<Long> getAnnounceIdsForUser(long userId) {
+	return getExtendedJdbcTemplate().query(
+		getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ANNOUNCE_IDS_BY_USER_ID").getSql(), new RowMapper<Long>() {
+		    public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return rs.getLong(1);
+		    }
+		}, new SqlParameterValue(Types.NUMERIC, userId));
+
+    }
+
+    public List<Long> getAnnounceIds(int objectType, long objectId) {
+	return getExtendedJdbcTemplate().query(
+		getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ANNOUNCE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(),
+		new RowMapper<Long>() {
+		    public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return rs.getLong(1);
+		    }
+		}, new SqlParameterValue(Types.NUMERIC, objectType), new SqlParameterValue(Types.NUMERIC, objectId));
+    }
+
+    public List<Long> getAnnounceIds() {
+	return getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ALL_ANNOUNCE_IDS").getSql(),
+		new RowMapper<Long>() {
+		    public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return rs.getLong(1);
+		    }
+		});
+    }
+
+    public int getAnnounceCount(int objectType, long objectId) {
+	return getExtendedJdbcTemplate().queryForInt(
+		getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(),
+		new SqlParameterValue(Types.NUMERIC, objectType), new SqlParameterValue(Types.NUMERIC, objectId));
+    }
+
+    public int getAnnounceCount(int objectType, long objectId, Date endDate) {
+	return getExtendedJdbcTemplate().queryForInt(
+		getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_END_DATE").getSql(),
+		new SqlParameterValue(Types.NUMERIC, objectType), new SqlParameterValue(Types.NUMERIC, objectId),
+		new SqlParameterValue(Types.TIMESTAMP, endDate == null ? Calendar.getInstance().getTime() : endDate));
+    }
+
+    public int getAnnounceCount(int objectType, long objectId, Date startDate, Date endDate) {
+	return getExtendedJdbcTemplate().queryForInt(
+		getBoundSql(
+			"ARCHITECTURE_COMMUNITY.COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_START_DATE_AND_END_DATE")
+				.getSql(),
+		new SqlParameterValue(Types.NUMERIC, objectType), new SqlParameterValue(Types.NUMERIC, objectId),
+		new SqlParameterValue(Types.TIMESTAMP, startDate == null ? new Date(0x8000000000000000L) : startDate),
+		new SqlParameterValue(Types.TIMESTAMP, endDate == null ? Calendar.getInstance().getTime() : endDate));
+    }
+
 }

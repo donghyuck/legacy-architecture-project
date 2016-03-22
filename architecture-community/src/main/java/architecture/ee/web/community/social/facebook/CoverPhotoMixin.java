@@ -21,12 +21,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class CoverPhotoMixin {
 
-	// TODO: For this to be reused for user cover photos, the "cover_id" mapping needs to be "id"
-	public CoverPhotoMixin(
-		@JsonProperty("cover_id") String id,
-		@JsonProperty("source") String source,
-		@JsonProperty("offset_x") int offsetX,
-		@JsonProperty("offset_y") int offsetY) {}
-	
-}
+    // TODO: For this to be reused for user cover photos, the "cover_id" mapping
+    // needs to be "id"
+    public CoverPhotoMixin(@JsonProperty("cover_id") String id, @JsonProperty("source") String source,
+	    @JsonProperty("offset_x") int offsetX, @JsonProperty("offset_y") int offsetY) {
+    }
 
+}

@@ -28,22 +28,21 @@ public class BooleanYNDeserializer extends JsonDeserializer<Boolean> {
     private static final String YES = "Y";
     private static final String NO = "N";
 
-	@SuppressWarnings("unchecked")
-	@Override
+    @SuppressWarnings("unchecked")
+    @Override
     public Boolean deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-        try {
-        	
-        	
-            return ctxt.getParser().getBooleanValue();
-            
-        } catch (JsonParseException jpe) {
-            if (NO.equalsIgnoreCase(jp.getText())) {
-                return false;
-            } else if (YES.equalsIgnoreCase(jp.getText())) {
-                return true;
-            }
-            throw jpe;
-        }
+	try {
+
+	    return ctxt.getParser().getBooleanValue();
+
+	} catch (JsonParseException jpe) {
+	    if (NO.equalsIgnoreCase(jp.getText())) {
+		return false;
+	    } else if (YES.equalsIgnoreCase(jp.getText())) {
+		return true;
+	    }
+	    throw jpe;
+	}
     }
 
 }

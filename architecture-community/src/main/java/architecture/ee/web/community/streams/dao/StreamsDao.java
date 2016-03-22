@@ -22,47 +22,45 @@ import architecture.ee.web.attachment.Image;
 import architecture.ee.web.community.streams.Photo;
 
 public interface StreamsDao {
-	
-	public List<String> getPhotoIdsByImage(long imageId);
-	
-	public List<String> getPhotoIds () ;
 
-	public List<String> getPhotoIds (int objectType) ;
-	
-	public List<String> getPhotoIds (int objectType, long objectId) ;
+    public List<String> getPhotoIdsByImage(long imageId);
 
-	public List<String> getPhotoIds (int startIndex, int maxResults ) ;
+    public List<String> getPhotoIds();
 
-	public List<String> getPhotoIds (int objectType, int startIndex, int maxResults ) ;
-	
-	public List<String> getPhotoIds (int objectType, long objectId, int startIndex, int maxResults ) ;
-	
-	public List<String> getPhotoIdsByRandom () ;
+    public List<String> getPhotoIds(int objectType);
 
-	public List<String> getPhotoIdsByRandom (int objectType) ;
-	
-	public List<String> getPhotoIdsByRandom (int objectType, long objectId) ;
+    public List<String> getPhotoIds(int objectType, long objectId);
 
-	public List<String> getPhotoIdsByRandom (int startIndex, int maxResults ) ;
+    public List<String> getPhotoIds(int startIndex, int maxResults);
 
-	public List<String> getPhotoIdsByRandom (int objectType, int startIndex, int maxResults ) ;
-	
-	public List<String> getPhotoIdsByRandom (int objectType, long objectId, int startIndex, int maxResults ) ;
-	
-	
-	public Photo getPhotoStream(String photoId ) throws NotFoundException ;
-	
-	public void addPhoto(Photo photo) ;
-	
-	public void removePhoto(Photo photo) ;
-	
-	public void removePhotos(Image image) ;
-	
-	public int getPhotoCount();
-	
-	public int getPhotoCount(int objectType);
-	
-	public int getPhotoCount(int objectType, long objectId);
-	
-	
+    public List<String> getPhotoIds(int objectType, int startIndex, int maxResults);
+
+    public List<String> getPhotoIds(int objectType, long objectId, int startIndex, int maxResults);
+
+    public List<String> getPhotoIdsByRandom();
+
+    public List<String> getPhotoIdsByRandom(int objectType);
+
+    public List<String> getPhotoIdsByRandom(int objectType, long objectId);
+
+    public List<String> getPhotoIdsByRandom(int startIndex, int maxResults);
+
+    public List<String> getPhotoIdsByRandom(int objectType, int startIndex, int maxResults);
+
+    public List<String> getPhotoIdsByRandom(int objectType, long objectId, int startIndex, int maxResults);
+
+    public Photo getPhotoStream(String photoId) throws NotFoundException;
+
+    public void addPhoto(Photo photo);
+
+    public void removePhoto(Photo photo);
+
+    public void removePhotos(Image image);
+
+    public int getPhotoCount();
+
+    public int getPhotoCount(int objectType);
+
+    public int getPhotoCount(int objectType, long objectId);
+
 }

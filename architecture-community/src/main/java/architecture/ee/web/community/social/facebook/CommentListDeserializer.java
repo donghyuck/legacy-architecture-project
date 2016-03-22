@@ -28,26 +28,30 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CommentListDeserializer extends JsonDeserializer<List<Comment>> {
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Comment> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-		
-/*		ObjectMapper mapper = new ObjectMapper();
-		mapper.addMixInAnnotations(Comment.class, CommentMixin.class);
-		mapper.addMixInAnnotations(Reference.class, ReferenceMixin.class);*/
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(new FacebookModule());
-		
-		jp.setCodec(mapper);
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Comment> deserialize(JsonParser jp, DeserializationContext ctxt)
+	    throws IOException, JsonProcessingException {
 
-		if(jp.hasCurrentToken()) {
-			TreeNode tNode = jp.readValueAsTree();
-			TreeNode dataNode = tNode.get("data");
-			if(dataNode != null) {
-				
-				return (List<Comment>) mapper.readValue(dataNode.traverse(), new TypeReference<List<Comment>>() {});
-			}
-		}
-		return Collections.emptyList();
+	/*
+	 * ObjectMapper mapper = new ObjectMapper();
+	 * mapper.addMixInAnnotations(Comment.class, CommentMixin.class);
+	 * mapper.addMixInAnnotations(Reference.class, ReferenceMixin.class);
+	 */
+	ObjectMapper mapper = new ObjectMapper();
+	mapper.registerModule(new FacebookModule());
+
+	jp.setCodec(mapper);
+
+	if (jp.hasCurrentToken()) {
+	    TreeNode tNode = jp.readValueAsTree();
+	    TreeNode dataNode = tNode.get("data");
+	    if (dataNode != null) {
+
+		return (List<Comment>) mapper.readValue(dataNode.traverse(), new TypeReference<List<Comment>>() {
+		});
+	    }
 	}
+	return Collections.emptyList();
+    }
 }

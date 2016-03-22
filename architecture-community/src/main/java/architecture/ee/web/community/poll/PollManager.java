@@ -24,103 +24,110 @@ import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.exception.NotFoundException;
 
 public interface PollManager {
-	
-	public abstract LinkedList<Vote> getVoteQueue();
-		
-	public abstract Poll createPoll(int objectType, long objectId, User user, String name) throws UnAuthorizedException;
-	
-	public abstract void updatePoll(Poll poll) throws NotFoundException;
-	
-	public abstract Poll getPoll(long pollId) throws UnAuthorizedException, NotFoundException;
-	
-	public abstract int getPollCount();
-	
-	public abstract int getPollCount(int objectType, long objectId);
-	
-	public abstract int getPollCount(User user);
-	
-	public abstract List<Poll> getPolls();
-	
-	public abstract List<Poll> getPolls(int objectType, long objectId);
-	
-	public abstract List<Poll> getPolls(User user);
-	
-	public abstract List<PollOption> getPollOptions(Poll poll) throws NotFoundException;
-	
-	public abstract void setPollOptions(Poll poll, List<PollOption> options);
-	
-	public abstract void deletePollOptions(Poll poll, List<PollOption> options);
-	
-	public int getVoteCount(Poll poll) ;
 
-	public int getVoteCount(Poll poll, long optionId) ;
+    public abstract LinkedList<Vote> getVoteQueue();
 
-	public int getUserVoteCount(Poll poll) ;
+    public abstract Poll createPoll(int objectType, long objectId, User user, String name) throws UnAuthorizedException;
 
-	public int getUserVoteCount(Poll poll, long optionId) ;
+    public abstract void updatePoll(Poll poll) throws NotFoundException;
 
-	public int getAnomymousVoteCount(Poll poll);
+    public abstract Poll getPoll(long pollId) throws UnAuthorizedException, NotFoundException;
 
-	public int getAnomymousVoteCount(Poll poll, long optionId);
-	
-	public List<Vote> getVotes(Poll poll);
-	
-	public List<User> getUserVotes(Poll poll) ;
+    public abstract int getPollCount();
 
-	public List<String> getAnomymousVotes(Poll poll) ;
+    public abstract int getPollCount(int objectType, long objectId);
 
-	public List<User> getUserVotes(Poll poll, long optionId) ;
+    public abstract int getPollCount(User user);
 
-	public List<String> getAnomymousVotes(Poll poll, long optionId);
+    public abstract List<Poll> getPolls();
 
-	public void addUserVote(Poll poll, long optionId, User user, String IPAddress) throws PollException ;
-	
-	public void addUserVote(Poll poll, long optionId, User user, String IPAddress, Date voteDate) throws PollException ;
+    public abstract List<Poll> getPolls(int objectType, long objectId);
 
-	public boolean hasUserVoted(Poll poll, User user);
+    public abstract List<Poll> getPolls(User user);
 
-	public boolean hasAnomyouseVoted(Poll poll, String username) ;
+    public abstract List<PollOption> getPollOptions(Poll poll) throws NotFoundException;
 
-	public void addAnomymousVote(Poll poll, long optionId, String username, String IPAddress) throws PollException ;
+    public abstract void setPollOptions(Poll poll, List<PollOption> options);
 
-	public void addAnomymousVote(Poll poll, long optionId, String username, String IPAddress, Date voteDate) throws PollException ;
+    public abstract void deletePollOptions(Poll poll, List<PollOption> options);
 
-	public List<PollOption> getUserVotes(Poll poll, User user) ;
+    public int getVoteCount(Poll poll);
 
-	public List<PollOption> getAnomymousVotes(Poll poll, String username) ;
-	
-	public PollStats getPollStats(Poll poll, User user);
-	
-	
-	/*
-	public abstract void deletePoll(Poll poll) throws UnAuthorizedException, PollException;
+    public int getVoteCount(Poll poll, long optionId);
 
-	public abstract void deleteUserPolls(User user) throws UnAuthorizedException, PollException;
+    public int getUserVoteCount(Poll poll);
 
+    public int getUserVoteCount(Poll poll, long optionId);
 
+    public int getAnomymousVoteCount(Poll poll);
 
+    public int getAnomymousVoteCount(Poll poll, long optionId);
 
-	public abstract int getPollCount(int objectType, long objectId)throws UnAuthorizedException;
+    public List<Vote> getVotes(Poll poll);
 
-	public abstract List<Poll> getPolls(int objectType, long objectId) throws UnAuthorizedException;
+    public List<User> getUserVotes(Poll poll);
 
-	public abstract List<Poll> getActivePolls();
+    public List<String> getAnomymousVotes(Poll poll);
 
-	public abstract int getActivePollCount();
+    public List<User> getUserVotes(Poll poll, long optionId);
 
-	public abstract List<Poll> getActivePolls(int objectType, long objectId) throws UnAuthorizedException;
+    public List<String> getAnomymousVotes(Poll poll, long optionId);
 
-	public abstract int getActivePollCount(int objectType, long objectId);
+    public void addUserVote(Poll poll, long optionId, User user, String IPAddress) throws PollException;
 
-	public abstract List<Poll> getLivePolls();
+    public void addUserVote(Poll poll, long optionId, User user, String IPAddress, Date voteDate) throws PollException;
 
-	public abstract int getLivePollCount();
+    public boolean hasUserVoted(Poll poll, User user);
 
-	public abstract List<Poll> getLivePolls(int objectType, long objectId) throws UnAuthorizedException;
+    public boolean hasAnomyouseVoted(Poll poll, String username);
 
-	public abstract int getLivePollCount(int objectType, long objectId) throws UnAuthorizedException;
+    public void addAnomymousVote(Poll poll, long optionId, String username, String IPAddress) throws PollException;
 
-	
-*/
-	
+    public void addAnomymousVote(Poll poll, long optionId, String username, String IPAddress, Date voteDate)
+	    throws PollException;
+
+    public List<PollOption> getUserVotes(Poll poll, User user);
+
+    public List<PollOption> getAnomymousVotes(Poll poll, String username);
+
+    public PollStats getPollStats(Poll poll, User user);
+
+    /*
+     * public abstract void deletePoll(Poll poll) throws UnAuthorizedException,
+     * PollException;
+     * 
+     * public abstract void deleteUserPolls(User user) throws
+     * UnAuthorizedException, PollException;
+     * 
+     * 
+     * 
+     * 
+     * public abstract int getPollCount(int objectType, long objectId)throws
+     * UnAuthorizedException;
+     * 
+     * public abstract List<Poll> getPolls(int objectType, long objectId) throws
+     * UnAuthorizedException;
+     * 
+     * public abstract List<Poll> getActivePolls();
+     * 
+     * public abstract int getActivePollCount();
+     * 
+     * public abstract List<Poll> getActivePolls(int objectType, long objectId)
+     * throws UnAuthorizedException;
+     * 
+     * public abstract int getActivePollCount(int objectType, long objectId);
+     * 
+     * public abstract List<Poll> getLivePolls();
+     * 
+     * public abstract int getLivePollCount();
+     * 
+     * public abstract List<Poll> getLivePolls(int objectType, long objectId)
+     * throws UnAuthorizedException;
+     * 
+     * public abstract int getLivePollCount(int objectType, long objectId)
+     * throws UnAuthorizedException;
+     * 
+     * 
+     */
+
 }

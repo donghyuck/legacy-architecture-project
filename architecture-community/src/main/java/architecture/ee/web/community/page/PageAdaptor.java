@@ -23,214 +23,214 @@ import architecture.ee.web.community.tag.TagDelegator;
 import architecture.ee.web.site.page.WebPage;
 
 public class PageAdaptor implements Page {
-	
-	private WebPage page ;
 
-	/**
-	 * @param page
-	 */
-	public PageAdaptor(WebPage page) {
-		this.page = page;
-	}
-	
-	public WebPage getWebPage(){
-		return page;
-	}
+    private WebPage page;
 
-	@Override
-	public int getCachedSize() {
-		return page.getCachedSize();
-	}
+    /**
+     * @param page
+     */
+    public PageAdaptor(WebPage page) {
+	this.page = page;
+    }
 
-	@Override
-	public Integer getObjectType() {
-		return 30;
-	}
+    public WebPage getWebPage() {
+	return page;
+    }
 
-	@Override
-	public void setObjectType(Integer objectTyp) {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public int getCachedSize() {
+	return page.getCachedSize();
+    }
 
-	@Override
-	public Long getObjectId() {
-		return page.getWebSiteId();
-	}
+    @Override
+    public Integer getObjectType() {
+	return 30;
+    }
 
-	@Override
-	public void setObjectId(Long objectId) {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public void setObjectType(Integer objectTyp) {
+	throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public Long getPageId() {
-		return page.getWebPageId();
-	}
+    @Override
+    public Long getObjectId() {
+	return page.getWebSiteId();
+    }
 
-	@Override
-	public void setPageId(Long pageId) {
-		throw new UnsupportedOperationException();		
-	}
+    @Override
+    public void setObjectId(Long objectId) {
+	throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public String getName() {
-		return page.getName();
-	}
+    @Override
+    public Long getPageId() {
+	return page.getWebPageId();
+    }
 
-	@Override
-	public void setName(String name) {
-		throw new UnsupportedOperationException();				
-	}
+    @Override
+    public void setPageId(Long pageId) {
+	throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public Integer getVersionId() {
-		return 0;
-	}
+    @Override
+    public String getName() {
+	return page.getName();
+    }
 
-	@Override
-	public void setVersionId(Integer versionId) {
-		throw new UnsupportedOperationException();				
-	}
+    @Override
+    public void setName(String name) {
+	throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public PageState getPageState() {
-		return page.isEnabled() ? PageState.PUBLISHED : PageState.INCOMPLETE ;
-	}
+    @Override
+    public Integer getVersionId() {
+	return 0;
+    }
 
-	@Override
-	public String getTitle() {
-		return page.getDisplayName();
-	}
+    @Override
+    public void setVersionId(Integer versionId) {
+	throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public void setTitle(String title) {
-		throw new UnsupportedOperationException();						
-	}
+    @Override
+    public PageState getPageState() {
+	return page.isEnabled() ? PageState.PUBLISHED : PageState.INCOMPLETE;
+    }
 
-	@Override
-	public String getSummary() {
-		return page.getDescription();
-	}
+    @Override
+    public String getTitle() {
+	return page.getDisplayName();
+    }
 
-	@Override
-	public void setSummary(String summary) {
-		throw new UnsupportedOperationException();				
-	}
+    @Override
+    public void setTitle(String title) {
+	throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public String getBodyText() {
-		return null;
-	}
+    @Override
+    public String getSummary() {
+	return page.getDescription();
+    }
 
-	@Override
-	public void setBodyText(String body) {
-		throw new UnsupportedOperationException();				
-	}
+    @Override
+    public void setSummary(String summary) {
+	throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public BodyContent getBodyContent() {
-		return null;
-	}
+    @Override
+    public String getBodyText() {
+	return null;
+    }
 
-	@Override
-	public void setBodyContent(BodyContent bodyContent) {
-		throw new UnsupportedOperationException();				
-	}
+    @Override
+    public void setBodyText(String body) {
+	throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public void setPageState(PageState state) {
-		throw new UnsupportedOperationException();				
-	}
+    @Override
+    public BodyContent getBodyContent() {
+	return null;
+    }
 
-	@Override
-	public Date getCreationDate() {
-		return page.getCreationDate();
-	}
+    @Override
+    public void setBodyContent(BodyContent bodyContent) {
+	throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public void setCreationDate(Date creationDate) {
-		throw new UnsupportedOperationException();				
-	}
+    @Override
+    public void setPageState(PageState state) {
+	throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public Date getModifiedDate() {		
-		return page.getModifiedDate();
-	}
+    @Override
+    public Date getCreationDate() {
+	return page.getCreationDate();
+    }
 
-	@Override
-	public void setModifiedDate(Date modifiedDate) {
-		throw new UnsupportedOperationException();				
-	}
+    @Override
+    public void setCreationDate(Date creationDate) {
+	throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public Map<String, String> getProperties() {
-		return page.getProperties();
-	}
+    @Override
+    public Date getModifiedDate() {
+	return page.getModifiedDate();
+    }
 
-	@Override
-	public void setProperties(Map<String, String> properties) {		
-		throw new UnsupportedOperationException();				
-	}
+    @Override
+    public void setModifiedDate(Date modifiedDate) {
+	throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public boolean getBooleanProperty(String name, boolean defaultValue) {
-		return page.getBooleanProperty(name, defaultValue);
-	}
+    @Override
+    public Map<String, String> getProperties() {
+	return page.getProperties();
+    }
 
-	@Override
-	public long getLongProperty(String name, long defaultValue) {
-		return page.getLongProperty(name, defaultValue);
-	}
+    @Override
+    public void setProperties(Map<String, String> properties) {
+	throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public int getIntProperty(String name, int defaultValue) {
-		return page.getIntProperty(name, defaultValue);
-	}
+    @Override
+    public boolean getBooleanProperty(String name, boolean defaultValue) {
+	return page.getBooleanProperty(name, defaultValue);
+    }
 
-	@Override
-	public String getProperty(String name, String defaultValue) {
-		return page.getProperty(name, defaultValue);
-	}
+    @Override
+    public long getLongProperty(String name, long defaultValue) {
+	return page.getLongProperty(name, defaultValue);
+    }
 
-	@Override
-	public User getUser() {
-		return null;
-	}
+    @Override
+    public int getIntProperty(String name, int defaultValue) {
+	return page.getIntProperty(name, defaultValue);
+    }
 
-	@Override
-	public void setUser(User user) {
-		throw new UnsupportedOperationException();						
-	}
+    @Override
+    public String getProperty(String name, String defaultValue) {
+	return page.getProperty(name, defaultValue);
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("PageAdaptor [");
-		if (page != null)
-			builder.append("page=").append(page).append(", ");
-		if (super.toString() != null)
-			builder.append("toString()=").append(super.toString());
-		builder.append("]");
-		return builder.toString();
-	}
+    @Override
+    public User getUser() {
+	return null;
+    }
 
-	@Override
-	public Integer getViewCount() {
-		return 0;				
-	}
+    @Override
+    public void setUser(User user) {
+	throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public Integer getCommentCount() {
-		return 0;
-	}
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("PageAdaptor [");
+	if (page != null)
+	    builder.append("page=").append(page).append(", ");
+	if (super.toString() != null)
+	    builder.append("toString()=").append(super.toString());
+	builder.append("]");
+	return builder.toString();
+    }
 
-	@Override
-	public TagDelegator getTagDelegator() {
-		return null;
-	}
+    @Override
+    public Integer getViewCount() {
+	return 0;
+    }
 
-	@Override
-	public String getTagsString() {
-		return null;
-	}
+    @Override
+    public Integer getCommentCount() {
+	return 0;
+    }
+
+    @Override
+    public TagDelegator getTagDelegator() {
+	return null;
+    }
+
+    @Override
+    public String getTagsString() {
+	return null;
+    }
 }

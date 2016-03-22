@@ -18,23 +18,22 @@ package architecture.ee.web.community.social.facebook;
 import java.util.Date;
 import java.util.List;
 
-
 public class PhotoPost extends Post {
 
-	private String photoId;
-	
-	private List<Tag> tags;
-	
-	public PhotoPost(String id, Reference from, Date createdTime, Date updatedTime) {
-		super(id, from, createdTime, updatedTime);
-	}
-	
-	public String getPhotoId() {
-		return photoId;
-	}
-	
-	public List<Tag> getTags() {
-		return tags;
-	}
+    private String photoId;
+
+    private List<Tag> tags;
+
+    public PhotoPost(String id, Reference from, Date createdTime, Date updatedTime) {
+	super(id, from, createdTime, updatedTime);
+    }
+
+    public String getPhotoId() {
+	return photoId;
+    }
+
+    public List<Tag> getTags() {
+	return tags;
+    }
 
 }

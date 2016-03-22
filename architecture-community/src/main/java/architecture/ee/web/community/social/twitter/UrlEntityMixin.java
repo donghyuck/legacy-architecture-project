@@ -19,10 +19,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 class UrlEntityMixin {
 
-	public UrlEntityMixin(
-			@JsonProperty("display_url") String display, 
-			@JsonProperty("expanded_url")String expanded, 
-			@JsonProperty("url") String url, 
-			@JsonProperty("indices") int[] indices) {}
-	
+    public UrlEntityMixin(@JsonProperty("display_url") String display, @JsonProperty("expanded_url") String expanded,
+	    @JsonProperty("url") String url, @JsonProperty("indices") int[] indices) {
+    }
+
 }

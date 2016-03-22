@@ -36,155 +36,153 @@ import net.sf.ehcache.Cache;
 
 public class DefaultSocialNetworktManager implements SocialNetworkManager {
 
-	private SocialNetworkDao socialNetworkDao;
-	private Cache socialNetworkCache;
-	
-	public DefaultSocialNetworktManager() {
+    private SocialNetworkDao socialNetworkDao;
+    private Cache socialNetworkCache;
+
+    public DefaultSocialNetworktManager() {
+    }
+
+    /**
+     * @return socialNetworkDao
+     */
+    public SocialNetworkDao getSocialNetworkDao() {
+	return socialNetworkDao;
+    }
+
+    /**
+     * @param socialNetworkDao
+     *            설정할 socialNetworkDao
+     */
+    public void setSocialNetworkDao(SocialNetworkDao socialNetworkDao) {
+	this.socialNetworkDao = socialNetworkDao;
+    }
+
+    /**
+     * @return socialNetworkCache
+     */
+    public Cache getSocialNetworkCache() {
+	return socialNetworkCache;
+    }
+
+    /**
+     * @param socialNetworkCache
+     *            설정할 socialNetworkCache
+     */
+    public void setSocialNetworkCache(Cache socialNetworkCache) {
+	this.socialNetworkCache = socialNetworkCache;
+    }
+
+    public SocialNetwork createSocialNetwork(Company company, Media media) {
+	SocailNetworkImpl impl = new SocailNetworkImpl();
+	Date now = new Date();
+	impl.setCreationDate(now);
+	impl.setModifiedDate(now);
+	impl.setObjectType(company.getModelObjectType());
+	impl.setObjectId(company.getCompanyId());
+	impl.setServiceProviderName(media.name().toLowerCase());
+	impl.setSocialAccountId(-1L);
+	impl.setConnected(false);
+	impl.setSocialServiceProvider(createSocialServiceProvider(media));
+	return impl;
+    }
+
+    public SocialNetwork createSocialNetwork(User user, Media media) {
+	SocailNetworkImpl impl = new SocailNetworkImpl();
+	Date now = new Date();
+	impl.setCreationDate(now);
+	impl.setModifiedDate(now);
+	impl.setObjectType(user.getModelObjectType());
+	impl.setObjectId(user.getUserId());
+	impl.setServiceProviderName(media.name().toLowerCase());
+	impl.setConnected(false);
+	impl.setSocialAccountId(-1L);
+	impl.setSocialServiceProvider(createSocialServiceProvider(media));
+
+	return impl;
+    }
+
+    private SocialServiceProvider createSocialServiceProvider(SocialNetwork.Media media) {
+	SocialServiceProvider provider = ServiceProviderFactory.getServiceProvider(media);
+	return provider;
+    }
+
+    public SocialNetwork getSocialNetworkById(long socialAccountId) throws NotFoundException {
+	SocialNetwork account = socialNetworkDao.getSocialAccountById(socialAccountId);
+	return account;
+    }
+
+    public List<SocialNetwork> getSocialNetworks(Company company) {
+	List<Long> ids = socialNetworkDao.getSocialAccountIds(ModelTypeFactory.getTypeIdFromCode("COMPANY"),
+		company.getCompanyId());
+	List<SocialNetwork> accounts = new ArrayList<SocialNetwork>(ids.size());
+	for (Long id : ids) {
+	    try {
+		accounts.add(getSocialNetworkById(id));
+	    } catch (NotFoundException e) {
+	    }
 	}
+	return accounts;
+    }
 
-
-	/**
-	 * @return socialNetworkDao
-	 */
-	public SocialNetworkDao getSocialNetworkDao() {
-		return socialNetworkDao;
+    public List<SocialNetwork> getSocialNetworks(User user) {
+	List<Long> ids = socialNetworkDao.getSocialAccountIds(ModelTypeFactory.getTypeIdFromCode("USER"),
+		user.getUserId());
+	List<SocialNetwork> accounts = new ArrayList<SocialNetwork>(ids.size());
+	for (Long id : ids) {
+	    try {
+		accounts.add(getSocialNetworkById(id));
+	    } catch (NotFoundException e) {
+	    }
 	}
+	return accounts;
+    }
 
-
-	/**
-	 * @param socialNetworkDao 설정할 socialNetworkDao
-	 */
-	public void setSocialNetworkDao(SocialNetworkDao socialNetworkDao) {
-		this.socialNetworkDao = socialNetworkDao;
+    public List<SocialNetwork> getSocialNetworks(int objectType, long objectId) {
+	List<Long> ids = socialNetworkDao.getSocialAccountIds(objectType, objectId);
+	List<SocialNetwork> accounts = new ArrayList<SocialNetwork>(ids.size());
+	for (Long id : ids) {
+	    try {
+		accounts.add(getSocialNetworkById(id));
+	    } catch (NotFoundException e) {
+	    }
 	}
+	return accounts;
+    }
 
-
-	/**
-	 * @return socialNetworkCache
-	 */
-	public Cache getSocialNetworkCache() {
-		return socialNetworkCache;
+    public List<SocialNetwork> getSocialNetworks(int objectType, String username) {
+	List<Long> ids = socialNetworkDao.getSocialAccountIds(objectType, username);
+	List<SocialNetwork> accounts = new ArrayList<SocialNetwork>(ids.size());
+	for (Long id : ids) {
+	    try {
+		accounts.add(getSocialNetworkById(id));
+	    } catch (NotFoundException e) {
+	    }
 	}
+	return accounts;
+    }
 
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public void saveSocialNetwork(SocialNetwork socialNetwork) {
 
-	/**
-	 * @param socialNetworkCache 설정할 socialNetworkCache
-	 */
-	public void setSocialNetworkCache(Cache socialNetworkCache) {
-		this.socialNetworkCache = socialNetworkCache;
+	if (socialNetwork.getSocialAccountId() <= 0) {
+	    socialNetworkDao.createSocialAccount(socialNetwork);
+	} else {
+	    socialNetworkDao.updateSocialAccount(socialNetwork);
 	}
+    }
 
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public void removeSocialNetwork(SocialNetwork socialNetwork) {
+	socialNetworkDao.deleteSocialAccount(socialNetwork);
+    }
 
-	public SocialNetwork createSocialNetwork(Company company, Media media) {
-		SocailNetworkImpl impl = new SocailNetworkImpl(); 
-		Date now = new Date();		
-		impl.setCreationDate(now);
-		impl.setModifiedDate(now);
-		impl.setObjectType(company.getModelObjectType());
-		impl.setObjectId(company.getCompanyId());
-		impl.setServiceProviderName(media.name().toLowerCase());
-		impl.setSocialAccountId(-1L);		
-		impl.setConnected(false);
-		impl.setSocialServiceProvider(createSocialServiceProvider(media));	
-		return impl;
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public void updateSocialNetworkProperties(SocialNetwork socialNetwork) {
+	if (socialNetwork.getSocialAccountId() > 0) {
+	    Date now = new Date();
+	    socialNetwork.setModifiedDate(now);
+	    getSocialNetworkDao().updateSocialAccount(socialNetwork);
 	}
+    }
 
-	public SocialNetwork createSocialNetwork(User user, Media media) {
-		SocailNetworkImpl impl = new SocailNetworkImpl(); 
-		Date now = new Date();		
-		impl.setCreationDate(now);
-		impl.setModifiedDate(now);
-		impl.setObjectType(user.getModelObjectType());
-		impl.setObjectId(user.getUserId());
-		impl.setServiceProviderName(media.name().toLowerCase());
-		impl.setConnected(false);
-		impl.setSocialAccountId(-1L);		
-		impl.setSocialServiceProvider(createSocialServiceProvider(media));
-		
-		return impl;
-	}
-
-	private SocialServiceProvider createSocialServiceProvider(SocialNetwork.Media media){		
-		SocialServiceProvider provider = ServiceProviderFactory.getServiceProvider(media);
-		return provider;
-	} 
-	
-	public SocialNetwork getSocialNetworkById(long socialAccountId)
-			throws NotFoundException {
-		SocialNetwork account = socialNetworkDao.getSocialAccountById(socialAccountId);
-		return account;
-	}
-
-	public List<SocialNetwork> getSocialNetworks(Company company) {
-		List<Long> ids = socialNetworkDao.getSocialAccountIds(ModelTypeFactory.getTypeIdFromCode("COMPANY"), company.getCompanyId());
-		List<SocialNetwork> accounts = new ArrayList<SocialNetwork>(ids.size());
-		for(Long id : ids){
-			try {
-				accounts.add( getSocialNetworkById(id) );
-			} catch (NotFoundException e) {
-			}
-		}
-		return accounts;
-	}
-
-	public List<SocialNetwork> getSocialNetworks(User user) {
-		List<Long> ids = socialNetworkDao.getSocialAccountIds(ModelTypeFactory.getTypeIdFromCode("USER"), user.getUserId());
-		List<SocialNetwork> accounts = new ArrayList<SocialNetwork>(ids.size());
-		for(Long id : ids){
-			try {
-				accounts.add( getSocialNetworkById(id) );
-			} catch (NotFoundException e) {
-			}
-		}
-		return accounts;
-	}
-
-	public List<SocialNetwork> getSocialNetworks(int objectType, long objectId) {
-		List<Long> ids = socialNetworkDao.getSocialAccountIds(objectType, objectId);
-		List<SocialNetwork> accounts = new ArrayList<SocialNetwork>(ids.size());
-		for(Long id : ids){
-			try {
-				accounts.add( getSocialNetworkById(id) );
-			} catch (NotFoundException e) {
-			}
-		}
-		return accounts;
-	}
-	
-	public List<SocialNetwork> getSocialNetworks(int objectType, String username) {
-		List<Long> ids = socialNetworkDao.getSocialAccountIds(objectType, username);
-		List<SocialNetwork> accounts = new ArrayList<SocialNetwork>(ids.size());
-		for(Long id : ids){
-			try {
-				accounts.add( getSocialNetworkById(id) );
-			} catch (NotFoundException e) {
-			}
-		}
-		return accounts;
-	}
-	
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
-	public void saveSocialNetwork(SocialNetwork socialNetwork) {
-		
-		if(socialNetwork.getSocialAccountId() <= 0 ){
-			socialNetworkDao.createSocialAccount(socialNetwork);
-		}else{
-			socialNetworkDao.updateSocialAccount(socialNetwork);			
-		}		
-	}
-
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
-	public void removeSocialNetwork(SocialNetwork socialNetwork) {
-		socialNetworkDao.deleteSocialAccount(socialNetwork);
-	}
-
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
-	public void updateSocialNetworkProperties(SocialNetwork socialNetwork) {
-		if( socialNetwork.getSocialAccountId() > 0 ){
-			Date now = new Date();
-			socialNetwork.setModifiedDate(now);
-			getSocialNetworkDao().updateSocialAccount(socialNetwork);
-		}
-	}
-	
 }

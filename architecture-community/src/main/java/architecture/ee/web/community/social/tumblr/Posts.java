@@ -27,35 +27,31 @@ public class Posts implements Serializable {
     private List<Post> posts;
 
     public BlogInfo getBlogInfo() {
-        return blogInfo;
+	return blogInfo;
     }
 
     public void setBlogInfo(BlogInfo blogInfo) {
-        this.blogInfo = blogInfo;
+	this.blogInfo = blogInfo;
     }
 
     public int getTotalPosts() {
-        return totalPosts;
+	return totalPosts;
     }
 
     public void setTotalPosts(int totalPosts) {
-        this.totalPosts = totalPosts;
+	this.totalPosts = totalPosts;
     }
 
     public List<Post> getPosts() {
-        return posts;
+	return posts;
     }
 
     public void setPosts(List<Post> posts) {
-        this.posts = posts;
+	this.posts = posts;
     }
 
     @Override
     public String toString() {
-        return "Posts{" +
-                "blogInfo=" + blogInfo +
-                ", totalPosts=" + totalPosts +
-                ", posts=" + posts +
-                '}';
+	return "Posts{" + "blogInfo=" + blogInfo + ", totalPosts=" + totalPosts + ", posts=" + posts + '}';
     }
 }

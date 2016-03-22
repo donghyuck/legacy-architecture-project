@@ -21,35 +21,34 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class EducationEntry implements Serializable {
 
-	private final Reference school;
+    private final Reference school;
 
-	private final Reference year;
+    private final Reference year;
 
-	private final List<Reference> concentration;
-	
-	private final String type;
+    private final List<Reference> concentration;
 
-	public EducationEntry(Reference school, Reference year, List<Reference> concentration, String type) {
-		this.school = school;
-		this.year = year;
-		this.concentration = concentration;
-		this.type = type;
-	}
+    private final String type;
 
-	public Reference getSchool() {
-		return school;
-	}
+    public EducationEntry(Reference school, Reference year, List<Reference> concentration, String type) {
+	this.school = school;
+	this.year = year;
+	this.concentration = concentration;
+	this.type = type;
+    }
 
-	public Reference getYear() {
-		return year;
-	}
+    public Reference getSchool() {
+	return school;
+    }
 
-	public List<Reference> getConcentration() {
-		return concentration;
-	}
+    public Reference getYear() {
+	return year;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public List<Reference> getConcentration() {
+	return concentration;
+    }
+
+    public String getType() {
+	return type;
+    }
 }
-

@@ -17,12 +17,12 @@ package architecture.ee.web.community.social.support;
 
 @SuppressWarnings("serial")
 public class URIBuilderException extends RuntimeException {
-	
-	public URIBuilderException(String message) {
-		super(message);
-	}
-	
-	public URIBuilderException(String message, Throwable cause) {
-		super(message, cause);
-	}
+
+    public URIBuilderException(String message) {
+	super(message);
+    }
+
+    public URIBuilderException(String message, Throwable cause) {
+	super(message, cause);
+    }
 }

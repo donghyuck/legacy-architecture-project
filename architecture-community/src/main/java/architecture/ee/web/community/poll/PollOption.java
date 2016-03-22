@@ -18,105 +18,114 @@ package architecture.ee.web.community.poll;
 import java.io.Serializable;
 
 public class PollOption implements Serializable {
-	
-	private long optionId;
-	private String optionText;
-	private int optionIndex;
-	private long pollId;
-	private int voteCount;
-	
-	public PollOption() {
-		optionId = -1L;
-		optionIndex = 1;
-		pollId = -1L;
-		voteCount = 0;
-	}
 
-	/**
-	 * @param pollId
-	 * @param optionId
-	 * @param optionText
-	 * @param optionIndex
-	 */
-	public PollOption(long optionId, long pollId, String optionText, int optionIndex) {
-		this.pollId = pollId;
-		this.optionId = optionId;
-		this.optionText = optionText;
-		this.optionIndex = optionIndex;
-		this.voteCount = 0;
-	}
+    private long optionId;
+    private String optionText;
+    private int optionIndex;
+    private long pollId;
+    private int voteCount;
 
-	public PollOption(long pollId, String optionText, int optionIndex) {
-		this.pollId = pollId;
-		this.optionId = -1L;
-		this.optionText = optionText;
-		this.optionIndex = optionIndex;
-		this.voteCount = 0;
-	}
-	
-	public int getVoteCount() {
-		return voteCount;
-	}
+    public PollOption() {
+	optionId = -1L;
+	optionIndex = 1;
+	pollId = -1L;
+	voteCount = 0;
+    }
 
-	public void setVoteCount(int voteCount) {
-		this.voteCount = voteCount;
-	}
+    /**
+     * @param pollId
+     * @param optionId
+     * @param optionText
+     * @param optionIndex
+     */
+    public PollOption(long optionId, long pollId, String optionText, int optionIndex) {
+	this.pollId = pollId;
+	this.optionId = optionId;
+	this.optionText = optionText;
+	this.optionIndex = optionIndex;
+	this.voteCount = 0;
+    }
 
-	/**
-	 * @return optionId
-	 */
-	public long getOptionId() {
-		return optionId;
-	}
-	/**
-	 * @param optionId 설정할 optionId
-	 */
-	public void setOptionId(long optionId) {
-		this.optionId = optionId;
-	}
-	/**
-	 * @return optionText
-	 */
-	public String getOptionText() {
-		return optionText;
-	}
-	/**
-	 * @param optionText 설정할 optionText
-	 */
-	public void setOptionText(String optionText) {
-		this.optionText = optionText;
-	}
-	/**
-	 * @return optionIndex
-	 */
-	public int getOptionIndex() {
-		return optionIndex;
-	}
-	/**
-	 * @param optionIndex 설정할 optionIndex
-	 */
-	public void setOptionIndex(int optionIndex) {
-		this.optionIndex = optionIndex;
-	}
-	/**
-	 * @return pollId
-	 */
-	public long getPollId() {
-		return pollId;
-	}
-	/**
-	 * @param pollId 설정할 pollId
-	 */
-	public void setPollId(long pollId) {
-		this.pollId = pollId;
-	}
+    public PollOption(long pollId, String optionText, int optionIndex) {
+	this.pollId = pollId;
+	this.optionId = -1L;
+	this.optionText = optionText;
+	this.optionIndex = optionIndex;
+	this.voteCount = 0;
+    }
 
-	@Override
-	public String toString() {
-		return "PollOption [optionId=" + optionId + ", optionText=" + optionText + ", optionIndex=" + optionIndex
-				+ ", pollId=" + pollId + "]";
-	}
-	
-	
-	
+    public int getVoteCount() {
+	return voteCount;
+    }
+
+    public void setVoteCount(int voteCount) {
+	this.voteCount = voteCount;
+    }
+
+    /**
+     * @return optionId
+     */
+    public long getOptionId() {
+	return optionId;
+    }
+
+    /**
+     * @param optionId
+     *            설정할 optionId
+     */
+    public void setOptionId(long optionId) {
+	this.optionId = optionId;
+    }
+
+    /**
+     * @return optionText
+     */
+    public String getOptionText() {
+	return optionText;
+    }
+
+    /**
+     * @param optionText
+     *            설정할 optionText
+     */
+    public void setOptionText(String optionText) {
+	this.optionText = optionText;
+    }
+
+    /**
+     * @return optionIndex
+     */
+    public int getOptionIndex() {
+	return optionIndex;
+    }
+
+    /**
+     * @param optionIndex
+     *            설정할 optionIndex
+     */
+    public void setOptionIndex(int optionIndex) {
+	this.optionIndex = optionIndex;
+    }
+
+    /**
+     * @return pollId
+     */
+    public long getPollId() {
+	return pollId;
+    }
+
+    /**
+     * @param pollId
+     *            설정할 pollId
+     */
+    public void setPollId(long pollId) {
+	this.pollId = pollId;
+    }
+
+    @Override
+    public String toString() {
+	return "PollOption [optionId=" + optionId + ", optionText=" + optionText + ", optionIndex=" + optionIndex
+		+ ", pollId=" + pollId + "]";
+    }
+
 }

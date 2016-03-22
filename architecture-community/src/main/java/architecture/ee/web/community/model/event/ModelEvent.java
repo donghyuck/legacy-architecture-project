@@ -17,8 +17,8 @@ package architecture.ee.web.community.model.event;
 
 public class ModelEvent {
 
-	public ModelEvent() {
-		
-	}
+    public ModelEvent() {
+
+    }
 
 }

@@ -18,87 +18,90 @@ package architecture.ee.web.community.social.facebook;
 import java.util.Date;
 import java.util.List;
 
-
 public class Video {
-	private String id;
-	
-	private Reference from;
-	
-	private List<Tag> tags;
-	
-	private String name;
-	
-	private String description;
-	
-	private String picture;
-	
-	private String embedHtml;
-	
-	private String icon;
-	
-	private String source;
-	
-	private Date createdTime;
-	
-	private Date updatedTime;
-	
-	private Video(String id, Reference from, String picture, String embedHtml, String icon, String source, Date createdTime, Date updatedTime) {
-		this.id = id;
-		this.from = from;
-		this.picture = picture;
-		this.embedHtml = embedHtml;
-		this.icon = icon;
-		this.source = source;
-		this.createdTime = createdTime;
-		this.updatedTime = updatedTime;
-	}
-	
-	public String getId() {
-		return id;
-	}
+    private String id;
 
-	public Reference getFrom() {
-		return from;
-	}
-	
-	public List<Tag> getTags() {
-		return tags;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public String getDescription() {
-		return description;
-	}
-	
-	/**
-	 * The video's picture.
-	 * @deprecated This method will be replaced in Spring 1.1.0 with a new version that returns an object with more details about the picture.
-	 */
-	@Deprecated
-	public String getPicture() {
-		return picture;
-	}
-	
-	public String getEmbedHtml() {
-		return embedHtml;
-	}
-	
-	public String getIcon() {
-		return icon;
-	}
-	
-	public String getSource() {
-		return source;
-	}
-	
-	public Date getCreatedTime() {
-		return createdTime;
-	}
-	
-	public Date getUpdatedTime() {
-		return updatedTime;
-	}
+    private Reference from;
+
+    private List<Tag> tags;
+
+    private String name;
+
+    private String description;
+
+    private String picture;
+
+    private String embedHtml;
+
+    private String icon;
+
+    private String source;
+
+    private Date createdTime;
+
+    private Date updatedTime;
+
+    private Video(String id, Reference from, String picture, String embedHtml, String icon, String source,
+	    Date createdTime, Date updatedTime) {
+	this.id = id;
+	this.from = from;
+	this.picture = picture;
+	this.embedHtml = embedHtml;
+	this.icon = icon;
+	this.source = source;
+	this.createdTime = createdTime;
+	this.updatedTime = updatedTime;
+    }
+
+    public String getId() {
+	return id;
+    }
+
+    public Reference getFrom() {
+	return from;
+    }
+
+    public List<Tag> getTags() {
+	return tags;
+    }
+
+    public String getName() {
+	return name;
+    }
+
+    public String getDescription() {
+	return description;
+    }
+
+    /**
+     * The video's picture.
+     * 
+     * @deprecated This method will be replaced in Spring 1.1.0 with a new
+     *             version that returns an object with more details about the
+     *             picture.
+     */
+    @Deprecated
+    public String getPicture() {
+	return picture;
+    }
+
+    public String getEmbedHtml() {
+	return embedHtml;
+    }
+
+    public String getIcon() {
+	return icon;
+    }
+
+    public String getSource() {
+	return source;
+    }
+
+    public Date getCreatedTime() {
+	return createdTime;
+    }
+
+    public Date getUpdatedTime() {
+	return updatedTime;
+    }
 }

@@ -19,20 +19,20 @@ import architecture.common.cache.Cacheable;
 
 public interface Media extends Cacheable {
 
-	public String getUrl();
-	
-	public String getCredit();
-	
-	public String getCaption();
-	
-	public String getThumbnailUrl();
-	
-	public void setUrl(String url);
-	
-	public void setCredit(String credit);
-	
-	public void setCaption(String caption);
-	
-	public void setThumbnailUrl(String thumbnailUrl);
-	
+    public String getUrl();
+
+    public String getCredit();
+
+    public String getCaption();
+
+    public String getThumbnailUrl();
+
+    public void setUrl(String url);
+
+    public void setCredit(String credit);
+
+    public void setCaption(String caption);
+
+    public void setThumbnailUrl(String thumbnailUrl);
+
 }

@@ -21,23 +21,20 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class CommentMixin {
 
-	@JsonCreator
-	CommentMixin(
-			@JsonProperty("id") String id, 
-			@JsonProperty("from") Reference from, 
-			@JsonProperty("message") String message, 
-			@JsonProperty("created_time") Date createdTime) {}
-	
-	// Support pre-Sept 2012 "likes" property
-	@JsonProperty("likes")
-	int _likes;
-	
-	// Support post-Sept 2012 "like_count" property
-	@JsonProperty("like_count")
-	Integer _likeCount;
-	
+    @JsonCreator
+    CommentMixin(@JsonProperty("id") String id, @JsonProperty("from") Reference from,
+	    @JsonProperty("message") String message, @JsonProperty("created_time") Date createdTime) {
+    }
+
+    // Support pre-Sept 2012 "likes" property
+    @JsonProperty("likes")
+    int _likes;
+
+    // Support post-Sept 2012 "like_count" property
+    @JsonProperty("like_count")
+    Integer _likeCount;
+
 }

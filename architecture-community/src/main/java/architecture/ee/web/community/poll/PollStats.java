@@ -4,59 +4,56 @@ import java.io.Serializable;
 import java.util.List;
 
 public class PollStats implements Serializable {
-	
-	private Poll poll ;
-	private int voteCount ;
-	private List<PollOptionStats> pollOptionStats ;
-	private boolean userVoted ;
-	private List<PollOption> userVotes ;
-	
-	public PollStats(Poll poll) {
-		super();
-		this.poll = poll;
-	}
 
-	public Poll getPoll() {
-		return poll;
-	}
-	
+    private Poll poll;
+    private int voteCount;
+    private List<PollOptionStats> pollOptionStats;
+    private boolean userVoted;
+    private List<PollOption> userVotes;
 
-	public boolean isUserVoted() {
-		return userVoted;
-	}
+    public PollStats(Poll poll) {
+	super();
+	this.poll = poll;
+    }
 
-	public void setUserVoted(boolean userVoted) {
-		this.userVoted = userVoted;
-	}
+    public Poll getPoll() {
+	return poll;
+    }
 
-	public List<PollOption> getUserVotes() {
-		return userVotes;
-	}
+    public boolean isUserVoted() {
+	return userVoted;
+    }
 
-	public void setUserVotes(List<PollOption> userVotes) {
-		this.userVotes = userVotes;
-	}
+    public void setUserVoted(boolean userVoted) {
+	this.userVoted = userVoted;
+    }
 
-	public void setPoll(Poll poll) {
-		this.poll = poll;
-	}
+    public List<PollOption> getUserVotes() {
+	return userVotes;
+    }
 
-	public int getVoteCount() {
-		return voteCount;
-	}
+    public void setUserVotes(List<PollOption> userVotes) {
+	this.userVotes = userVotes;
+    }
 
-	public void setVoteCount(int voteCount) {
-		this.voteCount = voteCount;
-	}
+    public void setPoll(Poll poll) {
+	this.poll = poll;
+    }
 
-	public List<PollOptionStats> getPollOptionStats() {
-		return pollOptionStats;
-	}
+    public int getVoteCount() {
+	return voteCount;
+    }
 
-	public void setPollOptionStats(List<PollOptionStats> pollOptionStats) {
-		this.pollOptionStats = pollOptionStats;
-	}
-	
-	
-	
+    public void setVoteCount(int voteCount) {
+	this.voteCount = voteCount;
+    }
+
+    public List<PollOptionStats> getPollOptionStats() {
+	return pollOptionStats;
+    }
+
+    public void setPollOptionStats(List<PollOptionStats> pollOptionStats) {
+	this.pollOptionStats = pollOptionStats;
+    }
+
 }

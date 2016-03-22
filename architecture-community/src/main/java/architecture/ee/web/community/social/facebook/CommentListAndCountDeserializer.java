@@ -27,24 +27,24 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 class CommentListAndCountDeserializer extends JsonDeserializer<ListAndCount<Comment>> {
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public ListAndCount<Comment> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(new FacebookModule());
-		jp.setCodec(mapper);
-		if(jp.hasCurrentToken()) {
-			JsonNode commentsNode = jp.readValueAs(JsonNode.class);
-			JsonNode dataNode = commentsNode.get("data");
-			List<Comment> commentsList = dataNode != null ? 
-					(List<Comment>) mapper.readValue(dataNode.traverse(), new TypeReference<List<Comment>>() {}) :
-					Collections.<Comment>emptyList();
-			return new ListAndCount<Comment>(commentsList, commentsList.size());
-		}
-		
-		return null;
+    @SuppressWarnings("unchecked")
+    @Override
+    public ListAndCount<Comment> deserialize(JsonParser jp, DeserializationContext ctxt)
+	    throws IOException, JsonProcessingException {
+	ObjectMapper mapper = new ObjectMapper();
+	mapper.registerModule(new FacebookModule());
+	jp.setCodec(mapper);
+	if (jp.hasCurrentToken()) {
+	    JsonNode commentsNode = jp.readValueAs(JsonNode.class);
+	    JsonNode dataNode = commentsNode.get("data");
+	    List<Comment> commentsList = dataNode != null
+		    ? (List<Comment>) mapper.readValue(dataNode.traverse(), new TypeReference<List<Comment>>() {
+		    }) : Collections.<Comment> emptyList();
+	    return new ListAndCount<Comment>(commentsList, commentsList.size());
 	}
+
+	return null;
+    }
 }

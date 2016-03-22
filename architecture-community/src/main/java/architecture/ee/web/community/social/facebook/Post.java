@@ -19,125 +19,128 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-
 public class Post {
-	
-	private final String id;
 
-	private final Reference from;
+    private final String id;
 
-	private final Date createdTime;
+    private final Reference from;
 
-	private final Date updatedTime;
+    private final Date createdTime;
 
-	private List<Reference> to;
-	
-	private String message;
-	
-	private String picture;
-	
-	private String link;
-		
-	private String name;
-	
-	private String caption;
-	
-	private String description;
-	
-	private String icon;
-	
-	private Reference application;
-	
-	private PostType type;
-	
-	private int likeCount;
+    private final Date updatedTime;
 
-	private List<Comment> comments;
+    private List<Reference> to;
 
-	public Post(String id, Reference from, Date createdTime, Date updatedTime) {
-		this.id = id;
-		this.from = from;
-		this.createdTime = createdTime;
-		this.updatedTime = updatedTime;
+    private String message;
+
+    private String picture;
+
+    private String link;
+
+    private String name;
+
+    private String caption;
+
+    private String description;
+
+    private String icon;
+
+    private Reference application;
+
+    private PostType type;
+
+    private int likeCount;
+
+    private List<Comment> comments;
+
+    public Post(String id, Reference from, Date createdTime, Date updatedTime) {
+	this.id = id;
+	this.from = from;
+	this.createdTime = createdTime;
+	this.updatedTime = updatedTime;
+    }
+
+    public String getId() {
+	return id;
+    }
+
+    public Reference getFrom() {
+	return from;
+    }
+
+    public List<Reference> getTo() {
+	return to;
+    }
+
+    public String getCaption() {
+	return caption;
+    }
+
+    public String getMessage() {
+	return message;
+    }
+
+    /**
+     * The page's picture.
+     * 
+     * @deprecated This method will be replaced in Spring 1.1.0 with a new
+     *             version that returns an object with more details about the
+     *             picture.
+     */
+    @Deprecated
+    public String getPicture() {
+	return picture;
+    }
+
+    public String getLink() {
+	return link;
+    }
+
+    public String getName() {
+	return name;
+    }
+
+    public String getDescription() {
+	return description;
+    }
+
+    public String getIcon() {
+	return icon;
+    }
+
+    public Date getCreatedTime() {
+	return createdTime;
+    }
+
+    public Date getUpdatedTime() {
+	return updatedTime;
+    }
+
+    public Reference getApplication() {
+	return application;
+    }
+
+    public PostType getType() {
+	return type;
+    }
+
+    public int getLikeCount() {
+	return likeCount;
+    }
+
+    /**
+     * The most recent comments for the post.
+     */
+    public List<Comment> getComments() {
+	if (comments != null) {
+	    return comments;
+	} else {
+	    return Collections.emptyList();
 	}
+    }
 
-	public String getId() {
-		return id;
-	}
+    public static enum PostType {
+	POST, CHECKIN, LINK, NOTE, PHOTO, STATUS, VIDEO, SWF, MUSIC
+    }
 
-	public Reference getFrom() {
-		return from;
-	}
-
-	public List<Reference> getTo() {
-		return to;
-	}
-
-	public String getCaption() {
-		return caption;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	/**
-	 * The page's picture.
-	 * @deprecated This method will be replaced in Spring 1.1.0 with a new version that returns an object with more details about the picture.
-	 */
-	@Deprecated
-	public String getPicture() {
-		return picture;
-	}
-
-	public String getLink() {
-		return link;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public String getIcon() {
-		return icon;
-	}
-
-	public Date getCreatedTime() {
-		return createdTime;
-	}
-
-	public Date getUpdatedTime() {
-		return updatedTime;
-	}
-
-	public Reference getApplication() {
-		return application;
-	}
-
-	public PostType getType() {
-		return type;
-	}
-	
-	public int getLikeCount() {
-		return likeCount;
-	}
-
-	/**
-	 * The most recent comments for the post.
-	 */
-	public List<Comment> getComments() {
-		if (comments != null) {
-			return comments;
-		} else {
-			return Collections.emptyList();
-		}
-	}
-
-	public static enum PostType { POST, CHECKIN, LINK, NOTE, PHOTO, STATUS, VIDEO, SWF, MUSIC }
-	
 }
-

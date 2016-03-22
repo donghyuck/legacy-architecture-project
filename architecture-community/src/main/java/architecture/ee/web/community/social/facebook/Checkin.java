@@ -20,68 +20,67 @@ import java.util.List;
 
 import com.opensymphony.module.sitemesh.Page;
 
-
 public class Checkin {
-	private String id;
+    private String id;
 
-	private Page place;
+    private Page place;
 
-	private Reference from;
+    private Reference from;
 
-	private Reference application; 
+    private Reference application;
 
-	private Date createdTime;
+    private Date createdTime;
 
-	private String message;
+    private String message;
 
-	private List<Comment> comments;
+    private List<Comment> comments;
 
-	private List<Reference> likes;
+    private List<Reference> likes;
 
-	private List<Reference> tags;
+    private List<Reference> tags;
 
-	private Checkin(String id, Page place, Reference from, Reference application, Date createdTime) {
-		this.id = id;
-		this.place = place;
-		this.from = from;
-		this.application = application;
-		this.createdTime = createdTime;
-	}
+    private Checkin(String id, Page place, Reference from, Reference application, Date createdTime) {
+	this.id = id;
+	this.place = place;
+	this.from = from;
+	this.application = application;
+	this.createdTime = createdTime;
+    }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+	return id;
+    }
 
-	public Page getPlace() {
-		return place;
-	}
+    public Page getPlace() {
+	return place;
+    }
 
-	public Reference getFrom() {
-		return from;
-	}
+    public Reference getFrom() {
+	return from;
+    }
 
-	public Reference getApplication() {
-		return application;
-	}
+    public Reference getApplication() {
+	return application;
+    }
 
-	public Date getCreatedTime() {
-		return createdTime;
-	}
+    public Date getCreatedTime() {
+	return createdTime;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+	return message;
+    }
 
-	public List<Comment> getComments() {
-		return comments;
-	}
+    public List<Comment> getComments() {
+	return comments;
+    }
 
-	public List<Reference> getLikes() {
-		return likes;
-	}
+    public List<Reference> getLikes() {
+	return likes;
+    }
 
-	public List<Reference> getTags() {
-		return tags;
-	}
+    public List<Reference> getTags() {
+	return tags;
+    }
 
 }

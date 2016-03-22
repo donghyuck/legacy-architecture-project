@@ -17,115 +17,115 @@ package architecture.ee.web.community.timeline;
 
 import architecture.common.cache.CacheSizes;
 
-public class DefaultMedia implements Media{
+public class DefaultMedia implements Media {
 
-	private String url;
-	private String thumbnailUrl;
-	private String caption;
-	private String credit;
+    private String url;
+    private String thumbnailUrl;
+    private String caption;
+    private String credit;
 
+    /**
+     * @param url
+     * @param caption
+     */
+    public DefaultMedia(String url, String caption) {
+	this.url = url;
+	this.caption = caption;
+	this.thumbnailUrl = null;
+	this.credit = null;
+    }
 
+    /**
+     * @param url
+     * @param caption
+     * @param credit
+     */
+    public DefaultMedia(String url, String caption, String credit) {
+	this.url = url;
+	this.caption = caption;
+	this.credit = credit;
+	this.thumbnailUrl = null;
+    }
 
-	/**
-	 * @param url
-	 * @param caption
-	 */
-	public DefaultMedia(String url, String caption) {
-		this.url = url;
-		this.caption = caption;
-		this.thumbnailUrl = null;
-		this.credit = null;
-	}
+    /**
+     * @param url
+     * @param caption
+     * @param credit
+     * @param thumbnailUrl
+     */
+    public DefaultMedia(String url, String caption, String credit, String thumbnailUrl) {
+	this.url = url;
+	this.caption = caption;
+	this.credit = credit;
+	this.thumbnailUrl = thumbnailUrl;
+    }
 
-	/**
-	 * @param url
-	 * @param caption
-	 * @param credit
-	 */
-	public DefaultMedia(String url, String caption, String credit) {
-		this.url = url;
-		this.caption = caption;
-		this.credit = credit;
-		this.thumbnailUrl = null;
-	}
+    public DefaultMedia() {
+    }
 
-	/**
-	 * @param url
-	 * @param caption
-	 * @param credit
-	 * @param thumbnailUrl
-	 */
-	public DefaultMedia(String url, String caption, String credit, String thumbnailUrl) {
-		this.url = url;
-		this.caption = caption;
-		this.credit = credit;
-		this.thumbnailUrl = thumbnailUrl;
-	}
+    /**
+     * @return url
+     */
+    public String getUrl() {
+	return url;
+    }
 
-	public DefaultMedia() {
-	}
+    /**
+     * @param url
+     *            설정할 url
+     */
+    public void setUrl(String url) {
+	this.url = url;
+    }
 
-	/**
-	 * @return url
-	 */
-	public String getUrl() {
-		return url;
-	}
+    /**
+     * @return thumbnailUrl
+     */
+    public String getThumbnailUrl() {
+	return thumbnailUrl;
+    }
 
-	/**
-	 * @param url 설정할 url
-	 */
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    /**
+     * @param thumbnailUrl
+     *            설정할 thumbnailUrl
+     */
+    public void setThumbnailUrl(String thumbnailUrl) {
+	this.thumbnailUrl = thumbnailUrl;
+    }
 
-	/**
-	 * @return thumbnailUrl
-	 */
-	public String getThumbnailUrl() {
-		return thumbnailUrl;
-	}
+    /**
+     * @return caption
+     */
+    public String getCaption() {
+	return caption;
+    }
 
-	/**
-	 * @param thumbnailUrl 설정할 thumbnailUrl
-	 */
-	public void setThumbnailUrl(String thumbnailUrl) {
-		this.thumbnailUrl = thumbnailUrl;
-	}
+    /**
+     * @param caption
+     *            설정할 caption
+     */
+    public void setCaption(String caption) {
+	this.caption = caption;
+    }
 
-	/**
-	 * @return caption
-	 */
-	public String getCaption() {
-		return caption;
-	}
+    /**
+     * @return credit
+     */
+    public String getCredit() {
+	return credit;
+    }
 
-	/**
-	 * @param caption 설정할 caption
-	 */
-	public void setCaption(String caption) {
-		this.caption = caption;
-	}
+    /**
+     * @param credit
+     *            설정할 credit
+     */
+    public void setCredit(String credit) {
+	this.credit = credit;
+    }
 
-	/**
-	 * @return credit
-	 */
-	public String getCredit() {
-		return credit;
-	}
-
-	/**
-	 * @param credit 설정할 credit
-	 */
-	public void setCredit(String credit) {
-		this.credit = credit;
-	}
-
-	public int getCachedSize() {
-		return CacheSizes.sizeOfString(this.url)
-				+ CacheSizes.sizeOfString(this.thumbnailUrl)
-				+ CacheSizes.sizeOfString(this.caption)
-				+ CacheSizes.sizeOfString(this.credit);
-	}
+    public int getCachedSize() {
+	return CacheSizes.sizeOfString(this.url) + CacheSizes.sizeOfString(this.thumbnailUrl)
+		+ CacheSizes.sizeOfString(this.caption) + CacheSizes.sizeOfString(this.credit);
+    }
 
 }

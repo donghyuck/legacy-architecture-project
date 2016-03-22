@@ -28,211 +28,213 @@ import architecture.common.user.User;
 
 public class DefaultProfileImage implements ProfileImage {
 
-	private Long profileImageId;
+    private Long profileImageId;
 
-	private Long userId;
+    private Long userId;
 
-	private Boolean primary;
+    private Boolean primary;
 
-	private String imageContentType;
+    private String imageContentType;
 
-	private Integer imageSize;
+    private Integer imageSize;
 
-	private String thumbnailContentType;
+    private String thumbnailContentType;
 
-	private Integer thumbnailSize;
+    private Integer thumbnailSize;
 
-	private Date creationDate ;
-	
-	private Date modifiedDate;
-	
-	private String filename;
-	
-	public DefaultProfileImage(User user) {
-		this.userId = user.getUserId();
-		this.profileImageId = -1L;
-		this.primary = false;
-		this.imageContentType = null;
-		this.imageSize = 0 ;
-		this.thumbnailContentType = DEFAULT_THUMBNAIL_CONTENT_TYPE;
-		this.thumbnailSize = 0;
-		Date now =  Calendar.getInstance().getTime();
-		this.creationDate = now;
-		this.modifiedDate = now;
-	}
-	/**
-	 * 
-	 */
-	public DefaultProfileImage() {
-		this.profileImageId = -1L;
-		this.userId = -1L;
-		this.primary = false;
-		this.imageContentType = null;
-		this.imageSize = 0 ;
-		this.thumbnailContentType = DEFAULT_THUMBNAIL_CONTENT_TYPE;
-		this.thumbnailSize = 0;
-		Date now =  Calendar.getInstance().getTime();
-		this.creationDate = now;
-		this.modifiedDate = now;
-	}
+    private Date creationDate;
 
-	/**
-	 * @return primary
-	 */
-	public Boolean isPrimary() {
-		return primary;
-	}
+    private Date modifiedDate;
 
-	/**
-	 * @param primary
-	 *            설정할 primary
-	 */
-	public void setPrimary(Boolean primary) {
-		this.primary = primary;
-	}
+    private String filename;
 
-	/**
-	 * @return profileImageId
-	 */
-	public Long getProfileImageId() {
-		return profileImageId;
-	}
+    public DefaultProfileImage(User user) {
+	this.userId = user.getUserId();
+	this.profileImageId = -1L;
+	this.primary = false;
+	this.imageContentType = null;
+	this.imageSize = 0;
+	this.thumbnailContentType = DEFAULT_THUMBNAIL_CONTENT_TYPE;
+	this.thumbnailSize = 0;
+	Date now = Calendar.getInstance().getTime();
+	this.creationDate = now;
+	this.modifiedDate = now;
+    }
 
-	/**
-	 * @param profileImageId
-	 *            설정할 profileImageId
-	 */
-	public void setProfileImageId(Long profilePhotoId) {
-		this.profileImageId = profilePhotoId;
-	}
+    /**
+     * 
+     */
+    public DefaultProfileImage() {
+	this.profileImageId = -1L;
+	this.userId = -1L;
+	this.primary = false;
+	this.imageContentType = null;
+	this.imageSize = 0;
+	this.thumbnailContentType = DEFAULT_THUMBNAIL_CONTENT_TYPE;
+	this.thumbnailSize = 0;
+	Date now = Calendar.getInstance().getTime();
+	this.creationDate = now;
+	this.modifiedDate = now;
+    }
 
-	/**
-	 * @return userId
-	 */
-	public Long getUserId() {
-		return userId;
-	}
+    /**
+     * @return primary
+     */
+    public Boolean isPrimary() {
+	return primary;
+    }
 
-	/**
-	 * @param userId
-	 *            설정할 userId
-	 */
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    /**
+     * @param primary
+     *            설정할 primary
+     */
+    public void setPrimary(Boolean primary) {
+	this.primary = primary;
+    }
 
-	/**
-	 * @return imageContentType
-	 */
-	public String getImageContentType() {
-		return imageContentType;
-	}
+    /**
+     * @return profileImageId
+     */
+    public Long getProfileImageId() {
+	return profileImageId;
+    }
 
-	/**
-	 * @param imageContentType
-	 *            설정할 imageContentType
-	 */
-	public void setImageContentType(String imageContentType) {
-		this.imageContentType = imageContentType;
-	}
+    /**
+     * @param profileImageId
+     *            설정할 profileImageId
+     */
+    public void setProfileImageId(Long profilePhotoId) {
+	this.profileImageId = profilePhotoId;
+    }
 
-	/**
-	 * @return imageSize
-	 */
-	public Integer getImageSize() {
-		return imageSize;
-	}
+    /**
+     * @return userId
+     */
+    public Long getUserId() {
+	return userId;
+    }
 
-	/**
-	 * @param imageSize
-	 *            설정할 imageSize
-	 */
-	public void setImageSize(Integer imageSize) {
-		this.imageSize = imageSize;
-	}
+    /**
+     * @param userId
+     *            설정할 userId
+     */
+    public void setUserId(Long userId) {
+	this.userId = userId;
+    }
 
-	/**
-	 * @return thumbnailContentType
-	 */
-	public String getThumbnailContentType() {
-		return thumbnailContentType;
-	}
+    /**
+     * @return imageContentType
+     */
+    public String getImageContentType() {
+	return imageContentType;
+    }
 
-	/**
-	 * @param thumbnailContentType
-	 *            설정할 thumbnailContentType
-	 */
-	public void setThumbnailContentType(String thumbnailContentType) {
-		this.thumbnailContentType = thumbnailContentType;
-	}
+    /**
+     * @param imageContentType
+     *            설정할 imageContentType
+     */
+    public void setImageContentType(String imageContentType) {
+	this.imageContentType = imageContentType;
+    }
 
-	/**
-	 * @return creationDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    /**
+     * @return imageSize
+     */
+    public Integer getImageSize() {
+	return imageSize;
+    }
 
-	/**
-	 * @param creationDate 설정할 creationDate
-	 */
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    /**
+     * @param imageSize
+     *            설정할 imageSize
+     */
+    public void setImageSize(Integer imageSize) {
+	this.imageSize = imageSize;
+    }
 
-	/**
-	 * @return modifiedDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
+    /**
+     * @return thumbnailContentType
+     */
+    public String getThumbnailContentType() {
+	return thumbnailContentType;
+    }
 
-	/**
-	 * @param modifiedDate 설정할 modifiedDate
-	 */
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
+    /**
+     * @param thumbnailContentType
+     *            설정할 thumbnailContentType
+     */
+    public void setThumbnailContentType(String thumbnailContentType) {
+	this.thumbnailContentType = thumbnailContentType;
+    }
 
-	/**
-	 * @return thumbnailSize
-	 */
-	public Integer getThumbnailSize() {
-		return thumbnailSize;
-	}
+    /**
+     * @return creationDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getCreationDate() {
+	return creationDate;
+    }
 
-	/**
-	 * @param thumbnailSize
-	 *            설정할 thumbnailSize
-	 */
-	public void setThumbnailSize(Integer thumbnailSize) {
-		this.thumbnailSize = thumbnailSize;
-	}
+    /**
+     * @param creationDate
+     *            설정할 creationDate
+     */
+    @JsonDeserialize(using = CustomJsonDateDeserializer.class)
+    public void setCreationDate(Date creationDate) {
+	this.creationDate = creationDate;
+    }
 
-	/**
-	 * @return filename
-	 */
-	public String getFilename() {
-		return filename;
-	}
+    /**
+     * @return modifiedDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getModifiedDate() {
+	return modifiedDate;
+    }
 
-	/**
-	 * @param filename 설정할 filename
-	 */
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
+    /**
+     * @param modifiedDate
+     *            설정할 modifiedDate
+     */
+    @JsonDeserialize(using = CustomJsonDateDeserializer.class)
+    public void setModifiedDate(Date modifiedDate) {
+	this.modifiedDate = modifiedDate;
+    }
 
-	public int getCachedSize() {
-		return CacheSizes.sizeOfBoolean() + CacheSizes.sizeOfLong()
-				+ CacheSizes.sizeOfLong() + CacheSizes.sizeOfInt()
-				+ CacheSizes.sizeOfInt()
-				+ CacheSizes.sizeOfString(imageContentType)
-				+ CacheSizes.sizeOfString(imageContentType);
-	}
+    /**
+     * @return thumbnailSize
+     */
+    public Integer getThumbnailSize() {
+	return thumbnailSize;
+    }
+
+    /**
+     * @param thumbnailSize
+     *            설정할 thumbnailSize
+     */
+    public void setThumbnailSize(Integer thumbnailSize) {
+	this.thumbnailSize = thumbnailSize;
+    }
+
+    /**
+     * @return filename
+     */
+    public String getFilename() {
+	return filename;
+    }
+
+    /**
+     * @param filename
+     *            설정할 filename
+     */
+    public void setFilename(String filename) {
+	this.filename = filename;
+    }
+
+    public int getCachedSize() {
+	return CacheSizes.sizeOfBoolean() + CacheSizes.sizeOfLong() + CacheSizes.sizeOfLong() + CacheSizes.sizeOfInt()
+		+ CacheSizes.sizeOfInt() + CacheSizes.sizeOfString(imageContentType)
+		+ CacheSizes.sizeOfString(imageContentType);
+    }
 
 }

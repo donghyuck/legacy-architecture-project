@@ -17,17 +17,15 @@ package architecture.ee.web.community.social.facebook;
 
 import java.util.Date;
 
-
 public class MusicPost extends Post {
 
-	private String source;
+    private String source;
 
-	public MusicPost(String id, Reference from, Date createdTime, Date updatedTime) {
-		super(id, from, createdTime, updatedTime);
-	}
-	
-	public String getSource() {
-		return source;
-	}
+    public MusicPost(String id, Reference from, Date createdTime, Date updatedTime) {
+	super(id, from, createdTime, updatedTime);
+    }
+
+    public String getSource() {
+	return source;
+    }
 }
-

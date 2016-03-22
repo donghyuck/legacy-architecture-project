@@ -21,15 +21,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 class EntitiesMixin {
 
-	@JsonCreator
-	public EntitiesMixin(
-			@JsonProperty("urls") List<UrlEntity> urls, 
-			@JsonProperty("hashtags") List<HashTagEntity> tags, 
-			@JsonProperty("user_mentions") List<MentionEntity> mentions, 
-			@JsonProperty("media") List<MediaEntity> media) {}
-	
+    @JsonCreator
+    public EntitiesMixin(@JsonProperty("urls") List<UrlEntity> urls, @JsonProperty("hashtags") List<HashTagEntity> tags,
+	    @JsonProperty("user_mentions") List<MentionEntity> mentions,
+	    @JsonProperty("media") List<MediaEntity> media) {
+    }
+
 }

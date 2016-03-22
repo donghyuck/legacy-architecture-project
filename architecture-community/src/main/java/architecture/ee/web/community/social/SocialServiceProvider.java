@@ -19,24 +19,24 @@ import org.scribe.oauth.OAuthService;
 
 public interface SocialServiceProvider {
 
-	public OAuthService getOAuthService();
-	
-	public String getAuthorizationUrl();
-	
-	public boolean isAuthorized();
-	
-	public String getAccessToken() ;
-	
-	public void setAccessToken(String accessToken) ;
-	
-	public String getAccessSecret() ;
-		
-	public void setAccessSecret(String accessSecret);
-	
-	public SocialNetwork.Media getMedia();
-	
-	public Object getUserProfile();
-	
-	//public void setAccessSecret(String accessToken, String accessVerifier );
-	
+    public OAuthService getOAuthService();
+
+    public String getAuthorizationUrl();
+
+    public boolean isAuthorized();
+
+    public String getAccessToken();
+
+    public void setAccessToken(String accessToken);
+
+    public String getAccessSecret();
+
+    public void setAccessSecret(String accessSecret);
+
+    public SocialNetwork.Media getMedia();
+
+    public Object getUserProfile();
+
+    // public void setAccessSecret(String accessToken, String accessVerifier );
+
 }

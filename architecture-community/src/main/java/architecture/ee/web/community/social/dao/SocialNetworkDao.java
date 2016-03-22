@@ -20,17 +20,17 @@ import java.util.List;
 import architecture.ee.web.community.social.SocialNetwork;
 
 public interface SocialNetworkDao {
-	
-	public List<Long> getSocialAccountIds( int objectType, String username) ;
-	
-	public List<Long> getSocialAccountIds( int objectType, long objectId);
-	
-	public SocialNetwork getSocialAccountById(long socialAccountId);
-	
-	public void updateSocialAccount(SocialNetwork socialNetwork);
-	
-	public SocialNetwork createSocialAccount(SocialNetwork socialNetwork);
-	
-	public void deleteSocialAccount(SocialNetwork socialNetwork);
-		
+
+    public List<Long> getSocialAccountIds(int objectType, String username);
+
+    public List<Long> getSocialAccountIds(int objectType, long objectId);
+
+    public SocialNetwork getSocialAccountById(long socialAccountId);
+
+    public void updateSocialAccount(SocialNetwork socialNetwork);
+
+    public SocialNetwork createSocialAccount(SocialNetwork socialNetwork);
+
+    public void deleteSocialAccount(SocialNetwork socialNetwork);
+
 }

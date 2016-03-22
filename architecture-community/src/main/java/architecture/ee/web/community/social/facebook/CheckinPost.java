@@ -19,24 +19,24 @@ import java.util.Date;
 import java.util.List;
 
 public class CheckinPost extends Post {
-	
-	private Page place;
-	
-	private List<Tag> tags;
-	
-	public CheckinPost(String id, Reference from, Date createdTime, Date updatedTime) {
-		super(id, from, createdTime, updatedTime);
-	}
 
-	public Page getPlace() {
-		return place;
-	}
-	
-	public List<Tag> getTags() {
-		return tags;
-	}
-	
-	public String checkinId() {
-		return this.getId().split("_")[1];
-	}
+    private Page place;
+
+    private List<Tag> tags;
+
+    public CheckinPost(String id, Reference from, Date createdTime, Date updatedTime) {
+	super(id, from, createdTime, updatedTime);
+    }
+
+    public Page getPlace() {
+	return place;
+    }
+
+    public List<Tag> getTags() {
+	return tags;
+    }
+
+    public String checkinId() {
+	return this.getId().split("_")[1];
+    }
 }

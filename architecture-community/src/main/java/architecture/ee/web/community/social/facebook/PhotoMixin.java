@@ -25,40 +25,33 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import architecture.ee.web.community.social.facebook.Photo.Image;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class PhotoMixin {
 
-	@JsonCreator
-	PhotoMixin(
-			@JsonProperty("id") String id, 
-			@JsonProperty("from") Reference from, 
-			@JsonProperty("picture") String picture, 
-			@JsonProperty("source") String source, 
-			@JsonProperty("link") String link, 
-			@JsonProperty("icon") String icon, 
-			@JsonProperty("created_time") Date createdTime,
-			@JsonProperty("images") List<Image> images) {}
-	
-	@JsonProperty("name")
-	String name;
-	
-	@JsonProperty("position")
-	int position;
-	
-	@JsonProperty("updated_time")
-	Date updatedTime;
-	
-	@JsonProperty("tags")
-	@JsonDeserialize(using=TagListDeserializer.class)
-	List<Tag> tags;
+    @JsonCreator
+    PhotoMixin(@JsonProperty("id") String id, @JsonProperty("from") Reference from,
+	    @JsonProperty("picture") String picture, @JsonProperty("source") String source,
+	    @JsonProperty("link") String link, @JsonProperty("icon") String icon,
+	    @JsonProperty("created_time") Date createdTime, @JsonProperty("images") List<Image> images) {
+    }
 
-	public static abstract class ImageMixin {
-		@JsonCreator
-		public ImageMixin(
-				@JsonProperty("source") String source,
-				@JsonProperty("width") int width,
-				@JsonProperty("height") int height
-				) {}
+    @JsonProperty("name")
+    String name;
+
+    @JsonProperty("position")
+    int position;
+
+    @JsonProperty("updated_time")
+    Date updatedTime;
+
+    @JsonProperty("tags")
+    @JsonDeserialize(using = TagListDeserializer.class)
+    List<Tag> tags;
+
+    public static abstract class ImageMixin {
+	@JsonCreator
+	public ImageMixin(@JsonProperty("source") String source, @JsonProperty("width") int width,
+		@JsonProperty("height") int height) {
 	}
+    }
 }

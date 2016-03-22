@@ -17,17 +17,17 @@ package architecture.ee;
 
 public class StringTest {
 
-	public StringTest() {
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public StringTest() {
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		String str1 = "abc";
-		String str2 = "abc";
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+	String str1 = "abc";
+	String str2 = "abc";
 
-	}
+    }
 
 }

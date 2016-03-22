@@ -17,16 +17,15 @@ package architecture.ee.web.community.social.facebook;
 
 import java.util.Date;
 
-
 public class NotePost extends Post {
-	
-	private String subject;
-	
-	public NotePost(String id, Reference from, Date createdTime, Date updatedTime) {
-		super(id, from, createdTime, updatedTime);
-	}
-	
-	public String getSubject() {
-		return subject;
-	}
+
+    private String subject;
+
+    public NotePost(String id, Reference from, Date createdTime, Date updatedTime) {
+	super(id, from, createdTime, updatedTime);
+    }
+
+    public String getSubject() {
+	return subject;
+    }
 }

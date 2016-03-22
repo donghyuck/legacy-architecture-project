@@ -15,54 +15,53 @@
  */
 package architecture.ee.web.community.social.facebook;
 
-
 public class Location {
 
-	private final double latitude;
+    private final double latitude;
 
-	private final double longitude;
+    private final double longitude;
 
-	private String street;
+    private String street;
 
-	private String city;
+    private String city;
 
-	private String state;
+    private String state;
 
-	private String country;
+    private String country;
 
-	private String zip;
+    private String zip;
 
-	private Location(double latitude, double longitude) {
-		this.latitude = latitude;
-		this.longitude = longitude;
-	}
+    private Location(double latitude, double longitude) {
+	this.latitude = latitude;
+	this.longitude = longitude;
+    }
 
-	public double getLatitude() {
-		return latitude;
-	}
+    public double getLatitude() {
+	return latitude;
+    }
 
-	public double getLongitude() {
-		return longitude;
-	}
+    public double getLongitude() {
+	return longitude;
+    }
 
-	public String getStreet() {
-		return street;
-	}
+    public String getStreet() {
+	return street;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public String getCity() {
+	return city;
+    }
 
-	public String getState() {
-		return state;
-	}
+    public String getState() {
+	return state;
+    }
 
-	public String getCountry() {
-		return country;
-	}
+    public String getCountry() {
+	return country;
+    }
 
-	public String getZip() {
-		return zip;
-	}
+    public String getZip() {
+	return zip;
+    }
 
 }

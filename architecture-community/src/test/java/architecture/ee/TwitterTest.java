@@ -28,94 +28,77 @@ import architecture.ee.web.community.social.twitter.TwitterServiceProvider;
 
 public class TwitterTest {
 
-	public TwitterTest() {
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public TwitterTest() {
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	private  SocialServiceProvider createSocialServiceProvider(Media media){		
-		SocialServiceProvider provider = null;				
-		if(media == SocialNetwork.Media.TWITTER){					
-			String callbackUrl = "http://222.122.63.147/community/twitter-callback.do";
-			if( callbackUrl!=null ){
-				provider = new TwitterServiceProvider(
-					"4XebpD1MW3CQ8Koh7naQpg",
-					"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc",
-					callbackUrl
-				);
-			}else{
-				provider = new TwitterServiceProvider(
-					"4XebpD1MW3CQ8Koh7naQpg",
-					"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc"
-				);
-			}					
-		}else if ( media == SocialNetwork.Media.FACEBOOK){		
-			String callbackUrl = "http://222.122.63.147/community/facebook-callback.do";
-			String scope = "export_stream, read_stream, user_about_me, user_activities, user_education_history, user_friends, user_photos, user_work_history";
-			provider = new FacebookServiceProvider(
-					"251365428350280",
-					"704f08c943c6dfdba328e08a10550d38",							
-					callbackUrl,
-					scope
-			);			
-		}	
-		return provider;
-	} 
-	
-	public SocialNetwork createSocialNetwork(Media media) {
-		SocailNetworkImpl impl = new SocailNetworkImpl(); 
-		Date now = new Date();		
-		impl.setCreationDate(now);
-		impl.setModifiedDate(now);
-		impl.setObjectType(2);
-		impl.setObjectId(2);
-		impl.setServiceProviderName(media.name().toLowerCase());
-		impl.setSocialAccountId(-1L);		
-		impl.setSocialServiceProvider(createSocialServiceProvider(media));	
-		return impl;
+    private SocialServiceProvider createSocialServiceProvider(Media media) {
+	SocialServiceProvider provider = null;
+	if (media == SocialNetwork.Media.TWITTER) {
+	    String callbackUrl = "http://222.122.63.147/community/twitter-callback.do";
+	    if (callbackUrl != null) {
+		provider = new TwitterServiceProvider("4XebpD1MW3CQ8Koh7naQpg",
+			"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc", callbackUrl);
+	    } else {
+		provider = new TwitterServiceProvider("4XebpD1MW3CQ8Koh7naQpg",
+			"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc");
+	    }
+	} else if (media == SocialNetwork.Media.FACEBOOK) {
+	    String callbackUrl = "http://222.122.63.147/community/facebook-callback.do";
+	    String scope = "export_stream, read_stream, user_about_me, user_activities, user_education_history, user_friends, user_photos, user_work_history";
+	    provider = new FacebookServiceProvider("251365428350280", "704f08c943c6dfdba328e08a10550d38", callbackUrl,
+		    scope);
 	}
-	
+	return provider;
+    }
+
+    public SocialNetwork createSocialNetwork(Media media) {
+	SocailNetworkImpl impl = new SocailNetworkImpl();
+	Date now = new Date();
+	impl.setCreationDate(now);
+	impl.setModifiedDate(now);
+	impl.setObjectType(2);
+	impl.setObjectId(2);
+	impl.setServiceProviderName(media.name().toLowerCase());
+	impl.setSocialAccountId(-1L);
+	impl.setSocialServiceProvider(createSocialServiceProvider(media));
+	return impl;
+    }
+
+    /**
+     * @param args
+     */
+    @Test
+    public void twitter() {
+	TwitterTest tt = new TwitterTest();
+	SocialNetwork sn = tt.createSocialNetwork(Media.TWITTER);
+	sn.getSocialServiceProvider().setAccessSecret(null);
+	sn.getSocialServiceProvider().setAccessToken(null);
+	System.out.println(sn.getAuthorizationUrl());
 	/**
-	 * @param args
-	 */
-	@Test
-	public void twitter() {
-		TwitterTest tt = new TwitterTest();
-		SocialNetwork sn = tt.createSocialNetwork(Media.TWITTER);
-		sn.getSocialServiceProvider().setAccessSecret(null);
-		sn.getSocialServiceProvider().setAccessToken(null);
-		System.out.println( sn.getAuthorizationUrl() ) ;
-		/**
-		TwitterServiceProvider provider = new TwitterServiceProvider(
-			"4XebpD1MW3CQ8Koh7naQpg",
-			"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc"
-		);
-		provider.setAccessToken("50153444-RgtZ4gNQtUtCHSnPgKuqxvqwO2piFQzET76iGjUtc");
-		provider.setAccessSecret("DfL22L3yhsVDLfW9uTYgZe7e7BoodDC49Nbzu54");
-		//provider.getAuthorizationUrl();
-		
-		TwitterProfile profile = provider.authenticate();
-		System.out.println( profile.getId());	
-		System.out.println( profile.getScreenName());			
-		System.out.println( profile.getName() );	
-		System.out.println( profile.getDescription() );	
-		System.out.println( profile.getProfileUrl() );	
-		System.out.println( "==========================");
-		List<Tweet> list = provider.getUserTimeline();
-		for( Tweet row : list ){
-			System.out.println(row.getText());
-			System.out.println(row.hasMedia());
-			System.out.println(row.getCreatedAt());
-			if( row.hasMedia() )
-			{
-				List<MediaEntity> mlist = row.getEntities().getMedia();
-				for( MediaEntity m : mlist ){
-					System.out.println(m.getType() + "," + m.getMediaUrl());
-				}
-				
-			}			
-			System.out.println("------------------------------");
-		}
-		**/
-	}
+	 * TwitterServiceProvider provider = new TwitterServiceProvider(
+	 * "4XebpD1MW3CQ8Koh7naQpg", "aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc"
+	 * ); provider.setAccessToken(
+	 * "50153444-RgtZ4gNQtUtCHSnPgKuqxvqwO2piFQzET76iGjUtc");
+	 * provider.setAccessSecret("DfL22L3yhsVDLfW9uTYgZe7e7BoodDC49Nbzu54");
+	 * //provider.getAuthorizationUrl();
+	 * 
+	 * TwitterProfile profile = provider.authenticate(); System.out.println(
+	 * profile.getId()); System.out.println( profile.getScreenName());
+	 * System.out.println( profile.getName() ); System.out.println(
+	 * profile.getDescription() ); System.out.println(
+	 * profile.getProfileUrl() ); System.out.println(
+	 * "=========================="); List<Tweet> list =
+	 * provider.getUserTimeline(); for( Tweet row : list ){
+	 * System.out.println(row.getText());
+	 * System.out.println(row.hasMedia());
+	 * System.out.println(row.getCreatedAt()); if( row.hasMedia() ) { List
+	 * <MediaEntity> mlist = row.getEntities().getMedia(); for( MediaEntity
+	 * m : mlist ){ System.out.println(m.getType() + "," + m.getMediaUrl());
+	 * }
+	 * 
+	 * } System.out.println("------------------------------"); }
+	 **/
+    }
 
 }

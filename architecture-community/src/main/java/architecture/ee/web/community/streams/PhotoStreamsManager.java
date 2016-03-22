@@ -23,44 +23,42 @@ import architecture.ee.web.attachment.Image;
 
 public interface PhotoStreamsManager {
 
-	
-	public void addImage(Image image, User creator);
-	
-	public void deletePhotos(Image image, User creator);
-	
-	public List<Photo> getPhotosByImage(Image image);
-	
-	public Photo getPhotoById(String externalId) throws NotFoundException ;	
-	
-	public int getPhotoCount(int objectType, long objectId);
-	
-	public int getPhotoCount(int objectType);
-	
-	public int getTotalPhotoCount();	
-	
-	public List<Photo> getPhotos(int objectType, long objectId); 
-	
-	public List<Photo> getPhotos(int objectType, long objectId, int startIndex, int maxResults );
-	
-	public List<Photo> getPhotos(int objectType);
-	
-	public List<Photo> getPhotos(int objectType, int startIndex, int maxResults );
-	
-	public List<Photo> getPhotos();
-	
-	public List<Photo> getPhotos(int startIndex, int maxResults );	
-	
-	public List<Photo> getPhotosByRandom(int objectType, long objectId); 
-	
-	public List<Photo> getPhotosByRandom(int objectType, long objectId, int startIndex, int maxResults );
-	
-	public List<Photo> getPhotosByRandom(int objectType);
-	
-	public List<Photo> getPhotosByRandom(int objectType, int startIndex, int maxResults );
-	
-	public List<Photo> getPhotosByRandom();
-	
-	public List<Photo> getPhotosByRandom(int startIndex, int maxResults );	
-	
-	
+    public void addImage(Image image, User creator);
+
+    public void deletePhotos(Image image, User creator);
+
+    public List<Photo> getPhotosByImage(Image image);
+
+    public Photo getPhotoById(String externalId) throws NotFoundException;
+
+    public int getPhotoCount(int objectType, long objectId);
+
+    public int getPhotoCount(int objectType);
+
+    public int getTotalPhotoCount();
+
+    public List<Photo> getPhotos(int objectType, long objectId);
+
+    public List<Photo> getPhotos(int objectType, long objectId, int startIndex, int maxResults);
+
+    public List<Photo> getPhotos(int objectType);
+
+    public List<Photo> getPhotos(int objectType, int startIndex, int maxResults);
+
+    public List<Photo> getPhotos();
+
+    public List<Photo> getPhotos(int startIndex, int maxResults);
+
+    public List<Photo> getPhotosByRandom(int objectType, long objectId);
+
+    public List<Photo> getPhotosByRandom(int objectType, long objectId, int startIndex, int maxResults);
+
+    public List<Photo> getPhotosByRandom(int objectType);
+
+    public List<Photo> getPhotosByRandom(int objectType, int startIndex, int maxResults);
+
+    public List<Photo> getPhotosByRandom();
+
+    public List<Photo> getPhotosByRandom(int startIndex, int maxResults);
+
 }

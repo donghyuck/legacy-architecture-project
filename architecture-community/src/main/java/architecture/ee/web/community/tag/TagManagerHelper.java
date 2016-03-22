@@ -23,57 +23,55 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class TagManagerHelper {
-		
-	private Log log = LogFactory.getLog(getClass());
-	
-	private final TagManager tagManager;
 
-	public TagManagerHelper(TagManager tagManager) {
-		this.tagManager = tagManager;
-	}
+    private Log log = LogFactory.getLog(getClass());
 
-	public void setTags(String tags, int objectType, long objectId) {		
-		if (tags == null || "".equals(tags.trim())) {
-			tagManager.removeAllTags(objectType, objectId);
-		} else {
-			List<String> tagAr = Arrays.asList(tags.trim().toLowerCase().split("(\\s|,|\\\\)"));
-			List<ContentTag> removedTags = new ArrayList<ContentTag>();
-			for (String tag : tagAr) {
-				String safeTag = tag.trim();
-				if (!"".equals(safeTag)) {
-					ContentTag ct = tagManager.createTag(safeTag);
-					boolean hasNewTag = false;
-					List<ContentTag> existingTags = tagManager.getTags(objectType, objectId);
-					for (ContentTag existingTag : existingTags) {
-						if (ct.equals(existingTag))
-							hasNewTag = true;
-						if (!removedTags.contains(existingTag)
-								&& !tagAr.contains(existingTag.getName())) {
-							tagManager.removeTag(existingTag, objectType, objectId);
-							removedTags.add(existingTag);
-						}
-					}
-					if (!hasNewTag)
-						tagManager.addTag(ct, objectType, objectId);
-				}
+    private final TagManager tagManager;
+
+    public TagManagerHelper(TagManager tagManager) {
+	this.tagManager = tagManager;
+    }
+
+    public void setTags(String tags, int objectType, long objectId) {
+	if (tags == null || "".equals(tags.trim())) {
+	    tagManager.removeAllTags(objectType, objectId);
+	} else {
+	    List<String> tagAr = Arrays.asList(tags.trim().toLowerCase().split("(\\s|,|\\\\)"));
+	    List<ContentTag> removedTags = new ArrayList<ContentTag>();
+	    for (String tag : tagAr) {
+		String safeTag = tag.trim();
+		if (!"".equals(safeTag)) {
+		    ContentTag ct = tagManager.createTag(safeTag);
+		    boolean hasNewTag = false;
+		    List<ContentTag> existingTags = tagManager.getTags(objectType, objectId);
+		    for (ContentTag existingTag : existingTags) {
+			if (ct.equals(existingTag))
+			    hasNewTag = true;
+			if (!removedTags.contains(existingTag) && !tagAr.contains(existingTag.getName())) {
+			    tagManager.removeTag(existingTag, objectType, objectId);
+			    removedTags.add(existingTag);
 			}
+		    }
+		    if (!hasNewTag)
+			tagManager.addTag(ct, objectType, objectId);
 		}
-	}	
-
-	public String getTagsAsString(int objectType, long objectId) {
-		StringBuilder tagValues = new StringBuilder();
-		
-		
-		List<ContentTag> existingTags = tagManager.getTags(objectType, objectId);
-		
-		log.debug("existingTags:" + existingTags );
-		
-		for (ContentTag existingTag : existingTags) {
-			tagValues.append(existingTag.getName());
-			tagValues.append(" ");
-		}
-		
-		return tagValues.toString().trim();
+	    }
 	}
+    }
+
+    public String getTagsAsString(int objectType, long objectId) {
+	StringBuilder tagValues = new StringBuilder();
+
+	List<ContentTag> existingTags = tagManager.getTags(objectType, objectId);
+
+	log.debug("existingTags:" + existingTags);
+
+	for (ContentTag existingTag : existingTags) {
+	    tagValues.append(existingTag.getName());
+	    tagValues.append(" ");
+	}
+
+	return tagValues.toString().trim();
+    }
 
 }

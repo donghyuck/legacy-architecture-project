@@ -23,23 +23,24 @@ import architecture.common.user.User;
 import architecture.common.user.UserNotFoundException;
 
 public interface ProfileManager {
-		
-	public List<ProfileImage> getProfileImages(User user) ;
-	
-	public Integer getProfileImageCount(User user) ;
-	
-	public void addProfileImage(ProfileImage image, File file, User user) ;
-	
-	public void removeProfileImage(ProfileImage image) ;
-	
-	public ProfileImage getProfileImageById(Long profileImageId) throws ProfileImageNotFoundException ;
-	
-	public ProfileImage getProfileImage(User user) throws ProfileImageNotFoundException;
-	
-	public ProfileImage getProfileImageByUsername(String username) throws ProfileImageNotFoundException, UserNotFoundException;
 
-	public InputStream getImageInputStream(ProfileImage image);
-		
-	public InputStream getImageThumbnailInputStream(ProfileImage image, int width, int height ) ;
-		
+    public List<ProfileImage> getProfileImages(User user);
+
+    public Integer getProfileImageCount(User user);
+
+    public void addProfileImage(ProfileImage image, File file, User user);
+
+    public void removeProfileImage(ProfileImage image);
+
+    public ProfileImage getProfileImageById(Long profileImageId) throws ProfileImageNotFoundException;
+
+    public ProfileImage getProfileImage(User user) throws ProfileImageNotFoundException;
+
+    public ProfileImage getProfileImageByUsername(String username)
+	    throws ProfileImageNotFoundException, UserNotFoundException;
+
+    public InputStream getImageInputStream(ProfileImage image);
+
+    public InputStream getImageThumbnailInputStream(ProfileImage image, int width, int height);
+
 }

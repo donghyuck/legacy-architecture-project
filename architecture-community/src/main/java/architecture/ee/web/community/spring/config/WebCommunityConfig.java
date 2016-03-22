@@ -33,27 +33,24 @@ import architecture.user.spring.annotation.ActiveUserWebArgumentResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {
-		"architecture.user.spring.controller", 
-		"architecture.ee.web.spring.controller", 
-		"architecture.ee.web.community.spring.controller"
-})
+@ComponentScan(basePackages = { "architecture.user.spring.controller", "architecture.ee.web.spring.controller",
+	"architecture.ee.web.community.spring.controller" })
 @Import(MultipartConfig.class)
-public class WebCommunityConfig extends WebMvcConfigurerAdapter  {
-	
-	private Log log = LogFactory.getLog(getClass());
-	
-	public WebCommunityConfig() {
-	}
+public class WebCommunityConfig extends WebMvcConfigurerAdapter {
 
-	@Override
-	public void configureDefaultServletHandling( DefaultServletHandlerConfigurer configurer) {
-		configurer.enable();		
-	}
+    private Log log = LogFactory.getLog(getClass());
 
-	@Override
-	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-		log.debug("overrid argument resolvers  register ...");
-		argumentResolvers.add(new ServletWebArgumentResolverAdapter(new ActiveUserWebArgumentResolver()));		
-	}
+    public WebCommunityConfig() {
+    }
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+	configurer.enable();
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+	log.debug("overrid argument resolvers  register ...");
+	argumentResolvers.add(new ServletWebArgumentResolverAdapter(new ActiveUserWebArgumentResolver()));
+    }
 }

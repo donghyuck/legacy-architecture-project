@@ -33,53 +33,49 @@ import architecture.ee.web.logo.LogoManager;
 import architecture.ee.web.navigator.MenuRepository;
 import architecture.ee.web.site.WebSiteManager;
 
-@Controller ("secure-community-data-controller")
+@Controller("secure-community-data-controller")
 @RequestMapping("/secure/data")
 public class SecureCommunityDataController {
 
-	private static final Log log = LogFactory.getLog(SecureCommunityDataController.class);
+    private static final Log log = LogFactory.getLog(SecureCommunityDataController.class);
 
-	
-	@Inject
-	@Qualifier("photoStreamsManager")
-	private PhotoStreamsManager photoStreamsManager ;
-	
-	@Inject
-	@Qualifier("imageManager")
-	private ImageManager imageManager ;
-	
-	@Inject
-	@Qualifier("attachmentManager")
-	private AttachmentManager attachmentManager;
+    @Inject
+    @Qualifier("photoStreamsManager")
+    private PhotoStreamsManager photoStreamsManager;
 
-	@Inject
-	@Qualifier("announceManager")
-	private AnnounceManager announceManager ;
-	
-	@Inject
-	@Qualifier("pageManager")
-	private PageManager pageManager;
+    @Inject
+    @Qualifier("imageManager")
+    private ImageManager imageManager;
 
-	@Inject
-	@Qualifier("menuRepository")
-	private MenuRepository menuRepository ;
+    @Inject
+    @Qualifier("attachmentManager")
+    private AttachmentManager attachmentManager;
 
-	@Inject
-	@Qualifier("webSiteManager")
-	private WebSiteManager webSiteManager;
-	
-	@Inject
-	@Qualifier("companyManager")
-	private CompanyManager companyManager;
-	
-	@Inject
-	@Qualifier("logoManager")
-	private LogoManager logoManager ;
-	
+    @Inject
+    @Qualifier("announceManager")
+    private AnnounceManager announceManager;
 
-	
-	public SecureCommunityDataController() {
-	}
+    @Inject
+    @Qualifier("pageManager")
+    private PageManager pageManager;
 
+    @Inject
+    @Qualifier("menuRepository")
+    private MenuRepository menuRepository;
+
+    @Inject
+    @Qualifier("webSiteManager")
+    private WebSiteManager webSiteManager;
+
+    @Inject
+    @Qualifier("companyManager")
+    private CompanyManager companyManager;
+
+    @Inject
+    @Qualifier("logoManager")
+    private LogoManager logoManager;
+
+    public SecureCommunityDataController() {
+    }
 
 }

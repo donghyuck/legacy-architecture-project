@@ -24,163 +24,167 @@ import architecture.common.cache.CacheSizes;
 
 public class DefaultTimeline implements Timeline {
 
-	private long timelineId;
-	
-	private int objectType;
-	
-	private long objectId;
-	
-	private String headline;
-	
-	private String body;
-	
-	private Media media;
+    private long timelineId;
 
-	private Date startDate ;
-	
-	private Date endDate;
-	
-	public DefaultTimeline() {
-		this.timelineId = -1L;
-		this.objectType = 0;
-		this.objectId = -1L;
-		this.headline = null;
-		this.body = null;
-		this.media = null;
-		Date now = Calendar.getInstance().getTime();
-		this.startDate = now;
-		this.endDate = now;
-	}
+    private int objectType;
 
-	/**
-	 * @return startDate
-	 */
-	public Date getStartDate() {
-		return startDate;
-	}
+    private long objectId;
 
-	/**
-	 * @param startDate 설정할 startDate
-	 */
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
+    private String headline;
 
-	/**
-	 * @return endDate
-	 */
-	public Date getEndDate() {
-		return endDate;
-	}
+    private String body;
 
-	/**
-	 * @param endDate 설정할 endDate
-	 */
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
+    private Media media;
 
-	/**
-	 * @return timelineId
-	 */
-	public long getTimelineId() {
-		return timelineId;
-	}
+    private Date startDate;
 
-	/**
-	 * @param timelineId 설정할 timelineId
-	 */
-	public void setTimelineId(long timelineId) {
-		this.timelineId = timelineId;
-	}
+    private Date endDate;
 
-	/**
-	 * @return objectType
-	 */
-	public int getObjectType() {
-		return objectType;
-	}
+    public DefaultTimeline() {
+	this.timelineId = -1L;
+	this.objectType = 0;
+	this.objectId = -1L;
+	this.headline = null;
+	this.body = null;
+	this.media = null;
+	Date now = Calendar.getInstance().getTime();
+	this.startDate = now;
+	this.endDate = now;
+    }
 
-	/**
-	 * @param objectType 설정할 objectType
-	 */
-	public void setObjectType(int objectType) {
-		this.objectType = objectType;
-	}
+    /**
+     * @return startDate
+     */
+    public Date getStartDate() {
+	return startDate;
+    }
 
-	/**
-	 * @return objectId
-	 */
-	public long getObjectId() {
-		return objectId;
-	}
+    /**
+     * @param startDate
+     *            설정할 startDate
+     */
+    public void setStartDate(Date startDate) {
+	this.startDate = startDate;
+    }
 
-	/**
-	 * @param objectId 설정할 objectId
-	 */
-	public void setObjectId(long objectId) {
-		this.objectId = objectId;
-	}
+    /**
+     * @return endDate
+     */
+    public Date getEndDate() {
+	return endDate;
+    }
 
-	/**
-	 * @return headline
-	 */
-	public String getHeadline() {
-		return headline;
-	}
+    /**
+     * @param endDate
+     *            설정할 endDate
+     */
+    public void setEndDate(Date endDate) {
+	this.endDate = endDate;
+    }
 
-	/**
-	 * @param headline 설정할 headline
-	 */
-	public void setHeadline(String headline) {
-		this.headline = headline;
-	}
+    /**
+     * @return timelineId
+     */
+    public long getTimelineId() {
+	return timelineId;
+    }
 
-	/**
-	 * @return body
-	 */
-	public String getBody() {
-		return body;
-	}
+    /**
+     * @param timelineId
+     *            설정할 timelineId
+     */
+    public void setTimelineId(long timelineId) {
+	this.timelineId = timelineId;
+    }
 
-	/**
-	 * @param body 설정할 body
-	 */
-	public void setBody(String body) {
-		this.body = body;
-	}
+    /**
+     * @return objectType
+     */
+    public int getObjectType() {
+	return objectType;
+    }
 
-	/**
-	 * @return media
-	 */
-	public Media getMedia() {
-		return media;
-	}
+    /**
+     * @param objectType
+     *            설정할 objectType
+     */
+    public void setObjectType(int objectType) {
+	this.objectType = objectType;
+    }
 
-	/**
-	 * @param media 설정할 media
-	 */
-	public void setMedia(Media media) {
-		this.media = media;
-	}
+    /**
+     * @return objectId
+     */
+    public long getObjectId() {
+	return objectId;
+    }
 
-	public boolean isHasMedia() {
-		if( this.media == null)
-			return false;
-		if( StringUtils.isBlank(media.getUrl()))
-			return false;
-		
-		return true;
-	}
+    /**
+     * @param objectId
+     *            설정할 objectId
+     */
+    public void setObjectId(long objectId) {
+	this.objectId = objectId;
+    }
 
+    /**
+     * @return headline
+     */
+    public String getHeadline() {
+	return headline;
+    }
 
-	public int getCachedSize() {
-		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfInt()
-				+ CacheSizes.sizeOfLong()
-				+ CacheSizes.sizeOfString(this.headline)
-				+ CacheSizes.sizeOfString(this.body) + CacheSizes.sizeOfDate()
-				+ CacheSizes.sizeOfDate() 
-				+ ( this.isHasMedia() ? this.media.getCachedSize() : 0 );
-	}
-	
+    /**
+     * @param headline
+     *            설정할 headline
+     */
+    public void setHeadline(String headline) {
+	this.headline = headline;
+    }
+
+    /**
+     * @return body
+     */
+    public String getBody() {
+	return body;
+    }
+
+    /**
+     * @param body
+     *            설정할 body
+     */
+    public void setBody(String body) {
+	this.body = body;
+    }
+
+    /**
+     * @return media
+     */
+    public Media getMedia() {
+	return media;
+    }
+
+    /**
+     * @param media
+     *            설정할 media
+     */
+    public void setMedia(Media media) {
+	this.media = media;
+    }
+
+    public boolean isHasMedia() {
+	if (this.media == null)
+	    return false;
+	if (StringUtils.isBlank(media.getUrl()))
+	    return false;
+
+	return true;
+    }
+
+    public int getCachedSize() {
+	return CacheSizes.sizeOfLong() + CacheSizes.sizeOfInt() + CacheSizes.sizeOfLong()
+		+ CacheSizes.sizeOfString(this.headline) + CacheSizes.sizeOfString(this.body) + CacheSizes.sizeOfDate()
+		+ CacheSizes.sizeOfDate() + (this.isHasMedia() ? this.media.getCachedSize() : 0);
+    }
+
 }

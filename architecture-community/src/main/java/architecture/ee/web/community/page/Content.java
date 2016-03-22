@@ -17,9 +17,8 @@ package architecture.ee.web.community.page;
 
 import architecture.common.model.BaseModelObject;
 
-
 public interface Content extends BaseModelObject {
-	
-	public Long getContentId();	
-	
+
+    public Long getContentId();
+
 }

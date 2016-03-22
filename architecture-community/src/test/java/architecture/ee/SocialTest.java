@@ -20,20 +20,18 @@ import org.springframework.security.crypto.encrypt.TextEncryptor;
 
 public class SocialTest {
 
-	public SocialTest() {
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public SocialTest() {
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-		
-		
-		TextEncryptor enc = Encryptors.noOpText();
-		System.out.println("50153444-RgtZ4gNQtUtCHSnPgKuqxvqwO2piFQzET76iGjUtc");
-		System.out.println(enc.decrypt("50153444-RgtZ4gNQtUtCHSnPgKuqxvqwO2piFQzET76iGjUtc"));
-	}
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+
+	TextEncryptor enc = Encryptors.noOpText();
+	System.out.println("50153444-RgtZ4gNQtUtCHSnPgKuqxvqwO2piFQzET76iGjUtc");
+	System.out.println(enc.decrypt("50153444-RgtZ4gNQtUtCHSnPgKuqxvqwO2piFQzET76iGjUtc"));
+    }
 
 }

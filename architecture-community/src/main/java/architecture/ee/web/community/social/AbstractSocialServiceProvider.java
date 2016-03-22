@@ -23,97 +23,98 @@ import org.scribe.oauth.OAuthService;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public abstract class AbstractSocialServiceProvider implements SocialServiceProvider  {
+public abstract class AbstractSocialServiceProvider implements SocialServiceProvider {
 
-	protected Log log = LogFactory.getLog(getClass());
-	
-	private OAuthService service;
-	private String accessToken ;
-	private String accessSecret;
-	protected boolean isAuthorized = false;
-	private ObjectMapper objectMapper = null ;
-	
-	
-	public AbstractSocialServiceProvider(OAuthService service) {
-		this.service = service;
-	}
+    protected Log log = LogFactory.getLog(getClass());
 
-	protected ObjectMapper getObjectMapper () {
-		
-		if( objectMapper == null)
-		{
-			this.objectMapper = createObjectMapper();
-		}
-		return objectMapper ;
-		
-	}
-	
-	protected abstract ObjectMapper createObjectMapper();
-	
-	public OAuthService getOAuthService() {
-		return service;
-	}
-	
-	public String getAuthorizationUrl(){
-		return service.getAuthorizationUrl(getRequestToken());
-	}
-	
-	/**
-	 * @return isAuthorized
-	 */
-	public boolean isAuthorized() {
-		
-		return isAuthorized;
-	
-	}
-	/**
-	 * @return accessToken
-	 */
-	public String getAccessToken() {
-		return accessToken;
-	}
+    private OAuthService service;
+    private String accessToken;
+    private String accessSecret;
+    protected boolean isAuthorized = false;
+    private ObjectMapper objectMapper = null;
 
-	/**
-	 * @param accessToken 설정할 accessToken
-	 */
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
+    public AbstractSocialServiceProvider(OAuthService service) {
+	this.service = service;
+    }
 
-	/**
-	 * @return accessSecret
-	 */
-	public String getAccessSecret() {
-		return accessSecret;
-	}
+    protected ObjectMapper getObjectMapper() {
 
-	/**
-	 * @param accessSecret 설정할 accessSecret
-	 */
-	public void setAccessSecret(String accessSecret) {
-		this.accessSecret = accessSecret;
+	if (objectMapper == null) {
+	    this.objectMapper = createObjectMapper();
 	}
-	
-	protected Token getRequestToken(){
-		return service.getRequestToken();
-	}
+	return objectMapper;
 
-	protected Token getAccessTokenWithCallbackReturns(String oAuthToken, String oAuthVarifier  ){		
-		Verifier verifier = new Verifier(oAuthVarifier) ;
-		Token requestToken = new Token(oAuthToken, oAuthVarifier);		
-		Token accessToken = service.getAccessToken(requestToken, verifier );
-		return accessToken;
-	}
-	
-	protected Token getAccessToken(String accessKey){
-		Token accessToken = service.getAccessToken(getRequestToken(), new Verifier(accessKey));
-		this.accessToken = accessToken.getToken();
-		this.accessSecret = accessToken.getSecret();
-		return accessToken;
-	}
-	
-	protected Token getAccessToken(String token, String secret){
-		Token accessToken = new Token( token, secret );
-		return accessToken;
-	}
+    }
+
+    protected abstract ObjectMapper createObjectMapper();
+
+    public OAuthService getOAuthService() {
+	return service;
+    }
+
+    public String getAuthorizationUrl() {
+	return service.getAuthorizationUrl(getRequestToken());
+    }
+
+    /**
+     * @return isAuthorized
+     */
+    public boolean isAuthorized() {
+
+	return isAuthorized;
+
+    }
+
+    /**
+     * @return accessToken
+     */
+    public String getAccessToken() {
+	return accessToken;
+    }
+
+    /**
+     * @param accessToken
+     *            설정할 accessToken
+     */
+    public void setAccessToken(String accessToken) {
+	this.accessToken = accessToken;
+    }
+
+    /**
+     * @return accessSecret
+     */
+    public String getAccessSecret() {
+	return accessSecret;
+    }
+
+    /**
+     * @param accessSecret
+     *            설정할 accessSecret
+     */
+    public void setAccessSecret(String accessSecret) {
+	this.accessSecret = accessSecret;
+    }
+
+    protected Token getRequestToken() {
+	return service.getRequestToken();
+    }
+
+    protected Token getAccessTokenWithCallbackReturns(String oAuthToken, String oAuthVarifier) {
+	Verifier verifier = new Verifier(oAuthVarifier);
+	Token requestToken = new Token(oAuthToken, oAuthVarifier);
+	Token accessToken = service.getAccessToken(requestToken, verifier);
+	return accessToken;
+    }
+
+    protected Token getAccessToken(String accessKey) {
+	Token accessToken = service.getAccessToken(getRequestToken(), new Verifier(accessKey));
+	this.accessToken = accessToken.getToken();
+	this.accessSecret = accessToken.getSecret();
+	return accessToken;
+    }
+
+    protected Token getAccessToken(String token, String secret) {
+	Token accessToken = new Token(token, secret);
+	return accessToken;
+    }
 }

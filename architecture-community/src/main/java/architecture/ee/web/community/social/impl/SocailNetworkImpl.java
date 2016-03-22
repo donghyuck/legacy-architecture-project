@@ -27,249 +27,251 @@ import architecture.ee.web.community.social.SocialServiceProvider;
 
 public class SocailNetworkImpl extends EntityModelObjectSupport implements SocialNetwork {
 
-	private Long socialAccountId = -1L;
-	private Integer objectType;
-	private Long objectId;
-	private String servicePrividerName;
-	private String accessToken;
-	private String accessSecret ;
-	private boolean isSignedIn = false;
-	private boolean connected = false ;
-	private String username;
-		
-	
-	/**
-	 * @return username
-	 */
-	public String getUsername() {
-		return username;
-	}
+    private Long socialAccountId = -1L;
+    private Integer objectType;
+    private Long objectId;
+    private String servicePrividerName;
+    private String accessToken;
+    private String accessSecret;
+    private boolean isSignedIn = false;
+    private boolean connected = false;
+    private String username;
 
-	/**
-	 * @param username 설정할 username
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
+    /**
+     * @return username
+     */
+    public String getUsername() {
+	return username;
+    }
 
-	private SocialServiceProvider serviceProvider;	
-	
-	public SocailNetworkImpl() {
-		
-	}
-	
-	/**
-	 * @return connected
-	 */
-	public boolean isConnected() {
-		return connected;
-	}
+    /**
+     * @param username
+     *            설정할 username
+     */
+    public void setUsername(String username) {
+	this.username = username;
+    }
 
+    private SocialServiceProvider serviceProvider;
 
-	/**
-	 * @param connected 설정할 connected
-	 */
-	public void setConnected(boolean connected) {
-		this.connected = connected;
-	}
+    public SocailNetworkImpl() {
 
+    }
 
-	public Serializable getPrimaryKeyObject() {
-		return socialAccountId;
-	}
+    /**
+     * @return connected
+     */
+    public boolean isConnected() {
+	return connected;
+    }
 
-	/**
-	 * @return socialAccountId
-	 */
-	public long getSocialAccountId() {
-		return socialAccountId;
-	}
+    /**
+     * @param connected
+     *            설정할 connected
+     */
+    public void setConnected(boolean connected) {
+	this.connected = connected;
+    }
 
-	/**
-	 * @param socialAccountId 설정할 socialAccountId
-	 */
-	public void setSocialAccountId(Long socialAccountId) {
-		this.socialAccountId = socialAccountId;
-	}
+    public Serializable getPrimaryKeyObject() {
+	return socialAccountId;
+    }
 
-	/**
-	 * @return objectType
-	 */
-	public int getObjectType() {
-		return objectType;
-	}
+    /**
+     * @return socialAccountId
+     */
+    public long getSocialAccountId() {
+	return socialAccountId;
+    }
 
-	/**
-	 * @param objectType 설정할 objectType
-	 */
-	public void setObjectType(int objectType) {
-		this.objectType = objectType;
-	}
+    /**
+     * @param socialAccountId
+     *            설정할 socialAccountId
+     */
+    public void setSocialAccountId(Long socialAccountId) {
+	this.socialAccountId = socialAccountId;
+    }
 
-	/**
-	 * @return objectId
-	 */
-	public long getObjectId() {
-		return objectId;
-	}
+    /**
+     * @return objectType
+     */
+    public int getObjectType() {
+	return objectType;
+    }
 
-	/**
-	 * @param objectId 설정할 objectId
-	 */
-	public void setObjectId(long objectId) {
-		this.objectId = objectId;
-	}
+    /**
+     * @param objectType
+     *            설정할 objectType
+     */
+    public void setObjectType(int objectType) {
+	this.objectType = objectType;
+    }
 
+    /**
+     * @return objectId
+     */
+    public long getObjectId() {
+	return objectId;
+    }
 
-	/**
-	 * @return accessToken
-	 */
-	@JsonIgnore
-	public String getAccessToken() {
-		return accessToken;
-	}
+    /**
+     * @param objectId
+     *            설정할 objectId
+     */
+    public void setObjectId(long objectId) {
+	this.objectId = objectId;
+    }
 
-	/**
-	 * @param accessToken 설정할 accessToken
-	 */
-	@JsonIgnore
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
+    /**
+     * @return accessToken
+     */
+    @JsonIgnore
+    public String getAccessToken() {
+	return accessToken;
+    }
 
-	/**
-	 * @return accessSecret
-	 */
-	@JsonIgnore
-	public String getAccessSecret() {
-		return accessSecret;
-	}
+    /**
+     * @param accessToken
+     *            설정할 accessToken
+     */
+    @JsonIgnore
+    public void setAccessToken(String accessToken) {
+	this.accessToken = accessToken;
+    }
 
-	/**
-	 * @param accessSecret 설정할 accessSecret
-	 */
-	@JsonIgnore
-	public void setAccessSecret(String accessSecret) {
-		this.accessSecret = accessSecret;
-	}
+    /**
+     * @return accessSecret
+     */
+    @JsonIgnore
+    public String getAccessSecret() {
+	return accessSecret;
+    }
 
-	/**
-	 * @return servicePrividerName
-	 */
-	public String getServiceProviderName() {
-		return servicePrividerName;
-	}
+    /**
+     * @param accessSecret
+     *            설정할 accessSecret
+     */
+    @JsonIgnore
+    public void setAccessSecret(String accessSecret) {
+	this.accessSecret = accessSecret;
+    }
 
-	/**
-	 * @param servicePrividerName 설정할 servicePrividerName
-	 */
-	public void setServiceProviderName(String servicePrividerName) {
-		this.servicePrividerName = servicePrividerName;
-	}
+    /**
+     * @return servicePrividerName
+     */
+    public String getServiceProviderName() {
+	return servicePrividerName;
+    }
 
-	/**
-	 * @return serviceProvider
-	 */
-	@JsonIgnore
-	public SocialServiceProvider getSocialServiceProvider() {
-		return serviceProvider;
-	}
+    /**
+     * @param servicePrividerName
+     *            설정할 servicePrividerName
+     */
+    public void setServiceProviderName(String servicePrividerName) {
+	this.servicePrividerName = servicePrividerName;
+    }
 
-	/**
-	 * @param serviceProvider 설정할 serviceProvider
-	 */
-	@JsonIgnore
-	public void setSocialServiceProvider(SocialServiceProvider serviceProvider) {
-		this.serviceProvider = serviceProvider;
-	}
+    /**
+     * @return serviceProvider
+     */
+    @JsonIgnore
+    public SocialServiceProvider getSocialServiceProvider() {
+	return serviceProvider;
+    }
 
-	/**
-	 * @return isSignedIn
-	 */
-	public boolean isSignedIn() {
-		return isSignedIn;
-	}
+    /**
+     * @param serviceProvider
+     *            설정할 serviceProvider
+     */
+    @JsonIgnore
+    public void setSocialServiceProvider(SocialServiceProvider serviceProvider) {
+	this.serviceProvider = serviceProvider;
+    }
 
-	/**
-	 * @param isSignedIn 설정할 isSignedIn
-	 */
-	public void setSignedIn(boolean isSignedIn) {
-		this.isSignedIn = isSignedIn;
-	}
+    /**
+     * @return isSignedIn
+     */
+    public boolean isSignedIn() {
+	return isSignedIn;
+    }
 
-	public int getModelObjectType() {
-		return ModelTypeFactory.getTypeIdFromCode("SOCIAL_NETWORK");
-	}
-		
-	public int getCachedSize() {
-		return CacheSizes.sizeOfLong() 
-				+ CacheSizes.sizeOfLong() 
-				+ CacheSizes.sizeOfInt() 
-				+ CacheSizes.sizeOfString(servicePrividerName)
-				+ CacheSizes.sizeOfString(accessToken)
-				+ CacheSizes.sizeOfString(accessSecret)
-				+ CacheSizes.sizeOfBoolean()
-				+ CacheSizes.sizeOfMap(getProperties())
-				+ CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate();
-	}
+    /**
+     * @param isSignedIn
+     *            설정할 isSignedIn
+     */
+    public void setSignedIn(boolean isSignedIn) {
+	this.isSignedIn = isSignedIn;
+    }
 
-	/* (비Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("SocailNetworkImpl [");
-		if (socialAccountId != null) {
-			builder.append("socialAccountId=");
-			builder.append(socialAccountId);
-			builder.append(", ");
-		}
-		if (objectType != null) {
-			builder.append("objectType=");
-			builder.append(objectType);
-			builder.append(", ");
-		}
-		if (objectId != null) {
-			builder.append("objectId=");
-			builder.append(objectId);
-			builder.append(", ");
-		}
-		if (servicePrividerName != null) {
-			builder.append("servicePrividerName=");
-			builder.append(servicePrividerName);
-			builder.append(", ");
-		}
-		if (accessToken != null) {
-			builder.append("accessToken=");
-			builder.append(accessToken);
-			builder.append(", ");
-		}
-		if (accessSecret != null) {
-			builder.append("accessSecret=");
-			builder.append(accessSecret);
-			builder.append(", ");
-		}
-		builder.append("isSignedIn=");
-		builder.append(isSignedIn);
-		builder.append(", ");
-		if (serviceProvider != null) {
-			builder.append("serviceProvider=");
-			builder.append(serviceProvider);
-		}
-		builder.append("]");
-		return builder.toString();
+    public int getModelObjectType() {
+	return ModelTypeFactory.getTypeIdFromCode("SOCIAL_NETWORK");
+    }
+
+    public int getCachedSize() {
+	return CacheSizes.sizeOfLong() + CacheSizes.sizeOfLong() + CacheSizes.sizeOfInt()
+		+ CacheSizes.sizeOfString(servicePrividerName) + CacheSizes.sizeOfString(accessToken)
+		+ CacheSizes.sizeOfString(accessSecret) + CacheSizes.sizeOfBoolean()
+		+ CacheSizes.sizeOfMap(getProperties()) + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate();
+    }
+
+    /*
+     * (비Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("SocailNetworkImpl [");
+	if (socialAccountId != null) {
+	    builder.append("socialAccountId=");
+	    builder.append(socialAccountId);
+	    builder.append(", ");
 	}
-	
-	@JsonIgnore
-	public String getAuthorizationUrl() {
-		if(serviceProvider!=null)
-			try {
-				return serviceProvider.getAuthorizationUrl();						
-			} catch (Exception e) {
-			}		
-		return "";
+	if (objectType != null) {
+	    builder.append("objectType=");
+	    builder.append(objectType);
+	    builder.append(", ");
 	}
+	if (objectId != null) {
+	    builder.append("objectId=");
+	    builder.append(objectId);
+	    builder.append(", ");
+	}
+	if (servicePrividerName != null) {
+	    builder.append("servicePrividerName=");
+	    builder.append(servicePrividerName);
+	    builder.append(", ");
+	}
+	if (accessToken != null) {
+	    builder.append("accessToken=");
+	    builder.append(accessToken);
+	    builder.append(", ");
+	}
+	if (accessSecret != null) {
+	    builder.append("accessSecret=");
+	    builder.append(accessSecret);
+	    builder.append(", ");
+	}
+	builder.append("isSignedIn=");
+	builder.append(isSignedIn);
+	builder.append(", ");
+	if (serviceProvider != null) {
+	    builder.append("serviceProvider=");
+	    builder.append(serviceProvider);
+	}
+	builder.append("]");
+	return builder.toString();
+    }
+
+    @JsonIgnore
+    public String getAuthorizationUrl() {
+	if (serviceProvider != null)
+	    try {
+		return serviceProvider.getAuthorizationUrl();
+	    } catch (Exception e) {
+	    }
+	return "";
+    }
 
 }

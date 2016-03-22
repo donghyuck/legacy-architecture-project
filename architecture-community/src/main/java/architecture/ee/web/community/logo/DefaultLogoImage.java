@@ -29,259 +29,262 @@ import architecture.ee.web.logo.LogoImage;
 
 public class DefaultLogoImage implements LogoImage {
 
-	private int objectType ;
-	
-	private Long objectId;
-	
-	private Long logoId;
+    private int objectType;
 
-	private Long userId;
+    private Long objectId;
 
-	private boolean primary;
+    private Long logoId;
 
-	private String imageContentType;
+    private Long userId;
 
-	private Integer imageSize;
+    private boolean primary;
 
-	private String thumbnailContentType;
+    private String imageContentType;
 
-	private Integer thumbnailSize;
+    private Integer imageSize;
 
-	private Date creationDate ;
-	
-	private Date modifiedDate;
-	
-	private String filename;
-	
-	public DefaultLogoImage() {
-		this.logoId = -1L;
-		this.objectType = 0 ;
-		this.objectId = -1L;
-		this.primary = false;
-		this.imageContentType = null;
-		this.imageSize = 0 ;
-		this.thumbnailContentType = DEFAULT_THUMBNAIL_CONTENT_TYPE;
-		this.thumbnailSize = 0;
-		Date now =  Calendar.getInstance().getTime();
-		this.creationDate = now;
-		this.modifiedDate = now;
-	}
+    private String thumbnailContentType;
 
-	/**
-	 * @param logoId 설정할 logoId
-	 */
-	public void setLogoId(Long logoId) {
-		this.logoId = logoId;
-	}
+    private Integer thumbnailSize;
 
-	/**
-	 * @return objectType
-	 */
-	public int getObjectType() {
-		return objectType;
-	}
+    private Date creationDate;
 
-	/**
-	 * @param objectType 설정할 objectType
-	 */
-	public void setObjectType(int objectType) {
-		this.objectType = objectType;
-	}
+    private Date modifiedDate;
 
-	/**
-	 * @return objectId
-	 */
-	public Long getObjectId() {
-		return objectId;
-	}
+    private String filename;
 
-	/**
-	 * @param objectId 설정할 objectId
-	 */
-	public void setObjectId(Long objectId) {
-		this.objectId = objectId;
-	}
+    public DefaultLogoImage() {
+	this.logoId = -1L;
+	this.objectType = 0;
+	this.objectId = -1L;
+	this.primary = false;
+	this.imageContentType = null;
+	this.imageSize = 0;
+	this.thumbnailContentType = DEFAULT_THUMBNAIL_CONTENT_TYPE;
+	this.thumbnailSize = 0;
+	Date now = Calendar.getInstance().getTime();
+	this.creationDate = now;
+	this.modifiedDate = now;
+    }
 
-	/**
-	 * @return userId
-	 */
-	public Long getUserId() {
-		return userId;
-	}
+    /**
+     * @param logoId
+     *            설정할 logoId
+     */
+    public void setLogoId(Long logoId) {
+	this.logoId = logoId;
+    }
 
-	/**
-	 * @param userId 설정할 userId
-	 */
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    /**
+     * @return objectType
+     */
+    public int getObjectType() {
+	return objectType;
+    }
 
+    /**
+     * @param objectType
+     *            설정할 objectType
+     */
+    public void setObjectType(int objectType) {
+	this.objectType = objectType;
+    }
 
+    /**
+     * @return objectId
+     */
+    public Long getObjectId() {
+	return objectId;
+    }
 
-	/**
-	 * @param primary 설정할 primary
-	 */
-	public void setPrimary(boolean primary) {
-		this.primary = primary;
-	}
+    /**
+     * @param objectId
+     *            설정할 objectId
+     */
+    public void setObjectId(Long objectId) {
+	this.objectId = objectId;
+    }
 
+    /**
+     * @return userId
+     */
+    public Long getUserId() {
+	return userId;
+    }
 
-	public Boolean isPrimary() {
-		return primary;
-	}
-	
-	/**
-	 * @return imageContentType
-	 */
-	public String getImageContentType() {
-		return imageContentType;
-	}
+    /**
+     * @param userId
+     *            설정할 userId
+     */
+    public void setUserId(Long userId) {
+	this.userId = userId;
+    }
 
-	/**
-	 * @param imageContentType 설정할 imageContentType
-	 */
-	public void setImageContentType(String imageContentType) {
-		this.imageContentType = imageContentType;
-	}
+    /**
+     * @param primary
+     *            설정할 primary
+     */
+    public void setPrimary(boolean primary) {
+	this.primary = primary;
+    }
 
-	/**
-	 * @return imageSize
-	 */
-	public Integer getImageSize() {
-		return imageSize;
-	}
+    public Boolean isPrimary() {
+	return primary;
+    }
 
-	/**
-	 * @param imageSize 설정할 imageSize
-	 */
-	public void setImageSize(Integer imageSize) {
-		this.imageSize = imageSize;
-	}
+    /**
+     * @return imageContentType
+     */
+    public String getImageContentType() {
+	return imageContentType;
+    }
 
-	/**
-	 * @return thumbnailContentType
-	 */
-	public String getThumbnailContentType() {
-		return thumbnailContentType;
-	}
+    /**
+     * @param imageContentType
+     *            설정할 imageContentType
+     */
+    public void setImageContentType(String imageContentType) {
+	this.imageContentType = imageContentType;
+    }
 
-	/**
-	 * @param thumbnailContentType 설정할 thumbnailContentType
-	 */
-	public void setThumbnailContentType(String thumbnailContentType) {
-		this.thumbnailContentType = thumbnailContentType;
-	}
+    /**
+     * @return imageSize
+     */
+    public Integer getImageSize() {
+	return imageSize;
+    }
 
-	/**
-	 * @return thumbnailSize
-	 */
-	public Integer getThumbnailSize() {
-		return thumbnailSize;
-	}
+    /**
+     * @param imageSize
+     *            설정할 imageSize
+     */
+    public void setImageSize(Integer imageSize) {
+	this.imageSize = imageSize;
+    }
 
-	/**
-	 * @param thumbnailSize 설정할 thumbnailSize
-	 */
-	public void setThumbnailSize(Integer thumbnailSize) {
-		this.thumbnailSize = thumbnailSize;
-	}
+    /**
+     * @return thumbnailContentType
+     */
+    public String getThumbnailContentType() {
+	return thumbnailContentType;
+    }
 
-	/**
-	 * @return creationDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    /**
+     * @param thumbnailContentType
+     *            설정할 thumbnailContentType
+     */
+    public void setThumbnailContentType(String thumbnailContentType) {
+	this.thumbnailContentType = thumbnailContentType;
+    }
 
-	/**
-	 * @param creationDate 설정할 creationDate
-	 */
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    /**
+     * @return thumbnailSize
+     */
+    public Integer getThumbnailSize() {
+	return thumbnailSize;
+    }
 
-	/**
-	 * @return modifiedDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
+    /**
+     * @param thumbnailSize
+     *            설정할 thumbnailSize
+     */
+    public void setThumbnailSize(Integer thumbnailSize) {
+	this.thumbnailSize = thumbnailSize;
+    }
 
-	/**
-	 * @param modifiedDate 설정할 modifiedDate
-	 */
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
+    /**
+     * @return creationDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getCreationDate() {
+	return creationDate;
+    }
 
-	/**
-	 * @return filename
-	 */
-	public String getFilename() {
-		return filename;
-	}
+    /**
+     * @param creationDate
+     *            설정할 creationDate
+     */
+    @JsonDeserialize(using = CustomJsonDateDeserializer.class)
+    public void setCreationDate(Date creationDate) {
+	this.creationDate = creationDate;
+    }
 
-	/**
-	 * @param filename 설정할 filename
-	 */
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
+    /**
+     * @return modifiedDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getModifiedDate() {
+	return modifiedDate;
+    }
 
-	/**
-	 * @return logoId
-	 */
-	public Long getLogoId() {
-		return logoId;
-	}
+    /**
+     * @param modifiedDate
+     *            설정할 modifiedDate
+     */
+    @JsonDeserialize(using = CustomJsonDateDeserializer.class)
+    public void setModifiedDate(Date modifiedDate) {
+	this.modifiedDate = modifiedDate;
+    }
 
-	@JsonIgnore
-	public int getCachedSize() {
-		return CacheSizes.sizeOfLong() + 
-				CacheSizes.sizeOfInt() + 
-				CacheSizes.sizeOfLong() + 
-				CacheSizes.sizeOfBoolean() + 
-				CacheSizes.sizeOfString(this.filename) + 
-				CacheSizes.sizeOfString(this.imageContentType) + 
-				CacheSizes.sizeOfInt() +
-				CacheSizes.sizeOfString(this.thumbnailContentType) +
-				CacheSizes.sizeOfInt() +
-				CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate() ;
-	}
+    /**
+     * @return filename
+     */
+    public String getFilename() {
+	return filename;
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("DefaultLogoImage [");
-		if (logoId != null)
-			builder.append("logoId=").append(logoId).append(", ");
-		builder.append("objectType=").append(objectType).append(", ");
-		if (objectId != null)
-			builder.append("objectId=").append(objectId).append(", ");
-		if (userId != null)
-			builder.append("userId=").append(userId).append(", ");
+    /**
+     * @param filename
+     *            설정할 filename
+     */
+    public void setFilename(String filename) {
+	this.filename = filename;
+    }
 
-		builder.append("primary=").append(primary).append(", ");
-		
-		if (filename != null)
-			builder.append("filename=").append(filename).append(", ");
-		if (imageContentType != null)
-			builder.append("imageContentType=").append(imageContentType).append(", ");
-		if (imageSize != null)
-			builder.append("imageSize=").append(imageSize).append(", ");
-		if (thumbnailContentType != null)
-			builder.append("thumbnailContentType=").append(thumbnailContentType).append(", ");
-		if (thumbnailSize != null)
-			builder.append("thumbnailSize=").append(thumbnailSize).append(", ");
-		if (creationDate != null)
-			builder.append("creationDate=").append(creationDate).append(", ");
-		if (modifiedDate != null)
-			builder.append("modifiedDate=").append(modifiedDate);
-		builder.append("]");
-		return builder.toString();
-	}
+    /**
+     * @return logoId
+     */
+    public Long getLogoId() {
+	return logoId;
+    }
+
+    @JsonIgnore
+    public int getCachedSize() {
+	return CacheSizes.sizeOfLong() + CacheSizes.sizeOfInt() + CacheSizes.sizeOfLong() + CacheSizes.sizeOfBoolean()
+		+ CacheSizes.sizeOfString(this.filename) + CacheSizes.sizeOfString(this.imageContentType)
+		+ CacheSizes.sizeOfInt() + CacheSizes.sizeOfString(this.thumbnailContentType) + CacheSizes.sizeOfInt()
+		+ CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate();
+    }
+
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("DefaultLogoImage [");
+	if (logoId != null)
+	    builder.append("logoId=").append(logoId).append(", ");
+	builder.append("objectType=").append(objectType).append(", ");
+	if (objectId != null)
+	    builder.append("objectId=").append(objectId).append(", ");
+	if (userId != null)
+	    builder.append("userId=").append(userId).append(", ");
+
+	builder.append("primary=").append(primary).append(", ");
+
+	if (filename != null)
+	    builder.append("filename=").append(filename).append(", ");
+	if (imageContentType != null)
+	    builder.append("imageContentType=").append(imageContentType).append(", ");
+	if (imageSize != null)
+	    builder.append("imageSize=").append(imageSize).append(", ");
+	if (thumbnailContentType != null)
+	    builder.append("thumbnailContentType=").append(thumbnailContentType).append(", ");
+	if (thumbnailSize != null)
+	    builder.append("thumbnailSize=").append(thumbnailSize).append(", ");
+	if (creationDate != null)
+	    builder.append("creationDate=").append(creationDate).append(", ");
+	if (modifiedDate != null)
+	    builder.append("modifiedDate=").append(modifiedDate);
+	builder.append("]");
+	return builder.toString();
+    }
 }

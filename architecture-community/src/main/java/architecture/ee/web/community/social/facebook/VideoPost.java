@@ -18,28 +18,27 @@ package architecture.ee.web.community.social.facebook;
 import java.util.Date;
 import java.util.List;
 
-
 public class VideoPost extends Post {
-	
-	private String source;
-	
-	private String videoId;
-	
-	private List<Tag> tags;
-	
-	public VideoPost(String id, Reference from, Date createdTime, Date updatedTime) {
-		super(id, from, createdTime, updatedTime);
-	}
-	
-	public String getSource() {
-		return source;
-	}
-	
-	public String getVideoId() {
-		return videoId;
-	}
-	
-	public List<Tag> getTags() {
-		return tags;
-	}
+
+    private String source;
+
+    private String videoId;
+
+    private List<Tag> tags;
+
+    public VideoPost(String id, Reference from, Date createdTime, Date updatedTime) {
+	super(id, from, createdTime, updatedTime);
+    }
+
+    public String getSource() {
+	return source;
+    }
+
+    public String getVideoId() {
+	return videoId;
+    }
+
+    public List<Tag> getTags() {
+	return tags;
+    }
 }

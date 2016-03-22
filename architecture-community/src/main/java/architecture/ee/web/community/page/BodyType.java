@@ -17,54 +17,50 @@ package architecture.ee.web.community.page;
 
 public enum BodyType {
 
-	RAW(1), 
-	XHTML(2), 
-	FREEMARKER(3), 
-	VELOCITY(4);
+    RAW(1), XHTML(2), FREEMARKER(3), VELOCITY(4);
 
-	private int id;
-	
-	private BodyType(int id){
-		this.id = id ;
-	}
+    private int id;
 
-	/**
-	 * @return id
-	 */
-	public int getId() {
-		return id;
-	}
- 
-	public String toString() {
-		StringBuilder builder = new StringBuilder("BodyType:");
-		 switch(id)
-	        {
-	        case 1: // '\001'
-	            builder.append("RAW");
-	            break;
+    private BodyType(int id) {
+	this.id = id;
+    }
 
-	        case 2: // '\002'
-	            builder.append("XHTML");
-	            break;
-	        case 3: // '\002'
-	            builder.append("FREEMARKER");
-	            break;
-	        case 4: // '\002'
-	            builder.append("VELOCITY");
-	            break;	            
-	        default:
-	            builder.append("id=").append(id);
-	            break;
-	        }
-	        return builder.toString();
+    /**
+     * @return id
+     */
+    public int getId() {
+	return id;
+    }
+
+    public String toString() {
+	StringBuilder builder = new StringBuilder("BodyType:");
+	switch (id) {
+	case 1: // '\001'
+	    builder.append("RAW");
+	    break;
+
+	case 2: // '\002'
+	    builder.append("XHTML");
+	    break;
+	case 3: // '\002'
+	    builder.append("FREEMARKER");
+	    break;
+	case 4: // '\002'
+	    builder.append("VELOCITY");
+	    break;
+	default:
+	    builder.append("id=").append(id);
+	    break;
 	}
-    
-	public static BodyType getBodyTypeById(int typeId){
-		for( BodyType type : BodyType.values()){
-			if( type.getId() == typeId)
-				return type;
-		}
-		return BodyType.RAW;
+	return builder.toString();
+    }
+
+    public static BodyType getBodyTypeById(int typeId) {
+	for (BodyType type : BodyType.values()) {
+	    if (type.getId() == typeId)
+		return type;
 	}
-    
+	return BodyType.RAW;
+    }
+
 }

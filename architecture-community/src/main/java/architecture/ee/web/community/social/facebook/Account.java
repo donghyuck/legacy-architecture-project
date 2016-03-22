@@ -15,38 +15,37 @@
  */
 package architecture.ee.web.community.social.facebook;
 
-
 public class Account {
 
-	private final String id;
-	
-	private final String name;
-	
-	private final String category;
-	
-	private final String accessToken;
+    private final String id;
 
-	public Account(String id, String name, String category, String accessToken) {
-		this.id = id;
-		this.name = name;
-		this.category = category;
-		this.accessToken = accessToken;
-	}
+    private final String name;
 
-	public String getId() {
-		return id;
-	}
+    private final String category;
 
-	public String getName() {
-		return name;
-	}
+    private final String accessToken;
 
-	public String getCategory() {
-		return category;
-	}
+    public Account(String id, String name, String category, String accessToken) {
+	this.id = id;
+	this.name = name;
+	this.category = category;
+	this.accessToken = accessToken;
+    }
 
-	public String getAccessToken() {
-		return accessToken;
-	}
-	
+    public String getId() {
+	return id;
+    }
+
+    public String getName() {
+	return name;
+    }
+
+    public String getCategory() {
+	return category;
+    }
+
+    public String getAccessToken() {
+	return accessToken;
+    }
+
 }

@@ -24,50 +24,47 @@ import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 
 import architecture.ee.web.community.social.provider.connect.SocialConnect.Media;
 
-
-
 public class ConnectionFactoryLocator {
 
-	public static interface Implementation {	
-		
-		public ConnectionFactoryRegistry getConnectionFactoryLocator();	
-		
-		public <A> ConnectionFactory<A> getConnectionFactory(Class<A> apiType) ;
-		
-		public ConnectionFactory<?>  getConnectionFactory(String providerId) ;
-		
-	}
-	
-	private static Implementation impl = null;
+    public static interface Implementation {
 
-	static 
-	{
-		impl =new DefaultConnectionFactoryLocator();
-	} 
-	
-	public static List<Media> registeredProviderMedia(){
-		Set<String> set = getConnectionFactoryLocator().registeredProviderIds();
-		List<Media> media = new ArrayList<Media>(set.size());
-		for(String name : set){
-			media.add(Media.valueOf(name.toUpperCase()));
-		}
-		return media;
-	}
+	public ConnectionFactoryRegistry getConnectionFactoryLocator();
 
-	public static ConnectionFactoryRegistry getConnectionFactoryLocator(){
-		return impl.getConnectionFactoryLocator();
-	}
+	public <A> ConnectionFactory<A> getConnectionFactory(Class<A> apiType);
 
-	public static <A> ConnectionFactory<A> getConnectionFactory(Class<A> apiType){
-		return impl.getConnectionFactory(apiType);
-	}
+	public ConnectionFactory<?> getConnectionFactory(String providerId);
 
-	public static ConnectionFactory<?> getConnectionFactory(String providerId){
-		return impl.getConnectionFactory(providerId);
+    }
+
+    private static Implementation impl = null;
+
+    static {
+	impl = new DefaultConnectionFactoryLocator();
+    }
+
+    public static List<Media> registeredProviderMedia() {
+	Set<String> set = getConnectionFactoryLocator().registeredProviderIds();
+	List<Media> media = new ArrayList<Media>(set.size());
+	for (String name : set) {
+	    media.add(Media.valueOf(name.toUpperCase()));
 	}
-	
-	public static ConnectionFactory<?> getConnectionFactory(Media media){
-		return impl.getConnectionFactory(media.name().toLowerCase());
-	}
-	
+	return media;
+    }
+
+    public static ConnectionFactoryRegistry getConnectionFactoryLocator() {
+	return impl.getConnectionFactoryLocator();
+    }
+
+    public static <A> ConnectionFactory<A> getConnectionFactory(Class<A> apiType) {
+	return impl.getConnectionFactory(apiType);
+    }
+
+    public static ConnectionFactory<?> getConnectionFactory(String providerId) {
+	return impl.getConnectionFactory(providerId);
+    }
+
+    public static ConnectionFactory<?> getConnectionFactory(Media media) {
+	return impl.getConnectionFactory(media.name().toLowerCase());
+    }
+
 }

@@ -17,8 +17,6 @@ package architecture.ee.web.community.labels;
 
 import architecture.common.model.ModelObject;
 
-public interface Labelable extends ModelObject  {
-
-
+public interface Labelable extends ModelObject {
 
 }

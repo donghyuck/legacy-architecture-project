@@ -50,197 +50,204 @@ import architecture.ee.web.logo.LogoManager;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteManager;
 
-@Controller ("community-download-controller")
+@Controller("community-download-controller")
 @RequestMapping("/download")
 public class DownloadController {
 
-	private static final Log log = LogFactory.getLog(DownloadController.class);
-	
-	@Inject
-	@Qualifier("imageManager")
-	private ImageManager imageManager ;
+    private static final Log log = LogFactory.getLog(DownloadController.class);
 
-	@Inject
-	@Qualifier("photoStreamsManager")
-	private PhotoStreamsManager photoStreamsManager ;
-	
-	@Inject
-	@Qualifier("profileManager")
-	ProfileManager profileManager ;
-	
-	@Inject
-	@Qualifier("logoManager")
-	LogoManager logoManager;
-	
-	@Inject
-	@Qualifier("companyManager")
-	CompanyManager companyManager;
-	
-	
-	
-	@Inject 
-	@Qualifier("webSiteManager")
-	WebSiteManager webSiteManager;
-	
-			
-	@Autowired private ServletContext servletContext;
-	
-	
-	
-	
-	/**
-	 * @return companyManager
-	 */
-	public CompanyManager getCompanyManager() {
-		return companyManager;
-	}
+    @Inject
+    @Qualifier("imageManager")
+    private ImageManager imageManager;
 
-	/**
-	 * @param companyManager 설정할 companyManager
-	 */
-	public void setCompanyManager(CompanyManager companyManager) {
-		this.companyManager = companyManager;
-	}
+    @Inject
+    @Qualifier("photoStreamsManager")
+    private PhotoStreamsManager photoStreamsManager;
 
-	/**
-	 * @return webSiteManager
-	 */
-	public WebSiteManager getWebSiteManager() {
-		return webSiteManager;
-	}
+    @Inject
+    @Qualifier("profileManager")
+    ProfileManager profileManager;
 
-	/**
-	 * @param webSiteManager 설정할 webSiteManager
-	 */
-	public void setWebSiteManager(WebSiteManager webSiteManager) {
-		this.webSiteManager = webSiteManager;
-	}
+    @Inject
+    @Qualifier("logoManager")
+    LogoManager logoManager;
 
-	/**
-	 * @return logoManager
-	 */
-	public LogoManager getLogoManager() {
-		return logoManager;
-	}
+    @Inject
+    @Qualifier("companyManager")
+    CompanyManager companyManager;
 
-	/**
-	 * @param logoManager 설정할 logoManager
-	 */
-	public void setLogoManager(LogoManager logoManager) {
-		this.logoManager = logoManager;
-	}
+    @Inject
+    @Qualifier("webSiteManager")
+    WebSiteManager webSiteManager;
 
-	/**
-	 * @return profileManager
-	 */
-	public ProfileManager getProfileManager() {
-		return profileManager;
-	}
+    @Autowired
+    private ServletContext servletContext;
 
-	/**
-	 * @param profileManager 설정할 profileManager
-	 */
-	public void setProfileManager(ProfileManager profileManager) {
-		this.profileManager = profileManager;
-	}
+    /**
+     * @return companyManager
+     */
+    public CompanyManager getCompanyManager() {
+	return companyManager;
+    }
 
-	@RequestMapping(value = "/streams/photo/{linkId}", method = RequestMethod.GET)
-	@ResponseBody
-	public void handleStreamPhoto(@PathVariable("linkId") String linkId, HttpServletResponse response) throws IOException {
-		
-		try {
-			Photo photo = photoStreamsManager.getPhotoById(linkId);
-			Image image =imageManager.getImage(photo.getImageId());			
-			InputStream input = imageManager.getImageInputStream(image);
-			String contentType  = image.getContentType();
-			int contentLength = image.getSize();
-			
-			response.setContentType(contentType);
-			response.setContentLength(contentLength);	
-			IOUtils.copy(input, response.getOutputStream());					
-			response.flushBuffer();
-		} catch (NotFoundException e) {
-			response.sendError(404);
-		}				
-	}
-	
-	@RequestMapping(value = "/logo/{type}/{name}", method = RequestMethod.GET)
-	@ResponseBody
-	public void handleLogo( @PathVariable("type") String type, @PathVariable("name") String name , @RequestParam(value="width", defaultValue="0", required=false ) Integer width, @RequestParam(value="height", defaultValue="0", required=false ) Integer height, HttpServletResponse response )throws IOException {
-		
-		try {
-			LogoImage image = null;
-			if( StringUtils.equals(type, "company")){
-				Company company = companyManager.getCompany(name);
-				image = logoManager.getPrimaryLogoImage(company);			
-			}else 	if( StringUtils.equals(type, "site")){
-				WebSite site = webSiteManager.getWebSiteByName(name);
-				image = logoManager.getPrimaryLogoImage(site);			
-			}			
-			if( image != null ){
-				InputStream input ;
-				String contentType ;
-				int contentLength ;
-				
-				if( width > 0 && width > 0 )			{
-					input = logoManager.getImageThumbnailInputStream(image, width, height);
-					contentType = image.getThumbnailContentType();
-					contentLength = image.getThumbnailSize();
-				}else{
-					input = logoManager.getImageInputStream(image);
-					contentType = image.getImageContentType();
-					contentLength = image.getImageSize();
-				}
-				
-				response.setContentType(contentType);
-				response.setContentLength(contentLength);			
-				IOUtils.copy(input, response.getOutputStream());
-				response.flushBuffer();			
-			}
-			
-		} catch (Exception e) {
-			log.warn(e);
-			response.setStatus(301);
-			String url = ApplicationHelper.getApplicationProperty("components.download.images.no-logo-url", "/images/common/what-to-know-before-getting-logo-design.png");
-			response.addHeader("Location", url );
-		}		
-	}
-	
-	@RequestMapping(value = "/profile/{username}", method = RequestMethod.GET)
-	@ResponseBody
-	public void handleProfile(@PathVariable("username") String username, @RequestParam(value="width", defaultValue="0", required=false ) Integer width, @RequestParam(value="height", defaultValue="0", required=false ) Integer height, HttpServletResponse response )throws IOException {
-		
-		log.debug(" ------------------------------------------");
-		log.debug("userName:" + username);
-		log.debug("width:"+ width);
-		log.debug("height:" + height);
-		log.debug("------------------------------------------");					
-		try {			
-			ProfileImage image = profileManager.getProfileImageByUsername(username);			
-			log.debug( "using profile image : " + image.getFilename()  );			
-			InputStream input ;
-			String contentType ;
-			int contentLength ;			
-			if( width > 0 && width > 0 )			{
-				input = profileManager.getImageThumbnailInputStream(image, width, height);
-				contentType = image.getThumbnailContentType();
-				contentLength = image.getThumbnailSize();
-			}else{
-				input = profileManager.getImageInputStream(image);
-				contentType = image.getImageContentType();
-				contentLength = image.getImageSize();				
-			}		
-			
-			response.setContentType(contentType);
-			response.setContentLength(contentLength);			
-			IOUtils.copy(input, response.getOutputStream());
-			response.flushBuffer();		
-		} catch (Exception e) {
-			response.setStatus(301);
-			String url = ApplicationHelper.getApplicationProperty("components.download.images.no-avatar-url", "/images/common/anonymous.png");
-			response.addHeader("Location", url );
-		}	
-	}
+    /**
+     * @param companyManager
+     *            설정할 companyManager
+     */
+    public void setCompanyManager(CompanyManager companyManager) {
+	this.companyManager = companyManager;
+    }
 
-	
+    /**
+     * @return webSiteManager
+     */
+    public WebSiteManager getWebSiteManager() {
+	return webSiteManager;
+    }
+
+    /**
+     * @param webSiteManager
+     *            설정할 webSiteManager
+     */
+    public void setWebSiteManager(WebSiteManager webSiteManager) {
+	this.webSiteManager = webSiteManager;
+    }
+
+    /**
+     * @return logoManager
+     */
+    public LogoManager getLogoManager() {
+	return logoManager;
+    }
+
+    /**
+     * @param logoManager
+     *            설정할 logoManager
+     */
+    public void setLogoManager(LogoManager logoManager) {
+	this.logoManager = logoManager;
+    }
+
+    /**
+     * @return profileManager
+     */
+    public ProfileManager getProfileManager() {
+	return profileManager;
+    }
+
+    /**
+     * @param profileManager
+     *            설정할 profileManager
+     */
+    public void setProfileManager(ProfileManager profileManager) {
+	this.profileManager = profileManager;
+    }
+
+    @RequestMapping(value = "/streams/photo/{linkId}", method = RequestMethod.GET)
+    @ResponseBody
+    public void handleStreamPhoto(@PathVariable("linkId") String linkId, HttpServletResponse response)
+	    throws IOException {
+
+	try {
+	    Photo photo = photoStreamsManager.getPhotoById(linkId);
+	    Image image = imageManager.getImage(photo.getImageId());
+	    InputStream input = imageManager.getImageInputStream(image);
+	    String contentType = image.getContentType();
+	    int contentLength = image.getSize();
+
+	    response.setContentType(contentType);
+	    response.setContentLength(contentLength);
+	    IOUtils.copy(input, response.getOutputStream());
+	    response.flushBuffer();
+	} catch (NotFoundException e) {
+	    response.sendError(404);
+	}
+    }
+
+    @RequestMapping(value = "/logo/{type}/{name}", method = RequestMethod.GET)
+    @ResponseBody
+    public void handleLogo(@PathVariable("type") String type, @PathVariable("name") String name,
+	    @RequestParam(value = "width", defaultValue = "0", required = false) Integer width,
+	    @RequestParam(value = "height", defaultValue = "0", required = false) Integer height,
+	    HttpServletResponse response) throws IOException {
+
+	try {
+	    LogoImage image = null;
+	    if (StringUtils.equals(type, "company")) {
+		Company company = companyManager.getCompany(name);
+		image = logoManager.getPrimaryLogoImage(company);
+	    } else if (StringUtils.equals(type, "site")) {
+		WebSite site = webSiteManager.getWebSiteByName(name);
+		image = logoManager.getPrimaryLogoImage(site);
+	    }
+	    if (image != null) {
+		InputStream input;
+		String contentType;
+		int contentLength;
+
+		if (width > 0 && width > 0) {
+		    input = logoManager.getImageThumbnailInputStream(image, width, height);
+		    contentType = image.getThumbnailContentType();
+		    contentLength = image.getThumbnailSize();
+		} else {
+		    input = logoManager.getImageInputStream(image);
+		    contentType = image.getImageContentType();
+		    contentLength = image.getImageSize();
+		}
+
+		response.setContentType(contentType);
+		response.setContentLength(contentLength);
+		IOUtils.copy(input, response.getOutputStream());
+		response.flushBuffer();
+	    }
+
+	} catch (Exception e) {
+	    log.warn(e);
+	    response.setStatus(301);
+	    String url = ApplicationHelper.getApplicationProperty("components.download.images.no-logo-url",
+		    "/images/common/what-to-know-before-getting-logo-design.png");
+	    response.addHeader("Location", url);
+	}
+    }
+
+    @RequestMapping(value = "/profile/{username}", method = RequestMethod.GET)
+    @ResponseBody
+    public void handleProfile(@PathVariable("username") String username,
+	    @RequestParam(value = "width", defaultValue = "0", required = false) Integer width,
+	    @RequestParam(value = "height", defaultValue = "0", required = false) Integer height,
+	    HttpServletResponse response) throws IOException {
+
+	log.debug(" ------------------------------------------");
+	log.debug("userName:" + username);
+	log.debug("width:" + width);
+	log.debug("height:" + height);
+	log.debug("------------------------------------------");
+	try {
+	    ProfileImage image = profileManager.getProfileImageByUsername(username);
+	    log.debug("using profile image : " + image.getFilename());
+	    InputStream input;
+	    String contentType;
+	    int contentLength;
+	    if (width > 0 && width > 0) {
+		input = profileManager.getImageThumbnailInputStream(image, width, height);
+		contentType = image.getThumbnailContentType();
+		contentLength = image.getThumbnailSize();
+	    } else {
+		input = profileManager.getImageInputStream(image);
+		contentType = image.getImageContentType();
+		contentLength = image.getImageSize();
+	    }
+
+	    response.setContentType(contentType);
+	    response.setContentLength(contentLength);
+	    IOUtils.copy(input, response.getOutputStream());
+	    response.flushBuffer();
+	} catch (Exception e) {
+	    response.setStatus(301);
+	    String url = ApplicationHelper.getApplicationProperty("components.download.images.no-avatar-url",
+		    "/images/common/anonymous.png");
+	    response.addHeader("Location", url);
+	}
+    }
+
 }

@@ -18,31 +18,35 @@ package architecture.ee.web.community.social.twitter;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
-
 class TwitterModule extends SimpleModule {
 
-	public TwitterModule() {
-		super("TwitterModule", new Version(1, 0, 0, null));
-	}
-	
-	@Override
-	public void setupModule(SetupContext context) {
-		context.setMixInAnnotations(TwitterProfile.class, TwitterProfileMixin.class);
-	//	context.setMixInAnnotations(SavedSearch.class, SavedSearchMixin.class);
-	//	context.setMixInAnnotations(Trend.class, TrendMixin.class);
-	//	context.setMixInAnnotations(Trends.class, TrendsMixin.class);
-	//	context.setMixInAnnotations(SuggestionCategory.class, SuggestionCategoryMixin.class);
-	//	context.setMixInAnnotations(DirectMessage.class, DirectMessageMixin.class);
-	//	context.setMixInAnnotations(UserList.class, UserListMixin.class);
-		context.setMixInAnnotations(Tweet.class, TweetMixin.class);
-	//	context.setMixInAnnotations(SearchResults.class, SearchResultsMixin.class);
-	//	context.setMixInAnnotations(Place.class, PlaceMixin.class);
-	//	context.setMixInAnnotations(SimilarPlacesResponse.class, SimilarPlacesMixin.class);
-		context.setMixInAnnotations(Entities.class, EntitiesMixin.class);
-		context.setMixInAnnotations(HashTagEntity.class, HashTagEntityMixin.class);
-		context.setMixInAnnotations(MediaEntity.class, MediaEntityMixin.class);
-		context.setMixInAnnotations(MentionEntity.class, MentionEntityMixin.class);
-		context.setMixInAnnotations(UrlEntity.class, UrlEntityMixin.class);
-	}
+    public TwitterModule() {
+	super("TwitterModule", new Version(1, 0, 0, null));
+    }
+
+    @Override
+    public void setupModule(SetupContext context) {
+	context.setMixInAnnotations(TwitterProfile.class, TwitterProfileMixin.class);
+	// context.setMixInAnnotations(SavedSearch.class,
+	// SavedSearchMixin.class);
+	// context.setMixInAnnotations(Trend.class, TrendMixin.class);
+	// context.setMixInAnnotations(Trends.class, TrendsMixin.class);
+	// context.setMixInAnnotations(SuggestionCategory.class,
+	// SuggestionCategoryMixin.class);
+	// context.setMixInAnnotations(DirectMessage.class,
+	// DirectMessageMixin.class);
+	// context.setMixInAnnotations(UserList.class, UserListMixin.class);
+	context.setMixInAnnotations(Tweet.class, TweetMixin.class);
+	// context.setMixInAnnotations(SearchResults.class,
+	// SearchResultsMixin.class);
+	// context.setMixInAnnotations(Place.class, PlaceMixin.class);
+	// context.setMixInAnnotations(SimilarPlacesResponse.class,
+	// SimilarPlacesMixin.class);
+	context.setMixInAnnotations(Entities.class, EntitiesMixin.class);
+	context.setMixInAnnotations(HashTagEntity.class, HashTagEntityMixin.class);
+	context.setMixInAnnotations(MediaEntity.class, MediaEntityMixin.class);
+	context.setMixInAnnotations(MentionEntity.class, MentionEntityMixin.class);
+	context.setMixInAnnotations(UrlEntity.class, UrlEntityMixin.class);
+    }
 
 }

@@ -17,168 +17,174 @@ package architecture.ee.web.community.social.facebook;
 
 import java.util.Map;
 
-
 public class Page {
 
-	private final String id;
+    private final String id;
 
-	private final String name;
+    private final String name;
 
-	private final String category;
+    private final String category;
 
-	private final String link;
+    private final String link;
 
-	private String description;
+    private String description;
 
-	private String about;
+    private String about;
 
-	private Location location;
-	
-	private String website;
-	
-	private String picture;
+    private Location location;
 
-	private CoverPhoto cover;
+    private String website;
 
-	private String phone;
-	
-	private String affiliation;
-	
-	private String companyOverview;
-	
-	private int fanCount;
-	
-	private int likes;
-	
-	private int talkingAboutCount;
+    private String picture;
 
-	private int checkins;
+    private CoverPhoto cover;
 
-	private boolean canPost;
-	
-	private boolean isPublished;
-	
-	private boolean isCommunityPage;
-	
-	private boolean hasAddedApp;
-	
-	private Map<String, String> hours;
-	
-	public Page(String id, String name, String link, String category) {
-		this.id = id;
-		this.name = name;
-		this.link = link;
-		this.category = category;
-	}
+    private String phone;
 
-	public String getId() {
-		return id;
-	}
+    private String affiliation;
 
-	public String getName() {
-		return name;
-	}
-	
-	public String getLink() {
-		return link;
-	}
+    private String companyOverview;
 
-	public String getCategory() {
-		return category;
-	}
-	
-	public String getDescription() {
-		return description;
-	}
+    private int fanCount;
 
-	public String getAbout() {
-		return about;
-	}
+    private int likes;
 
-	public Location getLocation() {
-		return location;
-	}
+    private int talkingAboutCount;
 
-	public String getWebsite() {
-		return website;
-	}
+    private int checkins;
 
-	/**
-	 * The page's picture.
-	 * @deprecated This method will be replaced in Spring 1.1.0 with a new version that returns an object with more details about the picture.
-	 */
-	@Deprecated
-	public String getPicture() {
-		return picture;
-	}
+    private boolean canPost;
 
-	public CoverPhoto getCover() {
-		return cover;
-	}
+    private boolean isPublished;
 
-	public String getPhone() {
-		return phone;
-	}
+    private boolean isCommunityPage;
 
-	public String getAffiliation() {
-		return affiliation;
-	}
+    private boolean hasAddedApp;
 
-	public String getCompanyOverview() {
-		return companyOverview;
-	}
-	
-	/**
-	 * @deprecated The fan_count property is no longer returned from Facebook's Graph API and so this will always be zero. This property will be removed in Spring Social Facebook 1.1.0.
-	 */
-	@Deprecated
-	public int getFanCount() {
-		return fanCount;
-	}
+    private Map<String, String> hours;
 
-	public int getLikes() {
-		return likes;
-	}
+    public Page(String id, String name, String link, String category) {
+	this.id = id;
+	this.name = name;
+	this.link = link;
+	this.category = category;
+    }
 
-	public int getTalkingAboutCount() {
-		return talkingAboutCount;
-	}
-	
-	public int getCheckins() {
-		return checkins;
-	}
+    public String getId() {
+	return id;
+    }
 
-	/**
-	 * Indicates whether or not the authenticated user can post on this page.
-	 * @return true if the user can post to the page; false otherwise
-	 */
-	public boolean canPost() {
-		return canPost;
-	}
-	
-	/**
-	 * @return true if the page has been published; false otherwise.
-	 */
-	public boolean isPublished() {
-		return isPublished;
-	}
-	
-	/**
-	 * @return true if the page is a community page; false otherwise.
-	 */
-	public boolean isCommunityPage() {
-		return isCommunityPage;
-	}
-	
-	/**
-	 * @return true if the page has added the app making the query in a Page tab; false otherwise.
-	 */
-	public boolean hasAddedApp() {
-		return hasAddedApp;
-	}
+    public String getName() {
+	return name;
+    }
 
-	public Map<String, String> getHours() {
-		return hours;
-	}
-	
+    public String getLink() {
+	return link;
+    }
+
+    public String getCategory() {
+	return category;
+    }
+
+    public String getDescription() {
+	return description;
+    }
+
+    public String getAbout() {
+	return about;
+    }
+
+    public Location getLocation() {
+	return location;
+    }
+
+    public String getWebsite() {
+	return website;
+    }
+
+    /**
+     * The page's picture.
+     * 
+     * @deprecated This method will be replaced in Spring 1.1.0 with a new
+     *             version that returns an object with more details about the
+     *             picture.
+     */
+    @Deprecated
+    public String getPicture() {
+	return picture;
+    }
+
+    public CoverPhoto getCover() {
+	return cover;
+    }
+
+    public String getPhone() {
+	return phone;
+    }
+
+    public String getAffiliation() {
+	return affiliation;
+    }
+
+    public String getCompanyOverview() {
+	return companyOverview;
+    }
+
+    /**
+     * @deprecated The fan_count property is no longer returned from Facebook's
+     *             Graph API and so this will always be zero. This property will
+     *             be removed in Spring Social Facebook 1.1.0.
+     */
+    @Deprecated
+    public int getFanCount() {
+	return fanCount;
+    }
+
+    public int getLikes() {
+	return likes;
+    }
+
+    public int getTalkingAboutCount() {
+	return talkingAboutCount;
+    }
+
+    public int getCheckins() {
+	return checkins;
+    }
+
+    /**
+     * Indicates whether or not the authenticated user can post on this page.
+     * 
+     * @return true if the user can post to the page; false otherwise
+     */
+    public boolean canPost() {
+	return canPost;
+    }
+
+    /**
+     * @return true if the page has been published; false otherwise.
+     */
+    public boolean isPublished() {
+	return isPublished;
+    }
+
+    /**
+     * @return true if the page is a community page; false otherwise.
+     */
+    public boolean isCommunityPage() {
+	return isCommunityPage;
+    }
+
+    /**
+     * @return true if the page has added the app making the query in a Page
+     *         tab; false otherwise.
+     */
+    public boolean hasAddedApp() {
+	return hasAddedApp;
+    }
+
+    public Map<String, String> getHours() {
+	return hours;
+    }
+
 }

@@ -17,9 +17,7 @@ package architecture.ee.web.community.comment;
 
 import java.util.List;
 
-
-
-public interface CommentTreeWalker extends  java.io.Serializable {
+public interface CommentTreeWalker extends java.io.Serializable {
 
     public abstract int getCommentDepth(Comment comment);
 
@@ -30,17 +28,15 @@ public interface CommentTreeWalker extends  java.io.Serializable {
     public abstract int getIndexOfChild(Comment comment, Comment comment1);
 
     public abstract boolean isLeaf(Comment comment);
-    
+
     public abstract List<Comment> topLevelComments();
-    
-	public abstract Comment getParent(Comment comment)
-			throws CommentNotFoundException;
 
-	public abstract Comment getChild(Comment comment, int i)
-			throws CommentNotFoundException;
+    public abstract Comment getParent(Comment comment) throws CommentNotFoundException;
 
-	public abstract List<Comment> children(Comment comment);
-	
-	public abstract List<Comment> recursiveChildren(Comment comment);	
-	
+    public abstract Comment getChild(Comment comment, int i) throws CommentNotFoundException;
+
+    public abstract List<Comment> children(Comment comment);
+
+    public abstract List<Comment> recursiveChildren(Comment comment);
+
 }

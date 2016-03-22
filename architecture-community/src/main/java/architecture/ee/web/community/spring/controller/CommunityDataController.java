@@ -90,1409 +90,1445 @@ import architecture.ee.web.util.WebSiteUtils;
 import architecture.ee.web.ws.Property;
 import architecture.ee.web.ws.Result;
 
-@Controller ("community-data-controller")
+@Controller("community-data-controller")
 @RequestMapping("/data")
 public class CommunityDataController {
-	private static final Log log = LogFactory.getLog(CommunityDataController.class);
+    private static final Log log = LogFactory.getLog(CommunityDataController.class);
 
-	@Inject
-	@Qualifier("userManager")
-	private UserManager userManager ;
-	
-	@Inject
-	@Qualifier("photoStreamsManager")
-	private PhotoStreamsManager photoStreamsManager ;
-	
-	@Inject
-	@Qualifier("imageManager")
-	private ImageManager imageManager ;
-	
-	@Inject
-	@Qualifier("attachmentManager")
-	private AttachmentManager attachmentManager;
+    @Inject
+    @Qualifier("userManager")
+    private UserManager userManager;
 
-	@Inject
-	@Qualifier("announceManager")
-	private AnnounceManager announceManager ;
-	
-	@Inject
-	@Qualifier("pageManager")
-	private PageManager pageManager;
-	
-	@Inject
-	@Qualifier("viewCountManager")
-	private ViewCountManager viewCountManager;	
-	
-	@Inject
-	@Qualifier("commentManager")
-	private CommentManager commentManager ;
+    @Inject
+    @Qualifier("photoStreamsManager")
+    private PhotoStreamsManager photoStreamsManager;
 
-	
-	@Inject
-	@Qualifier("pollManager")
-	private PollManager pollManager;
-	
-	
-	
+    @Inject
+    @Qualifier("imageManager")
+    private ImageManager imageManager;
+
+    @Inject
+    @Qualifier("attachmentManager")
+    private AttachmentManager attachmentManager;
+
+    @Inject
+    @Qualifier("announceManager")
+    private AnnounceManager announceManager;
+
+    @Inject
+    @Qualifier("pageManager")
+    private PageManager pageManager;
+
+    @Inject
+    @Qualifier("viewCountManager")
+    private ViewCountManager viewCountManager;
+
+    @Inject
+    @Qualifier("commentManager")
+    private CommentManager commentManager;
+
+    @Inject
+    @Qualifier("pollManager")
+    private PollManager pollManager;
+
+    /**
+     * @return announceManager
+     */
+    public AnnounceManager getAnnounceManager() {
+	return announceManager;
+    }
+
+    /**
+     * @param announceManager
+     *            설정할 announceManager
+     */
+    public void setAnnounceManager(AnnounceManager announceManager) {
+	this.announceManager = announceManager;
+    }
+
+    /**
+     * @return photoStreamsManager
+     */
+    public PhotoStreamsManager getPhotoStreamsManager() {
+	return photoStreamsManager;
+    }
+
+    /**
+     * @param photoStreamsManager
+     *            설정할 photoStreamsManager
+     */
+    public void setPhotoStreamsManager(PhotoStreamsManager photoStreamsManager) {
+	this.photoStreamsManager = photoStreamsManager;
+    }
+
+    /**
+     * @return imageManager
+     */
+    public ImageManager getImageManager() {
+	return imageManager;
+    }
+
+    /**
+     * @param imageManager
+     *            설정할 imageManager
+     */
+    public void setImageManager(ImageManager imageManager) {
+	this.imageManager = imageManager;
+    }
+
+    /**
+     * @return attachmentManager
+     */
+    public AttachmentManager getAttachmentManager() {
+	return attachmentManager;
+    }
+
+    /**
+     * @param attachmentManager
+     *            설정할 attachmentManager
+     */
+    public void setAttachmentManager(AttachmentManager attachmentManager) {
+	this.attachmentManager = attachmentManager;
+    }
+
+    /** ======================================== **/
+    /** USER SIGNUP **/
+    /** ======================================== **/
+    public static class SignupForm {
+
+	private String media;
+	private String id;
+	private String gender;
+	private String firstName;
+	private String lastName;
+	private String name;
+	private String email;
+	private String locale;
+	private String location;
+	private String languages;
+	private String timezone;
+	private String username;
+	private String password1;
+	private String password2;
+	private String onetime;
+	private boolean nameVisible;
+	private boolean emailVisible;
+	private boolean agree;
+
+	public SignupForm() {
+	    this.media = "internal";
+	    this.nameVisible = false;
+	    this.emailVisible = false;
+	    this.agree = false;
+	}
+
+	public String getMedia() {
+	    return media;
+	}
+
+	public void setMedia(String media) {
+	    this.media = media;
+	}
+
+	public String getId() {
+	    return id;
+	}
+
+	public void setId(String id) {
+	    this.id = id;
+	}
+
+	public String getGender() {
+	    return gender;
+	}
+
+	public void setGender(String gender) {
+	    this.gender = gender;
+	}
+
+	public String getFirstName() {
+	    return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+	    this.firstName = firstName;
+	}
+
+	public String getLastName() {
+	    return lastName;
+	}
+
+	public void setLastName(String lastName) {
+	    this.lastName = lastName;
+	}
+
+	public String getName() {
+	    return name;
+	}
+
+	public void setName(String name) {
+	    this.name = name;
+	}
+
+	public String getEmail() {
+	    return email;
+	}
+
+	public void setEmail(String email) {
+	    this.email = email;
+	}
+
+	public String getLocale() {
+	    return locale;
+	}
+
+	public void setLocale(String locale) {
+	    this.locale = locale;
+	}
+
+	public String getLocation() {
+	    return location;
+	}
+
+	public void setLocation(String location) {
+	    this.location = location;
+	}
+
+	public String getLanguages() {
+	    return languages;
+	}
+
+	public void setLanguages(String languages) {
+	    this.languages = languages;
+	}
+
+	public String getTimezone() {
+	    return timezone;
+	}
+
+	public void setTimezone(String timezone) {
+	    this.timezone = timezone;
+	}
+
+	public String getUsername() {
+	    return username;
+	}
+
+	public void setUsername(String username) {
+	    this.username = username;
+	}
+
+	public String getPassword1() {
+	    return password1;
+	}
+
+	public void setPassword1(String password1) {
+	    this.password1 = password1;
+	}
+
+	public String getPassword2() {
+	    return password2;
+	}
+
+	public void setPassword2(String password2) {
+	    this.password2 = password2;
+	}
+
+	public String getOnetime() {
+	    return onetime;
+	}
+
+	public void setOnetime(String onetime) {
+	    this.onetime = onetime;
+	}
+
+	public boolean isNameVisible() {
+	    return nameVisible;
+	}
+
+	public void setNameVisible(boolean nameVisible) {
+	    this.nameVisible = nameVisible;
+	}
+
+	public boolean isEmailVisible() {
+	    return emailVisible;
+	}
+
+	public void setEmailVisible(boolean emailVisible) {
+	    this.emailVisible = emailVisible;
+	}
+
+	public boolean isAgree() {
+	    return agree;
+	}
+
+	public void setAgree(boolean agree) {
+	    this.agree = agree;
+	}
+
+	@Override
+	public String toString() {
+	    return "SignupForm [media=" + media + ", id=" + id + ", gender=" + gender + ", firstName=" + firstName
+		    + ", lastName=" + lastName + ", name=" + name + ", email=" + email + ", locale=" + locale
+		    + ", location=" + location + ", languages=" + languages + ", timezone=" + timezone + ", username="
+		    + username + ", password1=" + password1 + ", password2=" + password2 + ", onetime=" + onetime
+		    + ", nameVisible=" + nameVisible + ", emailVisible=" + emailVisible + ", agree=" + agree + "]";
+	}
+
+    }
+
+    @RequestMapping(value = "/accounts/register.json", method = { RequestMethod.POST })
+    @ResponseBody
+    public Result register(@RequestBody SignupForm form, NativeWebRequest request) throws UserAlreadyExistsException {
+
+	String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();
+	String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
+	boolean match = form.getPassword1().matches(pattern);
+
+	if (match && form.isAgree()) {
+	    if (StringUtils.equals(form.getMedia(), "internal")) {
+		UserTemplate t = new UserTemplate(form.getUsername(), form.getPassword1(), form.getEmail(),
+			form.getName());
+		t.setEmailVisible(form.isEmailVisible());
+		t.setNameVisible(form.isNameVisible());
+		t.setCompanyId(-1L);
+		try {
+		    WebSite site = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class));
+		    t.setCompanyId(site.getCompany().getCompanyId());
+		} catch (WebSiteNotFoundException e) {
+		}
+
+		User targetUser = userManager.createApplicationUser(t);
+
+	    } else {
+
+	    }
+
+	}
+	log.debug("password valid:" + match);
+
+	log.debug(">>>" + form);
+	return Result.newResult();
+    }
+
+    /**
+     * 
+     * @param objectType
+     * @param objectId
+     * @param text
+     * @param name
+     * @param email
+     * @param request
+     * @return
+     * @throws NotFoundException
+     */
+
+    @RequestMapping(value = { "/comments/create.json" }, method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public Result addComment(
+	    @RequestParam(value = "objectType", defaultValue = "0", required = true) Integer objectType,
+	    @RequestParam(value = "objectId", defaultValue = "0", required = true) Long objectId,
+	    @RequestParam(value = "text", defaultValue = "", required = true) String text,
+	    @RequestParam(value = "name", defaultValue = "", required = false) String name,
+	    @RequestParam(value = "email", defaultValue = "", required = false) String email, NativeWebRequest request)
+	    throws NotFoundException {
+	User user = SecurityHelper.getUser();
+	String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();
+
+	log.debug("objectType=" + objectType);
+	log.debug("objectId=" + objectId);
+
+	Comment comment = commentManager.createComment(objectType, objectId, user, text);
+	comment.setIPAddress(address);
+
+	if (StringUtils.isNotEmpty(name))
+	    comment.setName(name);
+
+	if (StringUtils.isNotEmpty(email))
+	    comment.setEmail(email);
+
+	commentManager.addComment(comment);
+
+	CommentTreeWalker walker = commentManager.getCommentTreeWalker(objectType, objectId);
+
+	return Result.newResult(walker.getRecursiveChildCount(commentManager.getRootParent()));
+    }
+
+    @RequestMapping(value = { "/comments/update.json" }, method = { RequestMethod.POST })
+    @ResponseBody
+    public Result updateComment(@RequestBody DefaultComment comment, NativeWebRequest request) {
+
+	User user = SecurityHelper.getUser();
+	String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();
+	comment.setIPAddress(address);
+	comment.setUser(user);
+
+	log.debug(comment.toString());
+	commentManager.addComment(comment);
+	CommentTreeWalker walker = commentManager.getCommentTreeWalker(comment.getObjectType(), comment.getObjectId());
+	return Result.newResult(walker.getRecursiveChildCount(commentManager.getRootParent()));
+    }
+
+    @RequestMapping(value = { "/comments/list.json" }, method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public CommentList getComments(
+	    @RequestParam(value = "objectType", defaultValue = "0", required = true) Integer objectType,
+	    @RequestParam(value = "objectId", defaultValue = "0", required = true) Long objectId,
+	    NativeWebRequest request) {
+
+	CommentList list = new CommentList();
+	if (objectType < 1 || objectId < 1)
+	    return list;
+
+	CommentTreeWalker walker = commentManager.getCommentTreeWalker(objectType, objectId);
+	Comment PARENT = new DefaultComment();
+	list.setTotalCount(walker.getRecursiveChildCount(commentManager.getRootParent()));
+	list.setComments(walker.recursiveChildren(commentManager.getRootParent()));
+	return list;
+    }
+
+    @RequestMapping(value = { "/pages/comment.json" }, method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public Result addPageComment(
+	    @RequestParam(value = "objectType", defaultValue = "0", required = true) Integer objectType,
+	    @RequestParam(value = "objectId", defaultValue = "0", required = true) Long objectId,
+	    @RequestParam(value = "text", defaultValue = "", required = true) String text,
+	    @RequestParam(value = "name", defaultValue = "", required = false) String name,
+	    @RequestParam(value = "email", defaultValue = "", required = false) String email, NativeWebRequest request)
+	    throws NotFoundException {
+
+	User user = SecurityHelper.getUser();
+	String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();
+
+	Comment comment = commentManager.createComment(objectType, objectId, user, text);
+	comment.setIPAddress(address);
+
+	if (StringUtils.isNotEmpty(name))
+	    comment.setName(name);
+
+	if (StringUtils.isNotEmpty(email))
+	    comment.setEmail(email);
+
+	commentManager.addComment(comment);
+
+	CommentTreeWalker walker = commentManager.getCommentTreeWalker(objectType, objectId);
+
+	return Result.newResult(walker.getRecursiveChildCount(commentManager.getRootParent()));
+    }
+
+    @RequestMapping(value = { "/pages/comments/list.json" }, method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public CommentList getPageComments(@RequestParam(value = "pageId", defaultValue = "0", required = true) Long pageId,
+	    NativeWebRequest request) {
+
+	int objectType = ModelTypeFactory.getTypeIdFromCode("PAGE");
+	CommentTreeWalker walker = commentManager.getCommentTreeWalker(objectType, pageId);
+
+	Comment PARENT = new DefaultComment();
+	CommentList list = new CommentList();
+	list.setTotalCount(walker.getRecursiveChildCount(commentManager.getRootParent()));
+	list.setComments(walker.recursiveChildren(commentManager.getRootParent()));
+	return list;
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SITE_ADMIN' , 'ROLE_USER')")
+    @RequestMapping(value = "/pages/published/list.json", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public PageList getPublishedPageList(
+	    @RequestParam(value = "objectType", defaultValue = "2", required = false) Integer objectType,
+	    @RequestParam(value = "state", defaultValue = "NONE", required = false) String state,
+	    @RequestParam(value = "startIndex", defaultValue = "0", required = false) Integer startIndex,
+	    @RequestParam(value = "pageSize", defaultValue = "15", required = false) Integer pageSize,
+	    NativeWebRequest request) throws NotFoundException {
+	User user = SecurityHelper.getUser();
+	return getPublishedPageList(objectType, startIndex, pageSize);
+    }
+
+    private PageList getPublishedPageList(int objectType, int startIndex, int pageSize) {
+	PageList list = new PageList();
+	list.setTotalCount(pageManager.getPageCount(objectType, PageState.PUBLISHED));
+
+	List<Page> pages = new ArrayList(list.getTotalCount());
+	for (Page page : pageManager.getPages(objectType, PageState.PUBLISHED, startIndex, pageSize)) {
+	    pages.add(new ImmutablePage(page));
+	}
+
+	list.setPages(pages);
+
+	return list;
+    }
+
+    private List<Page> toImmutablePageList(List<Page> list) {
+	List<Page> pages = new ArrayList(list.size());
+	for (Page page : list) {
+	    pages.add(new ImmutablePage(page));
+	}
+	return pages;
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SITE_ADMIN' , 'ROLE_USER')")
+    @RequestMapping(value = "/pages/list.json", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public PageList getPageList(
+	    @RequestParam(value = "objectType", defaultValue = "2", required = false) Integer objectType,
+	    @RequestParam(value = "state", defaultValue = "NONE", required = false) String state,
+	    @RequestParam(value = "startIndex", defaultValue = "0", required = false) Integer startIndex,
+	    @RequestParam(value = "pageSize", defaultValue = "15", required = false) Integer pageSize,
+	    @RequestParam(value = "full", defaultValue = "true", required = false) Boolean isFull,
+	    NativeWebRequest request) throws NotFoundException {
+
+	User user = SecurityHelper.getUser();
+	long objectId = user.getUserId();
+	if (objectType == 1) {
+	    objectId = user.getCompanyId();
+	} else if (objectType == 30) {
+	    objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();
+	}
+
+	PageState pageState = PageState.valueOf(state.toUpperCase());
+	return getPageList(objectType, objectId, pageState, startIndex, pageSize, isFull);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(value = "/pages/get.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Page getPage(@RequestParam(value = "pageId", defaultValue = "2", required = true) Long pageId,
+	    @RequestParam(value = "version", defaultValue = "0", required = false) Integer version,
+	    @RequestParam(value = "count", defaultValue = "0", required = false) Integer count,
+	    NativeWebRequest request) throws NotFoundException {
+
+	User user = SecurityHelper.getUser();
+	Page page = pageManager.getPage(pageId);
+
+	if (page.getPageState() == PageState.PUBLISHED) {
+	    if (count > 0)
+		viewCountManager.addPageCount(page);
+	    return page;
+	}
+
+	if (page.getUser().getUserId() == user.getUserId()) {
+	    return page;
+	}
+
+	throw new UnAuthorizedException();
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(value = "/pages/update_state.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Page updatePageState(@RequestBody DefaultPage page, NativeWebRequest request) throws NotFoundException {
+
+	User user = SecurityHelper.getUser();
+	if (page.getUser() == null && page.getPageId() == 0)
+	    page.setUser(user);
+
+	if (user.isAnonymous() || user.getUserId() != page.getUser().getUserId())
+	    throw new UnAuthorizedException();
+
+	Page target = pageManager.getPage(page.getPageId());
+	target.setPageState(page.getPageState());
+	pageManager.updatePage(target);
+	return target;
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(value = "/pages/update.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Page updatePage(@RequestBody DefaultPage page, NativeWebRequest request) throws NotFoundException {
+	User user = SecurityHelper.getUser();
+	if (page.getUser() == null && page.getPageId() == 0)
+	    page.setUser(user);
+
+	if (user.isAnonymous() || user.getUserId() != page.getUser().getUserId())
+	    throw new UnAuthorizedException();
+
+	boolean doUpdate = false;
+	Page target;
+	String tagsString = null;
+
+	log.debug("page:" + page.getProperties());
+
+	if (page.getPageId() > 0) {
+	    target = pageManager.getPage(page.getPageId());
+	    if (!StringUtils.equals(page.getName(), target.getName())
+		    || !StringUtils.equals(page.getTitle(), target.getTitle())
+		    || !StringUtils.equals(page.getSummary(), target.getSummary()) ||
+
+		    !StringUtils.equals(page.getBodyContent().getBodyText(), target.getBodyContent().getBodyText())) {
+		// target.setProperties(page.getProperties());
+
+	    }
+	    doUpdate = true;
+	    log.debug("do update ...");
+	} else {
+	    if (page.getObjectType() == 30 && page.getObjectId() == 0L) {
+		page.setObjectId(
+			WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId());
+	    } else if (page.getObjectType() == 1 && page.getObjectId() == 0L) {
+		page.setObjectId(user.getCompanyId());
+	    } else if (page.getObjectType() == 2 && page.getObjectId() == 0L) {
+		page.setObjectId(user.getUserId());
+
+	    }
+	    target = new DefaultPage(page.getObjectType(), page.getObjectId());
+	    target.setUser(page.getUser());
+	    target.setBodyContent(new DefaultBodyContent());
+	    // target.setProperties(page.getProperties());
+	    doUpdate = true;
+	}
+
+	tagsString = page.getProperty("tagsString", null);
+	if (tagsString != null)
+	    page.getProperties().remove("tagsString");
+
+	if (doUpdate) {
+	    target.setName(page.getName());
+	    target.setTitle(page.getTitle());
+	    target.setSummary(page.getSummary());
+	    target.setBodyText(page.getBodyContent().getBodyText());
+	    target.setProperties(page.getProperties());
+	    pageManager.updatePage(target);
+	}
+
+	if (tagsString != null && !StringUtils.equals(target.getTagDelegator().getTagsAsString(), tagsString))
+	    target.getTagDelegator().setTags(tagsString);
+
+	log.debug("input:" + page.getProperties());
+	log.debug("target:" + target.getProperties());
+
+	return pageManager.getPage(target.getPageId());
+    }
+
+    @RequestMapping(value = "/pages/properties/list.json", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public List<Property> getPagePropertyList(
+	    @RequestParam(value = "pageId", defaultValue = "0", required = true) Long pageId,
+	    @RequestParam(value = "versionId", defaultValue = "1") Integer versionId, NativeWebRequest request)
+	    throws NotFoundException {
+
+	User user = SecurityHelper.getUser();
+	if (pageId <= 0) {
+	    return Collections.EMPTY_LIST;
+	}
+	Page page = pageManager.getPage(pageId, versionId);
+	Map<String, String> properties = page.getProperties();
+	return toList(properties);
+    }
+
+    @RequestMapping(value = "/pages/properties/update.json", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Property> updatePagePropertyList(
+	    @RequestParam(value = "pageId", defaultValue = "0", required = true) Long pageId,
+	    @RequestParam(value = "versionId", defaultValue = "1") Integer versionId,
+	    @RequestBody List<Property> newProperties, NativeWebRequest request) throws NotFoundException {
+	User user = SecurityHelper.getUser();
+	Page page = pageManager.getPage(pageId, versionId);
+	Map<String, String> properties = page.getProperties();
+	// update or create
+	for (Property property : newProperties) {
+	    properties.put(property.getName(), property.getValue().toString());
+	}
+	if (newProperties.size() > 0) {
+	    pageManager.updatePage(page);
+	}
+	return toList(properties);
+    }
+
+    @RequestMapping(value = "/pages/properties/delete.json", method = { RequestMethod.POST, RequestMethod.DELETE })
+    @ResponseBody
+    public List<Property> deletePagePropertyList(
+	    @RequestParam(value = "pageId", defaultValue = "0", required = true) Long pageId,
+	    @RequestParam(value = "versionId", defaultValue = "1") Integer versionId,
+	    @RequestBody List<Property> newProperties, NativeWebRequest request) throws NotFoundException {
+	User user = SecurityHelper.getUser();
+	Page page = pageManager.getPage(pageId, versionId);
+	Map<String, String> properties = page.getProperties();
+	log.debug(properties);
+	log.debug(newProperties);
+	for (Property property : newProperties) {
+	    properties.remove(property.getName());
+	}
+	if (newProperties.size() > 0) {
+	    log.debug(properties);
+	    pageManager.updatePage(page);
+	}
+	return toList(properties);
+    }
+
+    protected List<Property> toList(Map<String, String> properties) {
+	List<Property> list = new ArrayList<Property>();
+	for (String key : properties.keySet()) {
+	    String value = properties.get(key);
+	    list.add(new Property(key, value));
+	}
+	return list;
+    }
+
+    private boolean isPageStateFilterEnabled(PageState pageState) {
+	if (pageState != PageState.NONE) {
+	    return true;
+	} else {
+	    return false;
+	}
+    }
+
+    private PageList getPageList(int objectType, long objectId, PageState pageState, int startIndex, int pageSize,
+	    Boolean isFull) {
+
+	PageList list = new PageList();
+	boolean byState = isPageStateFilterEnabled(pageState);
+
+	List<Page> data;
+	int totalCount = 0;
+	if (byState) {
+	    data = pageManager.getPages(objectType, objectId, pageState, startIndex, pageSize);
+	    totalCount = pageManager.getPageCount(objectType, objectId, pageState);
+	} else {
+	    data = pageManager.getPages(objectType, objectId, startIndex, pageSize);
+	    totalCount = pageManager.getPageCount(objectType, objectId);
+	}
+
+	if (isFull) {
+	    list.setPages(data);
+	} else {
+
+	    list.setPages(toImmutablePageList(data));
+	}
+	list.setTotalCount(totalCount);
+
+	return list;
+    }
+
+    public static class PageList {
+	private List<Page> pages;
+	private int totalCount;
+
+	public PageList() {
+	}
+
 	/**
-	 * @return announceManager
+	 * @return pages
 	 */
-	public AnnounceManager getAnnounceManager() {
-		return announceManager;
+	public List<Page> getPages() {
+	    return pages;
 	}
 
 	/**
-	 * @param announceManager 설정할 announceManager
+	 * @param pages
+	 *            설정할 pages
 	 */
-	public void setAnnounceManager(AnnounceManager announceManager) {
-		this.announceManager = announceManager;
+	public void setPages(List<Page> pages) {
+	    this.pages = pages;
 	}
 
 	/**
-	 * @return photoStreamsManager
+	 * @return totalCount
 	 */
-	public PhotoStreamsManager getPhotoStreamsManager() {
-		return photoStreamsManager;
+	public int getTotalCount() {
+	    return totalCount;
 	}
 
 	/**
-	 * @param photoStreamsManager 설정할 photoStreamsManager
+	 * @param totalCount
+	 *            설정할 totalCount
 	 */
-	public void setPhotoStreamsManager(PhotoStreamsManager photoStreamsManager) {
-		this.photoStreamsManager = photoStreamsManager;
+	public void setTotalCount(int totalCount) {
+	    this.totalCount = totalCount;
+	}
+    }
+
+    public static class CommentList {
+
+	private List<Comment> comments;
+	private int totalCount;
+
+	/**
+	* 
+	*/
+	public CommentList() {
+	    comments = Collections.EMPTY_LIST;
+	    totalCount = 0;
 	}
 
 	/**
-	 * @return imageManager
+	 * @return pages
 	 */
-	public ImageManager getImageManager() {
-		return imageManager;
+	public List<Comment> getComments() {
+	    return comments;
 	}
 
 	/**
-	 * @param imageManager 설정할 imageManager
+	 * @param pages
+	 *            설정할 pages
 	 */
-	public void setImageManager(ImageManager imageManager) {
-		this.imageManager = imageManager;
+	public void setComments(List<Comment> comments) {
+	    this.comments = comments;
 	}
 
 	/**
-	 * @return attachmentManager
+	 * @return totalCount
 	 */
-	public AttachmentManager getAttachmentManager() {
-		return attachmentManager;
+	public int getTotalCount() {
+	    return totalCount;
 	}
 
 	/**
-	 * @param attachmentManager 설정할 attachmentManager
+	 * @param totalCount
+	 *            설정할 totalCount
 	 */
-	public void setAttachmentManager(AttachmentManager attachmentManager) {
-		this.attachmentManager = attachmentManager;
+	public void setTotalCount(int totalCount) {
+	    this.totalCount = totalCount;
+	}
+    }
+
+    /**
+     * get streams photo by imageId
+     * 
+     * @param imageId
+     * @param request
+     * @return
+     * @throws NotFoundException
+     */
+    @RequestMapping(value = "/streams/photos/get.json", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public List<Photo> getStreamPhoto(
+	    @RequestParam(value = "imageId", defaultValue = "0", required = true) Long imageId,
+	    NativeWebRequest request) throws NotFoundException {
+	Image image = imageManager.getImage(imageId);
+	return photoStreamsManager.getPhotosByImage(image);
+    }
+
+    /**
+     * get stream photo by linkId
+     * 
+     * @param linkId
+     * @param request
+     * @return
+     * @throws NotFoundException
+     */
+
+    @RequestMapping(value = "/streams/photos/getByLink.json", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public Photo getStreamPhotoByLink(@RequestParam(value = "linkId", required = true) String linkId,
+	    NativeWebRequest request) throws NotFoundException {
+	return photoStreamsManager.getPhotoById(linkId);
+    }
+
+    @RequestMapping(value = "/streams/photos/insert.json", method = { RequestMethod.POST })
+    @ResponseBody
+    public Result insertPhotoStream(@RequestParam(value = "imageId", defaultValue = "0", required = true) Long imageId,
+	    NativeWebRequest request) throws NotFoundException {
+	User user = SecurityHelper.getUser();
+	if (user.isAnonymous())
+	    throw new UnAuthorizedException();
+
+	Image image = imageManager.getImage(imageId);
+	photoStreamsManager.addImage(image, user);
+	return Result.newResult();
+
+    }
+
+    @RequestMapping(value = "/streams/photos/delete.json", method = { RequestMethod.POST })
+    @ResponseBody
+    public void deletePhotosStreams(@RequestParam(value = "imageId", defaultValue = "0", required = true) Long imageId,
+	    NativeWebRequest request) throws NotFoundException {
+	User user = SecurityHelper.getUser();
+	if (user.isAnonymous())
+	    throw new UnAuthorizedException();
+	Image image = imageManager.getImage(imageId);
+
+	photoStreamsManager.deletePhotos(image, user);
+    }
+
+    @PreAuthorize("permitAll")
+    @RequestMapping(value = "/streams/photos/list_with_random.json", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public PhotoList getStreamPhotoListByRandom(
+	    @RequestParam(value = "objectType", defaultValue = "2", required = false) Integer objectType,
+	    @RequestParam(value = "startIndex", defaultValue = "0", required = false) Integer startIndex,
+	    @RequestParam(value = "pageSize", defaultValue = "15", required = false) Integer pageSize,
+	    NativeWebRequest request) throws NotFoundException {
+	User user = SecurityHelper.getUser();
+	return getStreamPhotoList(objectType, startIndex, pageSize, true,
+		request.getNativeRequest(HttpServletRequest.class));
+    }
+
+    @PreAuthorize("permitAll")
+    @RequestMapping(value = "/streams/photos/list.json", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public PhotoList getStreamPhotoList(
+	    @RequestParam(value = "objectType", defaultValue = "2", required = false) Integer objectType,
+	    @RequestParam(value = "startIndex", defaultValue = "0", required = false) Integer startIndex,
+	    @RequestParam(value = "pageSize", defaultValue = "15", required = false) Integer pageSize,
+	    NativeWebRequest request) throws NotFoundException {
+	User user = SecurityHelper.getUser();
+	return getStreamPhotoList(objectType, startIndex, pageSize, false,
+		request.getNativeRequest(HttpServletRequest.class));
+    }
+
+    private PhotoList getStreamPhotoList(int objectType, int startIndex, int pageSize, boolean random,
+	    HttpServletRequest request) throws NotFoundException {
+
+	User user = SecurityHelper.getUser();
+	long objectId = user.getUserId();
+
+	if (objectType == 1) {
+	    objectId = user.getCompanyId();
+	} else if (objectType == 30) {
+	    objectId = WebSiteUtils.getWebSite(request).getWebSiteId();
+	}
+	PhotoList list = new PhotoList();
+
+	if (objectType > 0 && objectId == 0)
+	    list.setTotalCount(photoStreamsManager.getPhotoCount(objectType));
+	else if (objectType > 0 && objectId > 0)
+	    list.setTotalCount(photoStreamsManager.getPhotoCount(objectType, objectId));
+
+	if (objectType > 0 && objectId == 0) {
+	    if (random)
+		list.setPhotos(photoStreamsManager.getPhotosByRandom(objectType, startIndex, pageSize));
+	    else
+		list.setPhotos(photoStreamsManager.getPhotos(objectType, startIndex, pageSize));
+	} else if (objectType > 0 && objectId > 0) {
+	    if (random)
+		list.setPhotos(photoStreamsManager.getPhotosByRandom(objectType, objectId, startIndex, pageSize));
+	    else
+		list.setPhotos(photoStreamsManager.getPhotos(objectType, objectId, startIndex, pageSize));
 	}
 
-	
-	/** ======================================== **/
-	/**  USER SIGNUP			      			 **/
-	/** ======================================== **/
-	public static class SignupForm{
-		
-		private String media;
-		private String id ;
-		private String gender;
-		private String firstName;
-		private String lastName;
-		private String name;
-		private String email;
-		private String locale;
-		private String location;
-		private String languages ;
-		private String timezone;
-		private String username;
-		private String password1;
-		private String password2;
-		private String onetime;
-		private boolean nameVisible;
-		private boolean emailVisible;
-		private boolean agree;
-		
-		
-		
-		public SignupForm() {
-			this.media = "internal";
-			this.nameVisible = false;
-			this.emailVisible = false;
-			this.agree = false;
-		}
-		
-		public String getMedia() {
-			return media;
-		}
-		public void setMedia(String media) {
-			this.media = media;
-		}
-		public String getId() {
-			return id;
-		}
-		public void setId(String id) {
-			this.id = id;
-		}
-		public String getGender() {
-			return gender;
-		}
-		public void setGender(String gender) {
-			this.gender = gender;
-		}
-		public String getFirstName() {
-			return firstName;
-		}
-		public void setFirstName(String firstName) {
-			this.firstName = firstName;
-		}
-		public String getLastName() {
-			return lastName;
-		}
-		public void setLastName(String lastName) {
-			this.lastName = lastName;
-		}
-		public String getName() {
-			return name;
-		}
-		public void setName(String name) {
-			this.name = name;
-		}
-		public String getEmail() {
-			return email;
-		}
-		public void setEmail(String email) {
-			this.email = email;
-		}
-		public String getLocale() {
-			return locale;
-		}
-		public void setLocale(String locale) {
-			this.locale = locale;
-		}
-		public String getLocation() {
-			return location;
-		}
-		public void setLocation(String location) {
-			this.location = location;
-		}
-		public String getLanguages() {
-			return languages;
-		}
-		public void setLanguages(String languages) {
-			this.languages = languages;
-		}
-		public String getTimezone() {
-			return timezone;
-		}
-		public void setTimezone(String timezone) {
-			this.timezone = timezone;
-		}
-		public String getUsername() {
-			return username;
-		}
-		public void setUsername(String username) {
-			this.username = username;
-		}
-		public String getPassword1() {
-			return password1;
-		}
-		public void setPassword1(String password1) {
-			this.password1 = password1;
-		}
-		public String getPassword2() {
-			return password2;
-		}
-		public void setPassword2(String password2) {
-			this.password2 = password2;
-		}
-		public String getOnetime() {
-			return onetime;
-		}
-		public void setOnetime(String onetime) {
-			this.onetime = onetime;
-		}
-		public boolean isNameVisible() {
-			return nameVisible;
-		}
-		public void setNameVisible(boolean nameVisible) {
-			this.nameVisible = nameVisible;
-		}
-		public boolean isEmailVisible() {
-			return emailVisible;
-		}
-		public void setEmailVisible(boolean emailVisible) {
-			this.emailVisible = emailVisible;
-		}
-		public boolean isAgree() {
-			return agree;
-		}
-		public void setAgree(boolean agree) {
-			this.agree = agree;
-		}
-
-		@Override
-		public String toString() {
-			return "SignupForm [media=" + media + ", id=" + id + ", gender=" + gender + ", firstName=" + firstName
-					+ ", lastName=" + lastName + ", name=" + name + ", email=" + email + ", locale=" + locale
-					+ ", location=" + location + ", languages=" + languages + ", timezone=" + timezone + ", username="
-					+ username + ", password1=" + password1 + ", password2=" + password2 + ", onetime=" + onetime
-					+ ", nameVisible=" + nameVisible + ", emailVisible=" + emailVisible + ", agree=" + agree + "]";
-		}
-		
+	if (list.getTotalCount() == 0) {
+	    list.setTotalCount(photoStreamsManager.getTotalPhotoCount());
+	    if (random)
+		list.setPhotos(photoStreamsManager.getPhotosByRandom(startIndex, pageSize));
+	    else
+		list.setPhotos(photoStreamsManager.getPhotos(startIndex, pageSize));
 	}
-	
-	@RequestMapping(value="/accounts/register.json", method={RequestMethod.POST} )
-	@ResponseBody
-	public Result register(
-			@RequestBody SignupForm form,		
-			NativeWebRequest request
-	) throws UserAlreadyExistsException{
-		
-		String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();			
-		String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
-		boolean match = form.getPassword1().matches(pattern);
-		
-		if( match && form.isAgree() ){			
-			if(StringUtils.equals(form.getMedia(), "internal") ){
-				
-				
-				
-				UserTemplate t = new UserTemplate(form.getUsername(), form.getPassword1(), form.getEmail(), form.getName() );
-				t.setEmailVisible(form.isEmailVisible());
-				t.setNameVisible(form.isNameVisible());
-				t.setCompanyId(-1L);	
-				try {
-					WebSite site = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class));
-					t.setCompanyId(site.getCompany().getCompanyId());
-				} catch (WebSiteNotFoundException e) {
-				}
-				
-				User targetUser = userManager.createApplicationUser(t);
-				
-			}else{
-				
-			}
-			
-		}
-		log.debug("password valid:" + match);
-		
-		log.debug(">>>" + form);
-		return Result.newResult();
-	}	
-	
+	return list;
+    }
+
+    /**
+     * URL 로 이미지를 업로드 한다.
+     * 
+     * @param uploader
+     * @param request
+     * @return
+     * @throws NotFoundException
+     * @throws IOException
+     */
+    @RequestMapping(value = "/images/upload_by_url.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Image uploadImageByUrl(@RequestBody UrlImageUploader uploader, NativeWebRequest request)
+	    throws NotFoundException, IOException {
+
+	User user = SecurityHelper.getUser();
+	int objectType = uploader.getObjectType();
+	long objectId = uploader.getObjectId();
+	if (objectType == 2) {
+	    objectId = user.getUserId();
+	} else if (objectType == 1) {
+	    objectId = user.getCompanyId();
+	} else if (objectType == 30) {
+	    objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();
+	}
+
+	Image imageToUse = imageManager.createImage(objectType, objectId, uploader.getFileName(),
+		uploader.getContentType(), uploader.readFileFromUrl());
+	imageToUse.setUser(user);
+	if (uploader.getSourceUrl() == null) {
+	    uploader.setSourceUrl(uploader.getImageUrl());
+	}
+	imageToUse.getProperties().put("source", uploader.getSourceUrl().toString());
+	imageToUse.getProperties().put("url", uploader.getImageUrl().toString());
+
+	log.debug(imageToUse);
+
+	return imageManager.saveImage(imageToUse);
+    }
+
+    public static class UrlImageUploader {
+
+	private int objectType = 2;
+
+	private URL sourceUrl;
+
+	private URL imageUrl;
+
+	private long objectId = 0;
+
+	@JsonIgnore
+	private String contentType;
+
+	public void setObjectId(long objectId) {
+	    this.objectId = objectId;
+	}
+
+	public long getObjectId() {
+	    return this.objectId;
+	}
+
 	/**
-	 * 
+	 * @return sourceUrl
+	 */
+	public URL getSourceUrl() {
+	    return sourceUrl;
+	}
+
+	/**
+	 * @return objectType
+	 */
+	public int getObjectType() {
+	    return objectType;
+	}
+
+	/**
 	 * @param objectType
-	 * @param objectId
-	 * @param text
-	 * @param name
-	 * @param email
-	 * @param request
-	 * @return
-	 * @throws NotFoundException
+	 *            설정할 objectType
 	 */
-	
-	@RequestMapping(value={"/comments/create.json"},method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public Result  addComment (
-			@RequestParam(value="objectType", defaultValue="0", required=true ) Integer objectType,
-			@RequestParam(value="objectId", defaultValue="0", required=true ) Long objectId,
-			@RequestParam(value="text", defaultValue="", required=true ) String text,
-			@RequestParam(value="name", defaultValue="", required=false ) String name,
-			@RequestParam(value="email", defaultValue="", required=false ) String email,
-			NativeWebRequest request ) throws NotFoundException {		
-		User user = SecurityHelper.getUser();			
-		String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();		
-		
-		log.debug("objectType=" + objectType);
-		log.debug("objectId=" + objectId);
-		
-		Comment comment = commentManager.createComment(objectType, objectId, user, text);
-		comment.setIPAddress(address);
-		
-		if(StringUtils.isNotEmpty(name))
-			comment.setName(name);
-		
-		if(StringUtils.isNotEmpty(email))
-			comment.setEmail(email);
-		
-		commentManager.addComment(comment);
-		
-		CommentTreeWalker walker = commentManager.getCommentTreeWalker(objectType, objectId);				
-		
-		return Result.newResult(walker.getRecursiveChildCount(commentManager.getRootParent()));
-	}
-	
-	@RequestMapping(value={"/comments/update.json"},method={RequestMethod.POST} )
-	@ResponseBody
-	public Result updateComment(
-		@RequestBody DefaultComment comment,
-		NativeWebRequest request ){
-		
-		User user = SecurityHelper.getUser();			
-		String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();
-		comment.setIPAddress(address);
-		comment.setUser(user);
-		
-		log.debug(comment.toString());
-		commentManager.addComment(comment);
-		CommentTreeWalker walker = commentManager.getCommentTreeWalker(comment.getObjectType(), comment.getObjectId());	
-		return Result.newResult(walker.getRecursiveChildCount(commentManager.getRootParent()));
-	}
-	
-	
-	@RequestMapping(value={"/comments/list.json"},method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public CommentList getComments (
-			@RequestParam(value="objectType", defaultValue="0", required=true ) Integer objectType,
-			@RequestParam(value="objectId", defaultValue="0", required=true ) Long objectId,
-			NativeWebRequest request 
-			){
-		
-		CommentList list = new CommentList();
-		if( objectType < 1 || objectId < 1)
-			return list;
-		
-		CommentTreeWalker walker = commentManager.getCommentTreeWalker(objectType, objectId);
-		Comment PARENT = new DefaultComment();				
-		list.setTotalCount(walker.getRecursiveChildCount(commentManager.getRootParent()));
-		list.setComments( walker.recursiveChildren(commentManager.getRootParent()) );	
-		return list;
-	}	
-	
-	
-	
-	@RequestMapping(value={"/pages/comment.json"},method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public Result  addPageComment (
-			@RequestParam(value="objectType", defaultValue="0", required=true ) Integer objectType,
-			@RequestParam(value="objectId", defaultValue="0", required=true ) Long objectId,
-			@RequestParam(value="text", defaultValue="", required=true ) String text,
-			@RequestParam(value="name", defaultValue="", required=false ) String name,
-			@RequestParam(value="email", defaultValue="", required=false ) String email,
-			NativeWebRequest request ) throws NotFoundException {		
-		
-		User user = SecurityHelper.getUser();			
-		String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();		
-		
-		Comment comment = commentManager.createComment(objectType, objectId, user, text);
-		comment.setIPAddress(address);
-		
-		if(StringUtils.isNotEmpty(name))
-			comment.setName(name);
-		
-		if(StringUtils.isNotEmpty(email))
-			comment.setEmail(email);
-		
-		commentManager.addComment(comment);
-		
-		CommentTreeWalker walker = commentManager.getCommentTreeWalker(objectType, objectId);				
-		
-		return Result.newResult(walker.getRecursiveChildCount(commentManager.getRootParent()));
-	}
-	
-	@RequestMapping(value={"/pages/comments/list.json"},method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public CommentList getPageComments (
-			@RequestParam(value="pageId", defaultValue="0", required=true ) Long pageId,
-			NativeWebRequest request 
-			){
-		
-		int objectType = ModelTypeFactory.getTypeIdFromCode("PAGE") ;
-		CommentTreeWalker walker = commentManager.getCommentTreeWalker(objectType, pageId);
-		
-		Comment PARENT = new DefaultComment();		
-		CommentList list = new CommentList();
-		list.setTotalCount(walker.getRecursiveChildCount(commentManager.getRootParent()));
-		list.setComments( walker.recursiveChildren(commentManager.getRootParent()) );	
-		return list;
-	}	
-	
-	
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SITE_ADMIN' , 'ROLE_USER')")
-	@RequestMapping(value="/pages/published/list.json",method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public PageList  getPublishedPageList(
-			@RequestParam(value="objectType", defaultValue="2", required=false ) Integer objectType,
-			@RequestParam(value="state", defaultValue="NONE", required=false ) String state,
-			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
-			@RequestParam(value="pageSize", defaultValue="15", required=false ) Integer pageSize,
-			NativeWebRequest request ) throws NotFoundException {		
-		User user = SecurityHelper.getUser();					
-		return getPublishedPageList(objectType, startIndex, pageSize);
-	}
-
-	private PageList getPublishedPageList( int objectType, int startIndex, int pageSize){		
-		PageList list = new PageList();
-		list.setTotalCount(pageManager.getPageCount(objectType, PageState.PUBLISHED));
-		
-		List<Page> pages = new ArrayList(list.getTotalCount());
-		for( Page page :  pageManager.getPages(objectType, PageState.PUBLISHED, startIndex, pageSize) )
-		{
-			pages.add(new ImmutablePage(page));
-		}
-		
-		list.setPages(pages);
-		
-		return list;
-	}
-	
-	
-	private List<Page> toImmutablePageList(List<Page> list){
-		List<Page> pages = new ArrayList(list.size());
-		for( Page page :  list )
-		{
-			pages.add(new ImmutablePage(page));
-		}
-		return pages;
-	}
-	
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SITE_ADMIN' , 'ROLE_USER')")
-	@RequestMapping(value="/pages/list.json",method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public PageList  getPageList(
-			@RequestParam(value="objectType", defaultValue="2", required=false ) Integer objectType,
-			@RequestParam(value="state", defaultValue="NONE", required=false ) String state,
-			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
-			@RequestParam(value="pageSize", defaultValue="15", required=false ) Integer pageSize,
-			@RequestParam(value="full", defaultValue="true", required=false ) Boolean isFull,
-			NativeWebRequest request ) throws NotFoundException {		
-		
-		User user = SecurityHelper.getUser();						
-		long objectId = user.getUserId();		
-		if( objectType == 1 ){
-			objectId = user.getCompanyId();			
-		}else if ( objectType == 30){
-			objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();
-		}	
-		
-		PageState pageState = PageState.valueOf(state.toUpperCase());	
-		return getPageList(objectType, objectId, pageState, startIndex, pageSize, isFull);
-	}
-	
-	
-	@PreAuthorize("hasRole('ROLE_USER')")
-	@RequestMapping(value="/pages/get.json", method=RequestMethod.POST)
-	@ResponseBody
-	public Page getPage(
-			@RequestParam(value="pageId", defaultValue="2", required=true ) Long pageId,
-			@RequestParam(value="version", defaultValue="0", required=false ) Integer version,
-			@RequestParam(value="count", defaultValue="0", required=false ) Integer count,
-			NativeWebRequest request) throws NotFoundException{		
-		
-		User user = SecurityHelper.getUser();
-		Page page = pageManager.getPage(pageId);
-		
-		
-		if( page.getPageState() == PageState.PUBLISHED ){
-			if( count > 0 )
-				viewCountManager.addPageCount(page);
-			return page;
-		}
-		
-		if(page.getUser().getUserId() == user.getUserId()){
-			return page;
-		}
-		
-		throw new UnAuthorizedException();
-	}	
-	
-			
-	@PreAuthorize("hasRole('ROLE_USER')")
-	@RequestMapping(value="/pages/update_state.json", method=RequestMethod.POST)
-	@ResponseBody
-	public Page updatePageState(
-			@RequestBody DefaultPage page, 
-			NativeWebRequest request) throws NotFoundException{	
-		
-		User user = SecurityHelper.getUser();
-		if(page.getUser() == null && page.getPageId() == 0)
-			page.setUser(user);
-		
-		if( user.isAnonymous() || user.getUserId() != page.getUser().getUserId() )
-			throw new UnAuthorizedException();
-				
-		Page target = pageManager.getPage(page.getPageId());
-		target.setPageState(page.getPageState());
-		pageManager.updatePage(target);
-		return target;
-	}
-	
-	
-	@PreAuthorize("hasRole('ROLE_USER')")
-	@RequestMapping(value="/pages/update.json", method=RequestMethod.POST)
-	@ResponseBody
-	public Page updatePage(
-			@RequestBody DefaultPage page, 
-			NativeWebRequest request) throws NotFoundException{		
-		User user = SecurityHelper.getUser();
-		if(page.getUser() == null && page.getPageId() == 0)
-			page.setUser(user);
-		
-		if( user.isAnonymous() || user.getUserId() != page.getUser().getUserId() )
-			throw new UnAuthorizedException();
-		
-		boolean doUpdate = false;		
-		Page target ;
-		String tagsString = null;
-		
-		
-		log.debug("page:" + page.getProperties());		
-		
-		
-		if( page.getPageId() > 0){
-			target = pageManager.getPage(page.getPageId());
-			if( !StringUtils.equals(page.getName(), target.getName()) || 
-					!StringUtils.equals(page.getTitle(), target.getTitle()) ||
-					!StringUtils.equals(page.getSummary(), target.getSummary()) ||
-				
-					!StringUtils.equals(page.getBodyContent().getBodyText(), target.getBodyContent().getBodyText())){
-				//target.setProperties(page.getProperties());
-
-			}
-			doUpdate = true;		
-			log.debug( "do update ..." );
-		}else{
-			if( page.getObjectType() == 30 && page.getObjectId() == 0L ){
-				page.setObjectId(WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId());			
-			}else if (page.getObjectType() == 1 && page.getObjectId() == 0L ){
-				page.setObjectId(user.getCompanyId());		
-			}else if (page.getObjectType() == 2 && page.getObjectId() == 0L ){
-				page.setObjectId(user.getUserId());	
-				
-			}
-			target =  new DefaultPage(page.getObjectType(), page.getObjectId());
-			target.setUser(page.getUser());			
-			target.setBodyContent(new DefaultBodyContent());
-			//target.setProperties(page.getProperties());
-			doUpdate = true;		
-		}		
-		
-		tagsString = page.getProperty("tagsString", null);	
-		if( tagsString != null )
-			page.getProperties().remove("tagsString");
-		
-		if( doUpdate ){
-			target.setName(page.getName());
-			target.setTitle(page.getTitle());
-			target.setSummary(page.getSummary());
-			target.setBodyText(page.getBodyContent().getBodyText());
-			target.setProperties(page.getProperties());			
-			pageManager.updatePage(target);			
-		}		
-		
-		if( tagsString != null && !StringUtils.equals(target.getTagDelegator().getTagsAsString(), tagsString) )
-			target.getTagDelegator().setTags(tagsString);
-		
-		log.debug("input:" + page.getProperties());		
-		log.debug("target:"+ target.getProperties());		
-		
-		return pageManager.getPage(target.getPageId());
-	}
-	
-	@RequestMapping(value="/pages/properties/list.json", method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public List<Property>  getImageProperty(@RequestParam(value="pageId", defaultValue="0", required=true ) Long pageId, @RequestParam(value="versionId", defaultValue="1" ) Integer versionId, NativeWebRequest request ) throws NotFoundException {		
-		
-		User user = SecurityHelper.getUser();	
-		if(pageId <= 0){
-			return Collections.EMPTY_LIST;
-		}		
-		Page page = pageManager.getPage(pageId, versionId);
-		Map<String, String> properties = page.getProperties();
-		return toList(properties);
-	}
-		
-	@RequestMapping(value="/pages/properties/update.json", method=RequestMethod.POST)
-	@ResponseBody
-	public List<Property>  updateImageProperty(
-			@RequestParam(value="pageId", defaultValue="0", required=true ) Long pageId, 
-			@RequestParam(value="versionId", defaultValue="1" ) Integer versionId, 
-			@RequestBody List<Property> newProperties, NativeWebRequest request ) throws NotFoundException {		
-		User user = SecurityHelper.getUser();		
-		Page page = pageManager.getPage(pageId, versionId);
-		Map<String, String> properties = page.getProperties();		
-		// update or create
-		for (Property property : newProperties) {
-			properties.put(property.getName(), property.getValue().toString());
-		}		
-		if( newProperties.size() > 0){
-			pageManager.updatePage(page);
-		}	
-		return toList(properties);
-	}
-
-	@RequestMapping(value="/pages/properties/delete.json", method={RequestMethod.POST, RequestMethod.DELETE})
-	@ResponseBody
-	public List<Property>  deleteImageProperty(@RequestParam(value="pageId", defaultValue="0", required=true ) Long pageId, 
-			@RequestParam(value="versionId", defaultValue="1" ) Integer versionId, @RequestBody List<Property> newProperties,  
-			NativeWebRequest request ) throws NotFoundException {		
-		User user = SecurityHelper.getUser();		
-		Page page = pageManager.getPage(pageId, versionId);
-		Map<String, String> properties = page.getProperties();	
-		log.debug(properties);		
-		log.debug(newProperties);		
-		for (Property property : newProperties) {
-			properties.remove(property.getName());
-		}
-		if( newProperties.size() > 0){
-			log.debug(properties);
-			pageManager.updatePage(page);
-		}		
-		return toList(properties);
-	}
-	
-	protected List<Property> toList (Map<String, String> properties){
-		List<Property> list = new ArrayList<Property>();
-		for (String key : properties.keySet()) {
-			String value = properties.get(key);
-			list.add(new Property(key, value));
-		}
-		return list;
-	}
-	
-	private boolean isPageStateFilterEnabled(PageState pageState){
-		if( pageState != PageState.NONE){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	private PageList getPageList( int objectType, long objectId, PageState pageState, int startIndex, int pageSize, Boolean isFull){		
-		
-		PageList list = new PageList();	
-		boolean byState = isPageStateFilterEnabled(pageState);
-		
-		List<Page> data ;
-		int totalCount = 0 ;
-		if(byState){
-			data = pageManager.getPages(objectType, objectId, pageState, startIndex, pageSize);
-			totalCount = pageManager.getPageCount(objectType, objectId, pageState);
-		}else{
-			data = pageManager.getPages(objectType, objectId, startIndex, pageSize);
-			totalCount = pageManager.getPageCount(objectType, objectId);
-		}
-		
-		if(isFull){
-			list.setPages( data );	
-		}else{
-			
-			list.setPages( toImmutablePageList( data ));		
-		}
-		list.setTotalCount(totalCount);		
-		
-		return list;
-	}
-	
-	public static class PageList {		
-		private List<Page> pages ;
-		private int totalCount ;
-		
-		public PageList() {
-		}
-		/**
-		 * @return pages
-		 */
-		public List<Page> getPages() {
-			return pages;
-		}
-		/**
-		 * @param pages 설정할 pages
-		 */
-		public void setPages(List<Page> pages) {
-			this.pages = pages;
-		}
-		/**
-		 * @return totalCount
-		 */
-		public int getTotalCount() {
-			return totalCount;
-		}
-		/**
-		 * @param totalCount 설정할 totalCount
-		 */
-		public void setTotalCount(int totalCount) {
-			this.totalCount = totalCount;
-		}
-	}
-
-	public static class CommentList {
-		
-		private List<Comment> comments ;
-		private int totalCount ;		/**
-		 * 
-		 */
-		public CommentList() {
-			comments = Collections.EMPTY_LIST;
-			totalCount = 0;
-		}
-		/**
-		 * @return pages
-		 */
-		public List<Comment> getComments() {
-			return comments;
-		}
-		/**
-		 * @param pages 설정할 pages
-		 */
-		public void setComments(List<Comment> comments) {
-			this.comments = comments;
-		}
-		/**
-		 * @return totalCount
-		 */
-		public int getTotalCount() {
-			return totalCount;
-		}
-		/**
-		 * @param totalCount 설정할 totalCount
-		 */
-		public void setTotalCount(int totalCount) {
-			this.totalCount = totalCount;
-		}
-	}
-	
-	/**
-	 * get streams photo by imageId
-	 * 
-	 * @param imageId
-	 * @param request
-	 * @return
-	 * @throws NotFoundException
-	 */
-	@RequestMapping(value="/streams/photos/get.json", method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public List<Photo>  getStreamPhoto(@RequestParam(value="imageId", defaultValue="0", required=true ) Long imageId, NativeWebRequest request ) throws NotFoundException {		
-		Image image = imageManager.getImage(imageId);
-		return photoStreamsManager.getPhotosByImage(image);
+	public void setObjectType(int objectType) {
+	    this.objectType = objectType;
 	}
 
 	/**
-	 * get stream photo by linkId
-	 * @param linkId
-	 * @param request
-	 * @return
-	 * @throws NotFoundException
+	 * @param sourceUrl
+	 *            설정할 sourceUrl
 	 */
-			
-	@RequestMapping(value="/streams/photos/getByLink.json", method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public Photo getStreamPhotoByLink(@RequestParam(value="linkId", required=true ) String linkId, NativeWebRequest request ) throws NotFoundException {		
-		return photoStreamsManager.getPhotoById(linkId);
-	}
-	
-	
-	@RequestMapping(value="/streams/photos/insert.json",method={RequestMethod.POST} )
-	@ResponseBody
-	public Result insertPhotoStream(@RequestParam(value="imageId", defaultValue="0", required=true ) Long imageId, NativeWebRequest request) throws NotFoundException {
-		User user = SecurityHelper.getUser();		
-		if(user.isAnonymous())
-			throw new UnAuthorizedException();		
-		
-		Image image = imageManager.getImage(imageId);
-		photoStreamsManager.addImage(image, user);
-		return Result.newResult();
-		
-	}
-	
-	@RequestMapping(value="/streams/photos/delete.json",method={RequestMethod.POST} )
-	@ResponseBody
-	public void deletePhotosStreams(@RequestParam(value="imageId", defaultValue="0", required=true ) Long imageId, NativeWebRequest request) throws NotFoundException{		
-		User user = SecurityHelper.getUser();		
-		if(user.isAnonymous())
-			throw new UnAuthorizedException();			
-		Image image = imageManager.getImage(imageId);
-		
-		photoStreamsManager.deletePhotos(image, user);
-	}
-	
-	
-	@PreAuthorize("permitAll")
-	@RequestMapping(value="/streams/photos/list_with_random.json",method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public PhotoList  getStreamPhotoListByRandom(
-			@RequestParam(value="objectType", defaultValue="2", required=false ) Integer objectType,
-			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
-			@RequestParam(value="pageSize", defaultValue="15", required=false ) Integer pageSize,
-			NativeWebRequest request ) throws NotFoundException {		
-		User user = SecurityHelper.getUser();		
-		return getStreamPhotoList(objectType, startIndex, pageSize, true, request.getNativeRequest(HttpServletRequest.class));
-	}
-	
-	@PreAuthorize("permitAll")
-	@RequestMapping(value="/streams/photos/list.json",method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public PhotoList  getStreamPhotoList(
-			@RequestParam(value="objectType", defaultValue="2", required=false ) Integer objectType,
-			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
-			@RequestParam(value="pageSize", defaultValue="15", required=false ) Integer pageSize,
-			NativeWebRequest request ) throws NotFoundException {		
-		User user = SecurityHelper.getUser();		
-		return getStreamPhotoList(objectType, startIndex, pageSize, false, request.getNativeRequest(HttpServletRequest.class));
-	}
-	
-	private PhotoList getStreamPhotoList(int objectType, int startIndex, int pageSize, boolean random, HttpServletRequest request) throws NotFoundException{			
-		
-		User user = SecurityHelper.getUser();
-		long objectId = user.getUserId();		
-		
-		if( objectType == 1 ){
-			objectId = user.getCompanyId();	
-		}else if ( objectType == 30){
-			objectId = WebSiteUtils.getWebSite(request).getWebSiteId();
-		}				
-		PhotoList list = new PhotoList();
-
-		if(objectType > 0 && objectId == 0)
-			list.setTotalCount( photoStreamsManager.getPhotoCount(objectType ));
-		else if (objectType > 0 && objectId > 0)
-			list.setTotalCount( photoStreamsManager.getPhotoCount(objectType, objectId));		
-		
-		if(objectType > 0 && objectId == 0){
-			if( random )
-				list.setPhotos(photoStreamsManager.getPhotosByRandom(objectType, startIndex, pageSize));
-			else
-				list.setPhotos(photoStreamsManager.getPhotos(objectType, startIndex, pageSize));
-		}else if (objectType > 0 && objectId > 0){
-			if( random )
-				list.setPhotos(photoStreamsManager.getPhotosByRandom(objectType, objectId, startIndex, pageSize));
-			else
-				list.setPhotos(photoStreamsManager.getPhotos(objectType, objectId, startIndex, pageSize));
-		}
-		
-		if( list.getTotalCount() == 0 ){
-			list.setTotalCount(photoStreamsManager.getTotalPhotoCount());
-			if( random )
-				list.setPhotos(photoStreamsManager.getPhotosByRandom(startIndex, pageSize));
-			else
-				list.setPhotos(photoStreamsManager.getPhotos(startIndex, pageSize));			
-		}		
-		return list;
-	}
-	
-	
-	@RequestMapping(value="/images/upload_by_url.json", method=RequestMethod.POST)
-	@ResponseBody
-	public Image  uploadImageByUrl(@RequestBody UrlImageUploader uploader, NativeWebRequest request ) throws NotFoundException, IOException {		
-		
-		User user = SecurityHelper.getUser();
-		int objectType = uploader.getObjectType();
-		long objectId = uploader.getObjectId();
-		if( objectType == 2){
-			objectId = user.getUserId();	
-		}
-		else if( objectType == 1 ){
-			objectId = user.getCompanyId();			
-		}else if ( objectType == 30){
-			objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();
-		}	
-		Image imageToUse = imageManager.createImage(objectType, objectId,  uploader.getFileName(),  uploader.getContentType(),  uploader.readFileFromUrl());
-		
-		if( uploader.getSourceUrl() == null){
-			uploader.setSourceUrl(uploader.getImageUrl());
-		}
-		imageToUse.getProperties().put("source", uploader.getSourceUrl().toString());
-		imageToUse.getProperties().put("url", uploader.getImageUrl().toString());		
-		log.debug(imageToUse);
-		
-		return  imageManager.saveImage(imageToUse);
-	}
-	
-	public static class UrlImageUploader {
-		
-		 private int objectType = 2;
-		 
-		 private URL sourceUrl ;		 
-		 
-		 private URL imageUrl ;
-		 
-		 private long objectId = 0 ;
-		 
-		 @JsonIgnore
-		 private String contentType;
-		 
-		 public void setObjectId(long objectId){
-			 this.objectId = objectId;
-		 }
-		 
-		 public long getObjectId(){
-			return this.objectId;
-		 }
-		 
-		/**
-		 * @return sourceUrl
-		 */
-		 
-		 
-		public URL getSourceUrl() {
-			return sourceUrl;
-		}
-
-		/**
-		 * @return objectType
-		 */
-		public int getObjectType() {
-			return objectType;
-		}
-
-		/**
-		 * @param objectType 설정할 objectType
-		 */
-		public void setObjectType(int objectType) {
-			this.objectType = objectType;
-		}
-
-		/**
-		 * @param sourceUrl 설정할 sourceUrl
-		 */
-		public void setSourceUrl(URL sourceUrl) {
-			this.sourceUrl = sourceUrl;
-		}
-
-		/**
-		 * @return imageUrl
-		 */
-		public URL getImageUrl() {
-			return imageUrl;
-		}
-
-		/**
-		 * @param imageUrl 설정할 imageUrl
-		 */
-		public void setImageUrl(URL imageUrl) {
-			this.imageUrl = imageUrl;
-		}
-				
-		public String getContentType(){			
-			if(contentType == null){
-				Tika tika = new Tika();
-				try {
-					contentType = tika.detect(imageUrl);
-				} catch (IOException e) {
-					contentType = null;
-				}
-			}
-			return contentType;
-		}		
-		
-		public String getFileName(){
-			return FilenameUtils.getName(imageUrl.getFile());
-		}
-		
-		public File readFileFromUrl() throws IOException{		
-			File temp = File.createTempFile(UUID.randomUUID().toString(), ".tmp");
-			temp.deleteOnExit();
-			FileUtils.copyURLToFile(imageUrl, temp);			
-			return temp;
-		}
-	}	
-	
-	
-	public static class PhotoList {
-		
-		private List<Photo> photos ;
-		private int totalCount ;
-
-
-		/**
-		 * @return photos
-		 */
-		public List<Photo> getPhotos() {
-			return photos;
-		}
-		/**
-		 * @param photos 설정할 photos
-		 */
-		public void setPhotos(List<Photo> photos) {
-			this.photos = photos;
-		}
-		/**
-		 * @return totalCount
-		 */
-		public int getTotalCount() {
-			return totalCount;
-		}
-		/**
-		 * @param totalCount 설정할 totalCount
-		 */
-		public void setTotalCount(int totalCount) {
-			this.totalCount = totalCount;
-		}	
-		
+	public void setSourceUrl(URL sourceUrl) {
+	    this.sourceUrl = sourceUrl;
 	}
 
-	
-	@PreAuthorize("hasRole('ROLE_USER')")
-	@RequestMapping(value="/announce/update.json", method=RequestMethod.POST)
-	@ResponseBody
-	public Announce saveAnnounce(
-			@RequestBody DefaultAnnounce announce, 
-			NativeWebRequest request) throws AnnounceNotFoundException, WebSiteNotFoundException{		
-		User user = SecurityHelper.getUser();
-		if(announce.getUser() == null && announce.getAnnounceId() == 0)
-			announce.setUser(user);
-		
-		if( user.isAnonymous() || user.getUserId() != announce.getUser().getUserId() )
-			throw new UnAuthorizedException();
-				
-		Announce target ;
-		if( announce.getAnnounceId() > 0){
-			target = announceManager.getAnnounce(announce.getAnnounceId());
-		}else{
-			if( announce.getObjectType() == 30 && announce.getObjectId() == 0L ){
-				announce.setObjectId(WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId());			
-			}else if (announce.getObjectType() == 1 && announce.getObjectId() == 0L ){
-				announce.setObjectId(user.getCompanyId());		
-			}
-			target = announceManager.createAnnounce(user, announce.getObjectType() , announce.getObjectId());
-		}
-		
-		target.setSubject(announce.getSubject());
-		target.setBody(announce.getBody());	
-		target.setStartDate( announce.getStartDate());
-		target.setEndDate(announce.getEndDate());
-		if(target.getAnnounceId() > 0 ){
-			announceManager.updateAnnounce(target);		
-		}else{
-			announceManager.addAnnounce(target);
-		}		
-		return target;
-	}
-	
-	@PreAuthorize("hasRole('ROLE_USER')")
-	@RequestMapping(value="/announce/delete.json", method=RequestMethod.POST)
-	@ResponseBody
-	public Boolean destoryAnnounce(@RequestParam(value="announceId", defaultValue="0", required=true ) Long announceId, NativeWebRequest request){
-		User user = SecurityHelper.getUser();
-			
-		
-		return true;
-	}
-	
-	
-	
-	@PreAuthorize("permitAll")
-	@RequestMapping(value="/announce/list.json",method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public AnnounceList  getAnnounceList (
-		@RequestParam(value="objectType", defaultValue="30", required=false ) Integer objectType, 
-		@RequestParam(value="objectId", defaultValue="0", required=false  ) Long objectId, 
-		@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
-		@RequestParam(value="pageSize", defaultValue="0", required=false ) Integer pageSize,
-		@RequestParam(value="startDate", required=false ) @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss") Date startDate,
-		@RequestParam(value="endDate", required=false ) @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss") Date endDate,		
-		NativeWebRequest request ) throws NotFoundException {		
-		User user = SecurityHelper.getUser();		
-		if(!user.isAnonymous()){
-			if( objectType == 30 && objectId == 0L ){
-				objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();			
-			}else if (objectType == 1 && objectId == 0L ){
-				objectId = user.getCompanyId();		
-			}
-		}else{
-			objectType = 30 ;
-			objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();		
-		}		
-		
-		if( startDate == null )
-			startDate = Calendar.getInstance().getTime();
-		if (endDate == null)
-			endDate = Calendar.getInstance().getTime();
-		
-		return new AnnounceList(announceManager.getAnnounces(objectType, objectId, startDate, endDate), getTotalAnnounceCount(objectType, objectId, startDate, endDate));
-	}
-		
-	private int getTotalAnnounceCount(int objectType, long objectId , Date startDate, Date endDate){		
-		if(startDate != null ){
-			return announceManager.getAnnounceCount(objectType, objectId, startDate, endDate == null ? Calendar.getInstance().getTime() : endDate);
-		}
-		return announceManager.getAnnounceCount(objectType, objectId, endDate == null ? Calendar.getInstance().getTime() : endDate);
-	}	
-	
-	
-	public static class AnnounceList {
-		private List<Announce> announces ;
-		private int totalCount ;		
-		/**
-		 * @param announces
-		 * @param totalCount
-		 */
-		public AnnounceList(List<Announce> announces, int totalCount) {
-			super();
-			this.announces = announces;
-			this.totalCount = totalCount;
-		}
-		/**
-		 * @return announces
-		 */
-		public List<Announce> getAnnounces() {
-			return announces;
-		}
-		/**
-		 * @param announces 설정할 announces
-		 */
-		public void setAnnounces(List<Announce> announces) {
-			this.announces = announces;
-		}
-		/**
-		 * @return totalCount
-		 */
-		public int getTotalCount() {
-			return totalCount;
-		}
-		/**
-		 * @param totalCount 설정할 totalCount
-		 */
-		public void setTotalCount(int totalCount) {
-			this.totalCount = totalCount;
-		}
-	} 
-
-	/** ======================================== **/
-	/**  POLL					      			 **/
-	/** ======================================== **/
-	
-	private long getObjectId(int objectType, User user, NativeWebRequest request){
-		long objectId = 0;		
-		if( objectType == 1 ){
-			objectId = user.getCompanyId();			
-		}else if ( objectType == 2){
-			objectId = user.getUserId();	
-		}else if ( objectType == 30){
-			try {
-				objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();
-			} catch (WebSiteNotFoundException e) {
-			}
-		}
-		return objectId;
+	/**
+	 * @return imageUrl
+	 */
+	public URL getImageUrl() {
+	    return imageUrl;
 	}
 
-	
-	
-	@RequestMapping(value={"/polls/list.json"},method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public ItemList getPolls (			
-			@RequestParam(value="objectType", defaultValue="0", required=false ) Integer objectType,
-			@RequestParam(value="objectId", defaultValue="0", required=false ) Long objectId,
-			@RequestParam(value="status", defaultValue= "ALL", required=false) String statusString,
-			@RequestParam(value="active", defaultValue="false", required=false ) Boolean active,
-			@RequestParam(value="live", defaultValue="false", required=false ) Boolean live,
-			NativeWebRequest request 
-			){		
-		
-		User user = SecurityHelper.getUser();
-		ItemList list ;
-		if( objectType > 0 ){			
-			 list = new ItemList(pollManager.getPolls(objectType, getObjectId(objectType, user, request)), pollManager.getPollCount(objectType, getObjectId(objectType, user, request)) );		
-		}else{
-			 list = new ItemList(pollManager.getPolls(user), pollManager.getPollCount(user) );
-		}
-		return list;		
-	}	
-	
-	@RequestMapping(value={"/polls/stats/list.json"},method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public ItemList getStatsPolls (			
-			@RequestParam(value="objectType", defaultValue="0", required=false ) Integer objectType,
-			@RequestParam(value="objectId", defaultValue="0", required=false ) Long objectId,
-			@RequestParam(value="active", defaultValue="false", required=false ) Boolean active,
-			@RequestParam(value="live", defaultValue="false", required=false ) Boolean live,
-			NativeWebRequest request 
-			){		
+	/**
+	 * @param imageUrl
+	 *            설정할 imageUrl
+	 */
+	public void setImageUrl(URL imageUrl) {
+	    this.imageUrl = imageUrl;
+	}
 
-		User user = SecurityHelper.getUser();
-		
-		List<PollStats> items = new ArrayList<PollStats>();
-		int pollCount = 0;
-
-		if( objectType > 0){		
-			pollCount = pollManager.getPollCount(objectType, getObjectId(objectType, user, request));
-			for( Poll p : pollManager.getPolls(objectType, getObjectId(objectType, user, request))){
-				items.add(pollManager.getPollStats(p, user));
-			}
-		}else{
-			pollCount = pollManager.getPollCount(user);
-			for( Poll p : pollManager.getPolls(user)){
-				items.add(pollManager.getPollStats(p, user));
-			}		
+	public String getContentType() {
+	    if (contentType == null) {
+		Tika tika = new Tika();
+		try {
+		    contentType = tika.detect(imageUrl);
+		} catch (IOException e) {
+		    contentType = null;
 		}
-				
-		return new ItemList(items, pollCount);		
-	}	
+	    }
+	    return contentType;
+	}
 
-	
-	@RequestMapping(value={"/polls/get.json"},method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public Poll getPoll (			
-			@RequestParam(value="pollId", defaultValue="0", required=true ) Long pollId,
-			NativeWebRequest request 
-			) throws UnAuthorizedException, NotFoundException{		
-		User user = SecurityHelper.getUser();
-		Poll poll = pollManager.getPoll(pollId);
-		/*
-		for( PollOption po : poll.getOptions() )
-		{
-			po.setVoteCount(pollManager.getVoteCount(poll, po.getOptionId()));
-		}*/
-		return poll;
+	public String getFileName() {
+	    return FilenameUtils.getName(imageUrl.getFile());
 	}
-	
-	@RequestMapping(value={"/polls/stats/get.json"},method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public PollStats getStatsPoll (			
-			@RequestParam(value="pollId", defaultValue="0", required=true ) Long pollId,
-			NativeWebRequest request 
-			) throws UnAuthorizedException, NotFoundException{		
-		User user = SecurityHelper.getUser();
-		Poll poll = pollManager.getPoll(pollId);
-		return pollManager.getPollStats(poll, user);
-	}
-	 
 
-	@PreAuthorize("hasRole('ROLE_USER')")
-	@RequestMapping(value="/polls/update.json", method=RequestMethod.POST)
-	@ResponseBody
-	public Poll updatePoll(@RequestBody DefaultPoll poll, NativeWebRequest request) throws NotFoundException{		
-		
-		User user = SecurityHelper.getUser();
-		if(poll.getUser() == null && poll.getPollId() < 1)
-			poll.setUser(user);
-		
-		if( user.isAnonymous() || user.getUserId() != poll.getUser().getUserId() )
-			throw new UnAuthorizedException();
-		if( poll.getPollId() > 0){
-			DefaultPoll orgPoll = (DefaultPoll) pollManager.getPoll(poll.getPollId());
-			orgPoll.setName(poll.getName());
-			orgPoll.setDescription(poll.getDescription());
-			orgPoll.setStartDate(poll.getStartDate());
-			orgPoll.setEndDate(poll.getEndDate());
-			orgPoll.setExpireDate(poll.getExpireDate());
-			orgPoll.setMode(poll.getMode());
-			orgPoll.setStatus(poll.getStatus());
-			
-			pollManager.updatePoll(orgPoll);
-			
-			return orgPoll;
-		}else{
-			if( poll.getObjectType() > 0 && poll.getObjectId() == 0)
-				poll.setObjectId(getObjectId(poll.getObjectType(), user, request));
-			
-			
-			return pollManager.createPoll(poll.getObjectType(), poll.getObjectId(), user, poll.getName());
-		}		
+	public File readFileFromUrl() throws IOException {
+	    File temp = File.createTempFile(UUID.randomUUID().toString(), ".tmp");
+	    temp.deleteOnExit();
+	    FileUtils.copyURLToFile(imageUrl, temp);
+	    return temp;
 	}
-	
-	
-	@RequestMapping(value={"/polls/options/list.json"},method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public List<PollOption> getPollOptions(
-			@RequestParam(value="pollId", defaultValue="0", required=true ) Long pollId, 
-			NativeWebRequest request) throws UnAuthorizedException, NotFoundException{	
-		Poll poll = pollManager.getPoll(pollId);
-		return pollManager.getPollOptions(poll);		
-	}	
-	
-	@RequestMapping(value="/polls/options/update.json", method=RequestMethod.POST)
-	@ResponseBody
-	public Result updatePollOptions(
-			@RequestParam(value="pollId", defaultValue="0", required=true ) Long pollId, 
-			@RequestBody List<PollOption> options) throws UnAuthorizedException, NotFoundException{
-		
-		Poll poll = pollManager.getPoll(pollId);
-		pollManager.setPollOptions(poll, options);
-		return Result.newResult();
-		
+    }
+
+    public static class PhotoList {
+
+	private List<Photo> photos;
+	private int totalCount;
+
+	/**
+	 * @return photos
+	 */
+	public List<Photo> getPhotos() {
+	    return photos;
 	}
-	
-	@RequestMapping(value="/polls/options/delete.json", method=RequestMethod.POST)
-	@ResponseBody
-	public Result deletePollOptions(
-			@RequestParam(value="pollId", defaultValue="0", required=true ) Long pollId, 
-			@RequestBody List<PollOption> options) throws UnAuthorizedException, NotFoundException{
-		
-		Poll poll = pollManager.getPoll(pollId);
-		pollManager.deletePollOptions(poll, options);
-		return Result.newResult();
-		
+
+	/**
+	 * @param photos
+	 *            설정할 photos
+	 */
+	public void setPhotos(List<Photo> photos) {
+	    this.photos = photos;
 	}
-	
-	@RequestMapping(value="/polls/vote_allowed.json", method=RequestMethod.POST)
-	@ResponseBody
-	public Result voteAllowed (
-			@RequestBody Vote vote,
-			NativeWebRequest request
-			) throws UnAuthorizedException, NotFoundException, PollException {
-		
-		User user = SecurityHelper.getUser();
-		String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();	
-		Poll poll = pollManager.getPoll(vote.getPollId());
-		vote.setUserId(user.getUserId());
-		vote.setIPAddress(address);
-				
-		boolean voteAllow = false;
-		boolean hasVoted = false;
-		
-		if(user.isAnonymous()){
-			if(poll.isModeEnabled(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION))
-				voteAllow = true;
-			else
-				voteAllow = false;
-			hasVoted = pollManager.hasAnomyouseVoted(poll, vote.getUniqueId());
-			if( poll.isModeEnabled(Poll.MULTIPLE_SELECTIONS_ALLOWED))
-				voteAllow = true;
-			else
-				voteAllow = !hasVoted;			
-		}else{
-			if(poll.isModeEnabled(Poll.ALLOW_USER_VOTE_MODIFICATION))
-				voteAllow = true;
-			else
-				voteAllow = false;			
-			hasVoted = pollManager.hasUserVoted(poll, user);
-			if( poll.isModeEnabled(Poll.MULTIPLE_SELECTIONS_ALLOWED))
-				voteAllow = true;
-			else
-				voteAllow = !hasVoted;
-		}
-		
-		Result result = Result.newResult(hasVoted?1:0);
-		result.setSuccess(voteAllow);
-		return result;
+
+	/**
+	 * @return totalCount
+	 */
+	public int getTotalCount() {
+	    return totalCount;
 	}
-	
-	@RequestMapping(value="/polls/vote.json", method=RequestMethod.POST)
-	@ResponseBody
-	public Result addVote(
-			@RequestBody Vote vote,
-			NativeWebRequest request
-			) throws UnAuthorizedException, NotFoundException, PollException {
-		
-		User user = SecurityHelper.getUser();
-		String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();	
-		Poll poll = pollManager.getPoll(vote.getPollId());
-		vote.setUserId(user.getUserId());
-		vote.setIPAddress(address);
-		
-		log.debug(vote);
-		if(user.isAnonymous()){
-			if(StringUtils.isEmpty(vote.getUniqueId()))
-			{
-				throw new PollException("you need uinque id value (email address).");
-			}
-			if(!poll.isModeEnabled(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION)){
-				throw new UnAuthorizedException("anonymous vote not allowd.");
-			}
-			pollManager.addAnomymousVote(poll, vote.getOptionId(), vote.getUniqueId(), vote.getIPAddress());
-		}else{
-			if(!poll.isModeEnabled(Poll.ALLOW_USER_VOTE_MODIFICATION)){
-				throw new UnAuthorizedException("user vote not allowd.");
-			}
-			pollManager.addUserVote(poll, vote.getOptionId(), user, vote.getIPAddress());
-		}
-		
-		return Result.newResult();
+
+	/**
+	 * @param totalCount
+	 *            설정할 totalCount
+	 */
+	public void setTotalCount(int totalCount) {
+	    this.totalCount = totalCount;
 	}
-	
+
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(value = "/announce/update.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Announce saveAnnounce(@RequestBody DefaultAnnounce announce, NativeWebRequest request)
+	    throws AnnounceNotFoundException, WebSiteNotFoundException {
+	User user = SecurityHelper.getUser();
+	if (announce.getUser() == null && announce.getAnnounceId() == 0)
+	    announce.setUser(user);
+
+	if (user.isAnonymous() || user.getUserId() != announce.getUser().getUserId())
+	    throw new UnAuthorizedException();
+
+	Announce target;
+	if (announce.getAnnounceId() > 0) {
+	    target = announceManager.getAnnounce(announce.getAnnounceId());
+	} else {
+	    if (announce.getObjectType() == 30 && announce.getObjectId() == 0L) {
+		announce.setObjectId(
+			WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId());
+	    } else if (announce.getObjectType() == 1 && announce.getObjectId() == 0L) {
+		announce.setObjectId(user.getCompanyId());
+	    }
+	    target = announceManager.createAnnounce(user, announce.getObjectType(), announce.getObjectId());
+	}
+
+	target.setSubject(announce.getSubject());
+	target.setBody(announce.getBody());
+	target.setStartDate(announce.getStartDate());
+	target.setEndDate(announce.getEndDate());
+	if (target.getAnnounceId() > 0) {
+	    announceManager.updateAnnounce(target);
+	} else {
+	    announceManager.addAnnounce(target);
+	}
+	return target;
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(value = "/announce/delete.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean destoryAnnounce(
+	    @RequestParam(value = "announceId", defaultValue = "0", required = true) Long announceId,
+	    NativeWebRequest request) {
+	User user = SecurityHelper.getUser();
+
+	return true;
+    }
+
+    @PreAuthorize("permitAll")
+    @RequestMapping(value = "/announce/list.json", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public AnnounceList getAnnounceList(
+	    @RequestParam(value = "objectType", defaultValue = "30", required = false) Integer objectType,
+	    @RequestParam(value = "objectId", defaultValue = "0", required = false) Long objectId,
+	    @RequestParam(value = "startIndex", defaultValue = "0", required = false) Integer startIndex,
+	    @RequestParam(value = "pageSize", defaultValue = "0", required = false) Integer pageSize,
+	    @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date startDate,
+	    @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date endDate,
+	    NativeWebRequest request) throws NotFoundException {
+	User user = SecurityHelper.getUser();
+	if (!user.isAnonymous()) {
+	    if (objectType == 30 && objectId == 0L) {
+		objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();
+	    } else if (objectType == 1 && objectId == 0L) {
+		objectId = user.getCompanyId();
+	    }
+	} else {
+	    objectType = 30;
+	    objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();
+	}
+
+	if (startDate == null)
+	    startDate = Calendar.getInstance().getTime();
+	if (endDate == null)
+	    endDate = Calendar.getInstance().getTime();
+
+	return new AnnounceList(announceManager.getAnnounces(objectType, objectId, startDate, endDate),
+		getTotalAnnounceCount(objectType, objectId, startDate, endDate));
+    }
+
+    private int getTotalAnnounceCount(int objectType, long objectId, Date startDate, Date endDate) {
+	if (startDate != null) {
+	    return announceManager.getAnnounceCount(objectType, objectId, startDate,
+		    endDate == null ? Calendar.getInstance().getTime() : endDate);
+	}
+	return announceManager.getAnnounceCount(objectType, objectId,
+		endDate == null ? Calendar.getInstance().getTime() : endDate);
+    }
+
+    public static class AnnounceList {
+	private List<Announce> announces;
+	private int totalCount;
+
+	/**
+	 * @param announces
+	 * @param totalCount
+	 */
+	public AnnounceList(List<Announce> announces, int totalCount) {
+	    super();
+	    this.announces = announces;
+	    this.totalCount = totalCount;
+	}
+
+	/**
+	 * @return announces
+	 */
+	public List<Announce> getAnnounces() {
+	    return announces;
+	}
+
+	/**
+	 * @param announces
+	 *            설정할 announces
+	 */
+	public void setAnnounces(List<Announce> announces) {
+	    this.announces = announces;
+	}
+
+	/**
+	 * @return totalCount
+	 */
+	public int getTotalCount() {
+	    return totalCount;
+	}
+
+	/**
+	 * @param totalCount
+	 *            설정할 totalCount
+	 */
+	public void setTotalCount(int totalCount) {
+	    this.totalCount = totalCount;
+	}
+    }
+
+    /** ======================================== **/
+    /** POLL **/
+    /** ======================================== **/
+
+    private long getObjectId(int objectType, User user, NativeWebRequest request) {
+	long objectId = 0;
+	if (objectType == 1) {
+	    objectId = user.getCompanyId();
+	} else if (objectType == 2) {
+	    objectId = user.getUserId();
+	} else if (objectType == 30) {
+	    try {
+		objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();
+	    } catch (WebSiteNotFoundException e) {
+	    }
+	}
+	return objectId;
+    }
+
+    @RequestMapping(value = { "/polls/list.json" }, method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public ItemList getPolls(
+	    @RequestParam(value = "objectType", defaultValue = "0", required = false) Integer objectType,
+	    @RequestParam(value = "objectId", defaultValue = "0", required = false) Long objectId,
+	    @RequestParam(value = "status", defaultValue = "ALL", required = false) String statusString,
+	    @RequestParam(value = "active", defaultValue = "false", required = false) Boolean active,
+	    @RequestParam(value = "live", defaultValue = "false", required = false) Boolean live,
+	    NativeWebRequest request) {
+
+	User user = SecurityHelper.getUser();
+	ItemList list;
+	if (objectType > 0) {
+	    list = new ItemList(pollManager.getPolls(objectType, getObjectId(objectType, user, request)),
+		    pollManager.getPollCount(objectType, getObjectId(objectType, user, request)));
+	} else {
+	    list = new ItemList(pollManager.getPolls(user), pollManager.getPollCount(user));
+	}
+	return list;
+    }
+
+    @RequestMapping(value = { "/polls/stats/list.json" }, method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public ItemList getStatsPolls(
+	    @RequestParam(value = "objectType", defaultValue = "0", required = false) Integer objectType,
+	    @RequestParam(value = "objectId", defaultValue = "0", required = false) Long objectId,
+	    @RequestParam(value = "active", defaultValue = "false", required = false) Boolean active,
+	    @RequestParam(value = "live", defaultValue = "false", required = false) Boolean live,
+	    NativeWebRequest request) {
+
+	User user = SecurityHelper.getUser();
+
+	List<PollStats> items = new ArrayList<PollStats>();
+	int pollCount = 0;
+
+	if (objectType > 0) {
+	    pollCount = pollManager.getPollCount(objectType, getObjectId(objectType, user, request));
+	    for (Poll p : pollManager.getPolls(objectType, getObjectId(objectType, user, request))) {
+		items.add(pollManager.getPollStats(p, user));
+	    }
+	} else {
+	    pollCount = pollManager.getPollCount(user);
+	    for (Poll p : pollManager.getPolls(user)) {
+		items.add(pollManager.getPollStats(p, user));
+	    }
+	}
+
+	return new ItemList(items, pollCount);
+    }
+
+    @RequestMapping(value = { "/polls/get.json" }, method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public Poll getPoll(@RequestParam(value = "pollId", defaultValue = "0", required = true) Long pollId,
+	    NativeWebRequest request) throws UnAuthorizedException, NotFoundException {
+	User user = SecurityHelper.getUser();
+	Poll poll = pollManager.getPoll(pollId);
+	/*
+	 * for( PollOption po : poll.getOptions() ) {
+	 * po.setVoteCount(pollManager.getVoteCount(poll, po.getOptionId())); }
+	 */
+	return poll;
+    }
+
+    @RequestMapping(value = { "/polls/stats/get.json" }, method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public PollStats getStatsPoll(@RequestParam(value = "pollId", defaultValue = "0", required = true) Long pollId,
+	    NativeWebRequest request) throws UnAuthorizedException, NotFoundException {
+	User user = SecurityHelper.getUser();
+	Poll poll = pollManager.getPoll(pollId);
+	return pollManager.getPollStats(poll, user);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(value = "/polls/update.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Poll updatePoll(@RequestBody DefaultPoll poll, NativeWebRequest request) throws NotFoundException {
+
+	User user = SecurityHelper.getUser();
+	if (poll.getUser() == null && poll.getPollId() < 1)
+	    poll.setUser(user);
+
+	if (user.isAnonymous() || user.getUserId() != poll.getUser().getUserId())
+	    throw new UnAuthorizedException();
+	if (poll.getPollId() > 0) {
+	    DefaultPoll orgPoll = (DefaultPoll) pollManager.getPoll(poll.getPollId());
+	    orgPoll.setName(poll.getName());
+	    orgPoll.setDescription(poll.getDescription());
+	    orgPoll.setStartDate(poll.getStartDate());
+	    orgPoll.setEndDate(poll.getEndDate());
+	    orgPoll.setExpireDate(poll.getExpireDate());
+	    orgPoll.setMode(poll.getMode());
+	    orgPoll.setStatus(poll.getStatus());
+
+	    pollManager.updatePoll(orgPoll);
+
+	    return orgPoll;
+	} else {
+	    if (poll.getObjectType() > 0 && poll.getObjectId() == 0)
+		poll.setObjectId(getObjectId(poll.getObjectType(), user, request));
+
+	    return pollManager.createPoll(poll.getObjectType(), poll.getObjectId(), user, poll.getName());
+	}
+    }
+
+    @RequestMapping(value = { "/polls/options/list.json" }, method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public List<PollOption> getPollOptions(
+	    @RequestParam(value = "pollId", defaultValue = "0", required = true) Long pollId, NativeWebRequest request)
+	    throws UnAuthorizedException, NotFoundException {
+	Poll poll = pollManager.getPoll(pollId);
+	return pollManager.getPollOptions(poll);
+    }
+
+    @RequestMapping(value = "/polls/options/update.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Result updatePollOptions(@RequestParam(value = "pollId", defaultValue = "0", required = true) Long pollId,
+	    @RequestBody List<PollOption> options) throws UnAuthorizedException, NotFoundException {
+
+	Poll poll = pollManager.getPoll(pollId);
+	pollManager.setPollOptions(poll, options);
+	return Result.newResult();
+
+    }
+
+    @RequestMapping(value = "/polls/options/delete.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Result deletePollOptions(@RequestParam(value = "pollId", defaultValue = "0", required = true) Long pollId,
+	    @RequestBody List<PollOption> options) throws UnAuthorizedException, NotFoundException {
+
+	Poll poll = pollManager.getPoll(pollId);
+	pollManager.deletePollOptions(poll, options);
+	return Result.newResult();
+
+    }
+
+    @RequestMapping(value = "/polls/vote_allowed.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Result voteAllowed(@RequestBody Vote vote, NativeWebRequest request)
+	    throws UnAuthorizedException, NotFoundException, PollException {
+
+	User user = SecurityHelper.getUser();
+	String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();
+	Poll poll = pollManager.getPoll(vote.getPollId());
+	vote.setUserId(user.getUserId());
+	vote.setIPAddress(address);
+
+	boolean voteAllow = false;
+	boolean hasVoted = false;
+
+	if (user.isAnonymous()) {
+	    if (poll.isModeEnabled(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION))
+		voteAllow = true;
+	    else
+		voteAllow = false;
+	    hasVoted = pollManager.hasAnomyouseVoted(poll, vote.getUniqueId());
+	    if (poll.isModeEnabled(Poll.MULTIPLE_SELECTIONS_ALLOWED))
+		voteAllow = true;
+	    else
+		voteAllow = !hasVoted;
+	} else {
+	    if (poll.isModeEnabled(Poll.ALLOW_USER_VOTE_MODIFICATION))
+		voteAllow = true;
+	    else
+		voteAllow = false;
+	    hasVoted = pollManager.hasUserVoted(poll, user);
+	    if (poll.isModeEnabled(Poll.MULTIPLE_SELECTIONS_ALLOWED))
+		voteAllow = true;
+	    else
+		voteAllow = !hasVoted;
+	}
+
+	Result result = Result.newResult(hasVoted ? 1 : 0);
+	result.setSuccess(voteAllow);
+	return result;
+    }
+
+    @RequestMapping(value = "/polls/vote.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Result addVote(@RequestBody Vote vote, NativeWebRequest request)
+	    throws UnAuthorizedException, NotFoundException, PollException {
+
+	User user = SecurityHelper.getUser();
+	String address = request.getNativeRequest(HttpServletRequest.class).getRemoteAddr();
+	Poll poll = pollManager.getPoll(vote.getPollId());
+	vote.setUserId(user.getUserId());
+	vote.setIPAddress(address);
+
+	log.debug(vote);
+	if (user.isAnonymous()) {
+	    if (StringUtils.isEmpty(vote.getUniqueId())) {
+		throw new PollException("you need uinque id value (email address).");
+	    }
+	    if (!poll.isModeEnabled(Poll.ALLOW_ANONYMOUS_VOTE_MODIFICATION)) {
+		throw new UnAuthorizedException("anonymous vote not allowd.");
+	    }
+	    pollManager.addAnomymousVote(poll, vote.getOptionId(), vote.getUniqueId(), vote.getIPAddress());
+	} else {
+	    if (!poll.isModeEnabled(Poll.ALLOW_USER_VOTE_MODIFICATION)) {
+		throw new UnAuthorizedException("user vote not allowd.");
+	    }
+	    pollManager.addUserVote(poll, vote.getOptionId(), user, vote.getIPAddress());
+	}
+
+	return Result.newResult();
+    }
+
 }

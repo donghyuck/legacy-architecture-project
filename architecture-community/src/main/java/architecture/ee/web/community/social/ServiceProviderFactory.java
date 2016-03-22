@@ -25,44 +25,32 @@ import architecture.ee.web.community.social.tumblr.TumblrServiceProvider;
 import architecture.ee.web.community.social.twitter.TwitterServiceProvider;
 
 public class ServiceProviderFactory {
-	
-	private Log log = LogFactory.getLog(getClass());
-	
-	public static SocialServiceProvider getServiceProvider(Media media){
-		
-		SocialServiceProvider provider = null;				
-		String callbackUrl = getCallbackUrl(media);
-		if( media == Media.FACEBOOK ){
-			String scope = ApplicationHelper.getApplicationProperty("components.social.providers.facebook.scope", FacebookServiceProvider.DEFAULT_SCOPE);
-			provider = new FacebookServiceProvider(
-				"251365428350280",
-				"704f08c943c6dfdba328e08a10550d38",							
-				callbackUrl,
-				scope
-			);
-			provider.setAccessSecret("");
-		}else if ( media == Media.TWITTER ){
-			provider = new TwitterServiceProvider(
-				"4XebpD1MW3CQ8Koh7naQpg",
-				"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc",
-				callbackUrl
-			);	
-		}else if ( media == Media.TUMBLR ){
-			provider = new TumblrServiceProvider(
-				"VdE7COcqx3c8qiXg45AowMPausYVvYDpBSIrx1jI6gPj1X5V8T",
-				"SILFKJbnYTuFLWVhCnKiD1wpd4T6ahVC0HXTemu1AqT3X7iL0r",							
-				callbackUrl					
-			);
-		}
-		return provider;
+
+    private Log log = LogFactory.getLog(getClass());
+
+    public static SocialServiceProvider getServiceProvider(Media media) {
+
+	SocialServiceProvider provider = null;
+	String callbackUrl = getCallbackUrl(media);
+	if (media == Media.FACEBOOK) {
+	    String scope = ApplicationHelper.getApplicationProperty("components.social.providers.facebook.scope",
+		    FacebookServiceProvider.DEFAULT_SCOPE);
+	    provider = new FacebookServiceProvider("251365428350280", "704f08c943c6dfdba328e08a10550d38", callbackUrl,
+		    scope);
+	    provider.setAccessSecret("");
+	} else if (media == Media.TWITTER) {
+	    provider = new TwitterServiceProvider("4XebpD1MW3CQ8Koh7naQpg", "aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc",
+		    callbackUrl);
+	} else if (media == Media.TUMBLR) {
+	    provider = new TumblrServiceProvider("VdE7COcqx3c8qiXg45AowMPausYVvYDpBSIrx1jI6gPj1X5V8T",
+		    "SILFKJbnYTuFLWVhCnKiD1wpd4T6ahVC0HXTemu1AqT3X7iL0r", callbackUrl);
 	}
-	
-	
-	
-	
-	private static String getCallbackUrl(Media media){
-		return ApplicationHelper.getApplicationProperty("components.social.providers." + media.name().toLowerCase() +  ".callbackUrl", null);
-	}	
-	
-	
+	return provider;
+    }
+
+    private static String getCallbackUrl(Media media) {
+	return ApplicationHelper.getApplicationProperty(
+		"components.social.providers." + media.name().toLowerCase() + ".callbackUrl", null);
+    }
+
 }

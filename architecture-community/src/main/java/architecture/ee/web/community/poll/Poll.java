@@ -25,54 +25,54 @@ import architecture.ee.web.community.tag.TagDelegator;
 
 public interface Poll extends ModelObject {
 
-	public static final long ALLOW_USER_VOTE_MODIFICATION = 16L;
-	
-	public static final long ALLOW_ANONYMOUS_VOTE_MODIFICATION = 32L;
-	
-	public static final long MULTIPLE_SELECTIONS_ALLOWED = 256L;
+    public static final long ALLOW_USER_VOTE_MODIFICATION = 16L;
 
-	public abstract long getPollId();
+    public static final long ALLOW_ANONYMOUS_VOTE_MODIFICATION = 32L;
 
-	public abstract int getCommentStatus();
+    public static final long MULTIPLE_SELECTIONS_ALLOWED = 256L;
 
-	public abstract Date getCreationDate();
+    public abstract long getPollId();
 
-	public abstract String getDescription();
+    public abstract int getCommentStatus();
 
-	public abstract Date getEndDate();
+    public abstract Date getCreationDate();
 
-	public abstract Date getExpireDate();
+    public abstract String getDescription();
 
-	public abstract Date getModifiedDate();
-	
-	public abstract void setModifiedDate(Date modifiedDate);
+    public abstract Date getEndDate();
 
-	public abstract String getName();
+    public abstract Date getExpireDate();
 
-	public abstract long getObjectId();
+    public abstract Date getModifiedDate();
 
-	public abstract int getObjectType();
+    public abstract void setModifiedDate(Date modifiedDate);
 
-	public abstract List<PollOption> getOptions();
+    public abstract String getName();
 
-	public abstract Date getStartDate();
+    public abstract long getObjectId();
 
-	public abstract Status getStatus();
+    public abstract int getObjectType();
 
-	public abstract User getUser();
+    public abstract List<PollOption> getOptions();
 
-	public abstract boolean isModeEnabled(long mode);
-	
-	public abstract long getMode();
-	
-	public abstract void setOptions(List<PollOption> options) ;
-	
-	public abstract Integer getCommentCount();
-	
-	public abstract TagDelegator getTagDelegator();
-	
-	public abstract String getTagsString();
-	
-	public abstract int getVoteCount();
-	
+    public abstract Date getStartDate();
+
+    public abstract Status getStatus();
+
+    public abstract User getUser();
+
+    public abstract boolean isModeEnabled(long mode);
+
+    public abstract long getMode();
+
+    public abstract void setOptions(List<PollOption> options);
+
+    public abstract Integer getCommentCount();
+
+    public abstract TagDelegator getTagDelegator();
+
+    public abstract String getTagsString();
+
+    public abstract int getVoteCount();
+
 }

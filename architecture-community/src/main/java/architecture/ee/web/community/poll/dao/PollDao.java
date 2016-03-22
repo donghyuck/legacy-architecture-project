@@ -25,42 +25,34 @@ import architecture.ee.web.community.poll.Vote;
 
 public interface PollDao {
 
-	public abstract Poll createPoll( Poll  poll);
-	
-	public abstract Poll updatePoll( Poll poll);
-	
-	public abstract Poll deletePoll( Poll poll);
-	
-	public abstract	Poll getPollById(long pollId) throws NotFoundException;
-	
-	
-		
-	public abstract  int getPollCount();
-	
-	public abstract  int getPollCount(int objectType, long objectId);
-	
-	public abstract  int getPollCount(User user);
-	
-	
-	
-	
-	public abstract List<Long> getPollIds();
-		
-	public abstract List<Long> getPollIds(int objectType, long objectId);	
-	
-	public abstract List<Long> getPollIds(User user);	
-	
-	
-	
-	
-	public abstract List<PollOption> getPollOptions(Poll poll);
-	
-	public abstract void updatePollOptions(Poll poll, List<PollOption> options);
-	
-	public abstract void deletePollOptions(Poll poll, List<PollOption> options);
-	
-	public abstract List<Vote> getVotes(Poll poll);
-	
-	public abstract void batchPollVotes(final List<Vote> votes);
-	
+    public abstract Poll createPoll(Poll poll);
+
+    public abstract Poll updatePoll(Poll poll);
+
+    public abstract Poll deletePoll(Poll poll);
+
+    public abstract Poll getPollById(long pollId) throws NotFoundException;
+
+    public abstract int getPollCount();
+
+    public abstract int getPollCount(int objectType, long objectId);
+
+    public abstract int getPollCount(User user);
+
+    public abstract List<Long> getPollIds();
+
+    public abstract List<Long> getPollIds(int objectType, long objectId);
+
+    public abstract List<Long> getPollIds(User user);
+
+    public abstract List<PollOption> getPollOptions(Poll poll);
+
+    public abstract void updatePollOptions(Poll poll, List<PollOption> options);
+
+    public abstract void deletePollOptions(Poll poll, List<PollOption> options);
+
+    public abstract List<Vote> getVotes(Poll poll);
+
+    public abstract void batchPollVotes(final List<Vote> votes);
+
 }

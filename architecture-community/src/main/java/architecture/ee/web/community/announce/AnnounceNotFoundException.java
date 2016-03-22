@@ -19,73 +19,73 @@ import architecture.ee.exception.ApplicationException;
 
 public class AnnounceNotFoundException extends ApplicationException {
 
-	/**
-	 * 
-	 */
-	public AnnounceNotFoundException() {
-		super();
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * 
+     */
+    public AnnounceNotFoundException() {
+	super();
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param errorCode
-	 * @param msg
-	 * @param cause
-	 */
-	public AnnounceNotFoundException(int errorCode, String msg, Throwable cause) {
-		super(errorCode, msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param errorCode
+     * @param msg
+     * @param cause
+     */
+    public AnnounceNotFoundException(int errorCode, String msg, Throwable cause) {
+	super(errorCode, msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param errorCode
-	 * @param msg
-	 */
-	public AnnounceNotFoundException(int errorCode, String msg) {
-		super(errorCode, msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param errorCode
+     * @param msg
+     */
+    public AnnounceNotFoundException(int errorCode, String msg) {
+	super(errorCode, msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param errorCode
-	 * @param cause
-	 */
-	public AnnounceNotFoundException(int errorCode, Throwable cause) {
-		super(errorCode, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param errorCode
+     * @param cause
+     */
+    public AnnounceNotFoundException(int errorCode, Throwable cause) {
+	super(errorCode, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param errorCode
-	 */
-	public AnnounceNotFoundException(int errorCode) {
-		super(errorCode);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param errorCode
+     */
+    public AnnounceNotFoundException(int errorCode) {
+	super(errorCode);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param msg
-	 * @param cause
-	 */
-	public AnnounceNotFoundException(String msg, Throwable cause) {
-		super(msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param msg
+     * @param cause
+     */
+    public AnnounceNotFoundException(String msg, Throwable cause) {
+	super(msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param msg
-	 */
-	public AnnounceNotFoundException(String msg) {
-		super(msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param msg
+     */
+    public AnnounceNotFoundException(String msg) {
+	super(msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	/**
-	 * @param cause
-	 */
-	public AnnounceNotFoundException(Throwable cause) {
-		super(cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    /**
+     * @param cause
+     */
+    public AnnounceNotFoundException(Throwable cause) {
+	super(cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
 }

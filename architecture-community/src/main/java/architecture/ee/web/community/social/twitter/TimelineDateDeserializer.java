@@ -28,21 +28,20 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 
 /**
  * Deserializer to read date values from Twitter timeline entries.
+ * 
  * @author Craig Walls
  */
 class TimelineDateDeserializer extends JsonDeserializer<Date> {
 
-	@Override
-	public Date deserialize(JsonParser jp, DeserializationContext ctxt)
-			throws IOException, JsonProcessingException {
-        try {
-            return new SimpleDateFormat(TIMELINE_DATE_FORMAT, Locale.ENGLISH).parse(jp.getText());
-        } catch (ParseException e) {
-            return null;
-        }
+    @Override
+    public Date deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+	try {
+	    return new SimpleDateFormat(TIMELINE_DATE_FORMAT, Locale.ENGLISH).parse(jp.getText());
+	} catch (ParseException e) {
+	    return null;
 	}
+    }
 
-	private static final String TIMELINE_DATE_FORMAT = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+    private static final String TIMELINE_DATE_FORMAT = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
 
 }
-

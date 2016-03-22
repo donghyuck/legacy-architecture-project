@@ -22,10 +22,10 @@ public class UserInfoResponse {
     private UserInfo user;
 
     public UserInfo getUser() {
-        return user;
+	return user;
     }
 
     public void setUser(UserInfo user) {
-        this.user = user;
+	this.user = user;
     }
 }

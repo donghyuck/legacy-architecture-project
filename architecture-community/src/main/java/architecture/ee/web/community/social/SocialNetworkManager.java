@@ -22,24 +22,24 @@ import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
 
 public interface SocialNetworkManager {
-	
-	public abstract SocialNetwork createSocialNetwork(Company company, SocialNetwork.Media media);
-	
-	public abstract SocialNetwork createSocialNetwork(User user, SocialNetwork.Media media);
-	
-	public abstract SocialNetwork getSocialNetworkById(long socialAccountId) throws NotFoundException ;
-	
-	public abstract List<SocialNetwork> getSocialNetworks(Company company);
-	
-	public abstract List<SocialNetwork> getSocialNetworks(User user);
-	
-	public abstract List<SocialNetwork> getSocialNetworks(int objectType, long objectId);
-	
-	public abstract List<SocialNetwork> getSocialNetworks(int objectType, String username);
-			
-	public abstract void saveSocialNetwork( SocialNetwork socialNetwork );	
 
-	public abstract void removeSocialNetwork( SocialNetwork socialNetwork );
-	
-	public abstract void updateSocialNetworkProperties( SocialNetwork socialNetwork );
+    public abstract SocialNetwork createSocialNetwork(Company company, SocialNetwork.Media media);
+
+    public abstract SocialNetwork createSocialNetwork(User user, SocialNetwork.Media media);
+
+    public abstract SocialNetwork getSocialNetworkById(long socialAccountId) throws NotFoundException;
+
+    public abstract List<SocialNetwork> getSocialNetworks(Company company);
+
+    public abstract List<SocialNetwork> getSocialNetworks(User user);
+
+    public abstract List<SocialNetwork> getSocialNetworks(int objectType, long objectId);
+
+    public abstract List<SocialNetwork> getSocialNetworks(int objectType, String username);
+
+    public abstract void saveSocialNetwork(SocialNetwork socialNetwork);
+
+    public abstract void removeSocialNetwork(SocialNetwork socialNetwork);
+
+    public abstract void updateSocialNetworkProperties(SocialNetwork socialNetwork);
 }

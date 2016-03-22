@@ -21,17 +21,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class TagMixin {
-	
-	@JsonCreator
-	TagMixin(
-			@JsonProperty("id") String id, 
-			@JsonProperty("name") String name, 
-			@JsonProperty("x") Integer x, 
-			@JsonProperty("y") Integer y, 
-			@JsonProperty("created_time") Date createdTime) {}
-	
-}
 
+    @JsonCreator
+    TagMixin(@JsonProperty("id") String id, @JsonProperty("name") String name, @JsonProperty("x") Integer x,
+	    @JsonProperty("y") Integer y, @JsonProperty("created_time") Date createdTime) {
+    }
+
+}

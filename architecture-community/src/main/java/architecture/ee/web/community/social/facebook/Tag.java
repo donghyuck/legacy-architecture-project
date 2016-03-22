@@ -17,43 +17,42 @@ package architecture.ee.web.community.social.facebook;
 
 import java.util.Date;
 
-
 public class Tag {
-	private final String id;
+    private final String id;
 
-	private final String name;
-	
-	private final Integer x;
-	
-	private final Integer y;
-	
-	private final Date createdTime;
-	
-	public String getId() {
-		return id;
-	}
+    private final String name;
 
-	public String getName() {
-		return name;
-	}
+    private final Integer x;
 
-	public Integer getX() {
-		return x;
-	}
+    private final Integer y;
 
-	public Integer getY() {
-		return y;
-	}
+    private final Date createdTime;
 
-	public Date getCreatedTime() {
-		return createdTime;
-	}
+    public String getId() {
+	return id;
+    }
 
-	public Tag(String id, String name, Integer x, Integer y, Date createdTime) {
-		this.id = id;
-		this.name = name;
-		this.x = x;
-		this.y = y;
-		this.createdTime = createdTime;			
-	}
+    public String getName() {
+	return name;
+    }
+
+    public Integer getX() {
+	return x;
+    }
+
+    public Integer getY() {
+	return y;
+    }
+
+    public Date getCreatedTime() {
+	return createdTime;
+    }
+
+    public Tag(String id, String name, Integer x, Integer y, Date createdTime) {
+	this.id = id;
+	this.name = name;
+	this.x = x;
+	this.y = y;
+	this.createdTime = createdTime;
+    }
 }

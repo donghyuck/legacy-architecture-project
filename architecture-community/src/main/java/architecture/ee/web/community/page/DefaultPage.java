@@ -44,370 +44,382 @@ import architecture.ee.web.community.tag.TagManager;
 
 public class DefaultPage implements Page {
 
-	private Integer objectType;
-	private Long objectId;
-	private Long pageId;
-	private String name;
-	private Integer versionId;
-	private PageState pageState;
-	private String title;
-	private String summary;
-	private BodyContent bodyContent;
-	private Date creationDate;
-	private Date modifiedDate;
-	private Map<String, String> properties;
-	private User user ;
-	
-	public DefaultPage() {
+    private Integer objectType;
+    private Long objectId;
+    private Long pageId;
+    private String name;
+    private Integer versionId;
+    private PageState pageState;
+    private String title;
+    private String summary;
+    private BodyContent bodyContent;
+    private Date creationDate;
+    private Date modifiedDate;
+    private Map<String, String> properties;
+    private User user;
 
-		this.name = null;
-		this.pageId = -1L;
-		this.objectType = -1;
-		this.objectId = -1L;
-		this.versionId = -1;
-		this.pageState = PageState.INCOMPLETE;
-		this.user = new UserTemplate(-1L);
-		this.title = "";
-		this.properties = new ConcurrentHashMap<String, String>();
-		this.creationDate = Calendar.getInstance().getTime();
-		this.modifiedDate = creationDate;
-	}
+    public DefaultPage() {
 
-	public DefaultPage(Long pageId) {
-		this();
-		this.pageId = pageId;
-	}
-	
-	public DefaultPage(int objectType, long objectId) {
-		this();
-		this.objectType = objectType;
-		this.objectId = objectId;
-	}
-	
-	/**
-	 * @return objectType
-	 */
-	public Integer getObjectType() {
-		return objectType;
-	}
+	this.name = null;
+	this.pageId = -1L;
+	this.objectType = -1;
+	this.objectId = -1L;
+	this.versionId = -1;
+	this.pageState = PageState.INCOMPLETE;
+	this.user = new UserTemplate(-1L);
+	this.title = "";
+	this.properties = new ConcurrentHashMap<String, String>();
+	this.creationDate = Calendar.getInstance().getTime();
+	this.modifiedDate = creationDate;
+    }
 
-	/**
-	 * @param objectType 설정할 objectType
-	 */
-	public void setObjectType(Integer objectType) {
-		this.objectType = objectType;
-	}
+    public DefaultPage(Long pageId) {
+	this();
+	this.pageId = pageId;
+    }
 
-	/**
-	 * @return objectId
-	 */
-	public Long getObjectId() {
-		return objectId;
-	}
+    public DefaultPage(int objectType, long objectId) {
+	this();
+	this.objectType = objectType;
+	this.objectId = objectId;
+    }
 
-	/**
-	 * @param objectId 설정할 objectId
-	 */
-	public void setObjectId(Long objectId) {
-		this.objectId = objectId;
-	}
+    /**
+     * @return objectType
+     */
+    public Integer getObjectType() {
+	return objectType;
+    }
 
-	/**
-	 * @return pageId
-	 */
-	public Long getPageId() {
-		return pageId;
-	}
+    /**
+     * @param objectType
+     *            설정할 objectType
+     */
+    public void setObjectType(Integer objectType) {
+	this.objectType = objectType;
+    }
 
-	/**
-	 * @param pageId 설정할 pageId
-	 */
-	public void setPageId(Long pageId) {
-		this.pageId = pageId;
-	}
+    /**
+     * @return objectId
+     */
+    public Long getObjectId() {
+	return objectId;
+    }
 
-	/**
-	 * @return name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * @param objectId
+     *            설정할 objectId
+     */
+    public void setObjectId(Long objectId) {
+	this.objectId = objectId;
+    }
 
-	/**
-	 * @param name 설정할 name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @return pageId
+     */
+    public Long getPageId() {
+	return pageId;
+    }
 
-	/**
-	 * @return versionId
-	 */
-	public Integer getVersionId() {
-		return versionId;
-	}
+    /**
+     * @param pageId
+     *            설정할 pageId
+     */
+    public void setPageId(Long pageId) {
+	this.pageId = pageId;
+    }
 
-	/**
-	 * @param versionId 설정할 versionId
-	 */
-	public void setVersionId(Integer versionId) {
-		this.versionId = versionId;
-	}
+    /**
+     * @return name
+     */
+    public String getName() {
+	return name;
+    }
 
-	/**
-	 * @return pageState
-	 */
-	public PageState getPageState() {
-		return pageState;
-	}
+    /**
+     * @param name
+     *            설정할 name
+     */
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	/**
-	 * @param pageState 설정할 pageState
-	 */
-	
-	
-	@JsonDeserialize(using = PageStateDeserializer.class)
-	public void setPageState(PageState pageState) {
-		this.pageState = pageState;
-	}
+    /**
+     * @return versionId
+     */
+    public Integer getVersionId() {
+	return versionId;
+    }
 
-	/**
-	 * @return title
-	 */
-	public String getTitle() {
-		return title;
-	}
+    /**
+     * @param versionId
+     *            설정할 versionId
+     */
+    public void setVersionId(Integer versionId) {
+	this.versionId = versionId;
+    }
 
-	/**
-	 * @param title 설정할 title
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    /**
+     * @return pageState
+     */
+    public PageState getPageState() {
+	return pageState;
+    }
 
-	/**
-	 * @return summary
-	 */
-	public String getSummary() {
-		return summary;
-	}
+    /**
+     * @param pageState
+     *            설정할 pageState
+     */
 
-	/**
-	 * @param summary 설정할 summary
-	 */
-	public void setSummary(String summary) {
-		this.summary = summary;
-	}
+    @JsonDeserialize(using = PageStateDeserializer.class)
+    public void setPageState(PageState pageState) {
+	this.pageState = pageState;
+    }
 
-	/**
-	 * @return bodyContent
-	 */
-	public BodyContent getBodyContent() {
-		return bodyContent;
-	}
-	
-	
+    /**
+     * @return title
+     */
+    public String getTitle() {
+	return title;
+    }
 
-	/**
-	 * @param bodyContent 설정할 bodyContent
-	 */
-	@JsonDeserialize(using = BodyContentDeserializer.class)
-	public void setBodyContent(BodyContent bodyContent) {
-		this.bodyContent = bodyContent;
-	}	
-	
-	@JsonProperty
-	public Integer getViewCount() {
-		if( ApplicationHelper.getComponent(ViewCountManager.class).isViewCountsEnabled())
-			return ApplicationHelper.getComponent(ViewCountManager.class).getPageCount(this);
-		else
-			return -1;	
-	}
-	
-	@JsonIgnore
-	public void setViewCount(int viewCount){
-		
-	}
-	
-	@JsonIgnore
-	public void setCommentCount(int commentCount){
-		
-	}
-	/**
-	 * @return creationDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    /**
+     * @param title
+     *            설정할 title
+     */
+    public void setTitle(String title) {
+	this.title = title;
+    }
 
-	/**
-	 * @param creationDate 설정할 creationDate
-	 */
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    /**
+     * @return summary
+     */
+    public String getSummary() {
+	return summary;
+    }
 
-	/**
-	 * @return modifiedDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
+    /**
+     * @param summary
+     *            설정할 summary
+     */
+    public void setSummary(String summary) {
+	this.summary = summary;
+    }
 
-	/**
-	 * @param modifiedDate 설정할 modifiedDate
-	 */
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
+    /**
+     * @return bodyContent
+     */
+    public BodyContent getBodyContent() {
+	return bodyContent;
+    }
 
-	/**
-	 * @return properties
-	 */
-	public Map<String, String> getProperties() {
-		synchronized (this) {
-			if (properties == null) {
-				properties = new ConcurrentHashMap<String, String>();
-			}
-		}
-		return properties;
-	}
+    /**
+     * @param bodyContent
+     *            설정할 bodyContent
+     */
+    @JsonDeserialize(using = BodyContentDeserializer.class)
+    public void setBodyContent(BodyContent bodyContent) {
+	this.bodyContent = bodyContent;
+    }
 
+    @JsonProperty
+    public Integer getViewCount() {
+	if (ApplicationHelper.getComponent(ViewCountManager.class).isViewCountsEnabled())
+	    return ApplicationHelper.getComponent(ViewCountManager.class).getPageCount(this);
+	else
+	    return -1;
+    }
 
-	/**
-	 * @param properties 설정할 properties
-	 */
-	public void setProperties(Map<String, String> properties) {
-		this.properties = properties;
-	}
+    @JsonIgnore
+    public void setViewCount(int viewCount) {
 
-	/**
-	 * @return user
-	 */
-	public User getUser() {
-		return user;
-	}
+    }
 
-	/**
-	 * @param user 설정할 user
-	 */
-	@JsonDeserialize(using = UserDeserializer.class)
-	public void setUser(User user) {
-		this.user = user;
-	}
+    @JsonIgnore
+    public void setCommentCount(int commentCount) {
 
-	@JsonIgnore
-	public int getCachedSize() {
-		return 0;
-	}
+    }
 
-	@JsonIgnore
-	public String getBodyText() {
-		if( bodyContent == null)
-			return null;
-		else
-			return bodyContent.getBodyText();
-	}
+    /**
+     * @return creationDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getCreationDate() {
+	return creationDate;
+    }
 
-	@JsonIgnore
-	public void setBodyText(String body) {
-		bodyContent.setBodyText(body);
-	}
+    /**
+     * @param creationDate
+     *            설정할 creationDate
+     */
+    @JsonDeserialize(using = CustomJsonDateDeserializer.class)
+    public void setCreationDate(Date creationDate) {
+	this.creationDate = creationDate;
+    }
 
-	
-	public boolean getBooleanProperty(String name, boolean defaultValue) {
-		String value = getProperties().get(name);		
-		String valueToUse = StringUtils.defaultString(value, Boolean.toString(defaultValue));
-		return Boolean.parseBoolean(valueToUse);
-	}
+    /**
+     * @return modifiedDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getModifiedDate() {
+	return modifiedDate;
+    }
 
-	public long getLongProperty(String name, long defaultValue) {
-		String value = getProperties().get(name);		
-		String valueToUse = StringUtils.defaultString(value, Long.toString(defaultValue));
-		return Long.parseLong(valueToUse);
-	}
+    /**
+     * @param modifiedDate
+     *            설정할 modifiedDate
+     */
+    @JsonDeserialize(using = CustomJsonDateDeserializer.class)
+    public void setModifiedDate(Date modifiedDate) {
+	this.modifiedDate = modifiedDate;
+    }
 
-	public int getIntProperty(String name, int defaultValue) {
-		String value = getProperties().get(name);		
-		String valueToUse = StringUtils.defaultString(value, Integer.toString(defaultValue));
-		return Integer.parseInt(valueToUse);
+    /**
+     * @return properties
+     */
+    public Map<String, String> getProperties() {
+	synchronized (this) {
+	    if (properties == null) {
+		properties = new ConcurrentHashMap<String, String>();
+	    }
 	}
+	return properties;
+    }
 
-	public String getProperty(String name, String defaultString) {
-		String value = getProperties().get(name);
-		return StringUtils.defaultString(value, defaultString);
-	}
+    /**
+     * @param properties
+     *            설정할 properties
+     */
+    public void setProperties(Map<String, String> properties) {
+	this.properties = properties;
+    }
 
-	/* (비Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("DefaultPage [");
-		if (objectType != null)
-			builder.append("objectType=").append(objectType).append(", ");
-		if (objectId != null)
-			builder.append("objectId=").append(objectId).append(", ");
-		if (pageId != null)
-			builder.append("pageId=").append(pageId).append(", ");
-		if (name != null)
-			builder.append("name=").append(name).append(", ");
-		if (versionId != null)
-			builder.append("versionId=").append(versionId).append(", ");
-		if (pageState != null)
-			builder.append("pageState=").append(pageState).append(", ");
-		if (title != null)
-			builder.append("title=").append(title).append(", ");
-		if (summary != null)
-			builder.append("summary=").append(summary).append(", ");
-		if (bodyContent != null)
-			builder.append("bodyContent=").append(bodyContent).append(", ");
-		if (creationDate != null)
-			builder.append("creationDate=").append(creationDate).append(", ");
-		if (modifiedDate != null)
-			builder.append("modifiedDate=").append(modifiedDate).append(", ");
-		if (properties != null)
-			builder.append("properties=").append(properties).append(", ");
-		if (user != null)
-			builder.append("user=").append(user);
-		builder.append("]");
-		return builder.toString();
-	}
+    /**
+     * @return user
+     */
+    public User getUser() {
+	return user;
+    }
 
-	
-	@JsonProperty
-	@Override
-	public Integer getCommentCount() {
-		try {
-			CommentManager cmg = ApplicationHelper.getComponent(CommentManager.class);
-			return cmg.getCommentTreeWalker(ModelTypeFactory.getTypeIdFromCode("PAGE"), getPageId()).getRecursiveChildCount(cmg.getRootParent());
-		} catch (ComponentNotFoundException e) {
-			return 0;
-		}
-	}
+    /**
+     * @param user
+     *            설정할 user
+     */
+    @JsonDeserialize(using = UserDeserializer.class)
+    public void setUser(User user) {
+	this.user = user;
+    }
 
-	@JsonIgnore
-	public TagDelegator getTagDelegator() {
-		if( this.getPageId() == -1L )
-			throw new IllegalStateException("Cannot retrieve tag manager prior to document being saved.");
-		else{
-			TagManager tmg = ApplicationHelper.getComponent(TagManager.class);
-			return new DefaultTagDelegator(ModelTypeFactory.getTypeIdFromCode("PAGE"), this.getPageId(), tmg);
-		}
-	}
+    @JsonIgnore
+    public int getCachedSize() {
+	return 0;
+    }
 
-	@JsonIgnore
-	public void setTagsString(String tagsString){}
-	
-	@JsonProperty
-	public String getTagsString() {		
-		if( this.getPageId() > 0 )
-			return getTagDelegator().getTagsAsString();		
-		return null;
+    @JsonIgnore
+    public String getBodyText() {
+	if (bodyContent == null)
+	    return null;
+	else
+	    return bodyContent.getBodyText();
+    }
+
+    @JsonIgnore
+    public void setBodyText(String body) {
+	bodyContent.setBodyText(body);
+    }
+
+    public boolean getBooleanProperty(String name, boolean defaultValue) {
+	String value = getProperties().get(name);
+	String valueToUse = StringUtils.defaultString(value, Boolean.toString(defaultValue));
+	return Boolean.parseBoolean(valueToUse);
+    }
+
+    public long getLongProperty(String name, long defaultValue) {
+	String value = getProperties().get(name);
+	String valueToUse = StringUtils.defaultString(value, Long.toString(defaultValue));
+	return Long.parseLong(valueToUse);
+    }
+
+    public int getIntProperty(String name, int defaultValue) {
+	String value = getProperties().get(name);
+	String valueToUse = StringUtils.defaultString(value, Integer.toString(defaultValue));
+	return Integer.parseInt(valueToUse);
+    }
+
+    public String getProperty(String name, String defaultString) {
+	String value = getProperties().get(name);
+	return StringUtils.defaultString(value, defaultString);
+    }
+
+    /*
+     * (비Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("DefaultPage [");
+	if (objectType != null)
+	    builder.append("objectType=").append(objectType).append(", ");
+	if (objectId != null)
+	    builder.append("objectId=").append(objectId).append(", ");
+	if (pageId != null)
+	    builder.append("pageId=").append(pageId).append(", ");
+	if (name != null)
+	    builder.append("name=").append(name).append(", ");
+	if (versionId != null)
+	    builder.append("versionId=").append(versionId).append(", ");
+	if (pageState != null)
+	    builder.append("pageState=").append(pageState).append(", ");
+	if (title != null)
+	    builder.append("title=").append(title).append(", ");
+	if (summary != null)
+	    builder.append("summary=").append(summary).append(", ");
+	if (bodyContent != null)
+	    builder.append("bodyContent=").append(bodyContent).append(", ");
+	if (creationDate != null)
+	    builder.append("creationDate=").append(creationDate).append(", ");
+	if (modifiedDate != null)
+	    builder.append("modifiedDate=").append(modifiedDate).append(", ");
+	if (properties != null)
+	    builder.append("properties=").append(properties).append(", ");
+	if (user != null)
+	    builder.append("user=").append(user);
+	builder.append("]");
+	return builder.toString();
+    }
+
+    @JsonProperty
+    @Override
+    public Integer getCommentCount() {
+	try {
+	    CommentManager cmg = ApplicationHelper.getComponent(CommentManager.class);
+	    return cmg.getCommentTreeWalker(ModelTypeFactory.getTypeIdFromCode("PAGE"), getPageId())
+		    .getRecursiveChildCount(cmg.getRootParent());
+	} catch (ComponentNotFoundException e) {
+	    return 0;
 	}
+    }
+
+    @JsonIgnore
+    public TagDelegator getTagDelegator() {
+	if (this.getPageId() == -1L)
+	    throw new IllegalStateException("Cannot retrieve tag manager prior to document being saved.");
+	else {
+	    TagManager tmg = ApplicationHelper.getComponent(TagManager.class);
+	    return new DefaultTagDelegator(ModelTypeFactory.getTypeIdFromCode("PAGE"), this.getPageId(), tmg);
+	}
+    }
+
+    @JsonIgnore
+    public void setTagsString(String tagsString) {
+    }
+
+    @JsonProperty
+    public String getTagsString() {
+	if (this.getPageId() > 0)
+	    return getTagDelegator().getTagsAsString();
+	return null;
+    }
 }

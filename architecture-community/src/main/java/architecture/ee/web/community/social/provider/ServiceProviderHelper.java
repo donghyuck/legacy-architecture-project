@@ -29,69 +29,77 @@ import architecture.ee.web.community.social.provider.connect.ConnectionFactoryLo
 import architecture.ee.web.community.social.provider.connect.SocialConnect.Media;
 
 public class ServiceProviderHelper {
-	
-	public static final String DEFAULT_FACEBOOK_SCOPE = "export_stream, read_stream, user_about_me, user_activities, user_education_history, user_friends, user_photos, user_work_history";
-	
-	private static final Log log = LogFactory.getLog(ConnectionFactoryLocator.class);
-	
-	public static boolean allowSignin(Media media){
-		return ApplicationHelper.getApplicationBooleanProperty("components.social.providers." + media.name().toLowerCase() +  ".allowSignin", false);		
-	}
-	
-	public static boolean allowSignup(Media media){
-		return ApplicationHelper.getApplicationBooleanProperty("components.social.providers." + media.name().toLowerCase() +  ".allowSignup", false);		
-	}
-	
-	public static List<Media> getAllMedia(){
-		Collection<String> providers = ApplicationHelper.getRepository().getSetupApplicationProperties().getChildrenNames("components.social.providers"); //ApplicationHelper.getConfigService().getLocalProperties(parent).getApplicationPropertyNames("components.social.providers");
-		List<Media> media = new ArrayList<Media>(providers.size());
-		for( String name : providers)
-			media.add(Media.valueOf(name.toUpperCase()));
-		return media;
-	}
-	
-	public static List<ServiceProviderConfig> getAllServiceProviderConfig(){
-		Collection<String> providers = ApplicationHelper.getRepository().getSetupApplicationProperties().getChildrenNames("components.social.providers");
-		List<ServiceProviderConfig> infos = new ArrayList<ServiceProviderConfig>(providers.size());
-		for( String name : providers){			
-			Media media = Media.valueOf(name.toUpperCase());		
-			infos.add(
-				new ServiceProviderConfig(name, getClientId(media), getClientSecret(media), getCallbackUrl(media), getScope(media), allowSignin(media), allowSignup(media))
-			);
-		}	
-		return infos;
-	}
-	
-	public static String getCallbackUrl(Media media){
-		return ApplicationHelper.getApplicationProperty("components.social.providers." + media.name().toLowerCase() +  ".callbackUrl", null);
-	}
 
-	public static String getCallbackUrl(String providerId){
-		return ApplicationHelper.getApplicationProperty("components.social.providers." + providerId +  ".callbackUrl", null);
+    public static final String DEFAULT_FACEBOOK_SCOPE = "export_stream, read_stream, user_about_me, user_activities, user_education_history, user_friends, user_photos, user_work_history";
+
+    private static final Log log = LogFactory.getLog(ConnectionFactoryLocator.class);
+
+    public static boolean allowSignin(Media media) {
+	return ApplicationHelper.getApplicationBooleanProperty(
+		"components.social.providers." + media.name().toLowerCase() + ".allowSignin", false);
+    }
+
+    public static boolean allowSignup(Media media) {
+	return ApplicationHelper.getApplicationBooleanProperty(
+		"components.social.providers." + media.name().toLowerCase() + ".allowSignup", false);
+    }
+
+    public static List<Media> getAllMedia() {
+	Collection<String> providers = ApplicationHelper.getRepository().getSetupApplicationProperties()
+		.getChildrenNames("components.social.providers"); // ApplicationHelper.getConfigService().getLocalProperties(parent).getApplicationPropertyNames("components.social.providers");
+	List<Media> media = new ArrayList<Media>(providers.size());
+	for (String name : providers)
+	    media.add(Media.valueOf(name.toUpperCase()));
+	return media;
+    }
+
+    public static List<ServiceProviderConfig> getAllServiceProviderConfig() {
+	Collection<String> providers = ApplicationHelper.getRepository().getSetupApplicationProperties()
+		.getChildrenNames("components.social.providers");
+	List<ServiceProviderConfig> infos = new ArrayList<ServiceProviderConfig>(providers.size());
+	for (String name : providers) {
+	    Media media = Media.valueOf(name.toUpperCase());
+	    infos.add(new ServiceProviderConfig(name, getClientId(media), getClientSecret(media), getCallbackUrl(media),
+		    getScope(media), allowSignin(media), allowSignup(media)));
 	}
-	
-	public static String getClientId(Media media){
-		return ApplicationHelper.getApplicationProperty("components.social.providers." + media.name().toLowerCase() +  ".clientId", null);
-	}
-	
-	public static String getClientSecret(Media media){
-		return ApplicationHelper.getApplicationProperty("components.social.providers." + media.name().toLowerCase() +  ".clientSecret", null);
-	}
-	
-	public static ConnectSupport getConnectSupport(){
-		return new ConnectSupport();		
-	}
-	
-	public static ConnectSupport getConnectSupport(SessionStrategy sessionStrategy){
-		return new ConnectSupport(sessionStrategy);		
-	}
-	
-	public static String getScope(Media media){
-		return ApplicationHelper.getApplicationProperty("components.social.providers." + media.name().toLowerCase() +  ".scope", DEFAULT_FACEBOOK_SCOPE);
-	}
-	
-	public static Media toMedia(String name){
-		return Media.valueOf(name.toUpperCase());
-	}
-	
+	return infos;
+    }
+
+    public static String getCallbackUrl(Media media) {
+	return ApplicationHelper.getApplicationProperty(
+		"components.social.providers." + media.name().toLowerCase() + ".callbackUrl", null);
+    }
+
+    public static String getCallbackUrl(String providerId) {
+	return ApplicationHelper.getApplicationProperty("components.social.providers." + providerId + ".callbackUrl",
+		null);
+    }
+
+    public static String getClientId(Media media) {
+	return ApplicationHelper.getApplicationProperty(
+		"components.social.providers." + media.name().toLowerCase() + ".clientId", null);
+    }
+
+    public static String getClientSecret(Media media) {
+	return ApplicationHelper.getApplicationProperty(
+		"components.social.providers." + media.name().toLowerCase() + ".clientSecret", null);
+    }
+
+    public static ConnectSupport getConnectSupport() {
+	return new ConnectSupport();
+    }
+
+    public static ConnectSupport getConnectSupport(SessionStrategy sessionStrategy) {
+	return new ConnectSupport(sessionStrategy);
+    }
+
+    public static String getScope(Media media) {
+	return ApplicationHelper.getApplicationProperty(
+		"components.social.providers." + media.name().toLowerCase() + ".scope", DEFAULT_FACEBOOK_SCOPE);
+    }
+
+    public static Media toMedia(String name) {
+	return Media.valueOf(name.toUpperCase());
+    }
+
 }

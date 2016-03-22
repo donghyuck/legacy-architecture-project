@@ -22,67 +22,64 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class PageMixin {
 
-	@JsonCreator
-	PageMixin(
-			@JsonProperty("id") String id, 
-			@JsonProperty("name") String name, 
-			@JsonProperty("link") String location,
-			@JsonProperty("category") String category) {}
+    @JsonCreator
+    PageMixin(@JsonProperty("id") String id, @JsonProperty("name") String name, @JsonProperty("link") String location,
+	    @JsonProperty("category") String category) {
+    }
 
-	@JsonProperty("description")
-	String description;
-	
-	@JsonProperty("location")
-	Location location;
+    @JsonProperty("description")
+    String description;
 
-	@JsonProperty("website")
-	String website;
-	
-	@JsonProperty("picture")
-	@JsonDeserialize(using=PictureDeserializer.class)
-	String picture;
-	
-	@JsonProperty("cover")
-	CoverPhoto cover;
+    @JsonProperty("location")
+    Location location;
 
-	@JsonProperty("phone")
-	String phone;
+    @JsonProperty("website")
+    String website;
 
-	@JsonProperty("affiliation")
-	String affiliation;
-	
-	@JsonProperty("company_overview")
-	String companyOverview;
+    @JsonProperty("picture")
+    @JsonDeserialize(using = PictureDeserializer.class)
+    String picture;
 
-	@JsonProperty("fan_count")
-	int fanCount;
+    @JsonProperty("cover")
+    CoverPhoto cover;
 
-	@JsonProperty("likes")
-	int likes;
-	
-	@JsonProperty("talking_about_count")
-	int talkingAboutCount;
+    @JsonProperty("phone")
+    String phone;
 
-	@JsonProperty("checkins")
-	int checkins;
-	
-	@JsonProperty("can_post")
-	boolean canPost;
-	
-	@JsonProperty("is_published")
-	private boolean isPublished;
-	
-	@JsonProperty("is_community_page")
-	private boolean isCommunityPage;
-	
-	@JsonProperty("has_added_app")
-	private boolean hasAddedApp;
+    @JsonProperty("affiliation")
+    String affiliation;
 
-	@JsonProperty("hours")
-	private Map<String, String> hours;
+    @JsonProperty("company_overview")
+    String companyOverview;
+
+    @JsonProperty("fan_count")
+    int fanCount;
+
+    @JsonProperty("likes")
+    int likes;
+
+    @JsonProperty("talking_about_count")
+    int talkingAboutCount;
+
+    @JsonProperty("checkins")
+    int checkins;
+
+    @JsonProperty("can_post")
+    boolean canPost;
+
+    @JsonProperty("is_published")
+    private boolean isPublished;
+
+    @JsonProperty("is_community_page")
+    private boolean isCommunityPage;
+
+    @JsonProperty("has_added_app")
+    private boolean hasAddedApp;
+
+    @JsonProperty("hours")
+    private Map<String, String> hours;
 
 }

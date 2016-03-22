@@ -43,77 +43,78 @@ import architecture.ee.web.community.social.provider.connect.SocialConnect;
 import architecture.ee.web.community.social.provider.connect.SocialConnect.Media;
 import architecture.ee.web.community.social.provider.connect.SocialConnectManager;
 
-@Controller 
+@Controller
 @RequestMapping("/connect/tumblr")
 public class TumblrController {
 
-	private static final Log log = LogFactory.getLog(TumblrController.class);
-	
-	@Autowired
-	@Qualifier("socialConnectManager") private SocialConnectManager socialConnectManager ;
-	
-	public TumblrController() {
-	}
+    private static final Log log = LogFactory.getLog(TumblrController.class);
 
+    @Autowired
+    @Qualifier("socialConnectManager")
+    private SocialConnectManager socialConnectManager;
 
-	@RequestMapping(value="/user/lookup.json", method=RequestMethod.POST)
-	@ResponseBody
-	public UserInfo  lookupUser() throws Exception  {	
-	
-		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TUMBLR );		
-		Tumblr api = (Tumblr) account.getConnection().getApi();			
-		UserOperations userOperations = api.userOperations();
-		return userOperations.info();
-	}
-	
-	@RequestMapping(value="/following.json", method=RequestMethod.POST)
-	@ResponseBody
-	public Following following() throws Exception {
-		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TUMBLR );		
-		Tumblr api = (Tumblr) account.getConnection().getApi();	
-		return api.userOperations().following();
-	}
-	
-	@RequestMapping(value="/likes.json", method=RequestMethod.POST)
-	@ResponseBody
-	public Likes likes() throws Exception {
-		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TUMBLR );		
-		Tumblr api = (Tumblr) account.getConnection().getApi();	
-		return api.userOperations().likes();
-	}
+    public TumblrController() {
+    }
 
-	@RequestMapping(value="/dashboard.json", method=RequestMethod.POST)
-	@ResponseBody
-	public Posts dashboard(@RequestParam(value="offset", defaultValue="0", required=false ) Integer offset) throws Exception {
-		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TUMBLR );		
-		Tumblr api = (Tumblr) account.getConnection().getApi();			
-		if( offset > 0){
-			PostsQuery query = new PostsQuery();
-			query.setOffset(offset);
-			//query.setSinceId(offset);
-			return api.userOperations().dashboard(query);
-		}
-		return api.userOperations().dashboard();
-	}
+    @RequestMapping(value = "/user/lookup.json", method = RequestMethod.POST)
+    @ResponseBody
+    public UserInfo lookupUser() throws Exception {
 
-	
-	@RequestMapping(value="/{blogHostname}/avatar", method=RequestMethod.GET)
-	@ResponseBody
-	public RedirectView blog(@PathVariable("blogHostname") String blogHostname, @RequestParam(value="size", defaultValue="SMALL", required=false ) String size) throws Exception {
-		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TUMBLR );		
-		Tumblr api = (Tumblr) account.getConnection().getApi();			
-		
-		BlogOperations bo = api.blogOperations(blogHostname + ".tumblr.com");
-		String url = bo.avatar(AvatarSize.SMALL);
-		log.debug("info:" + bo.info().getUrl());		
-		log.debug("blogHostname:" + blogHostname);		
-		log.debug(url);
-		
-		return new RedirectView(url, true);
+	SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TUMBLR);
+	Tumblr api = (Tumblr) account.getConnection().getApi();
+	UserOperations userOperations = api.userOperations();
+	return userOperations.info();
+    }
+
+    @RequestMapping(value = "/following.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Following following() throws Exception {
+	SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TUMBLR);
+	Tumblr api = (Tumblr) account.getConnection().getApi();
+	return api.userOperations().following();
+    }
+
+    @RequestMapping(value = "/likes.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Likes likes() throws Exception {
+	SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TUMBLR);
+	Tumblr api = (Tumblr) account.getConnection().getApi();
+	return api.userOperations().likes();
+    }
+
+    @RequestMapping(value = "/dashboard.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Posts dashboard(@RequestParam(value = "offset", defaultValue = "0", required = false) Integer offset)
+	    throws Exception {
+	SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TUMBLR);
+	Tumblr api = (Tumblr) account.getConnection().getApi();
+	if (offset > 0) {
+	    PostsQuery query = new PostsQuery();
+	    query.setOffset(offset);
+	    // query.setSinceId(offset);
+	    return api.userOperations().dashboard(query);
 	}
-	
-	protected SocialConnect getSocialConnect(User user, Media media) throws ConnectNotFoundException{
-		return socialConnectManager.getSocialConnect(user, media.name().toLowerCase());		 		
-	}
-	
+	return api.userOperations().dashboard();
+    }
+
+    @RequestMapping(value = "/{blogHostname}/avatar", method = RequestMethod.GET)
+    @ResponseBody
+    public RedirectView blog(@PathVariable("blogHostname") String blogHostname,
+	    @RequestParam(value = "size", defaultValue = "SMALL", required = false) String size) throws Exception {
+	SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TUMBLR);
+	Tumblr api = (Tumblr) account.getConnection().getApi();
+
+	BlogOperations bo = api.blogOperations(blogHostname + ".tumblr.com");
+	String url = bo.avatar(AvatarSize.SMALL);
+	log.debug("info:" + bo.info().getUrl());
+	log.debug("blogHostname:" + blogHostname);
+	log.debug(url);
+
+	return new RedirectView(url, true);
+    }
+
+    protected SocialConnect getSocialConnect(User user, Media media) throws ConnectNotFoundException {
+	return socialConnectManager.getSocialConnect(user, media.name().toLowerCase());
+    }
+
 }

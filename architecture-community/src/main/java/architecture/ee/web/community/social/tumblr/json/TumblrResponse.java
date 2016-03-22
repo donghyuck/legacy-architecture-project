@@ -22,26 +22,26 @@ public class TumblrResponse {
     private String responseJson;
 
     public int getStatus() {
-        return status;
+	return status;
     }
 
     public void setStatus(int status) {
-        this.status = status;
+	this.status = status;
     }
 
     public String getMessage() {
-        return message;
+	return message;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+	this.message = message;
     }
 
     public String getResponseJson() {
-        return responseJson;
+	return responseJson;
     }
 
     public void setResponseJson(String responseJson) {
-        this.responseJson = responseJson;
+	this.responseJson = responseJson;
     }
 }

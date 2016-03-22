@@ -21,26 +21,26 @@ import architecture.common.user.User;
 
 public interface PageVersion {
 
-	public int getVersionNumber();
-	
-	public void setVersionNumber(int versionNumber);
-	
-	public Page getPage();
-	
-	public User getAuthor();
-	
-	public void setAuthor(User author);
-	
-	public PageState getPageState();
-	
-	public void setPageState(PageState state);
-		
-	public Date getCreationDate();
+    public int getVersionNumber();
 
-	public void setCreationDate(Date creationDate) ;
+    public void setVersionNumber(int versionNumber);
 
-	public Date getModifiedDate() ;
+    public Page getPage();
 
-	public void setModifiedDate(Date modifiedDate) ;
-	
+    public User getAuthor();
+
+    public void setAuthor(User author);
+
+    public PageState getPageState();
+
+    public void setPageState(PageState state);
+
+    public Date getCreationDate();
+
+    public void setCreationDate(Date creationDate);
+
+    public Date getModifiedDate();
+
+    public void setModifiedDate(Date modifiedDate);
+
 }

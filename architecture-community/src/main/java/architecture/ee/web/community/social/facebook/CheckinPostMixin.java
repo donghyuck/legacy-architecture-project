@@ -26,20 +26,17 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class CheckinPostMixin extends PostMixin {
 
-	@JsonCreator
-	CheckinPostMixin(
-			@JsonProperty("id") String id, 
-			@JsonProperty("from") Reference from, 
-			@JsonProperty("created_time") Date createdTime,
-			@JsonProperty("updated_time") Date updatedTime) {
-		super(id, from, createdTime, updatedTime);
-	}
+    @JsonCreator
+    CheckinPostMixin(@JsonProperty("id") String id, @JsonProperty("from") Reference from,
+	    @JsonProperty("created_time") Date createdTime, @JsonProperty("updated_time") Date updatedTime) {
+	super(id, from, createdTime, updatedTime);
+    }
 
-	@JsonProperty("place")
-	Page place;
-	
-	@JsonProperty("tags")
-	@JsonDeserialize(using=TagListDeserializer.class)
-	List<Tag> tags;
+    @JsonProperty("place")
+    Page place;
+
+    @JsonProperty("tags")
+    @JsonDeserialize(using = TagListDeserializer.class)
+    List<Tag> tags;
 
 }

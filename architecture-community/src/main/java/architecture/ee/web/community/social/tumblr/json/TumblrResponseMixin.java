@@ -29,22 +29,23 @@ public class TumblrResponseMixin {
 
     static class TumblrResponseDeserializer extends JsonDeserializer<TumblrResponse> {
 
-        @Override
-        public TumblrResponse deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-            JsonNode root = jp.readValueAsTree();
+	@Override
+	public TumblrResponse deserialize(JsonParser jp, DeserializationContext ctxt)
+		throws IOException, JsonProcessingException {
+	    JsonNode root = jp.readValueAsTree();
 
-            TumblrResponse response = new TumblrResponse();
+	    TumblrResponse response = new TumblrResponse();
 
-            JsonNode meta = root.get("meta");
+	    JsonNode meta = root.get("meta");
 
-            response.setStatus(meta.get("status").intValue());
-            response.setMessage(meta.get("msg").textValue());
+	    response.setStatus(meta.get("status").intValue());
+	    response.setMessage(meta.get("msg").textValue());
 
-            response.setResponseJson(root.get("response").toString());
+	    response.setResponseJson(root.get("response").toString());
 
-            return response;
-        }
-        
+	    return response;
+	}
+
     }
 
 }

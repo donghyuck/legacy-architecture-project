@@ -22,42 +22,42 @@ import architecture.ee.web.community.page.Page;
 
 public class PageEvent extends Event {
 
-	public enum Type {
+    public enum Type {
 
-		CREATED,
+	CREATED,
 
-		UPDATED,
+	UPDATED,
 
-		DELETED,
+	DELETED,
 
-		MOVED,
+	MOVED,
 
-		EXPIRED,
+	EXPIRED,
 
-		VIEWED
-	};
+	VIEWED
+    };
 
-	private Type type;
-	private Date date;
+    private Type type;
+    private Date date;
 
-	public PageEvent(Page source, Type type) {
-		super(source);
-		this.type = type;
-		date = new Date();
-	}
+    public PageEvent(Page source, Type type) {
+	super(source);
+	this.type = type;
+	date = new Date();
+    }
 
-	/**
-	 * @return date
-	 */
-	public Date getDate() {
-		return date;
-	}
+    /**
+     * @return date
+     */
+    public Date getDate() {
+	return date;
+    }
 
-	/**
-	 * @return type
-	 */
-	public Type getType() {
-		return type;
-	}
+    /**
+     * @return type
+     */
+    public Type getType() {
+	return type;
+    }
 
 }

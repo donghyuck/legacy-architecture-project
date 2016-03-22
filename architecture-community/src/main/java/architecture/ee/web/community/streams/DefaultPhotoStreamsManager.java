@@ -36,204 +36,207 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
 public class DefaultPhotoStreamsManager implements PhotoStreamsManager {
-	
-	
-	private Cache photoStreamCache;
-	
-	private StreamsDao streamsDao;		
-	
-	private UserManager userManager;
 
-	protected void clearPhotoInCache( Photo photo ){
-		photoStreamCache.remove(photo.getExternalId());
-	}
+    private Cache photoStreamCache;
 
-	public Photo getPhotoById(String externalId) throws NotFoundException {
-		
-		Photo photoToUse = getPhotoFromCache(externalId);
-		if( photoToUse == null ){
-			photoToUse = getStreamsDao().getPhotoStream(externalId);
-			User u;
-			try {
-				u = userManager.getUser(((PhotoImpl)photoToUse).getCreatorId());
-				((PhotoImpl)photoToUse).setCreator(u);
-			} catch (UserNotFoundException e) {
-				((PhotoImpl)photoToUse).setCreator(new AnonymousUser());
-			}			
-			updatePhotoInCache(photoToUse);
-		}
-		
-		return photoToUse;
+    private StreamsDao streamsDao;
+
+    private UserManager userManager;
+
+    protected void clearPhotoInCache(Photo photo) {
+	photoStreamCache.remove(photo.getExternalId());
+    }
+
+    public Photo getPhotoById(String externalId) throws NotFoundException {
+
+	Photo photoToUse = getPhotoFromCache(externalId);
+	if (photoToUse == null) {
+	    photoToUse = getStreamsDao().getPhotoStream(externalId);
+	    User u;
+	    try {
+		u = userManager.getUser(((PhotoImpl) photoToUse).getCreatorId());
+		((PhotoImpl) photoToUse).setCreator(u);
+	    } catch (UserNotFoundException e) {
+		((PhotoImpl) photoToUse).setCreator(new AnonymousUser());
+	    }
+	    updatePhotoInCache(photoToUse);
 	}
 
-	public int getPhotoCount(int objectType) {
-		return getStreamsDao().getPhotoCount(objectType);
-	}
+	return photoToUse;
+    }
 
-	public int getPhotoCount(int objectType, long objectId) {
-		return getStreamsDao().getPhotoCount(objectType, objectId);
-	}
+    public int getPhotoCount(int objectType) {
+	return getStreamsDao().getPhotoCount(objectType);
+    }
 
-	protected Photo getPhotoFromCache(String externalId){
-		if( photoStreamCache.get(externalId) != null)
-			return (Photo) photoStreamCache.get( externalId ).getValue();
-		return null;
-	}
+    public int getPhotoCount(int objectType, long objectId) {
+	return getStreamsDao().getPhotoCount(objectType, objectId);
+    }
 
-	public List<Photo> getPhotos() {
-		List<String> ids = getStreamsDao().getPhotoIds();
-		return toPhotoList(ids);
-	}
-	
-	public List<Photo> getPhotos(int objectType) {
-		List<String> ids = getStreamsDao().getPhotoIds(objectType);		
-		return toPhotoList(ids);
-	}
+    protected Photo getPhotoFromCache(String externalId) {
+	if (photoStreamCache.get(externalId) != null)
+	    return (Photo) photoStreamCache.get(externalId).getValue();
+	return null;
+    }
 
-	public List<Photo> getPhotos(int startIndex, int maxResults) {
-		
-		List<String> ids = getStreamsDao().getPhotoIds(startIndex, maxResults);		
-		
-		return toPhotoList(ids);
-	}
-	
-	public List<Photo> getPhotos(int objectType, int startIndex, int maxResults) {
-		List<String> ids = getStreamsDao().getPhotoIds(objectType, startIndex, maxResults);		
-		return toPhotoList(ids);
-	}
+    public List<Photo> getPhotos() {
+	List<String> ids = getStreamsDao().getPhotoIds();
+	return toPhotoList(ids);
+    }
 
-	public List<Photo> getPhotos(int objectType, long objectId) {
-		List<String> ids = getStreamsDao().getPhotoIds(objectType, objectId);		
-		return toPhotoList(ids);
-	}
+    public List<Photo> getPhotos(int objectType) {
+	List<String> ids = getStreamsDao().getPhotoIds(objectType);
+	return toPhotoList(ids);
+    }
 
-	public List<Photo> getPhotos(int objectType, long objectId, int startIndex, int maxResults) {
-		List<String> ids = getStreamsDao().getPhotoIds(objectType, objectId, startIndex, maxResults);	
-		return toPhotoList(ids);
-	}
+    public List<Photo> getPhotos(int startIndex, int maxResults) {
 
-	/**
-	 * @return photoStreamCache
-	 */
-	public Cache getPhotoStreamCache() {
-		return photoStreamCache;
-	}
+	List<String> ids = getStreamsDao().getPhotoIds(startIndex, maxResults);
 
-	/**
-	 * @return streamsDao
-	 */
-	public StreamsDao getStreamsDao() {
-		return streamsDao;
-	}
+	return toPhotoList(ids);
+    }
 
-	public int getTotalPhotoCount() {		
-		return getStreamsDao().getPhotoCount();
-	}
+    public List<Photo> getPhotos(int objectType, int startIndex, int maxResults) {
+	List<String> ids = getStreamsDao().getPhotoIds(objectType, startIndex, maxResults);
+	return toPhotoList(ids);
+    }
 
-	/**
-	 * @return userManager
-	 */
-	public UserManager getUserManager() {
-		return userManager;
-	}
+    public List<Photo> getPhotos(int objectType, long objectId) {
+	List<String> ids = getStreamsDao().getPhotoIds(objectType, objectId);
+	return toPhotoList(ids);
+    }
 
-	/**
-	 * @param photoStreamCache 설정할 photoStreamCache
-	 */
-	public void setPhotoStreamCache(Cache photoStreamCache) {
-		this.photoStreamCache = photoStreamCache;
-	}
-	
-	/**
-	 * @param streamsDao 설정할 streamsDao
-	 */
-	public void setStreamsDao(StreamsDao streamsDao) {
-		this.streamsDao = streamsDao;
-	}
+    public List<Photo> getPhotos(int objectType, long objectId, int startIndex, int maxResults) {
+	List<String> ids = getStreamsDao().getPhotoIds(objectType, objectId, startIndex, maxResults);
+	return toPhotoList(ids);
+    }
 
-	/**
-	 * @param userManager 설정할 userManager
-	 */
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
-	}
+    /**
+     * @return photoStreamCache
+     */
+    public Cache getPhotoStreamCache() {
+	return photoStreamCache;
+    }
 
-	protected List<Photo> toPhotoList(List<String> ids ){
-		if( ids.size() == 0 )
-			return Collections.EMPTY_LIST;		
-		List<Photo> photos = new ArrayList<Photo>(ids.size());
-		for( String id : ids){
-			Photo p;
-			try {
-				p = getPhotoById(id);
-				photos.add(p);
-			} catch (NotFoundException e) {
-			}			
-		}
-		return photos;
-	}
+    /**
+     * @return streamsDao
+     */
+    public StreamsDao getStreamsDao() {
+	return streamsDao;
+    }
 
-	protected void updatePhotoInCache( Photo photo ){
-		photoStreamCache.put(new Element(photo.getExternalId(), photo));		
-	}
+    public int getTotalPhotoCount() {
+	return getStreamsDao().getPhotoCount();
+    }
 
-	public List<Photo> getPhotosByImage(Image image) {
-		List<String> ids = streamsDao.getPhotoIdsByImage(image.getImageId());
-		return toPhotoList(ids);
-	}
-	
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
-	public void addImage(Image image, User creator) {		
-		PhotoImpl photoToUse = new PhotoImpl(RandomStringUtils.random(64, true, true), image.getImageId(), true, creator);
-		Date now = new Date();
-		photoToUse.setCreationDate(now);
-		photoToUse.setModifiedDate(now);
-		
-		this.streamsDao.addPhoto(photoToUse);		
-	}
+    /**
+     * @return userManager
+     */
+    public UserManager getUserManager() {
+	return userManager;
+    }
 
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
-	public void deletePhotos(Image image, User creator) {
-		List<Photo> list = getPhotosByImage(image);
-		streamsDao.removePhotos(image);
-		for( Photo p : list)
-			photoStreamCache.remove(p.getExternalId());
-	}
+    /**
+     * @param photoStreamCache
+     *            설정할 photoStreamCache
+     */
+    public void setPhotoStreamCache(Cache photoStreamCache) {
+	this.photoStreamCache = photoStreamCache;
+    }
 
-	@Override
-	public List<Photo> getPhotosByRandom(int objectType, long objectId) {
-		List<String> ids = getStreamsDao().getPhotoIdsByRandom(objectType, objectId);				
-		return toPhotoList(ids);
-	}
+    /**
+     * @param streamsDao
+     *            설정할 streamsDao
+     */
+    public void setStreamsDao(StreamsDao streamsDao) {
+	this.streamsDao = streamsDao;
+    }
 
-	@Override
-	public List<Photo> getPhotosByRandom(int objectType, long objectId, int startIndex, int maxResults) {
-		List<String> ids = getStreamsDao().getPhotoIdsByRandom(objectType, objectId, startIndex, maxResults);				
-		return toPhotoList(ids);
-	}
+    /**
+     * @param userManager
+     *            설정할 userManager
+     */
+    public void setUserManager(UserManager userManager) {
+	this.userManager = userManager;
+    }
 
-	@Override
-	public List<Photo> getPhotosByRandom(int objectType) {
-		List<String> ids = getStreamsDao().getPhotoIdsByRandom(objectType);				
-		return toPhotoList(ids);
+    protected List<Photo> toPhotoList(List<String> ids) {
+	if (ids.size() == 0)
+	    return Collections.EMPTY_LIST;
+	List<Photo> photos = new ArrayList<Photo>(ids.size());
+	for (String id : ids) {
+	    Photo p;
+	    try {
+		p = getPhotoById(id);
+		photos.add(p);
+	    } catch (NotFoundException e) {
+	    }
 	}
+	return photos;
+    }
 
-	@Override
-	public List<Photo> getPhotosByRandom(int objectType, int startIndex, 	int maxResults) {
-		List<String> ids = getStreamsDao().getPhotoIdsByRandom(objectType, startIndex, maxResults);				
-		return toPhotoList(ids);
-	}
+    protected void updatePhotoInCache(Photo photo) {
+	photoStreamCache.put(new Element(photo.getExternalId(), photo));
+    }
 
-	@Override
-	public List<Photo> getPhotosByRandom() {
-		List<String> ids = getStreamsDao().getPhotoIdsByRandom();				
-		return toPhotoList(ids);
-	}
+    public List<Photo> getPhotosByImage(Image image) {
+	List<String> ids = streamsDao.getPhotoIdsByImage(image.getImageId());
+	return toPhotoList(ids);
+    }
 
-	@Override
-	public List<Photo> getPhotosByRandom(int startIndex, int maxResults) {
-		List<String> ids = getStreamsDao().getPhotoIdsByRandom(startIndex, maxResults);				
-		return toPhotoList(ids);
-	}
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public void addImage(Image image, User creator) {
+	PhotoImpl photoToUse = new PhotoImpl(RandomStringUtils.random(64, true, true), image.getImageId(), true,
+		creator);
+	Date now = new Date();
+	photoToUse.setCreationDate(now);
+	photoToUse.setModifiedDate(now);
+
+	this.streamsDao.addPhoto(photoToUse);
+    }
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public void deletePhotos(Image image, User creator) {
+	List<Photo> list = getPhotosByImage(image);
+	streamsDao.removePhotos(image);
+	for (Photo p : list)
+	    photoStreamCache.remove(p.getExternalId());
+    }
+
+    @Override
+    public List<Photo> getPhotosByRandom(int objectType, long objectId) {
+	List<String> ids = getStreamsDao().getPhotoIdsByRandom(objectType, objectId);
+	return toPhotoList(ids);
+    }
+
+    @Override
+    public List<Photo> getPhotosByRandom(int objectType, long objectId, int startIndex, int maxResults) {
+	List<String> ids = getStreamsDao().getPhotoIdsByRandom(objectType, objectId, startIndex, maxResults);
+	return toPhotoList(ids);
+    }
+
+    @Override
+    public List<Photo> getPhotosByRandom(int objectType) {
+	List<String> ids = getStreamsDao().getPhotoIdsByRandom(objectType);
+	return toPhotoList(ids);
+    }
+
+    @Override
+    public List<Photo> getPhotosByRandom(int objectType, int startIndex, int maxResults) {
+	List<String> ids = getStreamsDao().getPhotoIdsByRandom(objectType, startIndex, maxResults);
+	return toPhotoList(ids);
+    }
+
+    @Override
+    public List<Photo> getPhotosByRandom() {
+	List<String> ids = getStreamsDao().getPhotoIdsByRandom();
+	return toPhotoList(ids);
+    }
+
+    @Override
+    public List<Photo> getPhotosByRandom(int startIndex, int maxResults) {
+	List<String> ids = getStreamsDao().getPhotoIdsByRandom(startIndex, maxResults);
+	return toPhotoList(ids);
+    }
 
 }

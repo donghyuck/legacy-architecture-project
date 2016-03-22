@@ -21,83 +21,85 @@ import architecture.common.model.EntityModelObject;
 
 public interface SocialNetwork extends EntityModelObject {
 
-	
-	public enum Media {
-		TWITTER, 
-		FACEBOOK,
-		TUMBLR
-	};	
-		
-	/**
-	 * @return username
-	 */
-	public String getUsername() ;
+    public enum Media {
+	TWITTER, FACEBOOK, TUMBLR
+    };
 
-	/**
-	 * @param username 설정할 username
-	 */
-	public void setUsername(String username);
-	
-	/**
-	 * @return connected
-	 */
-	public boolean isConnected();	
-		
-	public abstract int getObjectType();
-	
-	public abstract long getObjectId();
+    /**
+     * @return username
+     */
+    public String getUsername();
 
-	public abstract long getSocialAccountId();	
+    /**
+     * @param username
+     *            설정할 username
+     */
+    public void setUsername(String username);
 
-	public String getServiceProviderName() ;
+    /**
+     * @return connected
+     */
+    public boolean isConnected();
 
-	/**
-	 * @param servicePrivider 설정할 servicePrivider
-	 */
-	public void setServiceProviderName(String servicePrivider) ;
+    public abstract int getObjectType();
 
-	/**
-	 * @return serviceProvider
-	 */
-	public SocialServiceProvider getSocialServiceProvider();
+    public abstract long getObjectId();
 
-	/**
-	 * @param serviceProvider 설정할 serviceProvider
-	 */
-	public void setSocialServiceProvider(SocialServiceProvider serviceProvider);
+    public abstract long getSocialAccountId();
 
-	/**
-	 * @return accessToken
-	 */
-	public String getAccessToken() ;
+    public String getServiceProviderName();
 
-	/**
-	 * @param accessToken 설정할 accessToken
-	 */
-	public void setAccessToken(String accessToken) ;
+    /**
+     * @param servicePrivider
+     *            설정할 servicePrivider
+     */
+    public void setServiceProviderName(String servicePrivider);
 
-	/**
-	 * @return accessSecret
-	 */
-	public String getAccessSecret() ;
+    /**
+     * @return serviceProvider
+     */
+    public SocialServiceProvider getSocialServiceProvider();
 
-	/**
-	 * @param accessSecret 설정할 accessSecret
-	 */
-	public void setAccessSecret(String accessSecret) ;
+    /**
+     * @param serviceProvider
+     *            설정할 serviceProvider
+     */
+    public void setSocialServiceProvider(SocialServiceProvider serviceProvider);
 
-	/**
-	 * @return isSignedIn
-	 */
-	public boolean isSignedIn() ;
+    /**
+     * @return accessToken
+     */
+    public String getAccessToken();
 
-	public abstract Map<String, String> getProperties();
+    /**
+     * @param accessToken
+     *            설정할 accessToken
+     */
+    public void setAccessToken(String accessToken);
 
-	/**
-	 * @param properties
-	 */
-	public abstract void setProperties(Map<String, String> properties);
-	
-	public abstract String getAuthorizationUrl();
+    /**
+     * @return accessSecret
+     */
+    public String getAccessSecret();
+
+    /**
+     * @param accessSecret
+     *            설정할 accessSecret
+     */
+    public void setAccessSecret(String accessSecret);
+
+    /**
+     * @return isSignedIn
+     */
+    public boolean isSignedIn();
+
+    public abstract Map<String, String> getProperties();
+
+    /**
+     * @param properties
+     */
+    public abstract void setProperties(Map<String, String> properties);
+
+    public abstract String getAuthorizationUrl();
 
 }

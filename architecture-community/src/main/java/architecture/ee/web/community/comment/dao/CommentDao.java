@@ -20,15 +20,15 @@ import architecture.ee.web.community.comment.CommentNotFoundException;
 import architecture.ee.web.community.comment.CommentTreeWalker;
 
 public interface CommentDao {
-		
-	public abstract void create(Comment comment);
-	
-	public abstract void update(Comment comment);
-	
-	public abstract void delete(Comment comment);
-	
-	public abstract Comment getCommentById(long commentId) throws CommentNotFoundException ;
-	
-	public CommentTreeWalker getCommentTreeWalker(int objectType, long objectId);
-		
+
+    public abstract void create(Comment comment);
+
+    public abstract void update(Comment comment);
+
+    public abstract void delete(Comment comment);
+
+    public abstract Comment getCommentById(long commentId) throws CommentNotFoundException;
+
+    public CommentTreeWalker getCommentTreeWalker(int objectType, long objectId);
+
 }

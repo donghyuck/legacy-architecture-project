@@ -45,84 +45,85 @@ import architecture.ee.web.community.social.provider.connect.SocialConnect;
 import architecture.ee.web.community.social.provider.connect.SocialConnect.Media;
 import architecture.ee.web.community.social.provider.connect.SocialConnectManager;
 
-@Controller 
+@Controller
 @RequestMapping("/connect/facebook")
 public class FacebookController {
 
-	@Autowired
-	@Qualifier("socialConnectManager") private SocialConnectManager socialConnectManager ;
-	
-	public FacebookController() {
-	}
+    @Autowired
+    @Qualifier("socialConnectManager")
+    private SocialConnectManager socialConnectManager;
 
-	
-	@RequestMapping(value="/user/lookup.json", method=RequestMethod.POST)
-	@ResponseBody
-	public FacebookProfile  lookupUser(@RequestParam(value="userId", defaultValue="", required=false ) String userId) throws Exception  {		
-		
-		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.FACEBOOK );		
-		Facebook api = (Facebook) account.getConnection().getApi();	
-		UserOperations userOperations = api.userOperations();		
-		if(StringUtils.isNotBlank(userId))
-			return userOperations.getUserProfile(userId);
-		else
-			return userOperations.getUserProfile();
-	}
+    public FacebookController() {
+    }
 
-	@RequestMapping(value="/photo/{photoId}", method=RequestMethod.GET)
-	@ResponseBody
-	public Object getPhoto(@PathVariable("photoId") String photoId) throws Exception {
-		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.FACEBOOK );		
-		Facebook api = (Facebook) account.getConnection().getApi();	
-		Photo photo = api.mediaOperations().getPhoto(photoId);
-		return photo;
-	}
+    @RequestMapping(value = "/user/lookup.json", method = RequestMethod.POST)
+    @ResponseBody
+    public FacebookProfile lookupUser(
+	    @RequestParam(value = "userId", defaultValue = "", required = false) String userId) throws Exception {
 
+	SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.FACEBOOK);
+	Facebook api = (Facebook) account.getConnection().getApi();
+	UserOperations userOperations = api.userOperations();
+	if (StringUtils.isNotBlank(userId))
+	    return userOperations.getUserProfile(userId);
+	else
+	    return userOperations.getUserProfile();
+    }
 
-	@RequestMapping(value="/friends.json", method=RequestMethod.POST)
-	@ResponseBody
-	public List<FacebookProfile> getFriendProfiles() throws Exception {
-		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.FACEBOOK );		
-		Facebook api = (Facebook) account.getConnection().getApi();	
-		return api.friendOperations().getFriendProfiles();
-	}
+    @RequestMapping(value = "/photo/{photoId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getPhoto(@PathVariable("photoId") String photoId) throws Exception {
+	SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.FACEBOOK);
+	Facebook api = (Facebook) account.getConnection().getApi();
+	Photo photo = api.mediaOperations().getPhoto(photoId);
+	return photo;
+    }
 
-	@RequestMapping(value="/feed.json", method=RequestMethod.POST)
-	@ResponseBody
-	public List<Post> getFeed(@RequestParam(value="userId", defaultValue="", required=false ) String userId) throws Exception {
-		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.FACEBOOK );		
-		Facebook api = (Facebook) account.getConnection().getApi();	
-		if(StringUtils.isNotBlank(userId))
-			return api.feedOperations().getFeed(userId);
-		else	
-			return api.feedOperations().getFeed();
-	}
+    @RequestMapping(value = "/friends.json", method = RequestMethod.POST)
+    @ResponseBody
+    public List<FacebookProfile> getFriendProfiles() throws Exception {
+	SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.FACEBOOK);
+	Facebook api = (Facebook) account.getConnection().getApi();
+	return api.friendOperations().getFriendProfiles();
+    }
 
-	@RequestMapping(value="/homefeed.json", method=RequestMethod.POST)
-	@ResponseBody
-	public PagedList<Post> getHomeFeed(NativeWebRequest request) throws Exception {
-		SocialConnectController.setOutputFormat(request);
-		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.FACEBOOK );		
-		Facebook api = (Facebook) account.getConnection().getApi();	
-		return api.feedOperations().getHomeFeed();
-	}
+    @RequestMapping(value = "/feed.json", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Post> getFeed(@RequestParam(value = "userId", defaultValue = "", required = false) String userId)
+	    throws Exception {
+	SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.FACEBOOK);
+	Facebook api = (Facebook) account.getConnection().getApi();
+	if (StringUtils.isNotBlank(userId))
+	    return api.feedOperations().getFeed(userId);
+	else
+	    return api.feedOperations().getFeed();
+    }
 
-	@RequestMapping(value="/notes.json", method=RequestMethod.POST)
-	@ResponseBody
-	public PagedList<NotePost> getNotes() throws Exception {
-		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.FACEBOOK );		
-		Facebook api = (Facebook) account.getConnection().getApi();	
-		return api.feedOperations().getNotes();
-	}
-	
-	protected SocialConnect getSocialConnect(User user, Media media) throws ConnectNotFoundException{
-		return socialConnectManager.getSocialConnect(user, media.name().toLowerCase());		 		
-	}
-	
-	private void setOutputFormat(NativeWebRequest request){
-		HttpServletRequest httprequest = request.getNativeRequest(HttpServletRequest.class);
-		HttpServletResponse httpresponse = request.getNativeResponse(HttpServletResponse.class);		
-		httprequest.setAttribute("output", "json");
-	}
-		
+    @RequestMapping(value = "/homefeed.json", method = RequestMethod.POST)
+    @ResponseBody
+    public PagedList<Post> getHomeFeed(NativeWebRequest request) throws Exception {
+	SocialConnectController.setOutputFormat(request);
+	SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.FACEBOOK);
+	Facebook api = (Facebook) account.getConnection().getApi();
+	return api.feedOperations().getHomeFeed();
+    }
+
+    @RequestMapping(value = "/notes.json", method = RequestMethod.POST)
+    @ResponseBody
+    public PagedList<NotePost> getNotes() throws Exception {
+	SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.FACEBOOK);
+	Facebook api = (Facebook) account.getConnection().getApi();
+	return api.feedOperations().getNotes();
+    }
+
+    protected SocialConnect getSocialConnect(User user, Media media) throws ConnectNotFoundException {
+	return socialConnectManager.getSocialConnect(user, media.name().toLowerCase());
+    }
+
+    private void setOutputFormat(NativeWebRequest request) {
+	HttpServletRequest httprequest = request.getNativeRequest(HttpServletRequest.class);
+	HttpServletResponse httpresponse = request.getNativeResponse(HttpServletResponse.class);
+	httprequest.setAttribute("output", "json");
+    }
+
 }

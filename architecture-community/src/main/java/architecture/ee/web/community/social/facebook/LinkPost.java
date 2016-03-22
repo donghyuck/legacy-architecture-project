@@ -17,22 +17,21 @@ package architecture.ee.web.community.social.facebook;
 
 import java.util.Date;
 
-
 public class LinkPost extends Post {
-	
-	private String objectId;
 
-	public LinkPost(String id, Reference from, Date createdTime, Date updatedTime) {
-		super(id, from, createdTime, updatedTime);
-	}
-	
-	/**
-	 * The ID of the object referred to in the link.
-	 * As an example, an event may appear in a user's feed as a link to the event.
-	 * May be null if the link doesn't refer to another Facebook object.
-	 */
-	public String getObjectId() {
-		return objectId;
-	}
-	
+    private String objectId;
+
+    public LinkPost(String id, Reference from, Date createdTime, Date updatedTime) {
+	super(id, from, createdTime, updatedTime);
+    }
+
+    /**
+     * The ID of the object referred to in the link. As an example, an event may
+     * appear in a user's feed as a link to the event. May be null if the link
+     * doesn't refer to another Facebook object.
+     */
+    public String getObjectId() {
+	return objectId;
+    }
+
 }

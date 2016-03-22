@@ -32,84 +32,83 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 public class CrawlerTest {
-	
-	
-	public void crawlling() throws Exception {
-		CrawlConfig config = new CrawlConfig();
-		config.setCrawlStorageFolder("/Users/donghyuck/Documents/temp");
-		config.setPolitenessDelay(1000);
 
-	    /*
-	     * You can set the maximum crawl depth here. The default value is -1 for
-	     * unlimited depth
-	     */
-	    config.setMaxDepthOfCrawling(2);
+    public void crawlling() throws Exception {
+	CrawlConfig config = new CrawlConfig();
+	config.setCrawlStorageFolder("/Users/donghyuck/Documents/temp");
+	config.setPolitenessDelay(1000);
 
-	    /*
-	     * You can set the maximum number of pages to crawl. The default value
-	     * is -1 for unlimited number of pages
-	     */
-	    config.setMaxPagesToFetch(1000);
+	/*
+	 * You can set the maximum crawl depth here. The default value is -1 for
+	 * unlimited depth
+	 */
+	config.setMaxDepthOfCrawling(2);
 
-	    /**
-	     * Do you want crawler4j to crawl also binary data ?
-	     * example: the contents of pdf, or the metadata of images etc
-	     */
-	    config.setIncludeBinaryContentInCrawling(false);
+	/*
+	 * You can set the maximum number of pages to crawl. The default value
+	 * is -1 for unlimited number of pages
+	 */
+	config.setMaxPagesToFetch(1000);
 
-	    /*
-	     * Do you need to set a proxy? If so, you can use:
-	     * config.setProxyHost("proxyserver.example.com");
-	     * config.setProxyPort(8080);
-	     *
-	     * If your proxy also needs authentication:
-	     * config.setProxyUsername(username); config.getProxyPassword(password);
-	     */
+	/**
+	 * Do you want crawler4j to crawl also binary data ? example: the
+	 * contents of pdf, or the metadata of images etc
+	 */
+	config.setIncludeBinaryContentInCrawling(false);
 
-	    /*
-	     * This config parameter can be used to set your crawl to be resumable
-	     * (meaning that you can resume the crawl from a previously
-	     * interrupted/crashed crawl). Note: if you enable resuming feature and
-	     * want to start a fresh crawl, you need to delete the contents of
-	     * rootFolder manually.
-	     */
-	    config.setResumableCrawling(false);
-	    
-	    PageFetcher pageFetcher = new PageFetcher(config);
-	    
-	    RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
-	    RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
-	    
-	    CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
-	    controller.addSeed("http://www.naver.com/");
-	    controller.start(MyCrawler.class, 1);
-		
-	}
-	
-	@Test
-	public void visit() {
+	/*
+	 * Do you need to set a proxy? If so, you can use:
+	 * config.setProxyHost("proxyserver.example.com");
+	 * config.setProxyPort(8080);
+	 *
+	 * If your proxy also needs authentication:
+	 * config.setProxyUsername(username); config.getProxyPassword(password);
+	 */
 
-		try {
-			URL url = new URL("http://www.clien.net/cs2/bbs/board.php?bo_table=jirum");			
-			Document doc = Jsoup.parse(url, 1000);
-			System.out.println(doc.title());
-			Elements list = doc.select(".board_main table>tbody tr");
-			for( Element ele : list ){
-				Elements ele2 = ele.children();
-				if( ele2.size() > 1 && !ele.hasClass("post_notice") ){
-					for( Element ele3 : ele2){
-						System.out.println( "#" + ele3.html() );
-					}
-				}
-			}
-		} catch (MalformedURLException e) {
-			// TODO 자동 생성된 catch 블록
-			e.printStackTrace();
-		} catch (IOException e1) {
-			// TODO 자동 생성된 catch 블록
-			e1.printStackTrace();
+	/*
+	 * This config parameter can be used to set your crawl to be resumable
+	 * (meaning that you can resume the crawl from a previously
+	 * interrupted/crashed crawl). Note: if you enable resuming feature and
+	 * want to start a fresh crawl, you need to delete the contents of
+	 * rootFolder manually.
+	 */
+	config.setResumableCrawling(false);
+
+	PageFetcher pageFetcher = new PageFetcher(config);
+
+	RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
+	RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
+
+	CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
+	controller.addSeed("http://www.naver.com/");
+	controller.start(MyCrawler.class, 1);
+
+    }
+
+    @Test
+    public void visit() {
+
+	try {
+	    URL url = new URL("http://www.clien.net/cs2/bbs/board.php?bo_table=jirum");
+	    Document doc = Jsoup.parse(url, 1000);
+	    System.out.println(doc.title());
+	    Elements list = doc.select(".board_main table>tbody tr");
+	    for (Element ele : list) {
+		Elements ele2 = ele.children();
+		if (ele2.size() > 1 && !ele.hasClass("post_notice")) {
+		    for (Element ele3 : ele2) {
+			System.out.println("#" + ele3.html());
+		    }
 		}
-
+	    }
+	} catch (MalformedURLException e) {
+	    // TODO 자동 생성된 catch 블록
+	    e.printStackTrace();
+	} catch (IOException e1) {
+	    // TODO 자동 생성된 catch 블록
+	    e1.printStackTrace();
 	}
+
+    }
 
 }
