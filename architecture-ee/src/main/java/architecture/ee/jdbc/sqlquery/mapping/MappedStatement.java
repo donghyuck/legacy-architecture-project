@@ -23,124 +23,122 @@ import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.sql.SqlSource;
 
 /**
- * @author   donghyuck
+ * @author donghyuck
  */
 public class MappedStatement {
 
-	private String resource;
+    private String resource;
 
-	private Configuration configuration;
+    private Configuration configuration;
 
-	private String ID;
+    private String ID;
 
-	private Integer fetchSize;
+    private Integer fetchSize;
 
-	private Integer timeout;
+    private Integer timeout;
 
-	private SqlSource sqlSource;
+    private SqlSource sqlSource;
 
-	private StatementType statementType;
+    private StatementType statementType;
 
-	private String description;
-	
-	
-	/**
-	 * @author  donghyuck
-	 */
-	public static class Builder {
+    private String description;
 
+    /**
+     * @author donghyuck
+     */
+    public static class Builder {
 
-		private MappedStatement mappedStatement = new MappedStatement();
-		
-		public Builder(Configuration configuration, String id, SqlSource sqlSource, StatementType statementType) {
-			mappedStatement.configuration = configuration;
-			mappedStatement.ID = id;
-			mappedStatement.sqlSource = sqlSource;
-			mappedStatement.statementType = StatementType.PREPARED;
-			mappedStatement.timeout = configuration.getDefaultStatementTimeout();
-		}
+	private MappedStatement mappedStatement = new MappedStatement();
 
-		public Builder resource(String resource) {
-			mappedStatement.resource = resource;
-			return this;
-		}
-
-		public String id() {
-			return mappedStatement.ID;
-		}
-
-		public Builder description(String description) {
-			mappedStatement.description = description;
-			return this;
-		}
-		
-		public Builder fetchSize(Integer fetchSize) {
-			mappedStatement.fetchSize = fetchSize;
-			return this;
-		}
-
-		public Builder timeout(Integer timeout) {
-			mappedStatement.timeout = timeout;
-			return this;
-		}
-
-		public Builder statementType(StatementType statementType) {
-			mappedStatement.statementType = statementType;
-			return this;
-		}
-		
-		public MappedStatement build() {
-			assert mappedStatement.configuration != null;
-			assert mappedStatement.ID != null;
-			assert mappedStatement.sqlSource != null;
-			return mappedStatement;
-		}
+	public Builder(Configuration configuration, String id, SqlSource sqlSource, StatementType statementType) {
+	    mappedStatement.configuration = configuration;
+	    mappedStatement.ID = id;
+	    mappedStatement.sqlSource = sqlSource;
+	    mappedStatement.statementType = StatementType.PREPARED;
+	    mappedStatement.timeout = configuration.getDefaultStatementTimeout();
 	}
 
-	public String getID() {
-		return this.ID;
+	public Builder resource(String resource) {
+	    mappedStatement.resource = resource;
+	    return this;
 	}
 
-	public String getDescription(){
-		return this.description;
-	}
-	
-	public String getResource() {
-		return resource;
+	public String id() {
+	    return mappedStatement.ID;
 	}
 
-	public Configuration getConfiguration() {
-		return configuration;
+	public Builder description(String description) {
+	    mappedStatement.description = description;
+	    return this;
 	}
 
-	public Integer getFetchSize() {
-		return fetchSize;
+	public Builder fetchSize(Integer fetchSize) {
+	    mappedStatement.fetchSize = fetchSize;
+	    return this;
 	}
 
-	public Integer getTimeout() {
-		return timeout;
+	public Builder timeout(Integer timeout) {
+	    mappedStatement.timeout = timeout;
+	    return this;
 	}
 
-	public SqlSource getSqlSource() {
-		return sqlSource;
+	public Builder statementType(StatementType statementType) {
+	    mappedStatement.statementType = statementType;
+	    return this;
 	}
 
-	public StatementType getStatementType() {
-		return statementType;
+	public MappedStatement build() {
+	    assert mappedStatement.configuration != null;
+	    assert mappedStatement.ID != null;
+	    assert mappedStatement.sqlSource != null;
+	    return mappedStatement;
 	}
-	
-	public BoundSql getBoundSql(Object parameterObject) {		
-		BoundSql boundSql = sqlSource.getBoundSql(parameterObject);
-		return boundSql;
-	}
+    }
 
-	public BoundSql getBoundSql(Object parameterObject, Object additionalParameters) {
-		if(additionalParameters instanceof Map){
-		    return sqlSource.getBoundSql(parameterObject, (Map)additionalParameters);
-		}else{
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("additional_parameter", additionalParameters);		
-			return sqlSource.getBoundSql(parameterObject, params);
-		}
-	}	
+    public String getID() {
+	return this.ID;
+    }
+
+    public String getDescription() {
+	return this.description;
+    }
+
+    public String getResource() {
+	return resource;
+    }
+
+    public Configuration getConfiguration() {
+	return configuration;
+    }
+
+    public Integer getFetchSize() {
+	return fetchSize;
+    }
+
+    public Integer getTimeout() {
+	return timeout;
+    }
+
+    public SqlSource getSqlSource() {
+	return sqlSource;
+    }
+
+    public StatementType getStatementType() {
+	return statementType;
+    }
+
+    public BoundSql getBoundSql(Object parameterObject) {
+	BoundSql boundSql = sqlSource.getBoundSql(parameterObject);
+	return boundSql;
+    }
+
+    public BoundSql getBoundSql(Object parameterObject, Object additionalParameters) {
+	if (additionalParameters instanceof Map) {
+	    return sqlSource.getBoundSql(parameterObject, (Map) additionalParameters);
+	} else {
+	    Map<String, Object> params = new HashMap<String, Object>();
+	    params.put("additional_parameter", additionalParameters);
+	    return sqlSource.getBoundSql(parameterObject, params);
+	}
+    }
 }

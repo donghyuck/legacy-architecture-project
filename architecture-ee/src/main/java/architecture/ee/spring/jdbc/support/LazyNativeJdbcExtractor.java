@@ -10,88 +10,93 @@ import java.sql.Statement;
 import org.springframework.jdbc.support.nativejdbc.NativeJdbcExtractor;
 
 /**
- * A class to lazily instantiate a native JDBC extractor. <p /> We need to lazily instantiate it because otherwise Spring will construct it for us, and users might get class not found errors (eg if they're not using Weblogic and Spring tries to load the WeblogicNativeJdbcExtractor, things get ugly).
+ * A class to lazily instantiate a native JDBC extractor.
+ * <p />
+ * We need to lazily instantiate it because otherwise Spring will construct it
+ * for us, and users might get class not found errors (eg if they're not using
+ * Weblogic and Spring tries to load the WeblogicNativeJdbcExtractor, things get
+ * ugly).
  */
 
 public class LazyNativeJdbcExtractor implements NativeJdbcExtractor {
-	
-	/**
-	 * @uml.property  name="delegatedExtractor"
-	 */
-	private NativeJdbcExtractor delegatedExtractor;
-	
-	private Class<NativeJdbcExtractor> extractorClass;
 
-	public LazyNativeJdbcExtractor() {
+    /**
+     * @uml.property name="delegatedExtractor"
+     */
+    private NativeJdbcExtractor delegatedExtractor;
 
+    private Class<NativeJdbcExtractor> extractorClass;
+
+    public LazyNativeJdbcExtractor() {
+
+    }
+
+    /**
+     * @param extractorClass
+     * @uml.property name="extractorClass"
+     */
+    public void setExtractorClass(Class<NativeJdbcExtractor> extractorClass) {
+	this.extractorClass = extractorClass;
+    }
+
+    /**
+     * @return
+     * @uml.property name="delegatedExtractor"
+     */
+    private synchronized NativeJdbcExtractor getDelegatedExtractor() {
+	try {
+	    if (delegatedExtractor == null) {
+		delegatedExtractor = (NativeJdbcExtractor) extractorClass.newInstance();
+	    }
+	} catch (IllegalAccessException e) {
+	    throw new RuntimeException(
+		    "Error occurred trying to instantiate a native extractor of type: " + extractorClass, e);
+	} catch (InstantiationException e) {
+	    throw new RuntimeException(
+		    "Error occurred trying to instantiate a native extractor of type: " + extractorClass, e);
 	}
 
-	/**
-	 * @param extractorClass
-	 * @uml.property  name="extractorClass"
-	 */
-	public void setExtractorClass(Class<NativeJdbcExtractor> extractorClass) {
-		this.extractorClass = extractorClass;
+	if (delegatedExtractor != null) {
+	    return delegatedExtractor;
+	} else {
+	    throw new RuntimeException(
+		    "Error occurred trying to instantiate a native extractor of type: " + extractorClass);
 	}
+    }
 
-	/**
-	 * @return
-	 * @uml.property  name="delegatedExtractor"
-	 */
-	private synchronized NativeJdbcExtractor getDelegatedExtractor() {
-		try {
-			if (delegatedExtractor == null) {
-				delegatedExtractor = (NativeJdbcExtractor) extractorClass.newInstance();
-			}
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException( "Error occurred trying to instantiate a native extractor of type: " + extractorClass, e);
-		} catch (InstantiationException e) {
-			throw new RuntimeException( "Error occurred trying to instantiate a native extractor of type: " + extractorClass, e);
-		}
+    public boolean isNativeConnectionNecessaryForNativeStatements() {
+	return getDelegatedExtractor().isNativeConnectionNecessaryForNativeStatements();
+    }
 
-		if (delegatedExtractor != null) {
-			return delegatedExtractor;
-		} else {
-			throw new RuntimeException( "Error occurred trying to instantiate a native extractor of type: " + extractorClass);
-		}
-	}
+    public boolean isNativeConnectionNecessaryForNativePreparedStatements() {
+	return getDelegatedExtractor().isNativeConnectionNecessaryForNativePreparedStatements();
+    }
 
-	public boolean isNativeConnectionNecessaryForNativeStatements() {
-		return getDelegatedExtractor().isNativeConnectionNecessaryForNativeStatements();
-	}
+    public boolean isNativeConnectionNecessaryForNativeCallableStatements() {
+	return getDelegatedExtractor().isNativeConnectionNecessaryForNativeCallableStatements();
+    }
 
-	public boolean isNativeConnectionNecessaryForNativePreparedStatements() {
-		return getDelegatedExtractor().isNativeConnectionNecessaryForNativePreparedStatements();
-	}
+    public Connection getNativeConnection(Connection con) throws SQLException {
+	return getDelegatedExtractor().getNativeConnection(con);
+    }
 
-	public boolean isNativeConnectionNecessaryForNativeCallableStatements() {
-		return getDelegatedExtractor().isNativeConnectionNecessaryForNativeCallableStatements();
-	}
+    public Connection getNativeConnectionFromStatement(Statement stmt) throws SQLException {
+	return getDelegatedExtractor().getNativeConnectionFromStatement(stmt);
+    }
 
-	public Connection getNativeConnection(Connection con) throws SQLException {
-		return getDelegatedExtractor().getNativeConnection(con);
-	}
+    public Statement getNativeStatement(Statement stmt) throws SQLException {
+	return getDelegatedExtractor().getNativeStatement(stmt);
+    }
 
-	public Connection getNativeConnectionFromStatement(Statement stmt)
-			throws SQLException {
-		return getDelegatedExtractor().getNativeConnectionFromStatement(stmt);
-	}
+    public PreparedStatement getNativePreparedStatement(PreparedStatement ps) throws SQLException {
+	return getDelegatedExtractor().getNativePreparedStatement(ps);
+    }
 
-	public Statement getNativeStatement(Statement stmt) throws SQLException {
-		return getDelegatedExtractor().getNativeStatement(stmt);
-	}
+    public CallableStatement getNativeCallableStatement(CallableStatement cs) throws SQLException {
+	return getDelegatedExtractor().getNativeCallableStatement(cs);
+    }
 
-	public PreparedStatement getNativePreparedStatement(PreparedStatement ps)
-			throws SQLException {
-		return getDelegatedExtractor().getNativePreparedStatement(ps);
-	}
-
-	public CallableStatement getNativeCallableStatement(CallableStatement cs)
-			throws SQLException {
-		return getDelegatedExtractor().getNativeCallableStatement(cs);
-	}
-
-	public ResultSet getNativeResultSet(ResultSet rs) throws SQLException {
-		return getDelegatedExtractor().getNativeResultSet(rs);
-	}
+    public ResultSet getNativeResultSet(ResultSet rs) throws SQLException {
+	return getDelegatedExtractor().getNativeResultSet(rs);
+    }
 }

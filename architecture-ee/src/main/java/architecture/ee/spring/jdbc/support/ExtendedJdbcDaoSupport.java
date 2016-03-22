@@ -32,116 +32,115 @@ import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
 import architecture.ee.spring.util.NativeJdbcExtractorUtils;
 
 /**
- * @author   donghyuck
+ * @author donghyuck
  */
-public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {	
-	
-	protected Log log = LogFactory.getLog(getClass());	
+public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 
-	private MaxValueIncrementer maxValueIncrementer = null;
-	
-	private Configuration configuration = null;
+    protected Log log = LogFactory.getLog(getClass());
 
-	public ExtendedJdbcDaoSupport() {
-		super();
-	}
+    private MaxValueIncrementer maxValueIncrementer = null;
 
-	public ExtendedJdbcDaoSupport(Configuration configuration) {
-		super();
-		this.configuration = configuration;
-	}
+    private Configuration configuration = null;
 
-    protected boolean isMaxValueIncrementerSupport(){
-    	if(maxValueIncrementer!=null)
-    		return true;
-    	return false;
+    public ExtendedJdbcDaoSupport() {
+	super();
     }
 
-    protected long getNextId(String name){
-    	return maxValueIncrementer.nextLongValue(name);
+    public ExtendedJdbcDaoSupport(Configuration configuration) {
+	super();
+	this.configuration = configuration;
     }
-    
-	public void setMaxValueIncrementer(MaxValueIncrementer sequenceDao) {
-		this.maxValueIncrementer = sequenceDao;
-	}
-	
-	public void setConfiguration(Configuration configuration) {
-		this.configuration = configuration;
+
+    protected boolean isMaxValueIncrementerSupport() {
+	if (maxValueIncrementer != null)
+	    return true;
+	return false;
+    }
+
+    protected long getNextId(String name) {
+	return maxValueIncrementer.nextLongValue(name);
+    }
+
+    public void setMaxValueIncrementer(MaxValueIncrementer sequenceDao) {
+	this.maxValueIncrementer = sequenceDao;
+    }
+
+    public void setConfiguration(Configuration configuration) {
+	this.configuration = configuration;
+    }
+
+    public boolean isSetConfiguration() {
+	if (configuration == null)
+	    return false;
+	else
+	    return true;
+    }
+
+    protected ExtendedJdbcTemplate createJdbcTemplate(DataSource dataSource) {
+	return new ExtendedJdbcTemplate(dataSource);
+    }
+
+    public ExtendedJdbcTemplate getExtendedJdbcTemplate() {
+	return (ExtendedJdbcTemplate) getJdbcTemplate();
+    }
+
+    @Override
+    protected void initDao() throws Exception {
+
+    }
+
+    protected void initTemplateConfig() {
+
+    }
+
+    public LobHandler getLobHandler() {
+
+	if (getExtendedJdbcTemplate().getNativeJdbcExtractor() == null) {
+	    log.debug("Initializing NativeJdbcExtractor");
+	    log.debug("Database Type:" + getExtendedJdbcTemplate().getDatabaseType());
+	    NativeJdbcExtractor extractor = NativeJdbcExtractorUtils.getNativeJdbcExtractor();
+	    getExtendedJdbcTemplate().setNativeJdbcExtractor(extractor);
+	    log.debug("NativeJdbcExtractor:" + extractor.getClass().getName());
 	}
 
-	public boolean isSetConfiguration(){
-		if (configuration == null)
-			return false;
-		else 
-			return true;
-	}
-	
-	protected ExtendedJdbcTemplate createJdbcTemplate(DataSource dataSource) {
-		return new ExtendedJdbcTemplate(dataSource);
-	}
+	return getExtendedJdbcTemplate().getLobHandler();
+    }
 
-	public ExtendedJdbcTemplate getExtendedJdbcTemplate(){
-		return (ExtendedJdbcTemplate) getJdbcTemplate();
-	} 
-	
-	@Override
-	protected void initDao() throws Exception {
-       
-	}
+    public void setLobHandler(LobHandler lobHandler) {
+	getExtendedJdbcTemplate().setLobHandler(lobHandler);
+    }
 
-	
-	protected void initTemplateConfig() {
+    protected BoundSql getBoundSql(String statement) {
+	if (isSetConfiguration()) {
+	    MappedStatement stmt = configuration.getMappedStatement(statement);
+	    return stmt.getBoundSql(null);
+	}
+	return null;
+    }
 
+    protected BoundSql getBoundSql(String statement, Object... params) {
+	if (isSetConfiguration()) {
+	    MappedStatement stmt = configuration.getMappedStatement(statement);
+	    return stmt.getBoundSql(params);
 	}
+	return null;
+    }
 
-	public LobHandler getLobHandler(){
+    protected BoundSql getBoundSqlWithAdditionalParameter(String statement, Object additionalParameter) {
+	if (isSetConfiguration()) {
+	    MappedStatement stmt = configuration.getMappedStatement(statement);
+	    return stmt.getBoundSql(null, additionalParameter);
+	}
+	return null;
+    }
 
-	        if( getExtendedJdbcTemplate().getNativeJdbcExtractor() == null){
-	    		log.debug("Initializing NativeJdbcExtractor");
-		        log.debug("Database Type:" + getExtendedJdbcTemplate().getDatabaseType()); 
-		        NativeJdbcExtractor extractor = NativeJdbcExtractorUtils.getNativeJdbcExtractor();
-	        	getExtendedJdbcTemplate().setNativeJdbcExtractor(extractor);
-	            log.debug("NativeJdbcExtractor:" + extractor.getClass().getName() );	            
-	        }	        
-		
-		return getExtendedJdbcTemplate().getLobHandler();
-	} 
-	
-	public void setLobHandler(LobHandler lobHandler){
-		getExtendedJdbcTemplate().setLobHandler(lobHandler);
-	} 
-	
-	protected BoundSql getBoundSql(String statement ){
-		if(isSetConfiguration()){
-			MappedStatement stmt = configuration.getMappedStatement(statement);
-			return stmt.getBoundSql(null);
-		}
-		return null;
+    protected BoundSql getBoundSqlWithAdditionalParameter(String statement, Object parameters,
+	    Object additionalParameter) {
+	if (isSetConfiguration()) {
+	    MappedStatement stmt = configuration.getMappedStatement(statement);
+	    return stmt.getBoundSql(parameters, additionalParameter);
 	}
-	
-	protected BoundSql getBoundSql(String statement, Object ... params ){		
-		if(isSetConfiguration()){
-			MappedStatement stmt = configuration.getMappedStatement(statement);
-			return stmt.getBoundSql(params);
-		}
-		return null;
-	}
-	
-	protected BoundSql getBoundSqlWithAdditionalParameter(String statement, Object additionalParameter ){
-		if(isSetConfiguration()){
-			MappedStatement stmt = configuration.getMappedStatement(statement);
-			return stmt.getBoundSql(null, additionalParameter);
-		}
-		return null;
-	}
-
-	protected BoundSql getBoundSqlWithAdditionalParameter(String statement, Object parameters, Object additionalParameter ){
-		if(isSetConfiguration()){
-			MappedStatement stmt = configuration.getMappedStatement(statement);
-			return stmt.getBoundSql(parameters, additionalParameter);
-		}
-		return null;
-	}
-	
+	return null;
+    }
 
 }

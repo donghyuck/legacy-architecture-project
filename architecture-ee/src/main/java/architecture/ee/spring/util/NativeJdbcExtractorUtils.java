@@ -20,8 +20,8 @@ import org.springframework.jdbc.support.nativejdbc.NativeJdbcExtractor;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.common.spring.jdbc.support.nativejdbc.AutomaticJdbcExtractor;
 
-public class NativeJdbcExtractorUtils {	
-	public static NativeJdbcExtractor getNativeJdbcExtractor(){		
-		return Bootstrap.getBootstrapComponent(AutomaticJdbcExtractor.class);		
-	}
+public class NativeJdbcExtractorUtils {
+    public static NativeJdbcExtractor getNativeJdbcExtractor() {
+	return Bootstrap.getBootstrapComponent(AutomaticJdbcExtractor.class);
+    }
 }

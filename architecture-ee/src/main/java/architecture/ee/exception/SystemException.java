@@ -19,20 +19,20 @@ import architecture.common.exception.CodeableRuntimeException;
 
 public class SystemException extends CodeableRuntimeException {
 
-	public SystemException() {
-		super();
-	}
+    public SystemException() {
+	super();
+    }
 
-	public SystemException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    public SystemException(String msg, Throwable cause) {
+	super(msg, cause);
+    }
 
-	public SystemException(String msg) {
-		super(msg);
-	}
+    public SystemException(String msg) {
+	super(msg);
+    }
 
-	public SystemException(Throwable cause) {
-		super(cause);
-	}
+    public SystemException(Throwable cause) {
+	super(cause);
+    }
 
 }

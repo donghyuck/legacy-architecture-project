@@ -19,27 +19,27 @@ import java.util.List;
 
 public class MixedSqlNode implements SqlNode {
 
-	private List<SqlNode> contents;
+    private List<SqlNode> contents;
 
-	public MixedSqlNode(List<SqlNode> contents) {
-		this.contents = contents;
-	}
+    public MixedSqlNode(List<SqlNode> contents) {
+	this.contents = contents;
+    }
 
-	public boolean apply(DynamicContext context) {
-		for (SqlNode sqlNode : contents) {
-			sqlNode.apply(context);
-		}
-		return true;
+    public boolean apply(DynamicContext context) {
+	for (SqlNode sqlNode : contents) {
+	    sqlNode.apply(context);
 	}
+	return true;
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("contents {");
-		for (SqlNode node : contents)
-			sb.append(node.toString());
-		sb.append("}");
-		return sb.toString();
-	}
+    @Override
+    public String toString() {
+	StringBuilder sb = new StringBuilder();
+	sb.append("contents {");
+	for (SqlNode node : contents)
+	    sb.append(node.toString());
+	sb.append("}");
+	return sb.toString();
+    }
 
 }

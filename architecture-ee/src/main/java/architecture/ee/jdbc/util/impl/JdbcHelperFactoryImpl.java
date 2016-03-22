@@ -22,12 +22,12 @@ import architecture.ee.jdbc.util.JdbcHelperFactory;
 
 public class JdbcHelperFactoryImpl implements JdbcHelperFactory.Implementation {
 
-	public JdbcHelper getJdbcHelper(DataSource dataSource) {
-		return new JdbcHelperImpl(dataSource);
-	}
+    public JdbcHelper getJdbcHelper(DataSource dataSource) {
+	return new JdbcHelperImpl(dataSource);
+    }
 
-	public JdbcHelper getJdbcHelper() {
-		return new JdbcHelperImpl();
-	}
+    public JdbcHelper getJdbcHelper() {
+	return new JdbcHelperImpl();
+    }
 
 }

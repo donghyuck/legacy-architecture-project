@@ -25,18 +25,18 @@ import architecture.ee.jdbc.sqlquery.SqlQuery;
 
 public interface SqlQueryFactory {
 
-	public abstract SqlQuery createSqlQuery();
-	
-	public abstract SqlQuery createSqlQuery(DataSource dataSource);
+    public abstract SqlQuery createSqlQuery();
 
-	public abstract SqlQuery createSqlQuery(ExtendedJdbcTemplate jdbcTemplate);
-		
-	public abstract MaxValueIncrementer getMaxValueIncrementer();
-	
-	public boolean validateFile(File file);
-	
-	public boolean isFileDeployed(File file);
-	
-	public String fileCreated(File file);
-	
+    public abstract SqlQuery createSqlQuery(DataSource dataSource);
+
+    public abstract SqlQuery createSqlQuery(ExtendedJdbcTemplate jdbcTemplate);
+
+    public abstract MaxValueIncrementer getMaxValueIncrementer();
+
+    public boolean validateFile(File file);
+
+    public boolean isFileDeployed(File file);
+
+    public String fileCreated(File file);
+
 }

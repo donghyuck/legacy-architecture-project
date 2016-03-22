@@ -19,24 +19,24 @@ import architecture.ee.jdbc.sqlquery.SqlQueryException;
 
 public class BuilderException extends SqlQueryException {
 
-	public BuilderException() {
-		super();
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public BuilderException() {
+	super();
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public BuilderException(String msg, Throwable cause) {
-		super(msg, cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public BuilderException(String msg, Throwable cause) {
+	super(msg, cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public BuilderException(String msg) {
-		super(msg);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public BuilderException(String msg) {
+	super(msg);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
-	public BuilderException(Throwable cause) {
-		super(cause);
-		// TODO 자동 생성된 생성자 스텁
-	}
+    public BuilderException(Throwable cause) {
+	super(cause);
+	// TODO 자동 생성된 생성자 스텁
+    }
 
 }

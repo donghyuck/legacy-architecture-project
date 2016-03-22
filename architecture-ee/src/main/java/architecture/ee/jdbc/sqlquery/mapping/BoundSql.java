@@ -20,40 +20,40 @@ import java.util.List;
 import architecture.common.jdbc.ParameterMapping;
 import architecture.common.jdbc.ResultMapping;
 
-
 /**
- * @author   donghyuck
+ * @author donghyuck
  */
 public class BoundSql {
 
-	private String sql;
+    private String sql;
 
-	private Object parameterObject;
-	
-	private List<ParameterMapping> parameterMappings;
-	
-	private List<ResultMapping> resultMappings ;
-	
-	public BoundSql(String sql, List<ParameterMapping> parameterMappings, Object parameterObject, List<ResultMapping> resultMappings) {		
-	    this.sql = sql;
-	    this.parameterMappings = parameterMappings;
-	    this.resultMappings = resultMappings;
-	    this.parameterObject = parameterObject; 
-	  }
-		
-	public Object getParameterObject() {
-		return parameterObject;
-	}
+    private Object parameterObject;
 
-	public List<ParameterMapping> getParameterMappings() {
-		return parameterMappings;
-	}
+    private List<ParameterMapping> parameterMappings;
 
-	public String getSql() {
-		return sql;
-	}
+    private List<ResultMapping> resultMappings;
 
-	public List<ResultMapping> getResultMappings() {
-		return resultMappings;
-	}
+    public BoundSql(String sql, List<ParameterMapping> parameterMappings, Object parameterObject,
+	    List<ResultMapping> resultMappings) {
+	this.sql = sql;
+	this.parameterMappings = parameterMappings;
+	this.resultMappings = resultMappings;
+	this.parameterObject = parameterObject;
+    }
+
+    public Object getParameterObject() {
+	return parameterObject;
+    }
+
+    public List<ParameterMapping> getParameterMappings() {
+	return parameterMappings;
+    }
+
+    public String getSql() {
+	return sql;
+    }
+
+    public List<ResultMapping> getResultMappings() {
+	return resultMappings;
+    }
 }

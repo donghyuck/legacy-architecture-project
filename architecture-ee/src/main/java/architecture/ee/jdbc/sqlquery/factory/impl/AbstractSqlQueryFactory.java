@@ -51,273 +51,235 @@ import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
 
 /**
- * @author  donghyuck
+ * @author donghyuck
  */
 public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, DirectoryListener {
-	
-	protected Log log = LogFactory.getLog(getClass());
-	
-	private Map<URI, DeployedInfo> deployments = Collections.synchronizedMap(new HashMap<URI, DeployedInfo>());
-	
-	public static final String DEFAULT_FILE_SUFFIX = "sqlset.xml";
-	
-	private String prefix = "";
-	
-	private String suffix = DEFAULT_FILE_SUFFIX;
-	
-	private final Configuration configuration;
-	
-	protected List<String> resourceLocations;
-	
-	private Resource[] sqlLocations;
-	
-			
-	public AbstractSqlQueryFactory(Configuration configuration) {
-		this.configuration = configuration;
-	}
 
+    protected Log log = LogFactory.getLog(getClass());
 
-	public void setPrefix(String prefix) {
-		this.prefix = (prefix != null ? prefix : "");
-	}
-	
+    private Map<URI, DeployedInfo> deployments = Collections.synchronizedMap(new HashMap<URI, DeployedInfo>());
 
+    public static final String DEFAULT_FILE_SUFFIX = "sqlset.xml";
 
-	public List<String> getResourceLocations() {
-		return resourceLocations;
-	}
+    private String prefix = "";
 
+    private String suffix = DEFAULT_FILE_SUFFIX;
 
+    private final Configuration configuration;
 
-	public void setResourceLocations(List<String> resourceLocations) {
-		this.resourceLocations = resourceLocations;
-	}
-	
+    protected List<String> resourceLocations;
 
+    private Resource[] sqlLocations;
 
-	public void setSuffix(String suffix) {
-		this.suffix = (suffix != null ? suffix : "");
-	}	
-	
+    public AbstractSqlQueryFactory(Configuration configuration) {
+	this.configuration = configuration;
+    }
 
+    public void setPrefix(String prefix) {
+	this.prefix = (prefix != null ? prefix : "");
+    }
 
-	public Resource[] getSqlLocations() {
-		return sqlLocations;
-	}
+    public List<String> getResourceLocations() {
+	return resourceLocations;
+    }
 
+    public void setResourceLocations(List<String> resourceLocations) {
+	this.resourceLocations = resourceLocations;
+    }
 
-	public void setSqlLocations(Resource[] sqlLocations) {
-		this.sqlLocations = sqlLocations;
-	}
+    public void setSuffix(String suffix) {
+	this.suffix = (suffix != null ? suffix : "");
+    }
 
+    public Resource[] getSqlLocations() {
+	return sqlLocations;
+    }
 
-	public Configuration getConfiguration(){
-		return configuration;
-	}
-	
-	protected void buildSqlFromInputStream(InputStream inputStream, Configuration configuration) {
-		XmlSqlBuilder builder = new XmlSqlBuilder(inputStream, configuration);
-		builder.build();
-	}
-	
-	
-	private FileObject[] findSqlFiles ( FileObject fo ) throws FileSystemException {
-		return fo.findFiles(new FileSelector(){
-			public boolean includeFile(FileSelectInfo fileInfo) throws Exception {
-				FileObject f = fileInfo.getFile();
-				log.debug("varifing : " + f.getName() );
-				return StringUtils.endsWith(f.getName().getBaseName(), DEFAULT_FILE_SUFFIX);	
-			}
-			public boolean traverseDescendents(FileSelectInfo fileInfo) throws Exception {	
-				return VFSUtils.isFolder(fileInfo.getFile());
-		}});			
-	}
-	
-	
-	
-	protected boolean isEmpty(Object[]array){
-		return ObjectUtils.isEmpty(array);
-	} 
-	
-	protected void loadResourceLocations() {
-		
-		List<FileObject> list = new ArrayList<FileObject>();				
-		Repository repository = Bootstrap.getBootstrapComponent(Repository.class);
-		/**
-		log.debug("searching sql in jar ...");
-		if(!isEmpty(this.sqlLocations)){
-			for(Resource sqlLocation : sqlLocations ){
-				if(sqlLocation == null)
-					continue;
-				
-				
-				// 
-				log.debug(sqlLocation.toString());
-			}
+    public void setSqlLocations(Resource[] sqlLocations) {
+	this.sqlLocations = sqlLocations;
+    }
+
+    public Configuration getConfiguration() {
+	return configuration;
+    }
+
+    protected void buildSqlFromInputStream(InputStream inputStream, Configuration configuration) {
+	XmlSqlBuilder builder = new XmlSqlBuilder(inputStream, configuration);
+	builder.build();
+    }
+
+    private FileObject[] findSqlFiles(FileObject fo) throws FileSystemException {
+	return fo.findFiles(new FileSelector() {
+	    public boolean includeFile(FileSelectInfo fileInfo) throws Exception {
+		FileObject f = fileInfo.getFile();
+		log.debug("varifing : " + f.getName());
+		return StringUtils.endsWith(f.getName().getBaseName(), DEFAULT_FILE_SUFFIX);
+	    }
+
+	    public boolean traverseDescendents(FileSelectInfo fileInfo) throws Exception {
+		return VFSUtils.isFolder(fileInfo.getFile());
+	    }
+	});
+    }
+
+    protected boolean isEmpty(Object[] array) {
+	return ObjectUtils.isEmpty(array);
+    }
+
+    protected void loadResourceLocations() {
+
+	List<FileObject> list = new ArrayList<FileObject>();
+	Repository repository = Bootstrap.getBootstrapComponent(Repository.class);
+	/**
+	 * log.debug("searching sql in jar ...");
+	 * if(!isEmpty(this.sqlLocations)){ for(Resource sqlLocation :
+	 * sqlLocations ){ if(sqlLocation == null) continue;
+	 * 
+	 * 
+	 * // log.debug(sqlLocation.toString()); } }
+	 **/
+
+	/*
+	 * String value =
+	 * repository.getSetupApplicationProperties().getStringProperty(
+	 * "resources.sql", ""); String[] resources = StringUtils.split(value);
+	 * if( resources.length > 0 ){ log.debug(
+	 * "using custom sql resources instade of " + resourceLocations ); for(
+	 * String path : resources ){ try { FileObject f =
+	 * VFSUtils.resolveFile(path); if (f.exists()) { list.add(f); } } catch
+	 * (Throwable e) { log.warn(path + " not found.", e); } } }else{ for
+	 * (String path : resourceLocations) { try { FileObject f =
+	 * VFSUtils.resolveFile(path); if (f.exists()) { list.add(f); } } catch
+	 * (Throwable e) { log.warn(path + " not found.", e); } } }
+	 */
+
+	try {
+	    log.debug("searching sql ...");
+	    ClassLoader cl = Thread.currentThread().getContextClassLoader();
+	    Enumeration<URL> paths = cl.getResources("sql/");
+	    do {
+		if (!paths.hasMoreElements())
+		    break;
+		URL url = paths.nextElement();
+		String pathToUse = "jar:" + url.getPath();
+		log.debug("target:" + pathToUse);
+		FileObject fo = VFSUtils.resolveFile(pathToUse);
+		FileObject[] selected = findSqlFiles(fo);
+		for (FileObject f : selected) {
+		    if (!list.contains(f)) {
+			list.add(f);
+		    }
 		}
-		**/
+	    } while (true);
+	} catch (Throwable e) {
+	    log.warn(e);
+	}
 
-		
-/*
-		String value = repository.getSetupApplicationProperties().getStringProperty("resources.sql", "");
-		String[] resources = StringUtils.split(value);
-		if( resources.length > 0 ){
-			log.debug("using custom sql resources instade of " + resourceLocations );
-			for( String path : resources ){
-				try {
-					FileObject f = VFSUtils.resolveFile(path);
-					if (f.exists()) {
-						list.add(f);
-					}
-				} catch (Throwable e) {
-					log.warn(path + " not found.", e);
-				}
-			}
-		}else{			
-			for (String path : resourceLocations) {
-				try {
-					FileObject f = VFSUtils.resolveFile(path);
-					if (f.exists()) {
-						list.add(f);
-					}
-				} catch (Throwable e) {
-					log.warn(path + " not found.", e);
-				}
-			}				
-		}		
-*/	
-		
-		try {
-			log.debug("searching sql ...");
-			ClassLoader cl = Thread.currentThread().getContextClassLoader();
-			Enumeration<URL> paths = cl.getResources("sql/");
-			do {
-				if (!paths.hasMoreElements())
-					break;			
-				URL url = paths.nextElement();
-				String pathToUse = "jar:" + url.getPath();				
-				log.debug( "target:" + pathToUse);				
-				FileObject fo = VFSUtils.resolveFile(pathToUse);				
-				FileObject[] selected = findSqlFiles(fo);				
-				for( FileObject f : selected ){
-					if( ! list.contains(f) ){
-						list.add(f);
-					}						
-				}			
-			} while ( true );	
-		} catch (Throwable e) {
-			log.warn(e);
-		}					
-		
-		
-		for( FileObject fo : list){
-			try {
-				log.debug("sql : " + fo.getName() );
-				if (!configuration.isResourceLoaded(fo.getName().getURI())) {
-					buildSqlFromInputStream(fo.getContent().getInputStream(), configuration);
-					configuration.addLoadedResource(fo.getName().getURI());
-				}
-			} catch (FileSystemException e) {
-				log.warn(e);
-			}			
+	for (FileObject fo : list) {
+	    try {
+		log.debug("sql : " + fo.getName());
+		if (!configuration.isResourceLoaded(fo.getName().getURI())) {
+		    buildSqlFromInputStream(fo.getContent().getInputStream(), configuration);
+		    configuration.addLoadedResource(fo.getName().getURI());
 		}
-		
+	    } catch (FileSystemException e) {
+		log.warn(e);
+	    }
 	}
-	
-	
-	
-	static class DeployedInfo {
 
-		protected long deployedTime;
-		protected String name;
-		protected URI uri;
-		protected long timestamp = -1L;
-		
-		public DeployedInfo(URI uri, String name, long deployedTime) {
-			this.deployedTime = deployedTime;
-			this.name = name;
-			this.uri = uri;
+    }
+
+    static class DeployedInfo {
+
+	protected long deployedTime;
+	protected String name;
+	protected URI uri;
+	protected long timestamp = -1L;
+
+	public DeployedInfo(URI uri, String name, long deployedTime) {
+	    this.deployedTime = deployedTime;
+	    this.name = name;
+	    this.uri = uri;
+	}
+
+	public DeployedInfo(URI uri, String name, long deployedTime, long timestamp) {
+	    this.deployedTime = deployedTime;
+	    this.name = name;
+	    this.uri = uri;
+	    this.timestamp = timestamp;
+	}
+
+	public DeployedInfo(URI uri, long deployedTime) {
+	    this.deployedTime = deployedTime;
+	    this.uri = uri;
+	}
+    }
+
+    public String fileCreated(File file) {
+	try {
+	    URI uri = file.toURI();
+	    if (deployments.containsKey(uri)) {
+		DeployedInfo di = deployments.get(uri);
+		if (di.timestamp == file.lastModified()) {
+		    return "";
 		}
-		public DeployedInfo(URI uri, String name, long deployedTime, long timestamp) {
-			this.deployedTime = deployedTime;
-			this.name = name;
-			this.uri = uri;
-			this.timestamp = timestamp;
-		}		
+	    } else {
+		buildSqlFromInputStream(new FileInputStream(file), configuration);
+		DeployedInfo di = new DeployedInfo(file.toURI(), System.currentTimeMillis());
+		di.timestamp = file.lastModified();
+		deployments.put(di.uri, di);
+	    }
+	} catch (FileNotFoundException e) {
 
-		public DeployedInfo(URI uri, long deployedTime) {
-			this.deployedTime = deployedTime;
-			this.uri = uri;
-		}
 	}
-	
+	return "success";
+    }
 
-	public String fileCreated(File file) {		
-		try {	
-			URI uri = file.toURI();
-			if( deployments.containsKey(uri) ){
-				DeployedInfo di = deployments.get(uri);
-				if( di.timestamp == file.lastModified()){
-					return "";
-				}
-			}else{
-				buildSqlFromInputStream(new FileInputStream(file), configuration);
-				DeployedInfo di = new DeployedInfo(file.toURI(), System.currentTimeMillis());
-				di.timestamp = file.lastModified();
-				deployments.put(di.uri, di);
-			}
-		} catch (FileNotFoundException e) {
-			
-		}		
-		return "success";
+    public boolean fileDeleted(File file) {
+	if (configuration.isResourceLoaded(file.toURI().toString())) {
+	    configuration.removeUriNamespace(file.toURI().toString(), true);
+	    configuration.removeLoadedResource(file.toURI().toString());
 	}
+	// DeployedInfo di =
+	deployments.remove(file.toURI());
+	// ToDo more ...
+	return true;
+    }
 
-	public boolean fileDeleted(File file) {		
-		if (configuration.isResourceLoaded(file.toURI().toString())) {
-			configuration.removeUriNamespace(file.toURI().toString(), true);
-			configuration.removeLoadedResource(file.toURI().toString());
-		}		
-		//DeployedInfo di = 
-		deployments.remove(file.toURI());
-		// ToDo more ...
-		return true;		
+    public void fileChanged(File file) {
+	try {
+	    buildSqlFromInputStream(new FileInputStream(file), configuration);
+	    DeployedInfo di = deployments.get(file.toURI());
+	    di.deployedTime = System.currentTimeMillis();
+	    deployments.put(di.uri, di);
+	    configuration.buildAllStatements();
+	} catch (FileNotFoundException e) {
 	}
+    }
 
-	public void fileChanged(File file) {
-		try {
-			buildSqlFromInputStream(new FileInputStream(file), configuration);
-			DeployedInfo di = deployments.get(file.toURI());
-			di.deployedTime = System.currentTimeMillis();
-			deployments.put(di.uri, di);			
-			configuration.buildAllStatements();			
-		} catch (FileNotFoundException e) {
-		}
-	}
+    public long getDeploymentTime(File file) {
+	if (isFileDeployed(file))
+	    return deployments.get(file.toURI()).deployedTime;
+	return 0;
+    }
 
-	public long getDeploymentTime(File file) {
-		if (isFileDeployed(file))
-			return deployments.get(file.toURI()).deployedTime;
-		return 0;
-	}
+    public boolean isFileDeployed(File file) {
+	return deployments.containsKey(file.toURI());
+    }
 
-	public boolean isFileDeployed(File file) {
-		return deployments.containsKey(file.toURI());
-	}
-	
+    // 파일이 유요한 형태의 파일인가를 확인하여 true/false 값을 리턴한다.
+    public boolean validateFile(File file) {
+	boolean readable = file.canRead();
+	boolean flag1 = StringUtils.isEmpty(suffix) ? true : file.getName().endsWith(suffix);
+	boolean flag2 = StringUtils.isEmpty(prefix) ? true : file.getName().startsWith(prefix);
+	boolean valid = readable && flag1 && flag2;
 
-	// 파일이 유요한 형태의 파일인가를 확인하여 true/false 값을 리턴한다.	
-	public boolean validateFile(File file) {
-		boolean readable = file.canRead();
-		boolean flag1 = StringUtils.isEmpty(suffix) ? true : file.getName().endsWith(suffix);
-		boolean flag2 = StringUtils.isEmpty(prefix) ? true : file.getName().startsWith(prefix);
-		boolean valid = readable && flag1 && flag2;
-		
-		if (!valid) {
-			// if (log.isDebugEnabled())
-			// log.info(MessageFormatter.format("011023",
-			// file.getAbsolutePath()));
-		}		
-		return valid;
+	if (!valid) {
+	    // if (log.isDebugEnabled())
+	    // log.info(MessageFormatter.format("011023",
+	    // file.getAbsolutePath()));
 	}
-	
+	return valid;
+    }
+
 }

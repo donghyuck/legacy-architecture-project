@@ -48,168 +48,167 @@ import groovy.lang.GroovyClassLoader;
  */
 public final class ApplicationHelper {
 
-	private static final Log LOG = LogFactory.getLog(ApplicationHelper.class);
-	
-	private static final Map<Class<?>, WeakReference<?>> references = Collections.synchronizedMap(new HashMap<Class<?>, WeakReference<?>>()) ;
-	
-	@SuppressWarnings("unchecked")
-	public static <T> T getComponent(Class<T> requiredType) throws ComponentNotFoundException
-	{
-		if( ApplicationHelper.references.get(requiredType) == null){
-			ApplicationHelper.references.put(requiredType, new WeakReference<T>( ApplicationHelperFactory.getApplicationHelper().getComponent(requiredType) ));			
-		}
-		return (T)ApplicationHelper.references.get(requiredType).get();
+    private static final Log LOG = LogFactory.getLog(ApplicationHelper.class);
+
+    private static final Map<Class<?>, WeakReference<?>> references = Collections
+	    .synchronizedMap(new HashMap<Class<?>, WeakReference<?>>());
+
+    @SuppressWarnings("unchecked")
+    public static <T> T getComponent(Class<T> requiredType) throws ComponentNotFoundException {
+	if (ApplicationHelper.references.get(requiredType) == null) {
+	    ApplicationHelper.references.put(requiredType,
+		    new WeakReference<T>(ApplicationHelperFactory.getApplicationHelper().getComponent(requiredType)));
 	}
-	
-	/*
-	public static <T> List<T> getComponents(Class<T> requiredType){
-		
-		AdminService as = AdminHelper.getAdminService();
-		LOG.debug("SpringAdminService: " +  ( as instanceof SpringAdminService ));
-		
-		if( as instanceof SpringAdminService ){
-			SpringAdminService sas = (SpringAdminService)as ;
-			Map<String, T> beans =  sas.getApplicationContext().getBeansOfType(requiredType);
-			LOG.debug( beans );
-			
-			beans.values();
-			return new ArrayList<T>(beans.values());
-		}	
-		return Collections.EMPTY_LIST;
+	return (T) ApplicationHelper.references.get(requiredType).get();
+    }
+
+    /*
+     * public static <T> List<T> getComponents(Class<T> requiredType){
+     * 
+     * AdminService as = AdminHelper.getAdminService(); LOG.debug(
+     * "SpringAdminService: " + ( as instanceof SpringAdminService ));
+     * 
+     * if( as instanceof SpringAdminService ){ SpringAdminService sas =
+     * (SpringAdminService)as ; Map<String, T> beans =
+     * sas.getApplicationContext().getBeansOfType(requiredType); LOG.debug(
+     * beans );
+     * 
+     * beans.values(); return new ArrayList<T>(beans.values()); } return
+     * Collections.EMPTY_LIST; }
+     */
+
+    public static <T> T getComponent(String requiredName, Class<T> requiredType) throws ComponentNotFoundException {
+	return ApplicationHelperFactory.getApplicationHelper().getComponent(requiredName, requiredType);
+    }
+
+    public static void autowireComponent(Object obj) {
+	ApplicationHelperFactory.getApplicationHelper().autowireComponent(obj);
+    }
+
+    public static Resource getResource(String path) {
+	SpringAdminService adminService = (SpringAdminService) AdminHelper.getAdminService();
+	return adminService.getApplicationContext().getResource(path);
+    }
+
+    public static License getLicense() {
+	return AdminHelper.getLicense();
+    }
+
+    public static ConfigService getConfigService() {
+	return AdminHelper.getConfigService();
+    }
+
+    public static I18nTextManager getI18nTextManager() {
+	return getComponent(I18nTextManager.class);
+    }
+
+    public static boolean isSetupComplete() {
+	return AdminHelper.isSetupComplete();
+    }
+
+    public static boolean isReady() {
+	return AdminHelper.isReady();
+    }
+
+    public static EventPublisher getEventPublisher() {
+	return AdminHelper.getEventPublisher();
+    }
+
+    public static State getState() {
+	return AdminHelper.getState();
+    }
+
+    public static Repository getRepository() {
+	return AdminHelper.getRepository();
+    }
+
+    public static Class loadClass(String scriptName, boolean lookupScriptFiles, boolean preferClassOverScript)
+	    throws ClassNotFoundException {
+
+	GroovyClassLoader gcl = Bootstrap.getBootstrapComponent(groovy.lang.GroovyClassLoader.class);
+
+	return gcl.loadClass(scriptName, lookupScriptFiles, preferClassOverScript);
+
+    }
+
+    public static Locale getLocale() {
+	if (isReady()) {
+	    return getConfigService().getLocale();
+	} else {
+	    String language = getConfigService().getLocalProperty(ApplicationConstants.LOCALE_LANGUAGE_PROP_NAME);
+	    if (language == null)
+		language = "";
+	    String country = getConfigService().getLocalProperty(ApplicationConstants.LOCALE_COUNTRY_PROP_NAME);
+	    if (country == null)
+		country = "";
+	    if (language.equals("") && country.equals(""))
+		return Locale.getDefault();
+	    else
+		return new Locale(language, country);
 	}
-	*/
-	
-	public static <T> T getComponent(String requiredName, Class<T> requiredType) throws ComponentNotFoundException
-	{
-		return ApplicationHelperFactory.getApplicationHelper().getComponent(requiredName, requiredType);
+    }
+
+    public static String getCharacterEncoding() {
+	if (isReady()) {
+	    return getConfigService().getCharacterEncoding();
+	} else {
+	    return getConfigService().getLocalProperty(ApplicationConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME,
+		    ApplicationConstants.DEFAULT_CHAR_ENCODING);
 	}
-		
-	public static void autowireComponent(Object obj){
-		ApplicationHelperFactory.getApplicationHelper().autowireComponent(obj);
-	}	
-	
-	public static Resource getResource( String path ){
-		SpringAdminService adminService = (SpringAdminService)AdminHelper.getAdminService();		
-		return adminService.getApplicationContext().getResource(path);
-	}
-	
-	public static License getLicense(){
-	    return AdminHelper.getLicense();	
-	}
-	
-	public static ConfigService getConfigService(){
-		return AdminHelper.getConfigService();
+    }
+
+    public static String getApplicationProperty(String name, String defaultValue) {
+
+	ConfigService config = getConfigService();
+	String propValue = config.getLocalProperty(name, null);
+
+	if (isReady()) {
+	    String str = config.getApplicationProperty(name, null);
+	    if (!StringUtils.isEmpty(str))
+		propValue = str;
 	}
 
-    public static I18nTextManager getI18nTextManager(){
-		return getComponent(I18nTextManager.class);
-	}
-	
-	public static boolean isSetupComplete(){
-		return AdminHelper.isSetupComplete();
-	}
-	
-	public static boolean isReady(){		
-		return AdminHelper.isReady();
-	}
+	if (propValue == null)
+	    propValue = defaultValue;
+	return propValue;
+    }
 
-    public static EventPublisher getEventPublisher(){		
-		return AdminHelper.getEventPublisher();
-	}
-	
-	public static State getState(){
-		return AdminHelper.getState();
-	}
-	
-	public static Repository getRepository(){		
-		return AdminHelper.getRepository();
-	}
-	
-	public static Class loadClass( String scriptName , boolean lookupScriptFiles, boolean preferClassOverScript ) throws ClassNotFoundException{
-		
-		GroovyClassLoader gcl = Bootstrap.getBootstrapComponent( groovy.lang.GroovyClassLoader.class );
-		
-		return gcl.loadClass(scriptName, lookupScriptFiles, preferClassOverScript);
-		
-	}
-	
-	public static Locale getLocale(){
-		if (isReady()) {
-			return getConfigService().getLocale();
-		} else {
-			 String language = getConfigService().getLocalProperty(ApplicationConstants.LOCALE_LANGUAGE_PROP_NAME);
-	            if(language == null)
-	                language = "";
-	            String country = getConfigService().getLocalProperty(ApplicationConstants.LOCALE_COUNTRY_PROP_NAME);
-	            if(country == null)
-	                country = "";
-	            if(language.equals("") && country.equals(""))
-	                return Locale.getDefault();
-	            else
-	                return new Locale(language, country);            
-		}
-	}
-	
-	public static String getCharacterEncoding(){
-		if(isReady()){
-			return getConfigService().getCharacterEncoding();
-		}else{
-			return getConfigService().getLocalProperty( ApplicationConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME,  ApplicationConstants.DEFAULT_CHAR_ENCODING);
-		}
-	}
-	
-	public static String getApplicationProperty(String name, String defaultValue){		
-		
-		ConfigService config = getConfigService();		
-		String propValue = config.getLocalProperty(name, null);	
-		
-		if(isReady()){
-			String str = config.getApplicationProperty(name, null);			
-			if( !StringUtils.isEmpty( str ))
-				propValue = str;			
-		}		
-		
-		if( propValue == null)
-			propValue = defaultValue ;		
-		return propValue ;
-	}
-	
-	public static int getApplicationIntProperty(String name, int defaultValue){		
-		String str = getApplicationProperty(name, Integer.toString(defaultValue));		
-		return Integer.parseInt(str) ;
-	}
+    public static int getApplicationIntProperty(String name, int defaultValue) {
+	String str = getApplicationProperty(name, Integer.toString(defaultValue));
+	return Integer.parseInt(str);
+    }
 
-	public static long getApplicationLongProperty(String name, long defaultValue){		
-		String str = getApplicationProperty(name, Long.toString(defaultValue));		
-		return Integer.parseInt(str) ;
+    public static long getApplicationLongProperty(String name, long defaultValue) {
+	String str = getApplicationProperty(name, Long.toString(defaultValue));
+	return Integer.parseInt(str);
+    }
+
+    public static boolean getApplicationBooleanProperty(String name, boolean defaultValue) {
+	String str = getApplicationProperty(name, Boolean.toString(defaultValue));
+	return Boolean.parseBoolean(str);
+    }
+
+    public static TimeZone getTimeZone() {
+	if (isReady()) {
+	    return getConfigService().getTimeZone();
+	} else {
+	    String timeZoneID = getConfigService().getLocalProperty(ApplicationConstants.LOCALE_TIMEZONE_PROP_NAME);
+	    if (timeZoneID == null)
+		return TimeZone.getDefault();
+	    else
+		return TimeZone.getTimeZone(timeZoneID);
 	}
-	
-	public static boolean getApplicationBooleanProperty(String name, boolean defaultValue){
-		String str = getApplicationProperty(name, Boolean.toString(defaultValue));		
-		return Boolean.parseBoolean(str) ;
-	}
-	
-	public static TimeZone getTimeZone(){
-		if(isReady()){
-			return getConfigService().getTimeZone();
-		}else{
-			String timeZoneID = getConfigService().getLocalProperty(ApplicationConstants.LOCALE_TIMEZONE_PROP_NAME);
-			if(timeZoneID == null)
-				return TimeZone.getDefault();
-			else
-				return TimeZone.getTimeZone(timeZoneID);
-		}
-	}
-	
-	public static String getLocalizedApplicationProperty(String name, Locale locale){
-		if(isReady())
-			return getConfigService().getLocalizedApplicationProperty(name, locale);
-		else 
-			return null;
-	}
-	
-	public static String getLocalizedMessage(String code, Object[] args, Locale locale){		
-		return AdminHelper.getLocalizedMessage(code, args, locale);
-	}
-	
+    }
+
+    public static String getLocalizedApplicationProperty(String name, Locale locale) {
+	if (isReady())
+	    return getConfigService().getLocalizedApplicationProperty(name, locale);
+	else
+	    return null;
+    }
+
+    public static String getLocalizedMessage(String code, Object[] args, Locale locale) {
+	return AdminHelper.getLocalizedMessage(code, args, locale);
+    }
+
 }

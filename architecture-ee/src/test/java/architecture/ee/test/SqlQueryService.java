@@ -27,26 +27,25 @@ import architecture.ee.jdbc.sqlquery.SqlQueryHelper;
 import architecture.ee.spring.jdbc.support.SqlQueryDaoSupport;
 
 public class SqlQueryService extends SqlQueryDaoSupport {
-	
-	 private final TransactionTemplate transactionTemplate;
 
-	public SqlQueryService(PlatformTransactionManager  transactionManager) {
-		 this.transactionTemplate = new TransactionTemplate(transactionManager);
-	}
+    private final TransactionTemplate transactionTemplate;
 
-	 public Object someServiceMethod() {
-		 return transactionTemplate.execute(new TransactionCallback<List<Map<String, Object>>>() {
-		            public List<Map<String, Object>> doInTransaction(TransactionStatus status) {                
-	                return resultOfSelectOperation();
-	            }
-	        });
-	 }
-	 
-	
-	 public List<Map<String, Object>> resultOfSelectOperation(){
-		SqlQueryHelper helper = new SqlQueryHelper();
-		helper.additionalParameter("TABLE_NAME", "V2_I18N_LOCALE");
-		List<Map<String, Object>> list = helper.list(getSqlQuery(), "COMMON.SELECT_TABLE_ROWS");
-		return list;
-	 }
+    public SqlQueryService(PlatformTransactionManager transactionManager) {
+	this.transactionTemplate = new TransactionTemplate(transactionManager);
+    }
+
+    public Object someServiceMethod() {
+	return transactionTemplate.execute(new TransactionCallback<List<Map<String, Object>>>() {
+	    public List<Map<String, Object>> doInTransaction(TransactionStatus status) {
+		return resultOfSelectOperation();
+	    }
+	});
+    }
+
+    public List<Map<String, Object>> resultOfSelectOperation() {
+	SqlQueryHelper helper = new SqlQueryHelper();
+	helper.additionalParameter("TABLE_NAME", "V2_I18N_LOCALE");
+	List<Map<String, Object>> list = helper.list(getSqlQuery(), "COMMON.SELECT_TABLE_ROWS");
+	return list;
+    }
 }

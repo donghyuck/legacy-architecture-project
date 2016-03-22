@@ -21,8 +21,8 @@ import architecture.ee.jdbc.sqlquery.mapping.BoundSql;
 
 public interface SqlSource {
 
-	BoundSql getBoundSql(Object parameterObject);
+    BoundSql getBoundSql(Object parameterObject);
 
-	BoundSql getBoundSql(Object parameterObject, Map<String, Object> additionalParameters);
+    BoundSql getBoundSql(Object parameterObject, Map<String, Object> additionalParameters);
 
 }

@@ -30,90 +30,89 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateHashModel;
 
 /**
- * @author   donghyuck
+ * @author donghyuck
  */
 public class DynamicSqlNode implements SqlNode {
 
-	protected Log log = LogFactory.getLog(getClass());
-	private static BeansWrapper wrapper = new BeansWrapper();
-	private String text;
-	private Language language;
+    protected Log log = LogFactory.getLog(getClass());
+    private static BeansWrapper wrapper = new BeansWrapper();
+    private String text;
+    private Language language;
 
-	public DynamicSqlNode(String text) {
-		this.text = text;
-		this.language = Language.FREEMARKER;
+    public DynamicSqlNode(String text) {
+	this.text = text;
+	this.language = Language.FREEMARKER;
+    }
+
+    /**
+     * 다이나믹 구현은 Freemarker 을 사용하여 처리한다. 따라서 나이나믹 처리를 위해서는 반듯이 freemarker 의 규칙을
+     * 사용하여야 한다.
+     */
+    public boolean apply(DynamicContext context) {
+
+	Map<String, Object> map = new HashMap<String, Object>();
+
+	Object parameterObject = context.getBindings().get(DynamicContext.PARAMETER_OBJECT_KEY);
+	Object additionalParameterObject = context.getBindings().get(DynamicContext.ADDITIONAL_PARAMETER_OBJECT_KEY);
+
+	if (additionalParameterObject != null) {
+	    if (additionalParameterObject instanceof Map)
+		map.putAll((Map) additionalParameterObject);
+	    else
+		map.put("additional_parameter", additionalParameterObject);
 	}
 
 	/**
-	 * 다이나믹 구현은 Freemarker 을 사용하여 처리한다. 따라서 나이나믹 처리를 위해서는 반듯이 freemarker 의 규칙을
-	 * 사용하여야 한다.
+	 * 파라메터 객체가 널이 아니면 ..
 	 */
-	public boolean apply(DynamicContext context) {
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		Object parameterObject = context.getBindings().get(DynamicContext.PARAMETER_OBJECT_KEY);		
-		Object additionalParameterObject = context.getBindings().get(DynamicContext.ADDITIONAL_PARAMETER_OBJECT_KEY);		
-				
-		if (additionalParameterObject != null) {
-			if( additionalParameterObject instanceof Map )
-				map.putAll((Map) additionalParameterObject);
-			else
-				map.put("additional_parameter", additionalParameterObject);
-		}
-		
-		/**
-		 * 파라메터 객체가 널이 아니면 ..
-		 */
-		if (parameterObject != null) {
-			if (parameterObject instanceof Map) {
-				map.put( "parameters", parameterObject );
-			} else if (parameterObject instanceof MapSqlParameterSource) {
-				map.put("parameters",((MapSqlParameterSource) parameterObject).getValues());
-			} else if (parameterObject instanceof Object[]) {
-				map.put("parameters", parameterObject);
-			}
-		}
-		
-		context.appendSql(processTemplate(map));
-		return true;
+	if (parameterObject != null) {
+	    if (parameterObject instanceof Map) {
+		map.put("parameters", parameterObject);
+	    } else if (parameterObject instanceof MapSqlParameterSource) {
+		map.put("parameters", ((MapSqlParameterSource) parameterObject).getValues());
+	    } else if (parameterObject instanceof Object[]) {
+		map.put("parameters", parameterObject);
+	    }
 	}
 
-	@Override
-	public String toString() {
+	context.appendSql(processTemplate(map));
+	return true;
+    }
 
-		return "dynamic[" + text + "]";
-	}
+    @Override
+    public String toString() {
 
-	public enum Language {
-		VELOCITY,
-		FREEMARKER
-	}
+	return "dynamic[" + text + "]";
+    }
 
-	protected String processTemplate(Map<String, Object> map) {
-		StringReader reader = new StringReader(text);
-		StringWriter writer = new StringWriter();
-		try {
-			populateStatics(map);
-			freemarker.template.SimpleHash root = new freemarker.template.SimpleHash();
-			root.putAll(map);
-			freemarker.template.Template template = new freemarker.template.Template( "dynamic", reader, null );
-			template.process(root, writer);
-		} catch (IOException e) {
-			log.error(e);
-		} catch (TemplateException e) {
-			log.error(e);
-		}
-		return writer.toString();
-	}
+    public enum Language {
+	VELOCITY, FREEMARKER
+    }
 
-	protected static void populateStatics(Map<String, Object> model) {
-		try {
-			TemplateHashModel enumModels = wrapper.getEnumModels();
-			model.put("enums", enumModels );
-		} catch (UnsupportedOperationException e) {
-		}		
-		TemplateHashModel staticModels = wrapper.getStaticModels();		
-		model.put("statics", BeansWrapper.getDefaultInstance().getStaticModels());
+    protected String processTemplate(Map<String, Object> map) {
+	StringReader reader = new StringReader(text);
+	StringWriter writer = new StringWriter();
+	try {
+	    populateStatics(map);
+	    freemarker.template.SimpleHash root = new freemarker.template.SimpleHash();
+	    root.putAll(map);
+	    freemarker.template.Template template = new freemarker.template.Template("dynamic", reader, null);
+	    template.process(root, writer);
+	} catch (IOException e) {
+	    log.error(e);
+	} catch (TemplateException e) {
+	    log.error(e);
 	}
+	return writer.toString();
+    }
+
+    protected static void populateStatics(Map<String, Object> model) {
+	try {
+	    TemplateHashModel enumModels = wrapper.getEnumModels();
+	    model.put("enums", enumModels);
+	} catch (UnsupportedOperationException e) {
+	}
+	TemplateHashModel staticModels = wrapper.getStaticModels();
+	model.put("statics", BeansWrapper.getDefaultInstance().getStaticModels());
+    }
 }

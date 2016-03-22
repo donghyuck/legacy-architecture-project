@@ -4,55 +4,54 @@ import architecture.common.model.DateModelObject;
 
 public interface I18nLocale extends DateModelObject {
 
-
     /**
-	 * @return
-	 */
+     * @return
+     */
     public abstract long getLocaleId();
 
     /**
-	 * @param  id
-	 */
-    public abstract void setLocaleId(long id) ;
+     * @param id
+     */
+    public abstract void setLocaleId(long id);
 
     /**
-	 * @return
-	 */
-    public abstract String getLanguage() ;
+     * @return
+     */
+    public abstract String getLanguage();
 
     /**
-	 * @param  language
-	 */
-    public abstract void setLanguage(String language) ;
+     * @param language
+     */
+    public abstract void setLanguage(String language);
 
     /**
-	 * @return
-	 */
+     * @return
+     */
     public abstract String getCountry();
 
     /**
-	 * @param  country
-	 */
+     * @param country
+     */
     public abstract void setCountry(String country);
 
     /**
-	 * @return
-	 */
+     * @return
+     */
     public abstract String getEncoding();
 
     /**
-	 * @param  encoding
-	 */
+     * @param encoding
+     */
     public abstract void setEncoding(String encoding);
 
     /**
-	 * @return
-	 */
-    public abstract String getVariant() ;
+     * @return
+     */
+    public abstract String getVariant();
 
     /**
-	 * @param  variant
-	 */
+     * @param variant
+     */
     public abstract void setVariant(String variant);
 
     /**
@@ -60,5 +59,5 @@ public interface I18nLocale extends DateModelObject {
      * @return
      */
     public abstract java.util.Locale toJavaLocale();
-    
+
 }

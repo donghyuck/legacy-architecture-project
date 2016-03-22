@@ -17,6 +17,6 @@ package architecture.ee.jdbc.sqlquery.parser;
 
 public interface TokenHandler {
 
-	String handleToken(String content);
+    String handleToken(String content);
 
 }

@@ -20,11 +20,11 @@ import architecture.ee.jdbc.sqlquery.SqlQuery;
 
 /**
  * 
- * @author  <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
+ * @author <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
  *
  */
 public interface SqlQueryCallback<T> {
-	
-	T doInSqlQuery(SqlQuery sqlQuery) ;
-	
+
+    T doInSqlQuery(SqlQuery sqlQuery);
+
 }

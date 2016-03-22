@@ -5,19 +5,18 @@ import architecture.ee.services.UnitOfWork;
 
 public abstract class UnitOfWorkForSqlQuery implements UnitOfWork {
 
-	
-	protected SqlQuery sqlQuery;
-	
-	public String getName() {
-		return getClass().getName();
-	}
+    protected SqlQuery sqlQuery;
 
-	public SqlQuery getSqlQuery() {
-		return sqlQuery;
-	}
+    public String getName() {
+	return getClass().getName();
+    }
 
-	public void setSqlQuery(SqlQuery sqlQuery) {
-		this.sqlQuery = sqlQuery;
-	}
-	
+    public SqlQuery getSqlQuery() {
+	return sqlQuery;
+    }
+
+    public void setSqlQuery(SqlQuery sqlQuery) {
+	this.sqlQuery = sqlQuery;
+    }
+
 }

@@ -18,33 +18,32 @@ package architecture.ee.event;
 import architecture.common.lifecycle.event.Event;
 
 /**
- * @author  donghyuck
+ * @author donghyuck
  */
 public class PluginStateChangeEvent extends Event {
 
-	private static final long serialVersionUID = -6725688776619308652L;
+    private static final long serialVersionUID = -6725688776619308652L;
 
-	public enum State {
+    public enum State {
 
-		INSTALLED, 
+	INSTALLED,
 
-		UNINSTALLED, 
+	UNINSTALLED,
 
-		UNLOADED, 
+	UNLOADED,
 
-		RESTART
-	};
-	
+	RESTART
+    };
 
-	private State state;
-	
-	public PluginStateChangeEvent(Object source, State state) {
-		super(source);
-		this.state = state;
-	}
+    private State state;
 
-	public State getState() {
-		return state;
-	}
-	
+    public PluginStateChangeEvent(Object source, State state) {
+	super(source);
+	this.state = state;
+    }
+
+    public State getState() {
+	return state;
+    }
+
 }

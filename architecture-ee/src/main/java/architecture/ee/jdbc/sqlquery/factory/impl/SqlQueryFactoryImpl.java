@@ -35,70 +35,73 @@ import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
  * 
  * 
  * 
- * @author   donghyuck
+ * @author donghyuck
  */
 public class SqlQueryFactoryImpl extends AbstractSqlQueryFactory implements SqlQueryFactory {
-	
-	private DataSource dataSource = null;
 
-	private MaxValueIncrementer incrementer = null;
+    private DataSource dataSource = null;
 
-	private boolean incrementerSupported = false;
-	
-	public SqlQueryFactoryImpl(Configuration configuration) {
-		super(configuration);
-	}
+    private MaxValueIncrementer incrementer = null;
 
-	public void setIncrementerSupported(boolean incrementerSupported) {
-		this.incrementerSupported = incrementerSupported;
-	}
+    private boolean incrementerSupported = false;
 
-	public void initialize(){		
-		if(getResourceLocations().size() > 0)
-			loadResourceLocations();
-	}
-	
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-	
-	public String[] getMappedStatementNames(String namespace) {
-		Collection<String> names = getConfiguration().getMappedStatementNames();
-		List<String> list = new ArrayList<String>();
-		for (String name : names) {
-			if (StringUtils.startsWith(name, namespace))
-				list.add(name);
-		}
-		return list.toArray(new String[list.size()]);
-	}
+    public SqlQueryFactoryImpl(Configuration configuration) {
+	super(configuration);
+    }
 
-	public String[] getMappedStatementNames() {
-		return getConfiguration().getMappedStatementNames().toArray( new String[getConfiguration().getMappedStatementNames().size()]);
-	}
-	
-	public SqlQuery createSqlQuery() {
-		return new SqlQueryImpl(getConfiguration(), dataSource, incrementerSupported ? getMaxValueIncrementer() : null );
-	}
+    public void setIncrementerSupported(boolean incrementerSupported) {
+	this.incrementerSupported = incrementerSupported;
+    }
 
-	public SqlQuery createSqlQuery(DataSource dataSource) {
-		return new SqlQueryImpl(getConfiguration(), dataSource, incrementerSupported ? getMaxValueIncrementer() : null );
-	}
+    public void initialize() {
+	if (getResourceLocations().size() > 0)
+	    loadResourceLocations();
+    }
 
-	public SqlQuery createSqlQuery(ExtendedJdbcTemplate jdbcTemplate) {
-		return new SqlQueryImpl(getConfiguration(), jdbcTemplate, incrementerSupported ? getMaxValueIncrementer() : null );
-	}
+    public void setDataSource(DataSource dataSource) {
+	this.dataSource = dataSource;
+    }
 
-	public MaxValueIncrementer getMaxValueIncrementer(){
-		if(this.incrementer == null  ){			
-			JdbcMaxValueIncrementer incrementerToUse = new JdbcMaxValueIncrementer ( createSequencerFactory() );
-			incrementerToUse.initialize();
-			this.incrementer = incrementerToUse;
-		}
-		return this.incrementer ;
-	}	
-	
-	private SequencerFactory createSequencerFactory() {
-		return new SequencerFactory(getConfiguration(), dataSource == null ? DataSourceFactory.getDataSource() : dataSource );
+    public String[] getMappedStatementNames(String namespace) {
+	Collection<String> names = getConfiguration().getMappedStatementNames();
+	List<String> list = new ArrayList<String>();
+	for (String name : names) {
+	    if (StringUtils.startsWith(name, namespace))
+		list.add(name);
 	}
-	
+	return list.toArray(new String[list.size()]);
+    }
+
+    public String[] getMappedStatementNames() {
+	return getConfiguration().getMappedStatementNames()
+		.toArray(new String[getConfiguration().getMappedStatementNames().size()]);
+    }
+
+    public SqlQuery createSqlQuery() {
+	return new SqlQueryImpl(getConfiguration(), dataSource, incrementerSupported ? getMaxValueIncrementer() : null);
+    }
+
+    public SqlQuery createSqlQuery(DataSource dataSource) {
+	return new SqlQueryImpl(getConfiguration(), dataSource, incrementerSupported ? getMaxValueIncrementer() : null);
+    }
+
+    public SqlQuery createSqlQuery(ExtendedJdbcTemplate jdbcTemplate) {
+	return new SqlQueryImpl(getConfiguration(), jdbcTemplate,
+		incrementerSupported ? getMaxValueIncrementer() : null);
+    }
+
+    public MaxValueIncrementer getMaxValueIncrementer() {
+	if (this.incrementer == null) {
+	    JdbcMaxValueIncrementer incrementerToUse = new JdbcMaxValueIncrementer(createSequencerFactory());
+	    incrementerToUse.initialize();
+	    this.incrementer = incrementerToUse;
+	}
+	return this.incrementer;
+    }
+
+    private SequencerFactory createSequencerFactory() {
+	return new SequencerFactory(getConfiguration(),
+		dataSource == null ? DataSourceFactory.getDataSource() : dataSource);
+    }
+
 }

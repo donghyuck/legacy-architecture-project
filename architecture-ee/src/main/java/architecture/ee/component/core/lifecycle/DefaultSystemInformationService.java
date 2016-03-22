@@ -42,124 +42,118 @@ import architecture.common.util.RuntimeHelperFactory;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.spring.lifecycle.SpringAdminService;
 
-public class DefaultSystemInformationService extends ComponentImpl  implements
-		SystemInformationService {
+public class DefaultSystemInformationService extends ComponentImpl implements SystemInformationService {
 
-	private String dataSourceName ;
-    
-	private LicenseManager licenseManager ;	
-	
-	private ConfigService configService ;	
-		
-	public ConfigService getConfigService() {
-		return configService;
-	}
+    private String dataSourceName;
 
-	
-	public void setConfigService(ConfigService configService) {
-		this.configService = configService;
-	}
+    private LicenseManager licenseManager;
 
-	public String getDataSourceName() {
-		return dataSourceName;
-	}
+    private ConfigService configService;
 
-	public void setDataSourceName(String dataSourceName) {
-		this.dataSourceName = dataSourceName;
-	}
+    public ConfigService getConfigService() {
+	return configService;
+    }
 
-	public LicenseManager getLicenseManager() {
-		return licenseManager;
-	}
+    public void setConfigService(ConfigService configService) {
+	this.configService = configService;
+    }
 
-	public void setLicenseManager(LicenseManager licenseManager) {
-		this.licenseManager = licenseManager;
-	}
-	
-	public List<DiskUsage> getDiskUsages(){
-		
-		File[] list = File.listRoots();
-		List<DiskUsage> usages = new ArrayList<DiskUsage>(list.length);
-		
-		for(File file : list){
-			usages.add(DiskUsage.Builder.build(file));
-		}
-		return usages;
-	}
-	
-	public SystemInfo getSystemInfo() {
-		
-		RuntimeHelper helper = RuntimeHelperFactory.getRuntimeHelper();
-		
-		SystemInfo info = new SystemInfo();
-		Date now = new Date();
-		info.setDate( new SimpleDateFormat("EEEEEE, yyyy MMM dd", Locale.KOREA).format( now ) );
-		info.setTime( new SimpleDateFormat("HH:mm:ss", Locale.KOREA).format( now ) );
-		info.setAvailableProcessors(Runtime.getRuntime().availableProcessors());
-		
-		
-		
-		Properties sysProps = System.getProperties();
-		info.setJavaVersion(sysProps.getProperty("java.version"));
-	    info.setJavaVendor(sysProps.getProperty("java.vendor"));
-	    info.setJvmVersion(sysProps.getProperty("java.vm.specification.version"));
-	    info.setJvmVendor(sysProps.getProperty("java.vm.specification.vendor"));
-	    info.setJvmImplementationVersion(sysProps.getProperty("java.vm.version"));
-	    info.setJavaRuntime(sysProps.getProperty("java.runtime.name"));
-	    info.setJavaVm(sysProps.getProperty("java.vm.name"));
-	    info.setUserName(sysProps.getProperty("user.name"));
-	    info.setSystemLanguage(sysProps.getProperty("user.language"));
-	    info.setSystemTimezone(sysProps.getProperty("user.timezone"));
-	    info.setOperatingSystem((new StringBuilder()).append(sysProps.getProperty("os.name")).append(" ").append(sysProps.getProperty("os.version")).toString());
-	    info.setOperatingSystemArchitecture(sysProps.getProperty("os.arch"));
-	    info.setFileSystemEncoding(sysProps.getProperty("file.encoding"));
-	    info.setJvmInputArguments(helper.getJvmInputArguments());
-	    info.setWorkingDirectory(sysProps.getProperty("user.dir"));
-	    info.setTempDirectory(sysProps.getProperty("java.io.tmpdir"));
-		
-	    return info;
-	}
+    public String getDataSourceName() {
+	return dataSourceName;
+    }
 
-	public MemoryInfo getMemoryInfo() {
-		MemoryInfo mem = new MemoryInfo(); 
-		return mem;
-	}
+    public void setDataSourceName(String dataSourceName) {
+	this.dataSourceName = dataSourceName;
+    }
 
-	public License getLicenseInfo() {		
-		return licenseManager.getLicense();
-	}
+    public LicenseManager getLicenseManager() {
+	return licenseManager;
+    }
 
-	public List<DatabaseInfo> getDatabaseInfos() {
-		List<DatabaseInfo> databaseInfos = new ArrayList<DatabaseInfo>();
-		AdminService admin = AdminHelper.getAdminService();		
-		if( admin instanceof SpringAdminService ){
-			SpringAdminService sas = (SpringAdminService)admin ;
-			
-			Map<String, DataSource> beans1 = sas.getApplicationContext().getParent().getBeansOfType(DataSource.class);
-			Map<String, DataSource> beans2 =  sas.getApplicationContext().getBeansOfType(DataSource.class);
-		
-			for( Map.Entry<String,DataSource> entry : beans1.entrySet()){
-				String name = entry.getKey();
-				DataSource dataSource = entry.getValue();
-				DatabaseInfo info = new DatabaseInfo(JdbcUtils.getDatabaseType(dataSource));				
-				info.setName(name);
-				databaseInfos.add( info );	            
-	            log.debug( "parent context :" + info.toString() );	            
-			}
-			for( Map.Entry<String,DataSource> entry : beans2.entrySet()){
-				String name = entry.getKey();
-				DataSource dataSource = entry.getValue();
-				DatabaseInfo info = new DatabaseInfo(JdbcUtils.getDatabaseType(dataSource));				
-				info.setName(name);
-				databaseInfos.add( info );	            
-	            log.debug( "context :" + info.toString() );	            
-			}
-		}
-		
-		return databaseInfos;
+    public void setLicenseManager(LicenseManager licenseManager) {
+	this.licenseManager = licenseManager;
+    }
+
+    public List<DiskUsage> getDiskUsages() {
+
+	File[] list = File.listRoots();
+	List<DiskUsage> usages = new ArrayList<DiskUsage>(list.length);
+
+	for (File file : list) {
+	    usages.add(DiskUsage.Builder.build(file));
+	}
+	return usages;
+    }
+
+    public SystemInfo getSystemInfo() {
+
+	RuntimeHelper helper = RuntimeHelperFactory.getRuntimeHelper();
+
+	SystemInfo info = new SystemInfo();
+	Date now = new Date();
+	info.setDate(new SimpleDateFormat("EEEEEE, yyyy MMM dd", Locale.KOREA).format(now));
+	info.setTime(new SimpleDateFormat("HH:mm:ss", Locale.KOREA).format(now));
+	info.setAvailableProcessors(Runtime.getRuntime().availableProcessors());
+
+	Properties sysProps = System.getProperties();
+	info.setJavaVersion(sysProps.getProperty("java.version"));
+	info.setJavaVendor(sysProps.getProperty("java.vendor"));
+	info.setJvmVersion(sysProps.getProperty("java.vm.specification.version"));
+	info.setJvmVendor(sysProps.getProperty("java.vm.specification.vendor"));
+	info.setJvmImplementationVersion(sysProps.getProperty("java.vm.version"));
+	info.setJavaRuntime(sysProps.getProperty("java.runtime.name"));
+	info.setJavaVm(sysProps.getProperty("java.vm.name"));
+	info.setUserName(sysProps.getProperty("user.name"));
+	info.setSystemLanguage(sysProps.getProperty("user.language"));
+	info.setSystemTimezone(sysProps.getProperty("user.timezone"));
+	info.setOperatingSystem((new StringBuilder()).append(sysProps.getProperty("os.name")).append(" ")
+		.append(sysProps.getProperty("os.version")).toString());
+	info.setOperatingSystemArchitecture(sysProps.getProperty("os.arch"));
+	info.setFileSystemEncoding(sysProps.getProperty("file.encoding"));
+	info.setJvmInputArguments(helper.getJvmInputArguments());
+	info.setWorkingDirectory(sysProps.getProperty("user.dir"));
+	info.setTempDirectory(sysProps.getProperty("java.io.tmpdir"));
+
+	return info;
+    }
+
+    public MemoryInfo getMemoryInfo() {
+	MemoryInfo mem = new MemoryInfo();
+	return mem;
+    }
+
+    public License getLicenseInfo() {
+	return licenseManager.getLicense();
+    }
+
+    public List<DatabaseInfo> getDatabaseInfos() {
+	List<DatabaseInfo> databaseInfos = new ArrayList<DatabaseInfo>();
+	AdminService admin = AdminHelper.getAdminService();
+	if (admin instanceof SpringAdminService) {
+	    SpringAdminService sas = (SpringAdminService) admin;
+
+	    Map<String, DataSource> beans1 = sas.getApplicationContext().getParent().getBeansOfType(DataSource.class);
+	    Map<String, DataSource> beans2 = sas.getApplicationContext().getBeansOfType(DataSource.class);
+
+	    for (Map.Entry<String, DataSource> entry : beans1.entrySet()) {
+		String name = entry.getKey();
+		DataSource dataSource = entry.getValue();
+		DatabaseInfo info = new DatabaseInfo(JdbcUtils.getDatabaseType(dataSource));
+		info.setName(name);
+		databaseInfos.add(info);
+		log.debug("parent context :" + info.toString());
+	    }
+	    for (Map.Entry<String, DataSource> entry : beans2.entrySet()) {
+		String name = entry.getKey();
+		DataSource dataSource = entry.getValue();
+		DatabaseInfo info = new DatabaseInfo(JdbcUtils.getDatabaseType(dataSource));
+		info.setName(name);
+		databaseInfos.add(info);
+		log.debug("context :" + info.toString());
+	    }
 	}
 
-	
-	
+	return databaseInfos;
+    }
 
 }

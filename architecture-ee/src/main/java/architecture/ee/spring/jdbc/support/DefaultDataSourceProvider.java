@@ -12,43 +12,42 @@ import architecture.common.util.StringUtils;
 public class DefaultDataSourceProvider implements DataSourceProvider, InitializingBean, FactoryBean<DataSource> {
 
     private String dataSourceName;
-    private DataSource dataSource ;    
+    private DataSource dataSource;
 
-	public String getDataSourceName() {
-		return dataSourceName;
-	}
+    public String getDataSourceName() {
+	return dataSourceName;
+    }
 
-	public void setDataSourceName(String dataSourceName) {
-		this.dataSourceName = dataSourceName;
-	}
+    public void setDataSourceName(String dataSourceName) {
+	this.dataSourceName = dataSourceName;
+    }
 
-	
-	public DataSource getDataSource() {
-		try {
-			return getObject();
-		} catch (Exception e) {
-			
-			return null;
-		}
-	}
+    public DataSource getDataSource() {
+	try {
+	    return getObject();
+	} catch (Exception e) {
 
-	public DataSource getObject() throws Exception {
-		return this.dataSource;
+	    return null;
 	}
+    }
 
-	public Class<?> getObjectType() {
-		return DataSource.class;
-	}
+    public DataSource getObject() throws Exception {
+	return this.dataSource;
+    }
 
-	public boolean isSingleton() {
-		return true;
-	}
+    public Class<?> getObjectType() {
+	return DataSource.class;
+    }
 
-	public void afterPropertiesSet() throws Exception {
-		if(StringUtils.isEmpty(dataSourceName))
-			dataSourceName = "default";
-		
-		this.dataSource = DataSourceFactory.getDataSource(dataSourceName);
-	}
+    public boolean isSingleton() {
+	return true;
+    }
+
+    public void afterPropertiesSet() throws Exception {
+	if (StringUtils.isEmpty(dataSourceName))
+	    dataSourceName = "default";
+
+	this.dataSource = DataSourceFactory.getDataSource(dataSourceName);
+    }
 
 }

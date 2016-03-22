@@ -19,17 +19,17 @@ import architecture.common.jdbc.TypeAliasRegistry;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 
 /**
- * @author   donghyuck
+ * @author donghyuck
  */
 public abstract class AbstractBuilder {
 
-	protected final Configuration configuration;
+    protected final Configuration configuration;
 
-	public AbstractBuilder(Configuration configuration) {
-		this.configuration = configuration;
-	}
-	
-	public TypeAliasRegistry getTypeAliasRegistry(){
-		return configuration.getTypeAliasRegistry();
-	}
+    public AbstractBuilder(Configuration configuration) {
+	this.configuration = configuration;
+    }
+
+    public TypeAliasRegistry getTypeAliasRegistry() {
+	return configuration.getTypeAliasRegistry();
+    }
 }

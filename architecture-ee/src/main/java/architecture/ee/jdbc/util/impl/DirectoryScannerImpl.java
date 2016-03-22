@@ -20,166 +20,168 @@ import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
 import architecture.ee.spring.resources.scanner.DirectoryScanner;
 
 /**
- * @author   donghyuck
+ * @author donghyuck
  */
-public class DirectoryScannerImpl /** extends SpringLifecycleService **/ implements InitializingBean, DisposableBean, DirectoryScanner {
+public class DirectoryScannerImpl /** extends SpringLifecycleService **/
+	implements InitializingBean, DisposableBean, DirectoryScanner {
 
-	/**
-	 * @uml.property  name="scanner"
-	 * @uml.associationEnd  
-	 */
-	private URLDirectoryScanner scanner;
-	/**
-	 * @uml.property  name="resourceLocations"
-	 */
-	private List<String> resourceLocations;
-	private boolean fastDeploy = false;
-	
-	private Log log = LogFactory.getLog(getClass());
-	
-	public DirectoryScannerImpl() {				
-		this.resourceLocations = Collections.emptyList();		
-		try {
-			this.scanner = createURLDirectoryScanner(true);
-		} catch (Exception e){}
-	}
-	
-	public void setDirectoryListenerList(List<DirectoryListener> directoryListeners) {
-		for(DirectoryListener listener : (List<DirectoryListener>)directoryListeners){
-			scanner.removeDirectoryListener(listener);			
-			scanner.addDirectoryListener(listener);
-		}
-	}
+    /**
+     * @uml.property name="scanner"
+     * @uml.associationEnd
+     */
+    private URLDirectoryScanner scanner;
+    /**
+     * @uml.property name="resourceLocations"
+     */
+    private List<String> resourceLocations;
+    private boolean fastDeploy = false;
 
-	private URLDirectoryScanner createURLDirectoryScanner(boolean recursive) throws Exception {
-		URLDirectoryScanner scanner = new URLDirectoryScanner();
-		scanner.setRecursiveSearch(true);
-		scanner.setScanEnabled(true);
-		scanner.create();
-		return scanner;
-	}
-		
-	/**
-	 * @param  fastDeploy
-	 * @uml.property  name="fastDeploy"
-	 */
-	public void setFastDeploy(boolean fastDeploy) {
-		this.fastDeploy = fastDeploy;
-	}
+    private Log log = LogFactory.getLog(getClass());
 
-	/**
-	 * @return
-	 * @uml.property  name="resourceLocations"
-	 */
-	public List<String> getResourceLocations() {
-		return resourceLocations;
+    public DirectoryScannerImpl() {
+	this.resourceLocations = Collections.emptyList();
+	try {
+	    this.scanner = createURLDirectoryScanner(true);
+	} catch (Exception e) {
 	}
+    }
 
-	/**
-	 * @param  resourceLocations
-	 * @uml.property  name="resourceLocations"
-	 */
-	public void setResourceLocations(List<String> resourceLocations) {
-		this.resourceLocations = resourceLocations;
+    public void setDirectoryListenerList(List<DirectoryListener> directoryListeners) {
+	for (DirectoryListener listener : (List<DirectoryListener>) directoryListeners) {
+	    scanner.removeDirectoryListener(listener);
+	    scanner.addDirectoryListener(listener);
 	}
-			
-	public void setRecursiveSearch(boolean recurse){
-		scanner.setRecursiveSearch(recurse);
-	}
-	
-	public void setPollIntervalMillis(int pollIntervalMillis){
-		scanner.setPollIntervalMillis(pollIntervalMillis);
-	}
+    }
 
-	public void addDirectoryListener(DirectoryListener fileListener) {
-		scanner.addDirectoryListener(fileListener);
-	}
+    private URLDirectoryScanner createURLDirectoryScanner(boolean recursive) throws Exception {
+	URLDirectoryScanner scanner = new URLDirectoryScanner();
+	scanner.setRecursiveSearch(true);
+	scanner.setScanEnabled(true);
+	scanner.create();
+	return scanner;
+    }
 
-	public void addScanDir(String path) {	
-		scanner.addScanDir(path);
-	}
+    /**
+     * @param fastDeploy
+     * @uml.property name="fastDeploy"
+     */
+    public void setFastDeploy(boolean fastDeploy) {
+	this.fastDeploy = fastDeploy;
+    }
 
-	public DirectoryListener[] getDirectoryListeners() {
-		return scanner.getDirectoryListeners();
-	}
+    /**
+     * @return
+     * @uml.property name="resourceLocations"
+     */
+    public List<String> getResourceLocations() {
+	return resourceLocations;
+    }
 
-	public void removeDirectoryListener(DirectoryListener fileListener) {
-		scanner.removeDirectoryListener(fileListener);
-	}
+    /**
+     * @param resourceLocations
+     * @uml.property name="resourceLocations"
+     */
+    public void setResourceLocations(List<String> resourceLocations) {
+	this.resourceLocations = resourceLocations;
+    }
 
-	public void removeScanURL(URL url) {
-		scanner.removeScanURL(url);
-	}
+    public void setRecursiveSearch(boolean recurse) {
+	scanner.setRecursiveSearch(recurse);
+    }
 
-	public void addScanURI(URI uri) {
-		try {
-			scanner.addScanURL(uri.toURL());
-		} catch (MalformedURLException e) {
-		}
-	}
+    public void setPollIntervalMillis(int pollIntervalMillis) {
+	scanner.setPollIntervalMillis(pollIntervalMillis);
+    }
 
-	public void addScanURL(URL url) {
-		scanner.addScanURL(url);
-	}
+    public void addDirectoryListener(DirectoryListener fileListener) {
+	scanner.addDirectoryListener(fileListener);
+    }
 
-	public void removeScanURI(URI uri) {
-		try {
-			scanner.removeScanURL(uri.toURL());
-		} catch (MalformedURLException e) {
-		}
-	}
-	
-	public void destroy() throws Exception {
-		if(scanner.isStarted())
-			scanner.doStop();
-		scanner.destroy();		
-	}
+    public void addScanDir(String path) {
+	scanner.addScanDir(path);
+    }
 
+    public DirectoryListener[] getDirectoryListeners() {
+	return scanner.getDirectoryListeners();
+    }
 
-	public void afterPropertiesSet() throws Exception {		
-		loadResourceLocations();		
-		if(!scanner.isStarted())
-		    scanner.start();
+    public void removeDirectoryListener(DirectoryListener fileListener) {
+	scanner.removeDirectoryListener(fileListener);
+    }
+
+    public void removeScanURL(URL url) {
+	scanner.removeScanURL(url);
+    }
+
+    public void addScanURI(URI uri) {
+	try {
+	    scanner.addScanURL(uri.toURL());
+	} catch (MalformedURLException e) {
 	}
-	
-	protected void loadResourceLocations() {
-		try {
-			for (String path : resourceLocations) {		
-				FileObject fo = VFSUtils.resolveFile(path);
-				if(fo.exists()){
-		
-					URL url = fo.getURL();
-					url.openConnection();					
-					if(fastDeploy){
-						if(log.isDebugEnabled()){
-							log.debug("Fast deploy : " + url );							
-							SqlQueryFactory builder = null;							 
-							for(DirectoryListener listener : scanner.getDirectoryListeners()){
-								if(listener instanceof SqlQueryFactory ){									
-									builder = (SqlQueryFactory)listener;			
-								}
-							}							
-							File file = new File(url.getFile());
-							fastDeploy(file, builder);							
-						}
-					}
-					scanner.addScanURL(url);
+    }
+
+    public void addScanURL(URL url) {
+	scanner.addScanURL(url);
+    }
+
+    public void removeScanURI(URI uri) {
+	try {
+	    scanner.removeScanURL(uri.toURL());
+	} catch (MalformedURLException e) {
+	}
+    }
+
+    public void destroy() throws Exception {
+	if (scanner.isStarted())
+	    scanner.doStop();
+	scanner.destroy();
+    }
+
+    public void afterPropertiesSet() throws Exception {
+	loadResourceLocations();
+	if (!scanner.isStarted())
+	    scanner.start();
+    }
+
+    protected void loadResourceLocations() {
+	try {
+	    for (String path : resourceLocations) {
+		FileObject fo = VFSUtils.resolveFile(path);
+		if (fo.exists()) {
+
+		    URL url = fo.getURL();
+		    url.openConnection();
+		    if (fastDeploy) {
+			if (log.isDebugEnabled()) {
+			    log.debug("Fast deploy : " + url);
+			    SqlQueryFactory builder = null;
+			    for (DirectoryListener listener : scanner.getDirectoryListeners()) {
+				if (listener instanceof SqlQueryFactory) {
+				    builder = (SqlQueryFactory) listener;
 				}
+			    }
+			    File file = new File(url.getFile());
+			    fastDeploy(file, builder);
 			}
-		} catch (Exception e) { }
-	}		
-	
-	public void fastDeploy(File file, SqlQueryFactory builder){
-		if(file.isFile()){
+		    }
+		    scanner.addScanURL(url);
+		}
+	    }
+	} catch (Exception e) {
+	}
+    }
 
-			if(builder.validateFile(file)){
-	        	builder.fileCreated(file);
-	        }
-		}else{
-			for( File c : file.listFiles() ){
-			    fastDeploy(c, builder);				
-			}		
-		}	
-	}	
-	
+    public void fastDeploy(File file, SqlQueryFactory builder) {
+	if (file.isFile()) {
+
+	    if (builder.validateFile(file)) {
+		builder.fileCreated(file);
+	    }
+	} else {
+	    for (File c : file.listFiles()) {
+		fastDeploy(c, builder);
+	    }
+	}
+    }
+
 }

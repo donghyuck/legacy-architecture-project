@@ -28,58 +28,49 @@ import org.springframework.jdbc.support.nativejdbc.NativeJdbcExtractor;
  */
 public interface JdbcHelper {
 
-	/**
-	 * @author   donghyuck
-	 */
-	enum DatabaseType {
-		oracle,
-		postgresql,
-		mysql,
-		hsqldb,
-		db2,
-		sqlserver,
-		interbase,
-		derby,
-		unknown;
-	}
+    /**
+     * @author donghyuck
+     */
+    enum DatabaseType {
+	oracle, postgresql, mysql, hsqldb, db2, sqlserver, interbase, derby, unknown;
+    }
 
-	public boolean isBatchUpdatesSupported();
+    public boolean isBatchUpdatesSupported();
 
-	public String getDatabaseProductName();
+    public String getDatabaseProductName();
 
-	public String getDatabaseProductVersion();
+    public String getDatabaseProductVersion();
 
-	public DatabaseType getDatabaseType();
+    public DatabaseType getDatabaseType();
 
-	public boolean isDeleteSubqueriesSupported();
+    public boolean isDeleteSubqueriesSupported();
 
-	public boolean isFetchSizeSupported();
+    public boolean isFetchSizeSupported();
 
-	public String getJdbcDriverName();
+    public String getJdbcDriverName();
 
-	public String getJdbcDriverVersion();
+    public String getJdbcDriverVersion();
 
-	public boolean isMaxRowsSupported();
+    public boolean isMaxRowsSupported();
 
-	public boolean isScrollResultsSupported();
+    public boolean isScrollResultsSupported();
 
-	public boolean isStreamBlobRequired();
+    public boolean isStreamBlobRequired();
 
-	public boolean isStreamTextRequired();
+    public boolean isStreamTextRequired();
 
-	public boolean isSubqueriesSupported();
+    public boolean isSubqueriesSupported();
 
-	public int getTransactionIsolation();
+    public int getTransactionIsolation();
 
-	public boolean isTransactionsSupported();
+    public boolean isTransactionsSupported();
 
-	public PreparedStatement createScrollablePreparedStatement(Connection con, String sql) throws SQLException;
+    public PreparedStatement createScrollablePreparedStatement(Connection con, String sql) throws SQLException;
 
-	public void setFetchSize(ResultSet rs, int fetchSize);
+    public void setFetchSize(ResultSet rs, int fetchSize);
 
-	public void scrollResultSet(ResultSet rs, int rowNumber) throws SQLException;
+    public void scrollResultSet(ResultSet rs, int rowNumber) throws SQLException;
 
-	public NativeJdbcExtractor getNativeJdbcExtractor();
-	
-	
+    public NativeJdbcExtractor getNativeJdbcExtractor();
+
 }

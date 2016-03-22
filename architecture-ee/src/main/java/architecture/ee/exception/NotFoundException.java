@@ -17,36 +17,36 @@ package architecture.ee.exception;
 
 public class NotFoundException extends ApplicationException {
 
-	public NotFoundException() {
-		super();
-	}
+    public NotFoundException() {
+	super();
+    }
 
-	public NotFoundException(int errorCode, String msg, Throwable cause) {
-		super(errorCode, msg, cause);
-	}
+    public NotFoundException(int errorCode, String msg, Throwable cause) {
+	super(errorCode, msg, cause);
+    }
 
-	public NotFoundException(int errorCode, String msg) {
-		super(errorCode, msg);
-	}
+    public NotFoundException(int errorCode, String msg) {
+	super(errorCode, msg);
+    }
 
-	public NotFoundException(int errorCode, Throwable cause) {
-		super(errorCode, cause);
-	}
+    public NotFoundException(int errorCode, Throwable cause) {
+	super(errorCode, cause);
+    }
 
-	public NotFoundException(int errorCode) {
-		super(errorCode);
-	}
+    public NotFoundException(int errorCode) {
+	super(errorCode);
+    }
 
-	public NotFoundException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    public NotFoundException(String msg, Throwable cause) {
+	super(msg, cause);
+    }
 
-	public NotFoundException(String msg) {
-		super(msg);
-	}
+    public NotFoundException(String msg) {
+	super(msg);
+    }
 
-	public NotFoundException(Throwable cause) {
-		super(cause);
-	}
+    public NotFoundException(Throwable cause) {
+	super(cause);
+    }
 
 }

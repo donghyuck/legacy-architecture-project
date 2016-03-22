@@ -23,53 +23,53 @@ import org.springframework.core.io.Resource;
 import architecture.common.lifecycle.ConfigRoot;
 
 /**
- * @author   donghyuck
+ * @author donghyuck
  */
 public class ConfigRootImpl implements ConfigRoot {
 
-	private String rootURL;
+    private String rootURL;
 
-	private Resource rootFileObject;
-	
-	public ConfigRootImpl(Resource fileObject) {
-		this.rootFileObject = fileObject;
-		try {
-			this.rootURL = rootFileObject.getURL().toString();
-		} catch (IOException e) {
-		}
-	}
+    private Resource rootFileObject;
 
-	public ConfigRootImpl(String rootURL) {
-		this.rootURL = rootURL;
+    public ConfigRootImpl(Resource fileObject) {
+	this.rootFileObject = fileObject;
+	try {
+	    this.rootURL = rootFileObject.getURL().toString();
+	} catch (IOException e) {
 	}
-		
-	private Resource getRootResource() {
-		return rootFileObject;
-	}
+    }
 
-	public String getConfigRootPath() {
-		return rootURL;
-	}
+    public ConfigRootImpl(String rootURL) {
+	this.rootURL = rootURL;
+    }
 
-	public File getFile(String name) {
-		try {			
-			return getRootResource().createRelative(name).getFile();
-		} catch (IOException e) {
-		}
-		return null;
+    private Resource getRootResource() {
+	return rootFileObject;
+    }
+
+    public String getConfigRootPath() {
+	return rootURL;
+    }
+
+    public File getFile(String name) {
+	try {
+	    return getRootResource().createRelative(name).getFile();
+	} catch (IOException e) {
 	}
-	
-	public String getURI(String name) {
-		try {
-			
-			return  getRootResource().createRelative(name).getURI().toString();
-		} catch (IOException e) {
-		}
-		return null;
+	return null;
+    }
+
+    public String getURI(String name) {
+	try {
+
+	    return getRootResource().createRelative(name).getURI().toString();
+	} catch (IOException e) {
 	}
-	
-	public String getRootURI(){
-		return rootURL;
-	}
+	return null;
+    }
+
+    public String getRootURI() {
+	return rootURL;
+    }
 
 }

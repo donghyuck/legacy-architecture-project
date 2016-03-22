@@ -17,19 +17,19 @@ package architecture.ee.jdbc.sqlquery;
 
 public class SqlNotFoundException extends SqlQueryException {
 
-	public SqlNotFoundException() {
-	}
+    public SqlNotFoundException() {
+    }
 
-	public SqlNotFoundException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    public SqlNotFoundException(String msg, Throwable cause) {
+	super(msg, cause);
+    }
 
-	public SqlNotFoundException(String msg) {
-		super(msg);
-	}
+    public SqlNotFoundException(String msg) {
+	super(msg);
+    }
 
-	public SqlNotFoundException(Throwable cause) {
-		super(cause);
-	}
+    public SqlNotFoundException(Throwable cause) {
+	super(cause);
+    }
 
 }

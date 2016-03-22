@@ -20,34 +20,34 @@ import javax.sql.DataSource;
 import architecture.common.util.ImplFactory;
 
 /**
- * @author   donghyuck
+ * @author donghyuck
  */
 public class JdbcHelperFactory {
 
-	public static interface Implementation {
+    public static interface Implementation {
 
-		public JdbcHelper getJdbcHelper(DataSource dataSource);
+	public JdbcHelper getJdbcHelper(DataSource dataSource);
 
-		public JdbcHelper getJdbcHelper();
+	public JdbcHelper getJdbcHelper();
 
-	}
+    }
 
-	private static Implementation impl = null;
+    private static Implementation impl = null;
 
-	static {
-		impl = (Implementation) ImplFactory.loadImplFromKey(Implementation.class);
-	}
+    static {
+	impl = (Implementation) ImplFactory.loadImplFromKey(Implementation.class);
+    }
 
-	public static JdbcHelper getJdbcHelper() {
-		return impl.getJdbcHelper();
-	}
+    public static JdbcHelper getJdbcHelper() {
+	return impl.getJdbcHelper();
+    }
 
-	/**
-	 * @todo 캐쉬를 사용하는 것을 고려한다.
-	 * @param dataSource
-	 * @return
-	 */
-	public static JdbcHelper getJdbcHelper(DataSource dataSource) {
-		return impl.getJdbcHelper(dataSource);
-	}
+    /**
+     * @todo 캐쉬를 사용하는 것을 고려한다.
+     * @param dataSource
+     * @return
+     */
+    public static JdbcHelper getJdbcHelper(DataSource dataSource) {
+	return impl.getJdbcHelper(dataSource);
+    }
 }

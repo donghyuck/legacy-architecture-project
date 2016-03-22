@@ -34,61 +34,62 @@ import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.util.ApplicationConstants;
 import groovy.util.GroovyScriptEngine;
 
-public class GroovyScriptEngineFactory implements FactoryBean<GroovyScriptEngine>, InitializingBean,  ResourceLoaderAware {
-	
-	private Log log = LogFactory.getLog(getClass());
-	
-	private GroovyScriptEngine groovyScriptEngine;
-	
-	private ResourceLoader resourceLoader ;
+public class GroovyScriptEngineFactory
+	implements FactoryBean<GroovyScriptEngine>, InitializingBean, ResourceLoaderAware {
 
-	public void setResourceLoader(ResourceLoader resourceLoader) {
-		this.resourceLoader = resourceLoader;
-	}
+    private Log log = LogFactory.getLog(getClass());
 
-	public void afterPropertiesSet() throws Exception {
-		if(this.groovyScriptEngine == null)
-		{			
-			
-			ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();
-			
-			String path = setupProperties.get(ApplicationConstants.SCRIPTING_GROOVY_SOURCE_LOCATION_PROP_NAME);	
-			
-			String sourceEncoding = setupProperties.get(ApplicationConstants.SCRIPTING_GROOVY_SOURCE_ENCODING_PROP_NAME);	
-			
-			boolean recompileGroovySource = setupProperties.getBooleanProperty(ApplicationConstants.SCRIPTING_GROOVY_SOURCE_RECOMPILE_PROP_NAME, false);
-			
-			
-			if( StringUtils.isEmpty(path) ){
-				path = AdminHelper.getRepository().getURI("groovy");
-			}			
-			
-			if( StringUtils.isEmpty( sourceEncoding ))
-				sourceEncoding = ApplicationConstants.DEFAULT_CHAR_ENCODING;
-						
-			if(log.isErrorEnabled())
-				log.debug( L10NUtils.format("003031", path ) );
-			
-			FileObject fo = VFSUtils.resolveFile(path);			
-			CompilerConfiguration config = CompilerConfiguration.DEFAULT ;
-			config.setRecompileGroovySource(recompileGroovySource);
-			config.setSourceEncoding(sourceEncoding);
-			
-			this.groovyScriptEngine = new GroovyScriptEngine( new URL[]{ fo.getURL()  } );		
-			
-		}
-	}
+    private GroovyScriptEngine groovyScriptEngine;
 
-	public GroovyScriptEngine getObject() throws Exception {
-		return groovyScriptEngine;
-	}
+    private ResourceLoader resourceLoader;
 
-	public Class<GroovyScriptEngine> getObjectType() {
-		return GroovyScriptEngine.class;
-	}
+    public void setResourceLoader(ResourceLoader resourceLoader) {
+	this.resourceLoader = resourceLoader;
+    }
 
-	public boolean isSingleton() {
-		return true;
+    public void afterPropertiesSet() throws Exception {
+	if (this.groovyScriptEngine == null) {
+
+	    ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();
+
+	    String path = setupProperties.get(ApplicationConstants.SCRIPTING_GROOVY_SOURCE_LOCATION_PROP_NAME);
+
+	    String sourceEncoding = setupProperties
+		    .get(ApplicationConstants.SCRIPTING_GROOVY_SOURCE_ENCODING_PROP_NAME);
+
+	    boolean recompileGroovySource = setupProperties
+		    .getBooleanProperty(ApplicationConstants.SCRIPTING_GROOVY_SOURCE_RECOMPILE_PROP_NAME, false);
+
+	    if (StringUtils.isEmpty(path)) {
+		path = AdminHelper.getRepository().getURI("groovy");
+	    }
+
+	    if (StringUtils.isEmpty(sourceEncoding))
+		sourceEncoding = ApplicationConstants.DEFAULT_CHAR_ENCODING;
+
+	    if (log.isErrorEnabled())
+		log.debug(L10NUtils.format("003031", path));
+
+	    FileObject fo = VFSUtils.resolveFile(path);
+	    CompilerConfiguration config = CompilerConfiguration.DEFAULT;
+	    config.setRecompileGroovySource(recompileGroovySource);
+	    config.setSourceEncoding(sourceEncoding);
+
+	    this.groovyScriptEngine = new GroovyScriptEngine(new URL[] { fo.getURL() });
+
 	}
-	
+    }
+
+    public GroovyScriptEngine getObject() throws Exception {
+	return groovyScriptEngine;
+    }
+
+    public Class<GroovyScriptEngine> getObjectType() {
+	return GroovyScriptEngine.class;
+    }
+
+    public boolean isSingleton() {
+	return true;
+    }
+
 }

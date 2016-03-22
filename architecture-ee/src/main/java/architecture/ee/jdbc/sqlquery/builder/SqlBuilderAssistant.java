@@ -26,72 +26,72 @@ import architecture.ee.jdbc.sqlquery.sql.SqlSource;
 
 /**
  * MappedStatement 객체 생성을 돕는 클래스.
- * @author   DongHyuck, Son
+ * 
+ * @author DongHyuck, Son
  */
 public class SqlBuilderAssistant extends AbstractBuilder {
 
+    private String currentNamespace;
+    private String resource;
+    private Log log = LogFactory.getLog(SqlBuilderAssistant.class);
 
-	private String currentNamespace;
-	private String resource;
-	private Log log = LogFactory.getLog(SqlBuilderAssistant.class);
+    public SqlBuilderAssistant(Configuration configuration, String resource) {
+	super(configuration);
+	this.resource = resource;
+    }
 
-	public SqlBuilderAssistant(Configuration configuration, String resource) {
-		super(configuration);
-		this.resource = resource;
+    /**
+     * 
+     * @param id
+     * @param sqlSource
+     * @param fetchSize
+     * @param timeout
+     * @return
+     */
+    public MappedStatement addMappedStatement(String id, String description, SqlSource sqlSource,
+	    StatementType statementType, Integer fetchSize, Integer timeout) {
+	String idToUse = applyCurrentNamespace(id);
+	MappedStatement.Builder statementBuilder = new MappedStatement.Builder(configuration, idToUse, sqlSource,
+		statementType);
+	statementBuilder.resource(resource);
+	statementBuilder.fetchSize(fetchSize);
+	statementBuilder.description(description);
+	setStatementTimeout(timeout, statementBuilder);
+	MappedStatement statement = statementBuilder.build();
+	configuration.addMappedStatement(statement);
+	// log.debug( String.format("Mapped statement ID=%s, description=%s",
+	// new Object[]{statement.getID(), statement.getDescription()}) );
+
+	return statement;
+    }
+
+    public String getCurrentNamespace() {
+	return currentNamespace;
+    }
+
+    public void setCurrentNamespace(String currentNamespace) {
+	if (currentNamespace != null) {
+	    this.currentNamespace = currentNamespace;
+	    if (StringUtils.isNotEmpty(resource))
+		configuration.addUriNamespace(resource, currentNamespace);
 	}
-
-	/**
-	 * 
-	 * @param id
-	 * @param sqlSource
-	 * @param fetchSize
-	 * @param timeout
-	 * @return
-	 */
-	public MappedStatement addMappedStatement(String id, String description, SqlSource sqlSource, StatementType statementType, Integer fetchSize, Integer timeout) {
-		String idToUse = applyCurrentNamespace(id);
-		MappedStatement.Builder statementBuilder = new MappedStatement.Builder( configuration, idToUse, sqlSource, statementType);
-		statementBuilder.resource(resource);
-		statementBuilder.fetchSize(fetchSize);
-		statementBuilder.description(description);		
-		setStatementTimeout(timeout, statementBuilder);		
-		MappedStatement statement = statementBuilder.build();		
-		configuration.addMappedStatement(statement);		
-		//log.debug( String.format("Mapped statement ID=%s, description=%s", new Object[]{statement.getID(), statement.getDescription()}) );	
-		
-		return statement;
+	if (this.currentNamespace == null) {
+	    throw new BuilderException("The mapper element requires a namespace attribute to be specified.");
 	}
+    }
 
+    public String applyCurrentNamespace(String base) {
+	if (base == null)
+	    return null;
+	if (base.contains("."))
+	    return base;
+	return currentNamespace + "." + base;
+    }
 
-
-	public String getCurrentNamespace() {
-		return currentNamespace;
+    private void setStatementTimeout(Integer timeout, MappedStatement.Builder statementBuilder) {
+	if (timeout == null) {
+	    timeout = configuration.getDefaultStatementTimeout();
 	}
-
-
-	public void setCurrentNamespace(String currentNamespace) {
-		if (currentNamespace != null) {
-			this.currentNamespace = currentNamespace;
-			if (StringUtils.isNotEmpty(resource))
-				configuration.addUriNamespace(resource, currentNamespace);
-		}
-		if (this.currentNamespace == null) {
-			throw new BuilderException("The mapper element requires a namespace attribute to be specified.");
-		}
-	}
-
-	public String applyCurrentNamespace(String base) {
-		if (base == null)
-			return null;
-		if (base.contains("."))
-			return base;
-		return currentNamespace + "." + base;
-	}
-
-	private void setStatementTimeout(Integer timeout, MappedStatement.Builder statementBuilder) {
-		if (timeout == null) {
-			timeout = configuration.getDefaultStatementTimeout();
-		}
-		statementBuilder.timeout(timeout);
-	}
+	statementBuilder.timeout(timeout);
+    }
 }

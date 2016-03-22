@@ -19,48 +19,48 @@ import architecture.common.exception.CodeableRuntimeException;
 import architecture.common.util.L10NUtils;
 
 public class SqlQueryException extends CodeableRuntimeException {
-	
-      public SqlQueryException() {
-		super();
-	}
 
-	public SqlQueryException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    public SqlQueryException() {
+	super();
+    }
 
-	public SqlQueryException(String msg) {
-		super(msg);
-	}
+    public SqlQueryException(String msg, Throwable cause) {
+	super(msg, cause);
+    }
 
-	public SqlQueryException(Throwable cause) {
-		super(cause);
-	}
+    public SqlQueryException(String msg) {
+	super(msg);
+    }
 
-	public static SqlQueryException createSqlQueryException(Throwable cause, int code, Object...args){
-   			if( code < 60000){
-   				String codeString = L10NUtils.codeToString(code);
-   				String msg = L10NUtils.format(codeString, args);
-   				SqlQueryException e = new SqlQueryException(msg, cause);
-   				e.setErrorCode(code);
-   				return e;
-   			} else {
-   				SqlQueryException e = new SqlQueryException(cause);
-   				e.setErrorCode(code);
-   				return e;
-   			}
-      }
-	
-	public static SqlQueryException createSqlQueryException(Throwable cause, int code){
-			if( code < 60000){
-				String codeString = L10NUtils.codeToString(code);
-				String msg = L10NUtils.getMessage(codeString);
-				SqlQueryException e = new SqlQueryException(msg, cause);
-				e.setErrorCode(code);
-				return e;
-			} else {
-				SqlQueryException e = new SqlQueryException(cause);
-				e.setErrorCode(code);
-				return e;
-			}
-  }
+    public SqlQueryException(Throwable cause) {
+	super(cause);
+    }
+
+    public static SqlQueryException createSqlQueryException(Throwable cause, int code, Object... args) {
+	if (code < 60000) {
+	    String codeString = L10NUtils.codeToString(code);
+	    String msg = L10NUtils.format(codeString, args);
+	    SqlQueryException e = new SqlQueryException(msg, cause);
+	    e.setErrorCode(code);
+	    return e;
+	} else {
+	    SqlQueryException e = new SqlQueryException(cause);
+	    e.setErrorCode(code);
+	    return e;
+	}
+    }
+
+    public static SqlQueryException createSqlQueryException(Throwable cause, int code) {
+	if (code < 60000) {
+	    String codeString = L10NUtils.codeToString(code);
+	    String msg = L10NUtils.getMessage(codeString);
+	    SqlQueryException e = new SqlQueryException(msg, cause);
+	    e.setErrorCode(code);
+	    return e;
+	} else {
+	    SqlQueryException e = new SqlQueryException(cause);
+	    e.setErrorCode(code);
+	    return e;
+	}
+    }
 }

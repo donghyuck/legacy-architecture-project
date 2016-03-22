@@ -20,29 +20,30 @@ import architecture.ee.jdbc.sqlquery.factory.impl.SqlQueryFactoryBuilderImpl;
 
 /**
  * 
- * @author  <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
+ * @author <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
  *
  */
 public class SqlQueryFactoryBuilder {
-	
-	public static interface Implementation {
-		
-		public SqlQueryFactory getSqlQueryFactory();
-	
-		public SqlQueryFactory getSqlQueryFactory(Configuration configuration);
-	}
 
-	private static Implementation impl = null;
-	
-	static {
-		impl = new SqlQueryFactoryBuilderImpl();
-	}
+    public static interface Implementation {
 
-	public static SqlQueryFactory getSqlQueryFactory() {
-		return impl.getSqlQueryFactory();
-	}
-	public static SqlQueryFactory getSqlQueryFactory(Configuration configuration) {
-		return impl.getSqlQueryFactory(configuration);
-	}
-	
+	public SqlQueryFactory getSqlQueryFactory();
+
+	public SqlQueryFactory getSqlQueryFactory(Configuration configuration);
+    }
+
+    private static Implementation impl = null;
+
+    static {
+	impl = new SqlQueryFactoryBuilderImpl();
+    }
+
+    public static SqlQueryFactory getSqlQueryFactory() {
+	return impl.getSqlQueryFactory();
+    }
+
+    public static SqlQueryFactory getSqlQueryFactory(Configuration configuration) {
+	return impl.getSqlQueryFactory(configuration);
+    }
+
 }

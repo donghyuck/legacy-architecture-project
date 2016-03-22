@@ -24,59 +24,53 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 
 public class SmtpTest {
 
+    public SmtpTest() {
 
-	public SmtpTest() {
-		
-		
+    }
+
+    @Test
+    public void testSendMail() {
+	JavaMailSender sender = newMailSender();
+
+	try {
+	    MimeMessageHelper helper = new MimeMessageHelper(sender.createMimeMessage(), true);
+
+	    helper.setTo("developer");
+	    helper.setFrom("andang72@naver.com");
+
+	    helper.setSubject("테스트");
+	    helper.setText("내용없음", "<strong>내용없음</strong>"); // ("<strong>내용없음</strong>",
+							     // true);
+
+	    sender.send(helper.getMimeMessage());
+	} catch (Exception e) {
+	    e.printStackTrace();
 	}
 
-	
-	@Test
-	public void testSendMail(){
-		JavaMailSender sender = newMailSender();
-		
-		try {
-			MimeMessageHelper helper = new MimeMessageHelper(sender.createMimeMessage(), true);
-			
-			helper.setTo("developer");
-			helper.setFrom("andang72@naver.com");
-			
-			helper.setSubject("테스트");
-			helper.setText("내용없음", "<strong>내용없음</strong>"); //("<strong>내용없음</strong>", true);
-			
-			sender.send(helper.getMimeMessage());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		/*
-		SimpleMailMessage message = new SimpleMailMessage();
+	/*
+	 * SimpleMailMessage message = new SimpleMailMessage();
+	 * 
+	 * 
+	 * 
+	 * MimeMessage mm = sender.createMimeMessage();
+	 * 
+	 * message.setFrom("andang311@inkium.com");
+	 * message.setTo("andang72@naver.com"); message.setSubject("테스트 메일");
+	 * message.setText("내용없음"); sender.send(message);
+	 */
 
-		
-		
-		MimeMessage mm = sender.createMimeMessage();
+    }
 
-		message.setFrom("andang311@inkium.com");
-		message.setTo("andang72@naver.com");
-		message.setSubject("테스트 메일");
-		message.setText("내용없음");
-		sender.send(message);
-	*/
-	
-	}
-	
-	
-	
-	public static JavaMailSender newMailSender(){		
-		JavaMailSenderImpl sender = new JavaMailSenderImpl();
-		sender.setHost("222.122.47.196");
-		Properties javaMailProperties = new Properties();
-		javaMailProperties.put("mail.debug", "true");
-		javaMailProperties.put("mail.smtp.auth", "false");
-		sender.setJavaMailProperties(javaMailProperties);
-		sender.setDefaultEncoding("UTF-8");
-		sender.setPort(25);
-		sender.setProtocol("smtp");		
-		return sender;
-	} 
+    public static JavaMailSender newMailSender() {
+	JavaMailSenderImpl sender = new JavaMailSenderImpl();
+	sender.setHost("222.122.47.196");
+	Properties javaMailProperties = new Properties();
+	javaMailProperties.put("mail.debug", "true");
+	javaMailProperties.put("mail.smtp.auth", "false");
+	sender.setJavaMailProperties(javaMailProperties);
+	sender.setDefaultEncoding("UTF-8");
+	sender.setPort(25);
+	sender.setProtocol("smtp");
+	return sender;
+    }
 }

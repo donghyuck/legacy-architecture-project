@@ -17,36 +17,35 @@ package architecture.ee.event;
 
 import architecture.common.lifecycle.event.Event;
 
-public class ModelObjectEvent extends Event  {
+public class ModelObjectEvent extends Event {
 
-	public enum State {
+    public enum State {
 
-		CREATED, 
+	CREATED,
 
-		UPDATED, 
+	UPDATED,
 
-		DELETED, 
+	DELETED,
 
-		MOVED,
-		
-		EXPIRED,
-		
-		VIEWED	
-	};
-	
-	private State state;
-	
-	public ModelObjectEvent(Object source, State state) {
-		super(source);
-		this.state = state;
-	}
+	MOVED,
 
-	/**
-	 * @return state
-	 */
-	public State getState() {
-		return state;
-	}
+	EXPIRED,
 
-	
+	VIEWED
+    };
+
+    private State state;
+
+    public ModelObjectEvent(Object source, State state) {
+	super(source);
+	this.state = state;
+    }
+
+    /**
+     * @return state
+     */
+    public State getState() {
+	return state;
+    }
+
 }

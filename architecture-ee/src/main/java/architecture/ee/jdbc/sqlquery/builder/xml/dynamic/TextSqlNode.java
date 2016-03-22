@@ -17,20 +17,20 @@ package architecture.ee.jdbc.sqlquery.builder.xml.dynamic;
 
 public class TextSqlNode implements SqlNode {
 
-	private String text;
+    private String text;
 
-	public TextSqlNode(String text) {
-		this.text = text;
-	}
+    public TextSqlNode(String text) {
+	this.text = text;
+    }
 
-	public boolean apply(DynamicContext context) {
-		context.appendSql(text);
-		return true;
-	}
+    public boolean apply(DynamicContext context) {
+	context.appendSql(text);
+	return true;
+    }
 
-	@Override
-	public String toString() {
-		return "text[" + text + "]";
-	}
+    @Override
+    public String toString() {
+	return "text[" + text + "]";
+    }
 
 }

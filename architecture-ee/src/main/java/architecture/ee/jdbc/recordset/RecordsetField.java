@@ -14,72 +14,72 @@ import java.sql.Types;
  */
 public class RecordsetField implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
-	/** field name */
-	private String _name = null;
+    /** field name */
+    private String _name = null;
 
-	/** sql native type name */
-	private String _sqlTypeName = null;
+    /** sql native type name */
+    private String _sqlTypeName = null;
 
-	/** jdbc data type (java.sql.Types) */
-	private int _type = 0;
+    /** jdbc data type (java.sql.Types) */
+    private int _type = 0;
 
-	/**
-	 * Quick way to build an object of this class
-	 * 
-	 * @param name
-	 *            Field Name
-	 * @param typeName
-	 *            Native Type name
-	 * @param type
-	 *            JDBC Data Type
-	 */
-	public RecordsetField(String name, String typeName, int type) {
-		switch (type) {
-		case Types.DECIMAL:
-		case Types.FLOAT:
-		case Types.NUMERIC:
-			type = Types.DOUBLE;
-			break;
+    /**
+     * Quick way to build an object of this class
+     * 
+     * @param name
+     *            Field Name
+     * @param typeName
+     *            Native Type name
+     * @param type
+     *            JDBC Data Type
+     */
+    public RecordsetField(String name, String typeName, int type) {
+	switch (type) {
+	case Types.DECIMAL:
+	case Types.FLOAT:
+	case Types.NUMERIC:
+	    type = Types.DOUBLE;
+	    break;
 
-		case Types.BIGINT:
-		case Types.SMALLINT:
-		case Types.TINYINT:
-			type = Types.INTEGER;
-			break;
-		}
-
-		_name = name;
-		_sqlTypeName = typeName;
-		_type = type;
+	case Types.BIGINT:
+	case Types.SMALLINT:
+	case Types.TINYINT:
+	    type = Types.INTEGER;
+	    break;
 	}
 
-	/**
-	 * @return
-	 */
-	public String getName() {
-		return _name;
-	}
+	_name = name;
+	_sqlTypeName = typeName;
+	_type = type;
+    }
 
-	/**
-	 * @return
-	 */
-	public String getSqlTypeName() {
-		return _sqlTypeName;
-	}
+    /**
+     * @return
+     */
+    public String getName() {
+	return _name;
+    }
 
-	/**
-	 * @return
-	 */
-	public int getType() {
-		return _type;
-	}
+    /**
+     * @return
+     */
+    public String getSqlTypeName() {
+	return _sqlTypeName;
+    }
 
-	public RecordsetField() {
-	}
+    /**
+     * @return
+     */
+    public int getType() {
+	return _type;
+    }
+
+    public RecordsetField() {
+    }
 
 }

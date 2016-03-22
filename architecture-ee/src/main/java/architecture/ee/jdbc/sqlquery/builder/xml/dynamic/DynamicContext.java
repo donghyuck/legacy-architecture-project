@@ -19,48 +19,48 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author   DongHyuck, Son
+ * @author DongHyuck, Son
  */
 public class DynamicContext {
 
-	public static final String ADDITIONAL_PARAMETER_OBJECT_KEY = "_additional_parameter";
-	
-	public static final String PARAMETER_OBJECT_KEY = "_parameter";
+    public static final String ADDITIONAL_PARAMETER_OBJECT_KEY = "_additional_parameter";
 
-	private final Map<String, Object> bindings;
-	
-	private final StringBuilder sqlBuilder = new StringBuilder();
-	
-	public DynamicContext() {	
-		this.bindings = new HashMap<String, Object>();
-	}
-	
-	public DynamicContext(Object parameterObject) {	
-		this.bindings = new HashMap<String, Object>();
-		this.bindings.put(PARAMETER_OBJECT_KEY, parameterObject);
-	}
+    public static final String PARAMETER_OBJECT_KEY = "_parameter";
 
-	public DynamicContext(Object parameterObject, Map<String, Object> additionalParameters) {
-		this.bindings = new HashMap<String, Object>();
-		this.bindings.put(PARAMETER_OBJECT_KEY, parameterObject);
-		this.bindings.put(ADDITIONAL_PARAMETER_OBJECT_KEY, additionalParameters);	
-	}
+    private final Map<String, Object> bindings;
 
-	public Map<String, Object> getBindings() {
-		return bindings;
-	}
+    private final StringBuilder sqlBuilder = new StringBuilder();
 
-	public void bind(String name, Object value) {
-		bindings.put(name, value);
-	}
+    public DynamicContext() {
+	this.bindings = new HashMap<String, Object>();
+    }
 
-	public void appendSql(String sql) {
-		sqlBuilder.append(sql);
-		sqlBuilder.append(" ");
-	}
+    public DynamicContext(Object parameterObject) {
+	this.bindings = new HashMap<String, Object>();
+	this.bindings.put(PARAMETER_OBJECT_KEY, parameterObject);
+    }
 
-	public String getSql() {
-		return sqlBuilder.toString().trim();
-	}
+    public DynamicContext(Object parameterObject, Map<String, Object> additionalParameters) {
+	this.bindings = new HashMap<String, Object>();
+	this.bindings.put(PARAMETER_OBJECT_KEY, parameterObject);
+	this.bindings.put(ADDITIONAL_PARAMETER_OBJECT_KEY, additionalParameters);
+    }
+
+    public Map<String, Object> getBindings() {
+	return bindings;
+    }
+
+    public void bind(String name, Object value) {
+	bindings.put(name, value);
+    }
+
+    public void appendSql(String sql) {
+	sqlBuilder.append(sql);
+	sqlBuilder.append(" ");
+    }
+
+    public String getSql() {
+	return sqlBuilder.toString().trim();
+    }
 
 }

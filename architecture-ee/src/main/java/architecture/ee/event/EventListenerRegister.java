@@ -25,12 +25,13 @@ import architecture.common.event.spi.ListenerHandler;
 
 public class EventListenerRegister {
 
-	private final List<ListenerHandler> listenerHandlers;
-	
-	public EventListenerRegister(EventPublisher eventPublisher, ListenerHandlersConfiguration listenerHandlersConfiguration) {
-		
-		listenerHandlers = checkNotNull(checkNotNull(listenerHandlersConfiguration).getListenerHandlers());
+    private final List<ListenerHandler> listenerHandlers;
 
-	}
+    public EventListenerRegister(EventPublisher eventPublisher,
+	    ListenerHandlersConfiguration listenerHandlersConfiguration) {
+
+	listenerHandlers = checkNotNull(checkNotNull(listenerHandlersConfiguration).getListenerHandlers());
+
+    }
 
 }

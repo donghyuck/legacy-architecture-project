@@ -18,28 +18,28 @@ package architecture.ee.jdbc.sqlquery.factory;
 import architecture.ee.jdbc.sqlquery.factory.impl.ConfigurationFactoryImpl;
 
 /**
- * @author  donghyuck, son
+ * @author donghyuck, son
  */
 public class ConfigurationFactory {
 
-	public static interface Implementation {
+    public static interface Implementation {
 
-		public Configuration getConfiguration();
+	public Configuration getConfiguration();
 
-	}
+    }
 
-	/**
-	 * @uml.property  name="impl"
-	 * @uml.associationEnd  
-	 */
-	private static Implementation impl = null;
+    /**
+     * @uml.property name="impl"
+     * @uml.associationEnd
+     */
+    private static Implementation impl = null;
 
-	static {
-		impl = new ConfigurationFactoryImpl();
-	}
+    static {
+	impl = new ConfigurationFactoryImpl();
+    }
 
-	public static Configuration getConfiguration() {
-		return impl.getConfiguration();
-	}
+    public static Configuration getConfiguration() {
+	return impl.getConfiguration();
+    }
 
 }

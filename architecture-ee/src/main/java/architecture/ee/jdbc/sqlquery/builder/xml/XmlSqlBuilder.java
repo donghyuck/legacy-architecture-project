@@ -31,89 +31,85 @@ import architecture.ee.jdbc.sqlquery.parser.XNode;
 import architecture.ee.jdbc.sqlquery.parser.XPathParser;
 
 /**
- * @author   donghyuck
+ * @author donghyuck
  */
 public class XmlSqlBuilder extends AbstractBuilder {
 
-	private Log log = LogFactory.getLog(XmlSqlBuilder.class);
-	
-	/**
-	 * @uml.property  name="builderAssistant"
-	 * @uml.associationEnd  
-	 */
-	private SqlBuilderAssistant builderAssistant;
+    private Log log = LogFactory.getLog(XmlSqlBuilder.class);
 
-	/**
-	 * @uml.property  name="parser"
-	 * @uml.associationEnd  
-	 */
-	private XPathParser parser;
+    /**
+     * @uml.property name="builderAssistant"
+     * @uml.associationEnd
+     */
+    private SqlBuilderAssistant builderAssistant;
 
-	public XmlSqlBuilder(InputStream is, Configuration configuration, String resource) {
-		super(configuration);
-		this.builderAssistant = new SqlBuilderAssistant(configuration, resource);
-		this.parser = new XPathParser(new InputStreamReader(is), false, configuration.getVariables(), null);
+    /**
+     * @uml.property name="parser"
+     * @uml.associationEnd
+     */
+    private XPathParser parser;
+
+    public XmlSqlBuilder(InputStream is, Configuration configuration, String resource) {
+	super(configuration);
+	this.builderAssistant = new SqlBuilderAssistant(configuration, resource);
+	this.parser = new XPathParser(new InputStreamReader(is), false, configuration.getVariables(), null);
+    }
+
+    public XmlSqlBuilder(InputStream is, Configuration configuration) {
+	this(is, configuration, null);
+    }
+
+    public XmlSqlBuilder(Reader reader, Configuration configuration, String resource) {
+	super(configuration);
+	this.builderAssistant = new SqlBuilderAssistant(configuration, resource);
+	this.parser = new XPathParser(reader, false, configuration.getVariables(), null);
+    }
+
+    public XmlSqlBuilder(Reader reader, Configuration configuration) {
+	this(reader, configuration, null);
+    }
+
+    public void build() {
+	try {
+	    // OLD VERSION : V1
+	    XNode context = parser.evalNode("/sql-queryset");
+
+	    String namespace;
+	    String description;
+	    String version;
+
+	    boolean isNew = false;
+
+	    if (context != null) {
+		namespace = context.getStringAttribute("namespace");
+		description = context.getStringAttribute("description");
+		version = "1.0";
+	    } else {
+		// NEW VERSION : V2
+		isNew = true;
+		context = parser.evalNode("/sqlset");
+		namespace = context.evalString("name");
+		description = context.evalString("description");
+		version = "2.0";
+	    }
+
+	    log.debug(L10NUtils.format("003221", namespace, description, version));
+	    builderAssistant.setCurrentNamespace(namespace);
+
+	    if (isNew)
+		sqlElement(context.evalNodes("/sqlset/sql-query"));
+	    else
+		sqlElement(context.evalNodes("/sql-queryset/sql-query"));
+
+	} catch (Exception e) {
+	    throw new RuntimeException(L10NUtils.format("003222", e.getMessage()), e);
 	}
+    }
 
-	public XmlSqlBuilder(InputStream is, Configuration configuration) {
-		this(is, configuration, null);
-	}
-
-	public XmlSqlBuilder(Reader reader, Configuration configuration, String resource) {
-		super(configuration);
-		this.builderAssistant = new SqlBuilderAssistant(configuration, resource);
-		this.parser = new XPathParser(reader, false, configuration.getVariables(), null);
-	}
-
-	public XmlSqlBuilder(Reader reader, Configuration configuration) {
-		this(reader, configuration, null);
-	}
-
-	public void build() {
-		try {
-			// OLD VERSION : V1
-			XNode context = parser.evalNode("/sql-queryset");
-			
-			String namespace ;
-			String description ;
-			String version ;
-			
-			boolean isNew = false;
-			
-			if( context != null ){
-				namespace = context.getStringAttribute("namespace");
-				description = context.getStringAttribute("description");
-				version = "1.0";
-			}else{
-				// NEW VERSION : V2
-				isNew = true;
-				context = parser.evalNode("/sqlset");					
-				namespace = context.evalString("name");
-				description = context.evalString("description");
-				version = "2.0";
-			}
-
-			log.debug( 
-				L10NUtils.format("003221", namespace, description, version )					
-			);			
-			builderAssistant.setCurrentNamespace(namespace);		
-			
-			
-			if(isNew)
-				sqlElement(context.evalNodes("/sqlset/sql-query"));
-			else
-				sqlElement(context.evalNodes("/sql-queryset/sql-query"));
-			
-			
-		} catch (Exception e) {
-			throw new RuntimeException( L10NUtils.format("003222", e.getMessage()), e);
-		}
-	}
-
-	private void sqlElement(List<XNode> list) throws Exception {		
-		String currentNamespace = builderAssistant.getCurrentNamespace();
-		configuration.addStatementNodes(currentNamespace, list);		
-		log.debug(L10NUtils.format("003223", list.size()));
-	}
+    private void sqlElement(List<XNode> list) throws Exception {
+	String currentNamespace = builderAssistant.getCurrentNamespace();
+	configuration.addStatementNodes(currentNamespace, list);
+	log.debug(L10NUtils.format("003223", list.size()));
+    }
 
 }

@@ -25,52 +25,51 @@ import javax.sql.DataSource;
 
 public class DataSourceProxy implements DataSource {
 
-	private DataSource dataSource ;
+    private DataSource dataSource;
 
-	public DataSourceProxy(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
+    public DataSourceProxy(DataSource dataSource) {
+	this.dataSource = dataSource;
+    }
 
-	public Connection getConnection() throws SQLException {
-		return dataSource.getConnection();
-	}
+    public Connection getConnection() throws SQLException {
+	return dataSource.getConnection();
+    }
 
-	public Connection getConnection(String username, String password)
-			throws SQLException {
-		return dataSource.getConnection(username, password);
-	}
+    public Connection getConnection(String username, String password) throws SQLException {
+	return dataSource.getConnection(username, password);
+    }
 
-	public PrintWriter getLogWriter() throws SQLException {
-		return dataSource.getLogWriter();
-	}
+    public PrintWriter getLogWriter() throws SQLException {
+	return dataSource.getLogWriter();
+    }
 
-	public void setLogWriter(PrintWriter out) throws SQLException {
-		dataSource.setLogWriter(out);
-	}
+    public void setLogWriter(PrintWriter out) throws SQLException {
+	dataSource.setLogWriter(out);
+    }
 
-	public void setLoginTimeout(int seconds) throws SQLException {
-		dataSource.setLoginTimeout(seconds);
-	}
+    public void setLoginTimeout(int seconds) throws SQLException {
+	dataSource.setLoginTimeout(seconds);
+    }
 
-	public int getLoginTimeout() throws SQLException {
-		return dataSource.getLoginTimeout();
-	}
+    public int getLoginTimeout() throws SQLException {
+	return dataSource.getLoginTimeout();
+    }
 
-	@Override
-	public <T> T unwrap(Class<T> iface) throws SQLException {
-		// TODO 자동 생성된 메소드 스텁
-		return dataSource.unwrap(iface);
-	}
+    @Override
+    public <T> T unwrap(Class<T> iface) throws SQLException {
+	// TODO 자동 생성된 메소드 스텁
+	return dataSource.unwrap(iface);
+    }
 
-	@Override
-	public boolean isWrapperFor(Class<?> iface) throws SQLException {
-		return dataSource.isWrapperFor(iface);
-	}
+    @Override
+    public boolean isWrapperFor(Class<?> iface) throws SQLException {
+	return dataSource.isWrapperFor(iface);
+    }
 
-	@Override
-	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+    @Override
+    public Logger getParentLogger() throws SQLFeatureNotSupportedException {
 
-		return null;
-	}	
-	
+	return null;
+    }
+
 }

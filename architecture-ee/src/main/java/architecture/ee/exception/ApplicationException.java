@@ -19,79 +19,78 @@ import architecture.common.exception.CodeableException;
 import architecture.common.util.L10NUtils;
 
 /**
- * @author  donghyuck
+ * @author donghyuck
  */
 public class ApplicationException extends CodeableException {
-	
-	/**
-     * 
-     */
+
+    /**
+    * 
+    */
     private static final long serialVersionUID = -7905504453715998652L;
 
     public ApplicationException() {
-		super();
-	}
+	super();
+    }
 
-	public ApplicationException(int errorCode) {
-		super();
-		setErrorCode( errorCode );
-	}
+    public ApplicationException(int errorCode) {
+	super();
+	setErrorCode(errorCode);
+    }
 
-	public ApplicationException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-	
-	public ApplicationException(int errorCode, String msg, Throwable cause) {
-		
-		super(msg, cause);
-		setErrorCode( errorCode );
-	}
-	
+    public ApplicationException(String msg, Throwable cause) {
+	super(msg, cause);
+    }
 
-	public ApplicationException(String msg) {
-		super(msg);
-	}
+    public ApplicationException(int errorCode, String msg, Throwable cause) {
 
-	public ApplicationException(int errorCode, String msg) {
-		super(msg);
-		setErrorCode( errorCode );
-	}
-	
-	public ApplicationException(Throwable cause) {
-		super(cause);
-	}
+	super(msg, cause);
+	setErrorCode(errorCode);
+    }
 
-	public ApplicationException(int errorCode, Throwable cause) {
-		super(cause);
-		setErrorCode( errorCode );
+    public ApplicationException(String msg) {
+	super(msg);
+    }
+
+    public ApplicationException(int errorCode, String msg) {
+	super(msg);
+	setErrorCode(errorCode);
+    }
+
+    public ApplicationException(Throwable cause) {
+	super(cause);
+    }
+
+    public ApplicationException(int errorCode, Throwable cause) {
+	super(cause);
+	setErrorCode(errorCode);
+    }
+
+    public static ApplicationException createApplicationException(Throwable cause, int code, Object... args) {
+	if (code < 60000) {
+	    String codeString = L10NUtils.codeToString(code);
+	    String msg = L10NUtils.format(codeString, args);
+	    ApplicationException e = new ApplicationException(msg, cause);
+	    e.setErrorCode(code);
+	    return e;
+	} else {
+	    ApplicationException e = new ApplicationException(cause);
+	    e.setErrorCode(code);
+	    return e;
 	}
+    }
 
-	public static ApplicationException createApplicationException(Throwable cause, int code, Object...args){
-			if( code < 60000){
-				String codeString = L10NUtils.codeToString(code);
-				String msg = L10NUtils.format(codeString, args);
-				ApplicationException e = new ApplicationException(msg, cause);
-				e.setErrorCode(code);
-				return e;
-			} else {
-				ApplicationException e = new ApplicationException(cause);
-				e.setErrorCode(code);
-				return e;
-			}
-  }
-
-public static ApplicationException createApplicationException(Throwable cause, int code){
-		if( code < 60000){
-			String codeString = L10NUtils.codeToString(code);
-			String msg = L10NUtils.getMessage(codeString);
-			ApplicationException e = new ApplicationException(msg, cause);
-			e.setErrorCode(code);
-			return e;
-		} else {
-			ApplicationException e = new ApplicationException(cause);
-			e.setErrorCode(code);
-			return e;
-		}
-}
+    public static ApplicationException createApplicationException(Throwable cause, int code) {
+	if (code < 60000) {
+	    String codeString = L10NUtils.codeToString(code);
+	    String msg = L10NUtils.getMessage(codeString);
+	    ApplicationException e = new ApplicationException(msg, cause);
+	    e.setErrorCode(code);
+	    return e;
+	} else {
+	    ApplicationException e = new ApplicationException(cause);
+	    e.setErrorCode(code);
+	    return e;
+	}
+    }
 
 }
