@@ -42,107 +42,106 @@ import architecture.user.util.CompanyUtils;
 
 public class AuthenticationProviderFactoryImpl implements AuthenticationProviderFactory.Implementation {
 
-	private static final Log log = LogFactory.getLog(AuthenticationProviderFactoryImpl.class);
-	
-	private SecurityContextAuthenticationProvider instance = new SecurityContextAuthenticationProvider();
-	
-	public AuthenticationProvider getSecurityContextAuthenticationProvider() {
-		return instance;
+    private static final Log log = LogFactory.getLog(AuthenticationProviderFactoryImpl.class);
+
+    private SecurityContextAuthenticationProvider instance = new SecurityContextAuthenticationProvider();
+
+    public AuthenticationProvider getSecurityContextAuthenticationProvider() {
+	return instance;
+    }
+
+    static class SecurityContextAuthenticationProvider implements AuthenticationProvider {
+
+	public Authentication getAuthentication() {
+	    SecurityContext context = SecurityContextHolder.getContext();
+	    Authentication authen = context.getAuthentication();
+	    return authen;
 	}
 
-	static class SecurityContextAuthenticationProvider implements AuthenticationProvider {
-		
-		public Authentication getAuthentication(){
-			SecurityContext context = SecurityContextHolder.getContext();
-			Authentication authen = context.getAuthentication();		
-			return authen;
-		}
-
-		public User getUser() {
-			try {
-				Authentication authen = getAuthentication();	
-				Object obj = authen.getPrincipal();
-				if ( obj instanceof ExtendedUserDetails )
-					return ((ExtendedUserDetails)obj).getUser();
-			} catch (Exception ignore) {
-			}			
-			return  createAnonymousUser();
-		}
-
-		public AuthToken getAuthToken() {		
-			try {
-				Authentication authen = getAuthentication();	
-				Object obj = authen.getPrincipal();
-				if ( obj instanceof AuthToken )
-					return (AuthToken)obj;
-			} catch (Exception ignore) {
-			}		
-			return createAnonymousUser();
-		}
-		
-
-		public boolean isSystemAdmin() {
-				return false;
-		}
-		
-		protected AnonymousUser createAnonymousUser(){
-			
-			if(!CompanyUtils.isAllowedCompanyForAnonymous()){
-				return new AnonymousUser( new CompanyTemplate() );				
-			}
-			
-			if( CompanyUtils.isAllowedGetByDomainName() ){
-				try {
-					String localName = getLocalName();					
-					if(log.isDebugEnabled()){
-						log.debug("isValidIpAddress:" + TextUtils.isValidIpAddress(localName) );			
-						log.debug("isValidHostname:" + TextUtils.isValidHostname(localName) );		
-					}	
-					if( StringUtils.isNotEmpty(localName) && !TextUtils.isValidIpAddress(localName) && TextUtils.isValidHostname(localName)){
-						Company company =CompanyUtils.getCompanyByDomainName(localName);	
-						return new AnonymousUser( company );
-					}
-				} catch (Exception ignore) {
-					log.warn(ignore);
-				}	
-			}
-			
-						
-			try {
-				return new AnonymousUser( CompanyUtils.getDefaultCompany() );
-			} catch (Exception e) {
-				log.warn(e);
-				return new AnonymousUser();
-			}			
-		}
-		
-		protected String getLocalName(){
-			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-			return request.getLocalName();
-		}
-
-		private boolean isGranted(String role) {
-
-			Authentication auth = getAuthentication();
-			if ((auth == null) || (auth.getPrincipal() == null)) {
-				return false;
-			}
-			Collection<? extends GrantedAuthority> authorities = auth
-					.getAuthorities();
-			if (authorities == null) {
-				return false;
-			}
-			for (GrantedAuthority grantedAuthority : authorities) {
-				if (role.equals(grantedAuthority.getAuthority())) {
-					return true;
-				}
-			}
-			return false;
-		}
-
-		public boolean isUserInRole(String role) {
-			return isGranted(role);
-		}
-
+	public User getUser() {
+	    try {
+		Authentication authen = getAuthentication();
+		Object obj = authen.getPrincipal();
+		if (obj instanceof ExtendedUserDetails)
+		    return ((ExtendedUserDetails) obj).getUser();
+	    } catch (Exception ignore) {
+	    }
+	    return createAnonymousUser();
 	}
+
+	public AuthToken getAuthToken() {
+	    try {
+		Authentication authen = getAuthentication();
+		Object obj = authen.getPrincipal();
+		if (obj instanceof AuthToken)
+		    return (AuthToken) obj;
+	    } catch (Exception ignore) {
+	    }
+	    return createAnonymousUser();
+	}
+
+	public boolean isSystemAdmin() {
+	    return false;
+	}
+
+	protected AnonymousUser createAnonymousUser() {
+
+	    if (!CompanyUtils.isAllowedCompanyForAnonymous()) {
+		return new AnonymousUser(new CompanyTemplate());
+	    }
+
+	    if (CompanyUtils.isAllowedGetByDomainName()) {
+		try {
+		    String localName = getLocalName();
+		    if (log.isDebugEnabled()) {
+			log.debug("isValidIpAddress:" + TextUtils.isValidIpAddress(localName));
+			log.debug("isValidHostname:" + TextUtils.isValidHostname(localName));
+		    }
+		    if (StringUtils.isNotEmpty(localName) && !TextUtils.isValidIpAddress(localName)
+			    && TextUtils.isValidHostname(localName)) {
+			Company company = CompanyUtils.getCompanyByDomainName(localName);
+			return new AnonymousUser(company);
+		    }
+		} catch (Exception ignore) {
+		    log.warn(ignore);
+		}
+	    }
+
+	    try {
+		return new AnonymousUser(CompanyUtils.getDefaultCompany());
+	    } catch (Exception e) {
+		log.warn(e);
+		return new AnonymousUser();
+	    }
+	}
+
+	protected String getLocalName() {
+	    HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+		    .getRequest();
+	    return request.getLocalName();
+	}
+
+	private boolean isGranted(String role) {
+
+	    Authentication auth = getAuthentication();
+	    if ((auth == null) || (auth.getPrincipal() == null)) {
+		return false;
+	    }
+	    Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+	    if (authorities == null) {
+		return false;
+	    }
+	    for (GrantedAuthority grantedAuthority : authorities) {
+		if (role.equals(grantedAuthority.getAuthority())) {
+		    return true;
+		}
+	    }
+	    return false;
+	}
+
+	public boolean isUserInRole(String role) {
+	    return isGranted(role);
+	}
+
+    }
 }

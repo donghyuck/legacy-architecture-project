@@ -40,7 +40,7 @@ public interface UserDao {
     public abstract int getAuthenticatedUserCount();
 
     public abstract List<Long> getUserIdsWithStatuses(int status[]);
-    
+
     public abstract int getRecentUserCount(Date date);
 
     /**
@@ -49,7 +49,7 @@ public interface UserDao {
      * @return
      */
     public abstract List<User> findUsers(String nameOrEmail);
-    
+
     /**
      * 
      * @param nameOrEmail
@@ -58,34 +58,34 @@ public interface UserDao {
      * @return
      */
     public abstract List<User> findUsers(String nameOrEmail, int startIndex, int numResults);
-    
-    public abstract int getFoundUserCount(String nameOrEmail) ;
-    
+
+    public abstract int getFoundUserCount(String nameOrEmail);
+
     public abstract int getTotalUserCount();
-    
+
     public abstract List<User> getAllUsers();
 
     public abstract List<User> getAllUsers(int startIndex, int numResults);
 
-	public abstract int getUserCount(Company company);
-	
-	public abstract List<User> getUsers(Company company);
+    public abstract int getUserCount(Company company);
 
-	public abstract List<User> getUsers(Company company, int startIndex, int numResults);	
-	
-	public abstract List<User> findUsers(Company company, String nameOrEmail);
-	
-	public abstract List<User> findUsers(Company company, String nameOrEmail, int startIndex, int numResults);
-	
-	public abstract int getFoundUserCount(Company company, String nameOrEmail);
-	
-	public void switchCompanies(long  companyId,  Set<Long> users );
+    public abstract List<User> getUsers(Company company);
 
-	
-	public abstract List<Long> findUserIds(Company company, Group group, String nameOrEmail);
-	
-	public abstract List<Long> findUserIds(Company company, Group group, String nameOrEmail, int startIndex, int numResults);
-	
-	public abstract int getFoundUserCount(Company company, Group group, String nameOrEmail);
-	
+    public abstract List<User> getUsers(Company company, int startIndex, int numResults);
+
+    public abstract List<User> findUsers(Company company, String nameOrEmail);
+
+    public abstract List<User> findUsers(Company company, String nameOrEmail, int startIndex, int numResults);
+
+    public abstract int getFoundUserCount(Company company, String nameOrEmail);
+
+    public void switchCompanies(long companyId, Set<Long> users);
+
+    public abstract List<Long> findUserIds(Company company, Group group, String nameOrEmail);
+
+    public abstract List<Long> findUserIds(Company company, Group group, String nameOrEmail, int startIndex,
+	    int numResults);
+
+    public abstract int getFoundUserCount(Company company, Group group, String nameOrEmail);
+
 }

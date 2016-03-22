@@ -21,21 +21,21 @@ import architecture.ee.util.ApplicationHelper;
 import architecture.user.security.simple.authentication.AuthProvider;
 
 public class AuthFactoryImpl implements architecture.user.security.simple.authentication.AuthFactory.Implementation {
-	
-	public AuthProvider getAuthProvider() {
-		return ApplicationHelper.getComponent(AuthProvider.class);
-	}
 
-	public boolean isPlainSupported() {
-		return getAuthProvider().isPlainSupported();
-	}
+    public AuthProvider getAuthProvider() {
+	return ApplicationHelper.getComponent(AuthProvider.class);
+    }
 
-	public boolean isDigestSupported() {
-		return getAuthProvider().isDigestSupported();
-	}
+    public boolean isPlainSupported() {
+	return getAuthProvider().isPlainSupported();
+    }
 
-	public AuthToken getAuthToken(String username, String password) throws UnAuthorizedException {
-		return getAuthProvider().authenticateAndGetAuthToken(username, password);
-	}
+    public boolean isDigestSupported() {
+	return getAuthProvider().isDigestSupported();
+    }
+
+    public AuthToken getAuthToken(String username, String password) throws UnAuthorizedException {
+	return getAuthProvider().authenticateAndGetAuthToken(username, password);
+    }
 
 }

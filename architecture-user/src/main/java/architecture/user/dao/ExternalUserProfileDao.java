@@ -21,12 +21,12 @@ import architecture.common.user.User;
 
 public interface ExternalUserProfileDao {
 
-	public abstract Map<Long, Object> getProfile(User user);
-	
-	public abstract Map<String, Object> getProfile(long userId);
-	
-	public abstract void setProfile(User user, Map<String, Object> profile);
-	
-	public abstract void setProfile(long userId, Map<String, Object> profile);
-	
+    public abstract Map<Long, Object> getProfile(User user);
+
+    public abstract Map<String, Object> getProfile(long userId);
+
+    public abstract void setProfile(User user, Map<String, Object> profile);
+
+    public abstract void setProfile(long userId, Map<String, Object> profile);
+
 }

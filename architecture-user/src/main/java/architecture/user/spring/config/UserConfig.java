@@ -15,11 +15,9 @@
  */
 package architecture.user.spring.config;
 
-
 public class UserConfig {
 
-	public UserConfig() {
-	}
-
+    public UserConfig() {
+    }
 
 }

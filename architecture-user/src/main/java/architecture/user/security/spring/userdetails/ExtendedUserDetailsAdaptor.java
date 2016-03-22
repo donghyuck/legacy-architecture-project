@@ -26,65 +26,61 @@ import architecture.common.user.authentication.AnonymousUser;
 /**
  * 
  * 
- * @author  <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
+ * @author <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
  */
 public class ExtendedUserDetailsAdaptor implements UserDetails {
 
-	private final User user ;
-	
-	public ExtendedUserDetailsAdaptor(User user) {
-        if(user == null)
-            this.user = new AnonymousUser();
-        else
-            this.user = user;
-	}
+    private final User user;
 
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
-	}
-
-	public String getPassword() {
-		return user.getPassword();
-	}
-
-	public String getUsername() {
-		return user.getUsername();
-	}
-
-	public boolean isAccountNonExpired() {
-		return user.isEnabled();
-	}
-
-	public boolean isAccountNonLocked() {
-		return user.isEnabled();
-	}
-
-	public boolean isCredentialsNonExpired() {
-		return user.isEnabled();
-	}
-
-	public boolean isEnabled() {
-		return user.isEnabled();
-	}
-
-	
-	/** =========================================== **/
-	/** INTERNAL PROPOSE METHODS                                         **/
-	/** =========================================== **/
-	
-    public User getUser()
-    {
-        return user;
+    public ExtendedUserDetailsAdaptor(User user) {
+	if (user == null)
+	    this.user = new AnonymousUser();
+	else
+	    this.user = user;
     }
 
-    public long getUserId()
-    {
-        return user.getUserId();
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+	return null;
     }
 
-    public long getCreationDate()
-    {
-        return user.getCreationDate() != null ? user.getCreationDate().getTime() : -1L;
+    public String getPassword() {
+	return user.getPassword();
     }
-    
+
+    public String getUsername() {
+	return user.getUsername();
+    }
+
+    public boolean isAccountNonExpired() {
+	return user.isEnabled();
+    }
+
+    public boolean isAccountNonLocked() {
+	return user.isEnabled();
+    }
+
+    public boolean isCredentialsNonExpired() {
+	return user.isEnabled();
+    }
+
+    public boolean isEnabled() {
+	return user.isEnabled();
+    }
+
+    /** =========================================== **/
+    /** INTERNAL PROPOSE METHODS **/
+    /** =========================================== **/
+
+    public User getUser() {
+	return user;
+    }
+
+    public long getUserId() {
+	return user.getUserId();
+    }
+
+    public long getCreationDate() {
+	return user.getCreationDate() != null ? user.getCreationDate().getTime() : -1L;
+    }
+
 }

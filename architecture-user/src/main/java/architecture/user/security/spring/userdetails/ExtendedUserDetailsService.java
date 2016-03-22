@@ -40,75 +40,75 @@ import architecture.user.RoleManager;
 
 public class ExtendedUserDetailsService implements UserDetailsService, EventSource {
 
-	private Log log = LogFactory.getLog( getClass() );
-	
-	private UserManager userManager;
-	private RoleManager roleManager;
-	
-	public void setRoleManager(RoleManager roleManager) {
-		this.roleManager = roleManager;
-	}
+    private Log log = LogFactory.getLog(getClass());
 
-	private EventPublisher eventPublisher;
-	
-	private boolean caseInsensitive;
-	
-	public ExtendedUserDetailsService() {
-		caseInsensitive = true;
-	}
-	
-	public ExtendedUserDetailsService(boolean caseInsensitive) {
-		this.caseInsensitive = caseInsensitive;
-	}
+    private UserManager userManager;
+    private RoleManager roleManager;
 
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
-	}
-
-    public void setEventPublisher(EventPublisher eventPublisher)
-    {
-        this.eventPublisher = eventPublisher;
+    public void setRoleManager(RoleManager roleManager) {
+	this.roleManager = roleManager;
     }
-    
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
-		User user = userManager.getUser(new UserTemplate(username), caseInsensitive);
-		if( user == null){
-			String msg = L10NUtils.format( "005011", username );			
-			if( log.isInfoEnabled())
-				log.info(msg);			
-			throw new UsernameNotFoundException(msg);
-		}else{
-			return toUserDetails(user);
-		}
+
+    private EventPublisher eventPublisher;
+
+    private boolean caseInsensitive;
+
+    public ExtendedUserDetailsService() {
+	caseInsensitive = true;
+    }
+
+    public ExtendedUserDetailsService(boolean caseInsensitive) {
+	this.caseInsensitive = caseInsensitive;
+    }
+
+    public void setUserManager(UserManager userManager) {
+	this.userManager = userManager;
+    }
+
+    public void setEventPublisher(EventPublisher eventPublisher) {
+	this.eventPublisher = eventPublisher;
+    }
+
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+	User user = userManager.getUser(new UserTemplate(username), caseInsensitive);
+	if (user == null) {
+	    String msg = L10NUtils.format("005011", username);
+	    if (log.isInfoEnabled())
+		log.info(msg);
+	    throw new UsernameNotFoundException(msg);
+	} else {
+	    return toUserDetails(user);
+	}
+    }
+
+    protected UserDetails toUserDetails(User user) {
+	if (eventPublisher != null) {
+
 	}
 
-	protected UserDetails toUserDetails(User user){
-		if(eventPublisher != null){
-			
-		}		
-		
-		ExtendedUserDetails userDetails = new ExtendedUserDetails(user, getFinalUserAuthority(user) );
-		return userDetails;
+	ExtendedUserDetails userDetails = new ExtendedUserDetails(user, getFinalUserAuthority(user));
+	return userDetails;
+    }
+
+    protected List<GrantedAuthority> getFinalUserAuthority(User user) {
+	ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();
+	String authority = setupProperties
+		.get(architecture.ee.util.ApplicationConstants.SECURITY_AUTHENTICATION_AUTHORITY_PROP_NAME);
+	long userId = user.getUserId();
+	List<Role> userRoles = roleManager.getFinalUserRoles(userId);
+	List<String> roles = new ArrayList<String>();
+	for (Role role : userRoles) {
+	    roles.add(role.getName());
 	}
-	
-	protected List<GrantedAuthority> getFinalUserAuthority(User user){
-		ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();				
-		String authority = setupProperties.get(architecture.ee.util.ApplicationConstants.SECURITY_AUTHENTICATION_AUTHORITY_PROP_NAME);
-		long userId = user.getUserId();		
-		List<Role> userRoles = roleManager.getFinalUserRoles(userId) ;
-		List<String> roles = new ArrayList<String>();		
-		for( Role role : userRoles ){
-			roles.add( role.getName() );
-		}		
-		log.debug( " authority:" + authority );		
-		if( !architecture.common.util.StringUtils.isEmpty(authority) ){
-			authority = authority.trim();			
-			if (!roles.contains(authority)){
-				roles.add(authority);
-			}
-		}				
-		return AuthorityUtils.createAuthorityList(StringUtils.toStringArray(roles));
+	log.debug(" authority:" + authority);
+	if (!architecture.common.util.StringUtils.isEmpty(authority)) {
+	    authority = authority.trim();
+	    if (!roles.contains(authority)) {
+		roles.add(authority);
+	    }
 	}
-	
+	return AuthorityUtils.createAuthorityList(StringUtils.toStringArray(roles));
+    }
+
 }

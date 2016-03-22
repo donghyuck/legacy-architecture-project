@@ -17,9 +17,9 @@ package architecture.user.security.spring.authentication;
 
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 
-public class ExternalAuthenticationProvider extends DaoAuthenticationProvider  {
+public class ExternalAuthenticationProvider extends DaoAuthenticationProvider {
 
-	public ExternalAuthenticationProvider() {
-	}
+    public ExternalAuthenticationProvider() {
+    }
 
 }

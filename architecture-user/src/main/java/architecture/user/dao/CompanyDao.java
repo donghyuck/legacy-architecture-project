@@ -22,68 +22,66 @@ import architecture.common.user.DomainMatcher;
 
 public interface CompanyDao {
 
-	public void createCompany(Company company);
-	
-	public Company getCompanyByName(String name, boolean caseInsensitive) ;
-	
-	public Company getCompanyById(long companyId);
-	
-	public void updateCompany(Company company);
-	
-	//public Company getCompanyByDomainName(String domainName);
+    public void createCompany(Company company);
 
-	public List<DomainMatcher>  getCompanyDomainMatchers();
-	
-	/**
-	 * 제공되지 않는 기능
-	 * @return
-	 */
-	public List<Company> getCompanies( );
-	
-	/**
-	 * 제공되지 않는 기능
-	 * @return
-	 */
-	public List<Company> getCompanies( int start, int maxResults );
-	
-	
-	public int getCompanyCount();
-	
-	
-	public List<Long> getAllCompanyIds() ;
+    public Company getCompanyByName(String name, boolean caseInsensitive);
 
-	
-	public abstract List<Long> getCompanyIds(int start, int maxResults);	
-		
-	
-	/**
-	 * Company 에 해당하는 모든 그룹 수를 리턴한다.
-	 * @return
-	 */
-	public int getCompanyGroupCount(long companyId);
-	
-	
-	/**
-	 * Company 에 해당하는 모든 그룹 아이디를 리턴한다.
-	 * 
-	 * @return
-	 */
-	public abstract List<Long> getCompanyGroupIds(long companyId);
-	
-	/**
-	 * Company 에 해당하는 모든 그룹 아이디를 리턴한다.
-	 * 
-	 * @return
-	 */	
-	public abstract List<Long> getCompanyGroupIds(long companyId, int start, int maxResults);		
+    public Company getCompanyById(long companyId);
 
-	/*
-	public int getCompanyUserCount(long companyId);
-	
-	public abstract List<Long> getCompanyUserIds(long companyId);
-	
-	public abstract List<Long> getCompanyUserIds(long companyId, int start, int maxResults);
-	*/
-	
-	
+    public void updateCompany(Company company);
+
+    // public Company getCompanyByDomainName(String domainName);
+
+    public List<DomainMatcher> getCompanyDomainMatchers();
+
+    /**
+     * 제공되지 않는 기능
+     * 
+     * @return
+     */
+    public List<Company> getCompanies();
+
+    /**
+     * 제공되지 않는 기능
+     * 
+     * @return
+     */
+    public List<Company> getCompanies(int start, int maxResults);
+
+    public int getCompanyCount();
+
+    public List<Long> getAllCompanyIds();
+
+    public abstract List<Long> getCompanyIds(int start, int maxResults);
+
+    /**
+     * Company 에 해당하는 모든 그룹 수를 리턴한다.
+     * 
+     * @return
+     */
+    public int getCompanyGroupCount(long companyId);
+
+    /**
+     * Company 에 해당하는 모든 그룹 아이디를 리턴한다.
+     * 
+     * @return
+     */
+    public abstract List<Long> getCompanyGroupIds(long companyId);
+
+    /**
+     * Company 에 해당하는 모든 그룹 아이디를 리턴한다.
+     * 
+     * @return
+     */
+    public abstract List<Long> getCompanyGroupIds(long companyId, int start, int maxResults);
+
+    /*
+     * public int getCompanyUserCount(long companyId);
+     * 
+     * public abstract List<Long> getCompanyUserIds(long companyId);
+     * 
+     * public abstract List<Long> getCompanyUserIds(long companyId, int start,
+     * int maxResults);
+     */
+
 }

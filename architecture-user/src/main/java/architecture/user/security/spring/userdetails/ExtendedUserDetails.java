@@ -28,40 +28,39 @@ import architecture.common.user.authentication.AuthToken;
 @SuppressWarnings("serial")
 public class ExtendedUserDetails extends User implements AuthToken {
 
-	@JsonIgnore
-	private final architecture.common.user.User user ;
+    @JsonIgnore
+    private final architecture.common.user.User user;
 
-	public ExtendedUserDetails(architecture.common.user.User user) {
-		super(user.getUsername(), user.getPasswordHash(), user.isEnabled(), user.isEnabled(), true, user.isEnabled(), Collections.EMPTY_LIST );
-		this.user = user;
-	}
+    public ExtendedUserDetails(architecture.common.user.User user) {
+	super(user.getUsername(), user.getPasswordHash(), user.isEnabled(), user.isEnabled(), true, user.isEnabled(),
+		Collections.EMPTY_LIST);
+	this.user = user;
+    }
 
-	public ExtendedUserDetails(architecture.common.user.User user, List<GrantedAuthority> authorities ) {
-		super(user.getUsername(), user.getPasswordHash(), user.isEnabled(), user.isEnabled(), true, user.isEnabled(), authorities );
-		this.user = user;
-	}
-	
-	public boolean isAnonymous() {
-		return user.isAnonymous();
-	}
-    
+    public ExtendedUserDetails(architecture.common.user.User user, List<GrantedAuthority> authorities) {
+	super(user.getUsername(), user.getPasswordHash(), user.isEnabled(), user.isEnabled(), true, user.isEnabled(),
+		authorities);
+	this.user = user;
+    }
+
+    public boolean isAnonymous() {
+	return user.isAnonymous();
+    }
+
     /** =========================================== **/
-	/** INTERNAL PROPOSE METHODS                                         **/
-	/** =========================================== **/
-	
-    public architecture.common.user.User getUser()
-	{
-    	return user;
-	}
+    /** INTERNAL PROPOSE METHODS **/
+    /** =========================================== **/
 
-    public long getUserId()
-    {
-        return user.getUserId();
+    public architecture.common.user.User getUser() {
+	return user;
     }
 
-    public long getCreationDate()
-    {
-        return user.getCreationDate() != null ? user.getCreationDate().getTime() : -1L;
+    public long getUserId() {
+	return user.getUserId();
     }
-    
+
+    public long getCreationDate() {
+	return user.getCreationDate() != null ? user.getCreationDate().getTime() : -1L;
+    }
+
 }

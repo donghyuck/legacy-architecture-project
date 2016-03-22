@@ -5,67 +5,65 @@ import java.util.Date;
 import architecture.common.lifecycle.event.Event;
 
 public class PermissionEvent extends Event {
-	public enum Type {
+    public enum Type {
 
-		ADDED,
+	ADDED,
 
-		REMOVED
-	};
-	
-	private Type type;
-	
-	private Date date;
-	
-	private long userId;
-	
-	private long groupId;
-	
-	private long permission;
-	
-	
-	public PermissionEvent(Object source, Type type) {
-		super(source);
-		this.type = type;
-		date = new Date();		
-	}
+	REMOVED
+    };
 
-	/**
-	 * @return date
-	 */
-	public Date getDate() {
-		return date;
-	}
+    private Type type;
 
-	/**
-	 * @return type
-	 */
-	public Type getType() {
-		return type;
-	}
+    private Date date;
 
-	public long getUserId() {
-		return userId;
-	}
+    private long userId;
 
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
+    private long groupId;
 
-	public long getGroupId() {
-		return groupId;
-	}
+    private long permission;
 
-	public void setGroupId(long groupId) {
-		this.groupId = groupId;
-	}
+    public PermissionEvent(Object source, Type type) {
+	super(source);
+	this.type = type;
+	date = new Date();
+    }
 
-	public long getPermission() {
-		return permission;
-	}
+    /**
+     * @return date
+     */
+    public Date getDate() {
+	return date;
+    }
 
-	public void setPermission(long permission) {
-		this.permission = permission;
-	}
-	
-	
+    /**
+     * @return type
+     */
+    public Type getType() {
+	return type;
+    }
+
+    public long getUserId() {
+	return userId;
+    }
+
+    public void setUserId(long userId) {
+	this.userId = userId;
+    }
+
+    public long getGroupId() {
+	return groupId;
+    }
+
+    public void setGroupId(long groupId) {
+	this.groupId = groupId;
+    }
+
+    public long getPermission() {
+	return permission;
+    }
+
+    public void setPermission(long permission) {
+	this.permission = permission;
+    }
+
 }

@@ -29,26 +29,27 @@ import architecture.common.user.authentication.AnonymousUser;
 import architecture.user.security.spring.userdetails.ExtendedUserDetails;
 
 public class ActiveUserWebArgumentResolver implements WebArgumentResolver {
-	
-	private Log log = LogFactory.getLog(getClass());	
-	
-	private static final ExtendedUserDetails EMPTY_EXTENDED_USER_DETAILS = new ExtendedUserDetails( new AnonymousUser() );
-	
-	public Object resolveArgument(MethodParameter methodParameter,NativeWebRequest webRequest) {		
-		Annotation[] annotations = methodParameter.getParameterAnnotations();
-		if (methodParameter.getParameterType().equals(org.springframework.security.core.userdetails.User.class) || methodParameter.getParameterType().equals(architecture.user.security.spring.userdetails.ExtendedUserDetails.class)){
-			for (Annotation annotation : annotations) {			
-				if (ActiveUser.class.isInstance(annotation)) {			
-					Principal principal = webRequest.getUserPrincipal();
-					if( principal == null )
-					{
-						return  EMPTY_EXTENDED_USER_DETAILS;
-					}else{						
-						return ((Authentication) principal).getPrincipal();
-					}					
-				}
-			}
+
+    private Log log = LogFactory.getLog(getClass());
+
+    private static final ExtendedUserDetails EMPTY_EXTENDED_USER_DETAILS = new ExtendedUserDetails(new AnonymousUser());
+
+    public Object resolveArgument(MethodParameter methodParameter, NativeWebRequest webRequest) {
+	Annotation[] annotations = methodParameter.getParameterAnnotations();
+	if (methodParameter.getParameterType().equals(org.springframework.security.core.userdetails.User.class)
+		|| methodParameter.getParameterType()
+			.equals(architecture.user.security.spring.userdetails.ExtendedUserDetails.class)) {
+	    for (Annotation annotation : annotations) {
+		if (ActiveUser.class.isInstance(annotation)) {
+		    Principal principal = webRequest.getUserPrincipal();
+		    if (principal == null) {
+			return EMPTY_EXTENDED_USER_DETAILS;
+		    } else {
+			return ((Authentication) principal).getPrincipal();
+		    }
 		}
-		return WebArgumentResolver.UNRESOLVED;
+	    }
 	}
+	return WebArgumentResolver.UNRESOLVED;
+    }
 }

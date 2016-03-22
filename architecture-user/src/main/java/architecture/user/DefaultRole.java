@@ -23,79 +23,80 @@ import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
 
+public class DefaultRole extends BaseModelObjectSupport implements Role {
 
-public class DefaultRole extends BaseModelObjectSupport  implements Role  {
+    private Long roleId;
 
-	private Long roleId;
-	
-	private int mask;
-	
-	private String description;
-	
-	@JsonIgnore
-	public Serializable getPrimaryKeyObject() {
-		return getRoleId();
+    private int mask;
+
+    private String description;
+
+    @JsonIgnore
+    public Serializable getPrimaryKeyObject() {
+	return getRoleId();
+    }
+
+    @JsonIgnore
+    public int getModelObjectType() {
+	return ModelTypeFactory.getTypeIdFromCode("ROLE");
+    }
+
+    @JsonIgnore
+    public int getCachedSize() {
+	return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName()) + CacheSizes.sizeOfString(getDescription())
+		+ CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate();
+    }
+
+    /**
+     * @return description
+     */
+    public String getDescription() {
+	return description;
+    }
+
+    /**
+     * @param description
+     *            설정할 description
+     */
+    public void setDescription(String description) {
+	this.description = description;
+    }
+
+    public long getRoleId() {
+	return roleId;
+    }
+
+    public void setRoleId(long roleId) {
+	this.roleId = roleId;
+    }
+
+    public int getMask() {
+	return mask;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (obj instanceof Role) {
+	    if (((Role) obj).getRoleId() == this.roleId)
+		return true;
+	    else
+		return false;
 	}
+	return super.equals(obj);
+    }
 
-	@JsonIgnore
-	public int getModelObjectType() {
-		return ModelTypeFactory.getTypeIdFromCode("ROLE");
-	}
+    @Override
+    public String toString() {
+	StringBuilder sb = new StringBuilder();
+	sb.append("User [ roleId=");
+	sb.append(roleId);
+	sb.append(", name=").append(getName());
+	sb.append("]");
+	return sb.toString();
+    }
 
-	@JsonIgnore
-	public int getCachedSize() {
-		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName()) + CacheSizes.sizeOfString( getDescription() ) + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate() ;
-	}
-
-	/**
-	 * @return description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * @param description 설정할 description
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public long getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(long roleId) {
-		this.roleId = roleId;
-	}
-	public int getMask() {
-		return mask;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if( obj instanceof Role){
-			if( ((Role)obj).getRoleId() == this.roleId )
-				return true;
-			else 
-				return false;
-		}
-		return super.equals(obj);
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("User [ roleId=");
-		sb.append(roleId);
-		sb.append(", name=").append(getName());
-		sb.append("]");
-		return sb.toString();
-	}
-
-	public void setMask(int mask) {
-		this.mask = mask;
-	}
-
+    public void setMask(int mask) {
+	this.mask = mask;
+    }
 
 }

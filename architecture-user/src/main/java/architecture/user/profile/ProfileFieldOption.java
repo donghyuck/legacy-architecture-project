@@ -4,43 +4,43 @@ import architecture.common.model.ModelObject;
 
 public interface ProfileFieldOption extends ModelObject {
 
-	/**
-	 * @return
-	 */
-	public long getFieldId();
+    /**
+     * @return
+     */
+    public long getFieldId();
 
-	/**
-	 * @param fieldID
-	 */
-	public void setFieldId(long fieldID);
+    /**
+     * @param fieldID
+     */
+    public void setFieldId(long fieldID);
 
-	/**
-	 * @return
-	 */
-	public String getValue();
+    /**
+     * @return
+     */
+    public String getValue();
 
-	/**
-	 * @param value
-	 */
-	public void setValue(String value);
+    /**
+     * @param value
+     */
+    public void setValue(String value);
 
-	/**
-	 * @return
-	 */
-	public int getIndex();
+    /**
+     * @return
+     */
+    public int getIndex();
 
-	/**
-	 * @param index
-	 */
-	public void setIndex(int index);
+    /**
+     * @param index
+     */
+    public void setIndex(int index);
 
-	/**
-	 * @return
-	 */
-	public boolean isDefaultOption();
+    /**
+     * @return
+     */
+    public boolean isDefaultOption();
 
-	/**
-	 * @param defaultOption
-	 */
-	public void setDefaultOption(boolean defaultOption);
+    /**
+     * @param defaultOption
+     */
+    public void setDefaultOption(boolean defaultOption);
 }

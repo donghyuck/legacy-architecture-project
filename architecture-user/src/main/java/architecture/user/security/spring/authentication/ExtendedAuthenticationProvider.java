@@ -35,68 +35,61 @@ import architecture.user.security.spring.userdetails.ExtendedUserDetails;
 
 public class ExtendedAuthenticationProvider extends DaoAuthenticationProvider {
 
-	private Log log = LogFactory.getLog(getClass());
-	
-	protected UserManager userManager;
+    private Log log = LogFactory.getLog(getClass());
 
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
-	}
-	
-	@Override
-	protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication)
-			throws AuthenticationException {
-		
-		if(authentication.getCredentials() == null)
-			throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
-        
-		// 라이선스 검사.	
-		
-		super.additionalAuthenticationChecks(userDetails, authentication);		
-		ExtendedUserDetails user ;		
-		try {
-			user = (ExtendedUserDetails) userDetails;
-		} catch (Exception e) {
-			log.error("Unable to coerce user detail to ExtendedUserDetails.");
-            throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));        
-		}		
-		State state = ApplicationHelper.getState(); 		
-		log.debug(state);
-		try {
-			if(user.getUser() != null){
-				UserTemplate template = new UserTemplate(user.getUser());
-				template.setLastLoggedIn(new Date());				
-				userManager.updateUser(template);	
-			}		
-		} catch (Exception e) {
-			log.warn( L10NUtils.format("005016", user ), e );
-		}		
-	}
+    protected UserManager userManager;
 
-	@Override
-	public Authentication authenticate(Authentication authentication)
-			throws AuthenticationException {
-        try
-        {
-            return super.authenticate(authentication);
-        }
-        catch(AuthenticationException e)
-        {
-        	if(log.isInfoEnabled())
-	            log.info(
-	            		L10NUtils.format("005012", authentication != null ? authentication.getName() : "<unknown>", e.getMessage() )
-	            );      
-        	if(log.isTraceEnabled())
-        		log.trace(L10NUtils.getMessage("005013"), e);            
-            throw e;
-        }
-        catch(RuntimeException e)
-        {
-            log.warn(
-            		L10NUtils.format("005014", authentication != null ? authentication.getName() : "<unknown>" ), e
-            );
-            throw e;
-        }
+    public void setUserManager(UserManager userManager) {
+	this.userManager = userManager;
+    }
+
+    @Override
+    protected void additionalAuthenticationChecks(UserDetails userDetails,
+	    UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
+
+	if (authentication.getCredentials() == null)
+	    throw new BadCredentialsException(
+		    messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
+
+	// 라이선스 검사.
+
+	super.additionalAuthenticationChecks(userDetails, authentication);
+	ExtendedUserDetails user;
+	try {
+	    user = (ExtendedUserDetails) userDetails;
+	} catch (Exception e) {
+	    log.error("Unable to coerce user detail to ExtendedUserDetails.");
+	    throw new BadCredentialsException(
+		    messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
 	}
-	
+	State state = ApplicationHelper.getState();
+	log.debug(state);
+	try {
+	    if (user.getUser() != null) {
+		UserTemplate template = new UserTemplate(user.getUser());
+		template.setLastLoggedIn(new Date());
+		userManager.updateUser(template);
+	    }
+	} catch (Exception e) {
+	    log.warn(L10NUtils.format("005016", user), e);
+	}
+    }
+
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+	try {
+	    return super.authenticate(authentication);
+	} catch (AuthenticationException e) {
+	    if (log.isInfoEnabled())
+		log.info(L10NUtils.format("005012", authentication != null ? authentication.getName() : "<unknown>",
+			e.getMessage()));
+	    if (log.isTraceEnabled())
+		log.trace(L10NUtils.getMessage("005013"), e);
+	    throw e;
+	} catch (RuntimeException e) {
+	    log.warn(L10NUtils.format("005014", authentication != null ? authentication.getName() : "<unknown>"), e);
+	    throw e;
+	}
+    }
+
 }

@@ -8,7 +8,7 @@ import architecture.user.profile.ProfileFieldValue;
 import architecture.user.profile.ProfileFieldValueCount;
 
 public interface UserProfileDao {
-	
+
     public abstract Map<Long, ProfileFieldValue> getProfile(User user);
 
     public abstract void setProfile(User user, Collection<ProfileFieldValue> collection);

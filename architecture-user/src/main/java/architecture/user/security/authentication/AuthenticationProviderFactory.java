@@ -16,6 +16,7 @@
 package architecture.user.security.authentication;
 
 import architecture.common.util.ImplFactory;
+
 /**
  *
  *
@@ -24,19 +25,18 @@ import architecture.common.util.ImplFactory;
  */
 public class AuthenticationProviderFactory {
 
-	public static interface Implementation {		
-		public AuthenticationProvider getSecurityContextAuthenticationProvider();		
-	}
-	
-	private static Implementation impl = null;
+    public static interface Implementation {
+	public AuthenticationProvider getSecurityContextAuthenticationProvider();
+    }
 
-	static 
-	{
-		impl = (Implementation)ImplFactory.loadImplFromKey(AuthenticationProviderFactory.Implementation.class);
-	}
+    private static Implementation impl = null;
 
-	public static AuthenticationProvider getSecurityContextAuthenticationProvider(){
-		return impl.getSecurityContextAuthenticationProvider();
-	}
-	
+    static {
+	impl = (Implementation) ImplFactory.loadImplFromKey(AuthenticationProviderFactory.Implementation.class);
+    }
+
+    public static AuthenticationProvider getSecurityContextAuthenticationProvider() {
+	return impl.getSecurityContextAuthenticationProvider();
+    }
+
 }

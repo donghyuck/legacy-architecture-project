@@ -5,12 +5,12 @@ import architecture.common.user.authentication.UnAuthorizedException;
 
 public interface AuthProvider {
 
-	boolean isPlainSupported();
-	
-	boolean isDigestSupported();
+    boolean isPlainSupported();
 
-	void authenticate(String username, String password) throws UnAuthorizedException ;
-	
-	AuthToken authenticateAndGetAuthToken(String username, String password) throws UnAuthorizedException;
-		
+    boolean isDigestSupported();
+
+    void authenticate(String username, String password) throws UnAuthorizedException;
+
+    AuthToken authenticateAndGetAuthToken(String username, String password) throws UnAuthorizedException;
+
 }

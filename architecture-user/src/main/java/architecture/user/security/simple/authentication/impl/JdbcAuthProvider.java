@@ -36,149 +36,139 @@ import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.user.security.simple.authentication.AuthProvider;
 import architecture.user.security.simple.authentication.SimpleUserToken;
 
-public class JdbcAuthProvider  extends ExtendedJdbcDaoSupport implements AuthProvider {
+public class JdbcAuthProvider extends ExtendedJdbcDaoSupport implements AuthProvider {
 
-    private PasswordEncoder passwordEncoder ;	
-    
-	private String queryStringForPassword ;	
-	
-	private String queryStringForUserProperty;
+    private PasswordEncoder passwordEncoder;
 
-	private boolean digestSupported = true ;
-	
-	
-	public String getQueryStringForPassword() {
-		return queryStringForPassword;
+    private String queryStringForPassword;
+
+    private String queryStringForUserProperty;
+
+    private boolean digestSupported = true;
+
+    public String getQueryStringForPassword() {
+	return queryStringForPassword;
+    }
+
+    public void setQueryStringForPassword(String queryStringForPassword) {
+	this.queryStringForPassword = queryStringForPassword;
+    }
+
+    public String getQueryStringForUserProperty() {
+	return queryStringForUserProperty;
+    }
+
+    public void setQueryStringForUserProperty(String queryStringForUserProperty) {
+	this.queryStringForUserProperty = queryStringForUserProperty;
+    }
+
+    public boolean isPlainSupported() {
+	return true;
+    }
+
+    public void setDigestSupported(boolean digestSupported) {
+	this.digestSupported = digestSupported;
+    }
+
+    public boolean isDigestSupported() {
+	return digestSupported;
+    }
+
+    public PasswordEncoder getPasswordEncoder() {
+	return passwordEncoder;
+    }
+
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+	this.passwordEncoder = passwordEncoder;
+    }
+
+    public void authenticate(String username, String password) throws UnAuthorizedException {
+	if (username == null || password == null) {
+	    throw new UnAuthorizedException(L10NUtils.getMessage("005003"));
+	}
+	String passwordToUser = password;
+	if (isDigestSupported()) {
+	    passwordToUser = passwordEncoder.encodePassword(password, null);
+	}
+	try {
+	    if (!passwordToUser.equals(getPassword(username))) {
+		String msg = L10NUtils.format("005002", username);
+		throw new UnAuthorizedException(msg);
+	    }
+	} catch (UserNotFoundException e) {
+	    String msg = L10NUtils.format("005001", username);
+	    throw new UnAuthorizedException(msg, e);
+	}
+	// Got this far, so the user must be authorized.
+    }
+
+    public AuthToken authenticateAndGetAuthToken(String username, String password) throws UnAuthorizedException {
+
+	if (username == null || password == null) {
+	    throw new UnAuthorizedException(L10NUtils.getMessage("005003"));
 	}
 
-	public void setQueryStringForPassword(String queryStringForPassword) {
-		this.queryStringForPassword = queryStringForPassword;
+	String passwordToUser = password;
+	if (isDigestSupported()) {
+	    passwordToUser = passwordEncoder.encodePassword(password, null);
 	}
 
-	public String getQueryStringForUserProperty() {
-		return queryStringForUserProperty;
+	if (log.isDebugEnabled())
+	    log.debug(
+		    String.format("authenticate username:%s, password:%s ", new Object[] { username, passwordToUser }));
+
+	try {
+	    if (!passwordToUser.equals(getPassword(username))) {
+		String msg = L10NUtils.format("005002", username);
+		throw new UnAuthorizedException(msg);
+	    }
+	} catch (UserNotFoundException e) {
+	    String msg = L10NUtils.format("005001", username);
+	    throw new UnAuthorizedException(msg, e);
 	}
 
-	public void setQueryStringForUserProperty(String queryStringForUserProperty) {
-		this.queryStringForUserProperty = queryStringForUserProperty;
-	}
+	SimpleUserToken token = new SimpleUserToken(username);
+	token.setProperties(getUserProperties(username));
+	return null;
+    }
 
-	public boolean isPlainSupported() {
-		return true;
-	}
-	
-	public void setDigestSupported(boolean digestSupported) {
-		this.digestSupported = digestSupported;
-	}
+    public String getPassword(String username) throws UserNotFoundException {
+	try {
 
-	public boolean isDigestSupported() {
-		return digestSupported;
-	}	
-	
-	public PasswordEncoder getPasswordEncoder() {
-		return passwordEncoder;
-	}
+	    return getJdbcTemplate().queryForObject(getQueryStringForPassword(), new String[] { username },
+		    new int[] { Types.VARCHAR }, String.class);
 
-	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-		this.passwordEncoder = passwordEncoder;
+	} catch (DataAccessException e) {
+	    throw new UserNotFoundException(e);
 	}
+    }
 
-	
-	public void authenticate(String username, String password) throws UnAuthorizedException {
-        if (username == null || password == null) {
-            throw new UnAuthorizedException(L10NUtils.getMessage("005003"));
-        }        
-        String passwordToUser = password;        
-        if(isDigestSupported()){
-        	passwordToUser = passwordEncoder.encodePassword(password, null);        	
-        }        
-        try {
-			if (!passwordToUser.equals(getPassword(username))) {				
-				String msg = L10NUtils.format("005002", username );
-				throw new UnAuthorizedException(msg);
+    public Map<String, String> getUserProperties(String username) {
+	try {
+
+	    return getJdbcTemplate().queryForObject(getQueryStringForUserProperty(), new String[] { username },
+		    new int[] { Types.VARCHAR }, new RowMapper<Map<String, String>>() {
+
+			public Map<String, String> mapRow(ResultSet rs, int rowNum) throws SQLException {
+			    ResultSetMetaData rsmd = rs.getMetaData();
+			    int columnCount = rsmd.getColumnCount();
+			    Map<String, String> mapOfColValues = new HashMap<String, String>();
+			    for (int i = 1; i <= columnCount; i++) {
+				String key = getColumnKey(JdbcUtils.lookupColumnName(rsmd, i));
+				String value = rs.getString(i);
+				mapOfColValues.put(key, value);
+			    }
+			    return mapOfColValues;
 			}
-		} catch (UserNotFoundException e) {
-			String msg = L10NUtils.format("005001", username );
-			throw new UnAuthorizedException(msg, e);
-		}        
-        // Got this far, so the user must be authorized.
-	}
 
-	public AuthToken authenticateAndGetAuthToken(String username, String password) throws UnAuthorizedException {
-        
-		if (username == null || password == null) {
-            throw new UnAuthorizedException(L10NUtils.getMessage("005003"));
-        }
-        
-        String passwordToUser = password;        
-        if(isDigestSupported()){
-        	passwordToUser = passwordEncoder.encodePassword(password, null);        	
-        }
-        
-        if(log.isDebugEnabled())
-            log.debug(
-                String.format("authenticate username:%s, password:%s ", new Object[]{  username, passwordToUser })    
-            );
-
-		try {
-			if (!passwordToUser.equals(getPassword(username))) {
-				String msg = L10NUtils.format("005002", username );
-				throw new UnAuthorizedException(msg);
+			protected String getColumnKey(String columnName) {
+			    return columnName;
 			}
-		} catch (UserNotFoundException e) {
-			String msg = L10NUtils.format("005001", username );
-			throw new UnAuthorizedException(msg, e);
-		}
-		
-		SimpleUserToken token = new SimpleUserToken( username );
-		token.setProperties(getUserProperties(username) );
-		return null;
-	}
-	
-	public String getPassword(String username) throws UserNotFoundException {		
-		try {
-			
-			return getJdbcTemplate().queryForObject( 
-					getQueryStringForPassword(), 
-					new String[]{username}, 
-					new int[] {Types.VARCHAR } , 
-					String.class );
-			
-		} catch (DataAccessException e) {
-			throw new UserNotFoundException(e);
-		}
-	}	
-	
-	public Map<String, String> getUserProperties(String username){
-		try {
-			
-			return getJdbcTemplate().queryForObject(
-			        getQueryStringForUserProperty(), 
-					new String[]{username}, 
-					new int[] {Types.VARCHAR },
-					new RowMapper< Map<String, String>>(){
+		    });
 
-						public Map<String, String> mapRow(ResultSet rs, int rowNum) throws SQLException {
-							ResultSetMetaData rsmd = rs.getMetaData();
-							int columnCount = rsmd.getColumnCount();
-							Map<String, String> mapOfColValues = new HashMap<String, String>() ;
-							for (int i = 1; i <= columnCount; i++) {
-								String key = getColumnKey(JdbcUtils.lookupColumnName(rsmd, i));
-								String value = rs.getString(i);
-								mapOfColValues.put(key, value);
-							}							
-							return mapOfColValues;
-						}
-			        	
-						protected String getColumnKey(String columnName) {
-							return columnName;
-						}
-			        }
-			);
-			
-		} catch (DataAccessException e) {
-			return Collections.EMPTY_MAP;
-		}
+	} catch (DataAccessException e) {
+	    return Collections.EMPTY_MAP;
 	}
+    }
 
 }

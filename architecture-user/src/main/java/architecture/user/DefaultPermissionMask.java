@@ -24,58 +24,58 @@ import architecture.user.permission.PermissionMask;
 
 public class DefaultPermissionMask extends DateModelObjectSupport implements PermissionMask {
 
-	public String getName() {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
-	}
+    public String getName() {
+	// TODO 자동 생성된 메소드 스텁
+	return null;
+    }
 
-	public void setName(String name) {
-		// TODO 자동 생성된 메소드 스텁
-		
-	}
+    public void setName(String name) {
+	// TODO 자동 생성된 메소드 스텁
 
-	public Serializable getPrimaryKeyObject() {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
-	}
+    }
 
-	public int getModelObjectType() {
-		return ModelTypeFactory.getTypeIdFromCode("UNKNOWN");
-	}
+    public Serializable getPrimaryKeyObject() {
+	// TODO 자동 생성된 메소드 스텁
+	return null;
+    }
 
-	public Date getCreationDate() {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
-	}
+    public int getModelObjectType() {
+	return ModelTypeFactory.getTypeIdFromCode("UNKNOWN");
+    }
 
-	public void setCreationDate(Date creationDate) {
-		// TODO 자동 생성된 메소드 스텁
-		
-	}
+    public Date getCreationDate() {
+	// TODO 자동 생성된 메소드 스텁
+	return null;
+    }
 
-	public Date getModifiedDate() {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
-	}
+    public void setCreationDate(Date creationDate) {
+	// TODO 자동 생성된 메소드 스텁
 
-	public void setModifiedDate(Date modifiedDate) {
-		// TODO 자동 생성된 메소드 스텁
-		
-	}
+    }
 
-	public int getCachedSize() {
-		// TODO 자동 생성된 메소드 스텁
-		return 0;
-	}
+    public Date getModifiedDate() {
+	// TODO 자동 생성된 메소드 스텁
+	return null;
+    }
 
-	public int getMask() {
-		// TODO 자동 생성된 메소드 스텁
-		return 0;
-	}
+    public void setModifiedDate(Date modifiedDate) {
+	// TODO 자동 생성된 메소드 스텁
 
-	public void setMask(int mask) {
-		// TODO 자동 생성된 메소드 스텁
-		
-	}
+    }
+
+    public int getCachedSize() {
+	// TODO 자동 생성된 메소드 스텁
+	return 0;
+    }
+
+    public int getMask() {
+	// TODO 자동 생성된 메소드 스텁
+	return 0;
+    }
+
+    public void setMask(int mask) {
+	// TODO 자동 생성된 메소드 스텁
+
+    }
 
 }

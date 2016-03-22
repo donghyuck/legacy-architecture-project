@@ -12,230 +12,229 @@ import architecture.common.user.User;
 import architecture.common.user.authentication.AuthToken;
 import architecture.common.user.authentication.UnAuthorizedException;
 
-public class SimpleUserToken extends BaseModelObjectSupport  implements AuthToken, User {
+public class SimpleUserToken extends BaseModelObjectSupport implements AuthToken, User {
 
-	private long userId = -1L;
-	
-	private String username ;
-	
-	private String name ;
-	
-	private String email;
-	
-	private Map<String, String> properties = new HashMap<String, String>() ;
-	
-	public long getUserId() {
-		return userId;
-	}
-	
-	public SimpleUserToken(String username) {
-		this.userId =  -1L;
-		this.username = username;
-		this.name = null;
-		this.email = null;
-	}
-	
-	public SimpleUserToken(long userId, String username) {
-		this.userId = userId;
-		this.username = username;
-		this.name = null;
-		this.email = null;
-	}
-	
-	public SimpleUserToken(long userId, String username, String name) {
-		this.userId = userId;
-		this.username = username;
-		this.name = name;
-		this.email = null;
-	}
+    private long userId = -1L;
 
-	public Serializable getPrimaryKeyObject() {
-		return getUserId();
-	}
-	
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
+    private String username;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    private String name;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    private String email;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    private Map<String, String> properties = new HashMap<String, String>();
 
-	public void setProperties(Map<String, String> properties) {
-		this.properties = properties;
-	}
+    public long getUserId() {
+	return userId;
+    }
 
-	public int getModelObjectType() {
-		return ModelTypeFactory.getTypeIdFromCode("USER");
-	}
-	
-	public String getUsername() {
-		return username;
-	}
+    public SimpleUserToken(String username) {
+	this.userId = -1L;
+	this.username = username;
+	this.name = null;
+	this.email = null;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public SimpleUserToken(long userId, String username) {
+	this.userId = userId;
+	this.username = username;
+	this.name = null;
+	this.email = null;
+    }
 
-	public String getFirstName() {
-		return null;
-	}
+    public SimpleUserToken(long userId, String username, String name) {
+	this.userId = userId;
+	this.username = username;
+	this.name = name;
+	this.email = null;
+    }
 
-	public String getLastName() {
-		return null;
-	}
+    public Serializable getPrimaryKeyObject() {
+	return getUserId();
+    }
 
-	public boolean isNameVisible() {
-		return false;
-	}
+    public void setUserId(long userId) {
+	this.userId = userId;
+    }
 
-	public String getPasswordHash() throws UnAuthorizedException {
-		return null;
-	}
+    public void setUsername(String username) {
+	this.username = username;
+    }
 
-	public String getPassword() throws UnAuthorizedException {
-		return null;
-	}
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setEmail(String email) {
+	this.email = email;
+    }
 
-	public boolean isEmailVisible() {
-		return false;
-	}
+    public void setProperties(Map<String, String> properties) {
+	this.properties = properties;
+    }
 
-	public Date getCreationDate() {
-		return null;
-	}
+    public int getModelObjectType() {
+	return ModelTypeFactory.getTypeIdFromCode("USER");
+    }
 
-	public Date getModifiedDate() {
-		return null;
-	}
+    public String getUsername() {
+	return username;
+    }
 
-	public Map<String, String> getProperties() {
-		return properties ;
-	}
+    public String getName() {
+	return name;
+    }
 
-	public Date getLastLoggedIn() {
-		return null;
-	}
+    public String getFirstName() {
+	return null;
+    }
 
-	public Date getLastProfileUpdate() {
-		return null;
-	}
+    public String getLastName() {
+	return null;
+    }
 
-	public boolean isEnabled() {
-		return true;
-	}
+    public boolean isNameVisible() {
+	return false;
+    }
 
-	public boolean isFederated() {
-		return false;
-	}
+    public String getPasswordHash() throws UnAuthorizedException {
+	return null;
+    }
 
-	public boolean isExternal() {
-		return false;
-	}
+    public String getPassword() throws UnAuthorizedException {
+	return null;
+    }
 
-	public boolean isSetPasswordSupported() {
-		return false;
-	}
+    public String getEmail() {
+	return email;
+    }
 
-	public boolean isGetPasswordHashSupported() {
-		return false;
-	}
+    public boolean isEmailVisible() {
+	return false;
+    }
 
-	public boolean isSetPasswordHashSupported() {
-		return false;
-	}
+    public Date getCreationDate() {
+	return null;
+    }
 
-	public boolean isSetNameSupported() {
-		return false;
-	}
+    public Date getModifiedDate() {
+	return null;
+    }
 
-	public boolean isSetUsernameSupported() {
-		return false;
-	}
+    public Map<String, String> getProperties() {
+	return properties;
+    }
 
-	public boolean isSetEmailSupported() {
-		return false;
-	}
+    public Date getLastLoggedIn() {
+	return null;
+    }
 
-	public boolean isSetNameVisibleSupported() {
-		return false;
-	}
+    public Date getLastProfileUpdate() {
+	return null;
+    }
 
-	public boolean isSetEmailVisibleSupported() {
-		return false;
-	}
+    public boolean isEnabled() {
+	return true;
+    }
 
-	public boolean isPropertyEditSupported() {
-		return false;
-	}
+    public boolean isFederated() {
+	return false;
+    }
 
-	public Status getStatus() {
-		return Status.registered ;
-	}
+    public boolean isExternal() {
+	return false;
+    }
 
-	public int compareTo(User o) {
-		return 0;
-	}
+    public boolean isSetPasswordSupported() {
+	return false;
+    }
 
+    public boolean isGetPasswordHashSupported() {
+	return false;
+    }
 
-	public boolean isAnonymous() {
-		return false;
-	}
+    public boolean isSetPasswordHashSupported() {
+	return false;
+    }
 
-	public void setCreationDate(Date creationDate) {		
+    public boolean isSetNameSupported() {
+	return false;
+    }
 
-	}
+    public boolean isSetUsernameSupported() {
+	return false;
+    }
 
-	public void setModifiedDate(Date modifiedDate) {
-		
-	}
+    public boolean isSetEmailSupported() {
+	return false;
+    }
 
-	public int getCachedSize() {
-		return 0;
-	}
+    public boolean isSetNameVisibleSupported() {
+	return false;
+    }
 
-	public long getCompanyId() {
-		return 0;
-	}
+    public boolean isSetEmailVisibleSupported() {
+	return false;
+    }
 
-	public Company getCompany() {
-		return null;
-	}
+    public boolean isPropertyEditSupported() {
+	return false;
+    }
 
-	public boolean isProfileSupported() {
-		return false;
-	}
+    public Status getStatus() {
+	return Status.registered;
+    }
 
-	public boolean isProfileEditSupported() {
-		return false;
-	}
+    public int compareTo(User o) {
+	return 0;
+    }
 
-	public Map<String, Object> getProfile() {
-		return null;
-	}
+    public boolean isAnonymous() {
+	return false;
+    }
 
-	public <T> T getProfileFieldValue(String fieldName, Class<T> elementType) {
-		return null;
-	}
+    public void setCreationDate(Date creationDate) {
 
-	public String getProfileFieldValueString(String fieldName) {
-		return null;
-	}
+    }
 
-	@Override
-	public boolean hasCompany() {
-		return getCompanyId() > 0;
-	}
+    public void setModifiedDate(Date modifiedDate) {
+
+    }
+
+    public int getCachedSize() {
+	return 0;
+    }
+
+    public long getCompanyId() {
+	return 0;
+    }
+
+    public Company getCompany() {
+	return null;
+    }
+
+    public boolean isProfileSupported() {
+	return false;
+    }
+
+    public boolean isProfileEditSupported() {
+	return false;
+    }
+
+    public Map<String, Object> getProfile() {
+	return null;
+    }
+
+    public <T> T getProfileFieldValue(String fieldName, Class<T> elementType) {
+	return null;
+    }
+
+    public String getProfileFieldValueString(String fieldName) {
+	return null;
+    }
+
+    @Override
+    public boolean hasCompany() {
+	return getCompanyId() > 0;
+    }
 }

@@ -19,37 +19,36 @@ import architecture.ee.exception.ApplicationException;
 
 public class RoleAlreadyExistsException extends ApplicationException {
 
-	public RoleAlreadyExistsException() {
-		super();
-	}
+    public RoleAlreadyExistsException() {
+	super();
+    }
 
-	public RoleAlreadyExistsException(int errorCode, String msg,
-			Throwable cause) {
-		super(errorCode, msg, cause);
-	}
+    public RoleAlreadyExistsException(int errorCode, String msg, Throwable cause) {
+	super(errorCode, msg, cause);
+    }
 
-	public RoleAlreadyExistsException(int errorCode, String msg) {
-		super(errorCode, msg);
-	}
+    public RoleAlreadyExistsException(int errorCode, String msg) {
+	super(errorCode, msg);
+    }
 
-	public RoleAlreadyExistsException(int errorCode, Throwable cause) {
-		super(errorCode, cause);
-	}
+    public RoleAlreadyExistsException(int errorCode, Throwable cause) {
+	super(errorCode, cause);
+    }
 
-	public RoleAlreadyExistsException(int errorCode) {
-		super(errorCode);
-	}
+    public RoleAlreadyExistsException(int errorCode) {
+	super(errorCode);
+    }
 
-	public RoleAlreadyExistsException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    public RoleAlreadyExistsException(String msg, Throwable cause) {
+	super(msg, cause);
+    }
 
-	public RoleAlreadyExistsException(String msg) {
-		super(msg);
-	}
+    public RoleAlreadyExistsException(String msg) {
+	super(msg);
+    }
 
-	public RoleAlreadyExistsException(Throwable cause) {
-		super(cause);
-	}
+    public RoleAlreadyExistsException(Throwable cause) {
+	super(cause);
+    }
 
 }

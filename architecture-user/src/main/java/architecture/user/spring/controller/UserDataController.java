@@ -40,113 +40,96 @@ import architecture.common.user.UserTemplate;
 import architecture.user.security.spring.userdetails.ExtendedUserDetails;
 import architecture.user.spring.annotation.ActiveUser;
 
-
-@Controller ("user-data-controller")
+@Controller("user-data-controller")
 @RequestMapping("/data")
 public class UserDataController {
 
-	private static final Log log = LogFactory.getLog(UserDataController.class);
-		
-	@Inject
-	@Qualifier("userManager")
-	private UserManager userManager ;
-	
-	
-	public UserDataController() {
-	}
-	
+    private static final Log log = LogFactory.getLog(UserDataController.class);
 
-	@PreAuthorize("permitAll")
-	@RequestMapping(value="/accounts/verify_credentials.json", method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody
-	public ExtendedUserDetails verifyCredentials(@ActiveUser ExtendedUserDetails activeUser){	
-		return activeUser;
+    @Inject
+    @Qualifier("userManager")
+    private UserManager userManager;
+
+    public UserDataController() {
+    }
+
+    @PreAuthorize("permitAll")
+    @RequestMapping(value = "/accounts/verify_credentials.json", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public ExtendedUserDetails verifyCredentials(@ActiveUser ExtendedUserDetails activeUser) {
+	return activeUser;
+    }
+
+    @PreAuthorize("permitAll")
+    @RequestMapping(value = "/accounts/get.json", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public UserDetails getUserDetails(@ActiveUser ExtendedUserDetails activeUser, NativeWebRequest request) {
+	return new UserDetails(activeUser.getUser(), getRoles(activeUser.getAuthorities()));
+    }
+
+    @PreAuthorize("permitAll")
+    @RequestMapping(value = "/users/lookup.json", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public User getUserProfile(@RequestParam(value = "id", defaultValue = "0", required = false) Long userId,
+	    @RequestParam(value = "username", required = false) String username,
+	    @RequestParam(value = "email", required = false) String email, NativeWebRequest request) {
+	UserTemplate template = new UserTemplate(userId);
+	if (StringUtils.isNotEmpty(username))
+	    template.setUsername(username);
+	if (StringUtils.isNotEmpty(email))
+	    template.setEmail(email);
+	return userManager.getUser(template);
+    }
+
+    protected List<String> getRoles(Collection<GrantedAuthority> authorities) {
+	List<String> list = new ArrayList<String>();
+	for (GrantedAuthority auth : authorities) {
+	    list.add(auth.getAuthority());
+	}
+	return list;
+    }
+
+    public static class UserDetails {
+
+	private User user;
+	private List<String> roles;
+
+	public UserDetails() {
 	}
 
-	@PreAuthorize("permitAll")
-	@RequestMapping(value="/accounts/get.json", method={RequestMethod.POST, RequestMethod.GET } )
-	@ResponseBody
-	public UserDetails getUserDetails(@ActiveUser ExtendedUserDetails activeUser, NativeWebRequest request ){				
-		return new UserDetails(activeUser.getUser(), getRoles(activeUser.getAuthorities()));		
+	public UserDetails(User user, List<String> roles) {
+	    this.user = user;
+	    this.roles = roles;
 	}
-	
 
-	@PreAuthorize("permitAll")
-	@RequestMapping(value="/users/lookup.json", method={RequestMethod.POST, RequestMethod.GET} )
-	@ResponseBody 
-	public User getUserProfile(@RequestParam(value="id", defaultValue="0", required=false ) Long userId, @RequestParam(value="username", required=false ) String username, 	@RequestParam(value="email", required=false ) String email, 	NativeWebRequest request ){		
-		UserTemplate template = new UserTemplate(userId);		
-		if(StringUtils.isNotEmpty(username))
-			template.setUsername(username);
-		if(StringUtils.isNotEmpty(email))
-			template.setEmail(email);		
-		return userManager.getUser(template);
+	/**
+	 * @return user
+	 */
+	public User getUser() {
+	    return user;
 	}
-	
-	protected List<String> getRoles (Collection<GrantedAuthority> authorities) {		
-		List<String> list = new ArrayList<String>();
-		for(GrantedAuthority auth : authorities ) {
-			list.add( auth.getAuthority() );
-		}
-		return list;
+
+	/**
+	 * @param user
+	 *            설정할 user
+	 */
+	public void setUser(User user) {
+	    this.user = user;
 	}
-	
-/*
-							"media": { type: "string", defaultValue : "internal" },
-							"id": { type: "string" },
-							"username": { type: "string" },
-					        "firstName": { type: "string" },
-					        "lastName": { type: "string" },        
-					        "name": { type: "string" },
-					        "email": { type: "string" },
-					        "locale": { type: "string" },
-					        "location": { type: "string" },
-					        "languages": { type: "string" },
-					        "timezone": { type: "string" },
-					        "gender" : { type: "string" },
-					        "password1": { type: "string" },
-					        "password2": { type: "string" },
-					        "onetime": { type: "string" },
-					        "nameVisible" : { type:"boolean", defaultVlaue: false },
-					        "emailVisible" : { type:"boolean", defaultVlaue: false },
-					        "agree":  { type:"boolean", defaultVlaue: false }	
- */
-		
-	public static class UserDetails {
-		
-		private User user;
-		private List<String> roles;
-		
-		public UserDetails() {
-		}		
-		
-		public UserDetails(User user, List<String> roles) {
-			this.user = user;
-			this.roles = roles;
-		}
-		/**
-		 * @return user
-		 */
-		public User getUser() {
-			return user;
-		}
-		/**
-		 * @param user 설정할 user
-		 */
-		public void setUser(User user) {
-			this.user = user;
-		}
-		/**
-		 * @return roles
-		 */
-		public List<String> getRoles() {
-			return roles;
-		}
-		/**
-		 * @param roles 설정할 roles
-		 */
-		public void setRoles(List<String> roles) {
-			this.roles = roles;
-		}
+
+	/**
+	 * @return roles
+	 */
+	public List<String> getRoles() {
+	    return roles;
 	}
+
+	/**
+	 * @param roles
+	 *            설정할 roles
+	 */
+	public void setRoles(List<String> roles) {
+	    this.roles = roles;
+	}
+    }
 }

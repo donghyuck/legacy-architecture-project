@@ -19,37 +19,36 @@ import architecture.ee.exception.ApplicationException;
 
 public class GroupAlreadyExistsException extends ApplicationException {
 
-	public GroupAlreadyExistsException() {
-		super();
-	}
+    public GroupAlreadyExistsException() {
+	super();
+    }
 
-	public GroupAlreadyExistsException(int errorCode, String msg,
-			Throwable cause) {
-		super(errorCode, msg, cause);
-	}
+    public GroupAlreadyExistsException(int errorCode, String msg, Throwable cause) {
+	super(errorCode, msg, cause);
+    }
 
-	public GroupAlreadyExistsException(int errorCode, String msg) {
-		super(errorCode, msg);
-	}
+    public GroupAlreadyExistsException(int errorCode, String msg) {
+	super(errorCode, msg);
+    }
 
-	public GroupAlreadyExistsException(int errorCode, Throwable cause) {
-		super(errorCode, cause);
-	}
+    public GroupAlreadyExistsException(int errorCode, Throwable cause) {
+	super(errorCode, cause);
+    }
 
-	public GroupAlreadyExistsException(int errorCode) {
-		super(errorCode);
-	}
+    public GroupAlreadyExistsException(int errorCode) {
+	super(errorCode);
+    }
 
-	public GroupAlreadyExistsException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    public GroupAlreadyExistsException(String msg, Throwable cause) {
+	super(msg, cause);
+    }
 
-	public GroupAlreadyExistsException(String msg) {
-		super(msg);
-	}
+    public GroupAlreadyExistsException(String msg) {
+	super(msg);
+    }
 
-	public GroupAlreadyExistsException(Throwable cause) {
-		super(cause);
-	}
+    public GroupAlreadyExistsException(Throwable cause) {
+	super(cause);
+    }
 
 }

@@ -6,7 +6,7 @@ import architecture.user.profile.ProfileField;
 import architecture.user.profile.ProfileFieldOption;
 
 public interface ProfileFieldDao {
-	
+
     public abstract ProfileField createProfileField(ProfileField profilefield);
 
     public abstract ProfileField getProfileField(long fieldId);
@@ -22,5 +22,5 @@ public interface ProfileFieldDao {
     public abstract List<ProfileField> getProfileFields();
 
     public abstract void setIndex(ProfileField profilefield, int index);
-    
+
 }

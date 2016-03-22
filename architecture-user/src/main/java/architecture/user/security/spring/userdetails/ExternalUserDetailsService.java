@@ -26,28 +26,29 @@ import architecture.common.event.api.EventSource;
 
 public class ExternalUserDetailsService implements UserDetailsService, EventSource {
 
-	private Log log = LogFactory.getLog( getClass() );
-	
-	private EventPublisher eventPublisher;
-	
-	private boolean caseInsensitive;
-	
-	public ExternalUserDetailsService() {
-		caseInsensitive = true;
-	}
-    /**
-	 * @param caseInsensitive
-	 */
-	public ExternalUserDetailsService(boolean caseInsensitive) {
-		this.caseInsensitive = caseInsensitive;
-	}
-	public void setEventPublisher(EventPublisher eventPublisher)
-    {
-        this.eventPublisher = eventPublisher;
+    private Log log = LogFactory.getLog(getClass());
+
+    private EventPublisher eventPublisher;
+
+    private boolean caseInsensitive;
+
+    public ExternalUserDetailsService() {
+	caseInsensitive = true;
     }
-    
+
+    /**
+     * @param caseInsensitive
+     */
+    public ExternalUserDetailsService(boolean caseInsensitive) {
+	this.caseInsensitive = caseInsensitive;
+    }
+
+    public void setEventPublisher(EventPublisher eventPublisher) {
+	this.eventPublisher = eventPublisher;
+    }
+
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return null;
-	}
+	return null;
+    }
 
 }
