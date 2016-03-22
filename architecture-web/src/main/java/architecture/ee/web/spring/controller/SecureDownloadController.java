@@ -68,9 +68,6 @@ public class SecureDownloadController {
 	@Qualifier("webSiteManager")
 	private WebSiteManager webSiteManager;
 	
-
-	
-	
 	
 	@RequestMapping(value = "/logo/{logoId}", method = RequestMethod.GET)
 	@ResponseBody

@@ -38,6 +38,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
+import architecture.common.user.UserManager;
 import architecture.common.util.StringUtils;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Attachment;
@@ -59,6 +60,10 @@ public class DownloadController {
 	@Qualifier("attachmentManager")
 	private AttachmentManager attachmentManager;
 
+	@Inject
+	@Qualifier("userManager")
+	private UserManager userManager;
+	
 	
 	
 	/**
@@ -90,6 +95,15 @@ public class DownloadController {
 	}
 	
 	
+	
+	public UserManager getUserManager() {
+	    return userManager;
+	}
+
+	public void setUserManager(UserManager userManager) {
+	    this.userManager = userManager;
+	}
+
 	@RequestMapping(value = "/export", method = RequestMethod.POST)
 	public void exportProxy(
 		@RequestParam(value="fileName",  required=true ) String fileName, 
@@ -104,6 +118,8 @@ public class DownloadController {
 		response.getOutputStream().write(content);
 		response.flushBuffer();			
 	}
+	
+	
 	
 	@RequestMapping(value = "/files/{fileId:[\\p{Digit}]+}/{filename:.+}", method = { RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
