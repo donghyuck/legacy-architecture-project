@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import architecture.common.model.support.PropertyAndDateAwareSupport;
 import architecture.common.user.User;
 
-public class DefaultAlbum extends PropertyAndDateAwareSupport {
+public class DefaultAlbum extends PropertyAndDateAwareSupport implements Album {
 
     private boolean shared;
 
@@ -50,6 +50,14 @@ public class DefaultAlbum extends PropertyAndDateAwareSupport {
 	Date now = new Date();
 	setCreationDate(now);
 	setModifiedDate(now);
+    }
+    
+    public DefaultAlbum(long albumId) {
+	this.albumId = albumId;
+	this.name = null;
+	this.description = null;
+	this.shared = false;
+	this.collaborate = false;
     }
 
     public long getAlbumId() {

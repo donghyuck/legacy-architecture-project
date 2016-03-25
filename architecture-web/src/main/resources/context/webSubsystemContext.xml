@@ -12,7 +12,7 @@
 
 	<description>
 	<![CDATA[
-        Define User System 
+        Define Web System 
 	]]>
 	</description>	
 
@@ -22,8 +22,7 @@
 	p:timeToLive : 60 초 	
 	 -->	 
 	 
-	 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" p:maxUploadSize="52428800" >
-	 </bean>
+	 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" p:maxUploadSize="52428800" ></bean>
 	 
 	<bean id="monitoringCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="monitoringCache" p:maxElementsInMemory="100"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0"  p:statisticsEnabled="true" />
 	
@@ -40,8 +39,17 @@
 	<bean id="imageLinkDao" class="architecture.ee.web.attachment.dao.impl.JdbcImageLinkDao" parent="jdbcDaoSupport"  />	
 	<bean id="imageManager" class="architecture.ee.web.attachment.DefaultImageManager"  init-method="initialize" destroy-method="destroy"  depends-on="imageDao eventPublisher"  p:imageLinkDao-ref="imageLinkDao" 	p:imageDao-ref="imageDao" p:eventPublisher-ref="eventPublisher"  p:imageCache-ref="imageCache"  p:imageLinkCache-ref="imageLinkCache"  p:imageLinkIdCache-ref="imageLinkIdCache" />
 
+
+
 	<bean id="attachmentDao" class="architecture.ee.web.attachment.dao.impl.JdbcAttachmentDao" parent="jdbcDaoSupport"  p:extendedPropertyDao-ref="extendedPropertyDao" 	/>
 	<bean id="attachmentManager" class="architecture.ee.web.attachment.DefaultAttachmentManager"  init-method="initialize" destroy-method="destroy"  depends-on="attachmentDao, eventPublisher"  p:attachmentDao-ref="attachmentDao" p:eventPublisher-ref="eventPublisher"  p:attachmentCache-ref="attachmentCache" />
+
+	<!--  album  -->
+	<bean id="albumDao" class="architecture.ee.web.photo.album.dao.jdbc.JdbcAlbumDao" parent="jdbcDaoSupport"  p:extendedPropertyDao-ref="extendedPropertyDao"	/>
+	<bean id="albumCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="albumCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0"  p:statisticsEnabled="true" />
+	<bean id="albumManager" class="architecture.ee.web.photo.album.DefaultAlbumManager"  p:albumDao-ref="albumDao" p:albumCache-ref="albumCache" />
+	
+
 		
 	<bean id="passwordEncoder" class="architecture.user.security.spring.authentication.encoding.PasswordEncoderFactory" />
     <bean id="passwordSaltSource" class="architecture.user.security.spring.authentication.encoding.SaltSourceFactory" />

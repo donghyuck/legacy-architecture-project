@@ -60,6 +60,9 @@ import architecture.ee.web.attachment.ImageLink;
 import architecture.ee.web.attachment.ImageManager;
 import architecture.ee.web.attachment.impl.AttachmentImpl;
 import architecture.ee.web.attachment.impl.ImageImpl;
+import architecture.ee.web.photo.album.Album;
+import architecture.ee.web.photo.album.AlbumManager;
+import architecture.ee.web.photo.album.DefaultAlbum;
 import architecture.ee.web.util.WebSiteUtils;
 import architecture.ee.web.ws.Property;
 import architecture.ee.web.ws.Usage;
@@ -77,6 +80,10 @@ public class MyCloudDataController {
     @Inject
     @Qualifier("attachmentManager")
     private AttachmentManager attachmentManager;
+
+    @Inject
+    @Qualifier("albumManager")
+    private AlbumManager albumManager;
 
     @Inject
     @Qualifier("userManager")
@@ -120,6 +127,58 @@ public class MyCloudDataController {
 	this.attachmentManager = attachmentManager;
     }
 
+    
+    @RequestMapping(value = "/me/photo/album/update.json", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public Album saveOrupdateAlbum (@RequestBody DefaultAlbum album, NativeWebRequest request) throws NotFoundException{
+	User user = SecurityHelper.getUser();	
+	if(album.getAlbumId() > 0 ){
+	    
+	}else{
+	    album.setUser(user);
+	}
+	albumManager.saveOrUpdate(album);
+	return album;
+	
+    }
+    
+    
+    @RequestMapping(value = "/me/photo/album/list.json", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public ItemList getPhotoAlbumList(
+	    @RequestParam(value = "startIndex", defaultValue = "0", required = false) Integer startIndex,
+	    @RequestParam(value = "pageSize", defaultValue = "0", required = false) Integer pageSize,
+	    NativeWebRequest request) throws NotFoundException {
+
+	User user = SecurityHelper.getUser();
+	int count = albumManager.getTotalAlbumCount(user);
+	List<Album> items;
+	if (count > 0) {
+	    if (pageSize > 0) {
+		items = albumManager.getAlbums(user, startIndex, pageSize);
+	    } else {
+		items = albumManager.getAlbums(user);
+	    }
+	} else {
+	    items = Collections.EMPTY_LIST;
+	}
+	ItemList list = new ItemList(items, count);
+	return list;
+    }
+
+    @Secured({ "ROLE_USER" })
+    @RequestMapping(value = "/me/photo/images/list.json", method = { RequestMethod.POST, RequestMethod.GET })
+    @ResponseBody
+    public ImageList getImageList(
+	    @RequestParam(value = "startIndex", defaultValue = "0", required = false) Integer startIndex,
+	    @RequestParam(value = "pageSize", defaultValue = "0", required = false) Integer pageSize,
+	    NativeWebRequest request) throws NotFoundException {
+	User user = SecurityHelper.getUser();
+	return getImageList( 2 , user.getUserId(), startIndex, pageSize, request.getNativeRequest(HttpServletRequest.class));
+
+    }
+    
+    
     @Secured({ "ROLE_USER" })
     @RequestMapping(value = "/cloud/usage.json", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
@@ -229,15 +288,14 @@ public class MyCloudDataController {
 	return true;
     }
 
-    
     @RequestMapping(value = "/images/details.json", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
     public ImageDetails getImageDetails(
 	    @RequestParam(value = "imageId", defaultValue = "0", required = true) Long imageId,
 	    NativeWebRequest request) throws NotFoundException {
-	
+
 	User user = SecurityHelper.getUser();
-	
+
 	Image image = imageManager.getImage(imageId);
 	ImageDetails details = new ImageDetails(image);
 	try {
@@ -246,7 +304,8 @@ public class MyCloudDataController {
 		List<ExifTag> list = new ArrayList<ExifTag>();
 		ExifSubIFDDirectory exifDirectory = metadata.getDirectory(ExifSubIFDDirectory.class);
 		for (Tag tag : exifDirectory.getTags()) {
-		    list.add(new ExifTag(tag.getTagName(), tag.getDescription(), exifDirectory.getString(tag.getTagType())));
+		    list.add(new ExifTag(tag.getTagName(), tag.getDescription(),
+			    exifDirectory.getString(tag.getTagType())));
 		}
 		details.setExif(list);
 	    }
@@ -407,7 +466,8 @@ public class MyCloudDataController {
 		((ImageImpl) image).setInputStream(is);
 		((ImageImpl) image).setSize((int) mpf.getSize());
 	    } else {
-		image = imageManager.createImage(objectType, objectId, mpf.getOriginalFilename(), mpf.getContentType(), is, (int) mpf.getSize());
+		image = imageManager.createImage(objectType, objectId, mpf.getOriginalFilename(), mpf.getContentType(),
+			is, (int) mpf.getSize());
 		image.setUser(user);
 	    }
 	    log.debug(hasPermissions(image, user));
@@ -417,9 +477,6 @@ public class MyCloudDataController {
 	return list;
     }
 
-    
-    
-    
     @RequestMapping(value = "/images/insert.json", method = RequestMethod.POST)
     @ResponseBody
     public Image updateImage(@RequestBody ImageImpl newImage, NativeWebRequest request) throws NotFoundException {
@@ -436,9 +493,6 @@ public class MyCloudDataController {
 	return null;
     }
 
-    
-    
-    
     @RequestMapping(value = "/images/link.json", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
     public ImageLink getImageLink(@RequestParam(value = "imageId", defaultValue = "0", required = true) Long imageId,
