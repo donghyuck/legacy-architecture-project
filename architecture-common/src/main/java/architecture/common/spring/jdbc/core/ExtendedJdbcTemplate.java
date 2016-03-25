@@ -360,13 +360,14 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
     public LobHandler getLobHandler() {
 	if (this.lobHandler == null && this.getDataSource() != null) {
 	    logger.debug("Initializing ExtendedJdbcTemplate LobHandler");
-	    if (getDatabaseType() == DatabaseType.oracle) {
+	    /*if (getDatabaseType() == DatabaseType.oracle) {
 		OracleLobHandler oracleLobHandler = new OracleLobHandler();
 		oracleLobHandler.setNativeJdbcExtractor(getNativeJdbcExtractor());
 		this.lobHandler = oracleLobHandler;
 	    } else {
 		this.lobHandler = new DefaultLobHandler();
-	    }
+	    }*/
+	    this.lobHandler = new DefaultLobHandler();
 	}
 	return lobHandler;
     }
@@ -375,13 +376,14 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	logger.debug("Initializing ExtendedJdbcTemplate");
 	logger.debug("databaseType:" + databaseType);
 	if (this.lobHandler == null && this.getDataSource() != null) {
-	    if (getDatabaseType() == DatabaseType.oracle) {
+	    /*if (getDatabaseType() == DatabaseType.oracle) {
 		OracleLobHandler oracleLobHandler = new OracleLobHandler();
 		oracleLobHandler.setNativeJdbcExtractor(getNativeJdbcExtractor());
 		this.lobHandler = oracleLobHandler;
 	    } else {
 		this.lobHandler = new DefaultLobHandler();
-	    }
+	    }*/
+	    this.lobHandler = new DefaultLobHandler();
 	}
     }
 
