@@ -33,7 +33,9 @@ import architecture.user.spring.annotation.ActiveUserWebArgumentResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "architecture.user.spring.controller", "architecture.ee.web.spring.controller",
+@ComponentScan(basePackages = { 
+	"architecture.user.spring.controller", 
+	"architecture.ee.web.spring.controller",
 	"architecture.ee.web.community.spring.controller" })
 @Import(MultipartConfig.class)
 public class WebCommunityConfig extends WebMvcConfigurerAdapter {

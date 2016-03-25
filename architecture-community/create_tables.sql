@@ -105,7 +105,7 @@
 		NAME							VARCHAR2(100),
 		EMAIL							VARCHAR2(255),
 		URL								VARCHAR2(255),
-		IP									VARCHAR2(15),
+		IP								VARCHAR2(15),
 		BODY                            VARCHAR2(4000),
 		STATUS							INTEGER NOT NULL, 
 		CREATION_DATE				DATE DEFAULT  SYSDATE NOT NULL,
