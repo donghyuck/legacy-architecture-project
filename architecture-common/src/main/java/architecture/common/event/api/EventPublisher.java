@@ -23,6 +23,7 @@ package architecture.common.event.api;
  * @see EventListener annotation which can be used to indicate event listener
  *      methods
  */
+
 public interface EventPublisher {
     /**
      * Publish an event that will be consumed by all listeners which have
