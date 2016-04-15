@@ -23,7 +23,7 @@ public final class EventThreadFactory implements ThreadFactory {
 
     public Thread newThread(Runnable r) {
         final Thread thread = delegateThreadFactory.newThread(r);
-        thread.setName("AtlassianEvent::" + thread.getName());
+        thread.setName("Architecture Event::" + thread.getName());
         return thread;
     }
 }
