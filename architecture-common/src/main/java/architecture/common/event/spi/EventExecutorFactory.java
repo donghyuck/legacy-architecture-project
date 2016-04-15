@@ -23,5 +23,7 @@ import java.util.concurrent.Executor;
  * </p>
  */
 public interface EventExecutorFactory {
+    
     public abstract Executor getExecutor();
+
 }

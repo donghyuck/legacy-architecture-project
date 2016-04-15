@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
  * </p>
  * <p>
  * This is the default annotation to be used with
- * {@link com.atlassian.event.internal.AnnotationAsynchronousEventResolver}
+ * {@link architecture.common.event.internal.AnnotationAsynchronousEventResolver}
  * </p>
  * 
  * @see architecture.common.event.internal.AnnotationAsynchronousEventResolver
