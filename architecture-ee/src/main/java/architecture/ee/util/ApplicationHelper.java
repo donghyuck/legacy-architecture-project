@@ -50,32 +50,15 @@ public final class ApplicationHelper {
 
     private static final Log LOG = LogFactory.getLog(ApplicationHelper.class);
 
-    private static final Map<Class<?>, WeakReference<?>> references = Collections
-	    .synchronizedMap(new HashMap<Class<?>, WeakReference<?>>());
+    private static final Map<Class<?>, WeakReference<?>> references = Collections.synchronizedMap(new HashMap<Class<?>, WeakReference<?>>());
 
     @SuppressWarnings("unchecked")
     public static <T> T getComponent(Class<T> requiredType) throws ComponentNotFoundException {
 	if (ApplicationHelper.references.get(requiredType) == null) {
-	    ApplicationHelper.references.put(requiredType,
-		    new WeakReference<T>(ApplicationHelperFactory.getApplicationHelper().getComponent(requiredType)));
+	    ApplicationHelper.references.put(requiredType, new WeakReference<T>(ApplicationHelperFactory.getApplicationHelper().getComponent(requiredType)));
 	}
 	return (T) ApplicationHelper.references.get(requiredType).get();
     }
-
-    /*
-     * public static <T> List<T> getComponents(Class<T> requiredType){
-     * 
-     * AdminService as = AdminHelper.getAdminService(); LOG.debug(
-     * "SpringAdminService: " + ( as instanceof SpringAdminService ));
-     * 
-     * if( as instanceof SpringAdminService ){ SpringAdminService sas =
-     * (SpringAdminService)as ; Map<String, T> beans =
-     * sas.getApplicationContext().getBeansOfType(requiredType); LOG.debug(
-     * beans );
-     * 
-     * beans.values(); return new ArrayList<T>(beans.values()); } return
-     * Collections.EMPTY_LIST; }
-     */
 
     public static <T> T getComponent(String requiredName, Class<T> requiredType) throws ComponentNotFoundException {
 	return ApplicationHelperFactory.getApplicationHelper().getComponent(requiredName, requiredType);
@@ -85,6 +68,7 @@ public final class ApplicationHelper {
 	ApplicationHelperFactory.getApplicationHelper().autowireComponent(obj);
     }
 
+    
     public static Resource getResource(String path) {
 	SpringAdminService adminService = (SpringAdminService) AdminHelper.getAdminService();
 	return adminService.getApplicationContext().getResource(path);
@@ -124,11 +108,8 @@ public final class ApplicationHelper {
 
     public static Class loadClass(String scriptName, boolean lookupScriptFiles, boolean preferClassOverScript)
 	    throws ClassNotFoundException {
-
 	GroovyClassLoader gcl = Bootstrap.getBootstrapComponent(groovy.lang.GroovyClassLoader.class);
-
 	return gcl.loadClass(scriptName, lookupScriptFiles, preferClassOverScript);
-
     }
 
     public static Locale getLocale() {

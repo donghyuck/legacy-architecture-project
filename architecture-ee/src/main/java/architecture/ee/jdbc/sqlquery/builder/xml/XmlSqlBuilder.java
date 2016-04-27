@@ -71,9 +71,9 @@ public class XmlSqlBuilder extends AbstractBuilder {
 
     public void build() {
 	try {
+	    
 	    // OLD VERSION : V1
 	    XNode context = parser.evalNode("/sql-queryset");
-
 	    String namespace;
 	    String description;
 	    String version;
@@ -85,6 +85,7 @@ public class XmlSqlBuilder extends AbstractBuilder {
 		description = context.getStringAttribute("description");
 		version = "1.0";
 	    } else {
+		
 		// NEW VERSION : V2
 		isNew = true;
 		context = parser.evalNode("/sqlset");
@@ -96,20 +97,29 @@ public class XmlSqlBuilder extends AbstractBuilder {
 	    log.debug(L10NUtils.format("003221", namespace, description, version));
 	    builderAssistant.setCurrentNamespace(namespace);
 
-	    if (isNew)
+	    if (isNew){
 		sqlElement(context.evalNodes("/sqlset/sql-query"));
-	    else
+		mapperElement(context.evalNodes("/sqlset/row-mapper"));
+	    }else{
 		sqlElement(context.evalNodes("/sql-queryset/sql-query"));
-
+	    }
 	} catch (Exception e) {
 	    throw new RuntimeException(L10NUtils.format("003222", e.getMessage()), e);
 	}
     }
-
+    
+    private void mapperElement(List<XNode> list) throws Exception {
+	String currentNamespace = builderAssistant.getCurrentNamespace();
+	configuration.addMapperNodes(currentNamespace, list);
+	log.debug(" mapper founded : " + list.size());	
+    }
+    
     private void sqlElement(List<XNode> list) throws Exception {
 	String currentNamespace = builderAssistant.getCurrentNamespace();
 	configuration.addStatementNodes(currentNamespace, list);
 	log.debug(L10NUtils.format("003223", list.size()));
     }
+    
+    
 
 }

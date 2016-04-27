@@ -3,6 +3,7 @@ package architecture.ee.spring.context.impl;
 import architecture.common.lifecycle.ApplicationHelper;
 import architecture.common.lifecycle.ApplicationHelperFactory.Implementation;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
+import architecture.ee.component.admin.AdminHelper;
 
 /**
  * @author donghyuck
@@ -17,8 +18,8 @@ public class ApplicationHelperFactoryImpl implements Implementation {
 
     public ApplicationHelper getApplicationHelper() {
 	// 이부분은 숨여야할 필요성이 있다.
-	if (helper == null) {
-	    this.helper = new ApplicationHelperImpl(Bootstrap.getBootstrapApplicationContext());
+	if (helper == null) {	    
+	    this.helper = new ApplicationHelperImpl(Bootstrap.getBootstrapApplicationContext(), AdminHelper.getAdminService());
 	}
 	return helper;
     }

@@ -81,6 +81,8 @@ public class XmlStatementBuilder extends AbstractBuilder {
 
     public void parseStatementNode() {
 
+	//log.debug("parse statement node ");
+	
 	String idToUse = context.getStringAttribute(XML_ATTR_ID_TAG);
 	String nameToUse = context.getStringAttribute(XML_ATTR_NAME_TAG);
 	if (StringUtils.isEmpty(idToUse))
@@ -90,8 +92,7 @@ public class XmlStatementBuilder extends AbstractBuilder {
 	Integer timeout = context.getIntAttribute(XML_ATTR_TIMEOUT_TAG, 0);
 
 	// bug!! 디폴트로 PREPARED !!!
-	StatementType statementType = StatementType
-		.valueOf(context.getStringAttribute(XML_ATTR_STATEMENT_TYPE_TAG, StatementType.PREPARED.toString()));
+	StatementType statementType = StatementType.valueOf(context.getStringAttribute(XML_ATTR_STATEMENT_TYPE_TAG, StatementType.PREPARED.toString()));
 	List<ParameterMapping> parameterMappings = parseParameterMappings(context);
 	List<ResultMapping> resultrMappings = parseResultMappings(context);
 	// dynamic 해당하는 부분을 검색한다.
@@ -102,6 +103,9 @@ public class XmlStatementBuilder extends AbstractBuilder {
     }
 
     private List<ResultMapping> parseResultMappings(XNode node) {
+	
+	//log.debug("parse statement result mapping node ");
+	
 	List<ResultMapping> parameterMappings = new ArrayList<ResultMapping>();
 	List<XNode> children = node.evalNodes("resultMappings/resultMapping");
 	for (XNode child : children) {
@@ -128,12 +132,13 @@ public class XmlStatementBuilder extends AbstractBuilder {
     }
 
     private List<ParameterMapping> parseParameterMappings(XNode node) {
+	//log.debug("parse statement paramenters node ");
+	
 	List<ParameterMapping> parameterMappings = new ArrayList<ParameterMapping>();
 	List<XNode> children = node.evalNodes("parameterMappings/parameterMapping");
 	for (XNode child : children) {
 
-	    ParameterMapping.Builder builder = new ParameterMapping.Builder(
-		    child.getStringAttribute(XML_ATTR_NAME_TAG));
+	    ParameterMapping.Builder builder = new ParameterMapping.Builder(child.getStringAttribute(XML_ATTR_NAME_TAG));
 
 	    builder.index(child.getIntAttribute("index", 0));
 	    builder.mode(child.getStringAttribute("mode", "NONE"));
@@ -144,46 +149,16 @@ public class XmlStatementBuilder extends AbstractBuilder {
 	    builder.cipherKey(child.getStringAttribute("cipherKey", null));
 	    builder.cipherKeyAlg(child.getStringAttribute("cipherKeyAlg", null));
 	    builder.digest(child.getStringAttribute("digest", null));
-
 	    builder.size(child.getStringAttribute("size", "0"));
-
+	    builder.column(child.getStringAttribute("column", null));	    
 	    String javaTypeName = child.getStringAttribute("javaType", null);
-	    String jdbcTypeName = child.getStringAttribute("jdbcType", null);
-	    if (jdbcTypeName != null)
+	    String jdbcTypeName = child.getStringAttribute("jdbcType", null);	    
+	    if (StringUtils.isNotEmpty(jdbcTypeName))
 		builder.jdbcTypeName(jdbcTypeName);
-	    if (javaTypeName != null)
+	    if (StringUtils.isNotEmpty(javaTypeName))
 		builder.javaType(getTypeAliasRegistry().resolveAlias(javaTypeName));
-
 	    parameterMappings.add(builder.build());
 	}
-
-	// node.getNode().getChildNodes();
-	/*
-	 * for (int i = 0; i < children.getLength(); i++) { XNode child =
-	 * node.newXNode(children.item(i)); if( Node.ELEMENT_NODE ==
-	 * child.getNode().getNodeType() &&
-	 * XML_NODE_PARAMETER_MAPPING_TAG.equals(child.getNode().getNodeName()))
-	 * {
-	 * 
-	 * ParameterMapping.Builder builder = new
-	 * ParameterMapping.Builder(child.getStringAttribute(XML_ATTR_NAME_TAG))
-	 * ; builder.jdbcTypeName(child.getStringAttribute("jdbcType", null));
-	 * String javaTypeString = child.getStringAttribute("javaType", null);
-	 * builder.index(child.getIntAttribute("index", 0));
-	 * builder.primary(child.getBooleanAttribute("primary", false));
-	 * if(StringUtils.isNotEmpty(javaTypeString)){
-	 * builder.jdbcTypeName(javaTypeString);
-	 * builder.javaType(getTypeAliasRegistry().resolveAlias(javaTypeString))
-	 * ; } builder.encoding(child.getStringAttribute("encoding", null));
-	 * builder.pattern( child.getStringAttribute("pattern", null) );
-	 * builder.cipher(child.getStringAttribute("cipher", null));
-	 * builder.cipherKey(child.getStringAttribute("cipherKey", null));
-	 * builder.cipherKeyAlg(child.getStringAttribute("cipherKeyAlg", null));
-	 * parameterMappings.add(builder.build());
-	 * 
-	 * } }
-	 */
-
 	return parameterMappings;
     }
 
@@ -193,8 +168,7 @@ public class XmlStatementBuilder extends AbstractBuilder {
 	for (int i = 0; i < children.getLength(); i++) {
 	    XNode child = node.newXNode(children.item(i));
 	    String nodeName = child.getNode().getNodeName();
-	    if (child.getNode().getNodeType() == Node.CDATA_SECTION_NODE
-		    || child.getNode().getNodeType() == Node.TEXT_NODE) {
+	    if (child.getNode().getNodeType() == Node.CDATA_SECTION_NODE || child.getNode().getNodeType() == Node.TEXT_NODE) {
 		String data = child.getStringBody("");
 		contents.add(new TextSqlNode(data));
 	    } else {

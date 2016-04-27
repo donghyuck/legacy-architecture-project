@@ -26,6 +26,7 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 import org.springframework.core.io.FileSystemResource;
@@ -49,6 +50,7 @@ import architecture.common.lifecycle.internal.XmlApplicationProperties;
 import architecture.common.util.L10NUtils;
 import architecture.common.util.StringUtils;
 import architecture.common.xml.XmlProperties;
+
 import architecture.ee.util.ApplicationConstants;
 
 /**
@@ -166,8 +168,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 		ServletContextResourceLoader servletResoruceLoader = new ServletContextResourceLoader(servletContext);
 		Resource resource = servletResoruceLoader.getResource(value);
 		if (resource.exists()) {
-		    log.debug(L10NUtils.format("003003", ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY,
-			    resource.getURI()));
+		    log.debug(L10NUtils.format("003003", ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY, resource.getURI()));
 		    this.rootResource = resource;
 		    setState(State.INITIALIZED);
 		    initailized = true;

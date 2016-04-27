@@ -27,8 +27,7 @@ public class WebApplicationContextLoader extends ContextLoader {
     public static final String RUNTIME_LOCATION_PARAM = "runtimeContextLocation";
     public static final String EXTENSION_LOCATION_PARAM = "extensionContextLocation";
 
-    protected void customizeContext(ServletContext servletContext,
-	    ConfigurableWebApplicationContext applicationContext) {
+    protected void customizeContext(ServletContext servletContext, ConfigurableWebApplicationContext applicationContext) {
 
 	List<String> contextFiles = new LinkedList<String>();
 	try {

@@ -12,13 +12,15 @@
        
 	<description>
 	<![CDATA[
-        Define Transaction
+        Define Admin Service  
 	]]>
 	</description>	
 	<!-- ================================================ -->
-	<!-- 1. Transaction                                	  -->
+	<!-- 1. CORE COMPOMENTS                               -->
 	<!-- ================================================ -->	
-	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<bean id="configService" class="architecture.ee.component.core.lifecycle.ConfigServiceImpl" init-method="initialize" depends-on="eventPublisher, sqlConfiguration, dataSource" p:eventPublisher-ref="eventPublisher" p:sqlConfiguration-ref="sqlConfiguration" p:dataSource-ref="dataSource" ></bean>
 	
+	<bean id="adminService" class="architecture.ee.component.core.lifecycle.SmartAdminService" init-method="initialize" depends-on="eventPublisher, configService" p:eventPublisher-ref="eventPublisher" p:configService-ref="configService"  />
+
 	
 </beans>

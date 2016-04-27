@@ -30,7 +30,9 @@ import architecture.common.util.L10NUtils;
 import architecture.common.util.StringUtils;
 import architecture.ee.jdbc.sqlquery.SqlNotFoundException;
 import architecture.ee.jdbc.sqlquery.builder.SqlBuilderAssistant;
+import architecture.ee.jdbc.sqlquery.builder.xml.XmlMapperBuilder;
 import architecture.ee.jdbc.sqlquery.builder.xml.XmlStatementBuilder;
+import architecture.ee.jdbc.sqlquery.mapping.MapperSource;
 import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
 import architecture.ee.jdbc.sqlquery.parser.XNode;
 
@@ -53,7 +55,9 @@ public class Configuration {
      * 
      */
     protected final Map<String, MappedStatement> mappedStatements = new HashMap<String, MappedStatement>();
-
+    
+    protected final Map<String, MapperSource> mappers = new HashMap<String, MapperSource>();
+    
     protected final Map<String, String> uriNamespace = new HashMap<String, String>();
 
     public TypeAliasRegistry getTypeAliasRegistry() {
@@ -87,7 +91,13 @@ public class Configuration {
 
     /** A map holds statement nodes for a namespace. */
     protected final ConcurrentMap<String, List<XNode>> statementNodesToParse = new ConcurrentHashMap<String, List<XNode>>();
-
+    
+    protected final ConcurrentMap<String, List<XNode>> mapperNodesToParse = new ConcurrentHashMap<String, List<XNode>>();
+    
+    public void addMapperNodes(String namespace, List<XNode> nodes) {
+	mapperNodesToParse.put(namespace, nodes);
+    }
+    
     public void addStatementNodes(String namespace, List<XNode> nodes) {
 	statementNodesToParse.put(namespace, nodes);
     }
@@ -151,11 +161,47 @@ public class Configuration {
 	    }
 	}
     }
+    
+    public void buildAllMappers() {
+	if (!this.mapperNodesToParse.isEmpty()) {
+	    Set<String> keySet = mapperNodesToParse.keySet();
+	    for (String namespace : keySet) {
+		buildMappersForNamespace(namespace);
+	    }
+	}
+    }
+
+    public void addMapper(MapperSource factory) {
+	mappers.put(factory.getID(), factory);
+    }
 
     public void addMappedStatement(MappedStatement ms) {
 	mappedStatements.put(ms.getID(), ms);
     }
-
+    
+    
+    protected void buildMappersForNamespace(String namespace) {
+	if (namespace != null) {
+	    final List<XNode> list = mapperNodesToParse.get(namespace);
+	    if (list != null) {
+		final SqlBuilderAssistant builderAssistant = new SqlBuilderAssistant(this, null);
+		builderAssistant.setCurrentNamespace(namespace);
+		parseMapperNodes(builderAssistant, list);
+		// Remove the processed nodes and resource from the cache.
+		mapperNodesToParse.remove(namespace);
+	    }
+	}
+    }
+    
+   
+    protected void parseMapperNodes(final SqlBuilderAssistant builderAssistant, final List<XNode> list) {
+	for (XNode context : list) {
+	    final XmlMapperBuilder mapperParser = new XmlMapperBuilder(this, builderAssistant, context);
+	    mapperParser.parseRowMapperFactoryNode();
+	}
+    }
+    
+    
     /**
      * Parses cached statement nodes for the specified namespace and stores the
      * generated mapped statements.
@@ -194,6 +240,13 @@ public class Configuration {
 	return mappedStatements.keySet();
     }
 
+    
+    public Collection<String> getMapperNames() {
+	buildAllMappers();
+	return mappers.keySet();
+    }
+    
+    
     /**
      * @return
      */
@@ -210,9 +263,24 @@ public class Configuration {
 	    throw new SqlNotFoundException(L10NUtils.format("003281", id));
 	return mappedStatements.get(id);
     }
+    
+    public MapperSource getMapper(String id) {
+	if (!this.mappers.containsKey(id)) {
+	    buildMappersFromId(id);
+	}
+	if (!mappers.containsKey(id))
+	    throw new SqlNotFoundException(L10NUtils.format("003281", id));
+	return mappers.get(id);
+    }
+    
 
     protected void buildStatementsFromId(String id) {
 	final String namespace = extractNamespace(id);
 	buildStatementsForNamespace(namespace);
+    }
+    
+    protected void buildMappersFromId(String id) {
+	final String namespace = extractNamespace(id);
+	buildMappersForNamespace(namespace);
     }
 }

@@ -17,7 +17,9 @@ public class WebApplicationContextLoaderListener extends ContextLoaderListener {
 
 	ServletContext useToServletContext = event.getServletContext();
 	try {
+	    
 	    Bootstrap.boot(useToServletContext);
+	    
 	} catch (Throwable e) {
 	    log.error("Bootstrap.boot", e);
 	}
@@ -26,8 +28,10 @@ public class WebApplicationContextLoaderListener extends ContextLoaderListener {
 
     public void contextDestroyed(ServletContextEvent event) {
 	try {
+	    
 	    ServletContext servletContext = event.getServletContext();
 	    Bootstrap.shutdown(servletContext);
+	    
 	} catch (Exception ex) {
 	} finally {
 	}

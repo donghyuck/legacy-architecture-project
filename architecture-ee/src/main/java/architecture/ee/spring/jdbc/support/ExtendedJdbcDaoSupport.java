@@ -20,6 +20,8 @@ import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.ss.formula.functions.T;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.jdbc.support.nativejdbc.NativeJdbcExtractor;
@@ -110,6 +112,10 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 	getExtendedJdbcTemplate().setLobHandler(lobHandler);
     }
 
+    protected <T> RowMapper<T> createRowMapper(String name, Class<T> requiredType ){	
+	 return configuration.getMapper(name).createRowMapper(requiredType);
+    }
+    
     protected BoundSql getBoundSql(String statement) {
 	if (isSetConfiguration()) {
 	    MappedStatement stmt = configuration.getMappedStatement(statement);

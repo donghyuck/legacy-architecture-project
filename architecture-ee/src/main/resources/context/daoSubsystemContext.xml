@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+			
+	<!-- ================================================ -->
+	<!-- 1. SQL Service                                   -->
+	<!-- ================================================ -->		
+	<bean id="sqlConfiguration" factory-bean="sqlQueryFactory" factory-method="getConfiguration" />
+	<bean id="sqlQueryFactory" class="architecture.ee.jdbc.sqlquery.factory.SqlQueryFactoryBuilder" factory-method="getSqlQueryFactory" init-method="initialize" depends-on="dataSource" p:incrementerSupported="false" >
+		<property name="resourceLocations">
+			<list>
+				<value>res:sql/default-framework-sqlset.xml</value>
+				<value>res:sql/default-community-sqlset.xml</value>
+				<value>res:sql/default-web-sqlset.xml</value>
+				<value>res:sql/default-user-sqlset.xml</value>
+			</list>
+    	</property>
+    	<property name="dataSource" ref="dataSource" />
+    </bean>	   
+    
+	<bean id="directoryScanner" class="architecture.ee.spring.resources.scanner.impl.DirectoryScannerImpl" destroy-method="destroy" p:fastDeploy="true">		  
+		<property name="directoryListenerList">		
+	        <list value-type="architecture.common.scanner.DirectoryListener">
+	        	<ref bean="sqlQueryFactory" />
+	        </list>
+		</property>
+		<property name="resourceLocations">
+			<list>
+				<value>${services.sql.location}</value>
+			</list>
+		</property>	    		 
+    </bean>    
+	<!-- =================================================== -->
+	<!-- 2. Dao Support										 -->
+	<!-- =================================================== -->	
+	
+	<bean id="maxValueIncrementer" factory-bean="sqlQueryFactory" factory-method="getMaxValueIncrementer" />	
+    
+	<bean id="jdbcDaoSupport" abstract="true" p:configuration-ref="sqlConfiguration" p:dataSource-ref="dataSource" p:maxValueIncrementer-ref="maxValueIncrementer"  depends-on="dataSource, sqlConfiguration, maxValueIncrementer" />
+ 	
+ 	<bean id="extendedPropertyDao" class="architecture.ee.jdbc.property.dao.impl.JdbcExtendedPropertyDao" parent="jdbcDaoSupport" />
+	
+	<bean id="sqlQuerySupport" abstract="true" p:sqlQueryFactory-ref="sqlQueryFactory"  depends-on="sqlQueryFactory"  />	
+	
+	<bean id="sqlQueryClient"  parent="sqlQuerySupport" class="architecture.ee.component.impl.SqlQueryClientImpl" p:dataSource-ref="dataSource" />	
+ 			   
+</beans>	

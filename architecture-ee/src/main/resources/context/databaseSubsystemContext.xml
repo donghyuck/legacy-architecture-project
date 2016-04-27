@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:c="http://www.springframework.org/schema/c" xmlns:aop="http://www.springframework.org/schema/aop"
@@ -9,16 +10,21 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
-       
-	<description>
-	<![CDATA[
-        Define Transaction
-	]]>
-	</description>	
+			
+ 	<!-- ================================================ -->
+	<!-- 1. DataSource                                    -->
 	<!-- ================================================ -->
-	<!-- 1. Transaction                                	  -->
+	<bean id="dataSource" class="architecture.common.jdbc.datasource.DataSourceFactory" factory-method="getDataSource" />
+	
+	 <bean id="defaultLobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true"/>
+	
+	<alias name="defaultLobHandler" alias="lobHandler"/>
+	
+	<!-- ================================================ -->
+	<!-- 2. Transaction                                   -->
 	<!-- ================================================ -->	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" depends-on="dataSource" p:dataSource-ref="dataSource" />	
+	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
-	
-	
-</beans>
+			   
+</beans>	

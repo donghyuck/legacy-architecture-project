@@ -37,6 +37,7 @@ import architecture.ee.util.ApplicationConstants;
 import net.sf.ehcache.Cache;
 
 /**
+ * this class for admin service .
  * 
  * @author donghyuck son
  *
@@ -71,11 +72,9 @@ public final class AdminHelper {
     }
 
     public static boolean isSetupComplete() {
-	Boolean isSetupComplete = getAdminService().getConfigService()
-		.getLocalProperty(ApplicationConstants.SETUP_COMPLETE_PROP_NAME, false);
+	Boolean isSetupComplete = getAdminService().getConfigService().getLocalProperty(ApplicationConstants.SETUP_COMPLETE_PROP_NAME, false);
 	if (isReady()) {
-	    return getAdminService().getConfigService()
-		    .getApplicationBooleanProperty(ApplicationConstants.SETUP_COMPLETE_PROP_NAME, isSetupComplete);
+	    return getAdminService().getConfigService().getApplicationBooleanProperty(ApplicationConstants.SETUP_COMPLETE_PROP_NAME, isSetupComplete);
 	}
 	return isSetupComplete;
     }
@@ -137,8 +136,7 @@ public final class AdminHelper {
 	    boolean diskPersistent = false;
 	    long diskExpiryThreadIntervalSeconds = 0;
 
-	    Cache memoryOnlyCache = new Cache(name, maxElementsInMemory, overflowToDisk, eternal, timeToLiveSeconds,
-		    timeToIdleSeconds, diskPersistent, diskExpiryThreadIntervalSeconds);
+	    Cache memoryOnlyCache = new Cache(name, maxElementsInMemory, overflowToDisk, eternal, timeToLiveSeconds, timeToIdleSeconds, diskPersistent, diskExpiryThreadIntervalSeconds);
 	    getCacheManager().addCache(memoryOnlyCache);
 	} else {
 	    return null;

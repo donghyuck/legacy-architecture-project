@@ -155,20 +155,16 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 
 		    int start = path.indexOf('{') + 1;
 		    int end = path.indexOf('}');
-
 		    String key = path.substring(start, end).trim();
-
-		    if (key.equals(ApplicationConstants.RESOURCE_SQL_LOCATION_PROP_NAME)) {
-
-			path = AdminHelper.getRepository().getSetupApplicationProperties()
-				.get(ApplicationConstants.RESOURCE_SQL_LOCATION_PROP_NAME);
+		    if (key.equals(ApplicationConstants.RESOURCE_SQL_LOCATION_PROP_NAME) || key.equals(ApplicationConstants.SERVICES_SQL_LOCATION_PROP_NAME)) {
+			path = AdminHelper.getRepository().getSetupApplicationProperties().get(key);			
 			if (StringUtils.isEmpty(path))
 			    path = AdminHelper.getRepository().getURI("sql");
-
 		    } else {
 			path = AdminHelper.getRepository().getSetupApplicationProperties().get(key);
 		    }
-		    log.debug(key + "=" + path);
+		    
+		    log.debug( key + "=" + path );
 		}
 
 		FileObject fo = VFSUtils.resolveFile(path);

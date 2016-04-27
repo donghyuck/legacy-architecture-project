@@ -34,17 +34,30 @@ public interface ApplicationConstants extends architecture.common.lifecycle.Appl
     public static final String FREEMARKER_STRONG_TEMPLATE_CACHE_SIZE_PROP_NAME = "framework.freemarker.strongTemplateCacheSize";
     public static final String FREEMARKER_WEAK_TEMPLATE_CACHE_SIZE_PROP_NAME = "framework.freemarker.weakTemplateCacheSize";
 
+    
+    /** SECURITY PROPERTY KEY */
     public static final String SECURITY_AUTHENTICATION_ENCODING_ALGORITHM_PROP_NAME = "security.authentication.encoding.algorithm";
     public static final String SECURITY_AUTHENTICATION_ENCODING_SALT_PROP_NAME = "security.authentication.encoding.salt";
     public static final String SECURITY_AUTHENTICATION_AUTHORITY_PROP_NAME = "security.authentication.authority";
 
+    /** LOCALE PROPERTY KEY */
     public static final String LOCALE_LANGUAGE_PROP_NAME = "locale.language";
     public static final String LOCALE_COUNTRY_PROP_NAME = "locale.country";
     public static final String LOCALE_CHARACTER_ENCODING_PROP_NAME = "locale.characterEncoding";
     public static final String LOCALE_TIMEZONE_PROP_NAME = "locale.timeZone";
 
+    
+    
+    /** SQL PROPERTY KEY */
+    public static final String SERVICES_SQL_LOCATION_PROP_NAME = "services.sql.location";
+    
+    
+    
     public static final String RESOURCE_SQL_LOCATION_PROP_NAME = "resource.sql.location";
     public static final String RESOURCE_TEMPLATE_LOCATION_PROP_NAME = "resource.template.location";
+    
+    
+    /** SCRIPTING PROPERTY KEY */
 
     public static final String SCRIPTING_GROOVY_SOURCE_LOCATION_PROP_NAME = "scripting.groovy.source.location";
     public static final String SCRIPTING_GROOVY_SOURCE_ENCODING_PROP_NAME = "scripting.groovy.source.encoding";
@@ -52,7 +65,9 @@ public interface ApplicationConstants extends architecture.common.lifecycle.Appl
     public static final String SCRIPTING_GROOVY_DEBUG_PROP_NAME = "scripting.groovy.debug";
 
     // setRecompileGroovySource
-    public static final String RESOURCE_LICENSE_LOCATION_PROP_NAME = "resoruce.license.location";
+    
+    /** LICENSE PROPERTY KEY */
+    public static final String RESOURCE_LICENSE_LOCATION_PROP_NAME = "license.location";
 
     public static final int USER = 1;
 

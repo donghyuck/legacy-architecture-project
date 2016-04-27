@@ -31,9 +31,11 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.access.BeanFactoryReference;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.access.ContextSingletonBeanFactoryLocator;
+import org.springframework.web.context.ContextLoader;
 
 import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.lifecycle.ApplicationProperties;
+import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
@@ -43,6 +45,9 @@ import architecture.ee.spring.lifecycle.SpringAdminService;
 import architecture.ee.util.ApplicationConstants;
 
 /**
+ * this bootstrap ... for everything.
+ * 
+ * 
  * @author donghyuck
  */
 public class BootstrapImpl implements Bootstrap.Implementation {
@@ -51,19 +56,17 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 
     private static final String BOOTSTRAP_CONTEXT_KEY = "default-services-context";
 
-    private Map<Class<?>, WeakReference<?>> references = Collections
-	    .synchronizedMap(new HashMap<Class<?>, WeakReference<?>>());
+    private Map<Class<?>, WeakReference<?>> references = Collections.synchronizedMap(new HashMap<Class<?>, WeakReference<?>>());
 
     private RepositoryImpl repository = new RepositoryImpl();
 
     private final ReentrantLock lock = new ReentrantLock();
 
     private final AtomicBoolean initialized = new AtomicBoolean(false);
-
+    
     private String bootstrapFactoryKey;
-
+        
     public ConfigurableApplicationContext getBootstrapApplicationContext() {
-
 	try {
 	    // 리파지토리가 준비되어 있고 아직 컨텍스트가 초기화 되지 않았다면 ..
 	    if (repository.getState() == State.INITIALIZED && !initialized.getAndSet(true)) {
@@ -75,24 +78,17 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 			log.debug(L10NUtils.format("003053", name, properties.get(name)));
 		    }
 		}
-		boolean setupComplete = properties.getBooleanProperty(ApplicationConstants.SETUP_COMPLETE_PROP_NAME,
-			false);
-		bootstrapFactoryKey = properties.getStringProperty(ApplicationConstants.BOOTSTRAP_CONTEXT_PROP_NAME,
-			BOOTSTRAP_CONTEXT_KEY);
+		boolean setupComplete = properties.getBooleanProperty(ApplicationConstants.SETUP_COMPLETE_PROP_NAME, false);
+		bootstrapFactoryKey = properties.getStringProperty(ApplicationConstants.BOOTSTRAP_CONTEXT_PROP_NAME, BOOTSTRAP_CONTEXT_KEY);
 		if (log.isDebugEnabled()) {
 		    log.info(L10NUtils.format("003008", setupComplete));
 		    log.info(L10NUtils.format("003009", bootstrapFactoryKey));
 		}
-	    }
-
-	    BeanFactoryReference parentContextRef = ContextSingletonBeanFactoryLocator.getInstance()
-		    .useBeanFactory(bootstrapFactoryKey);
+	    }	
+	    BeanFactoryReference parentContextRef = ContextSingletonBeanFactoryLocator.getInstance().useBeanFactory(bootstrapFactoryKey);
 	    ConfigurableApplicationContext context = (ConfigurableApplicationContext) parentContextRef.getFactory();
-
 	    return context;
-
 	} catch (Throwable e) {
-
 	    log.error(L10NUtils.getMessage("002402"), e);
 	    return null;
 	}
@@ -100,11 +96,9 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 
     @SuppressWarnings("unchecked")
     public <T> T getBootstrapComponent(Class<T> requiredType) throws ComponentNotFoundException {
-
 	if (requiredType == null) {
 	    throw new ComponentNotFoundException();
 	}
-
 	if (requiredType == Repository.class) {
 	    lock.lock();
 	    try {
@@ -118,60 +112,73 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 	    }
 	    return (T) repository;
 	}
-
 	if (references.get(requiredType) == null) {
-	    try {
+	    try {		
 		if (getBootstrapApplicationContext() == null) {
 		    throw new IllegalStateException(L10NUtils.getMessage("003051"));
-		}
-		references.put(requiredType,
-			new WeakReference<T>(getBootstrapApplicationContext().getBean(requiredType)));
+		}		
+		if( ContextLoader.getCurrentWebApplicationContext() != null ){
+		    log.debug("searching in current web application context");
+		    references.put(requiredType, new WeakReference<T>(ContextLoader.getCurrentWebApplicationContext().getBean(requiredType)));	
+		}else{
+		    log.debug("searching in bootstrap application context");
+		    references.put(requiredType, new WeakReference<T>(getBootstrapApplicationContext().getBean(requiredType)));
+		}				
 	    } catch (BeansException e) {
 		throw new ComponentNotFoundException(L10NUtils.format("003052", requiredType.getName()), e);
 	    }
 	}
-
 	return (T) references.get(requiredType).get();
     }
 
     public void boot(ServletContext servletContext) {
 	lock.lock();
-	try {
+	try {	    
+	    log.debug("checking repository state:" + getState() );	    
 	    if (repository.getState() != State.INITIALIZED) {
 		((RepositoryImpl) repository).setServletContext(servletContext);
 	    }
-
-	    // 1. admin service 가 존재하는 경우 : DOTO
-
-	    AdminService adminService = getAdminService();
-	    if (adminService instanceof SpringAdminService) {
-		((SpringAdminService) adminService).setServletContext(servletContext);
-	    }
-	    adminService.start();
-	} catch (BeansException e) {
-
+	    // 1. admin service 가 bootstrap 에 존재하는 경우 : DOTO
+	    AdminService adminService = getBootstrapComponent(AdminService.class);
+            if (adminService instanceof SpringAdminService) {
+                ((SpringAdminService) adminService).setServletContext(servletContext);
+       	    }
+            adminService.start();	            
 	} catch (ComponentNotFoundException e) {
-	    // 2. admin service 가 존재하지 않는 경우 : DOTO
-
+	    ContextLoader contextLoader = getBootstrapComponent(ContextLoader.class);
+	    contextLoader.initWebApplicationContext(servletContext);
 	} finally {
 	    lock.unlock();
 	}
     }
 
-    public AdminService getAdminService() throws ComponentNotFoundException {
-	return getBootstrapComponent(AdminService.class);
+    public AdminService getAdminService() throws ComponentNotFoundException {	
+	try {
+	    return getBootstrapComponent(AdminService.class);
+	} catch (ComponentNotFoundException e) {
+	    if(initialized.get()){
+		try {
+		    return ContextLoader.getCurrentWebApplicationContext().getBean(AdminService.class);
+		} catch (BeansException e1) {
+		    throw new ComponentNotFoundException(e1);
+		}
+	    }else{
+		throw e;
+	    }
+	}
     }
 
     public void shutdown(ServletContext servletContext) {
 	lock.lock();
 	try {
 	    // 1. admin service 가 존재하는 경우 :
-	    AdminService adminService = getAdminService();
-	    adminService.stop();
-	    adminService.destroy();
+            AdminService adminService = getAdminService();
+            adminService.stop();
+            adminService.destroy();
 	} catch (ComponentNotFoundException e) {
 	    // 2. admin service 가 존재하지 않는 경우 :
-
+	    ContextLoader contextLoader = getBootstrapComponent(ContextLoader.class);
+	    contextLoader.closeWebApplicationContext(servletContext);	    
 	} finally {
 	    initialized.set(false);
 	    lock.unlock();
@@ -179,6 +186,7 @@ public class BootstrapImpl implements Bootstrap.Implementation {
     }
 
     @SuppressWarnings("unchecked")
+    @Deprecated
     public boolean isBootstrapComponentAvailable(Class serviceClass) {
 	try {
 	    getBootstrapComponent(serviceClass);
@@ -190,13 +198,16 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 	return true;
     }
 
-    public State getState() {
-	if (isBootstrapComponentAvailable(AdminService.class)) {
-	    AdminService adminService = getBootstrapComponent(AdminService.class);
-	    return adminService.getState();
-	} else {
+    public State getState() {	
+	try {
+	    if(initialized.get()){
+		return getAdminService().getState();
+	    }else{
+		return repository.getState();
+	    }
+	} catch (ComponentNotFoundException e) {
 	    return repository.getState();
-	}
+	}	
     }
 
 }

@@ -155,6 +155,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	    impl.afterPropertiesSet();
 	    return impl;
 	}
+	
 	return null;
     }
 
@@ -434,13 +435,23 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public void setLocalizedApplicationProperty(String name, String value, Locale locale) {
-	getLocalizedApplicationProperties()
-		.put((new StringBuilder()).append(name).append(".").append(locale.toString()).toString(), value);
+	getLocalizedApplicationProperties().put((new StringBuilder()).append(name).append(".").append(locale.toString()).toString(), value);
     }
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public void deleteLocalizedApplicationProperty(String name, Locale locale) {
-	getLocalizedApplicationProperties()
-		.remove((new StringBuilder()).append(name).append(".").append(locale.toString()).toString());
+	getLocalizedApplicationProperties().remove((new StringBuilder()).append(name).append(".").append(locale.toString()).toString());
     }
+
+    @Override
+    public String toString() {
+	return "ConfigServiceImpl [setupProperties=" + setupProperties + ", properties=" + properties
+		+ ", localizedProperties=" + localizedProperties + ", locale=" + locale + ", timeZone=" + timeZone
+		+ ", characterEncoding=" + characterEncoding + ", dateFormat=" + dateFormat + ", dateTimeFormat="
+		+ dateTimeFormat + ", sqlConfiguration=" + sqlConfiguration + ", dataSource=" + dataSource
+		+ ", effectiveRootPath=" + effectiveRootPath + "]";
+    }
+    
+    
+    
 }

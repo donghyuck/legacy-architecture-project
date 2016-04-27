@@ -11,11 +11,14 @@ import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.common.spring.jdbc.core.ExtendedJdbcTemplate;
+import architecture.common.user.Company;
 import architecture.ee.jdbc.sqlquery.SqlQuery;
 import architecture.ee.jdbc.sqlquery.SqlQueryHelper;
 import architecture.ee.jdbc.sqlquery.builder.xml.XmlSqlBuilder;
@@ -23,26 +26,49 @@ import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
 import architecture.ee.jdbc.sqlquery.factory.impl.SqlQueryFactoryImpl;
 import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
+import architecture.ee.jdbc.sqlquery.mapping.MapperSource;
 
-public class TestSqlQuery {
+public class SqlQueryTest {
 
-    private Log log = LogFactory.getLog(getClass());
+    private static Log log = LogFactory.getLog(SqlQueryTest.class);
 
-    private static ClassPathXmlApplicationContext appContext = null;
+    private static ClassPathXmlApplicationContext context = null;
 
-    protected ClassPathXmlApplicationContext createClassPathXmlApplicationContext(String path) {
-	if (appContext == null)
-	    appContext = new ClassPathXmlApplicationContext(path);
-	return appContext;
+    @BeforeClass
+    public static void setup() {
+	log.debug("setup context..");
+	//context = new ClassPathXmlApplicationContext("syncSubsystemContext.xml");
     }
 
-    protected ClassPathXmlApplicationContext createClassPathXmlApplicationContext() {
-	return createClassPathXmlApplicationContext("sqlQuerySubsystemContext.xml");
+    @Test
+    public void testXmlSqlBuilder() {
+	InputStream input = getClass().getClassLoader().getResourceAsStream("common-sqlset.xml");
+	Configuration config = new Configuration();
+	XmlSqlBuilder builder = new XmlSqlBuilder(input, config);
+	builder.build();
+	
+	//config.buildAllStatements();
+	log.debug( "%%%%%%%%//" + config.getMapper("COMMON.companyRowMapper") );
+	for (String name : config.getMappedStatementNames()) {
+	    MappedStatement statement = config.getMappedStatement(name);
+	    log.debug("SQL:" + name);
+	    //log.debug(statement.getBoundSql(null).getParameterMappings());
+	}
+	
+	
+	
+	
+	for (String name : config.getMapperNames()) {
+	    MapperSource factory = config.getMapper(name);
+	    log.debug("FACTORY: " + factory.getID());
+	    //log.debug(statement.getBoundSql(null).getParameterMappings());
+	}
     }
-
+    
+    
+    
     // @Test
     public void testLoadSqlQueryFactory() {
-	ClassPathXmlApplicationContext context = createClassPathXmlApplicationContext();
 	SqlQueryFactory factory = context.getBean(SqlQueryFactory.class);
 
 	SqlQuery query = factory.createSqlQuery();
@@ -85,12 +111,18 @@ public class TestSqlQuery {
 	Configuration config = new Configuration();
 	XmlSqlBuilder builder = new XmlSqlBuilder(is, config);
 	builder.build();
-	config.buildAllStatements();
+	
+	//config.buildAllStatements();
 
 	for (String name : config.getMappedStatementNames()) {
 	    MappedStatement statement = config.getMappedStatement(name);
 	    log.debug("SQL:" + name);
 	    log.debug(statement.getDescription());
+	}
+	
+	for (String name : config.getMapperNames()) {
+	    MapperSource factory = config.getMapper(name);
+	    log.debug("Factory:" + name);
 	}
     }
 
@@ -126,7 +158,7 @@ public class TestSqlQuery {
 
     // @Test
     public void testSqlQueryWithSpringStyle() {
-	ClassPathXmlApplicationContext context = createClassPathXmlApplicationContext();
+
 	DataSource dataSource = (DataSource) context.getBean("dataSource");
 	InputStream is = getClass().getClassLoader().getResourceAsStream("common-sqlset.xml");
 	Configuration config = new Configuration();
@@ -161,7 +193,6 @@ public class TestSqlQuery {
 
     // @Test
     public void testSqlQueryWithNewStyle() {
-	ClassPathXmlApplicationContext context = createClassPathXmlApplicationContext();
 
 	SqlQuery query = context.getBean(SqlQuery.class);
 	log.debug(" test 1 start -------------------------------------------");

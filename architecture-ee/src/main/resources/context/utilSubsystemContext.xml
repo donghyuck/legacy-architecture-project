@@ -14,24 +14,9 @@
        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
 	<!-- =================================================== -->
-	<!-- 1. URLDirectoryScanner -->
+	<!-- 1. Task Scheduler									 -->
 	<!-- =================================================== -->
-	<bean id="directoryScanner"
-		class="architecture.ee.spring.resources.scanner.impl.DirectoryScannerImpl"
-		destroy-method="destroy" p:fastDeploy="true">
-		<property name="directoryListenerList">
-			<list value-type="architecture.common.scanner.DirectoryListener">
-				<ref bean="sqlQueryFactory" />
-			</list>
-		</property>
-		<property name="resourceLocations">
-			<list>
-				<value>${resource.sql.location}</value>
-			</list>
-		</property>
-	</bean>
-
-	<task:annotation-driven scheduler="taskScheduler" executor="taskExecutor" />
-	<task:scheduler id="taskScheduler" pool-size="2" />
+	<task:scheduler id="taskScheduler" pool-size="2" />	
+	<task:annotation-driven scheduler="taskScheduler" executor="taskExecutor" />	
 
 </beans>

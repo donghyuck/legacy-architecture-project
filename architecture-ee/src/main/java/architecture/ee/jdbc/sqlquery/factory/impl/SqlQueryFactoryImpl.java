@@ -73,8 +73,7 @@ public class SqlQueryFactoryImpl extends AbstractSqlQueryFactory implements SqlQ
     }
 
     public String[] getMappedStatementNames() {
-	return getConfiguration().getMappedStatementNames()
-		.toArray(new String[getConfiguration().getMappedStatementNames().size()]);
+	return getConfiguration().getMappedStatementNames().toArray(new String[getConfiguration().getMappedStatementNames().size()]);
     }
 
     public SqlQuery createSqlQuery() {
@@ -86,8 +85,7 @@ public class SqlQueryFactoryImpl extends AbstractSqlQueryFactory implements SqlQ
     }
 
     public SqlQuery createSqlQuery(ExtendedJdbcTemplate jdbcTemplate) {
-	return new SqlQueryImpl(getConfiguration(), jdbcTemplate,
-		incrementerSupported ? getMaxValueIncrementer() : null);
+	return new SqlQueryImpl(getConfiguration(), jdbcTemplate, incrementerSupported ? getMaxValueIncrementer() : null);
     }
 
     public MaxValueIncrementer getMaxValueIncrementer() {
@@ -100,8 +98,10 @@ public class SqlQueryFactoryImpl extends AbstractSqlQueryFactory implements SqlQ
     }
 
     private SequencerFactory createSequencerFactory() {
-	return new SequencerFactory(getConfiguration(),
-		dataSource == null ? DataSourceFactory.getDataSource() : dataSource);
+	return new SequencerFactory(getConfiguration(),	dataSource == null ? DataSourceFactory.getDataSource() : dataSource);
     }
 
+    
+    
+    
 }

@@ -56,9 +56,15 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
      */
     private SpringAdminService adminService;
 
+    protected ApplicationHelperImpl(ConfigurableApplicationContext applicationContext, AdminService adminService) {
+	this.applicationContext = applicationContext;	
+	this.adminService = (SpringAdminService) adminService;
+    }
+
+    
     protected ApplicationHelperImpl(ConfigurableApplicationContext applicationContext) {
-	this.applicationContext = applicationContext;
-	this.adminService = this.applicationContext.getBean(SpringAdminService.class);
+	this.applicationContext = applicationContext;	
+	this.adminService = this.applicationContext.getBean(SpringAdminService.class);	
     }
 
     public ConfigurableApplicationContext getConfigurableApplicationContext() {

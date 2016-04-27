@@ -154,14 +154,13 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 
 	    }
 	}
-
-	setupMoskitoThresholds();
-
+	if(isEnabledMoskito()){
+	    setupMoskitoThresholds();
+	}
 	// 컨텐스트를 로드합니다
 	if (isSetServletContext() && isSetContextLoader()) {
 	    try {
-		this.applicationContext = (ConfigurableApplicationContext) getContextLoader()
-			.initWebApplicationContext(getServletContext());
+		this.applicationContext = (ConfigurableApplicationContext) getContextLoader().initWebApplicationContext(getServletContext());
 		this.applicationContext.start();
 	    } finally {
 		if (oldLoader != null)
@@ -170,12 +169,18 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 
 	}
     }
+    
+    
+    private boolean isEnabledMoskito(){	
+	boolean isEnabled = this.getRepository().getSetupApplicationProperties().getBooleanProperty("performance-monitoring.moskito.enabled", false);
+	return configService.getApplicationBooleanProperty("performance-monitoring.moskito.enabled", isEnabled );
+    } 
 
     private void setupMoskitoThresholds() {
-	boolean isEnabled = this.getRepository().getSetupApplicationProperties()
-		.getBooleanProperty("performance-monitoring.moskito.thresholds-setup", false);
-	if (isEnabled || configService.getApplicationBooleanProperty("performance-monitoring.moskito.thresholds-setup",
-		false)) {
+	
+	
+	boolean isEnabled = this.getRepository().getSetupApplicationProperties().getBooleanProperty("performance-monitoring.moskito.thresholds-setup", false);
+	if (isEnabled || configService.getApplicationBooleanProperty("performance-monitoring.moskito.thresholds-setup", false)) {
 	    log.debug("setup moskito threshold ...");
 	    Thresholds.addMemoryThreshold("PermGenFree", "MemoryPool-PS Perm Gen-NonHeap", "Free",
 		    new LongBarrierPassGuard(ThresholdStatus.GREEN, 1000 * 1000 * 5, GuardedDirection.UP), /* */

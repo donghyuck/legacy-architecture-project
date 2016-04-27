@@ -20,6 +20,7 @@ import org.apache.commons.logging.LogFactory;
 
 import architecture.common.util.StringUtils;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
+import architecture.ee.jdbc.sqlquery.mapping.MapperSource;
 import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
 import architecture.ee.jdbc.sqlquery.mapping.StatementType;
 import architecture.ee.jdbc.sqlquery.sql.SqlSource;
@@ -32,7 +33,9 @@ import architecture.ee.jdbc.sqlquery.sql.SqlSource;
 public class SqlBuilderAssistant extends AbstractBuilder {
 
     private String currentNamespace;
+    
     private String resource;
+    
     private Log log = LogFactory.getLog(SqlBuilderAssistant.class);
 
     public SqlBuilderAssistant(Configuration configuration, String resource) {
@@ -48,23 +51,25 @@ public class SqlBuilderAssistant extends AbstractBuilder {
      * @param timeout
      * @return
      */
-    public MappedStatement addMappedStatement(String id, String description, SqlSource sqlSource,
-	    StatementType statementType, Integer fetchSize, Integer timeout) {
+    public MappedStatement addMappedStatement(String id, String description, SqlSource sqlSource, StatementType statementType, Integer fetchSize, Integer timeout) {
 	String idToUse = applyCurrentNamespace(id);
-	MappedStatement.Builder statementBuilder = new MappedStatement.Builder(configuration, idToUse, sqlSource,
-		statementType);
+	MappedStatement.Builder statementBuilder = new MappedStatement.Builder(configuration, idToUse, sqlSource,statementType);
 	statementBuilder.resource(resource);
 	statementBuilder.fetchSize(fetchSize);
 	statementBuilder.description(description);
 	setStatementTimeout(timeout, statementBuilder);
 	MappedStatement statement = statementBuilder.build();
 	configuration.addMappedStatement(statement);
-	// log.debug( String.format("Mapped statement ID=%s, description=%s",
-	// new Object[]{statement.getID(), statement.getDescription()}) );
-
 	return statement;
     }
 
+    public MapperSource addMapperSource(String id, MapperSource  mapperSource){
+	String idToUse = applyCurrentNamespace(id);
+	mapperSource.setID(idToUse);
+	configuration.addMapper(mapperSource);
+	return mapperSource;
+    }
+    
     public String getCurrentNamespace() {
 	return currentNamespace;
     }

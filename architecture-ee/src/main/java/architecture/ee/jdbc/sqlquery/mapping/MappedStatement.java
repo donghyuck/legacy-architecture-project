@@ -128,6 +128,7 @@ public class MappedStatement {
     }
 
     public BoundSql getBoundSql(Object parameterObject) {
+	
 	BoundSql boundSql = sqlSource.getBoundSql(parameterObject);
 	return boundSql;
     }
