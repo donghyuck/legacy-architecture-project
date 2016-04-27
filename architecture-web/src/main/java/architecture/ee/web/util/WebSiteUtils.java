@@ -35,207 +35,203 @@ import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteManager;
 import architecture.ee.web.site.WebSiteNotFoundException;
 
-
 public class WebSiteUtils {
 
-	public static final String MAIN_PAGE_VIEW_PREFIX = "main.view";
-	private static final Log log = LogFactory.getLog(WebSiteUtils.class);
-	public WebSiteUtils() {
+    public static final String MAIN_PAGE_VIEW_PREFIX = "main.view";
+    private static final Log log = LogFactory.getLog(WebSiteUtils.class);
+
+    public WebSiteUtils() {
+    }
+
+    public static LogoManager getLogoManager() {
+	return ApplicationHelper.getComponent(LogoManager.class);
+    }
+
+    public static WebSiteManager getWebSiteManager() {
+	return ApplicationHelper.getComponent(WebSiteManager.class);
+    }
+
+    public static WebSite getWebSite(HttpServletRequest request) throws WebSiteNotFoundException {
+	String localName = request.getLocalName();
+
+	log.debug("check: " + localName + " - " + (StringUtils.isNotEmpty(localName) && !TextUtils.isValidIpAddress(localName) && TextUtils.isValidHostname(localName)));
+
+	if (StringUtils.isNotEmpty(localName) && !TextUtils.isValidIpAddress(localName) && TextUtils.isValidHostname(localName)) {
+	    return getWebSiteManager().getWebSiteByUrl(localName);
 	}
 
-	public static LogoManager getLogoManager(){
-		return ApplicationHelper.getComponent(LogoManager.class);
-	}
+	return getDefaultWebSite();
+    }
 
-	public static WebSiteManager getWebSiteManager(){
-		return ApplicationHelper.getComponent(WebSiteManager.class);
-	}	
-	
-	public static WebSite getWebSite(HttpServletRequest request) throws WebSiteNotFoundException {
-		String localName = request.getLocalName();		
-		
-		log.debug("check: " + localName + " - " + ( StringUtils.isNotEmpty(localName) && !TextUtils.isValidIpAddress(localName) && TextUtils.isValidHostname(localName)) );
-		
-		if( StringUtils.isNotEmpty(localName) && !TextUtils.isValidIpAddress(localName) && TextUtils.isValidHostname(localName)){	
-			return getWebSiteManager().getWebSiteByUrl(localName);			
+    public static Long getDefaultWebSiteId() {
+	return ApplicationHelper.getApplicationLongProperty("components.website.default.websiteId", 1L);
+    }
+
+    public static WebSite getDefaultWebSite() throws WebSiteNotFoundException {
+	return getWebSiteManager().getWebSiteById(getDefaultWebSiteId());
+    }
+
+    public static MenuRepository getMenuRepository() {
+	return ApplicationHelper.getComponent(MenuRepository.class);
+    }
+
+    public static Long getDefaultMenuId() {
+	return ApplicationHelper.getApplicationLongProperty("components.menu.default.menuId", 1L);
+    }
+
+    public static Menu getDefaultMenu() throws MenuNotFoundException {
+	return getMenuRepository().getMenu(getDefaultMenuId());
+    }
+
+    public static Menu getMenu(long menuId) throws MenuNotFoundException {
+	return getMenuRepository().getMenu(menuId);
+    }
+
+    public static MenuComponent getMenuComponent(String name) throws MenuNotFoundException {
+	return getMenuComponent(getDefaultMenu(), name);
+    }
+
+    public static MenuComponent getMenuComponent(String name, String child) throws MenuNotFoundException {
+	return getMenuComponent(getDefaultMenu(), name, child);
+    }
+
+    public static MenuComponent getMenuComponent(Menu menu, String name) throws MenuNotFoundException {
+	if (menu != null) {
+	    return getMenuRepository().getMenuComponent(menu, name);
+	} else {
+	    throw new MenuNotFoundException();
+	}
+    }
+
+    public static MenuComponent getMenuComponent(MenuComponent menu, String name) throws MenuNotFoundException {
+	for (MenuComponent childMenu : menu.getComponents()) {
+
+	    if (name.equals(childMenu.getName())) {
+		return childMenu;
+	    }
+	    if (childMenu.getComponents().size() > 0) {
+		for (MenuComponent childMenu2 : childMenu.getComponents()) {
+		    if (name.equals(childMenu2.getName())) {
+			return childMenu2;
+		    }
 		}
-		
-		return getDefaultWebSite();
-	}
-	
-	public static Long getDefaultWebSiteId(){
-		return  ApplicationHelper.getApplicationLongProperty("components.website.default.websiteId", 1L);
-	}
-	
-	public static WebSite getDefaultWebSite() throws WebSiteNotFoundException {
-		return getWebSiteManager().getWebSiteById(getDefaultWebSiteId());
-	}
-
-	public static MenuRepository getMenuRepository(){
-		return ApplicationHelper.getComponent(MenuRepository.class);
-	}
-		
-	
-	public static Long getDefaultMenuId(){
-		return ApplicationHelper.getApplicationLongProperty("components.menu.default.menuId", 1L);
-	}
-	
-	public static Menu getDefaultMenu() throws MenuNotFoundException {
-		return getMenuRepository().getMenu(getDefaultMenuId());
-	}
-	
-	public static Menu getMenu(long menuId) throws MenuNotFoundException {
-		return getMenuRepository().getMenu(menuId);
-	}
-
-	public static MenuComponent getMenuComponent(String name) throws MenuNotFoundException { 
-		return getMenuComponent(getDefaultMenu(), name);
-	}
-	
-	public static MenuComponent getMenuComponent(String name, String child) throws MenuNotFoundException { 
-		return getMenuComponent(getDefaultMenu(), name, child);
-	}
-		
-	public static MenuComponent getMenuComponent(Menu menu, String name) throws MenuNotFoundException { 
-		if( menu != null ){
-			return getMenuRepository().getMenuComponent(menu, name);
-		}else{
-			throw new MenuNotFoundException();
-		}
-	}
-
-	public static MenuComponent getMenuComponent(MenuComponent menu, String name) throws MenuNotFoundException { 
-		for( MenuComponent childMenu : menu.getComponents() )
-		{
-			
-			if( name.equals( childMenu.getName() ) ){
-				return childMenu;
+		for (MenuComponent childMenu2 : childMenu.getComponents()) {
+		    if (childMenu2.getComponents().size() > 0) {
+			for (MenuComponent childMenu3 : childMenu2.getComponents()) {
+			    if (name.equals(childMenu3.getName())) {
+				return childMenu3;
+			    }
 			}
-			if( childMenu.getComponents().size() > 0 ){				
-				for( MenuComponent childMenu2 : childMenu.getComponents() ){
-					if( name.equals( childMenu2.getName() ) ){
-						return childMenu2;
-					}
-				}
-				for( MenuComponent childMenu2 : childMenu.getComponents() ){
-					if( childMenu2.getComponents().size() > 0){
-						for( MenuComponent childMenu3 : childMenu2.getComponents() ){
-							if( name.equals( childMenu3.getName() ) ){
-								return childMenu3;
-							}							
-						}
-					}
+		    }
 
-				}
+		}
+	    }
+	}
+	throw new MenuNotFoundException();
+    }
+
+    public static MenuComponent getMenuComponent(Menu menu, String name, String child) throws MenuNotFoundException {
+	if (menu != null) {
+	    MenuComponent parentMenu = getMenuComponent(menu, name);
+	    MenuComponent selectedMenu = null;
+	    for (MenuComponent childMenu : parentMenu.getComponents()) {
+		if (child.equals(childMenu.getName())) {
+		    selectedMenu = childMenu;
+		    break;
+		}
+		if (childMenu.getComponents().size() > 0) {
+		    for (MenuComponent childMenu2 : childMenu.getComponents()) {
+			if (child.equals(childMenu2.getName())) {
+			    selectedMenu = childMenu2;
+			    break;
 			}
-		}
-		throw new MenuNotFoundException();
-	}
-	
-	public static MenuComponent getMenuComponent(Menu menu, String name, String child) throws MenuNotFoundException { 
-		if( menu != null ){
-			MenuComponent parentMenu = getMenuComponent(menu, name);
-			MenuComponent selectedMenu = null;
-			for( MenuComponent childMenu : parentMenu.getComponents() )
-			{
-				if( child.equals( childMenu.getName() ) ){
-					selectedMenu = childMenu;		
-					break;
+		    }
+		    for (MenuComponent childMenu2 : childMenu.getComponents()) {
+			if (childMenu2.getComponents().size() > 0) {
+			    for (MenuComponent childMenu3 : childMenu2.getComponents()) {
+				if (child.equals(childMenu3.getName())) {
+				    selectedMenu = childMenu3;
+				    break;
 				}
-				if( childMenu.getComponents().size() > 0 ){
-					for( MenuComponent childMenu2 : childMenu.getComponents() ){
-						if( child.equals( childMenu2.getName() ) ){
-							selectedMenu = childMenu2;		
-							break;
-						}
-					}
-					for( MenuComponent childMenu2 : childMenu.getComponents() ){
-						if( childMenu2.getComponents().size() > 0){
-							for( MenuComponent childMenu3 : childMenu2.getComponents() ){
-								if( child.equals( childMenu3.getName() ) ){
-									selectedMenu = childMenu3;
-									break;
-								}							
-							}
-						}
-
-					}
-				}
+			    }
 			}
-			return selectedMenu;		
-		}else{
-			throw new MenuNotFoundException();
+
+		    }
 		}
-	}	
+	    }
+	    return selectedMenu;
+	} else {
+	    throw new MenuNotFoundException();
+	}
+    }
 
-	public static boolean isUserAccessAllowed(MenuComponent menu){
-		if(StringUtils.isNotEmpty(menu.getRoles())){			
-			for( String role : StringUtils.split(menu.getRoles(), ",")){
-				if( SecurityHelper.isUserInRole( role ) )
-					return true;
-			}			
-		}else{
-			return true;
-		}
-		return false;
+    public static boolean isUserAccessAllowed(MenuComponent menu) {
+	if (StringUtils.isNotEmpty(menu.getRoles())) {
+	    for (String role : StringUtils.split(menu.getRoles(), ",")) {
+		if (SecurityHelper.isUserInRole(role))
+		    return true;
+	    }
+	} else {
+	    return true;
 	}
-	
-	public static boolean isUserAccessAllowed(HttpServletRequest request, MenuComponent menu){
-		if(StringUtils.isNotEmpty(menu.getRoles())){			
-			for( String role : StringUtils.split(menu.getRoles(), ",")){
-				if( request.isUserInRole( role ) )
-					return true;
-			}			
-		}else{
-			return true;
-		}
-		return false;
-	}	
-					
-	public static Menu getWebSiteMenu(WebSite webSite) throws MenuNotFoundException{
-		if( webSite.getMenu().getMenuId() < 1 )
-			return getDefaultMenu();
-		else 
-			return webSite.getMenu();
-	}	
-	
-	public static boolean hasLogo(WebSite website){
-		return getLogoManager().getLogoImages(website).size() > 0 ? true : false;
-	}
+	return false;
+    }
 
-	public static Set<String> getMenuNames(WebSite website)throws MenuNotFoundException{
-		Menu menu = website.getMenu();
-		return getMenuRepository().getMenuNames(menu);
+    public static boolean isUserAccessAllowed(HttpServletRequest request, MenuComponent menu) {
+	if (StringUtils.isNotEmpty(menu.getRoles())) {
+	    for (String role : StringUtils.split(menu.getRoles(), ",")) {
+		if (request.isUserInRole(role))
+		    return true;
+	    }
+	} else {
+	    return true;
 	}
-	
-	public static boolean isAllowedSignIn(WebSite website){
-		return website.getBooleanProperty("allowedSignIn", true);
-	}
+	return false;
+    }
 
-	
-	public static boolean isAllowedSignup(WebSite website){
-		return website.getBooleanProperty("allowedSignup", true);
-	}
+    public static Menu getWebSiteMenu(WebSite webSite) throws MenuNotFoundException {
+	if (webSite.getMenu().getMenuId() < 1)
+	    return getDefaultMenu();
+	else
+	    return webSite.getMenu();
+    }
 
-	public static boolean isAllowedSocialConnect(WebSite website){
-		return website.getBooleanProperty("allowedSocialConnect", true);
-	}
+    public static boolean hasLogo(WebSite website) {
+	return getLogoManager().getLogoImages(website).size() > 0 ? true : false;
+    }
 
-	public static void setIsAllowedSignIn(WebSite website, boolean isAllowedSignIn){
-		website.getProperties().put("allowedSignIn", Boolean.toString(isAllowedSignIn));
-	}
-	
-	public static void setIsAllowedSignup(WebSite website, boolean isAllowedSignup){
-		website.getProperties().put("allowedSignup", Boolean.toString(isAllowedSignup));
-	}
+    public static Set<String> getMenuNames(WebSite website) throws MenuNotFoundException {
+	Menu menu = website.getMenu();
+	return getMenuRepository().getMenuNames(menu);
+    }
 
-	public static void setIsAllowedSocialConnect(WebSite website, boolean isAllowedSocialConnect){
-		website.getProperties().put("allowedSocialConnect", Boolean.toString(isAllowedSocialConnect));
-	}
+    public static boolean isAllowedSignIn(WebSite website) {
+	return website.getBooleanProperty("allowedSignIn", true);
+    }
 
-	public static void setMainTemplate(WebSite website, String templage){
-		if(StringUtils.isNotBlank(templage))
-			website.getProperties().put(MAIN_PAGE_VIEW_PREFIX, templage);
-	}		
+    public static boolean isAllowedSignup(WebSite website) {
+	return website.getBooleanProperty("allowedSignup", true);
+    }
+
+    public static boolean isAllowedSocialConnect(WebSite website) {
+	return website.getBooleanProperty("allowedSocialConnect", true);
+    }
+
+    public static void setIsAllowedSignIn(WebSite website, boolean isAllowedSignIn) {
+	website.getProperties().put("allowedSignIn", Boolean.toString(isAllowedSignIn));
+    }
+
+    public static void setIsAllowedSignup(WebSite website, boolean isAllowedSignup) {
+	website.getProperties().put("allowedSignup", Boolean.toString(isAllowedSignup));
+    }
+
+    public static void setIsAllowedSocialConnect(WebSite website, boolean isAllowedSocialConnect) {
+	website.getProperties().put("allowedSocialConnect", Boolean.toString(isAllowedSocialConnect));
+    }
+
+    public static void setMainTemplate(WebSite website, String templage) {
+	if (StringUtils.isNotBlank(templage))
+	    website.getProperties().put(MAIN_PAGE_VIEW_PREFIX, templage);
+    }
 
 }

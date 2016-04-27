@@ -26,39 +26,35 @@ import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
 
 public abstract class AbstractAttachmentManager implements EventSource {
-	
-	protected Log log = LogFactory.getLog(getClass());
-	
-	private EventPublisher eventPublisher;
-	
-	
-	
-	public EventPublisher getEventPublisher() {
-		return eventPublisher;
-	}
 
-	public void setEventPublisher(EventPublisher eventPublisher) {
-		this.eventPublisher = eventPublisher;
-	}
-	
-	
-	protected static String listToString(List<String> list)
-    {
-        StringBuilder sb = new StringBuilder();
-        for( String element :  list ){
-        	 sb.append(element).append(",");
-        }
-        return sb.toString();
+    protected Log log = LogFactory.getLog(getClass());
+
+    private EventPublisher eventPublisher;
+
+    public EventPublisher getEventPublisher() {
+	return eventPublisher;
     }
 
-	protected static List<String> stringToList(String string)
-    {
-        List<String> list = new ArrayList<String>();
-        if(string != null)
-        {
-            for(StringTokenizer tokens = new StringTokenizer(string, ","); tokens.hasMoreTokens(); list.add(tokens.nextToken()));
-        }
-        return list;
+    public void setEventPublisher(EventPublisher eventPublisher) {
+	this.eventPublisher = eventPublisher;
+    }
+
+    protected static String listToString(List<String> list) {
+	StringBuilder sb = new StringBuilder();
+	for (String element : list) {
+	    sb.append(element).append(",");
+	}
+	return sb.toString();
+    }
+
+    protected static List<String> stringToList(String string) {
+	List<String> list = new ArrayList<String>();
+	if (string != null) {
+	    for (StringTokenizer tokens = new StringTokenizer(string, ","); tokens.hasMoreTokens(); list
+		    .add(tokens.nextToken()))
+		;
+	}
+	return list;
     }
 
 }

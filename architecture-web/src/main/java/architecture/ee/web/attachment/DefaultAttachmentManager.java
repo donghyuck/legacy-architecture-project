@@ -74,8 +74,7 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 	    if (!attachmentDir.exists()) {
 		boolean result = attachmentDir.mkdir();
 		if (!result)
-		    log.error((new StringBuilder()).append("Unable to create attachment directory: '")
-			    .append(attachmentDir).append("'").toString());
+		    log.error((new StringBuilder()).append("Unable to create attachment directory: '").append(attachmentDir).append("'").toString());
 	    }
 	}
 	return attachmentDir;

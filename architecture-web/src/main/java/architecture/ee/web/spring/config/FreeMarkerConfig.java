@@ -28,8 +28,6 @@ public class FreeMarkerConfig {
 	public FreeMarkerConfig() {
 	}
 
-	
-	
 	@Bean
 	public FreeMarkerConfigurer freemarkerConfig(){
 		FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();

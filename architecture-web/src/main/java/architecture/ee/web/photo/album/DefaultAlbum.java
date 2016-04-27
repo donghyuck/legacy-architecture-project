@@ -21,6 +21,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import architecture.common.cache.CacheSizes;
 import architecture.common.model.support.PropertyAndDateAwareSupport;
 import architecture.common.user.User;
 
@@ -51,7 +52,7 @@ public class DefaultAlbum extends PropertyAndDateAwareSupport implements Album {
 	setCreationDate(now);
 	setModifiedDate(now);
     }
-    
+
     public DefaultAlbum(long albumId) {
 	this.albumId = albumId;
 	this.name = null;
@@ -120,8 +121,14 @@ public class DefaultAlbum extends PropertyAndDateAwareSupport implements Album {
 
     @JsonIgnore
     public int getCachedSize() {
-
-	return 0;
+	int size = user.getCachedSize() 
+		+ CacheSizes.sizeOfMap(getProperties()) 
+		+ CacheSizes.sizeOfLong()
+		+ CacheSizes.sizeOfBoolean() 
+		+ CacheSizes.sizeOfBoolean() 
+		+ CacheSizes.sizeOfString(name)
+		+ CacheSizes.sizeOfString(description);
+	return size;
     }
 
 }

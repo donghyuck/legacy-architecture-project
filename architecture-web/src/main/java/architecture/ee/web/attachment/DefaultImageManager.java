@@ -34,6 +34,7 @@ import org.apache.poi.util.IOUtils;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import architecture.common.lifecycle.ConfigService;
 import architecture.common.util.PlatformHelper.Platform;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.exception.SystemException;
@@ -47,6 +48,8 @@ import net.sf.ehcache.Element;
 
 public class DefaultImageManager extends AbstractAttachmentManager implements ImageManager {
 
+    private ConfigService configService;
+    
     private Lock lock = new ReentrantLock();
     private ImageConfig imageConfig;
     private ImageDao imageDao;
@@ -56,6 +59,12 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
     private Cache imageLinkCache;
     private Cache imageCache;
     private File imageDir;
+
+    
+    
+    public void setConfigService(ConfigService configService) {
+        this.configService = configService;
+    }
 
     /**
      * @return imageLinkIdCache
@@ -125,7 +134,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
     public void setImageEnabled(boolean enabled) {
 	imageConfig.setEnabled(enabled);
 	String str = (new StringBuilder()).append("").append(enabled).toString();
-	ApplicationHelper.getConfigService().setApplicationProperty("image.enabled", str);
+	configService.setApplicationProperty("image.enabled", str);
     }
 
     public int getMaxImageSize() {
@@ -135,7 +144,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
     public void setMaxImageSize(int maxImageSize) {
 	imageConfig.setMaxImageSize(maxImageSize);
 	String str = (new StringBuilder()).append("").append(maxImageSize).toString();
-	ApplicationHelper.getConfigService().setApplicationProperty("image.maxImageSize", str);
+	configService.setApplicationProperty("image.maxImageSize", str);
     }
 
     public int getImagePreviewMaxSize() {
@@ -145,7 +154,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
     public void setImagePreviewMaxSize(int imagePreviewMaxSize) {
 	imageConfig.setImagePreviewMaxSize(imagePreviewMaxSize);
 	String str = (new StringBuilder()).append("").append(imagePreviewMaxSize).toString();
-	ApplicationHelper.getConfigService().setApplicationProperty("image.imagePreviewMaxSize", str);
+	configService.setApplicationProperty("image.imagePreviewMaxSize", str);
     }
 
     public boolean isForceThumbnailsEnabled() {
@@ -155,7 +164,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
     public void setFourceThumbnailsEnabled(boolean forceThumbnailsEnabled) {
 	imageConfig.setForceThumbnailsEnabled(forceThumbnailsEnabled);
 	String str = (new StringBuilder()).append("").append(forceThumbnailsEnabled).toString();
-	ApplicationHelper.getConfigService().setApplicationProperty("image.forceThumbnailsEnabled", str);
+	configService.setApplicationProperty("image.forceThumbnailsEnabled", str);
     }
 
     public int getImageMaxWidth() {
@@ -165,7 +174,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
     public void setImageMaxWidth(int imageMaxWidth) {
 	imageConfig.setImageMaxWidth(imageMaxWidth);
 	String str = (new StringBuilder()).append("").append(imageMaxWidth).toString();
-	ApplicationHelper.getConfigService().setApplicationProperty("image.imageMaxWidth", str);
+	configService.setApplicationProperty("image.imageMaxWidth", str);
     }
 
     public int getImageMaxHeight() {
@@ -175,7 +184,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
     public void setImageMaxHeight(int imageMaxHeight) {
 	imageConfig.setImageMaxHeight(imageMaxHeight);
 	String str = (new StringBuilder()).append("").append(imageMaxHeight).toString();
-	ApplicationHelper.getConfigService().setApplicationProperty("image.imageMaxHeight", str);
+	configService.setApplicationProperty("image.imageMaxHeight", str);
     }
 
     public boolean isValidType(String contentType) {
@@ -195,7 +204,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 	if (!imageConfig.getDisallowedTypes().contains(contentType)) {
 	    imageConfig.getDisallowedTypes().add(contentType);
 	    String str = listToString(imageConfig.getDisallowedTypes());
-	    ApplicationHelper.getConfigService().setApplicationProperty("image.disallowedTypes", str);
+	    configService.setApplicationProperty("image.disallowedTypes", str);
 	}
     }
 
@@ -203,7 +212,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 	if (imageConfig.getDisallowedTypes().contains(contentType)) {
 	    imageConfig.getDisallowedTypes().remove(contentType);
 	    String str = listToString(imageConfig.getDisallowedTypes());
-	    ApplicationHelper.getConfigService().setApplicationProperty("image.disallowedTypes", str);
+	    configService.setApplicationProperty("image.disallowedTypes", str);
 	}
     }
 
@@ -211,7 +220,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 	if (!imageConfig.getAllowedTypes().contains(contentType)) {
 	    imageConfig.getAllowedTypes().add(contentType);
 	    String str = listToString(imageConfig.getAllowedTypes());
-	    ApplicationHelper.getConfigService().setApplicationProperty("image.allowedTypes", str);
+	    configService.setApplicationProperty("image.allowedTypes", str);
 	}
     }
 
@@ -219,7 +228,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 	if (imageConfig.getAllowedTypes().contains(contentType)) {
 	    imageConfig.getAllowedTypes().remove(contentType);
 	    String str = listToString(imageConfig.getAllowedTypes());
-	    ApplicationHelper.getConfigService().setApplicationProperty("image.allowedTypes", str);
+	    configService.setApplicationProperty("image.allowedTypes", str);
 	}
     }
 
@@ -234,7 +243,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
     public void setAllowAllByDefault(boolean allowed) {
 	imageConfig.setAllowAllByDefault(allowed);
 	String str = (new StringBuilder()).append("").append(allowed).toString();
-	ApplicationHelper.getConfigService().setApplicationProperty("image.allowAllByDefault", str);
+	configService.setApplicationProperty("image.allowAllByDefault", str);
     }
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
@@ -407,8 +416,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 	    if (!imageDir.exists()) {
 		boolean result = imageDir.mkdir();
 		if (!result)
-		    log.error((new StringBuilder()).append("Unable to create image directory: '").append(imageDir)
-			    .append("'").toString());
+		    log.error((new StringBuilder()).append("Unable to create image directory: '").append(imageDir).append("'").toString());
 
 		getImageCacheDir(); // new File(imageDir, "cache");
 		getImageTempDir();
@@ -556,24 +564,18 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
     }
 
     public void initialize() {
-	log.debug("initializing image manager");
+	log.debug("initializing image component");
 	ImageConfig imageConfigToUse = new ImageConfig();
-	imageConfigToUse.setEnabled(ApplicationHelper.getApplicationBooleanProperty("image.enabled", true));
-	imageConfigToUse
-		.setAllowAllByDefault(ApplicationHelper.getApplicationBooleanProperty("image.allowAllByDefault", true));
-	imageConfigToUse.setForceThumbnailsEnabled(
-		ApplicationHelper.getApplicationBooleanProperty("image.forceThumbnailsEnabled", true));
-	imageConfigToUse.setMaxImageSize(ApplicationHelper.getApplicationIntProperty("", 2048));
-	imageConfigToUse
-		.setImagePreviewMaxSize(ApplicationHelper.getApplicationIntProperty("image.imagePreviewMaxSize", 250));
-	imageConfigToUse.setImageMaxWidth(ApplicationHelper.getApplicationIntProperty("image.imageMaxWidth", 450));
-	imageConfigToUse.setImageMaxHeight(ApplicationHelper.getApplicationIntProperty("image.imageMaxHeight", 600));
-	imageConfigToUse
-		.setMaxImagesPerObject(ApplicationHelper.getApplicationIntProperty("image.maxImagesPerObject", 50));
-	imageConfigToUse
-		.setAllowedTypes(stringToList(ApplicationHelper.getApplicationProperty("image.allowedTypes", "")));
-	imageConfigToUse.setDisallowedTypes(
-		stringToList(ApplicationHelper.getApplicationProperty("image.disallowedTypes", "")));
+	imageConfigToUse.setEnabled(configService.getApplicationBooleanProperty("components.image.enabled", true));
+	imageConfigToUse.setAllowAllByDefault(configService.getApplicationBooleanProperty("components.image.allowAllByDefault", true));
+	imageConfigToUse.setForceThumbnailsEnabled(configService.getApplicationBooleanProperty("components.image.forceThumbnailsEnabled", true));
+	imageConfigToUse.setMaxImageSize(configService.getApplicationIntProperty("components.image.maxImageSize", 2048));
+	imageConfigToUse.setImagePreviewMaxSize(configService.getApplicationIntProperty("components.image.imagePreviewMaxSize", 250));
+	imageConfigToUse.setImageMaxWidth(configService.getApplicationIntProperty("components.image.imageMaxWidth", 450));
+	imageConfigToUse.setImageMaxHeight(configService.getApplicationIntProperty("components.image.imageMaxHeight", 600));
+	imageConfigToUse.setMaxImagesPerObject(configService.getApplicationIntProperty("components.image.maxImagesPerObject", 50));
+	imageConfigToUse.setAllowedTypes(stringToList(configService.getApplicationProperty("components.image.allowedTypes", "")));
+	imageConfigToUse.setDisallowedTypes(stringToList(configService.getApplicationProperty("components.image.disallowedTypes", "")));
 	this.imageConfig = imageConfigToUse;
 
 	getImageDir();
@@ -647,8 +649,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 		link = imageLinkDao.getImageLinkByImageId(imageIdToUse);
 		imageLinkCache.put(new Element(imageIdToUse, link));
 	    } catch (Exception e) {
-		String msg = (new StringBuilder()).append("Unable to find image link for iamge : ").append(imageIdToUse)
-			.toString();
+		String msg = (new StringBuilder()).append("Unable to find image link for iamge : ").append(imageIdToUse).toString();
 		throw new NotFoundException(msg, e);
 	    }
 	} else {

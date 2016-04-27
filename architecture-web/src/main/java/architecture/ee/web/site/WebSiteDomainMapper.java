@@ -20,40 +20,40 @@ import java.io.Serializable;
 import org.apache.commons.lang3.StringUtils;
 
 public class WebSiteDomainMapper implements Serializable {
-	
-	private long webSiteId ;
-	private String[] domains ;
-	
-	/**
-	 * @param domain
-	 * @param webSiteId
-	 */
-	public WebSiteDomainMapper(long webSiteId, String domain) {
-		this.domains = StringUtils.split(domain);
-		this.webSiteId = webSiteId;
-	}
 
-	/**
-	 * @return webSiteId
-	 */
-	public long getWebSiteId() {
-		return webSiteId;
-	}
+    private long webSiteId;
+    private String[] domains;
 
-	/**
-	 * @return domain
-	 */
-	public String[] getDomains() {
-		return domains;
+    /**
+     * @param domain
+     * @param webSiteId
+     */
+    public WebSiteDomainMapper(long webSiteId, String domain) {
+	this.domains = StringUtils.split(domain);
+	this.webSiteId = webSiteId;
+    }
+
+    /**
+     * @return webSiteId
+     */
+    public long getWebSiteId() {
+	return webSiteId;
+    }
+
+    /**
+     * @return domain
+     */
+    public String[] getDomains() {
+	return domains;
+    }
+
+    public boolean isMatch(String domain) {
+	for (String str1 : domains) {
+	    if (StringUtils.equalsIgnoreCase(str1, domain)) {
+		return true;
+	    }
 	}
-	
-	public boolean isMatch(String domain){
-		for(String str1 : domains){
-			if( StringUtils.equalsIgnoreCase(str1, domain) ){
-				return true;
-			}
-		}
-		return false;
-	}
-	
+	return false;
+    }
+
 }

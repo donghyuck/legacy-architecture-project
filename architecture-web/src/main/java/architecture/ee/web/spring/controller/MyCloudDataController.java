@@ -16,24 +16,31 @@
 package architecture.ee.web.spring.controller;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MethodInvoker;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,11 +54,14 @@ import com.drew.imaging.ImageMetadataReader;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
 import com.drew.metadata.exif.ExifSubIFDDirectory;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
+import architecture.common.user.authentication.UnAuthorizedException;
+import architecture.common.util.ClassUtils;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.attachment.AttachmentManager;
@@ -72,7 +82,7 @@ import architecture.ee.web.ws.Usage;
 public class MyCloudDataController {
 
     private Log log = LogFactory.getLog(getClass());
-
+    
     @Inject
     @Qualifier("imageManager")
     private ImageManager imageManager;
@@ -130,7 +140,7 @@ public class MyCloudDataController {
     
     @RequestMapping(value = "/me/photo/album/update.json", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
-    public Album saveOrupdateAlbum (@RequestBody DefaultAlbum album, NativeWebRequest request) throws NotFoundException{
+    public Album saveOrupdateMyAlbum (@RequestBody DefaultAlbum album, NativeWebRequest request) throws NotFoundException{
 	User user = SecurityHelper.getUser();	
 	if(album.getAlbumId() > 0 ){
 	    
@@ -138,6 +148,7 @@ public class MyCloudDataController {
 	    album.setUser(user);
 	}
 	albumManager.saveOrUpdate(album);
+	
 	return album;
 	
     }
@@ -145,7 +156,7 @@ public class MyCloudDataController {
     
     @RequestMapping(value = "/me/photo/album/list.json", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
-    public ItemList getPhotoAlbumList(
+    public ItemList getMyPhotoAlbumList(
 	    @RequestParam(value = "startIndex", defaultValue = "0", required = false) Integer startIndex,
 	    @RequestParam(value = "pageSize", defaultValue = "0", required = false) Integer pageSize,
 	    NativeWebRequest request) throws NotFoundException {
@@ -165,17 +176,192 @@ public class MyCloudDataController {
 	ItemList list = new ItemList(items, count);
 	return list;
     }
+    
 
     @Secured({ "ROLE_USER" })
     @RequestMapping(value = "/me/photo/images/list.json", method = { RequestMethod.POST, RequestMethod.GET })
     @ResponseBody
-    public ImageList getImageList(
+    public ImageList getMyImageList(
 	    @RequestParam(value = "startIndex", defaultValue = "0", required = false) Integer startIndex,
 	    @RequestParam(value = "pageSize", defaultValue = "0", required = false) Integer pageSize,
 	    NativeWebRequest request) throws NotFoundException {
 	User user = SecurityHelper.getUser();
 	return getImageList( 2 , user.getUserId(), startIndex, pageSize, request.getNativeRequest(HttpServletRequest.class));
 
+    }
+ 
+
+    @Secured({ "ROLE_USER" })
+    @RequestMapping(value = "/me/photo/images/update_with_media.json", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Image> uploadMyImageWithMedia(
+	    @RequestParam(value = "imageId", defaultValue = "0", required = false) Long imageId,
+	    MultipartHttpServletRequest request) throws NotFoundException, IOException {
+	User user = SecurityHelper.getUser();
+
+	if( user.isAnonymous() )
+	    throw new UnAuthorizedException();
+	
+	Iterator<String> names = request.getFileNames();
+	List<Image> list = new ArrayList<Image>();
+	while (names.hasNext()) {
+	    String fileName = names.next();
+	    log.debug(fileName);
+	    MultipartFile mpf = request.getFile(fileName);
+	    InputStream is = mpf.getInputStream();
+	    log.debug("imageId: " + imageId);
+	    log.debug("file name: " + mpf.getOriginalFilename());
+	    log.debug("file size: " + mpf.getSize());
+	    log.debug("file type: " + mpf.getContentType());
+	    log.debug("file class: " + is.getClass().getName());
+	    Image image;
+	    if (imageId > 0) {
+		image = imageManager.getImage(imageId);
+		
+		image.setName(mpf.getOriginalFilename());
+		((ImageImpl) image).setInputStream(is);
+		((ImageImpl) image).setSize((int) mpf.getSize());
+	    } else {
+		image = imageManager.createImage(2, user.getUserId(), mpf.getOriginalFilename(), mpf.getContentType(), is, (int) mpf.getSize());
+		image.setUser(user);
+	    }
+	    log.debug(hasPermissions(image, user));
+	    imageManager.saveImage(image);
+	    list.add(image);
+	}
+	return list;
+    }
+
+    /**
+     * URL 로 이미지를 업로드 한다.
+     * 
+     * @param uploader
+     * @param request
+     * @return
+     * @throws NotFoundException
+     * @throws IOException
+     */
+    
+    @Secured({ "ROLE_USER" })
+    @RequestMapping(value = "/me/photo/images/upload_by_url.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Image uploadImageByUrl(@RequestBody UrlImageUpload upload, NativeWebRequest request)
+	    throws NotFoundException, IOException {
+
+	User user = SecurityHelper.getUser();
+	if( user.isAnonymous() )
+	    throw new UnAuthorizedException();
+	
+	Image imageToUse = imageManager.createImage(2, user.getUserId(), upload.getFileName(), upload.getContentType(), upload.readFileFromUrl());
+	imageToUse.setUser(user);
+	if (upload.getSourceUrl() == null) {
+	    upload.setSourceUrl(upload.getImageUrl());
+	}
+	imageToUse.getProperties().put("source", upload.getSourceUrl().toString());
+	imageToUse.getProperties().put("url", upload.getImageUrl().toString());
+
+	log.debug(imageToUse);
+
+	return imageManager.saveImage(imageToUse);
+    }
+    
+
+    public static class UrlImageUpload {
+
+	private Log log = LogFactory.getLog(getClass());
+	 
+	private int objectType = 0;
+
+	private URL sourceUrl;
+
+	private URL imageUrl;
+
+	private long objectId = 0;
+
+	@JsonIgnore
+	private String contentType;
+
+	public void setObjectId(long objectId) {
+	    this.objectId = objectId;
+	}
+
+	public long getObjectId() {
+	    return this.objectId;
+	}
+
+	/**
+	 * @return sourceUrl
+	 */
+	public URL getSourceUrl() {
+	    return sourceUrl;
+	}
+
+	/**
+	 * @return objectType
+	 */
+	public int getObjectType() {
+	    return objectType;
+	}
+
+	/**
+	 * @param objectType
+	 *            설정할 objectType
+	 */
+	public void setObjectType(int objectType) {
+	    this.objectType = objectType;
+	}
+
+	/**
+	 * @param sourceUrl
+	 *            설정할 sourceUrl
+	 */
+	public void setSourceUrl(URL sourceUrl) {
+	    this.sourceUrl = sourceUrl;
+	}
+
+	/**
+	 * @return imageUrl
+	 */
+	public URL getImageUrl() {
+	    return imageUrl;
+	}
+
+	/**
+	 * @param imageUrl
+	 *            설정할 imageUrl
+	 */
+	public void setImageUrl(URL imageUrl) {
+	    this.imageUrl = imageUrl;
+	}
+
+	public String getContentType() {
+	    if (contentType == null) {
+		try {
+
+		    MethodInvoker invoker = new MethodInvoker();		    
+		    invoker.setTargetObject(ClassUtils.getClass("org.apache.tika.Tika").newInstance());
+		    invoker.setTargetMethod("detect");
+		    invoker.setArguments(new URL[]{ imageUrl });
+		    invoker.prepare();
+		    contentType = (String) invoker.invoke();
+		} catch (Throwable e) {
+		    log.error("extracting error", e);
+		    contentType = null;
+		}
+	    }
+	    return contentType;
+	}
+
+	public String getFileName() {
+	    return FilenameUtils.getName(imageUrl.getFile());
+	}
+
+	public File readFileFromUrl() throws IOException {
+	    File temp = File.createTempFile(UUID.randomUUID().toString(), ".tmp");
+	    temp.deleteOnExit();
+	    FileUtils.copyURLToFile(imageUrl, temp);
+	    return temp;
+	}
     }
     
     
