@@ -87,9 +87,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 
 	private Log log = LogFactory.getLog(getClass());
 
-	public ScrollablePreparedStatementCreator(String sql, int startIndex, int numResults, Object args[],
-		int[] types, DatabaseType databaseType) {
-
+	public ScrollablePreparedStatementCreator(String sql, int startIndex, int numResults, Object args[], int[] types, DatabaseType databaseType) {
 	    this.startIndex = startIndex;
 	    this.numResults = numResults;
 	    this.params = args;
@@ -374,7 +372,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 
     public void initialize() {
 	logger.debug("Initializing ExtendedJdbcTemplate");
-	logger.debug("databaseType:" + databaseType);
+	logger.debug("databaseType:" + getDatabaseType());
 	if (this.lobHandler == null && this.getDataSource() != null) {
 	    /*if (getDatabaseType() == DatabaseType.oracle) {
 		OracleLobHandler oracleLobHandler = new OracleLobHandler();

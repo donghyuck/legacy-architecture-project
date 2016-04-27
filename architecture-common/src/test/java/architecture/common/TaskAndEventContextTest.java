@@ -22,6 +22,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import architecture.common.event.api.EventPublisher;
+
 public class TaskAndEventContextTest {
 
     private static Log log = LogFactory.getLog(TaskAndEventContextTest.class);
@@ -30,10 +32,25 @@ public class TaskAndEventContextTest {
     @BeforeClass
     public static void setup() {
 	log.debug("setup context..");
-	context = new ClassPathXmlApplicationContext("context/TaskAndEventSubsystemContext.xml");
+	context = new ClassPathXmlApplicationContext("commonSubsystemContext.xml");
     }
 
     public TaskAndEventContextTest() {
+    }
+
+    
+
+    @Test
+    public void testEventPublish() {
+	
+	EventPublisher publisher = context.getBean( "eventPublisher", EventPublisher.class );
+	publisher.publish("hello");
+	try {
+	    Thread.currentThread().sleep(1000L);
+	} catch (InterruptedException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
     }
 
     @Test
@@ -42,5 +59,4 @@ public class TaskAndEventContextTest {
 	for (String name : context.getBeanDefinitionNames())
 	    log.debug(name + " loaded.");
     }
-
 }

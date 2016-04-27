@@ -162,8 +162,10 @@ public abstract class JdbcUtils extends org.springframework.jdbc.support.JdbcUti
 	}
     }
 
+    
     public static PreparedStatement createScrollablePreparedStatement(DatabaseType type, Connection con, String sql)
 	    throws SQLException {
+
 	if (type.scrollResultsSupported)
 	    return con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 	else

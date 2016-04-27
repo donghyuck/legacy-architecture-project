@@ -8,6 +8,8 @@ import architecture.common.lifecycle.State;
 public class SpringLifecycleSupport extends ComponentImpl implements Lifecycle {
 
     public boolean isRunning() {
+	
 	return (getState() == State.STARTED || getState() == State.RUNNING);
+	
     }
 }

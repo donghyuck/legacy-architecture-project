@@ -38,6 +38,8 @@ public class ParameterMapping {
     private int index;
 
     private String property;
+    
+    private String column;
 
     private String encoding;
 
@@ -142,6 +144,18 @@ public class ParameterMapping {
 	return pattern;
     }
 
+    
+    
+    public String getColumn() {
+        return column;
+    }
+
+    public void setColumn(String column) {
+        this.column = column;
+    }
+
+
+
     public static class Builder {
 
 	/**
@@ -222,6 +236,11 @@ public class ParameterMapping {
 
 	public Builder index(int index) {
 	    parameterMapping.index = index;
+	    return this;
+	}
+	
+	public Builder column(String column) {
+	    parameterMapping.column = column;
 	    return this;
 	}
 

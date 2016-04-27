@@ -42,7 +42,6 @@ public class TypeAliasRegistry {
 
     public TypeAliasRegistry() {
 	registerAlias("string", String.class);
-
 	registerAlias("byte", Byte.class);
 	registerAlias("long", Long.class);
 	registerAlias("short", Short.class);
@@ -95,9 +94,8 @@ public class TypeAliasRegistry {
 	registerAlias("arraylist", ArrayList.class);
 	registerAlias("collection", Collection.class);
 	registerAlias("iterator", Iterator.class);
-
+	
 	registerAlias("locale", Locale.class);
-
 	registerAlias("ResultSet", ResultSet.class);
     }
 
