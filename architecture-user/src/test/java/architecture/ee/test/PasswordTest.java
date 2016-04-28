@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, 2013 Donghyuck, Son
+ * Copyright 2016 donghyuck
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.user.dao;
 
-import java.util.Map;
+package architecture.ee.test;
 
-import architecture.common.user.User;
+import org.junit.Test;
 
-public interface ExternalUserProfileDao {
+public class PasswordTest {
 
-    public abstract Map<String, Object> getProfile(User user);
-
-    public abstract Map<String, Object> getProfile(long userId);
-
-    public abstract void setProfile(User user, Map<String, Object> profile);
-
-    public abstract void setProfile(long userId, Map<String, Object> profile);
-
+    public PasswordTest() {
+	// TODO Auto-generated constructor stub
+    }
+	
+	
+	@Test
+	public void testPasswordEncoder (){
+	    
+	org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder encoder = new org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder("SHA-256");
+	String enc = encoder.encodePassword("1420", "");
+	
+		System.out.println(enc);
+		
+	}
 }

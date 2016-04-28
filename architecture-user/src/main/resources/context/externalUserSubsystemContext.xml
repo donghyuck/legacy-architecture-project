@@ -41,14 +41,22 @@
 		 
 	<bean id="roleDao" class="architecture.user.dao.impl.JdbcRoleDao" parent="jdbcDaoSupport" />			 				
 	<bean id="roleManager" class="architecture.user.DefaultRoleManager"  depends-on="roleDao, groupManager, eventPublisher"  p:roleDao-ref="roleDao"  p:groupManager-ref="groupManager" p:eventPublisher-ref="eventPublisher" 	p:roleCache-ref="roleCache" p:roleIdCache-ref="roleIdCache"  />	
-<!-- 
-	<bean id="imageDao" class="architecture.ee.web.attachment.dao.impl.JdbcImageDao" parent="jdbcDaoSupport" />
-	<bean id="imageManager" class="architecture.ee.web.attachment.DefaultImageManager"  init-method="initialize" destroy-method="destroy"  depends-on="imageDao eventPublisher" 	p:imageDao-ref="imageDao" p:eventPublisher-ref="eventPublisher"  p:imageCache-ref="imageCache" />
 
-	<bean id="attachmentDao" class="architecture.ee.web.attachment.dao.impl.JdbcAttachmentDao" parent="jdbcDaoSupport" depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
-	<bean id="attachmentManager" class="architecture.ee.web.attachment.DefaultAttachmentManager"  init-method="initialize" destroy-method="destroy"  depends-on="attachmentDao, eventPublisher" 	p:attachmentDao-ref="attachmentDao" p:eventPublisher-ref="eventPublisher"  p:attachmentCache-ref="attachmentCache" />
- -->		 			
     <bean id="passwordEncoder" class="architecture.user.security.spring.authentication.encoding.PasswordEncoderFactory" />    
+    
     <bean id="passwordSaltSource" class="architecture.user.security.spring.authentication.encoding.SaltSourceFactory" />
 
+	<bean id="permissionsDao" class="architecture.user.permission.dao.impl.JdbcPermissionsDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" />	
+	
+	<bean id="userPermsCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="userPermsCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0"  p:statisticsEnabled="true" />
+	<bean id="permKeyToAssignedMasksCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="permKeyToAssignedMasksCache" p:maxElementsInMemory="100"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0"  p:statisticsEnabled="true" />
+	<bean id="objectsWithPermissionsCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="objectsWithPermissionsCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0"  p:statisticsEnabled="true" />
+	
+	<bean id="permissionsManager" class="architecture.user.permission.DefaultPermissionsManager"  
+		p:permissionsDao-ref="permissionsDao" 
+		p:objectsWithPermissionsCache-ref="objectsWithPermissionsCache" 
+		p:permKeyToAssignedMasksCache-ref="permKeyToAssignedMasksCache" 
+		p:userPermsCache-ref="userPermsCache"
+		p:eventPublisher-ref="eventPublisher"  p:userManager-ref="userManager" p:groupManager-ref="groupManager" />
+		
 </beans>

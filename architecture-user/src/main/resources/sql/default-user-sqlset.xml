@@ -4,7 +4,29 @@
     <version>2.0</version>
     <description>Queries for SECURITY</description>
     <version></version>
-    	 
+
+
+    <row-mapper name="USER_ROWMAPPER" class="architecture.common.user.CompanyTemplate" >		
+		<parameterMapping name="companyId" column="COMPANY_ID" javaType="long" />	
+		<parameterMapping name="displayName" column="DISPLAY_NAME" javaType="string" />	
+		<parameterMapping name="name" column="NAME" javaType="string" />	
+		<parameterMapping name="domainName" column="DOMAIN_NAME" javaType="string" />	
+		<parameterMapping name="description" column="DESCRIPTION" javaType="string" />
+		<parameterMapping name="creationDate" column="CREATION_DATE" javaType="date" />
+		<parameterMapping name="modifiedDate" column="MODIFIED_DATE" javaType="date" />			
+    </row-mapper>
+    
+    
+    <row-mapper name="COMPANY_ROWMAPPER" class="architecture.common.user.CompanyTemplate"  >		
+		<parameterMapping name="companyId" column="COMPANY_ID" javaType="long" />	
+		<parameterMapping name="displayName" column="DISPLAY_NAME" javaType="string" />	
+		<parameterMapping name="name" column="NAME" javaType="string" />	
+		<parameterMapping name="domainName" column="DOMAIN_NAME" javaType="string" />	
+		<parameterMapping name="description" column="DESCRIPTION" javaType="string" />
+		<parameterMapping name="creationDate" column="CREATION_DATE" javaType="date" />
+		<parameterMapping name="modifiedDate" column="MODIFIED_DATE" javaType="date" />			
+    </row-mapper>
+        	 
     <!--  COMPANY -->	 
 	<sql-query name="CREATE_COMPANY" description="COMPANY 생성"><![CDATA[    
     	INSERT INTO V2_COMPANY (

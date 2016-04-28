@@ -92,6 +92,7 @@ public class UserDataController {
     public static class UserDetails {
 
 	private User user;
+	
 	private List<String> roles;
 
 	public UserDetails() {

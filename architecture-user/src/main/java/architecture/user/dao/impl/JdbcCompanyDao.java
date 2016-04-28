@@ -21,6 +21,7 @@ import java.sql.Types;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
@@ -55,6 +56,7 @@ public class JdbcCompanyDao extends ExtendedJdbcDaoSupport implements CompanyDao
     private String companyPropertyTableName = "V2_COMPANY_PROPERTY";
     private String companyPropertyPrimaryColumnName = "COMPANY_ID";
 
+    
     /**
      * @param companyPropertyTableName
      */
@@ -125,9 +127,11 @@ public class JdbcCompanyDao extends ExtendedJdbcDaoSupport implements CompanyDao
 	}
 	Company company = null;
 	try {
+	    
+	    RowMapper<Company> companyMapper = createRowMapper("ARCHITECTURE_SECURITY.COMPANY_ROWMAPPER", Company.class);
+	    
 	    company = getExtendedJdbcTemplate().queryForObject(
-		    getBoundSqlWithAdditionalParameter("ARCHITECTURE_SECURITY.SELECT_COMPANY_BY_NAME",
-			    new Boolean(caseInsensitive)).getSql(),
+		    getBoundSqlWithAdditionalParameter("ARCHITECTURE_SECURITY.SELECT_COMPANY_BY_NAME", new Boolean(caseInsensitive)).getSql(),
 		    companyMapper, new SqlParameterValue(Types.VARCHAR, caseInsensitive ? name.toLowerCase() : name));
 
 	    company.setProperties(getCompanyProperties(company.getCompanyId()));
@@ -138,8 +142,7 @@ public class JdbcCompanyDao extends ExtendedJdbcDaoSupport implements CompanyDao
 		throw e;
 	    }
 	} catch (DataAccessException e) {
-	    String message = (new StringBuilder()).append("Failure attempting to load company by name : ").append(name)
-		    .append(".").toString();
+	    String message = (new StringBuilder()).append("Failure attempting to load company by name : ").append(name).append(".").toString();
 	    log.fatal(message, e);
 	}
 	return company;
@@ -148,6 +151,7 @@ public class JdbcCompanyDao extends ExtendedJdbcDaoSupport implements CompanyDao
     public Company getCompanyById(long companyId) {
 	Company company = null;
 	try {
+	    RowMapper<Company> companyMapper = createRowMapper("ARCHITECTURE_SECURITY.COMPANY_ROWMAPPER", Company.class);
 	    company = getExtendedJdbcTemplate().queryForObject(
 		    getBoundSql("ARCHITECTURE_SECURITY.SELECT_COMPANY_BY_ID").getSql(), companyMapper,
 		    new SqlParameterValue(Types.NUMERIC, companyId));

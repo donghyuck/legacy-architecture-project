@@ -49,8 +49,7 @@ public class CompanyUtils {
     }
 
     public static Long getDefaultCompanyId() {
-	long defaultCompanyId = ApplicationHelper.getApplicationLongProperty("components.company.default.companyId",
-		1L);
+	long defaultCompanyId = ApplicationHelper.getApplicationLongProperty("components.company.default.companyId", 1L);
 	return defaultCompanyId;
     }
 
@@ -74,8 +73,7 @@ public class CompanyUtils {
      * @return
      */
     public static boolean isAllowedGetByDomainName() {
-	boolean getByDomainName = ApplicationHelper
-		.getApplicationBooleanProperty("components.user.anonymous.company.getByDomainName", false);
+	boolean getByDomainName = ApplicationHelper.getApplicationBooleanProperty("components.user.anonymous.company.getByDomainName", false);
 	return getByDomainName;
     }
 
