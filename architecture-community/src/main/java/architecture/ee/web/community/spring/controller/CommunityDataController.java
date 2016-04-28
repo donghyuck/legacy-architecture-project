@@ -1114,6 +1114,7 @@ public class CommunityDataController {
 	public String getContentType() {
 	    if (contentType == null) {
 		Tika tika = new Tika();
+		
 		try {
 		    contentType = tika.detect(imageUrl);
 		} catch (IOException e) {
