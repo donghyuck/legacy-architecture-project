@@ -64,6 +64,8 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 
     private final AtomicBoolean initialized = new AtomicBoolean(false);
     
+    private final AtomicBoolean bootstrapAdminServiceEnabled = new AtomicBoolean(false);
+        
     private String bootstrapFactoryKey;
         
     public ConfigurableApplicationContext getBootstrapApplicationContext() {
@@ -99,6 +101,7 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 	if (requiredType == null) {
 	    throw new ComponentNotFoundException();
 	}
+	
 	if (requiredType == Repository.class) {
 	    lock.lock();
 	    try {
@@ -138,13 +141,16 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 	    if (repository.getState() != State.INITIALIZED) {
 		((RepositoryImpl) repository).setServletContext(servletContext);
 	    }
+	    
 	    // 1. admin service 가 bootstrap 에 존재하는 경우 : DOTO
 	    AdminService adminService = getBootstrapComponent(AdminService.class);
+	    bootstrapAdminServiceEnabled.set(true);
             if (adminService instanceof SpringAdminService) {
                 ((SpringAdminService) adminService).setServletContext(servletContext);
        	    }
             adminService.start();	            
 	} catch (ComponentNotFoundException e) {
+	    log.debug("no adminservice.");
 	    ContextLoader contextLoader = getBootstrapComponent(ContextLoader.class);
 	    contextLoader.initWebApplicationContext(servletContext);
 	} finally {
@@ -153,9 +159,10 @@ public class BootstrapImpl implements Bootstrap.Implementation {
     }
 
     public AdminService getAdminService() throws ComponentNotFoundException {	
-	try {
+	
+	if( bootstrapAdminServiceEnabled.get() ){
 	    return getBootstrapComponent(AdminService.class);
-	} catch (ComponentNotFoundException e) {
+	}else{
 	    if(initialized.get()){
 		try {
 		    return ContextLoader.getCurrentWebApplicationContext().getBean(AdminService.class);
@@ -163,22 +170,22 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 		    throw new ComponentNotFoundException(e1);
 		}
 	    }else{
-		throw e;
-	    }
+		throw new ComponentNotFoundException();
+	    }	    
 	}
     }
 
     public void shutdown(ServletContext servletContext) {
 	lock.lock();
 	try {
-	    // 1. admin service 가 존재하는 경우 :
-            AdminService adminService = getAdminService();
-            adminService.stop();
-            adminService.destroy();
-	} catch (ComponentNotFoundException e) {
-	    // 2. admin service 가 존재하지 않는 경우 :
-	    ContextLoader contextLoader = getBootstrapComponent(ContextLoader.class);
-	    contextLoader.closeWebApplicationContext(servletContext);	    
+	    if( bootstrapAdminServiceEnabled.get() ){
+		AdminService adminService = getAdminService();
+	        adminService.stop();
+	        adminService.destroy();
+	    }else{
+		ContextLoader contextLoader = getBootstrapComponent(ContextLoader.class);
+	        contextLoader.closeWebApplicationContext(servletContext);
+	    }	    
 	} finally {
 	    initialized.set(false);
 	    lock.unlock();

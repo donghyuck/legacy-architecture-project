@@ -95,12 +95,18 @@ public class XmlMapperBuilder extends AbstractBuilder  {
 	    builder.cipherKeyAlg(child.getStringAttribute("cipherKeyAlg", null));
 	    builder.digest(child.getStringAttribute("digest", null));
 	    builder.size(child.getStringAttribute("size", "0"));
-	    String javaTypeName = child.getStringAttribute("javaType", null);
-	    String jdbcTypeName = child.getStringAttribute("jdbcType", null);	    
+	    
+	    String columnName = child.getStringAttribute("column", null);
+	    if (StringUtils.isNotEmpty(columnName)){
+		 builder.column(columnName);
+	    }
+	    String jdbcTypeName = child.getStringAttribute("jdbcType", null);	  
 	    if (StringUtils.isNotEmpty(jdbcTypeName))
 		builder.jdbcTypeName(jdbcTypeName);
+	    String javaTypeName = child.getStringAttribute("javaType", null);
 	    if (StringUtils.isNotEmpty(javaTypeName))
 		builder.javaType(getTypeAliasRegistry().resolveAlias(javaTypeName));
+	    
 	    parameterMappings.add(builder.build());
 	}
 	return parameterMappings;

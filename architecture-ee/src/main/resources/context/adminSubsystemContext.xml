@@ -20,7 +20,7 @@
 	<!-- ================================================ -->	
 	<bean id="configService" class="architecture.ee.component.core.lifecycle.ConfigServiceImpl" init-method="initialize" depends-on="eventPublisher, sqlConfiguration, dataSource" p:eventPublisher-ref="eventPublisher" p:sqlConfiguration-ref="sqlConfiguration" p:dataSource-ref="dataSource" ></bean>
 	
-	<bean id="adminService" class="architecture.ee.component.core.lifecycle.SmartAdminService" init-method="initialize" depends-on="eventPublisher, configService" p:eventPublisher-ref="eventPublisher" p:configService-ref="configService"  />
+	<bean id="adminService" class="architecture.ee.component.core.lifecycle.DefaultAdminService" init-method="initialize" depends-on="eventPublisher, configService" p:eventPublisher-ref="eventPublisher" p:configService-ref="configService"  />
 
 	
 </beans>

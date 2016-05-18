@@ -48,7 +48,7 @@ import net.anotheria.moskito.core.threshold.Thresholds;
 import net.anotheria.moskito.core.threshold.guard.GuardedDirection;
 import net.anotheria.moskito.core.threshold.guard.LongBarrierPassGuard;
 
-public class SmartAdminService extends SpringLifecycleSupport implements SpringAdminService, ServletContextAware, ApplicationContextAware {
+public class DefaultAdminService extends SpringLifecycleSupport implements SpringAdminService, ServletContextAware, ApplicationContextAware {
 
     private ServletContext servletContext;
     
@@ -58,7 +58,7 @@ public class SmartAdminService extends SpringLifecycleSupport implements SpringA
 
     private ConfigService configService;
     
-    public SmartAdminService() {
+    public DefaultAdminService() {
 	super();
 	setName("AdminService");
 	this.version = new Version(2, 0, 1, Version.ReleaseStatus.Release, 1);
