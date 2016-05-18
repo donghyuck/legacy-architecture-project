@@ -9,9 +9,9 @@
 	<groupId>architecture.common</groupId>
 	<artifactId>architecture-common</artifactId>
 	<name>APPLICATION COMMON ARCHITECTURE</name>
-	<packaging>jar</packaging>
-	<version>2.0.0.RELEASE</version>
-	<description>공통 아키텍처 콤포넌트 모듈</description>
+	<version>2.0.1.RELEASE</version>
+	<description>공통 아키텍처 콤포넌트 모듈 
+코드 네임 : FOOTSTEP</description>
 	<contributors>
 		<contributor>
 			<name>Donghyuch, Son</name>
@@ -19,7 +19,7 @@
 	</contributors>
 
 	<scm>
-		<url>https://power-j.googlecode.com/svn/trunk/architecture-common</url>
+		<url>https://github.com/donghyuck/architecture-project/tree/master/architecture-common</url>
 	</scm>
 
 	<repositories>
@@ -42,21 +42,38 @@
 		<project.dependency.spring.version>4.1.0.RELEASE</project.dependency.spring.version>
 		<project.dependency.spring-security.version>3.2.5.RELEASE</project.dependency.spring-security.version>
 		<project.dependency.moskito.version>2.5.0</project.dependency.moskito.version>		
+		<javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>	
 	</properties>
 
 	<dependencies>
 		<dependency>
+		    <groupId>com.google.code.findbugs</groupId>
+		    <artifactId>jsr305</artifactId>
+		    <version>2.0.1</version>
+		</dependency>	
+		<dependency>
+		    <groupId>javax.annotation</groupId>
+		    <artifactId>javax.annotation-api</artifactId>
+		    <version>1.2</version>
+		</dependency>	
+		<dependency>
 			<groupId>javolution</groupId>
 			<artifactId>javolution</artifactId>
 			<version>5.5.1</version>
-		</dependency>
+		</dependency><!-- 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math</artifactId>
 			<version>2.2</version>
 			<type>jar</type>
 			<scope>compile</scope>
-		</dependency>
+		</dependency>-->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>3.6</version>
+			<scope>compile</scope>
+		</dependency>		
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-vfs2</artifactId>
@@ -103,13 +120,6 @@
 			<version>1.2.14</version>
 			<type>jar</type>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.google.collections</groupId>
-			<artifactId>google-collections</artifactId>
-			<version>1.0</version>
-			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-collections</groupId>
@@ -169,7 +179,12 @@
 			<artifactId>spring-context</artifactId>
 			<version>${project.dependency.spring.version}</version>
 		</dependency>		
-		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${project.dependency.spring.version}</version>
+			<scope>test</scope>
+		</dependency>		
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
@@ -237,7 +252,12 @@
 			<groupId>net.anotheria</groupId>
 			<artifactId>moskito-web</artifactId>
 			<version>${project.dependency.moskito.version}</version>
-		</dependency>			
+		</dependency>
+		<dependency>
+		  <groupId>com.google.guava</groupId>
+		  <artifactId>guava</artifactId>
+		  <version>18.0</version>
+		</dependency>		
 	</dependencies>
 
 	<build>
@@ -350,6 +370,14 @@
 						<lib>${java.home}/lib/jsse.jar</lib>
 					</libs>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>proguard</groupId>
+						<artifactId>proguard</artifactId>
+						<version>5.2</version>
+						<scope>runtime</scope>
+					</dependency>
+				</dependencies>				
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -395,4 +423,8 @@
 		</repository>
 	</distributionManagement>
 
+	<organization>
+		<name>Podo Software</name>
+		<url>www.podosw.com</url>
+	</organization>
 </project>

@@ -53,6 +53,8 @@ public class Bootstrap {
      * @return
      */
     public static <T> T getBootstrapComponent(Class<T> requiredType) {
+	
+	
 	return impl.getBootstrapComponent(requiredType);
     }
 

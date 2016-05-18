@@ -156,6 +156,17 @@ public class ParameterMapping {
 
 
 
+    @Override
+    public String toString() {
+	return "ParameterMapping [cipher=" + cipher + ", cipherKey=" + cipherKey + ", cipherKeyAlg=" + cipherKeyAlg
+		+ ", size=" + size + ", index=" + index + ", property=" + property + ", column=" + column
+		+ ", encoding=" + encoding + ", jdbcType=" + jdbcType + ", jdbcTypeName=" + jdbcTypeName + ", pattern="
+		+ pattern + ", digest=" + digest + ", primary=" + primary + ", javaType=" + javaType + ", mode=" + mode
+		+ "]";
+    }
+
+
+
     public static class Builder {
 
 	/**

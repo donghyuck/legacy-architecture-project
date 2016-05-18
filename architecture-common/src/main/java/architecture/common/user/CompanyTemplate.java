@@ -112,4 +112,10 @@ public class CompanyTemplate extends BaseModelObjectSupport implements Company {
 		+ CacheSizes.sizeOfString(getDescription()) + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate();
     }
 
+    @Override
+    public String toString() {
+	return "CompanyTemplate [companyId=" + companyId + ", displayName=" + displayName + ", domainName=" + domainName
+		+ ", memberCount=" + memberCount + "]";
+    }
+
 }
