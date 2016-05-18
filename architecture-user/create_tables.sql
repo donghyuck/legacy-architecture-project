@@ -1,6 +1,6 @@
 
 	    -- =================================================  
-		--  COMPANY	
+		--  1. COMPANY	
 		-- =================================================		
 		CREATE TABLE V2_COMPANY (
 			  COMPANY_ID                INTEGER NOT NULL,
@@ -39,8 +39,8 @@
 		COMMENT ON COLUMN "V2_COMPANY_PROPERTY"."PROPERTY_VALUE" IS '프로퍼티 값'; 		
 
 		
-		insert into V2_COMPANY (COMPANY_ID,DISPLAY_NAME,NAME,DESCRIPTION) 
-		values (1,'메르디앙','PUBLIC','메르디앙');
+--		insert into V2_COMPANY (COMPANY_ID,DISPLAY_NAME,NAME,DESCRIPTION) 
+--		values (1,'메르디앙','PUBLIC','메르디앙');
 
 
         -- =================================================  

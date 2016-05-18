@@ -151,7 +151,9 @@ public class JdbcCompanyDao extends ExtendedJdbcDaoSupport implements CompanyDao
     public Company getCompanyById(long companyId) {
 	Company company = null;
 	try {
+	    
 	    RowMapper<Company> companyMapper = createRowMapper("ARCHITECTURE_SECURITY.COMPANY_ROWMAPPER", Company.class);
+	    log.debug("using row  mapper : " + companyMapper.getClass().getName());
 	    company = getExtendedJdbcTemplate().queryForObject(
 		    getBoundSql("ARCHITECTURE_SECURITY.SELECT_COMPANY_BY_ID").getSql(), companyMapper,
 		    new SqlParameterValue(Types.NUMERIC, companyId));

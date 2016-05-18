@@ -93,11 +93,11 @@ public abstract class AbstractCompanyManager implements CompanyManager, EventSou
 	}
     }
 
-    public Company getCompany(long groupId) throws CompanyNotFoundException {
-	Company company = getCompanyInCache(groupId);
+    public Company getCompany(long companyId) throws CompanyNotFoundException {
+	Company company = getCompanyInCache(companyId);
 	if (company == null) {
-	    company = lookupCompany(groupId);
-	    companyCache.put(new Element(groupId, company));
+	    company = lookupCompany(companyId);
+	    companyCache.put(new Element(companyId, company));
 	}
 	return company;
     }
