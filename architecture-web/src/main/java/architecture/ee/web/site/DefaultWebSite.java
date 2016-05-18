@@ -230,5 +230,11 @@ public class DefaultWebSite extends BaseModelObjectSupport  implements WebSite {
 	public int getCachedSize() {
 		return 0;
 	}
+	@Override
+	public String toString() {
+	    return "DefaultWebSite [displayName=" + displayName + ", company=" + company + ", webSiteId=" + webSiteId
+		    + ", enabled=" + enabled + ", allowAnonymousAccess=" + allowAnonymousAccess + ", user=" + user
+		    + ", url=" + url + ", menu=" + menu + "]";
+	}
 
 }

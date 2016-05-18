@@ -51,13 +51,21 @@ public class WebSiteUtils {
 	return ApplicationHelper.getComponent(WebSiteManager.class);
     }
 
-    public static WebSite getWebSite(HttpServletRequest request) throws WebSiteNotFoundException {
+    public static WebSite getWebSite(HttpServletRequest request) throws WebSiteNotFoundException {	
 	String localName = request.getLocalName();
-
 	log.debug("check: " + localName + " - " + (StringUtils.isNotEmpty(localName) && !TextUtils.isValidIpAddress(localName) && TextUtils.isValidHostname(localName)));
-
 	if (StringUtils.isNotEmpty(localName) && !TextUtils.isValidIpAddress(localName) && TextUtils.isValidHostname(localName)) {
-	    return getWebSiteManager().getWebSiteByUrl(localName);
+	    try {
+		log.debug("web site by url");
+		return getWebSiteManager().getWebSiteByUrl(localName);
+	    } catch (WebSiteNotFoundException e) {
+		if( localName.equals("localhost")){
+		    return getDefaultWebSite();
+		}
+		else{
+		    throw e;
+		}
+	    }
 	}
 
 	return getDefaultWebSite();
@@ -68,6 +76,7 @@ public class WebSiteUtils {
     }
 
     public static WebSite getDefaultWebSite() throws WebSiteNotFoundException {
+	log.debug("web site by default " + getDefaultWebSiteId());
 	return getWebSiteManager().getWebSiteById(getDefaultWebSiteId());
     }
 

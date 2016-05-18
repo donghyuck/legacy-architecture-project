@@ -25,21 +25,21 @@ import architecture.ee.web.view.freemarker.FreeMarkerConfigurer;
 @Configuration
 public class FreeMarkerConfig {
 
-	public FreeMarkerConfig() {
-	}
+    public FreeMarkerConfig() {
+    }
 
-	@Bean
-	public FreeMarkerConfigurer freemarkerConfig(){
-		FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
-		initializingBean(freeMarkerConfigurer);
-		return freeMarkerConfigurer;
+    @Bean
+    public FreeMarkerConfigurer freemarkerConfig() {
+	FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
+	initializingBean(freeMarkerConfigurer);
+	return freeMarkerConfigurer;
+    }
+
+    private void initializingBean(InitializingBean bean) {
+	try {
+	    bean.afterPropertiesSet();
+	} catch (Exception e) {
+	    throw new ConfigurationError(e);
 	}
-	
-	private void initializingBean (InitializingBean bean){
-		try {
-			bean.afterPropertiesSet();
-		} catch (Exception e) {
-			throw new ConfigurationError(e);
-		}
-	}
+    }
 }

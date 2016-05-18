@@ -499,4 +499,8 @@
 			"MODIFIED_DATE" DATE DEFAULT SYSDATE,
 			CONSTRAINT V2_ALBUM_IMAGE_PK PRIMARY KEY (ALBUM_ID, IMAGE_ID)
 	  	) ;
-   		
+
+	  	
+	  	-- =================================================  
+		--  WEBSITE
+		-- =================================================	

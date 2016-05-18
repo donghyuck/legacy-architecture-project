@@ -20,17 +20,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
-import architecture.common.user.CompanyNotFoundException;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
-import architecture.common.user.UserNotFoundException;
 import architecture.common.util.StringUtils;
-import architecture.ee.web.navigator.MenuNotFoundException;
 import architecture.ee.web.site.dao.WebSiteDao;
 import architecture.ee.web.site.page.WebPage;
 import architecture.ee.web.util.WebSiteUtils;
@@ -39,20 +38,7 @@ import net.sf.ehcache.Element;
 
 public class DefaultWebSiteManager implements WebSiteManager {
 
-    /**
-     * @return webSiteUrlCache
-     */
-    public Cache getWebSiteUrlCache() {
-	return webSiteUrlCache;
-    }
-
-    /**
-     * @param webSiteUrlCache
-     *            설정할 webSiteUrlCache
-     */
-    public void setWebSiteUrlCache(Cache webSiteUrlCache) {
-	this.webSiteUrlCache = webSiteUrlCache;
-    }
+    private Log log = LogFactory.getLog(getClass());
 
     private UserManager userManager;
 
@@ -72,6 +58,22 @@ public class DefaultWebSiteManager implements WebSiteManager {
 
     public DefaultWebSiteManager() {
 
+    }
+    
+
+    /**
+     * @return webSiteUrlCache
+     */
+    public Cache getWebSiteUrlCache() {
+	return webSiteUrlCache;
+    }
+
+    /**
+     * @param webSiteUrlCache
+     *            설정할 webSiteUrlCache
+     */
+    public void setWebSiteUrlCache(Cache webSiteUrlCache) {
+	this.webSiteUrlCache = webSiteUrlCache;
     }
 
     /**
@@ -311,7 +313,9 @@ public class DefaultWebSiteManager implements WebSiteManager {
 		}
 	    }
 	}
-
+	
+	if( webSiteId < 0)
+	    throw new WebSiteNotFoundException();	
 	return getWebSiteById(webSiteId);
     }
 
@@ -322,16 +326,19 @@ public class DefaultWebSiteManager implements WebSiteManager {
 	} else {
 	    webSite = webSiteDao.getWebSiteById(webSiteId);
 	    try {
+		log.debug("set user " + webSite.getUser().getUserId() );		
+		
 		((DefaultWebSite) webSite).setUser(userManager.getUser(webSite.getUser().getUserId()));
+		log.debug("set company " + webSite.getCompany().getCompanyId() );
+		
 		((DefaultWebSite) webSite).setCompany(companyManager.getCompany(webSite.getCompany().getCompanyId()));
+		
 		if (webSite.getMenu().getMenuId() > 0)
 		    ((DefaultWebSite) webSite).setMenu(WebSiteUtils.getMenu(webSite.getMenu().getMenuId()));
 		else
 		    ((DefaultWebSite) webSite).setMenu(WebSiteUtils.getDefaultMenu());
-
-	    } catch (MenuNotFoundException e) {
-	    } catch (UserNotFoundException e) {
-	    } catch (CompanyNotFoundException e) {
+		
+	    } catch (Exception e) {
 	    }
 	    webSiteCache.put(new Element(webSiteId, webSite));
 	}

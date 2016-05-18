@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 	<groupId>architecture.web</groupId>
 	<artifactId>architecture-web</artifactId>
-	<version>2.0.0.RELEASE</version>
+	<version>2.0.1.RELEASE</version>
 	<name>APPLICATION WEB ARCHITECTURE</name>
 	<description>웹 어플리케이션 개발을 위한 아키텍처</description>
 	<scm>
@@ -25,9 +25,10 @@
 		<javac.src.version>1.6</javac.src.version>
 		<javac.target.version>1.6</javac.target.version>
 		<project.javadoc.docEncoding>UTF-8</project.javadoc.docEncoding>
-		<project.build.version>2.0.0.RELEASE</project.build.version>
+		<project.build.version>2.0.1.RELEASE</project.build.version>
 		<project.dependency.spring.version>4.1.0.RELEASE</project.dependency.spring.version>
 		<project.dependency.spring-security.version>3.2.5.RELEASE</project.dependency.spring-security.version>				
+		<javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
 	</properties>
 		
 	<build>
@@ -140,6 +141,14 @@
 						<lib>${java.home}/lib/jsse.jar</lib>
 					</libs>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>proguard</groupId>
+						<artifactId>proguard</artifactId>
+						<version>5.2</version>
+						<scope>runtime</scope>
+					</dependency>
+				</dependencies>				
 			</plugin>
 		</plugins>
 	</build>
@@ -233,11 +242,6 @@
 			<groupId>com.drewnoakes</groupId>
 			<artifactId>metadata-extractor</artifactId>
 			<version>2.6.2</version>
-		</dependency>
-		<dependency>
-			<groupId>edu.uci.ics</groupId>
-			<artifactId>crawler4j</artifactId>
-			<version>4.1</version>
 		</dependency>
 	</dependencies>
 
