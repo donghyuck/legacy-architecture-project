@@ -177,8 +177,7 @@ public class DisplayController {
 
     protected void setPageActionAdaptor(Page page, WebSite site, User user, Model model, HttpServletRequest request,
 	    HttpServletResponse response) {
-	PageMaker.Builder builder = PageMaker.newBuilder().configuration(freeMarkerConfig.getConfiguration())
-		.servletContext(servletContext).page(page).model(model).request(request);
+	PageMaker.Builder builder = PageMaker.newBuilder().configuration(freeMarkerConfig.getConfiguration()).servletContext(servletContext).page(page).model(model).request(request);
 	model.addAttribute("action", PageActionAdaptor.newBuilder().webSite(site).builder(builder).user(user).build());
     }
 
@@ -198,6 +197,8 @@ public class DisplayController {
 	    website = WebSiteUtils.getWebSite(request);
 	else
 	    website = webSiteManager.getWebSiteById(webSiteId);
+	
+	log.debug(website);
 	return website;
     }
 

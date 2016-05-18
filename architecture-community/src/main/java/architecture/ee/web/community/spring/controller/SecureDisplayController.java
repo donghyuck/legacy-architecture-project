@@ -21,25 +21,31 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 
+import architecture.common.lifecycle.ConfigService;
 import architecture.common.user.CompanyManager;
 import architecture.common.user.CompanyNotFoundException;
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
+import architecture.ee.web.community.page.Page;
+import architecture.ee.web.community.page.PageAdaptor;
 import architecture.ee.web.community.page.PageManager;
 import architecture.ee.web.community.spring.controller.DisplayController.PageActionAdaptor;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteManager;
+import architecture.ee.web.site.page.WebPage;
 import architecture.ee.web.util.WebSiteUtils;
 
 @Controller("community-secure-display-controller")
@@ -49,10 +55,15 @@ public class SecureDisplayController {
     private static final Log log = LogFactory.getLog(DisplayController.class);
     private static final String DEFAULT_CONTENT_TYPE = "text/html;charset=UTF-8";
 
+   
+    @Inject
+    @Qualifier("configService")
+    private ConfigService configService;
+    
     @Inject
     @Qualifier("pageManager")
     private PageManager pageManager;
-
+    
     @Inject
     @Qualifier("freemarkerConfig")
     private FreeMarkerConfig freeMarkerConfig;
@@ -68,15 +79,18 @@ public class SecureDisplayController {
     public SecureDisplayController() {
 
     }
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String template(@RequestParam(value = "source") String view,
 	    @RequestParam(value = "companyId", defaultValue = "0") Long companyId, HttpServletRequest request,
 	    HttpServletResponse response, Model model) throws NotFoundException, IOException {
 
 	User user = SecurityHelper.getUser();
+	
+	if( StringUtils.isEmpty(view)){	    
+	    view = configService.getLocalProperty("view.html.page.secure.main");
+	}
+	
 	WebSite website = WebSiteUtils.getWebSite(request);
-
 	DisplayController.PageActionAdaptor.Builder builder = PageActionAdaptor.newBuilder();
 	if (companyId > 0)
 	    try {
@@ -89,9 +103,31 @@ public class SecureDisplayController {
 	log.debug("path:" + view);
 	return view;
     }
+    
+    @RequestMapping(value = "/{filename:.+}", method = { RequestMethod.POST, RequestMethod.GET })
+    public String page(@PathVariable String filename, @RequestParam(value = "source", required = false) String view, 
+	    HttpServletRequest request, 
+	    HttpServletResponse response, Model model) 
+	    throws NotFoundException, IOException {
 
+	User user = SecurityHelper.getUser();
+	
+	if( StringUtils.isEmpty(view)){	    
+	    view = configService.getLocalProperty("view.html.page.secure.main");
+	}
+	
+	WebSite website = WebSiteUtils.getWebSite(request);
+	DisplayController.PageActionAdaptor.Builder builder = PageActionAdaptor.newBuilder();
+	model.addAttribute("action", builder.webSite(website).user(user).build());
+	
+	setContentType(response);
+	log.debug("path:" + view);
+	
+	return view;
+    }
+    
     protected void setContentType(HttpServletResponse response) {
-	response.setContentType("text/html;charset=UTF-8");
+	response.setContentType(DEFAULT_CONTENT_TYPE);
     }
 
 }

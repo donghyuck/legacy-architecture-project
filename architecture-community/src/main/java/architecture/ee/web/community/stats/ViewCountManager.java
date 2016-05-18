@@ -29,6 +29,7 @@ import org.apache.commons.logging.LogFactory;
 
 import architecture.common.event.api.EventListener;
 import architecture.common.event.api.EventPublisher;
+import architecture.common.lifecycle.ConfigService;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.task.TaskEngine;
 import architecture.common.user.authentication.UnAuthorizedException;
@@ -52,18 +53,33 @@ public class ViewCountManager {
     private Cache pageCountCache;
     private ViewCountDao viewCountDao;
     private EventPublisher eventPublisher;
-
+    private ConfigService configService ;
+    private TaskEngine taskEngine;
+    
     public ViewCountManager(TaskEngine taskEngine) {
-	this.viewCountsEnabled = ApplicationHelper.getApplicationBooleanProperty("components.viewCounts.enabled", true);
-	log.debug("view count enabled : " + viewCountsEnabled);
+	//this.viewCountsEnabled = ApplicationHelper.getApplicationBooleanProperty("components.viewCounts.enabled", true);
+	//log.debug("view count enabled : " + viewCountsEnabled);
+	this.taskEngine = taskEngine;
 	if (this.viewCountsEnabled) {
 	    this.queue = initQueue();
-	    this.task = new PersistenceTask();
+	    this.task = new PersistenceTask();	   
 	    taskEngine.schedule(task, DEFAULT_PERIOD_TIME, DEFAULT_PERIOD_TIME);
 	}
     }
 
+    public void setConfigService(ConfigService configService) {
+        this.configService = configService;
+    }
+
     public void initialize() {
+	if( configService != null && !viewCountsEnabled ){
+	    this.viewCountsEnabled = configService.getApplicationBooleanProperty("components.viewCounts.enabled", true);
+	}
+	if (this.viewCountsEnabled) {
+	    this.queue = initQueue();
+	    this.task = new PersistenceTask();
+	    this.taskEngine.schedule(task, DEFAULT_PERIOD_TIME, DEFAULT_PERIOD_TIME);
+	}	
 	this.eventPublisher.register(this);
     }
 

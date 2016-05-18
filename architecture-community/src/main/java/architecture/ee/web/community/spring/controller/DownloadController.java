@@ -164,51 +164,51 @@ public class DownloadController {
 	}
     }
 
-    @RequestMapping(value = "/logo/{type}/{name}", method = RequestMethod.GET)
-    @ResponseBody
-    public void handleLogo(@PathVariable("type") String type, @PathVariable("name") String name,
-	    @RequestParam(value = "width", defaultValue = "0", required = false) Integer width,
-	    @RequestParam(value = "height", defaultValue = "0", required = false) Integer height,
-	    HttpServletResponse response) throws IOException {
-
-	try {
-	    LogoImage image = null;
-	    if (StringUtils.equals(type, "company")) {
-		Company company = companyManager.getCompany(name);
-		image = logoManager.getPrimaryLogoImage(company);
-	    } else if (StringUtils.equals(type, "site")) {
-		WebSite site = webSiteManager.getWebSiteByName(name);
-		image = logoManager.getPrimaryLogoImage(site);
-	    }
-	    if (image != null) {
-		InputStream input;
-		String contentType;
-		int contentLength;
-
-		if (width > 0 && width > 0) {
-		    input = logoManager.getImageThumbnailInputStream(image, width, height);
-		    contentType = image.getThumbnailContentType();
-		    contentLength = image.getThumbnailSize();
-		} else {
-		    input = logoManager.getImageInputStream(image);
-		    contentType = image.getImageContentType();
-		    contentLength = image.getImageSize();
-		}
-
-		response.setContentType(contentType);
-		response.setContentLength(contentLength);
-		IOUtils.copy(input, response.getOutputStream());
-		response.flushBuffer();
-	    }
-
-	} catch (Exception e) {
-	    log.warn(e);
-	    response.setStatus(301);
-	    String url = ApplicationHelper.getApplicationProperty("components.download.images.no-logo-url",
-		    "/images/common/what-to-know-before-getting-logo-design.png");
-	    response.addHeader("Location", url);
-	}
-    }
+//    @RequestMapping(value = "/logo/{type}/{name}", method = RequestMethod.GET)
+//    @ResponseBody
+//    public void handleLogo(@PathVariable("type") String type, @PathVariable("name") String name,
+//	    @RequestParam(value = "width", defaultValue = "0", required = false) Integer width,
+//	    @RequestParam(value = "height", defaultValue = "0", required = false) Integer height,
+//	    HttpServletResponse response) throws IOException {
+//
+//	try {
+//	    LogoImage image = null;
+//	    if (StringUtils.equals(type, "company")) {
+//		Company company = companyManager.getCompany(name);
+//		image = logoManager.getPrimaryLogoImage(company);
+//	    } else if (StringUtils.equals(type, "site")) {
+//		WebSite site = webSiteManager.getWebSiteByName(name);
+//		image = logoManager.getPrimaryLogoImage(site);
+//	    }
+//	    if (image != null) {
+//		InputStream input;
+//		String contentType;
+//		int contentLength;
+//
+//		if (width > 0 && width > 0) {
+//		    input = logoManager.getImageThumbnailInputStream(image, width, height);
+//		    contentType = image.getThumbnailContentType();
+//		    contentLength = image.getThumbnailSize();
+//		} else {
+//		    input = logoManager.getImageInputStream(image);
+//		    contentType = image.getImageContentType();
+//		    contentLength = image.getImageSize();
+//		}
+//
+//		response.setContentType(contentType);
+//		response.setContentLength(contentLength);
+//		IOUtils.copy(input, response.getOutputStream());
+//		response.flushBuffer();
+//	    }
+//
+//	} catch (Exception e) {
+//	    log.warn(e);
+//	    response.setStatus(301);
+//	    String url = ApplicationHelper.getApplicationProperty("components.download.images.no-logo-url",
+//		    "/images/common/what-to-know-before-getting-logo-design.png");
+//	    response.addHeader("Location", url);
+//	}
+//    }
 
     @RequestMapping(value = "/profile/{username}", method = RequestMethod.GET)
     @ResponseBody
