@@ -33,11 +33,11 @@ import architecture.ee.web.logo.LogoManager;
 import architecture.ee.web.navigator.MenuRepository;
 import architecture.ee.web.site.WebSiteManager;
 
-@Controller("secure-community-data-controller")
+@Controller("secure-community-mgmt-data-controller")
 @RequestMapping("/secure/data")
-public class SecureCommunityDataController {
+public class SecureCommunityMgmtDataController {
 
-    private static final Log log = LogFactory.getLog(SecureCommunityDataController.class);
+    private static final Log log = LogFactory.getLog(SecureCommunityMgmtDataController.class);
 
     @Inject
     @Qualifier("photoStreamsManager")
@@ -75,7 +75,7 @@ public class SecureCommunityDataController {
     @Qualifier("logoManager")
     private LogoManager logoManager;
 
-    public SecureCommunityDataController() {
+    public SecureCommunityMgmtDataController() {
     }
 
 }
