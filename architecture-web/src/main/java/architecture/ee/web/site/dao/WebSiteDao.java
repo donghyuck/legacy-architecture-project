@@ -17,6 +17,7 @@ package architecture.ee.web.site.dao;
 
 import java.util.List;
 
+import architecture.ee.web.model.DataSourceRequest.FilterDescriptor;
 import architecture.ee.web.site.WebPageNotFoundException;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteDomainMapper;
@@ -55,7 +56,12 @@ public interface WebSiteDao {
 	
 	public List<Long> getWebPageIds(long websiteId, int startIndex, int maxResults );
 	
-
+	public int getWebPageCount(long websiteId, List<FilterDescriptor> filters);
+	
+	public List<Long> getWebPageIds(long websiteId, List<FilterDescriptor> filters);
+	
+	public List<Long> getWebPageIds(long websiteId, List<FilterDescriptor> filters, int startIndex, int maxResults );
+	
 	public void createWebPage(WebPage page);
 	
 	public void updateWebPage(WebPage page);

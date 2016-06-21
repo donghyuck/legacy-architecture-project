@@ -44,7 +44,7 @@ public class JdbcImageLinkDao extends ExtendedJdbcDaoSupport implements ImageLin
 		ImageLink link =  getExtendedJdbcTemplate().queryForObject(
 				getBoundSql("ARCHITECTURE_WEB.SELECT_IMAGE_LINK_BY_IMAGE_ID").getSql(), 
 				imageLinkMapper, 
-				new SqlParameterValue (Types.INTEGER, imageId ));			
+				new SqlParameterValue (Types.NUMERIC, imageId ));			
 		return link;		
 	}
 	
@@ -59,7 +59,7 @@ public class JdbcImageLinkDao extends ExtendedJdbcDaoSupport implements ImageLin
 	public void saveImageLink(ImageLink link) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.INSERT_IMAGE_LINK").getSql(), 	
 					new SqlParameterValue (Types.VARCHAR, link.getLinkId() ), 
-					new SqlParameterValue (Types.INTEGER, link.getImageId() ), 
+					new SqlParameterValue (Types.NUMERIC, link.getImageId() ), 
 					new SqlParameterValue (Types.INTEGER, link.isPublicShared() ? 1 : 0  ) );
 	}	
 	

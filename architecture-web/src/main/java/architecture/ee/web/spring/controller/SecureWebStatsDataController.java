@@ -64,11 +64,11 @@ import net.anotheria.moskito.core.registry.ProducerReference;
 import net.anotheria.moskito.core.registry.ProducerRegistryFactory;
 import net.sf.ehcache.Cache;
 
-@Controller ("secure-web-stage-data-controller")
+@Controller ("secure-web-stats-data-controller")
 @RequestMapping("/secure/data")
-public class SecureWebStageDataController {
+public class SecureWebStatsDataController {
 
-	private static final Log log = LogFactory.getLog(SecureWebStageDataController.class);
+	private static final Log log = LogFactory.getLog(SecureWebStatsDataController.class);
 	
 	@Inject
 	@Qualifier("systemInformationService")	
@@ -105,7 +105,7 @@ public class SecureWebStageDataController {
 	@Qualifier("taskExecutor")
 	private TaskExecutor taskExecutor;
 	
-	public SecureWebStageDataController() {
+	public SecureWebStatsDataController() {
 	}
 
 	/**

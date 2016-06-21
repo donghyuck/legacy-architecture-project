@@ -102,7 +102,9 @@ public class SecureDownloadController {
 		} catch (Exception e) {
 			log.warn(e);
 			response.setStatus(301);
-			String url = ApplicationHelper.getApplicationProperty("components.download.images.no-logo-url", "/images/common/what-to-know-before-getting-logo-design.png");
+			String url = ApplicationHelper.getApplicationProperty(
+				"components.download.images.no-logo-url", 
+				"/images/common/what-to-know-before-getting-logo-design.png");
 			response.addHeader("Location", url );
 		}		
 	}

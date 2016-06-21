@@ -18,6 +18,7 @@ package architecture.ee.web.site.dao.jdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ import architecture.common.user.CompanyTemplate;
 import architecture.common.user.UserTemplate;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
+import architecture.ee.web.model.DataSourceRequest.FilterDescriptor;
 import architecture.ee.web.navigator.DefaultMenu;
 import architecture.ee.web.site.DefaultWebSite;
 import architecture.ee.web.site.WebPageNotFoundException;
@@ -424,5 +426,32 @@ public class JdbcWebSiteDao extends ExtendedJdbcDaoSupport implements WebSiteDao
     public void deleteWebPage(WebPage page) {
 	// TODO 자동 생성된 메소드 스텁
 
+    }
+
+   
+    public int getWebPageCount(long websiteId, List<FilterDescriptor> filters) {
+	Map map = new HashMap();
+	map.put("filters", filters);	
+	return getExtendedJdbcTemplate().queryForObject(
+		getBoundSqlWithAdditionalParameter("ARCHITECTURE_WEB.COUNT_WEBPAGE_BY_WEBSITE_AND_FILTERS", map).getSql(), Integer.class,
+		new SqlParameterValue(Types.NUMERIC, websiteId));
+    }
+
+    @Override
+    public List<Long> getWebPageIds(long websiteId, List<FilterDescriptor> filters) {
+	Map map = new HashMap();
+	map.put("filters", filters);	
+	return getExtendedJdbcTemplate().queryForList(
+		getBoundSqlWithAdditionalParameter("ARCHITECTURE_WEB.SELECT_WEBPAGE_IDS_BY_WEBSITE_AND_FILTERS", map).getSql(), Long.class,
+		new SqlParameterValue(Types.NUMERIC, websiteId));
+    }
+
+    @Override
+    public List<Long> getWebPageIds(long websiteId, List<FilterDescriptor> filters, int startIndex, int maxResults) {
+	Map map = new HashMap();
+	map.put("filters", filters);	
+	return getExtendedJdbcTemplate().queryScrollable(
+		getBoundSqlWithAdditionalParameter("ARCHITECTURE_WEB.SELECT_WEBPAGE_IDS_BY_WEBSITE_AND_FILTERS", map).getSql(), startIndex, maxResults,
+		new Object[] { websiteId }, new int[] { Types.NUMERIC }, Long.class);
     }
 }

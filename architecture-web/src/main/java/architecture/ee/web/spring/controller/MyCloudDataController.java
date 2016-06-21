@@ -36,7 +36,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -70,6 +69,7 @@ import architecture.ee.web.attachment.ImageLink;
 import architecture.ee.web.attachment.ImageManager;
 import architecture.ee.web.attachment.impl.AttachmentImpl;
 import architecture.ee.web.attachment.impl.ImageImpl;
+import architecture.ee.web.model.ItemList;
 import architecture.ee.web.photo.album.Album;
 import architecture.ee.web.photo.album.AlbumManager;
 import architecture.ee.web.photo.album.DefaultAlbum;
@@ -911,53 +911,53 @@ public class MyCloudDataController {
 	}
 
     }
-
-    public static class ItemList {
-
-	private List<?> items;
-	private int totalCount;
-
-	/**
-	 * @param items
-	 * @param totalCount
-	 */
-
-	public ItemList(List<?> items, int totalCount) {
-	    super();
-	    this.items = items;
-	    this.totalCount = totalCount;
-	}
-
-	/**
-	 * @return items
-	 */
-	public List<?> getItems() {
-	    return items;
-	}
-
-	/**
-	 * @param items
-	 *            설정할 items
-	 */
-	public void setItems(List<?> items) {
-	    this.items = items;
-	}
-
-	/**
-	 * @return totalCount
-	 */
-	public int getTotalCount() {
-	    return totalCount;
-	}
-
-	/**
-	 * @param totalCount
-	 *            설정할 totalCount
-	 */
-	public void setTotalCount(int totalCount) {
-	    this.totalCount = totalCount;
-	}
-
-    }
+//
+//    public static class ItemList {
+//
+//	private List<?> items;
+//	private int totalCount;
+//
+//	/**
+//	 * @param items
+//	 * @param totalCount
+//	 */
+//
+//	public ItemList(List<?> items, int totalCount) {
+//	    super();
+//	    this.items = items;
+//	    this.totalCount = totalCount;
+//	}
+//
+//	/**
+//	 * @return items
+//	 */
+//	public List<?> getItems() {
+//	    return items;
+//	}
+//
+//	/**
+//	 * @param items
+//	 *            설정할 items
+//	 */
+//	public void setItems(List<?> items) {
+//	    this.items = items;
+//	}
+//
+//	/**
+//	 * @return totalCount
+//	 */
+//	public int getTotalCount() {
+//	    return totalCount;
+//	}
+//
+//	/**
+//	 * @param totalCount
+//	 *            설정할 totalCount
+//	 */
+//	public void setTotalCount(int totalCount) {
+//	    this.totalCount = totalCount;
+//	}
+//
+//    }
 
 }

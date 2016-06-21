@@ -18,6 +18,7 @@ package architecture.ee.web.site.page;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -27,6 +28,8 @@ import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.json.CustomJsonDateDeserializer;
 import architecture.common.model.json.CustomJsonDateSerializer;
+import architecture.common.model.json.JsonMapPropertyDeserializer;
+import architecture.common.model.json.JsonMapPropertySerializer;
 import architecture.common.model.support.PropertyModelSupport;
 
 public class WebPage extends PropertyModelSupport {
@@ -294,5 +297,15 @@ public class WebPage extends PropertyModelSupport {
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	    @JsonDeserialize(using = JsonMapPropertyDeserializer.class)
+	    public void setProperties(Map<String, String> properties) {
+		super.setProperties(properties);
+	    }
+
+	    @JsonSerialize(using = JsonMapPropertySerializer.class)
+	    public Map<String, String> getProperties() {
+		return super.getProperties();
+	    }
 
 }

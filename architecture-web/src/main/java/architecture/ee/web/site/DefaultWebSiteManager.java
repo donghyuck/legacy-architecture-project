@@ -30,6 +30,7 @@ import architecture.common.user.CompanyManager;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.util.StringUtils;
+import architecture.ee.web.model.DataSourceRequest.FilterDescriptor;
 import architecture.ee.web.site.dao.WebSiteDao;
 import architecture.ee.web.site.page.WebPage;
 import architecture.ee.web.util.WebSiteUtils;
@@ -435,9 +436,44 @@ public class DefaultWebSiteManager implements WebSiteManager {
 	return list;
     }
 
+    
     @Override
     public int getWebPageCount(WebSite website) {
 	return webSiteDao.getWebPageCount(website.getWebSiteId());
+    }
+
+
+    @Override
+    public List<WebPage> getWebPages(WebSite website, List<FilterDescriptor> filters) {
+	List<Long> IDs = webSiteDao.getWebPageIds(website.getWebSiteId(), filters );
+	List<WebPage> list = new ArrayList<WebPage>();
+	for (Long webPageId : IDs) {
+	    try {
+		list.add(getWebPageById(webPageId));
+	    } catch (WebPageNotFoundException e) {
+	    }
+	}
+	return list;
+    }
+
+
+    @Override
+    public List<WebPage> getWebPages(WebSite website, List<FilterDescriptor> filters, int startIndex, int maxResults) {
+	List<Long> IDs = webSiteDao.getWebPageIds(website.getWebSiteId(), filters,  startIndex, maxResults);
+	List<WebPage> list = new ArrayList<WebPage>();
+	for (Long webPageId : IDs) {
+	    try {
+		list.add(getWebPageById(webPageId));
+	    } catch (WebPageNotFoundException e) {
+	    }
+	}
+	return list;
+    }
+
+
+    @Override
+    public int getWebPageCount(WebSite website, List<FilterDescriptor> filters) {
+	return webSiteDao.getWebPageCount(website.getWebSiteId(), filters);
     }
 
 }

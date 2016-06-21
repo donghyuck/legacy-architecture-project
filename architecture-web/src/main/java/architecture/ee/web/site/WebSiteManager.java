@@ -19,6 +19,7 @@ import java.util.List;
 
 import architecture.common.user.Company;
 import architecture.common.user.User;
+import architecture.ee.web.model.DataSourceRequest.FilterDescriptor;
 import architecture.ee.web.site.page.WebPage;
 
 public interface WebSiteManager {
@@ -60,5 +61,11 @@ public interface WebSiteManager {
 	public List<WebPage> getWebPages(WebSite website, int startIndex, int maxResults );
 	
 	public int getWebPageCount(WebSite website);
+	
+	public List<WebPage> getWebPages(WebSite website, List<FilterDescriptor> filters);
+	
+	public List<WebPage> getWebPages(WebSite website, List<FilterDescriptor> filters, int startIndex, int maxResults );
+	
+	public int getWebPageCount(WebSite website, List<FilterDescriptor> filters);
 		
 }
