@@ -23,6 +23,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.support.lob.DefaultLobHandler;
 import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.jdbc.support.nativejdbc.NativeJdbcExtractor;
 
@@ -97,12 +98,13 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 
     public LobHandler getLobHandler() {
 
-	if (getExtendedJdbcTemplate().getNativeJdbcExtractor() == null) {
-	    log.debug("Initializing NativeJdbcExtractor");
-	    log.debug("Database Type:" + getExtendedJdbcTemplate().getDatabaseType());
-	    NativeJdbcExtractor extractor = NativeJdbcExtractorUtils.getNativeJdbcExtractor();
-	    getExtendedJdbcTemplate().setNativeJdbcExtractor(extractor);
-	    log.debug("NativeJdbcExtractor:" + extractor.getClass().getName());
+	if ( getExtendedJdbcTemplate().getLobHandler() == null) {
+//	    log.debug("Initializing NativeJdbcExtractor");
+//	    log.debug("Database Type:" + getExtendedJdbcTemplate().getDatabaseType());
+//	    NativeJdbcExtractor extractor = NativeJdbcExtractorUtils.getNativeJdbcExtractor();
+//	    getExtendedJdbcTemplate().setNativeJdbcExtractor(extractor);
+//	    log.debug("NativeJdbcExtractor:" + extractor.getClass().getName());
+	    getExtendedJdbcTemplate().setLobHandler(new DefaultLobHandler());
 	}
 
 	return getExtendedJdbcTemplate().getLobHandler();

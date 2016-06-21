@@ -18,7 +18,42 @@
 	
 	 <bean id="defaultLobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true"/>
 	
-	<alias name="defaultLobHandler" alias="lobHandler"/>	
+	<alias name="defaultLobHandler" alias="lobHandler"/>
+	
+
+	<bean id="automaticJdbcExtractor" class="architecture.common.spring.jdbc.support.nativejdbc.AutomaticJdbcExtractor" lazy-init="true">		
+		<property name="defaultJdbcExtractor">
+			<bean id="simpleJdbcExtractor" class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor" />
+		</property>			
+		<property name="extractors">
+			<map>
+				<entry key="org.apache.commons.dbcp">
+					<bean class="architecture.common.spring.jdbc.support.nativejdbc.LazyNativeJdbcExtractor">
+						<property name="extractorClass">
+							<value type="java.lang.Class">org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor</value>
+						</property>
+					</bean>
+				</entry>	
+			
+				<entry key="weblogic">
+					<bean class="architecture.common.spring.jdbc.support.nativejdbc.LazyNativeJdbcExtractor">
+						<property name="extractorClass">
+							<value type="java.lang.Class">org.springframework.jdbc.support.nativejdbc.WebLogicNativeJdbcExtractor</value>
+						</property>
+					</bean>
+				</entry>	
+				<entry key="c3p0">
+					<bean class="architecture.common.spring.jdbc.support.nativejdbc.LazyNativeJdbcExtractor">
+						<property name="extractorClass">
+							<value type="java.lang.Class">org.springframework.jdbc.support.nativejdbc.C3P0NativeJdbcExtractor</value>
+						</property>
+					</bean>
+				</entry>
+			
+			</map>
+		</property>
+	</bean>	
+			
 	<!-- ================================================ -->
 	<!-- 2. Transaction                                   -->
 	<!-- ================================================ -->	
