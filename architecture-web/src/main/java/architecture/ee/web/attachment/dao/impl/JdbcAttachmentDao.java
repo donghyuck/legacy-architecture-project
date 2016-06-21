@@ -141,7 +141,7 @@ public class JdbcAttachmentDao extends ExtendedJdbcDaoSupport implements Attachm
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.INSERT_ATTACHMENT").getSql(), 	
 					new SqlParameterValue (Types.NUMERIC, toUse.getAttachmentId()), 
 					new SqlParameterValue (Types.INTEGER, toUse.getObjectType() ), 
-					new SqlParameterValue (Types.INTEGER, toUse.getObjectId() ), 
+					new SqlParameterValue (Types.NUMERIC, toUse.getObjectId() ), 
 					new SqlParameterValue (Types.VARCHAR, toUse.getContentType()), 
 					new SqlParameterValue (Types.VARCHAR, toUse.getName() ), 
 					new SqlParameterValue (Types.INTEGER, toUse.getSize() ), 					
@@ -155,7 +155,7 @@ public class JdbcAttachmentDao extends ExtendedJdbcDaoSupport implements Attachm
 	public void updateAttachment(Attachment attachment) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.UPDATE_ATTACHMENT").getSql(), 	
 				new SqlParameterValue (Types.INTEGER, attachment.getObjectType() ), 
-				new SqlParameterValue (Types.INTEGER, attachment.getObjectId() ), 
+				new SqlParameterValue (Types.NUMERIC, attachment.getObjectId() ), 
 				new SqlParameterValue (Types.VARCHAR, attachment.getContentType()), 
 				new SqlParameterValue (Types.VARCHAR, attachment.getName() ), 
 				new SqlParameterValue (Types.INTEGER, attachment.getSize() ), 
