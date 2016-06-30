@@ -152,7 +152,6 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 	try {
 	    for (String path : resourceLocations) {
 		if (path.startsWith("${") && path.endsWith("}")) {
-
 		    int start = path.indexOf('{') + 1;
 		    int end = path.indexOf('}');
 		    String key = path.substring(start, end).trim();
@@ -162,8 +161,7 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 			    path = AdminHelper.getRepository().getURI("sql");
 		    } else {
 			path = AdminHelper.getRepository().getSetupApplicationProperties().get(key);
-		    }
-		    
+		    }		    
 		    log.debug( key + "=" + path );
 		}
 
@@ -197,7 +195,6 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
     public void fastDeploy(File file, SqlQueryFactory builder) {
 	if (file.isDirectory()) {
 	    for (File f : FileUtils.listFiles(file, new String[] { "xml" }, true)) {
-
 		boolean valid = builder.validateFile(f);
 		StringBuilder sb = new StringBuilder();
 		sb.append("deploy : ");
@@ -205,7 +202,6 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 		sb.append(" , valid = ");
 		sb.append(valid);
 		log.debug(sb.toString());
-
 		if (valid) {
 		    try {
 			builder.fileCreated(file);
