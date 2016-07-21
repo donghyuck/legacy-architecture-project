@@ -13,6 +13,8 @@ import architecture.ee.web.attachment.Attachment;
 
 public class AttachmentImpl extends BaseModelObject implements Attachment {
 
+	private long userId = -1L;
+	
     private long attachmentId = -1L;
 	
     private String name;
@@ -57,6 +59,16 @@ public class AttachmentImpl extends BaseModelObject implements Attachment {
 
 	public void setObjectId(long objectId) {
 		this.objectId = objectId;
+	}
+
+	
+	
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 	public String getName() {

@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +27,10 @@ public class JdbcAttachmentDao extends ExtendedJdbcDaoSupport implements Attachm
 	private final RowMapper<Attachment> attachmentMapper = new RowMapper<Attachment>(){
 		public Attachment mapRow(ResultSet rs, int rowNum) throws SQLException {
 			AttachmentImpl image = new AttachmentImpl();
+			
+			if(enableSaveUserId){
+				image.setUserId(rs.getLong("USER_ID"));
+			}
 			image.setAttachmentId(rs.getLong("ATTACHMENT_ID"));
 			image.setObjectType(rs.getInt("OBJECT_TYPE"));
 			image.setObjectId(rs.getLong("OBJECT_ID"));
@@ -64,6 +67,19 @@ public class JdbcAttachmentDao extends ExtendedJdbcDaoSupport implements Attachm
 	private String attachmentPropertyTableName = "V2_ATTACHMENT_PROPERTY";
 	private String attachmentPropertyPrimaryColumnName = "ATTACHMENT_ID";
 	
+	private boolean enableSaveUserId = false ;
+	
+	
+	public boolean isEnableSaveUserId() {
+		return enableSaveUserId;
+	}
+
+
+	public void setEnableSaveUserId(boolean enableSaveUserId) {
+		this.enableSaveUserId = enableSaveUserId;
+	}
+
+
 	public void setExtendedPropertyDao(ExtendedPropertyDao extendedPropertyDao) {
 		this.extendedPropertyDao = extendedPropertyDao;
 	}
@@ -133,12 +149,30 @@ public class JdbcAttachmentDao extends ExtendedJdbcDaoSupport implements Attachm
 	}
 
 	public Attachment createAttachment(Attachment attachment) {
+		
 		Attachment toUse = attachment;		
 		if( toUse.getAttachmentId() <1L){
 			long attachmentId = getNextId(sequencerName);
 			toUse.setAttachmentId(attachmentId);
 		}
-		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.INSERT_ATTACHMENT").getSql(), 	
+		
+		String sql = getBoundSql("ARCHITECTURE_WEB.INSERT_ATTACHMENT").getSql();
+		
+		if( enableSaveUserId ){
+			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.INSERT_ATTACHMENT").getSql(), 	
+					new SqlParameterValue (Types.NUMERIC, toUse.getAttachmentId()), 
+					new SqlParameterValue (Types.INTEGER, toUse.getObjectType() ), 
+					new SqlParameterValue (Types.NUMERIC, toUse.getObjectId() ), 
+					new SqlParameterValue (Types.VARCHAR, toUse.getContentType()), 
+					new SqlParameterValue (Types.VARCHAR, toUse.getName() ), 
+					new SqlParameterValue (Types.INTEGER, toUse.getSize() ), 	
+					
+					new SqlParameterValue (Types.NUMERIC, toUse.getUserId() ), 
+					
+					new SqlParameterValue(Types.DATE, toUse.getCreationDate()),
+					new SqlParameterValue(Types.DATE, toUse.getModifiedDate()));				
+		}else{
+			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.INSERT_ATTACHMENT").getSql(), 	
 					new SqlParameterValue (Types.NUMERIC, toUse.getAttachmentId()), 
 					new SqlParameterValue (Types.INTEGER, toUse.getObjectType() ), 
 					new SqlParameterValue (Types.NUMERIC, toUse.getObjectId() ), 
@@ -147,7 +181,7 @@ public class JdbcAttachmentDao extends ExtendedJdbcDaoSupport implements Attachm
 					new SqlParameterValue (Types.INTEGER, toUse.getSize() ), 					
 					new SqlParameterValue(Types.DATE, toUse.getCreationDate()),
 					new SqlParameterValue(Types.DATE, toUse.getModifiedDate()));			
-		
+		}		
 		return toUse;
 		
 	}

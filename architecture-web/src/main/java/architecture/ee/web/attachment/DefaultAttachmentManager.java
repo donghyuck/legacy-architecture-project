@@ -22,20 +22,25 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import architecture.common.user.User;
+import architecture.common.user.authentication.AnonymousUser;
+import architecture.common.user.authentication.AuthToken;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.exception.SystemException;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.attachment.dao.AttachmentDao;
 import architecture.ee.web.attachment.impl.AttachmentImpl;
+
+
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 public class DefaultAttachmentManager extends AbstractAttachmentManager implements AttachmentManager {
 
@@ -104,6 +109,7 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 	
 	public Attachment createAttachment(int objectType, long objectId, String name, String contentType, File file) {
 		
+		
 		AttachmentImpl attachment = new AttachmentImpl();
 		attachment.setObjectType(objectType);
 		attachment.setObjectId(objectId);
@@ -134,9 +140,27 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 		return attachment;
 	}
 	
+	
+	public long getUserId() {
+		try {
+			org.springframework.security.core.context.SecurityContext context = org.springframework.security.core.context.SecurityContextHolder.getContext();
+			org.springframework.security.core.Authentication authen = context.getAuthentication();
+			Object obj = authen.getPrincipal();
+			if ( obj instanceof AuthToken ){
+				return ((AuthToken)obj).getUserId();
+			}
+			
+		} catch (Exception ignore) {
+		}			
+		return -1L;
+	}
+	
+	
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public Attachment saveAttachment(Attachment attachment) {
 		
+		long userId = getUserId();
+	
 		Date now = new Date();
 		Attachment attachmentToUse = attachment ;
 		if( attachmentToUse.getAttachmentId() > 0 ){
@@ -146,6 +170,7 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 		}else{			
 			attachmentToUse.setCreationDate(now);
 			attachmentToUse.setModifiedDate(now);
+			((AttachmentImpl)attachmentToUse).setUserId(userId);
 			attachmentToUse = attachmentDao.createAttachment(attachmentToUse);
 		}		
 		try {

@@ -43,4 +43,6 @@ public interface Attachment extends ModelObject {
 	public void setInputStream(InputStream inputStream) ;
 	
 	public InputStream getInputStream() throws IOException ;
+	
+	public long getUserId();
 }
