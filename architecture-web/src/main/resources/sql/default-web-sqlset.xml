@@ -34,6 +34,26 @@
     WHERE 
     	ATTACHMENT_ID = ?	    
     ]]></sql-query>
+    
+    
+    
+    <sql-query name="MOVE_ATTACHMENTS" description="이동"><![CDATA[    
+    UPDATE V2_ATTACHMENT SET 		
+		OBJECT_TYPE = ?,
+		OBJECT_ID = ?
+	WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
+    ]]></sql-query>
+    
+	<sql-query name="SELECT_ATTACHMENT_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 값으로 첨부파일  조회"><![CDATA[    
+    SELECT 
+		ATTACHMENT_ID
+    FROM 
+    	V2_ATTACHMENT
+    WHERE 
+    	OBJECT_TYPE = ?	AND
+    	OBJECT_ID = ?
+    ]]></sql-query>    
+        
     <sql-query name="SELECT_ATTACHMENT_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 값으로 첨부파일  조회"><![CDATA[    
     SELECT 
 		ATTACHMENT_ID,
@@ -59,6 +79,7 @@
     WHERE 
     	ATTACHMENT_ID = ?
     ]]></sql-query>    
+    
     <sql-query name="INSERT_ATTACHMENT" description="첨부파일  생성"><![CDATA[    
     INSERT INTO V2_ATTACHMENT (
 		ATTACHMENT_ID,

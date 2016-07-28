@@ -18,6 +18,7 @@ package architecture.ee.web.attachment;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -25,20 +26,15 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import architecture.common.user.User;
-import architecture.common.user.authentication.AnonymousUser;
 import architecture.common.user.authentication.AuthToken;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.exception.SystemException;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.attachment.dao.AttachmentDao;
 import architecture.ee.web.attachment.impl.AttachmentImpl;
-
-
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
@@ -49,8 +45,7 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 
 	private Cache attachmentCache;
 	
-	private File attachmentDir;	
-	
+	private File attachmentDir;		
 
 
 	public AttachmentDao getAttachmentDao() {
@@ -96,7 +91,20 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 	}
 
 	public List<Attachment> getAttachments(int objectType, long objectId) {
+		/*
+		List<Long> ids = attachmentDao.getAllAttachmentIds();		
+		List<Attachment> list = new ArrayList(ids.size());
+		for( Long id : ids){
+			try {
+				list.add(getAttachment(id));
+			} catch (NotFoundException e) {
+				log.error(e);
+			}
+		}		
+		return list;
+		*/
 		return attachmentDao.getByObjectTypeAndObjectId(objectType, objectId);
+	
 	}
 	
 	protected Attachment getAttachmentInCache(long attachmentId){
@@ -166,7 +174,12 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 		if( attachmentToUse.getAttachmentId() > 0 ){
 			attachmentCache.remove(attachmentToUse.getAttachmentId());			
 			attachmentToUse.setModifiedDate(now);
-			attachmentDao.updateAttachment(attachmentToUse);			
+			attachmentDao.updateAttachment(attachmentToUse);	
+			
+			if( attachmentCache.get(attachmentToUse.getAttachmentId()) != null ){
+				attachmentCache.remove(attachmentToUse.getAttachmentId());
+			}
+			
 		}else{			
 			attachmentToUse.setCreationDate(now);
 			attachmentToUse.setModifiedDate(now);
@@ -177,13 +190,11 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 			
 			if( attachmentToUse.getInputStream() != null )
 			{
-				attachmentDao.saveAttachmentData(attachmentToUse, attachmentToUse.getInputStream());
-				
+				attachmentDao.saveAttachmentData(attachmentToUse, attachmentToUse.getInputStream());				
 				Collection<File> files = FileUtils.listFiles(getAttachmentCacheDir(), FileFilterUtils.prefixFileFilter(attachment.getAttachmentId() + ""), null);
 				for(File file : files){
 					FileUtils.deleteQuietly(file);
-				}
-				
+				}				
 			}
 			
 			return getAttachment(attachment.getAttachmentId());
@@ -245,6 +256,17 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 			attachmentCache.remove(attachmentToUse.getAttachmentId());		
 			attachmentDao.deleteAttachment(attachmentToUse);
 			attachmentDao.deleteAttachmentData(attachmentToUse);
+		}
+	}
+
+	public void move(int objectType, long objectId, int targetObjectType, long targetObjectId) {
+		List<Long> ids = attachmentDao.getAttachmentIds(objectType, objectId);
+		if(ids.size() > 0){
+			for(Long id : ids ){
+				if(attachmentCache.get(id)!=null)
+					attachmentCache.remove(id);		
+			}
+			attachmentDao.move(objectType, objectId, targetObjectType, targetObjectId);
 		}
 	}
 }

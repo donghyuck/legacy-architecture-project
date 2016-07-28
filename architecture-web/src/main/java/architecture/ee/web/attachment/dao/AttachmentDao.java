@@ -58,6 +58,10 @@ public interface AttachmentDao {
 
     public abstract Attachment getByAttachmentId(long attachmentId);
 
+    public abstract List<Long> getAttachmentIds(int objectType, long objectId);
+    
+    public abstract void move(int objectType, long objectId, int targetObjectType, long targetObjectId);
+    
     public abstract List<Attachment> getByObjectTypeAndObjectId(int objectType, long objectId);
     
 }

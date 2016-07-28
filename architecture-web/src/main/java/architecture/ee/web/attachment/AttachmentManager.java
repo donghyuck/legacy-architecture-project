@@ -27,6 +27,8 @@ public interface AttachmentManager {
 	
 	public abstract List<Attachment> getAttachments(int objectType, long objectId);
 	
+	public abstract void move(int objectType, long objectId, int targetObjectType, long targetObjectId);
+	
 	public abstract Attachment createAttachment(int objectType, long objectId, String name, String contentType, File file);
 	
 	public abstract Attachment createAttachment(int objectType, long objectId, String name, String contentType, InputStream inputStream);	
