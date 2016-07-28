@@ -91,7 +91,7 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 	}
 
 	public List<Attachment> getAttachments(int objectType, long objectId) {
-		/*
+		
 		List<Long> ids = attachmentDao.getAllAttachmentIds();		
 		List<Attachment> list = new ArrayList(ids.size());
 		for( Long id : ids){
@@ -102,8 +102,8 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 			}
 		}		
 		return list;
-		*/
-		return attachmentDao.getByObjectTypeAndObjectId(objectType, objectId);
+		
+		//return attachmentDao.getByObjectTypeAndObjectId(objectType, objectId);
 	
 	}
 	
