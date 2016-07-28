@@ -92,8 +92,8 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 
 	public List<Attachment> getAttachments(int objectType, long objectId) {
 		
-		List<Long> ids = attachmentDao.getAllAttachmentIds();		
-		List<Attachment> list = new ArrayList(ids.size());
+		List<Long> ids = attachmentDao.getAttachmentIds(objectType, objectId);		
+		List<Attachment> list = new ArrayList<Attachment>(ids.size());
 		for( Long id : ids){
 			try {
 				list.add(getAttachment(id));
