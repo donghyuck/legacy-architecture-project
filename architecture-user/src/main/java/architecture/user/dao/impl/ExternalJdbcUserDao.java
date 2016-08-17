@@ -408,20 +408,21 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
     }
 
     public int getTotalUserCount() {
-	return getExtendedJdbcTemplate().queryForInt(getSql("COUNT_VISIBLE_USER"));
+	return getExtendedJdbcTemplate().queryForObject(getSql("COUNT_VISIBLE_USER"), Integer.class);
     }
 
     public int getApplicationUserCount() {
-	return getExtendedJdbcTemplate().queryForInt(getSql("COUNT_ENABLED_USER"));
+	return getExtendedJdbcTemplate().queryForObject(getSql("COUNT_ENABLED_USER"), Integer.class);
     }
 
     public int getAuthenticatedUserCount() {
-	return getExtendedJdbcTemplate().queryForInt(getSql("COUNT_AUTHENTICATED_USER"));
+	return getExtendedJdbcTemplate().queryForObject(getSql("COUNT_AUTHENTICATED_USER"), Integer.class);
     }
 
     public int getRecentUserCount(Date date) {
-	return getExtendedJdbcTemplate().queryForInt(getSql("COUNT_RECENT_USER"), new Object[] { date },
-		new int[] { Types.DATE });
+	return getExtendedJdbcTemplate().queryForObject(getSql("COUNT_RECENT_USER"), 
+		Integer.class,
+		new SqlParameterValue(Types.DATE, date));	
     }
 
     public List<User> getAllUsers() {
@@ -470,7 +471,8 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
     }
 
     public int getFoundUserCount(String nameOrEmail) {
-	return getExtendedJdbcTemplate().queryForInt(getSql("COUNT_USERS_BY_EMAIL_OR_NAME"),
+	return getExtendedJdbcTemplate().queryForObject(getSql("COUNT_USERS_BY_EMAIL_OR_NAME"), 
+		Integer.class,
 		new SqlParameterValue(Types.VARCHAR, nameOrEmail), new SqlParameterValue(Types.VARCHAR, nameOrEmail));
     }
 
@@ -543,13 +545,15 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
     }
 
     public int getFoundUserCount(Company company, String nameOrEmail) {
-	return getExtendedJdbcTemplate().queryForInt(getSql("COUNT_COMPANY_USERS_BY_EMAIL_OR_NAME"),
+	return getExtendedJdbcTemplate().queryForObject(getSql("COUNT_COMPANY_USERS_BY_EMAIL_OR_NAME"),
+		Integer.class,
 		new SqlParameterValue(Types.INTEGER, company.getCompanyId()),
 		new SqlParameterValue(Types.VARCHAR, nameOrEmail), new SqlParameterValue(Types.VARCHAR, nameOrEmail));
     }
 
     public int getUserCount(Company company) {
-	return getExtendedJdbcTemplate().queryForInt(getSql("COUNT_COMPANY_USERS"),
+	return getExtendedJdbcTemplate().queryForObject(getSql("COUNT_COMPANY_USERS"),
+		Integer.class,
 		new SqlParameterValue(Types.INTEGER, company.getCompanyId()));
     }
 
@@ -575,19 +579,16 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 
     @Override
     public List<Long> findUserIds(Company company, Group group, String nameOrEmail) {
-	// TODO 자동 생성된 메소드 스텁
 	return null;
     }
 
     @Override
     public List<Long> findUserIds(Company company, Group group, String nameOrEmail, int startIndex, int numResults) {
-	// TODO 자동 생성된 메소드 스텁
 	return null;
     }
 
     @Override
     public int getFoundUserCount(Company company, Group group, String nameOrEmail) {
-	// TODO 자동 생성된 메소드 스텁
 	return 0;
     }
 }

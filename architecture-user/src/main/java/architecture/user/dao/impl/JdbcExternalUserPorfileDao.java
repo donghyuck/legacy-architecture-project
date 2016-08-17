@@ -44,6 +44,7 @@ public class JdbcExternalUserPorfileDao extends ExtendedJdbcDaoSupport implement
 	}
 
 	public void setProfile(User user, Map<String, Object> profile) {
+	    
 	}
 
 	public void setProfile(long userId, Map<String, Object> profile) {

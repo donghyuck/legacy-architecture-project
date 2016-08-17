@@ -207,11 +207,11 @@ public class JdbcCompanyDao extends ExtendedJdbcDaoSupport implements CompanyDao
     }
 
     public int getCompanyCount() {
-	return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_ALL_COMPANY").getSql());
+	return getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.COUNT_ALL_COMPANY").getSql(), Integer.class);
     }
 
     public int getCompanyGroupCount(long companyId) {
-	return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_COMPANY_GROUPS").getSql(),
+	return getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.COUNT_COMPANY_GROUPS").getSql(), Integer.class,
 		new SqlParameterValue(Types.NUMERIC, companyId));
     }
 
