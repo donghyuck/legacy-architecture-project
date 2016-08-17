@@ -27,8 +27,7 @@ public class EventListenerRegister {
 
     private final List<ListenerHandler> listenerHandlers;
 
-    public EventListenerRegister(EventPublisher eventPublisher,
-	    ListenerHandlersConfiguration listenerHandlersConfiguration) {
+    public EventListenerRegister(EventPublisher eventPublisher, ListenerHandlersConfiguration listenerHandlersConfiguration) {
 
 	listenerHandlers = checkNotNull(checkNotNull(listenerHandlersConfiguration).getListenerHandlers());
 
