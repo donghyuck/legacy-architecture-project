@@ -8,8 +8,14 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * <p>Annotation to be used with events to tell whether they can be handled asynchronously</p>
- * <p>This is the default annotation to be used with {@link architecture.common.event.internal.AnnotationAsynchronousEventResolver}</p>
+ * <p>
+ * Annotation to be used with events to tell whether they can be handled
+ * asynchronously
+ * </p>
+ * <p>
+ * This is the default annotation to be used with
+ * {@link architecture.common.event.internal.AnnotationAsynchronousEventResolver}
+ * </p>
  *
  * @see architecture.common.event.internal.AnnotationAsynchronousEventResolver
  * @since 2.0
