@@ -18,7 +18,9 @@ package architecture.ee.web.ws;
 public class Result {
 	
 	private boolean success;
+	
 	private Error error;
+	
 	private Integer count;
 	
 	public Result() {

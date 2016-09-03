@@ -96,6 +96,13 @@ public abstract class AbstractJdbcUserDao extends ExtendedJdbcDaoSupport impleme
     
     protected abstract RowMapper<User> getUserRowMapper();
 
+    protected void deleteMembership(User user){
+	getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.DELETE_GROUP_MEMBERSHIP").getSql(), new Object[] { user.getUserId() }, new int[] { Types.NUMERIC });
+	
+    }
+    protected void deleteUserProperties(User user){
+	extendedPropertyDao.deleteProperties(userPropertyTableName, userPropertyPrimaryColumnName, user.getUserId());
+    }
     
     protected long getNextUserId(){
 	return getNextId(sequencerName);

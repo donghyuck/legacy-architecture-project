@@ -34,278 +34,276 @@ import architecture.common.model.support.PropertyModelSupport;
 
 public class WebPage extends PropertyModelSupport {
 
-	private long webPageId;
-	
-	private long webSiteId;
+    private long webPageId;
 
-	private String name;
+    private long webSiteId;
 
-	private String displayName;
+    private String name;
 
-	private String description;
+    private String displayName;
 
-	private String contentType;
+    private String description;
 
-	private String template;
+    private String contentType;
 
-	private boolean enabled;
+    private String template;
 
-	private String locale;
+    private boolean enabled;
 
-	private Date creationDate;
+    private String locale;
 
-	private Date modifiedDate;
+    private Date creationDate;
 
-	public WebPage() {
-		super();
-		this.webPageId = -1L;
-		this.webSiteId = -1L;
-		this.name = null;
-		this.displayName = null;
-		this.description = null;
-		this.contentType = null;
-		this.template = null;
-		this.enabled = false;
-		this.creationDate = Calendar.getInstance().getTime();
-		this.modifiedDate = creationDate;
-	}
+    private Date modifiedDate;
 
-	/**
-	 * @param webPageId
-	 */
-	public WebPage(long webPageId) {
-		this();
-		this.webPageId = webPageId;
-	}
+    public WebPage() {
+	super();
+	this.webPageId = -1L;
+	this.webSiteId = -1L;
+	this.name = null;
+	this.displayName = null;
+	this.description = null;
+	this.contentType = null;
+	this.template = null;
+	this.enabled = false;
+	this.creationDate = Calendar.getInstance().getTime();
+	this.modifiedDate = creationDate;
+    }
 
-	/**
-	 * @return webPageId
-	 */
-	public long getWebPageId() {
-		return webPageId;
-	}
+    /**
+     * @param webPageId
+     */
+    public WebPage(long webPageId) {
+	this();
+	this.webPageId = webPageId;
+    }
 
-	/**
-	 * @param webPageId 설정할 webPageId
-	 */
-	public void setWebPageId(long webPageId) {
-		this.webPageId = webPageId;
-	}
+    /**
+     * @return webPageId
+     */
+    public long getWebPageId() {
+	return webPageId;
+    }
 
-	/**
-	 * @return webSiteId
-	 */
-	public long getWebSiteId() {
-		return webSiteId;
-	}
+    /**
+     * @param webPageId
+     *            설정할 webPageId
+     */
+    public void setWebPageId(long webPageId) {
+	this.webPageId = webPageId;
+    }
 
-	/**
-	 * @return creationDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    /**
+     * @return webSiteId
+     */
+    public long getWebSiteId() {
+	return webSiteId;
+    }
 
-	/**
-	 * @param creationDate
-	 *            설정할 creationDate
-	 */
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    /**
+     * @return creationDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getCreationDate() {
+	return creationDate;
+    }
 
-	/**
-	 * @return modifiedDate
-	 */
-	@JsonSerialize(using = CustomJsonDateSerializer.class)
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
+    /**
+     * @param creationDate
+     *            설정할 creationDate
+     */
+    @JsonDeserialize(using = CustomJsonDateDeserializer.class)
+    public void setCreationDate(Date creationDate) {
+	this.creationDate = creationDate;
+    }
 
-	/**
-	 * @param modifiedDate
-	 *            설정할 modifiedDate
-	 */
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
+    /**
+     * @return modifiedDate
+     */
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
+    public Date getModifiedDate() {
+	return modifiedDate;
+    }
 
-	/**
-	 * @param webSiteId
-	 *            설정할 webSiteId
-	 */
-	public void setWebSiteId(long webSiteId) {
-		this.webSiteId = webSiteId;
-	}
+    /**
+     * @param modifiedDate
+     *            설정할 modifiedDate
+     */
+    @JsonDeserialize(using = CustomJsonDateDeserializer.class)
+    public void setModifiedDate(Date modifiedDate) {
+	this.modifiedDate = modifiedDate;
+    }
 
-	/**
-	 * @return name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * @param webSiteId
+     *            설정할 webSiteId
+     */
+    public void setWebSiteId(long webSiteId) {
+	this.webSiteId = webSiteId;
+    }
 
-	/**
-	 * @param name
-	 *            설정할 name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @return name
+     */
+    public String getName() {
+	return name;
+    }
 
-	/**
-	 * @return displayName
-	 */
-	public String getDisplayName() {
-		return displayName;
-	}
+    /**
+     * @param name
+     *            설정할 name
+     */
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	/**
-	 * @param displayName
-	 *            설정할 displayName
-	 */
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
-	}
+    /**
+     * @return displayName
+     */
+    public String getDisplayName() {
+	return displayName;
+    }
 
-	/**
-	 * @return description
-	 */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * @param displayName
+     *            설정할 displayName
+     */
+    public void setDisplayName(String displayName) {
+	this.displayName = displayName;
+    }
 
-	/**
-	 * @param description
-	 *            설정할 description
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    /**
+     * @return description
+     */
+    public String getDescription() {
+	return description;
+    }
 
-	/**
-	 * @return contentType
-	 */
-	public String getContentType() {
-		return contentType;
-	}
+    /**
+     * @param description
+     *            설정할 description
+     */
+    public void setDescription(String description) {
+	this.description = description;
+    }
 
-	/**
-	 * @param contentType
-	 *            설정할 contentType
-	 */
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-	}
+    /**
+     * @return contentType
+     */
+    public String getContentType() {
+	return contentType;
+    }
 
-	/**
-	 * @return template
-	 */
-	public String getTemplate() {
-		return template;
-	}
+    /**
+     * @param contentType
+     *            설정할 contentType
+     */
+    public void setContentType(String contentType) {
+	this.contentType = contentType;
+    }
 
-	/**
-	 * @param template
-	 *            설정할 template
-	 */
-	public void setTemplate(String template) {
-		this.template = template;
-	}
+    /**
+     * @return template
+     */
+    public String getTemplate() {
+	return template;
+    }
 
-	/**
-	 * @return enabled
-	 */
-	public boolean isEnabled() {
-		return enabled;
-	}
+    /**
+     * @param template
+     *            설정할 template
+     */
+    public void setTemplate(String template) {
+	this.template = template;
+    }
 
-	/**
-	 * @param enabled
-	 *            설정할 enabled
-	 */
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+    /**
+     * @return enabled
+     */
+    public boolean isEnabled() {
+	return enabled;
+    }
 
-	/**
-	 * @return locale
-	 */
-	public String getLocale() {
-		return locale;
-	}
+    /**
+     * @param enabled
+     *            설정할 enabled
+     */
+    public void setEnabled(boolean enabled) {
+	this.enabled = enabled;
+    }
 
-	/**
-	 * @param locale
-	 *            설정할 locale
-	 */
-	public void setLocale(String locale) {
-		this.locale = locale;
-	}
- 
-	public int getCachedSize() {
-		return CacheSizes.sizeOfMap(getProperties()) 
-				+ CacheSizes.sizeOfBoolean()
-				+ CacheSizes.sizeOfString(locale)
-				+ CacheSizes.sizeOfString(template)
-				+ CacheSizes.sizeOfString(contentType)
-				+ CacheSizes.sizeOfString(description)
-				+ CacheSizes.sizeOfString(displayName)
-				+ CacheSizes.sizeOfString(name) + CacheSizes.sizeOfLong();
-	}
- 
-	@JsonIgnore
-	public Serializable getPrimaryKeyObject() {
-		return this.getWebPageId();
-	}
- 
-	@JsonIgnore
-	public int getModelObjectType() {
-		return ModelTypeFactory.getTypeIdFromCode("WEBPAGE");
-	}
+    /**
+     * @return locale
+     */
+    public String getLocale() {
+	return locale;
+    }
 
-	/* (비Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("WebPage [webPageId=").append(webPageId)
-				.append(", webSiteId=").append(webSiteId).append(", ");
-		if (name != null)
-			builder.append("name=").append(name).append(", ");
-		if (displayName != null)
-			builder.append("displayName=").append(displayName).append(", ");
-		if (description != null)
-			builder.append("description=").append(description).append(", ");
-		if (contentType != null)
-			builder.append("contentType=").append(contentType).append(", ");
-		if (template != null)
-			builder.append("template=").append(template).append(", ");
-		builder.append("enabled=").append(enabled).append(", ");
-		if (locale != null)
-			builder.append("locale=").append(locale).append(", ");
-		if (creationDate != null)
-			builder.append("creationDate=").append(creationDate).append(", ");
-		if (modifiedDate != null)
-			builder.append("modifiedDate=").append(modifiedDate).append(", ");
-		if (getProperties() != null)
-			builder.append("properties=").append(getProperties());
-		builder.append("]");
-		return builder.toString();
-	}
-	
-	    @JsonDeserialize(using = JsonMapPropertyDeserializer.class)
-	    public void setProperties(Map<String, String> properties) {
-		super.setProperties(properties);
-	    }
+    /**
+     * @param locale
+     *            설정할 locale
+     */
+    public void setLocale(String locale) {
+	this.locale = locale;
+    }
 
-	    @JsonSerialize(using = JsonMapPropertySerializer.class)
-	    public Map<String, String> getProperties() {
-		return super.getProperties();
-	    }
+    public int getCachedSize() {
+	return CacheSizes.sizeOfMap(getProperties()) + CacheSizes.sizeOfBoolean() + CacheSizes.sizeOfString(locale)
+		+ CacheSizes.sizeOfString(template) + CacheSizes.sizeOfString(contentType)
+		+ CacheSizes.sizeOfString(description) + CacheSizes.sizeOfString(displayName)
+		+ CacheSizes.sizeOfString(name) + CacheSizes.sizeOfLong();
+    }
+
+    @JsonIgnore
+    public Serializable getPrimaryKeyObject() {
+	return this.getWebPageId();
+    }
+
+    @JsonIgnore
+    public int getModelObjectType() {
+	return ModelTypeFactory.getTypeIdFromCode("WEBPAGE");
+    }
+
+    /*
+     * (비Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("WebPage [webPageId=").append(webPageId).append(", webSiteId=").append(webSiteId).append(", ");
+	if (name != null)
+	    builder.append("name=").append(name).append(", ");
+	if (displayName != null)
+	    builder.append("displayName=").append(displayName).append(", ");
+	if (description != null)
+	    builder.append("description=").append(description).append(", ");
+	if (contentType != null)
+	    builder.append("contentType=").append(contentType).append(", ");
+	if (template != null)
+	    builder.append("template=").append(template).append(", ");
+	builder.append("enabled=").append(enabled).append(", ");
+	if (locale != null)
+	    builder.append("locale=").append(locale).append(", ");
+	if (creationDate != null)
+	    builder.append("creationDate=").append(creationDate).append(", ");
+	if (modifiedDate != null)
+	    builder.append("modifiedDate=").append(modifiedDate).append(", ");
+	if (getProperties() != null)
+	    builder.append("properties=").append(getProperties());
+	builder.append("]");
+	return builder.toString();
+    }
+
+    @JsonDeserialize(using = JsonMapPropertyDeserializer.class)
+    public void setProperties(Map<String, String> properties) {
+	super.setProperties(properties);
+    }
+
+    @JsonSerialize(using = JsonMapPropertySerializer.class)
+    public Map<String, String> getProperties() {
+	return super.getProperties();
+    }
 
 }

@@ -23,17 +23,25 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 
 public class DataSourceRequest {
+    
     private int objectType;
     private long objectId;
+    
     private int page;
     private int pageSize;
     private int take;
     private int skip;
+    
     private List<SortDescriptor> sort;
+    
     private List<GroupDescriptor> group;
+    
     private List<AggregateDescriptor> aggregate;
+    
     private HashMap<String, Object> data;
+    
     private FilterDescriptor filter;
+    
     
     public DataSourceRequest() {
         filter = new FilterDescriptor();
@@ -449,6 +457,7 @@ public class DataSourceRequest {
         return calculateAggregates(criteria, aggregates);                
     }    
     */
+    
     private List<SortDescriptor> sortDescriptors() {
         List<SortDescriptor> sort = new ArrayList<SortDescriptor>();
         

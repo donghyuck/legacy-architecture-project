@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,6 +32,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.json.CustomJsonDateDeserializer;
 import architecture.common.model.json.CustomJsonDateSerializer;
+import architecture.common.model.json.JsonMapPropertyDeserializer;
+import architecture.common.model.json.JsonMapPropertySerializer;
 import architecture.common.model.json.UserDeserializer;
 import architecture.common.model.support.NoNamedEntityModelObjectSupport;
 import architecture.common.user.User;
@@ -323,6 +326,16 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 	return 0;
     }
 
+    @JsonDeserialize(using = JsonMapPropertyDeserializer.class)
+    public void setProperties(Map<String, String> properties) {
+	super.setProperties(properties);
+    }
+
+    @JsonSerialize(using = JsonMapPropertySerializer.class)
+    public Map<String, String> getProperties() {
+	return super.getProperties();
+    }
+    
     /*
      * (비Javadoc)
      * 
