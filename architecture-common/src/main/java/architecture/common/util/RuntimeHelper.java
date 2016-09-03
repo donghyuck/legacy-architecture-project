@@ -15,10 +15,6 @@
  */
 package architecture.common.util;
 
-import java.util.List;
-
-import architecture.common.util.internal.MemoryInformation;
-
 public interface RuntimeHelper {
 
     public abstract long getTotalHeapMemory();
@@ -26,8 +22,6 @@ public interface RuntimeHelper {
     public abstract long getTotalHeapMemoryUsed();
 
     public abstract String getJvmInputArguments();
-
-    public abstract List<MemoryInformation> getMemoryPoolInformation();
 
     public abstract long getTotalPermGenMemory();
 

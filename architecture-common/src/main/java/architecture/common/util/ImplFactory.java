@@ -26,7 +26,8 @@ import java.util.Map;
 
 import javax.xml.parsers.SAXParserFactory;
 
-import org.springframework.core.io.DefaultResourceLoader;
+//import org.springframework.core.io.DefaultResourceLoader;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
@@ -35,7 +36,8 @@ import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
-import groovy.lang.GroovyClassLoader;
+//import groovy.lang.GroovyClassLoader;
+
 import javolution.util.FastList;
 import javolution.util.FastMap;
 
@@ -45,6 +47,7 @@ import javolution.util.FastMap;
  * 이상의 파일이 검색된 경우 XML 에 정의된 lank 정보를 가지고 우선순위를 판단하여 높은 순위의 것을 생성하여 리턴.
  * <p>
  * 2012.09.05 - Groovy 을 지원하도록 수정
+ * 2016.08.31 - Groovy 기능 삭제 (사용하지 않음)
  * <p>
  * (이 클래스는 javolution 을 사용하여 구현됨.)
  * 
@@ -307,18 +310,18 @@ public class ImplFactory {
     private static Class<?> loadClass(String classname) throws ClassNotFoundException {
 	try {
 	    ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-	    if (classname.endsWith(".groovy")) {
-		try {
-		    GroovyClassLoader gcl = new GroovyClassLoader(classloader);
-		    DefaultResourceLoader loader = new DefaultResourceLoader();
-		    URL url = loader.getResource(classname).getURL();
-		    return gcl.parseClass(new groovy.lang.GroovyCodeSource(url));
-		} catch (Exception e) {
-		    throw new ClassNotFoundException(e.getMessage());
-		}
-	    } else {
+//	    if (classname.endsWith(".groovy")) {
+//		try {
+//		    GroovyClassLoader gcl = new GroovyClassLoader(classloader);
+//		    DefaultResourceLoader loader = new DefaultResourceLoader();
+//		    URL url = loader.getResource(classname).getURL();
+//		    return gcl.parseClass(new groovy.lang.GroovyCodeSource(url));
+//		} catch (Exception e) {
+//		    throw new ClassNotFoundException(e.getMessage());
+//		}
+//	    } else {
 		return classloader.loadClass(classname);
-	    }
+	    //}
 	} catch (ClassNotFoundException e) {
 	    if (classname.endsWith(".groovy"))
 		throw e;

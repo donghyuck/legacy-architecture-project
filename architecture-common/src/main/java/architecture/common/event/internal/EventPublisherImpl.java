@@ -1,5 +1,25 @@
 package architecture.common.event.internal;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
+
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import static org.apache.commons.lang3.ObjectUtils.identityToString;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -12,22 +32,6 @@ import architecture.common.event.config.ListenerHandlersConfiguration;
 import architecture.common.event.spi.EventDispatcher;
 import architecture.common.event.spi.ListenerHandler;
 import architecture.common.event.spi.ListenerInvoker;
-
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
-import static org.apache.commons.lang.ObjectUtils.identityToString;
-import static org.apache.commons.lang.StringUtils.isNotEmpty;
 
 /**
  * <p>The default implementation of the {@link architecture.common.event.api.EventPublisher} interface.</p>

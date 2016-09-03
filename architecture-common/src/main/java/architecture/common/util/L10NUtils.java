@@ -29,8 +29,8 @@ import java.util.MissingResourceException;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
@@ -44,7 +44,7 @@ import architecture.common.i18n.LocalizerFactory;
 
 public class L10NUtils {
 
-    private static Log log = LogFactory.getLog(L10NUtils.class);
+    private static Logger log = LoggerFactory.getLogger(L10NUtils.class);
 
     private static final L10NUtils SINGLETON = new L10NUtils(true);
 
@@ -62,8 +62,7 @@ public class L10NUtils {
 		loadProps(I18N_XML_RESOURCE, true);
 	    }
 	} catch (IOException e) {
-	    log.debug((new StringBuilder()).append("Unable to access I18n file, " + I18N_XML_RESOURCE + ": ")
-		    .append(e.toString()).toString());
+	    log.debug((new StringBuilder()).append("Unable to access I18n file, " + I18N_XML_RESOURCE + ": ").append(e.toString()).toString());
 	}
 
 	// 1. 모든 jar 에 포함된 i18n_custom.xml 에서 오류 코드에 따른 properties 파일 정보를 가져온다.
@@ -72,9 +71,7 @@ public class L10NUtils {
 		loadProps(I18N_CUSTOM_XML_RESOURCE, true);
 	    }
 	} catch (IOException e) {
-	    log.debug(
-		    ((new StringBuilder()).append("Unable to access I18n user file, " + I18N_CUSTOM_XML_RESOURCE + ": ")
-			    .append(e.toString()).toString()));
+	    log.debug(((new StringBuilder()).append("Unable to access I18n user file, " + I18N_CUSTOM_XML_RESOURCE + ": ").append(e.toString()).toString()));
 	}
     }
 
@@ -149,7 +146,7 @@ public class L10NUtils {
 		if (breakOnError)
 		    throw e;
 	    } catch (Exception e) {
-		log.error(e);
+		log.error("Fail to loading ", e);
 	    } finally {
 		if (is != null)
 		    IOUtils.closeQuietly(is);

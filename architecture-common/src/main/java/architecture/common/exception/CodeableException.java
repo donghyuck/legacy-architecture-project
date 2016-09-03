@@ -3,6 +3,7 @@ package architecture.common.exception;
 import java.lang.reflect.Constructor;
 
 import architecture.common.i18n.Localizer;
+
 import architecture.common.util.L10NUtils;
 
 public class CodeableException extends Exception implements Codeable {

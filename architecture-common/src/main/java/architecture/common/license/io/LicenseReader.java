@@ -22,11 +22,11 @@ import java.io.StringReader;
 import java.io.StringWriter;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import architecture.common.exception.LicenseException;
 import architecture.common.license.License;
@@ -36,7 +36,7 @@ import architecture.common.lifecycle.ApplicationConstants;
 
 public class LicenseReader {
 
-    private static final Log log = LogFactory.getLog(LicenseReader.class);
+    private static final Logger log = LoggerFactory.getLogger(LicenseReader.class);
 
     static final boolean assertionsDisabled = false;
 
