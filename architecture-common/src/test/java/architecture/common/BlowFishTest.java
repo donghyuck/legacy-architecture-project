@@ -20,32 +20,35 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Hex;
 import org.junit.Test;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BlowFishTest {
 
-	public BlowFishTest() {
-		// TODO 자동 생성된 생성자 스텁
-	}
+    private Logger log = LoggerFactory.getLogger(getClass());
 
-	@Test
-	public void testBlowfish() throws Exception {
-		String Key = "password";
-		byte[] KeyData = Key.getBytes();
-		SecretKeySpec KS = new SecretKeySpec(KeyData, "Blowfish");
-		Cipher cipher = Cipher.getInstance("Blowfish");
-		cipher.init(Cipher.ENCRYPT_MODE, KS);	
-		
-		// encrypt message
-		String inputText = "MyTextToEncrypt";	    
-	    byte[] encrypted = cipher.doFinal(inputText.getBytes());
-	    String encryptedString = Hex.encodeHexString(encrypted);
-	    System.out.println("암호화 : " + encryptedString );
-	    
-	    cipher.init(Cipher.DECRYPT_MODE, KS);
-		byte[] decrypt = cipher.doFinal(Hex.decodeHex(encryptedString.toCharArray()));
-		System.out.println("복호화	: " + new String(decrypt));
-		
-	}
+    public BlowFishTest() {
+	// TODO 자동 생성된 생성자 스텁
+    }
+
+    @Test
+    public void testBlowfish() throws Exception {
+	String Key = "password";
+	byte[] KeyData = Key.getBytes();
+	SecretKeySpec KS = new SecretKeySpec(KeyData, "Blowfish");
+	Cipher cipher = Cipher.getInstance("Blowfish");
+	cipher.init(Cipher.ENCRYPT_MODE, KS);
+
+	// encrypt message
+	String inputText = "MyTextToEncrypt";
+	byte[] encrypted = cipher.doFinal(inputText.getBytes());
+	String encryptedString = Hex.encodeHexString(encrypted);
+	log.debug("암호화 : " + encryptedString);
+
+	cipher.init(Cipher.DECRYPT_MODE, KS);
+	byte[] decrypt = cipher.doFinal(Hex.decodeHex(encryptedString.toCharArray()));
+	log.debug("복호화	: " + new String(decrypt));
+
+    }
 
 }

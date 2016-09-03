@@ -18,17 +18,20 @@ package architecture.common.crypto;
 import java.security.MessageDigest;
 import java.util.Random;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
- * @author donghyuck
+ * 
+ * @author donghyuck.son
  */
 public class Blowfish {
 
-    private static final Log Log = LogFactory.getLog(Blowfish.class);
+    private static final Logger Log = LoggerFactory.getLogger(Blowfish.class);
 
     private BlowfishCBC m_bfish;
+    
     private static Random m_rndGen = new Random();
 
     /**

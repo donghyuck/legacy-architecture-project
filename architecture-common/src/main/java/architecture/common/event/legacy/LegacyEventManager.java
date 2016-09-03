@@ -7,7 +7,7 @@ import architecture.common.event.EventListener;
 import architecture.common.event.EventManager;
 import architecture.common.event.api.EventPublisher;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
 
@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @deprecated since 2.0.0
  */
 public final class LegacyEventManager implements EventManager {
+    
     private final EventPublisher delegateEventPublisher;
 
     /**

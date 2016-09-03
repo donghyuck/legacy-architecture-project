@@ -9,51 +9,13 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Hex;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class AESTest {
-/*
-	private static String sKeyString = "" ;
-	private static String message= "This is just an example";
-	
-	@Test
-	public void testAESEncode() throws Exception {
-				
-		KeyGenerator kgen = KeyGenerator.getInstance("AES");
-		kgen.init(128);
-				
-		SecretKey skey = kgen.generateKey();
-		
-		sKeyString = Hex.encodeHexString(skey.getEncoded());
-		
-		SecretKeySpec skeySpec = new SecretKeySpec(skey.getEncoded(), "AES");		
-		Cipher cipher = Cipher.getInstance("AES");
-		cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
-		byte[] encrypted = cipher.doFinal(message.getBytes());
-	    
-		System.out.println("encrypted string: " + Hex.encodeHexString(encrypted));
-	    
-		cipher.init(Cipher.DECRYPT_MODE, skeySpec);
-	    byte[] original =  cipher.doFinal(encrypted);
-	    String originalString = new String(original);
-	    
-	    System.out.println("Original string: " + originalString + " " + Hex.encodeHexString(original));
-	}
-	
-	@Test
-	public void testAESDecode() throws Exception {		
-		SecretKeySpec skeySpec = new SecretKeySpec(Hex.decodeHex(sKeyString.toCharArray()), "AES");
-		Cipher cipher = Cipher.getInstance("AES");
-		cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
-		byte[] encrypted = cipher.doFinal(message.getBytes());
-	    System.out.println("encrypted string: " + Hex.encodeHexString(encrypted));
-	    cipher.init(Cipher.DECRYPT_MODE, skeySpec);
-	    byte[] original =  cipher.doFinal(encrypted);
-	    String originalString = new String(original);
-	    System.out.println("Original string: " + originalString + " " + Hex.encodeHexString(original));
-	    
-	}
-	*/
+    	
+    	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	private static String encString = "" ;
 	
@@ -77,7 +39,7 @@ public class AESTest {
 	    
 	    encString =  Hex.encodeHexString(encrypted);
 	    
-	    System.out.println("encrypted string: [" + keyString + "] " + encString );
+	    logger.info("encrypted string: [" + keyString + "] " + encString );
 	}
 	
 	@Test 
@@ -99,7 +61,7 @@ public class AESTest {
 		cipher.init(Cipher.DECRYPT_MODE, skeySpec);
 	    byte[] decrypted =  cipher.doFinal(Hex.decodeHex(encString.toCharArray()));
 	    
-	    System.out.println("decrypted string: [" + keyString + "] " + new String(decrypted));
+	    logger.info("decrypted string: [" + keyString + "] " + new String(decrypted));
 	}
 	
 	
