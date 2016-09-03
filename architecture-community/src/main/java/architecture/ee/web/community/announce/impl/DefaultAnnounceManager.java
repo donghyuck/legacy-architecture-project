@@ -194,6 +194,9 @@ public class DefaultAnnounceManager implements AnnounceManager, EventSource {
 	return list;
     }
 
+    /**
+     * 
+     */
     public List<Announce> getAnnounces(int objectType, long objectId, Date startDate, Date endDate) {
 	List<Long> announceIds = announceDao.getAnnounceIds(objectType, objectId);
 	if (announceIds.size() == 0)
@@ -207,19 +210,28 @@ public class DefaultAnnounceManager implements AnnounceManager, EventSource {
 	return results;
     }
 
+    /**
+     * 
+     * @param startDate 보다 시작일이 적거나 같은 경우
+     * @param endDate 보다 종료일이 크거나 같고 시작일이 startDate 적거나 같은 경우. (즉 게시기간이 인자로 주어진 기간에 포함되는 경우.)
+     * @param announceIds
+     * @return
+     */
     private List<Announce> filterAnnounces(Date startDate, Date endDate, List<Long> announceIds) {
 	List<Announce> list = new ArrayList<Announce>();
 	for (Long announceId : announceIds) {
 	    try {
 		Announce announce = getAnnounce(announceId);
+		
 		log.debug("diff start date : " + announce.getStartDate() + " / " + startDate);
 		log.debug("diff end date : " + announce.getEndDate() + " / " + endDate);
+		
+		
 		if (announce.getEndDate() == null) {
 		    if (announce.getStartDate().getTime() <= startDate.getTime())
 			list.add(announce);
 
-		} else if (announce.getEndDate().getTime() >= endDate.getTime()
-			&& announce.getStartDate().getTime() <= startDate.getTime()) {
+		} else if (announce.getEndDate().getTime() >= endDate.getTime() && announce.getStartDate().getTime() <= startDate.getTime()) {
 		    list.add(announce);
 		}
 	    } catch (AnnounceNotFoundException e) {

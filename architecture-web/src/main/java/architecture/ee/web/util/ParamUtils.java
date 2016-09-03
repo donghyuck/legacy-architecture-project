@@ -277,6 +277,7 @@ public class ParamUtils extends ServletRequestUtils {
 
     public static int getIntAttribute(HttpServletRequest request, String name, int defaultNum)
     {
+	
         String temp = (String)request.getAttribute(name);
         if(temp != null && !temp.equals(""))
         {

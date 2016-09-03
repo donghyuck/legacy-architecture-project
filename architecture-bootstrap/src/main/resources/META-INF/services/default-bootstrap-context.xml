@@ -57,7 +57,7 @@
     <bean id="groovyClassLoaderFactory" class="architecture.ee.spring.scripting.groovy.GroovyClassLoaderFactory" />
     
     <!-- =================================================== -->
-	<!-- 6. System Information Service                                                               -->
+	<!-- 6. System Information Service                       -->
 	<!-- =================================================== -->	
 	<bean id="systemInformationService" class="architecture.ee.component.core.lifecycle.DefaultSystemInformationService" depends-on="licenseManager"  p:licenseManager-ref="licenseManager" />
 		

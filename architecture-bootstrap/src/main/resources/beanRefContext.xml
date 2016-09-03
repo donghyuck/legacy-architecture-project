@@ -24,4 +24,12 @@
         </constructor-arg>
     </bean>
 
+    <bean id="podo-services-context" class="org.springframework.context.support.ClassPathXmlApplicationContext" lazy-init="true">
+        <constructor-arg>
+            <list>
+                <value>classpath*:META-INF/services/podo-bootstrap-context.xml</value>
+            </list>
+        </constructor-arg>
+    </bean>
+    
 </beans>	

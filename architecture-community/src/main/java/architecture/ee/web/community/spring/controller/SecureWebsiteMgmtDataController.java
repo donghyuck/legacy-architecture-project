@@ -119,11 +119,14 @@ public class SecureWebsiteMgmtDataController {
     **/
     
     @PreAuthorize("hasRole('ROLE_USER')")
-    @RequestMapping(value = "/mgmt/website/announce/list.json", method = RequestMethod.POST)
+    @RequestMapping(value = "/mgmt/site/announce/list.json", method = RequestMethod.POST)
     @ResponseBody
     public ItemList getWebsiteAnnouncementList(@RequestBody DataSourceRequest request) throws WebSiteNotFoundException {	
+	
 	User user = SecurityHelper.getUser();	
+	
 	WebSite site = webSiteManager.getWebSiteById( request.getObjectId() );		
+	
 	Date startDate = null ;
 	Date endDate = null ;	
 	List<Announce> items = Collections.EMPTY_LIST;
@@ -134,20 +137,21 @@ public class SecureWebsiteMgmtDataController {
 	if( request.getData().containsKey("endDate") ){
 	    endDate = getISO8601Date(request.getData().get("endDate").toString());
 	}
+	
 	if(startDate != null && endDate != null)
 	{
 	    items = announceManager.getAnnounces(30, site.getWebSiteId(), startDate, endDate);
-	    totalCount = announceManager.getAnnounceCount(30, site.getWebSiteId(), startDate, endDate);
+	    totalCount = items.size();
 	}else{
 	    items = announceManager.getAnnounces(30, site.getWebSiteId());
-	    totalCount = announceManager.countAnnounce(30, site.getWebSiteId());
+	    totalCount = items.size();
 	}	
 	return new ItemList(items, totalCount);	
     }
         
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @RequestMapping(value = "/mgmt/website/announce/update.json", method = RequestMethod.POST)
+    @RequestMapping(value = "/mgmt/site/announce/update.json", method = RequestMethod.POST)
     @ResponseBody
     public Announce saveAnnounce(@RequestBody DefaultAnnounce announce, NativeWebRequest request)
 	    throws AnnounceNotFoundException, WebSiteNotFoundException {
@@ -187,7 +191,7 @@ public class SecureWebsiteMgmtDataController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @RequestMapping(value = "/mgmt/website/announce/delete.json", method = RequestMethod.POST)
+    @RequestMapping(value = "/mgmt/site/announce/delete.json", method = RequestMethod.POST)
     @ResponseBody
     public Boolean destoryAnnounce(
 	    @RequestParam(value = "announceId", defaultValue = "0", required = true) Long announceId,

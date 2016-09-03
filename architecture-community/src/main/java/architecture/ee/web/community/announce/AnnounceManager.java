@@ -32,9 +32,7 @@ public interface AnnounceManager {
 
     public abstract Announce getAnnounce(long announceId) throws AnnounceNotFoundException;
 
-    public abstract List<Announce> getAnnounces(int objectType, long objectId);
 
-    public abstract List<Announce> getAnnounces(int objectType, long objectId, Date startDate, Date endDate);
 
     public abstract void deleteAnnounce(long announceId);
 
@@ -44,10 +42,52 @@ public interface AnnounceManager {
 
     public abstract void moveAnnounces(int fromObjectType, long fromObjectId, int toObjectType, long toObjectId);
 
+    /**
+     * 
+     * @param objectType
+     * @param objectId
+     * @return
+     */
+    public abstract List<Announce> getAnnounces(int objectType, long objectId);
+
+    /**
+     * 
+     * startDate 일자보다 시작일이 적거나 같고 
+     * endDate 일자보다 종료일이 크거나 같은 경우에 
+     * 해당하는 이벤트를 리턴한다. 즉 특정기간동안 유효한 이벤트들을 검색하는 목적이다.  
+     * 
+     * @param objectType
+     * @param objectId
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    public abstract List<Announce> getAnnounces(int objectType, long objectId, Date startDate, Date endDate);
+    
+
     public abstract int countAnnounce(int objectType, long objectId);
 
+    
+    /**
+     * 
+     * @param objectType
+     * @param objectId
+     * @param endDate
+     * @return
+     */
     public abstract int getAnnounceCount(int objectType, long objectId, Date endDate);
 
+    
+    
+    /**
+     * 
+     * 
+     * @param objectType
+     * @param objectId
+     * @param startDate
+     * @param endDate
+     * @return
+     */
     public abstract int getAnnounceCount(int objectType, long objectId, Date startDate, Date endDate);
 
 }
