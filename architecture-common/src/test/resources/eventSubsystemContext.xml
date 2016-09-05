@@ -20,22 +20,22 @@
 	<!-- 1. Asynchronous Event                            -->
 	<!-- ================================================ -->
 	<!-- 
-	<bean id="eventThreadPoolConfiguration" class="architecture.common.event.internal.EventThreadPoolConfigurationImpl" />
+	<bean id="eventThreadPoolConfiguration" class="architecture.common.event.impl.EventThreadPoolConfigurationImpl" />
 	
-	<bean id="eventThreadFactory" class="architecture.common.event.internal.DirectEventExecutorFactory" >
+	<bean id="eventThreadFactory" class="architecture.common.event.impl.DirectEventExecutorFactory" >
 		<constructor-arg index="0" ref="eventThreadPoolConfiguration" />
 	</bean>	
 	
-	<bean id="eventResolver" class="architecture.common.event.internal.AnnotationAsynchronousEventResolver" />
+	<bean id="eventResolver" class="architecture.common.event.impl.AnnotationAsynchronousEventResolver" />
 	
-	<bean id="eventDispatcher" class="architecture.common.event.internal.AsynchronousAbleEventDispatcher">
+	<bean id="eventDispatcher" class="architecture.common.event.impl.AsynchronousAbleEventDispatcher">
 		<constructor-arg index="0" ref="taskExecutor" />
 		<constructor-arg index="1" ref="eventResolver" />
 	</bean>	
 	
-	<bean id="listenerHandlerConfiguration" class="architecture.common.event.internal.ListenerHandlerConfigurationImpl" />
+	<bean id="listenerHandlerConfiguration" class="architecture.common.event.impl.ListenerHandlerConfigurationImpl" />
 	
-	<bean id="eventPublisher" class="architecture.common.event.internal.LockFreeEventPublisher" >
+	<bean id="eventPublisher" class="architecture.common.event.impl.LockFreeEventPublisher" >
 		<constructor-arg index="0" ref="eventDispatcher" />
 		<constructor-arg index="1" ref="listenerHandlerConfiguration" />
 	</bean>

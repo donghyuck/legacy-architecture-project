@@ -20,7 +20,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *    }
  * </tt></pre>
  *
- * @see architecture.common.event.internal.AnnotatedMethodsListenerHandler
+ * @see architecture.common.event.impl.AnnotatedMethodsListenerHandler
  * @since 2.0
  */
 @Retention(RUNTIME)

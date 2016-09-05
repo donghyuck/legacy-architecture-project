@@ -1,4 +1,4 @@
-package architecture.common.event.internal;
+package architecture.common.event.impl;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;

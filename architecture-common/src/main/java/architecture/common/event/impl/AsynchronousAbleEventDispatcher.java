@@ -1,4 +1,4 @@
-package architecture.common.event.internal;
+package architecture.common.event.impl;
 
 import com.google.common.util.concurrent.MoreExecutors;
 

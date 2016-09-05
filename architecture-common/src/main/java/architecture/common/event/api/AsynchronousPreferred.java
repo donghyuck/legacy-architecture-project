@@ -14,10 +14,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * </p>
  * <p>
  * This is the default annotation to be used with
- * {@link architecture.common.event.internal.AnnotationAsynchronousEventResolver}
+ * {@link architecture.common.event.impl.AnnotationAsynchronousEventResolver}
  * </p>
  *
- * @see architecture.common.event.internal.AnnotationAsynchronousEventResolver
+ * @see architecture.common.event.impl.AnnotationAsynchronousEventResolver
  * @since 2.0
  */
 @Retention(RUNTIME)

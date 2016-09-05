@@ -1,4 +1,4 @@
-package architecture.common.event.internal;
+package architecture.common.event.impl;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Iterables.concat;
@@ -73,19 +73,19 @@ public final class LockFreeEventPublisher implements EventPublisher {
 
     /**
      * If you need to customise the asynchronous handling, you should use the
-     * {@link architecture.common.event.internal.AsynchronousAbleEventDispatcher}
+     * {@link architecture.common.event.impl.AsynchronousAbleEventDispatcher}
      * together with a custom executor.
      * <p>
      * You might also want to have a look at using the
-     * {@link architecture.common.event.internal.EventThreadFactory} to keep the naming
+     * {@link architecture.common.event.impl.EventThreadFactory} to keep the naming
      * of event threads consistent with the default naming of the Atlassian Event
      * library.
      *
      * @param eventDispatcher               the event dispatcher to be used with the publisher
      * @param listenerHandlersConfiguration the list of listener handlers to be used with this publisher
      * @param transformer                   the batcher for batching up listener invocations
-     * @see architecture.common.event.internal.AsynchronousAbleEventDispatcher
-     * @see architecture.common.event.internal.EventThreadFactory
+     * @see architecture.common.event.impl.AsynchronousAbleEventDispatcher
+     * @see architecture.common.event.impl.EventThreadFactory
      */
 
     public LockFreeEventPublisher(final EventDispatcher eventDispatcher,

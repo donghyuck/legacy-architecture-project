@@ -1,4 +1,4 @@
-package architecture.common.event.internal;
+package architecture.common.event.impl;
 
 /**
  * An interface to resolve whether an event can be handled asynchronously or not.

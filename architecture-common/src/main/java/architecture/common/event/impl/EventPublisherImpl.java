@@ -1,4 +1,4 @@
-package architecture.common.event.internal;
+package architecture.common.event.impl;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -57,14 +57,14 @@ public final class EventPublisherImpl implements EventPublisher {
 
     /**
      * <p>If you need to customise the asynchronous handling, you should use the
-     * {@link architecture.common.event.internal.AsynchronousAbleEventDispatcher} together with a custom executor. You might
-     * also want to have a look at using the {@link architecture.common.event.internal.EventThreadFactory} to keep the naming
+     * {@link architecture.common.event.impl.AsynchronousAbleEventDispatcher} together with a custom executor. You might
+     * also want to have a look at using the {@link architecture.common.event.impl.EventThreadFactory} to keep the naming
      * of event threads consistent with the default naming of the Atlassian Event library.<p>
      *
      * @param eventDispatcher               the event dispatcher to be used with the publisher
      * @param listenerHandlersConfiguration the list of listener handlers to be used with this publisher
-     * @see architecture.common.event.internal.AsynchronousAbleEventDispatcher
-     * @see architecture.common.event.internal.EventThreadFactory
+     * @see architecture.common.event.impl.AsynchronousAbleEventDispatcher
+     * @see architecture.common.event.impl.EventThreadFactory
      */
     public EventPublisherImpl(EventDispatcher eventDispatcher, ListenerHandlersConfiguration listenerHandlersConfiguration) {
         this.eventDispatcher = checkNotNull(eventDispatcher);
