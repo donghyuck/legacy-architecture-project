@@ -49,6 +49,8 @@ public class PlatformHelper {
     public static boolean isDarwin() {
 
 	// according to http://developer.apple.com/technotes/tn2002/tn2110.html
+	
+
 	return System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("mac");
     }
 

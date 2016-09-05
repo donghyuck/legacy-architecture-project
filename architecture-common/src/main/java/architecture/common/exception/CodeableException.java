@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 
 import architecture.common.i18n.Localizer;
 
-import architecture.common.util.L10NUtils;
+import architecture.common.util.L10nUtils;
 
 public class CodeableException extends Exception implements Codeable {
 
@@ -79,9 +79,9 @@ public class CodeableException extends Exception implements Codeable {
 	try {
 	    String errorCodeToUse = Localizer.codeToString(errorCode);
 	    if (args != null) {
-		messageToUse = L10NUtils.format(errorCodeToUse, args);
+		messageToUse = L10nUtils.format(errorCodeToUse, args);
 	    } else {
-		messageToUse = L10NUtils.getMessage(errorCodeToUse);
+		messageToUse = L10nUtils.getMessage(errorCodeToUse);
 	    }
 	} catch (Exception ignore) {
 	}

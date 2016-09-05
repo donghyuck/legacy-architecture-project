@@ -43,11 +43,11 @@ public class BlowFishTest {
 	String inputText = "MyTextToEncrypt";
 	byte[] encrypted = cipher.doFinal(inputText.getBytes());
 	String encryptedString = Hex.encodeHexString(encrypted);
-	log.debug("암호화 : " + encryptedString);
+	log.debug("encrypted : " + encryptedString);
 
 	cipher.init(Cipher.DECRYPT_MODE, KS);
 	byte[] decrypt = cipher.doFinal(Hex.decodeHex(encryptedString.toCharArray()));
-	log.debug("복호화	: " + new String(decrypt));
+	log.debug("decrypted	: " + new String(decrypt));
 
     }
 

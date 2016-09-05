@@ -20,22 +20,23 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import architecture.common.event.api.EventPublisher;
 
-public class TaskAndEventContextTest {
+public class EventTest {
 
-    private static Log log = LogFactory.getLog(TaskAndEventContextTest.class);
+    private static Log log = LogFactory.getLog(EventTest.class);
     private static ClassPathXmlApplicationContext context = null;
 
     @BeforeClass
     public static void setup() {
 	log.debug("setup context..");
-	context = new ClassPathXmlApplicationContext("commonSubsystemContext.xml");
+	context = new ClassPathXmlApplicationContext("eventSubsystemContext.xml");
     }
 
-    public TaskAndEventContextTest() {
+    public EventTest() {
     }
 
     
@@ -43,20 +44,14 @@ public class TaskAndEventContextTest {
     @Test
     public void testEventPublish() {
 	
-	EventPublisher publisher = context.getBean( "eventPublisher", EventPublisher.class );
-	publisher.publish("hello");
-	try {
-	    Thread.currentThread().sleep(1000L);
-	} catch (InterruptedException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
+//	EventPublisher publisher = context.getBean( "eventPublisher", EventPublisher.class );
+//	publisher.publish("hello");
+//	try {
+//	    Thread.currentThread().sleep(1000L);
+//	} catch (InterruptedException e) {
+//	    // TODO Auto-generated catch block
+//	    e.printStackTrace();
+//	}
     }
 
-    @Test
-    public void testBeanDefinitionNames() {
-	log.debug("loading context test..");
-	for (String name : context.getBeanDefinitionNames())
-	    log.debug(name + " loaded.");
-    }
 }

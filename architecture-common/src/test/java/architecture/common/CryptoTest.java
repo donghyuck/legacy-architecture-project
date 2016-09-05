@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.security.InvalidKeyException;
 import java.security.Key;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
@@ -16,15 +17,16 @@ import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 public class CryptoTest {
+
+    
 
     private Log log = LogFactory.getLog(getClass());
 
@@ -121,8 +123,12 @@ public class CryptoTest {
 
 	    byte raw[] = cipher.doFinal(stringBytes);
 
-	    BASE64Encoder encoder = new BASE64Encoder();
-	    base64 = encoder.encode(raw);
+	    // BASE64Encoder encoder = new BASE64Encoder();
+	    //base64 = encoder.encode(raw);
+	    
+	    Base64 binaryBase64 = new Base64();
+	    binaryBase64.encode(raw);
+	    
 
 	    log.debug("HEX:" + Hex.encodeHexString(raw));
 	    log.debug("BASE64:" + base64);
@@ -138,9 +144,11 @@ public class CryptoTest {
 	    Cipher cipher = Cipher.getInstance(transformation);
 	    cipher.init(Cipher.DECRYPT_MODE, skeySpec);
 	    base64 = "KTyhyD/m9OICvoPKTQWPyg==";
-	    BASE64Decoder decoder = new BASE64Decoder();
+	    
+	    Base64 binaryBase64 = new Base64();
+	    //BASE64Decoder decoder = new BASE64Decoder();
 
-	    byte raw[] = decoder.decodeBuffer(base64);
+	    byte raw[] = binaryBase64.decode(base64); // decoder.decodeBuffer(base64);
 
 	    String s = new String(raw, "UTF8");
 	    log.debug("base64 :" + s);
@@ -155,6 +163,19 @@ public class CryptoTest {
 	}
     }
 
+
+	@Test
+	public void testSHA(){
+		
+		try {
+			MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
+		
+		} catch (NoSuchAlgorithmException e) {
+
+			e.printStackTrace();
+		}
+	}
+	
     // @Test
     public void testGetSecurityKey() {
 	InputStream resourceIs = null;
