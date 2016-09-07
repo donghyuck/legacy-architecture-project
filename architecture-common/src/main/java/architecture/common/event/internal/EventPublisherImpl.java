@@ -28,6 +28,7 @@ import architecture.common.event.config.ListenerHandlersConfiguration;
 import architecture.common.event.spi.EventDispatcher;
 import architecture.common.event.spi.ListenerHandler;
 import architecture.common.event.spi.ListenerInvoker;
+import architecture.common.util.ClassUtils;
 
 /**
  * <p>The default implementation of the {@link architecture.common.event.api.EventPublisher} interface.</p>

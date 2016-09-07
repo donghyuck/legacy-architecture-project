@@ -25,7 +25,7 @@ public class AsynchronousAbleEventDispatcher implements EventDispatcher {
     /**
      * An executor that execute commands synchronously
      */
-    private static final Executor SYNCHRONOUS_EXECUTOR = MoreExecutors.sameThreadExecutor();
+    private static final Executor SYNCHRONOUS_EXECUTOR = MoreExecutors.directExecutor(); //.sameThreadExecutor();
 
     /**
      * {@link EventRunnableFactory} that creates a simple runnable that runs the invoker.

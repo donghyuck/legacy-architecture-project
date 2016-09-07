@@ -5,6 +5,7 @@ import architecture.common.event.config.ListenerHandlersConfiguration;
 import architecture.common.event.spi.EventDispatcher;
 import architecture.common.event.spi.ListenerHandler;
 import architecture.common.event.spi.ListenerInvoker;
+import architecture.common.util.ClassUtils;
 
 import com.google.common.base.Function;
 import com.google.common.cache.CacheBuilder;

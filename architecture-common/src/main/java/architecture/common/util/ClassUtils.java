@@ -1,4 +1,4 @@
-package architecture.common.event.internal;
+package architecture.common.util;
 
 import com.google.common.collect.Sets;
 
