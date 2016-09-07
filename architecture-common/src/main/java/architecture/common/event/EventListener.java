@@ -6,7 +6,7 @@ package architecture.common.event;
  * @see architecture.common.event.api.EventListener
  * @see architecture.common.event.api.EventPublisher
  * @since 1.0
- * @deprecated since 2.0, you can now use a POJO annotated with {@link architecture.common.event.api.EventListener} and the {@link architecture.common.event.api.EventPublisher}
+ * @deprecated since 2.0, you can now use a POJO annotated with {@link architecture.common.event.api.EventListener} and the {@link com.atlassian.event.api.EventPublisher}
  */
 public interface EventListener {
     /**

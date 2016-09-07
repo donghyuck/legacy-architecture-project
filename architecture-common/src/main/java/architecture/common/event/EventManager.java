@@ -4,7 +4,7 @@ package architecture.common.event;
  * Interface to manage events. It essentially allows to register event listeners and publish events.
  *
  * @since 1.0
- * @deprecated since 2.0, use {@link architecture.common.event.api.EventPublisher}
+ * @deprecated since 2.0, use {@link com.atlassian.event.api.EventPublisher}
  */
 public interface EventManager {
     /**

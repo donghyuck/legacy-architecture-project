@@ -1,8 +1,8 @@
 package architecture.common.event.config;
 
-import java.util.List;
-
 import architecture.common.event.spi.ListenerHandler;
+
+import java.util.List;
 
 /**
  * Specifies a listener handler configuration to use

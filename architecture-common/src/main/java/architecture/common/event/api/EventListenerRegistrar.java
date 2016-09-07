@@ -10,7 +10,7 @@ public interface EventListenerRegistrar {
      * @param listener The listener that is being registered
      * @throws NullPointerException     if the listener is {@code null}
      * @throws IllegalArgumentException if the parameter is not found to be an actual listener
-     * @see architecture.common.event.api.EventListener annotation which can be used to indicate event listener methods
+     * @see com.atlassian.event.api.EventListener annotation which can be used to indicate event listener methods
      */
     void register(Object listener);
 

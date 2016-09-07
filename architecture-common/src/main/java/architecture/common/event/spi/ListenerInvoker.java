@@ -5,7 +5,7 @@ import java.util.Set;
 /**
  * <p>Implementation of this interface know how to invoke 'given types' of listeners so that they handle given events.</p>
  * <p><strong>Note:</strong> Implementations <strong>MUST</strong> provide correct implementations of the
- * {@link #equals(Object)} and {@link #hashCode()} method.</p>
+ * {@link Object#equals(Object)} and {@link Object#hashCode()} method.</p>
  *
  * @since 2.0
  */

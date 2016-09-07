@@ -1,12 +1,10 @@
 package architecture.common.event.legacy;
 
-import com.google.common.collect.Maps;
-
 import architecture.common.event.Event;
 import architecture.common.event.EventListener;
 import architecture.common.event.EventManager;
 import architecture.common.event.api.EventPublisher;
-
+import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
@@ -14,14 +12,13 @@ import java.util.Map;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * This is a legacy event manager that implements the now deprecated {@link architecture.common.event.EventManager} interface. It relies on the
+ * This is a legacy event manager that implements the now deprecated {@link com.atlassian.event.EventManager} interface. It relies on the
  * {@link architecture.common.event.api.EventPublisher} to actually publish the events.
  *
  * @since 2.0.0
  * @deprecated since 2.0.0
  */
 public final class LegacyEventManager implements EventManager {
-    
     private final EventPublisher delegateEventPublisher;
 
     /**

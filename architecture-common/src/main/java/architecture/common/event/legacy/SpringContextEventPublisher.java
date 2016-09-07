@@ -1,10 +1,9 @@
 package architecture.common.event.legacy;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-
 import architecture.common.event.Event;
 import architecture.common.event.EventListener;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

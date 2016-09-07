@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationEvent;
 
 /**
  * @since 1.0
- * @deprecated since 2.0, you can now use POJO's using {@link architecture.common.event.api.EventPublisher}!
+ * @deprecated since 2.0, you can now use POJO's using {@link com.atlassian.event.api.EventPublisher}!
  */
 public class Event extends ApplicationEvent {
     public Event(Object source) {

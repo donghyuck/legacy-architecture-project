@@ -16,6 +16,8 @@
 
 package architecture.common.event.api;
 
+import architecture.common.event.api.EventPublisher;
+
 public interface EventSource {
 
     public void setEventPublisher(EventPublisher eventPublisher);

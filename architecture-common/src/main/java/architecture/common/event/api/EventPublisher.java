@@ -13,7 +13,7 @@ public interface EventPublisher extends EventListenerRegistrar {
      * Implementations must dispatch events to listeners which have a public method annotated with
      * {@link EventListener} and one argument which is assignable from the event type (i.e. a superclass
      * or interface implemented by the event object). Implementations may also dispatch events
-     * to legacy {@link architecture.common.event.EventListener} implementations based on the types returned
+     * to legacy {@link com.atlassian.event.EventListener} implementations based on the types returned
      * from {@link architecture.common.event.EventListener#getHandledEventClasses()}.
      *
      * This method should process all event listeners, despite any errors or exceptions that are generated

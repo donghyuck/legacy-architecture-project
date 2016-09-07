@@ -20,10 +20,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import architecture.common.event.api.EventPublisher;
+
 
 public class EventTest {
 
@@ -44,14 +44,19 @@ public class EventTest {
     @Test
     public void testEventPublish() {
 	
-//	EventPublisher publisher = context.getBean( "eventPublisher", EventPublisher.class );
-//	publisher.publish("hello");
-//	try {
-//	    Thread.currentThread().sleep(1000L);
-//	} catch (InterruptedException e) {
-//	    // TODO Auto-generated catch block
-//	    e.printStackTrace();
-//	}
+	EventPublisher publisher = context.getBean( "eventPublisher", EventPublisher.class );
+	LoginEvent evt = new LoginEvent("hello");
+	evt.setUsername("a");
+	evt.setSessionId("1233");
+	
+	publisher.publish(evt);
+	
+	try {
+	    System.out.println("-----------------------------");
+	    Thread.currentThread().sleep(5000L);
+	} catch (InterruptedException e) {
+	    e.printStackTrace();
+	}
     }
 
 }

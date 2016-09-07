@@ -1,11 +1,10 @@
 package architecture.common.event.legacy;
 
-import com.google.common.collect.Sets;
-
 import architecture.common.event.Event;
 import architecture.common.event.EventListener;
 import architecture.common.event.spi.ListenerHandler;
 import architecture.common.event.spi.ListenerInvoker;
+import com.google.common.collect.Sets;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,9 +13,9 @@ import java.util.Set;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * A listener handler to deal with legacy {@link architecture.common.event.EventListener event listeners}
+ * A listener handler to deal with legacy {@link com.atlassian.event.EventListener event listeners}
  *
- * @see architecture.common.event.EventListener
+ * @see com.atlassian.event.EventListener
  * @see Event
  * @since 2.0
  */

@@ -17,27 +17,37 @@
 	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" p:corePoolSize="5" p:maxPoolSize="10" p:queueCapacity="25" />
 
 	<!-- ================================================ -->
-	<!-- 1. Asynchronous Event                            -->
+	<!-- 1. Event                           			  -->
 	<!-- ================================================ -->
-	<!-- 
-	<bean id="eventThreadPoolConfiguration" class="architecture.common.event.impl.EventThreadPoolConfigurationImpl" />
+	<bean id="eventThreadPoolConfiguration" class="architecture.common.event.internal.EventThreadPoolConfigurationImpl" />
 	
-	<bean id="eventThreadFactory" class="architecture.common.event.impl.DirectEventExecutorFactory" >
+	<bean id="listenerHandlerConfiguration" class="architecture.common.event.internal.ListenerHandlerConfigurationImpl" />
+	
+	<bean id="eventExecutorFactory" class="architecture.common.event.internal.DirectEventExecutorFactory" >
 		<constructor-arg index="0" ref="eventThreadPoolConfiguration" />
 	</bean>	
+	<bean id="eventResolver" class="architecture.common.event.internal.AnnotationAsynchronousEventResolver" />
 	
-	<bean id="eventResolver" class="architecture.common.event.impl.AnnotationAsynchronousEventResolver" />
-	
-	<bean id="eventDispatcher" class="architecture.common.event.impl.AsynchronousAbleEventDispatcher">
+	<bean id="eventDispatcher" class="architecture.common.event.internal.AsynchronousAbleEventDispatcher">
 		<constructor-arg index="0" ref="taskExecutor" />
 		<constructor-arg index="1" ref="eventResolver" />
 	</bean>	
 	
-	<bean id="listenerHandlerConfiguration" class="architecture.common.event.impl.ListenerHandlerConfigurationImpl" />
-	
-	<bean id="eventPublisher" class="architecture.common.event.impl.LockFreeEventPublisher" >
+	<bean id="eventPublisher" class="architecture.common.event.internal.EventPublisherImpl" >
 		<constructor-arg index="0" ref="eventDispatcher" />
 		<constructor-arg index="1" ref="listenerHandlerConfiguration" />
 	</bean>
+	
+	<bean id="eventSourceSupport" abstract="true" class="architecture.common.event.spring.EventSourceSupport" p:eventPublisher-ref="eventPublisher" />
+	
+	<bean id="test" class="architecture.common.TestListener" parent="eventSourceSupport" ></bean>
+	<!-- 
+	
+	<bean id="eventListenerRegistrar" class="architecture.common.event.spring.EventListenerRegistrarBeanProcessor">
+		<constructor-arg index="0" value="eventListenerRegistrar" />
+		<constructor-arg index="1" ref="listenerHandlerConfiguration" />
+	</bean>
 	 -->
+	
+	
 </beans>

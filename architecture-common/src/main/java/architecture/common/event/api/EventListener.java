@@ -10,7 +10,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * Used to annotate event listener methods. Methods should be public and take
  * one parameter which is the event to be handled.
- * <p/>
+ * <p>
  * For example, the following class implements a simple event listener:
  * <pre><tt>      public class TestListener {
  *        &#64;EventListener
@@ -20,7 +20,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *    }
  * </tt></pre>
  *
- * @see architecture.common.event.impl.AnnotatedMethodsListenerHandler
+ * @see architecture.common.event.internal.AnnotatedMethodsListenerHandler
  * @since 2.0
  */
 @Retention(RUNTIME)
