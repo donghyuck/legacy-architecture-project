@@ -39,7 +39,7 @@ public class FileScanTest {
     public void tearDown() throws Exception {
     }
 
-    @Test
+    
     public void test() {
 
 	String FOLDER = "/Users/donghyuck/Documents/workspace/maven.1440568037035/architecture-ee/src/main/resources/sql";
