@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, 2013 Donghyuck, Son
+ * Copyright 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 package architecture.ee.web.model;
 
-import architecture.ee.web.navigator.MenuComponent;
+import architecture.ee.web.navigator.menu.MenuComponent;
 
 public class MenuItem {
     

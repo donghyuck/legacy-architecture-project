@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 donghyuck
+ * Copyright 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,6 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 
 public class DataSourceRequest {
     
-    private int objectType;
-    private long objectId;
-    
     private int page;
     private int pageSize;
     private int take;
@@ -50,8 +47,6 @@ public class DataSourceRequest {
         pageSize = 0;
         take = 0 ;
         skip = 0 ;    
-        objectType = 0 ;
-        objectId = -1L;
     }
     
     public HashMap<String, Object> getData() {
@@ -63,22 +58,6 @@ public class DataSourceRequest {
         data.put(key, value);
     }
     
-    public int getObjectType() {
-        return objectType;
-    }
-
-    public void setObjectType(int objectType) {
-        this.objectType = objectType;
-    }
-
-    public long getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(long objectId) {
-        this.objectId = objectId;
-    }
-
     public int getPage() {
         return page;
     }
@@ -495,7 +474,7 @@ public class DataSourceRequest {
 
     @Override
     public String toString() {
-	return "DataSourceRequest [objectType=" + objectType + ", objectId=" + objectId + ", page=" + page
+	return "DataSourceRequest [ page=" + page
 		+ ", pageSize=" + pageSize + ", take=" + take + ", skip=" + skip + ", sort=" + sort + ", group=" + group
 		+ ", aggregate=" + aggregate + ", data=" + data + ", filter=" + filter + "]";
     }

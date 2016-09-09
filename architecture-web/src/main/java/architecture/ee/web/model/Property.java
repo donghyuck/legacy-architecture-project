@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Donghyuck, Son
+ * Copyright 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,48 +15,45 @@
  */
 package architecture.ee.web.model;
 
-
 /**
- * AJAX 를 위한 프로퍼티 객체 
+ * AJAX 를 위한 프로퍼티 객체
  * 
- * @author  <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
+ * @author <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
  *
  */
 public class Property implements java.io.Serializable {
-    
+
     private static final long serialVersionUID = -2672216687853105936L;
-    
+
     private String name;
-    
+
     private Object value;
 
-
     /**
-	 * 
-	 */
-	public Property() {
-	}
-	
-    public Property(String name, Object value) {
-        this.name = name;
-        this.value = value;
+     * 
+     */
+    public Property() {
     }
 
+    public Property(String name, Object value) {
+	this.name = name;
+	this.value = value;
+    }
 
-	public String getName() {
-        return name;
+    public String getName() {
+	return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+	this.name = name;
     }
 
     public Object getValue() {
-        return value;
+	return value;
     }
 
     public void setValue(Object value) {
-        this.value = value;
+	this.value = value;
     }
-    
+
 }
