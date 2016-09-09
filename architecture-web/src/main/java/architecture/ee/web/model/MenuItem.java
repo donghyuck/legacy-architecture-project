@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.ws;
+package architecture.ee.web.model;
 
 import architecture.ee.web.navigator.MenuComponent;
 
 public class MenuItem {
+    
 	private String menu;
 	private String name;
 	private String title;
