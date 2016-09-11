@@ -16,12 +16,13 @@
 
 package architecture.web.ui.menu;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
 
 import architecture.web.ui.LoadableResourceException;
 
-public interface MenuReader {
+public interface MenuRepository {
     
     public Set<String> getMenuNames();
 
@@ -35,7 +36,7 @@ public interface MenuReader {
 
     public void removeAllMenus();
 
-    public void reload() throws LoadableResourceException;
+    public void reload(InputStream is ) throws LoadableResourceException;
 
     public MenuComponent getMenu(String menuName, String delimiter);
 

@@ -16,16 +16,31 @@
 
 package architecture.web.ui.menu;
 
+import java.io.InputStream;
+
+import org.apache.commons.digester3.Digester;
+
 import architecture.web.ui.LoadableResourceException;
 
-public class XmlMenuReader extends AbstractMenuReader {
+public class XmlMenuRepository extends AbstractMenuRepository {
 
-    public XmlMenuReader() {
+    public XmlMenuRepository() {
 	
     }
 
-    @Override
-    public void reload() throws LoadableResourceException {
+    public void reload(InputStream input) throws LoadableResourceException {
+	Digester digester = initDigester();
+	try {
+	    digester.parse(input);
+	    
+	}catch (Exception e){    
+	    throw new LoadableResourceException("Error parsing resource nested exception is: " + e.getMessage());
+        } finally {
+            try {
+                input.close();
+            } catch (Exception e) {
+            }
+        }
 	
     }
 

@@ -18,5 +18,5 @@ package architecture.web.ui.menu;
 
 public interface MenuManager {
 
-    public void getMenuRepository();
+    public MenuRepository getMenuRepository();
 }

@@ -16,6 +16,7 @@
 
 package architecture.web.ui.menu;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,9 +30,9 @@ import org.slf4j.LoggerFactory;
 
 import architecture.web.ui.LoadableResourceException;
 
-public abstract class AbstractMenuReader implements MenuReader {
+public abstract class AbstractMenuRepository implements MenuRepository {
 
-    public AbstractMenuReader() {
+    public AbstractMenuRepository() {
     }
 
     private String breadCrumbDelimiter;
@@ -154,7 +155,7 @@ public abstract class AbstractMenuReader implements MenuReader {
         menus.clear();
     }
 
-    public abstract void reload() throws LoadableResourceException;
+    public abstract void reload(InputStream is) throws LoadableResourceException;
 
     /**
      * Method getMenu.  Get a subMenu beneath a root or parent menu.  Will drill-down as deep as requested
