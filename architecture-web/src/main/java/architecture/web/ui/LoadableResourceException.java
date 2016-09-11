@@ -1,4 +1,4 @@
-package architecture.web.navigator;
+package architecture.web.ui;
 
 
 /**

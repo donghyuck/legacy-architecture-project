@@ -1,4 +1,4 @@
-package architecture.web.navigator.menu;
+package architecture.web.ui.menu;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -7,7 +7,7 @@ import javax.servlet.ServletContextListener;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import architecture.web.navigator.LoadableResourceException;
+import architecture.web.ui.LoadableResourceException;
 
 
 /**
@@ -62,7 +62,6 @@ public class MenuContextListener implements ServletContextListener {
         try {
             repository.load();
             ctx.setAttribute(MenuRepository.MENU_REPOSITORY_KEY, repository);
-
             if (log.isDebugEnabled()) {
                 log.debug("struts-menu initialization successfull");
             }

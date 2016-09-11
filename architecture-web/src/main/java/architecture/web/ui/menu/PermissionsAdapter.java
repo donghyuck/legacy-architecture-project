@@ -4,7 +4,7 @@
  * Created on April 29, 2002, 10:15 PM
  */
 
-package architecture.web.navigator.menu;
+package architecture.web.ui.menu;
 
 /**
  * Defines a pluggable adapter into the menu framework that is used for 

@@ -1,4 +1,4 @@
-package architecture.web.navigator.menu;
+package architecture.web.ui.menu;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,11 +10,10 @@ import org.apache.commons.lang3.StringUtils;
 
 
 /**
+ * 
  * This class extends {@link MenuBase} and basically contains helper methods
  * for adding and fetching children and parents.
  *
- * @author Scott Sayles, Matt Raible
- * @version $Revision: 1.19 $ $Date: 2006/10/17 11:27:09 $
  */
 public class MenuComponent extends MenuBase implements Serializable, Component {
     //~ Static fields/initializers =============================================
@@ -22,9 +21,12 @@ public class MenuComponent extends MenuBase implements Serializable, Component {
 
     //~ Instance fields ========================================================
 
-    protected List menuComponents = Collections.synchronizedList(new ArrayList());
+    protected List<MenuComponent> menuComponents = Collections.synchronizedList(new ArrayList<MenuComponent>());
+    
     protected MenuComponent parentMenu;
+    
     private boolean last;
+    
     private String breadCrumb;
 
     //~ Methods ================================================================
@@ -69,7 +71,7 @@ public class MenuComponent extends MenuBase implements Serializable, Component {
      * Convenience method for Velocity templates
      * @return menuComponents as a java.util.List
      */
-    public List getComponents() {
+    public List<MenuComponent> getComponents() {
         return menuComponents;
     }
 
@@ -153,8 +155,8 @@ public class MenuComponent extends MenuBase implements Serializable, Component {
      * Remove all children from a parent menu item
      */
     public void removeChildren() {
-        for (Iterator iterator = this.getComponents().iterator(); iterator.hasNext();) {
-            MenuComponent child = (MenuComponent) iterator.next();
+        for (Iterator<MenuComponent> iterator = this.getComponents().iterator(); iterator.hasNext();) {
+            MenuComponent child = iterator.next();
             child.setParent(null);
             iterator.remove();
         }
@@ -181,9 +183,9 @@ public class MenuComponent extends MenuBase implements Serializable, Component {
     }
 
     private void setChildBreadCrumb(String delimiter) {
-        List children = this.getComponents();
-        for (Iterator iterator = children.iterator(); iterator.hasNext();) {
-            MenuComponent child = (MenuComponent) iterator.next();
+        List<MenuComponent> children = this.getComponents();
+        for (Iterator<MenuComponent> iterator = children.iterator(); iterator.hasNext();) {
+            MenuComponent child = iterator.next();
             child.setBreadCrumb(delimiter);
         }
     }

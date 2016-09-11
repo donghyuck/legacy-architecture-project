@@ -3,7 +3,7 @@
  *
  * Created on January 29, 2001, 9:51 AM
  */
-package architecture.web.navigator.menu;
+package architecture.web.ui.menu;
 
 import java.io.InputStream;
 import java.io.Serializable;
@@ -20,7 +20,7 @@ import org.apache.commons.digester3.Digester;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import architecture.web.navigator.LoadableResourceException;
+import architecture.web.ui.LoadableResourceException;
 
 /**
  * Holder of Menus and their items. Can be populated programmatically.

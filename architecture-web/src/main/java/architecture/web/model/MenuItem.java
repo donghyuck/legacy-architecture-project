@@ -15,7 +15,7 @@
  */
 package architecture.web.model;
 
-import architecture.web.navigator.menu.MenuComponent;
+import architecture.web.ui.menu.MenuComponent;
 
 public class MenuItem {
     

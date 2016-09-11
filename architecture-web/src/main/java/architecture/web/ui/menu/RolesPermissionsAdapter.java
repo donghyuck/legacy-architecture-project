@@ -4,7 +4,7 @@
  * Created on December 7, 2002 2:25 PM
  */
 
-package architecture.web.navigator.menu;
+package architecture.web.ui.menu;
 
 import java.util.regex.Pattern;
 

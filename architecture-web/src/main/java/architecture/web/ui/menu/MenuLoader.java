@@ -1,4 +1,4 @@
-package architecture.web.navigator.menu;
+package architecture.web.ui.menu;
 
 import javax.servlet.ServletException;
 
@@ -7,7 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContextException;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
 
-import architecture.web.navigator.LoadableResourceException;
+import architecture.web.ui.LoadableResourceException;
 
 /**
  * This loader is available for those that use the Spring Framework.  To 
@@ -26,6 +26,7 @@ import architecture.web.navigator.LoadableResourceException;
  * @author Matt Raible
  */
 public class MenuLoader extends WebApplicationObjectSupport {
+    
     private static Log log = LogFactory.getLog(MenuLoader.class);
 
     /** Configuration file for menus */
