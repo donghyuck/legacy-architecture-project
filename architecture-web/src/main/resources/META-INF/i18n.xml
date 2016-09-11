@@ -2,6 +2,6 @@
 <localizers>
 
      <!--  WEB  -->
-	<localizer bundleName="architecture.ee.web.i18n.WebLogLocalizer" codes="005501-006000" />
+	<localizer bundleName="architecture.web.i18n.WebLogLocalizer" codes="005501-006000" />
 	
 </localizers>

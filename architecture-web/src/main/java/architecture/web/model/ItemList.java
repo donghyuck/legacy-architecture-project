@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package architecture.ee.web.model;
+package architecture.web.model;
 
 import java.util.List;
 
