@@ -16,16 +16,18 @@
 
 package architecture.web.ui.menu;
 
-import java.io.InputStream;
-
 import javax.servlet.ServletContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.core.io.Resource;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.context.support.ServletContextResourceLoader;
 
 public class DefaultMenuManager implements MenuManager, InitializingBean, ServletContextAware {
 
+    private Logger logger = LoggerFactory.getLogger(DefaultMenuManager.class);
     private ServletContextResourceLoader resourceRoader ;
     private String menuConfigLocation = "/WEB-INF/menu-config.xml";;
     private MenuRepository menuRepository = new XmlMenuRepository();
@@ -42,13 +44,16 @@ public class DefaultMenuManager implements MenuManager, InitializingBean, Servle
     @Override
     public void afterPropertiesSet() throws Exception {
 	
-	InputStream is = resourceRoader.getResource(menuConfigLocation).getInputStream();
-	menuRepository.reload(is);
+	Resource resource = resourceRoader.getResource(menuConfigLocation);
+	
+	logger.debug("loading menu from :" + resource.toString());
+	
+	menuRepository.reload(resource.getInputStream());
 	
     }
     @Override
     public MenuRepository getMenuRepository() {
-	return null;
+	return menuRepository;
     }
 
     public ServletContextResourceLoader getResourceRoader() {
