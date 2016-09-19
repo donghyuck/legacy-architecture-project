@@ -1,5 +1,7 @@
 package architecture.web.ui.menu;
 
+import org.springframework.util.StringUtils;
+
 /**
  * 
  * 
@@ -70,6 +72,8 @@ public abstract class MenuBase implements Component {
 
     /** Holds parsed (with variables) url that is used to render a link */
     private String url;
+    
+    private String icon;
     
     /** Holds value of property onContextMenu */
     protected String onContextMenu;
@@ -394,5 +398,21 @@ public abstract class MenuBase implements Component {
 
     public void setModule(String module) {
         this.module = module;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+    
+    public boolean isSetIcon(){
+	if( StringUtils.isEmpty(this.icon) ){
+	    return false;
+	}else{
+	    return true;
+	}
     }
 }
