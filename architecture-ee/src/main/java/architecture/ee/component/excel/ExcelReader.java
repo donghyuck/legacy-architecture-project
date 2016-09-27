@@ -37,13 +37,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Excel 파일을 읽기 위한 유틸리티 클래스 
+ * Excel 파일을 쉽게 읽기 위한 유틸리티 클래스 
+ * 
+ * 
  * @author donghyuck
  *
  */
 public class ExcelReader {
 
     private Logger log = LoggerFactory.getLogger(getClass());
+    
     private Workbook workbook;
 
     private int sheetIndex = 0;
