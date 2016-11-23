@@ -5,7 +5,7 @@
 	<artifactId>architecture-ee</artifactId>
 	<name>APPLICATION EE ARCHITECTURE</name>
 	<description>자바기반의 엔터프라이즈 어플리케이션 개발 아키텍처.</description>
-	<version>3.0.0.RELEASE</version>
+	<version>3.0.1</version>
 	<packaging>jar</packaging>
 	
 	<contributors>
@@ -15,7 +15,7 @@
 	</contributors>
 	
 	<scm>
-		<url>https://github.com/donghyuck/architecture-project/tree/3.0.0.RELEASE/architecture-ee</url>
+		<url>https://github.com/donghyuck/architecture-project/tree/3.0.1/architecture-ee</url>
 	</scm>
 	
 	<organization>
@@ -29,7 +29,7 @@
 		<javac.target.version>1.6</javac.target.version>
 		<project.javadoc.docEncoding>UTF-8</project.javadoc.docEncoding>
 		<project.build.version>3.0.0.RELEASE</project.build.version>
-		<project.dependency.spring.version>4.1.0.RELEASE</project.dependency.spring.version>
+		<project.dependency.spring.version>4.3.2.RELEASE</project.dependency.spring.version>
 		<project.dependency.spring-security.version>3.2.5.RELEASE</project.dependency.spring-security.version>
 		<javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
 	</properties>
@@ -41,17 +41,31 @@
 			</snapshots>
 			<id>central</id>
 			<name>MY MAVEN REPOSITORY</name>
-			<url>http://222.122.63.146/artifactory/repo</url>
+			<url>http://www.podosw.com/artifactory/repo</url>
 		</repository>
 	</repositories>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${project.dependency.spring.version}</version>
+		</dependency>		
+		
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi-ooxml</artifactId>
 		    <version>3.14</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.25-incubating</version>
+		</dependency>
+  
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -223,7 +237,7 @@
 		<repository>
 			<id>hadoop-master</id>
 			<name>hadoop-master-releases</name>
-			<url>http://222.122.63.146/artifactory/ext-release-local</url>
+			<url>http://www.podosw.com/artifactory/ext-release-local</url>
 		</repository>
 	</distributionManagement>
 
