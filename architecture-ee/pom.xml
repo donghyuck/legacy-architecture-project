@@ -28,7 +28,7 @@
 		<javac.src.version>1.6</javac.src.version>
 		<javac.target.version>1.6</javac.target.version>
 		<project.javadoc.docEncoding>UTF-8</project.javadoc.docEncoding>
-		<project.build.version>3.0.0.RELEASE</project.build.version>
+		<project.build.version>3.0.1</project.build.version>
 		<project.dependency.spring.version>4.3.2.RELEASE</project.dependency.spring.version>
 		<project.dependency.spring-security.version>3.2.5.RELEASE</project.dependency.spring-security.version>
 		<javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
