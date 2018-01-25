@@ -47,8 +47,7 @@ public class EhcacheWrapper<K, V> implements Cache<K, V> {
 	public boolean containsValue(Object value) {
 		for (Object key : targetCache.getKeys()) {
 			Element element = targetCache.get(key);
-			if (element != null && element.getValue() != null
-					&& element.getValue().equals(value))
+			if (element != null && element.getValue() != null && element.getValue().equals(value))
 				return true;
 		}
 		return false;
@@ -162,12 +161,14 @@ public class EhcacheWrapper<K, V> implements Cache<K, V> {
 	public int getCacheSize() {
 		return targetCache.getSize();
 	}
-
-	public long getCacheHits() {
-		return targetCache.getStatistics().getCacheHits();
+ 
+	public long getCacheHits() { 
+		return 0;
+	}
+ 
+	public long getCacheMisses() { 
+		return 0;
 	}
 
-	public long getCacheMisses() {
-		return targetCache.getStatistics().getCacheMisses();
-	}
+ 
 }

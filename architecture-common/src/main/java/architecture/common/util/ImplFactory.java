@@ -16,20 +16,16 @@
 
 package architecture.common.util;
 
-import groovy.lang.GroovyClassLoader;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.SAXParserFactory;
-
-import javolution.util.FastList;
-import javolution.util.FastMap;
 
 import org.springframework.core.io.DefaultResourceLoader;
 import org.xml.sax.Attributes;
@@ -39,6 +35,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
+
+import groovy.lang.GroovyClassLoader;
 
 /**
  * 
@@ -258,8 +256,8 @@ public class ImplFactory {
 	static {
 
 		try {
-			_map = new FastMap<String, String>(); 
-			List<FactoryList> list =  new FastList<FactoryList>(); 
+			_map = new HashMap<String, String>(); 
+			List<FactoryList> list =  new ArrayList<FactoryList>(); 
 			
 			ImplFactory.parseLegacyXmlFile(list);
 			

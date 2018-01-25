@@ -10,7 +10,7 @@
 	<artifactId>architecture-common</artifactId>
 	<name>APPLICATION COMMON ARCHITECTURE</name>
 	<packaging>jar</packaging>
-	<version>1.0.3.RELEASE</version>
+	<version>1.1.0.RELEASE</version>
 
 	<description>공통 아키텍처 콤포넌트 모듈</description>
 	<contributors>
@@ -22,32 +22,78 @@
 	<scm>
 		<url>https://power-j.googlecode.com/svn/trunk/architecture-common</url>
 	</scm>
-
+	
 	<repositories>
 		<repository>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
 			<id>central</id>
-			<name>FUSE ARCHITECTURE Maven Repository</name>
-			<url>http://222.122.63.146/artifactory/repo</url>
+			<name>Donghyuck's Maven Repository</name>
+			<url>http://www.podosw.com/artifactory/repo</url>
 		</repository>
 	</repositories>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<javac.src.version>1.5</javac.src.version>
-		<javac.target.version>1.5</javac.target.version>
+		<javac.src.version>1.6</javac.src.version>
+		<javac.target.version>1.6</javac.target.version>
 		<project.javadoc.docEncoding>UTF-8</project.javadoc.docEncoding>
-		<project.build.version>1.0.1.RELEASE</project.build.version>
+		<project.build.version>1.1.0.RELEASE</project.build.version>
+		<project.dependency.spring.version>3.2.18.RELEASE</project.dependency.spring.version>
 	</properties>
 
 	<dependencies>
+		<!-- 
 		<dependency>
 			<groupId>javolution</groupId>
 			<artifactId>javolution</artifactId>
 			<version>5.5.1</version>
+		</dependency>-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${project.dependency.spring.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${project.dependency.spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${project.dependency.spring.version}</version>
+		</dependency>			
+		
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>20.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+						
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math</artifactId>
@@ -55,6 +101,18 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.0.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>	
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.1</version>
+		</dependency>			
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-vfs2</artifactId>
@@ -76,18 +134,26 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
 			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.0</version>
-			<type>jar</type>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+				
 		<dependency>
 			<groupId>aopalliance</groupId>
 			<artifactId>aopalliance</artifactId>
@@ -95,6 +161,19 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>2.10.3</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+						
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -102,6 +181,8 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- 
 		<dependency>
 			<groupId>com.google.collections</groupId>
 			<artifactId>google-collections</artifactId>
@@ -109,6 +190,7 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
@@ -116,18 +198,16 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.0.1</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
+		 -->
+
+		<!-- 
 		<dependency>
 			<groupId>net.sf.jpf</groupId>
 			<artifactId>jpf</artifactId>
 			<version>1.5</version>
 		</dependency>
+		-->
+		<!-- 
 		<dependency>
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
@@ -157,23 +237,27 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		-->
+
+		<!-- 
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${project.dependency.spring.version}</version>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>2.0.1</version>
 		</dependency>
+				
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.1</version>
+		</dependency>
+									
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>1.6</version>
 		</dependency>
-		<dependency>
-			<groupId>dom4j</groupId>
-			<artifactId>dom4j</artifactId>
-			<version>1.6.1</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
+
 		<dependency>
 			<groupId>commons-net</groupId>
 			<artifactId>commons-net</artifactId>
@@ -181,24 +265,16 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.crypto</groupId>
 			<artifactId>javax.crypto</artifactId>
 			<version>1.6</version>
 			<type>jar</type>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy-all</artifactId>
-			<version>2.0.1</version>
-		</dependency>
+		</dependency> 
 
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.1</version>
-		</dependency>
+
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache-core</artifactId>
@@ -209,8 +285,8 @@
 			<artifactId>activation</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+		 -->
 	</dependencies>
-
 	<build>
 		<plugins>
 
@@ -240,90 +316,30 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.8</version>
-				<configuration>
-					<show>private</show>
-					<nohelp>true</nohelp>
-					<source>${maven.compile.source}</source>
-					<encoding>${project.build.sourceEncoding}</encoding>
-					<docEncoding>${project.javadoc.docEncoding}</docEncoding>
-				</configuration>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>com.pyx4me</groupId>
-				<artifactId>proguard-maven-plugin</artifactId>
-				<version>2.0.4</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>proguard</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<obfuscate>true</obfuscate>
-					<injar>${project.build.finalName}.jar</injar>
-					<outjar>${project.build.finalName}-min.jar</outjar>
-					<outputDirectory>${project.build.directory}</outputDirectory>
-					<proguardInclude>${basedir}/proguard.conf</proguardInclude>
-					<options>
-						<option>-optimizationpasses 3</option>
-						<option>-overloadaggressively</option>
-						<option>-repackageclasses ''</option>
-						<option>-allowaccessmodification</option>
-						<option>-dontskipnonpubliclibraryclasses</option>
-						<option>-dontnote</option>
-						<option><![CDATA[ 
-					    
-					    -keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod
-					    
-					    -keep public class * {
-	                         public protected *;
-	                    }
-	                    					    
-					    -keepclassmembernames class * {
-	                         java.lang.Class class$(java.lang.String);
-	                         java.lang.Class class$(java.lang.String, boolean);
-	                    } 
-		                
-		                -keepclasseswithmembernames class * {
-		                    native <methods>;
-		                }
-
-					    -keepclassmembers enum * {
-	                        public static **[] values();
-	                    	public static ** valueOf(java.lang.String);
-	                    }				    
-					    
-					    -keepclassmembers class * implements java.io.Serializable {
-	                    	static final long serialVersionUID;
-						    private void writeObject(java.io.ObjectOutputStream);
-						    private void readObject(java.io.ObjectInputStream);
-						    java.lang.Object writeReplace();
-						    java.lang.Object readResolve();
-						}	    
-					    ]]></option>
-					</options>
-					<libs>
-						<lib>${java.home}/lib/rt.jar</lib>
-						<lib>${java.home}/lib/jce.jar</lib>
-						<lib>${java.home}/lib/jsse.jar</lib>
-					</libs>
-				</configuration>
-			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-javadoc-plugin</artifactId> 
+				<version>2.8</version> <configuration> <show>private</show> <nohelp>true</nohelp> 
+				<source>${maven.compile.source}</source> <encoding>${project.build.sourceEncoding}</encoding> 
+				<docEncoding>${project.javadoc.docEncoding}</docEncoding> </configuration> 
+				<executions> <execution> <id>attach-javadocs</id> <goals> <goal>jar</goal> 
+				</goals> </execution> </executions> </plugin> <plugin> <groupId>com.pyx4me</groupId> 
+				<artifactId>proguard-maven-plugin</artifactId> <version>2.0.4</version> <executions> 
+				<execution> <phase>package</phase> <goals> <goal>proguard</goal> </goals> 
+				</execution> </executions> <configuration> <obfuscate>true</obfuscate> <injar>${project.build.finalName}.jar</injar> 
+				<outjar>${project.build.finalName}-min.jar</outjar> <outputDirectory>${project.build.directory}</outputDirectory> 
+				<proguardInclude>${basedir}/proguard.conf</proguardInclude> <options> <option>-optimizationpasses 
+				3</option> <option>-overloadaggressively</option> <option>-repackageclasses 
+				''</option> <option>-allowaccessmodification</option> <option>-dontskipnonpubliclibraryclasses</option> 
+				<option>-dontnote</option> <option><![CDATA[ -keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod 
+				-keep public class * { public protected *; } -keepclassmembernames class 
+				* { java.lang.Class class$(java.lang.String); java.lang.Class class$(java.lang.String, 
+				boolean); } -keepclasseswithmembernames class * { native <methods>; } -keepclassmembers 
+				enum * { public static **[] values(); public static ** valueOf(java.lang.String); 
+				} -keepclassmembers class * implements java.io.Serializable { static final 
+				long serialVersionUID; private void writeObject(java.io.ObjectOutputStream); 
+				private void readObject(java.io.ObjectInputStream); java.lang.Object writeReplace(); 
+				java.lang.Object readResolve(); } ]]></option> </options> <libs> <lib>${java.home}/lib/rt.jar</lib> 
+				<lib>${java.home}/lib/jce.jar</lib> <lib>${java.home}/lib/jsse.jar</lib> 
+				</libs> </configuration> </plugin> -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
@@ -341,7 +357,8 @@
 		<repository>
 			<id>hadoop-master</id>
 			<name>hadoop-master-releases</name>
-			<url>http://222.122.63.146/artifactory/ext-release-local</url>
+			<!-- <url>http://222.122.63.146/artifactory/ext-release-local</url> -->
+			<url>http://www.podosw.com/artifactory/ext-release-local</url>
 		</repository>
 	</distributionManagement>
 

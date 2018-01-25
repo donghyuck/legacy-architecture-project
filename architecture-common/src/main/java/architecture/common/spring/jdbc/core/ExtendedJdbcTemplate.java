@@ -103,6 +103,8 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		 */
 		public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 			
+			
+			
 			PreparedStatement ps;
 			if (DatabaseType.mysql == databaseType) {
 				StringBuilder builder = new StringBuilder(sqlToUse);
@@ -129,6 +131,8 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 				}
 				ps = pscf.newPreparedStatementCreator( params ).createPreparedStatement(connection);
 			}			
+
+			
 			return ps;
 		}
 	}	
@@ -409,6 +413,11 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	// Public Methods for Scrollable
 	// ********************************************
 	protected PreparedStatementCreator newScrollablePreparedStatementCreator(String sql, int startIndex, int numResults, Object args[], int[] argTypes, DatabaseType databaseType) {
+		//logger.debug("Executing prepared SQL statement" + (sql != null ? " [" + sql + "]" : ""));
+		
+		if (super.logger.isDebugEnabled()) {
+			super.logger.debug("Using SQL query [" + sql + "]");
+		}
 		return new ScrollablePreparedStatementCreator( sql, startIndex, numResults, args, argTypes, databaseType);
 	}
 	
@@ -475,12 +484,13 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	
 	
 	public <T> List<T> query(String sql, List<ParameterMapping> parameterMappings, Object[] args, RowMapper<T> rowMapper) throws DataAccessException {	
-		
-		
+				
 		return query(sql, newMappedArrayPreparedStatementSetter(args, parameterMappings), new RowMapperResultSetExtractor<T>(rowMapper));		
 	}
 	
-	public <T> List<T> queryForList(String sql, List<ParameterMapping> parameterMappings, Map<String, Object> parameters, RowMapper<T> rowMapper) throws DataAccessException {				
+	public <T> List<T> queryForList(String sql, List<ParameterMapping> parameterMappings, Map<String, Object> parameters, RowMapper<T> rowMapper) throws DataAccessException {	
+		
+		
 		return query(sql, newMappedPreparedStatementSetter(parameters, parameterMappings), new RowMapperResultSetExtractor<T>(rowMapper));		
 	}
 	
