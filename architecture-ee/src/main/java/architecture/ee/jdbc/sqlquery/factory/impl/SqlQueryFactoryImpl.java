@@ -21,7 +21,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import architecture.common.jdbc.datasource.DataSourceFactory;
 import architecture.common.jdbc.incrementer.MaxValueIncrementer;

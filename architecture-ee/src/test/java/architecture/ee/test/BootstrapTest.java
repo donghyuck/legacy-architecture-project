@@ -15,7 +15,7 @@ public class BootstrapTest {
 	private Log log = LogFactory.getLog(getClass());
 	
 	
-	@Test
+	//@Test
 	public void testGetEffectiveRootPath() throws Exception{
 		Repository repo = Bootstrap.getBootstrapComponent(Repository.class);
 		log.info(" -1- " + repo.getEffectiveRootPath());

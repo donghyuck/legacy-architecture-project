@@ -15,7 +15,7 @@
  */
 package architecture.ee.component.core.lifecycle;
 
-import org.apache.commons.lang.math.NumberUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.lifecycle.ApplicationProperties;

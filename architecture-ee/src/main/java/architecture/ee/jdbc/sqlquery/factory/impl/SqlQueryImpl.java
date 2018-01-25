@@ -213,7 +213,10 @@ public class SqlQueryImpl implements SqlQuery {
 	}
 
 	public Map<String, Object> queryForMap(String statement, Object[] params, int[] paramTypes, Object additionalParameters) {
-		BoundSql sql = getBoundSql(statement, params, additionalParameters);		
+		
+		BoundSql sql = getBoundSql(statement, params, additionalParameters);	
+		
+		
 		return jdbcTemplate.queryForMap(sql.getSql(), params, paramTypes);
 	}
 	
@@ -225,6 +228,9 @@ public class SqlQueryImpl implements SqlQuery {
 
 	public <T> List<T> queryForList(String statement, Object[] params, int[] paramTypes, Class<T> elementType) {
 		BoundSql sql = getBoundSql(statement, params);		
+		
+		log.debug("Executing prepared SQL statement" + (sql != null ? " [" + sql.getSql() + "]" : ""));
+		
 		if( this.maxResults > 0 ){
 				return jdbcTemplate.queryScrollable(sql.getSql(), startIndex, maxResults, params, paramTypes, elementType);
 		}else{
