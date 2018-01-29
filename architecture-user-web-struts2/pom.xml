@@ -1,26 +1,36 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>architecture.user</groupId>
-  <artifactId>architecture-user-web-struts2</artifactId>
-  <version>1.0.3.RELEASE</version>
-  
-<dependencies>
-	<dependency>
-		<groupId>architecture.web</groupId>
-		<artifactId>architecture-web-struts2</artifactId>
-		<version>1.0.3.RELEASE</version>
-		<exclusions>
-			<exclusion>
-				<artifactId>tools</artifactId>
-				<groupId>com.sun</groupId>
-			</exclusion>
-		</exclusions>
-	</dependency>
-</dependencies>
- 
- 
- 
- <build>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>architecture.user</groupId>
+	<artifactId>architecture-user-web-struts2</artifactId>
+	<version>1.1.0.RELEASE</version>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<javac.src.version>1.6</javac.src.version>
+		<javac.target.version>1.6</javac.target.version>
+		<project.test.testFailureIgnore>true</project.test.testFailureIgnore>
+		<project.test.skip>true</project.test.skip>
+		<project.javadoc.docEncoding>UTF-8</project.javadoc.docEncoding>
+		<project.build.version>1.1.0.RELEASE</project.build.version>
+		<project.dependency.spring.version>3.2.18.RELEASE</project.dependency.spring.version>		
+		<project.dependency.spring-security.version>3.2.10.RELEASE</project.dependency.spring-security.version>
+		<javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>	
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>architecture.web</groupId>
+			<artifactId>architecture-web-struts2</artifactId>
+			<version>1.1.0.RELEASE</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>tools</artifactId>
+					<groupId>com.sun</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies> 
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -48,7 +58,7 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.8</version>
@@ -130,17 +140,16 @@
 						<lib>${java.home}/lib/jsse.jar</lib>
 					</libs>
 				</configuration>
-			</plugin>
+			</plugin> -->
 
 		</plugins>
 	</build>
-	
-  	<distributionManagement>
+	<distributionManagement>
 		<repository>
-			<id>hadoop-master</id>
-			<name>hadoop-master-releases</name>
-			<url>http://222.122.63.146/artifactory/ext-release-local</url>
+			<id>podo-artifactory</id>
+			<name>artifactory-releases</name>
+			<url>http://www.podosw.com/artifactory/ext-release-local</url>
 		</repository>
 	</distributionManagement>
-	 
+
 </project>

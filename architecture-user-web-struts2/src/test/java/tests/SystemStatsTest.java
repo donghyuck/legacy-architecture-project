@@ -19,11 +19,11 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import sun.management.ManagementFactory;
+//import sun.management.ManagementFactory;
 
 public class SystemStatsTest {
 
-	@Test
+	//@Test
 	public void test() {
 		//fail("아직 구현되지 않음");
 		Runtime.getRuntime().freeMemory();
@@ -34,9 +34,9 @@ public class SystemStatsTest {
 		
 		Runtime.getRuntime().availableProcessors();
 		
-		System.out.println(  ManagementFactory.getMemoryMXBean().getHeapMemoryUsage() );
+		//System.out.println(  ManagementFactory.getMemoryMXBean().getHeapMemoryUsage() );
 		
-		System.out.println( ManagementFactory.getMemoryMXBean().getNonHeapMemoryUsage() );
+		//System.out.println( ManagementFactory.getMemoryMXBean().getNonHeapMemoryUsage() );
 		
 		
 	}
