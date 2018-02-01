@@ -15,8 +15,8 @@
  */
 package architecture.user;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
+import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,20 +24,27 @@ import org.apache.commons.logging.LogFactory;
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
 import architecture.common.user.Company;
-import architecture.ee.component.admin.AdminHelper;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 public abstract class AbstractCompanyManager implements CompanyManager , EventSource {
 	
 	protected Log log = LogFactory.getLog(getClass());
 	protected EventPublisher eventPublisher;
 	protected boolean caseInsensitiveCompanyNameMatch;
+	
+	@Inject
+	@Qualifier("companyCache")
 	protected Cache companyCache;
+	
+	@Inject
+	@Qualifier("companyIdCache")
     protected Cache companyIdCache ;
         
 	public AbstractCompanyManager() {
         this.caseInsensitiveCompanyNameMatch = true;
-        this.companyCache = AdminHelper.getCache("companyCache");
-        this.companyIdCache = AdminHelper.getCache("companyIdCache");
+        //this.companyCache = AdminHelper.getCache("companyCache");
+        //this.companyIdCache = AdminHelper.getCache("companyIdCache");
 	}
 	
 	public void setCaseInsensitiveCompanyNameMatch(

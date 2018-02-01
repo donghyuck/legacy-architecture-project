@@ -15,12 +15,16 @@
  */
 package architecture.user.security.spring.authentication.encoding;
 
+import javax.inject.Inject;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.dao.ReflectionSaltSource;
 import org.springframework.security.authentication.dao.SaltSource;
 
 import architecture.common.lifecycle.ApplicationProperties;
+import architecture.common.lifecycle.Repository;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.util.ApplicationConstants;
 
@@ -29,6 +33,10 @@ import architecture.ee.util.ApplicationConstants;
  */
 public class SaltSourceFactory implements FactoryBean <SaltSource>{
 
+	@Inject
+	@Qualifier("repository")
+	protected Repository repository;
+	
 	/**
 	 * @uml.property  name="singleton"
 	 */
@@ -40,7 +48,7 @@ public class SaltSourceFactory implements FactoryBean <SaltSource>{
 		
 		if(saltSource == null){
 		
-			ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();
+			ApplicationProperties setupProperties = repository.getSetupApplicationProperties();
 			
 			String userPropertyToUse = setupProperties.get(ApplicationConstants.SECURITY_AUTHENTICATION_ENCODING_SALT_PROP_NAME);
 			

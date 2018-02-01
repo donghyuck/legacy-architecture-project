@@ -23,11 +23,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
+import javax.inject.Inject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
@@ -50,10 +50,11 @@ import architecture.common.user.UserTemplate;
 import architecture.common.user.authentication.AnonymousUser;
 import architecture.common.user.spi.UserProvider;
 import architecture.common.util.L10NUtils;
-import architecture.ee.component.admin.AdminHelper;
 import architecture.user.dao.UserDao;
 import architecture.user.security.authentication.InvalidProviderUserException;
 import architecture.user.security.spring.userdetails.ExtendedUserDetailsAdaptor;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 
 /**
@@ -79,8 +80,16 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 	protected int authenticatedUserCount;
 	protected int totalUserCount;
 
+	@Inject
+	@Qualifier("userCache")
 	private Cache userCache;
+	
+	@Inject
+	@Qualifier("userIdCache")
 	private Cache userIdCache;
+	
+	@Inject
+	@Qualifier("userProviderCache")
 	private Cache userProviderCache;
 
 	public MultiProviderUserManager() {
@@ -90,9 +99,9 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 		this.applicationUserCount = -1;
 		this.authenticatedUserCount = -1;
 		this.totalUserCount = -1;
-		this.userCache = AdminHelper.getCache("userCache");
-		this.userIdCache = AdminHelper.getCache("userIDCache");
-		this.userProviderCache = AdminHelper.getCache("userProviderCache");
+		//this.userCache = AdminHelper.getCache("userCache");
+		//this.userIdCache = AdminHelper.getCache("userIDCache");
+		//this.userProviderCache = AdminHelper.getCache("userProviderCache");
 	}
 
 	public void setAllowApplicationUserCreation(

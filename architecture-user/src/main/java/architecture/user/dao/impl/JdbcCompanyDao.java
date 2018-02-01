@@ -54,6 +54,34 @@ public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDa
 	private String companyPropertyTableName = "V2_COMPANY_PROPERTY";
 	private String companyPropertyPrimaryColumnName = "COMPANY_ID";
 	
+	private String customSqlSetName = null ;
+	
+	protected String getSqlKey(String sql) {
+		String prifix = StringUtils.defaultString(customSqlSetName, "ARCHITECTURE_SECURITY") ;
+		StringBuilder builder = new StringBuilder();
+		builder.append(prifix.trim());
+		builder.append(".");
+		builder.append(sql);
+		return builder.toString();
+	}
+	
+	
+	
+	
+	public String getCustomSqlSetName() {
+		return customSqlSetName;
+	}
+
+
+
+
+	public void setCustomSqlSetName(String customSqlSetName) {
+		this.customSqlSetName = customSqlSetName;
+	}
+
+
+
+
 	/**
 	 * @param companyPropertyTableName
 	 */
@@ -81,7 +109,7 @@ public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDa
 		if("".equals(company.getDescription()))
 			company.setDescription(null);
 		
-		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.CREATE_COMPANY").getSql(), 	
+		getExtendedJdbcTemplate().update(getBoundSql(getSqlKey("CREATE_COMPANY")).getSql(), 	
 				new SqlParameterValue (Types.NUMERIC, companyId), 
 				new SqlParameterValue(Types.VARCHAR, company.getName()),
 				new SqlParameterValue(Types.VARCHAR, company.getDisplayName()),
@@ -100,7 +128,7 @@ public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDa
 		Company company = null ;
 		try {
 			company = getExtendedJdbcTemplate().queryForObject(
-					getBoundSqlWithAdditionalParameter("ARCHITECTURE_SECURITY.SELECT_COMPANY_BY_NAME", new Boolean( caseInsensitive ) ).getSql(), companyMapper, 
+					getBoundSqlWithAdditionalParameter(getSqlKey("SELECT_COMPANY_BY_NAME"), new Boolean( caseInsensitive ) ).getSql(), companyMapper, 
 					new SqlParameterValue(Types.VARCHAR, caseInsensitive ? name.toLowerCase() :  name  ) );
 			
 			company.setProperties(getCompanyProperties( company.getCompanyId() ));
@@ -120,7 +148,7 @@ public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDa
 	public Company getCompanyById(long companyId) {
 		Company company = null ;
 		try {
-			company = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.SELECT_COMPANY_BY_ID").getSql(), companyMapper, new SqlParameterValue(Types.NUMERIC, companyId ) );
+			company = getExtendedJdbcTemplate().queryForObject(getBoundSql(getSqlKey("SELECT_COMPANY_BY_ID")).getSql(), companyMapper, new SqlParameterValue(Types.NUMERIC, companyId ) );
 			company.setProperties(getCompanyProperties( company.getCompanyId() ));
 		} catch (IncorrectResultSizeDataAccessException e) {
 			if(e.getActualSize() > 1)
@@ -136,7 +164,7 @@ public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDa
 	}
 
 	public void updateCompany(Company company) {
-		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.UPDATE_COMPANY").getSql(), 	
+		getExtendedJdbcTemplate().update(getBoundSql(getSqlKey("UPDATE_COMPANY")).getSql(), 	
 				new SqlParameterValue(Types.VARCHAR, company.getName()),
 				new SqlParameterValue(Types.VARCHAR, company.getDisplayName()),
 				new SqlParameterValue(Types.VARCHAR, company.getDescription()),
@@ -158,7 +186,7 @@ public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDa
 
 	public List<Long> getCompanyIds(int startIndex, int numResults) {
 		return getExtendedJdbcTemplate().queryScrollable(
-				getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_COMPANY_IDS").getSql(), 
+				getBoundSql(getSqlKey("SELECT_ALL_COMPANY_IDS")).getSql(), 
 				startIndex, 
 				numResults, 
 				new Object[0], 
@@ -174,14 +202,14 @@ public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDa
 		extendedPropertyDao.updateProperties(companyPropertyTableName, companyPropertyPrimaryColumnName, companyId, props);
 	}
 	public int getCompanyCount() {
-		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_ALL_COMPANY").getSql());
+		return getExtendedJdbcTemplate().queryForInt(getBoundSql(getSqlKey("COUNT_ALL_COMPANY")).getSql());
 	}
 	public int getCompanyGroupCount( long companyId) {
-		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_COMPANY_GROUPS").getSql(), new SqlParameterValue(Types.NUMERIC, companyId ));
+		return getExtendedJdbcTemplate().queryForInt(getBoundSql(getSqlKey("COUNT_COMPANY_GROUPS")).getSql(), new SqlParameterValue(Types.NUMERIC, companyId ));
 	}
 
 	public List<Long> getCompanyGroupIds(long companyId) {
-		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_SECURITY.SELECT_COMPANY_GROUP_IDS").getSql(), Long.class, new SqlParameterValue(Types.NUMERIC, companyId ));
+		return getExtendedJdbcTemplate().queryForList(getBoundSql(getSqlKey("SELECT_COMPANY_GROUP_IDS")).getSql(), Long.class, new SqlParameterValue(Types.NUMERIC, companyId ));
 	}
 	
 
@@ -200,6 +228,4 @@ public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDa
 				new int[]{Types.INTEGER}, 
 				Long.class);
 	}
-
-
 }

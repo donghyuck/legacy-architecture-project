@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
+import javax.inject.Inject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +17,11 @@ import architecture.common.event.api.EventSource;
 import architecture.common.exception.CodeableException;
 import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
-import architecture.ee.component.admin.AdminHelper;
 import architecture.user.dao.RoleDao;
 import architecture.user.model.impl.RoleImpl;
 import architecture.user.spi.ExtendedRoleManager;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 /**
  * @author  donghyuck
@@ -37,8 +38,12 @@ public class DefaultRoleManager implements ExtendedRoleManager, EventSource {
 
 	private EventPublisher eventPublisher;
 	
+	@Inject
+	@Qualifier("roleCache")
 	private Cache roleCache;
 
+	@Inject
+	@Qualifier("roleIdCache")
 	protected Cache roleIdCache ;
 	
 	//private Cache userRoleCache;
@@ -46,10 +51,10 @@ public class DefaultRoleManager implements ExtendedRoleManager, EventSource {
 	//private Cache groupRoleCache;	
 	
 	public DefaultRoleManager() {
-		this.roleCache = AdminHelper.getCache("roleCache");
+		//this.roleCache = AdminHelper.getCache("roleCache");
 		//this.userRoleCache = AdminHelper.getCache("userRoleCache");
 		//this.groupRoleCache = AdminHelper.getCache("groupRoleCache");
-		this.roleIdCache = AdminHelper.getCache("roleIdCache");
+		//this.roleIdCache = AdminHelper.getCache("roleIdCache");
 	}
 
 		

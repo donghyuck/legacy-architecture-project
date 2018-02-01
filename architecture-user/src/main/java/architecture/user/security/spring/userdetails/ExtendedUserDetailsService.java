@@ -18,8 +18,11 @@ package architecture.user.security.spring.userdetails;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,11 +33,11 @@ import org.springframework.util.StringUtils;
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
 import architecture.common.lifecycle.ApplicationProperties;
+import architecture.common.lifecycle.Repository;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserTemplate;
-import architecture.common.util.L10NUtils;
-import architecture.ee.component.admin.AdminHelper;
+import architecture.common.util.L10NUtils; 
 import architecture.user.Role;
 import architecture.user.RoleManager;
 
@@ -92,9 +95,13 @@ public class ExtendedUserDetailsService implements UserDetailsService, EventSour
 		return userDetails;
 	}
 	
+	@Inject
+	@Qualifier("repository")
+	private Repository repository;
+	
 	protected List<GrantedAuthority> getFinalUserAuthority(User user){		
 		
-		ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();		
+		ApplicationProperties setupProperties = repository.getSetupApplicationProperties();		
 		String authority = setupProperties.get(architecture.ee.util.ApplicationConstants.SECURITY_AUTHENTICATION_AUTHORITY_PROP_NAME);
 		
 		long userId = user.getUserId();		

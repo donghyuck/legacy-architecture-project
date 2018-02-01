@@ -1,14 +1,15 @@
 package architecture.user;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
+import javax.inject.Inject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
-import architecture.ee.component.admin.AdminHelper;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 /**
  * @author  donghyuck
@@ -18,14 +19,20 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 	protected Log log = LogFactory.getLog(getClass());
 	protected EventPublisher eventPublisher;
 	protected boolean caseInsensitiveGroupNameMatch;
+	
+	@Inject
+	@Qualifier("groupCache")
 	protected Cache groupCache;
+	
+	@Inject
+	@Qualifier("groupIdCache")
     protected Cache groupIdCache ;
     
 	public AbstractGroupManager() {
 		
         this.caseInsensitiveGroupNameMatch = true;
-        this.groupCache = AdminHelper.getCache("groupCache");
-        this.groupIdCache = AdminHelper.getCache("groupIdCache");
+        //this.groupCache = AdminHelper.getCache("groupCache");
+        //this.groupIdCache = AdminHelper.getCache("groupIdCache");
 	}
 	
 	public void setGroupCache(Cache groupCache) {
