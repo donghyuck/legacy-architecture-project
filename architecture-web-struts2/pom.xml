@@ -25,6 +25,7 @@
 		<project.build.version>1.1.0.RELEASE</project.build.version>
 		<project.dependency.spring.version>3.2.18.RELEASE</project.dependency.spring.version>		
 		<project.dependency.spring-security.version>3.2.10.RELEASE</project.dependency.spring-security.version>
+		<project.dependency.struts2.version>2.3.34</project.dependency.struts2.version>
 		<javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>	
 	</properties>
 		
@@ -158,7 +159,7 @@
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-core</artifactId>
-			<version>2.3.4.1</version>
+			<version>${project.dependency.struts2.version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>commons-lang3</artifactId>
@@ -169,7 +170,7 @@
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-json-plugin</artifactId>
-			<version>2.3.34</version>
+			<version>${project.dependency.struts2.version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>commons-lang3</artifactId>
@@ -184,7 +185,7 @@
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-spring-plugin</artifactId>
-			<version>2.3.34</version>
+			<version>${project.dependency.struts2.version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>spring-web</artifactId>
@@ -215,7 +216,7 @@
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-sitemesh-plugin</artifactId>
-			<version>2.3.34</version>
+			<version>${project.dependency.struts2.version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>struts2-core</artifactId>

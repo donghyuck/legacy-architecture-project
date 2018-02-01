@@ -51,31 +51,29 @@ import freemarker.template.TemplateModelException;
 /**
  * 스트럿츠 2 지원을 위한 Freemarker 클래스
  * 
- * @author  <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
+ * @author <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
  *
  */
 public class ExtendedFreemarkerManager extends FreemarkerManager {
 
-    private List tagModels;
-    
+	private List tagModels;
+
 	private static final Log log = LogFactory.getLog(ExtendedFreemarkerManager.class);
-	
+
 	private static final int UPDATE_DELAY = 60;
-	
-	private FreeMarkerConfig freeMarkerConfig ;
-	
-	public static final TemplateExceptionHandler LOG_DEBUG_HANDLER = new TemplateExceptionHandler() {		
-		
-	        public void handleTemplateException(TemplateException te, Environment env, Writer out)
-	        {
-	        	ExtendedFreemarkerManager.log.warn("Freemarker template exception. ", te);
-	        }
-	        
-	   };
-	   
-	   
-	public ExtendedFreemarkerManager() {    	
-	    tagModels = Collections.emptyList();
+
+	private FreeMarkerConfig freeMarkerConfig;
+
+	public static final TemplateExceptionHandler LOG_DEBUG_HANDLER = new TemplateExceptionHandler() {
+
+		public void handleTemplateException(TemplateException te, Environment env, Writer out) {
+			ExtendedFreemarkerManager.log.warn("Freemarker template exception. ", te);
+		}
+
+	};
+
+	public ExtendedFreemarkerManager() {
+		tagModels = Collections.emptyList();
 	}
 
 	public void setFreeMarkerConfig(FreeMarkerConfig freeMarkerConfig) {
@@ -83,67 +81,80 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 	}
 
 	@Override
-	protected Configuration createConfiguration(ServletContext servletContext)
-			throws TemplateException {		
-		if(ApplicationHelper.isReady())
-		try {
-			//FreeMarkerConfig freeMarkerConfig = ApplicationHelper.getComponent(FreeMarkerConfig.class);
-			Configuration configuration = freeMarkerConfig.getConfiguration();			
-			configureDefaultConfiguration(configuration, servletContext );
-			return configuration;
-		} catch (ComponentNotFoundException e) {			
-		}
+	protected Configuration createConfiguration(ServletContext servletContext) throws TemplateException {
+		if (ApplicationHelper.isReady())
+			try {
+				// FreeMarkerConfig freeMarkerConfig =
+				// ApplicationHelper.getComponent(FreeMarkerConfig.class);
+				Configuration configuration = freeMarkerConfig.getConfiguration();
+				configureDefaultConfiguration(configuration, servletContext);
+				return configuration;
+			} catch (ComponentNotFoundException e) {
+			}
 		return super.createConfiguration(servletContext);
 	}
-	
-    protected void configureDefaultConfiguration(Configuration configuration, ServletContext servletContext)
-    {     
-    	configuration.setCacheStorage(new StrongCacheStorage());        
-    	configuration.setTemplateExceptionHandler(getTemplateExceptionHandler());    	
-        // configuration.addAutoImport("framework", "/template/common/include/framework-macros.ftl");        
-        // configuration.setLocalizedLookup(false);
-    	if( configuration.getObjectWrapper() == null ){
-    	    configuration.setObjectWrapper(createObjectWrapper(servletContext));
-    	}
-    }
-    
-    @Override
-	protected void loadSettings(ServletContext servletContext) {
-		super.loadSettings(servletContext);
-		HttpServletRequest request = ServletActionContext.getRequest();
-        HttpServletResponse response = ServletActionContext.getResponse();        
-        if( request == null || response == null )
-        {
-            return;
-        } else
-        {
-        	config.setLocale(ApplicationHelper.getLocale());
-        	config.setTimeZone(ApplicationHelper.getTimeZone());
-            return;
-        }	
+
+	protected void configureDefaultConfiguration(Configuration configuration, ServletContext servletContext) {
+		configuration.setCacheStorage(new StrongCacheStorage());
+		configuration.setTemplateExceptionHandler(getTemplateExceptionHandler());
+		// configuration.addAutoImport("framework",
+		// "/template/common/include/framework-macros.ftl");
+		// configuration.setLocalizedLookup(false);
+		if (configuration.getObjectWrapper() == null) {
+			configuration.setObjectWrapper(createObjectWrapper(servletContext));
+		}
 	}
-    
-    public void setTagModels(List tagModels)
-    {
-        this.tagModels = tagModels;
-    }
-    
 
 	@Override
-	protected void populateContext(ScopesHashModel model, ValueStack stack,
-			Object action, HttpServletRequest request,
+	protected void loadSettings(ServletContext servletContext) {
+		super.loadSettings(servletContext);
+
+		HttpServletRequest request = getHttpServletRequest();
+		HttpServletResponse response = getHttpServletResponse();
+		if (request == null || response == null) {
+			return;
+		} else {
+			config.setLocale(ApplicationHelper.getLocale());
+			config.setTimeZone(ApplicationHelper.getTimeZone());
+			return;
+		}
+	}
+
+	private HttpServletResponse getHttpServletResponse() {
+		try {
+			return ServletActionContext.getResponse();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+	}
+
+	private HttpServletRequest getHttpServletRequest() {
+		try {
+			return ServletActionContext.getRequest();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	public void setTagModels(List tagModels) {
+		this.tagModels = tagModels;
+	}
+
+	@Override
+	protected void populateContext(ScopesHashModel model, ValueStack stack, Object action, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		super.populateContext(model, stack, action, request, response);		
-		HashMap<String, Object> map = new HashMap<String, Object>();		
-		populateStatics(map);		
+		super.populateContext(model, stack, action, request, response);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		populateStatics(map);
 		model.putAll(map);
 	}
 
-	public void populateStatics(Map<String, Object> model){
-		
+	public void populateStatics(Map<String, Object> model) {
+
 		BeansWrapper b = (BeansWrapper) wrapper;
-		
+
 		try {
 			TemplateHashModel enumModels = b.getEnumModels();
 			try {
@@ -157,38 +168,37 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 
 		TemplateHashModel staticModels = b.getStaticModels();
 		try {
-			model.put("L10NUtils",             staticModels.get("architecture.common.util.L10NUtils"));
-			model.put("LocaleUtils",             staticModels.get("architecture.ee.web.util.LocaleUtils"));
-			model.put("ServletUtils",             staticModels.get("architecture.ee.web.util.ServletUtils"));
-			model.put("ParamUtils",             staticModels.get("architecture.ee.web.util.ParamUtils"));
-			model.put("SecurityHelper",         staticModels.get("architecture.user.util.SecurityHelper"));
-			model.put("ApplicationHelper",     staticModels.get("architecture.ee.util.ApplicationHelper"));							
-			model.put("WebApplicationHelper",     staticModels.get("architecture.ee.web.util.WebApplicationHelper"));
+			model.put("L10NUtils", staticModels.get("architecture.common.util.L10NUtils"));
+			model.put("LocaleUtils", staticModels.get("architecture.ee.web.util.LocaleUtils"));
+			model.put("ServletUtils", staticModels.get("architecture.ee.web.util.ServletUtils"));
+			model.put("ParamUtils", staticModels.get("architecture.ee.web.util.ParamUtils"));
+			model.put("SecurityHelper", staticModels.get("architecture.user.util.SecurityHelper"));
+			model.put("ApplicationHelper", staticModels.get("architecture.ee.util.ApplicationHelper"));
+			model.put("WebApplicationHelper", staticModels.get("architecture.ee.web.util.WebApplicationHelper"));
 		} catch (TemplateModelException e) {
 			log.error(e);
-		}		
+		}
 		model.put("statics", BeansWrapper.getDefaultInstance().getStaticModels());
 	}
 
 	@Override
-    protected TemplateLoader createTemplateLoader(ServletContext servletContext, String templatePath) {
-        
-	    log.debug("templatePath:" + templatePath );
-	    return freeMarkerConfig.getConfiguration().getTemplateLoader();	    
-        //return super.createTemplateLoader(servletContext, templatePath);	    
-    }
+	protected TemplateLoader createTemplateLoader(ServletContext servletContext, String templatePath) {
 
-    private TemplateExceptionHandler getTemplateExceptionHandler()
-    {
-    	boolean logErrorDefault = false;
-        boolean logError = ApplicationHelper.getApplicationBooleanProperty(WebApplicatioinConstants.VIEW_FREEMARKER_DEBUG, logErrorDefault);
-        TemplateExceptionHandler handler;
-        
-        if(logError)
-            handler = LOG_DEBUG_HANDLER;
-        else
-            handler = TemplateExceptionHandler.HTML_DEBUG_HANDLER;
-        return handler;
-    }
-	    
+		log.debug("templatePath:" + templatePath);
+		return freeMarkerConfig.getConfiguration().getTemplateLoader();
+		// return super.createTemplateLoader(servletContext, templatePath);
+	}
+
+	private TemplateExceptionHandler getTemplateExceptionHandler() {
+		boolean logErrorDefault = false;
+		boolean logError = ApplicationHelper.getApplicationBooleanProperty(WebApplicatioinConstants.VIEW_FREEMARKER_DEBUG, logErrorDefault);
+		TemplateExceptionHandler handler;
+
+		if (logError)
+			handler = LOG_DEBUG_HANDLER;
+		else
+			handler = TemplateExceptionHandler.HTML_DEBUG_HANDLER;
+		return handler;
+	}
+
 }

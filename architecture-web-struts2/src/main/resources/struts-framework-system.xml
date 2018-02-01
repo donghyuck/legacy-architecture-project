@@ -7,79 +7,86 @@
 	<package name="framework-system-actions" namespace="/secure" extends="framework-default">
 		<action name="stats-system" class="architecture.ee.web.struts2.action.admin.MainAction">
 			<result name="success" type="freemarker">/html/system-info.ftl</result>
-		</action>	
+		</action>
 		<action name="manage-system" class="architecture.ee.web.struts2.action.admin.MainAction">
 			<result name="success" type="freemarker">/html/manage-system.ftl</result>
 		</action>
 	</package>
-	<package name="framework-system-user-actions" namespace="/"  extends="framework-default" >
+	<package name="framework-system-user-actions" namespace="/"
+		extends="framework-default">
 
 
-          <action name="download-my-attachment" class="architecture.ee.web.struts2.action.DownloadAttachmentActioin">
-                        <result name="success" type="stream">
-                          <param name="contentType">${targetAttachmentContentType}</param>
-                          <param name="contentLength">${targetAttachmentContentLength}</param>
-                          <param name="inputName">targetAttachmentInputStream</param>
-                          <param name="contentDisposition">attachment;filename="${encodedTargetAttachmentFileName}"</param>
-                          <param name="bufferSize">1024</param>
-                        </result>                       
-                </action>
+		<action name="download-my-attachment"
+			class="architecture.ee.web.struts2.action.DownloadAttachmentActioin">
+			<result name="success" type="stream">
+				<param name="contentType">${targetAttachmentContentType}</param>
+				<param name="contentLength">${targetAttachmentContentLength}</param>
+				<param name="inputName">targetAttachmentInputStream</param>
+				<param name="contentDisposition">attachment;filename="${encodedTargetAttachmentFileName}"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
 
-                <action name="view-my-attachment" class="architecture.ee.web.struts2.action.DownloadAttachmentActioin">
-                        <result name="success" type="stream">
-                          <param name="contentType">${targetAttachmentContentType}</param>
-                          <param name="contentLength">${targetAttachmentContentLength}</param>
-                          <param name="inputName">targetAttachmentInputStream</param>
-                          <!-- <param name="contentDisposition">attachment;filename="${targetAttachmentFileName}"</param>-->
-                          <param name="bufferSize">1024</param>
-                        </result>                       
-                </action>
+		<action name="view-my-attachment"
+			class="architecture.ee.web.struts2.action.DownloadAttachmentActioin">
+			<result name="success" type="stream">
+				<param name="contentType">${targetAttachmentContentType}</param>
+				<param name="contentLength">${targetAttachmentContentLength}</param>
+				<param name="inputName">targetAttachmentInputStream</param>
+				<!-- <param name="contentDisposition">attachment;filename="${targetAttachmentFileName}"</param> -->
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
 
-                                        
-                <action name="list-my-attachement" class="architecture.ee.web.struts2.action.ajax.MyAttachmentAction">
-                        <result name="json-success" type="json">
-                            <param name="enableGZIP">true</param>
-                            <param name="excludeProperties">targetAttachments.*\.inputStream</param>     
-                            <param name="excludeNullProperties">true</param>
-                                <param name="includeProperties">
-                                  targetAttachments.*
-                                </param>
-                        </result>       
-                </action>                       
-                
-                <action name="delete-my-attachment" method="deleteAttachment" class="architecture.ee.web.struts2.action.ajax.MyAttachmentAction">
-                        <result name="json-success" type="json">
-                            <param name="enableGZIP">true</param>
-                            <param name="excludeNullProperties">true</param>    
-                            <param name="excludeProperties">targetAttachment.inputStream, targetAttachments</param>            
-                                <param name="includeProperties">
-                                targetAttachment.*
-                                </param>
-                        </result>
-                </action>
 
-                <action name="update-my-attachment" method="updateAttachment" class="architecture.ee.web.struts2.action.ajax.MyAttachmentAction">
-                        <result name="json-success" type="json">
-                            <param name="enableGZIP">true</param>
-                            <param name="excludeProperties">targetAttachment.inputStream, targetAttachments</param>     
-                            <param name="excludeNullProperties">true</param>        
-                                <param name="includeProperties">
-                                targetAttachment.*
-                                </param>
-                        </result>
-                </action>
-                                                                        
-                <action name="save-my-attachments" method="saveAttachments" class="architecture.ee.web.struts2.action.ajax.MyAttachmentAction">
-                		<result name="success">/includes/jsp/upload.jsp</result>
-                        <result name="json-success" type="json">
-                            <param name="enableGZIP">true</param>
-                            <param name="excludeProperties">targetAttachment.inputStream, targetAttachments</param>     
-                            <param name="excludeNullProperties">true</param>        
-                                <param name="includeProperties">
-                                targetAttachment.*
-                                </param>
-                        </result>
-                </action>
-                	
+		<action name="list-my-attachement"
+			class="architecture.ee.web.struts2.action.ajax.MyAttachmentAction">
+			<result name="json-success" type="json">
+				<param name="enableGZIP">true</param>
+				<param name="excludeProperties">targetAttachments.*\.inputStream</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="includeProperties">
+					targetAttachments.*
+				</param>
+			</result>
+		</action>
+
+		<action name="delete-my-attachment" method="deleteAttachment"
+			class="architecture.ee.web.struts2.action.ajax.MyAttachmentAction">
+			<result name="json-success" type="json">
+				<param name="enableGZIP">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="excludeProperties">targetAttachment.inputStream, targetAttachments</param>
+				<param name="includeProperties">
+					targetAttachment.*
+				</param>
+			</result>
+		</action>
+
+		<action name="update-my-attachment" method="updateAttachment"
+			class="architecture.ee.web.struts2.action.ajax.MyAttachmentAction">
+			<result name="json-success" type="json">
+				<param name="enableGZIP">true</param>
+				<param name="excludeProperties">targetAttachment.inputStream, targetAttachments</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="includeProperties">
+					targetAttachment.*
+				</param>
+			</result>
+		</action>
+
+		<action name="save-my-attachments" method="saveAttachments"
+			class="architecture.ee.web.struts2.action.ajax.MyAttachmentAction">
+			<result name="success">/includes/jsp/upload.jsp</result>
+			<result name="json-success" type="json">
+				<param name="enableGZIP">true</param>
+				<param name="excludeProperties">targetAttachment.inputStream, targetAttachments</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="includeProperties">
+					targetAttachment.*
+				</param>
+			</result>
+		</action>
+
 	</package>
 </struts>
