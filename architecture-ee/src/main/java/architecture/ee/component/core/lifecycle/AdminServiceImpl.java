@@ -133,15 +133,20 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 	@Override
 	protected void doStart(){		
 		
+		
+		
 		Thread currentThread = Thread.currentThread();
         ClassLoader oldLoader = currentThread.getContextClassLoader();
         
         LicenseManager licenseManager = getBootstrapComponent(LicenseManager.class);
+        log.info("license .." + licenseManager.isInitialized() );
+        
         License license = licenseManager.getLicense();
         
-        log.info( 
-            license.toString()
-        );
+        if( license != null )
+	        log.info( 
+	            license.toString()
+	        );
         
        // MethodInvoker invoker = new MethodInvoker();
         

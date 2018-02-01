@@ -30,13 +30,16 @@ import javax.sql.DataSource;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
 import org.apache.commons.vfs2.FileObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import architecture.common.jdbc.datasource.DataSourceFactory;
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.ComponentImpl;
+import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.ConfigService;
+import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.internal.EmptyApplicationProperties;
 import architecture.common.util.LocaleUtils;
 import architecture.common.util.vfs.VFSUtils;
@@ -49,6 +52,11 @@ import architecture.ee.util.ApplicationConstants;
  */
 public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
+	@Autowired(required = true)
+	@Qualifier("repository")
+	private Repository repository;
+	
+	
 	private ApplicationProperties setupProperties = null;
 
 	private ApplicationProperties properties = null;	
@@ -65,17 +73,21 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
     
     private FastDateFormat dateTimeFormat = null;
 
+	@Autowired(required = true)
+	@Qualifier("sqlConfiguration")
     private Configuration sqlConfiguration = null;   
     
-    private DataSource dataSource = null;    
-
+    @Autowired(required = false)
+	@Qualifier("dataSource")
+	private DataSource dataSource;
+    
     private String effectiveRootPath = null;
     
 	public ConfigServiceImpl() {
 		super();
 		setName("ConfigService");
 	}
-
+	
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		reset();
@@ -134,6 +146,16 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		
 	}
 
+	@Override
+	protected Repository getRepository() {
+		return repository;
+	}
+
+	@Override
+	protected ConfigRoot getConfigRoot() {
+		return repository.getConfigRoot();
+	}
+
 	private ApplicationProperties getSetupProperties(){
 		if(setupProperties == null)
 			this.setupProperties = getRepository().getSetupApplicationProperties();
@@ -144,11 +166,12 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		this.setupProperties = setupProperties;
 	}
 
-	private ApplicationProperties newApplicationProperties(boolean localized){		
-		DataSource dataSourceToUse = this.dataSource;		
+	private ApplicationProperties newApplicationProperties(boolean localized){	
+		log.debug("create new applicaiton properties using : " + dataSource );
+		DataSource dataSourceToUse = dataSource;		
 		if(dataSourceToUse == null){
 			getSetupProperties();
-			dataSourceToUse = DataSourceFactory.getDataSource();
+			//dataSourceToUse = DataSourceFactory.getDataSource();
 		}		
 		// 데이터베이스 설정이 완료되지 않았다면 널을 리턴한다.		
 		if(dataSourceToUse != null){			
@@ -180,9 +203,9 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 			String countryToUse = getLocalProperty(ApplicationConstants.LOCALE_COUNTRY_PROP_NAME, null);			
 			if(!StringUtils.isEmpty(languageToUse)){
 			    if(StringUtils.isEmpty(countryToUse)){
-			    	localeToUse = new Locale(languageToUse, "", "");
+			    		localeToUse = new Locale(languageToUse, "", "");
 			    }else{
-			    	localeToUse = new Locale(languageToUse, countryToUse, "");
+			    		localeToUse = new Locale(languageToUse, countryToUse, "");
 			    }	
 			}		
 			
@@ -191,9 +214,9 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
 			if(!StringUtils.isEmpty(languageToUse)){
 			    if(StringUtils.isEmpty(countryToUse)){
-			    	localeToUse = new Locale(languageToUse, null, null);
+			    		localeToUse = new Locale(languageToUse, null, null);
 			    }else{
-			    	localeToUse = new Locale(languageToUse, countryToUse, null);
+			    		localeToUse = new Locale(languageToUse, countryToUse, null);
 			    }	
 			}	
 			this.locale = localeToUse;			

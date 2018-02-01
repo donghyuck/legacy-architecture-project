@@ -2,44 +2,69 @@ package architecture.ee.jdbc.datasource.impl;
 
 import java.util.Collection;
 
+import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.apache.commons.lang3.ClassUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.pool.impl.GenericObjectPool;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.util.MethodInvoker;
 
 import architecture.common.exception.RuntimeError;
-import architecture.common.jdbc.datasource.DataSourceFactory;
 import architecture.common.lifecycle.ApplicationProperties;
+import architecture.common.lifecycle.Repository;
 import architecture.common.util.L10NUtils;
-import architecture.common.util.StringUtils;
-import architecture.ee.component.admin.AdminHelper;
+import architecture.ee.jdbc.datasource.DataSourceFactory;
 
-public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
+public class DataSourceFactoryImpl implements DataSourceFactory {
 
 	private Log log = LogFactory.getLog(getClass());
 	
 	private JndiTemplate jndiTemplate = new JndiTemplate();
 	
-	public DataSource getDataSource() {
-		return getDataSource("default");
+	private String profileName ;	
+	
+	@Inject
+	@Qualifier("repository")
+	private Repository repository;
+	
+	
+	public String getProfileName() {
+		return profileName;
+	}
+
+	
+	public void setProfileName(String profileName) {
+		this.profileName = profileName;
 	}
 	
-	public DataSource getDataSource(String name) {
+	public DataSource getDataSource() {
+		if(StringUtils.isEmpty(profileName))
+		{
+			return getDataSource("default");
+		}else{
+			return getDataSource("default");
+		}
+	}
+	
+	
+	public DataSource getDataSource(String profileName) {
 		
 		DataSource dataSource = null;
 		
-		ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();		
-		Collection<String> c = setupProperties.getChildrenNames("database."+ name);
+		ApplicationProperties setupProperties = repository.getSetupApplicationProperties();
+		
+		Collection<String> c = setupProperties.getChildrenNames("database."+ profileName);
 		if( c.size() == 0 ){
 			// 주어진 이름에 해당하는 데이터베이스 연결 정보가 존재하지 않음 .
-			throw new RuntimeError(L10NUtils.format("003057", name));
+			throw new RuntimeError(L10NUtils.format("003057", profileName));
 		}
 		
-		String jndiTag = "database."+ name + ".jndiDataSourceProvider";			
+		String jndiTag = "database."+ profileName + ".jndiDataSourceProvider";			
 		if( setupProperties.getChildrenNames(jndiTag).size() > 0 ){
 			String jndiName = setupProperties.get( jndiTag + ".jndiName"); 
 			if(StringUtils.isNotEmpty(jndiName)){
@@ -54,7 +79,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 			log.warn(L10NUtils.format("003055", jndiTag));			
 		}		
 		
-		String providerTag = "database."+ name + ".oracleDataSourceProvider";		
+		String providerTag = "database."+ profileName + ".oracleDataSourceProvider";		
 		if( dataSource == null && setupProperties.getChildrenNames(providerTag).size() > 0 ){
 			String driverClassName = setupProperties.get( providerTag + ".driverClassName"); 
 			String url = setupProperties.get( providerTag + ".url"); 
@@ -93,7 +118,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 			}			
 		}
 		
-		String pooledTag = "database."+ name + ".pooledDataSourceProvider";		
+		String pooledTag = "database."+ profileName + ".pooledDataSourceProvider";		
 		
 		if( dataSource == null && setupProperties.getChildrenNames(pooledTag).size() > 0 ){
 			String driverClassName = setupProperties.get( pooledTag + ".driverClassName"); 
@@ -134,13 +159,15 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 			basic.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);
 			basic.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
 			basic.setNumTestsPerEvictionRun(numTestsPerEvictionRun);
+
+			
 			dataSource = basic;
 		}else{
 			log.warn(L10NUtils.format("003055", pooledTag));	
 		}
 		
 		if( dataSource == null )
-			throw new RuntimeError(L10NUtils.format("003056", name));
+			throw new RuntimeError(L10NUtils.format("003056", profileName));
 		
 		return dataSource;
 	}

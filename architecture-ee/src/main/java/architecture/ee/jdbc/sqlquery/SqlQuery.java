@@ -25,6 +25,7 @@ import org.springframework.jdbc.core.RowMapper;
 public interface SqlQuery {
 
 	
+	
 	/**
 	 * 사용할 데이터소스를 설정한다.
 	 * @param dataSource

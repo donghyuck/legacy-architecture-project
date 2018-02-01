@@ -337,6 +337,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 
 	public File getFile(String name) {
 		try {	
+			log.debug( "get file " + getRootResource().getURI() + " " + name );
 			File file = new File(getRootResource().getFile(), name);
 			return  file ;
 		} catch (IOException e) {

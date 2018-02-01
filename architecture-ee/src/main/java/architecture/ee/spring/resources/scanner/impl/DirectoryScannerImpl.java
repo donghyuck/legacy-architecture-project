@@ -22,6 +22,8 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -29,11 +31,12 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.commons.vfs2.FileObject;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Qualifier;
 
+import architecture.common.lifecycle.Repository;
 import architecture.common.scanner.DirectoryListener;
 import architecture.common.scanner.URLDirectoryScanner;
 import architecture.common.util.vfs.VFSUtils;
-import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
 import architecture.ee.spring.resources.scanner.DirectoryScanner;
 import architecture.ee.util.ApplicationConstants;
@@ -55,6 +58,10 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 	private boolean fastDeploy = false;
 	
 	private Log log = LogFactory.getLog(getClass());
+	
+	@Inject
+	@Qualifier("repository")
+	private Repository repository;
 	
 	public DirectoryScannerImpl() {				
 		this.resourceLocations = Collections.emptyList();		
@@ -160,13 +167,16 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 					String key = path.substring( start, end ).trim();	
 					
 					if( key.equals(ApplicationConstants.RESOURCE_SQL_LOCATION_PROP_NAME)){
-						
-						path = AdminHelper.getRepository().getSetupApplicationProperties().get(ApplicationConstants.RESOURCE_SQL_LOCATION_PROP_NAME);						
-						if( StringUtils.isEmpty(path))
-							path = AdminHelper.getRepository().getURI("sql");
-						
+						path = repository.getSetupApplicationProperties().get(ApplicationConstants.RESOURCE_SQL_LOCATION_PROP_NAME);						
+						if( StringUtils.isEmpty(path)) {							
+							path = repository.getURI("sql");							
+							String type = repository.getSetupApplicationProperties().getStringProperty("components.sql.type", null);
+							if( StringUtils.isNotEmpty(type)) {
+								path = repository.getURI("sql/" + type);
+							}
+						}
 					}else {
-						path = AdminHelper.getRepository().getSetupApplicationProperties().get(key);
+						path = repository.getSetupApplicationProperties().get(key);
 					}
 					log.debug( key + "=" + path );
 				}				

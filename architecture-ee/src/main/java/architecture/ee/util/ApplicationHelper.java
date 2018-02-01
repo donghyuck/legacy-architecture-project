@@ -15,13 +15,9 @@
  */
 package architecture.ee.util;
 
-import groovy.lang.GroovyClassLoader;
-
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
@@ -29,20 +25,17 @@ import java.util.TimeZone;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.poi.ss.formula.functions.T;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.i18n.I18nTextManager;
 import architecture.common.license.License;
-import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
-import architecture.common.lifecycle.bootstrap.Bootstrap;
-import architecture.common.lifecycle.service.AdminService;
-import architecture.ee.component.admin.AdminHelper;
-import architecture.ee.spring.lifecycle.SpringAdminService;
+import architecture.common.lifecycle.bootstrap.Bootstrap; 
+import architecture.ee.services.ApplicationHelperFactory;
+import groovy.lang.GroovyClassLoader;
 
 /**
  * 컴포넌트들에 대한 인터페이스를 제공하는 Helper 클래스.
@@ -65,24 +58,6 @@ public final class ApplicationHelper {
 		return (T)ApplicationHelper.references.get(requiredType).get();
 	}
 	
-	/*
-	public static <T> List<T> getComponents(Class<T> requiredType){
-		
-		AdminService as = AdminHelper.getAdminService();
-		LOG.debug("SpringAdminService: " +  ( as instanceof SpringAdminService ));
-		
-		if( as instanceof SpringAdminService ){
-			SpringAdminService sas = (SpringAdminService)as ;
-			Map<String, T> beans =  sas.getApplicationContext().getBeansOfType(requiredType);
-			LOG.debug( beans );
-			
-			beans.values();
-			return new ArrayList<T>(beans.values());
-		}	
-		return Collections.EMPTY_LIST;
-	}
-	*/
-	
 	public static <T> T getComponent(String requiredName, Class<T> requiredType) throws ComponentNotFoundException
 	{
 		return ApplicationHelperFactory.getApplicationHelper().getComponent(requiredName, requiredType);
@@ -93,11 +68,11 @@ public final class ApplicationHelper {
 	}	
 	
 	public static License getLicense(){
-	    return AdminHelper.getLicense();	
+	    return null; // AdminHelper.getLicense();	
 	}
 	
 	public static ConfigService getConfigService(){
-		return AdminHelper.getConfigService();
+		return getComponent(ConfigService.class);
 	}
 
     public static I18nTextManager getI18nTextManager(){
@@ -105,23 +80,23 @@ public final class ApplicationHelper {
 	}
 	
 	public static boolean isSetupComplete(){
-		return AdminHelper.isSetupComplete();
+		return true; // AdminHelper.isSetupComplete();
 	}
 	
 	public static boolean isReady(){		
-		return AdminHelper.isReady();
+		return ApplicationHelperFactory.getApplicationHelper().isReady(); // AdminHelper.isReady();
 	}
 
     public static EventPublisher getEventPublisher(){		
-		return AdminHelper.getEventPublisher();
+		return getComponent(EventPublisher.class);
 	}
 	
-	public static State getState(){
-		return AdminHelper.getState();
+	public static State getState(){		
+		return getRepository().getState();
 	}
 	
 	public static Repository getRepository(){		
-		return AdminHelper.getRepository();
+		return getComponent(Repository.class);
 	}
 	
 	public static Class loadClass( String scriptName , boolean lookupScriptFiles, boolean preferClassOverScript ) throws ClassNotFoundException{
@@ -159,7 +134,8 @@ public final class ApplicationHelper {
 	
 	public static String getApplicationProperty(String name, String defaultValue){		
 		
-		ConfigService config = getConfigService();		
+		ConfigService config = getConfigService();	
+		
 		String propValue = config.getLocalProperty(name, null);	
 		if(isReady()){
 			String str = config.getApplicationProperty(name, null);			
@@ -201,7 +177,7 @@ public final class ApplicationHelper {
 	}
 	
 	public static String getLocalizedMessage(String code, Object[] args, Locale locale){		
-		return AdminHelper.getLocalizedMessage(code, args, locale);
+		return null; //AdminHelper.getLocalizedMessage(code, args, locale);
 	}
 	
 }
