@@ -20,9 +20,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.ui.freemarker.FreeMarkerConfigurationFactory;
@@ -30,10 +32,9 @@ import org.springframework.ui.freemarker.SpringTemplateLoader;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 
+import architecture.common.lifecycle.Repository;
 import architecture.common.util.StringUtils;
-import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.util.WebApplicatioinConstants;
-
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.FileTemplateLoader;
 import freemarker.cache.TemplateLoader;
@@ -54,6 +55,10 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 
 	private TaglibFactory taglibFactory;
 
+	@Inject
+	@Qualifier("repository")
+	private Repository repository;
+	
 	/**
 	 * Set a preconfigured Configuration to use for the FreeMarker web config,
 	 * e.g. a shared one for web and email usage, set up via
@@ -102,7 +107,7 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 	@Override
 	public void setTemplateLoaderPaths(String[] templateLoaderPaths) {
 		
-		String pathString = ApplicationHelper.getRepository().getSetupApplicationProperties().getStringProperty(WebApplicatioinConstants.VIEW_FREEMARKER_SOURCE_LOCATION, null);
+		String pathString = repository.getSetupApplicationProperties().getStringProperty(WebApplicatioinConstants.VIEW_FREEMARKER_SOURCE_LOCATION, null);
 		if( StringUtils.isNotEmpty(pathString)){
 			logger.debug("using template paths from startup-config.xml");
 			List<String> list = new ArrayList<String>();
