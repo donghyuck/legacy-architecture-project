@@ -47,7 +47,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 		{
 			return getDataSource("default");
 		}else{
-			return getDataSource("default");
+			return getDataSource(profileName);
 		}
 	}
 	
@@ -55,9 +55,10 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 	public DataSource getDataSource(String profileName) {
 		
 		DataSource dataSource = null;
-		
+		log.debug("repository:"+ repository == null ? false : true );
+	System.out.println("=====================");
 		ApplicationProperties setupProperties = repository.getSetupApplicationProperties();
-		
+		log.debug("properties:" + setupProperties);
 		Collection<String> c = setupProperties.getChildrenNames("database."+ profileName);
 		if( c.size() == 0 ){
 			// 주어진 이름에 해당하는 데이터베이스 연결 정보가 존재하지 않음 .

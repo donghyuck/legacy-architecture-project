@@ -266,7 +266,7 @@ public class SqlQueryImpl implements SqlQuery {
 	public List<Map<String, Object>> queryForList(String statement, Object[] params, int[] paramTypes) {
 		BoundSql sql = getBoundSql( statement, params );		
 		if( this.maxResults > 0 ){
-			
+			log.debug("scrollable ... ");
 			return jdbcTemplate.queryScrollable(sql.getSql(), startIndex, maxResults, params, paramTypes, new ColumnMapRowMapper());			
 		}else{
 			if(params == null || params.length == 0 )

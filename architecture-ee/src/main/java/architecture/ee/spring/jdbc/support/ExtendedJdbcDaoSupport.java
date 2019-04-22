@@ -21,15 +21,14 @@ import javax.sql.DataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.support.lob.DefaultLobHandler;
 import org.springframework.jdbc.support.lob.LobHandler;
-import org.springframework.jdbc.support.nativejdbc.NativeJdbcExtractor;
 
 import architecture.common.jdbc.incrementer.MaxValueIncrementer;
 import architecture.common.spring.jdbc.core.ExtendedJdbcTemplate;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.mapping.BoundSql;
 import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
-import architecture.ee.spring.util.NativeJdbcExtractorUtils;
 
 /**
  * @author   donghyuck
@@ -95,7 +94,9 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 	}
 
 	public LobHandler getLobHandler(){
-
+		if( getExtendedJdbcTemplate().getLobHandler() == null ) {
+			return new DefaultLobHandler();
+		}/*
 	        if( getExtendedJdbcTemplate().getNativeJdbcExtractor() == null){
 	    		log.debug("Initializing NativeJdbcExtractor");
 		        log.debug("Database Type:" + getExtendedJdbcTemplate().getDatabaseType()); 
@@ -103,7 +104,7 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 	        	getExtendedJdbcTemplate().setNativeJdbcExtractor(extractor);
 	            log.debug("NativeJdbcExtractor:" + extractor.getClass().getName() );	            
 	        }	        
-		
+		*/
 		return getExtendedJdbcTemplate().getLobHandler();
 	} 
 	
