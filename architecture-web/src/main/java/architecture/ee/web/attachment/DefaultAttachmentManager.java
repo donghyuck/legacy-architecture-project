@@ -26,6 +26,7 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -164,8 +165,12 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 	}
 	
 	
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
+	//@Transactional
+	//@Transactional(readOnly = false, propagation = Propagation.REQUIRED, isolation=Isolation.READ_UNCOMMITTED)
+	//@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
+	@Transactional
 	public Attachment saveAttachment(Attachment attachment) {
+	
 		
 		long userId = getUserId();
 	

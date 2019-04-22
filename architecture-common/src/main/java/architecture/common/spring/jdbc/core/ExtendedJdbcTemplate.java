@@ -103,17 +103,20 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		 */
 		public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 			
-			
-			
+			log.debug( "create prepared statement for datatabase : " + databaseType );
 			PreparedStatement ps;
+			String sqlToUse2 = sqlToUse;
 			if (DatabaseType.mysql == databaseType) {
 				StringBuilder builder = new StringBuilder(sqlToUse);
 				builder.append(" LIMIT ").append(startIndex).append(",").append(numResults);
-				ps = connection.prepareStatement(builder.toString());
+				sqlToUse2 = builder.toString();
+				log.debug("Final query for scrollable : " + sqlToUse2 );				
+				ps = connection.prepareStatement(sqlToUse2);
 			} else if (DatabaseType.postgresql == databaseType) {
 				StringBuilder builder = new StringBuilder(sqlToUse);
 				builder.append(" LIMIT ").append(numResults).append(" OFFSET ").append(startIndex);
-				ps = connection.prepareStatement(builder.toString());
+				sqlToUse2 = builder.toString();
+				ps = connection.prepareStatement(sqlToUse2);
 			} else {
 				if (databaseType.scrollResultsSupported){
 					return connection.prepareStatement(sqlToUse, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -125,14 +128,12 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 			if (params != null) {
 				PreparedStatementCreatorFactory pscf;
 				if (paramTypes != null) {
-					pscf = new PreparedStatementCreatorFactory(sqlToUse, paramTypes);
+					pscf = new PreparedStatementCreatorFactory(sqlToUse2, paramTypes);
 				} else {
-					pscf = new PreparedStatementCreatorFactory(sqlToUse);
+					pscf = new PreparedStatementCreatorFactory(sqlToUse2);
 				}
 				ps = pscf.newPreparedStatementCreator( params ).createPreparedStatement(connection);
-			}			
-
-			
+			}
 			return ps;
 		}
 	}	
@@ -157,6 +158,8 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		public Object extractData(ResultSet rs) throws SQLException, DataAccessException {			
 			
 			ArrayList<Object> list = new ArrayList<Object>();
+			
+			log.debug( "extract data for datatabase : " + databaseType );
 			
 			if (DatabaseType.mysql == databaseType || DatabaseType.postgresql == databaseType) {
 				for (int count = 0; rs.next(); count++)
